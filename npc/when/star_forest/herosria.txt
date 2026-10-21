@@ -1,0 +1,523 @@
+//===== World Sync Extras: Star Forest block ================
+//= Sanctuary Herosria: the Garden of Dawn (hero_lb), its PvP
+//= dungeon and gardens, and the portals into it.
+//===== Description: =========================================
+//= From kRO's official Herosria guide and update notes (2022):
+//= - The Garden of Beginnings portals in the four castle realms
+//=   (alde_gld 186,142, prt_gld 207,162, pay_gld 200,150,
+//=   gef_fild13 176,222) lead into the sanctuary.
+//= - Sanctuary Manager: the castle guild's master receives 10
+//=   Herosria's Gifts once a day.
+//= - Garden Maker: crafts the Dimensional Wanderer accessories
+//=   (rAthena's item_reform "Unsealing the dimension").
+//= - Garden Technician: refines them from +9 to +11 (item_reform
+//=   "Dimension Enhancer") and enchants them (item_enchant 56).
+//= - Garden Herbalist: the five Herosria Herb Jams.
+//= - Equipment Merchant: the Herosria siege equipment.
+//= - Castle guild members get a combat buff in the PvP dungeon.
+//= The siege itself (Siege HE, twelve maps) isn't part of this
+//= block: the sanctuary honours the guilds that hold any castle
+//= of Rune-Midgard. Amounts the guides don't give (equipment
+//= price, smelting, cutting and herb recipes) are estimates.
+//============================================================
+
+// 1 when the player's guild holds a castle, else 0.
+function	script	F_WSF_HasCastle	{
+	.@g = getcharid(2);
+	if (!.@g)
+		return 0;
+	setarray .@c$,
+		"prtg_cas01","prtg_cas02","prtg_cas03","prtg_cas04","prtg_cas05",
+		"payg_cas01","payg_cas02","payg_cas03","payg_cas04","payg_cas05",
+		"gefg_cas01","gefg_cas02","gefg_cas03","gefg_cas04","gefg_cas05",
+		"aldeg_cas01","aldeg_cas02","aldeg_cas03","aldeg_cas04","aldeg_cas05",
+		"arug_cas01","arug_cas02","arug_cas03","arug_cas04","arug_cas05",
+		"schg_cas01","schg_cas02","schg_cas03","schg_cas04","schg_cas05",
+		"te_aldecas1","te_aldecas2","te_aldecas3","te_aldecas4","te_aldecas5",
+		"te_prtcas01","te_prtcas02","te_prtcas03","te_prtcas04","te_prtcas05";
+	for (.@i = 0; .@i < getarraysize(.@c$); .@i++)
+		if (getcastledata(.@c$[.@i], CD_GUILD_ID) == .@g)
+			return 1;
+	return 0;
+}
+
+// Turns <amount> of each input into one output, as many times as the
+// player can and wants.
+// callfunc "F_WSF_Craft", "<npc name>", <output id>, <zeny per craft>, <in id>, <amount>{, <in id>, <amount>...};
+function	script	F_WSF_Craft	{
+	.@npc$ = getarg(0);
+	.@out = getarg(1);
+	.@zeny = getarg(2);
+	.@n = 0;
+	for (.@a = 3; .@a < getargcount(); .@a += 2) {
+		.@in[.@n] = getarg(.@a);
+		.@amt[.@n] = getarg(.@a + 1);
+		.@n++;
+	}
+	.@max = 999;
+	for (.@i = 0; .@i < .@n; .@i++)
+		.@max = min(.@max, countitem(.@in[.@i]) / .@amt[.@i]);
+	if (.@zeny)
+		.@max = min(.@max, Zeny / .@zeny);
+	mes "[" + .@npc$ + "]";
+	mes "One " + getitemname(.@out) + " takes:";
+	for (.@i = 0; .@i < .@n; .@i++)
+		mes "- " + .@amt[.@i] + " " + getitemname(.@in[.@i]) + " (you have " + countitem(.@in[.@i]) + ")";
+	if (.@zeny)
+		mes "- " + callfunc("F_InsertComma", .@zeny) + " zeny";
+	if (.@max < 1) {
+		mes "You don't have enough for even one.";
+		close;
+	}
+	next;
+	mes "[" + .@npc$ + "]";
+	mes "You can make up to " + .@max + ". How many?";
+	next;
+	if (input(.@k, 0, .@max) != 0 || .@k == 0) {
+		mes "[" + .@npc$ + "]";
+		mes "Come back when you've decided.";
+		close;
+	}
+	if (!checkweight(.@out, .@k)) {
+		mes "[" + .@npc$ + "]";
+		mes "You can't carry that much. Make some room first.";
+		close;
+	}
+	for (.@i = 0; .@i < .@n; .@i++)
+		delitem .@in[.@i], .@amt[.@i] * .@k;
+	if (.@zeny)
+		Zeny -= .@zeny * .@k;
+	getitem .@out, .@k;
+	specialeffect EF_REFINEOK;
+	mes "[" + .@npc$ + "]";
+	mes "Here you are: " + .@k + " " + getitemname(.@out) + ".";
+	close;
+}
+
+// ------------------------------------------------------------
+// The portals into the sanctuary
+// ------------------------------------------------------------
+alde_gld,186,142,4	script	Garden of Beginnings#wsf1	10527,{
+	mes "^4d4dffA swirl of light hangs in the air. Through it you glimpse a garden under a sky full of stars: Sanctuary Herosria, made by the constellation Rigel.^000000";
+	next;
+	if (select("Step into the light:Stay here") == 2)
+		close;
+	close2;
+	warp "hero_lb",136,143;
+	end;
+}
+prt_gld,207,162,4	duplicate(Garden of Beginnings#wsf1)	Garden of Beginnings#wsf2	10527
+pay_gld,200,150,4	duplicate(Garden of Beginnings#wsf1)	Garden of Beginnings#wsf3	10527
+gef_fild13,178,222,4	duplicate(Garden of Beginnings#wsf1)	Garden of Beginnings#wsf4	10527
+
+// ------------------------------------------------------------
+// The Garden of Dawn (hero_lb)
+// ------------------------------------------------------------
+hero_lb,116,163,4	script	Britoniah#wsf	10527,{
+	callfunc "F_WSF_HeroOut", "Britoniah", "gef_fild13", 178, 219;
+	end;
+}
+hero_lb,116,116,4	script	Satellite city Luina#wsf	10527,{
+	callfunc "F_WSF_HeroOut", "Luina", "alde_gld", 186, 145;
+	end;
+}
+hero_lb,163,116,4	script	Valkyrie Realm#wsf	10527,{
+	callfunc "F_WSF_HeroOut", "the Valkyrie Realm", "prt_gld", 209, 159;
+	end;
+}
+hero_lb,163,163,4	script	Greenwood Lake#wsf	10527,{
+	callfunc "F_WSF_HeroOut", "Greenwood Lake", "pay_gld", 200, 147;
+	end;
+}
+
+// callfunc "F_WSF_HeroOut", "<realm>", "<map>", <x>, <y>;
+function	script	F_WSF_HeroOut	{
+	mes "^4d4dffA path of light leads out of the sanctuary, to " + getarg(0) + ".^000000";
+	next;
+	if (select("Go to " + getarg(0) + ":Stay in the garden") == 2)
+		close;
+	close2;
+	warp getarg(1), getarg(2), getarg(3);
+	end;
+}
+
+hero_lb,151,151,4	script	Sanctuary Manager#wsf	55,{
+	mes "[Sanctuary Manager]";
+	mes "Welcome to Sanctuary Herosria, the training ground of the constellation Rigel.";
+	next;
+	switch (select("What is Herosria?:Receive Herosria's Gift:Leave")) {
+	case 1:
+		mes "[Sanctuary Manager]";
+		mes "Rigel, the constellation of life and earth, watched adventurers close the dimensional rifts, guild beside guild.";
+		mes "Rigel liked what it saw. So it built a battlefield shaped like Rune-Midgard itself, to watch the guilds fight some more.";
+		next;
+		mes "[Sanctuary Manager]";
+		mes "This is the Garden of Beginnings, where everyone starts. The gardeners around me sell and make what you need in the sanctuary.";
+		mes "The Garden Cat takes you to the PvP dungeon and the training grounds.";
+		next;
+		mes "[Sanctuary Manager]";
+		mes "Rigel rewards the guilds that hold a castle. Their guild master may receive ^0000FF10 Herosria's Gifts^000000 from me ^0000FFonce a day^000000.";
+		mes "And their members fight harder in the PvP dungeon, with the blessing of the Spring Jewel.";
+		close;
+	case 2:
+		break;
+	case 3:
+		close;
+	}
+	mes "[Sanctuary Manager]";
+	if (!getcharid(2) || getguildmasterid(getcharid(2)) != getcharid(0)) {
+		mes "Herosria's Gifts are for the master of a guild that holds a castle.";
+		close;
+	}
+	if (!callfunc("F_WSF_HasCastle")) {
+		mes "Your guild doesn't hold a castle. Take one, and Rigel will notice.";
+		close;
+	}
+	if (wsf_hero_gift == gettime(DT_YYYYMMDD)) {
+		mes "You've already received today's gifts. Come back tomorrow.";
+		close;
+	}
+	if (!checkweight(101750, 10)) {
+		mes "You're carrying too much. Make some room first.";
+		close;
+	}
+	wsf_hero_gift = gettime(DT_YYYYMMDD);
+	getitem 101750, 10;	// Herosria_Gift
+	mes "Rigel's gifts for the lord of a castle. Use them well.";
+	close;
+}
+
+hero_lb,153,148,4	script	Garden Cat#wsf	561,{
+	mes "[Garden Cat]";
+	mes "Nyaa~ Where to, adventurer?";
+	next;
+	switch (select("Herosria PvP Dungeon:Herosria Training Ground:The seasonal gardens:Nowhere, thanks")) {
+	case 1:
+		mes "[Garden Cat]";
+		mes "The spring garden, nya! Garden wolves, cannons that bite, Ferus... and the Floral Pegasus, if you're lucky. Or unlucky.";
+		mes "Guilds that hold a castle can ask the Spring Jewel inside for its blessing.";
+		next;
+		if (select("Go:Not yet") == 2)
+			close;
+		close2;
+		warp "hero_dun1",110,108;
+		end;
+	case 2:
+		mes "[Garden Cat]";
+		mes "The training ground, nya. Quiet place to practise before a real fight.";
+		next;
+		if (select("Go:Not yet") == 2)
+			close;
+		close2;
+		warp "hero_tra",70,22;
+		end;
+	case 3:
+		mes "[Garden Cat]";
+		mes "The spring, summer, autumn and winter gardens are where the sanctuary's battle is won, nya.";
+		mes "Outside the battle, only the guilds that hold a castle may walk there.";
+		next;
+		if (!callfunc("F_WSF_HasCastle")) {
+			mes "[Garden Cat]";
+			mes "Your guild doesn't hold a castle. Sorry, nya.";
+			close;
+		}
+		.@g = select("Spring Garden:Summer Garden:Autumn Garden:Winter Garden:Not now");
+		if (.@g == 5)
+			close;
+		close2;
+		warp "hero_in" + .@g, 120, 120;
+		end;
+	case 4:
+		mes "[Garden Cat]";
+		mes "Nyaa. I'll be here, napping.";
+		close;
+	}
+}
+
+hero_lb,153,131,4	script	Garden Herbalist#wsf	10226,{
+	mes "[Garden Herbalist]";
+	mes "Herbs from Herosria, ground fine and mixed with honey. That's a Herosria Herb Jam.";
+	mes "What would you like?";
+	next;
+	switch (select("Grind herbs into powder:Purple Herb Jam:Red Herb Jam:Blue Herb Jam:Yellow Herb Jam:White Herb Jam:What do the jams do?")) {
+	case 1:
+		mes "[Garden Herbalist]";
+		mes "One Herosria herb makes one powder. Ordinary herbs work too, but I need ten of them for the same powder.";
+		next;
+		.@c = select("Herosria Red Herb:Herosria Blue Herb:Herosria Yellow Herb:Herosria White Herb:10 Red Herbs:10 Blue Herbs:10 Yellow Herbs:10 White Herbs") - 1;
+		setarray .@pw, 1001131, 1001132, 1001133, 1001134;	// Heros_<colour>_H_Powder
+		setarray .@hh, 1001114, 1001115, 1001116, 1001117;	// Heros_<colour>_Herb
+		setarray .@nh, 507, 510, 508, 509;			// Red/Blue/Yellow/White_Herb
+		if (.@c < 4)
+			callfunc "F_WSF_Craft", "Garden Herbalist", .@pw[.@c], 0, .@hh[.@c], 1;
+		else
+			callfunc "F_WSF_Craft", "Garden Herbalist", .@pw[.@c - 4], 0, .@nh[.@c - 4], 10;
+		end;
+	case 2:
+		callfunc "F_WSF_Craft", "Garden Herbalist", 101753, 0, 1001131, 5, 1001132, 5, 1001133, 5, 1001134, 5;
+		end;
+	case 3:
+		callfunc "F_WSF_Craft", "Garden Herbalist", 101754, 0, 1001131, 10;
+		end;
+	case 4:
+		callfunc "F_WSF_Craft", "Garden Herbalist", 101755, 0, 1001132, 10;
+		end;
+	case 5:
+		callfunc "F_WSF_Craft", "Garden Herbalist", 101756, 0, 1001133, 10;
+		end;
+	case 6:
+		callfunc "F_WSF_Craft", "Garden Herbalist", 101757, 0, 1001134, 10;
+		end;
+	case 7:
+		mes "[Garden Herbalist]";
+		mes "^800080Purple^000000: all trait stats +5 for 30 minutes.";
+		mes "^FF0000Red^000000: P.ATK +5 for 10 minutes.";
+		mes "^0000FFBlue^000000: S.MATK +5 for 10 minutes.";
+		mes "^C0A000Yellow^000000: C.Rate +5 for 10 minutes.";
+		mes "White: RES +50 and MRES +50 for 10 minutes.";
+		close;
+	}
+}
+
+hero_lb,151,128,4	script	Garden Worker#wsf	627,{
+	mes "[Garden Worker]";
+	mes "Rough stones in, polished jewels out. That's my job in the garden.";
+	next;
+	switch (select("Cut gem ore:Polish gems (Shining):Polish gems (Brilliant):Join jewel fragments")) {
+	case 1:
+		.@c = select("Ruby:Topaz:Sapphire:Emerald:Diamond") - 1;
+		callfunc "F_WSF_Craft", "Garden Worker", 1001109 + .@c, 1000, 1001104 + .@c, 5;
+		end;
+	case 2:
+		.@c = select("Ruby:Topaz:Sapphire:Emerald:Diamond") - 1;
+		callfunc "F_WSF_Craft", "Garden Worker", 1001118 + .@c, 5000, 1001109 + .@c, 5;
+		end;
+	case 3:
+		.@c = select("Ruby:Topaz:Sapphire:Emerald:Diamond") - 1;
+		callfunc "F_WSF_Craft", "Garden Worker", 1001123 + .@c, 10000, 1001118 + .@c, 5;
+		end;
+	case 4:
+		switch (select("Herosria Jewel:Dimensional Jewel:Dimensional Jewelry")) {
+		case 1:
+			callfunc "F_WSF_Craft", "Garden Worker", 1001095, 0, 1001092, 10;
+			end;
+		case 2:
+			callfunc "F_WSF_Craft", "Garden Worker", 1001093, 0, 1001090, 10;
+			end;
+		case 3:
+			callfunc "F_WSF_Craft", "Garden Worker", 1001094, 0, 1001091, 10;
+			end;
+		}
+	}
+	end;
+}
+
+hero_lb,148,126,4	script	Garden Blacksmith#wsf	454,{
+	mes "[Garden Blacksmith]";
+	mes "Herosria ore, straight into the furnace. Five ores make a bar.";
+	mes "The Garden Technician needs bars for the dimension enhancer, and the enchanters want them too.";
+	next;
+	.@c = select("Gold Bar:Silver Bar:Copper Bar:Iron Bar:Never mind") - 1;
+	if (.@c == 4)
+		close;
+	callfunc "F_WSF_Craft", "Garden Blacksmith", 1001100 + .@c, 1000, 1001096 + .@c, 5;
+	end;
+}
+
+hero_lb,131,126,4	script	Garden Technician#wsf	446,{
+	mes "[Garden Technician]";
+	mes "Dimensional Wanderer accessories? Bring them here.";
+	mes "I can push a +9 piece up to +11, one level at a time, and I can enchant them.";
+	next;
+	switch (select("Refine with the Dimension Enhancer:Enchant:What does refining cost?")) {
+	case 1:
+		mes "[Garden Technician]";
+		mes "Choose the piece and I'll get to work.";
+		close2;
+		item_reform 101816;	// Dimmen_A_Refine
+		end;
+	case 2:
+		mes "[Garden Technician]";
+		mes "Let's see what the stars allow.";
+		close2;
+		item_enchant 56;
+		end;
+	case 3:
+		mes "[Garden Technician]";
+		mes "Each level, from +9 up to +11, costs:";
+		mes "50 Herosria Gold Bars, 100 Herosria Silver Bars,";
+		mes "200 Herosria Copper Bars and 300 Herosria Iron Bars.";
+		mes "Grade, cards, enchants and random options stay as they are.";
+		close;
+	}
+}
+
+hero_lb,128,128,4	script	Equipment Merchant#wsf	513,{
+	mes "[Equipment Merchant]";
+	mes "Herosria equipment, made for the sanctuary's battles.";
+	mes "Cheap, sturdy, and everyone fights on equal footing with it.";
+	next;
+	switch (select("Weapons:Armor and accessories:Leave")) {
+	case 1:
+		close2;
+		callshop "WSF_HsWeapons", 1;
+		end;
+	case 2:
+		close2;
+		callshop "WSF_HsArmor", 1;
+		end;
+	case 3:
+		close;
+	}
+}
+
+-	shop	WSF_HsWeapons	-1,21064:10000,500057:10000,500058:10000,500059:10000,500060:10000,510079:10000,510080:10000,510081:10000,510082:10000,510083:10000,510084:10000,510085:10000,510086:10000,510087:10000,510088:10000,510089:10000,510090:10000,520022:10000,530036:10000,540061:10000,540062:10000,540063:10000,540064:10000,540065:10000,540066:10000,550096:10000,550097:10000,550098:10000,550099:10000,550100:10000,550101:10000,550102:10000,550103:10000,550104:10000,550105:10000,550106:10000,550107:10000,560039:10000,560040:10000,570034:10000,570035:10000,580035:10000,580036:10000,590050:10000,590051:10000,590052:10000,600032:10000,610043:10000,620021:10000,630020:10000,640038:10000,640039:10000,650030:10000,700061:10000,700062:10000,700063:10000,700064:10000,800017:10000,810016:10000,820012:10000,830016:10000,840011:10000
+-	shop	WSF_HsArmor	-1,400336:10000,400337:10000,400338:10000,400339:10000,400340:10000,401239:10000,401240:10000,401241:10000,401242:10000,401243:10000,450229:10000,450230:10000,450231:10000,450232:10000,450233:10000,460034:10000,460035:10000,460036:10000,460037:10000,470153:10000,470154:10000,470155:10000,470156:10000,470157:10000,480215:10000,480216:10000,480217:10000,480218:10000,480219:10000,490251:10000,490252:10000,490253:10000,490254:10000,490255:10000,490256:10000
+
+hero_lb,126,131,4	script	Garden Maker#wsf	789,{
+	mes "[Garden Maker]";
+	mes "The Sealed Dimensional Key, Lock and Keyring. All their power is locked away.";
+	mes "With the right stones, I can wake it up.";
+	next;
+	switch (select("Unseal an accessory:What do I need?:Leave")) {
+	case 1:
+		mes "[Garden Maker]";
+		mes "Show me the sealed piece.";
+		close2;
+		item_reform 101745;	// Dimmen_A_Reform
+		end;
+	case 2:
+		mes "[Garden Maker]";
+		mes "The sealed piece at +0, plus one each of:";
+		mes "Dimensional Jewel, Dimensional Jewelry and Herosria Jewel.";
+		mes "And one treasure: Herosria's Faith for the Key, Herosria's Justice for the Lock, Herosria's Glory for the Keyring.";
+		next;
+		mes "[Garden Maker]";
+		mes "The sealed pieces and the jewels come in Herosria's Gifts. The treasures, from the Floral Pegasus in the PvP dungeon.";
+		close;
+	case 3:
+		close;
+	}
+}
+
+hero_lb,126,148,4	script	Management Soldier#wsf	105,{
+	mes "[Management Soldier]";
+	mes "I keep an eye on the beasts of the spring garden. Wolves, Ferus, cannons...";
+	next;
+	switch (select("Is the Floral Pegasus out?:Rules of the sanctuary:Leave")) {
+	case 1:
+		.@n = getmapunits(BL_MOB, "hero_dun1", .@u);
+		for (.@i = 0; .@i < .@n; .@i++) {
+			getunitdata .@u[.@i], .@d;
+			if (.@d[UMOB_CLASS] == 21904) {	// HEROS_F_PEGASUS
+				.@up = 1;
+				break;
+			}
+		}
+		mes "[Management Soldier]";
+		if (.@up)
+			mes "The Floral Pegasus is flying over the spring garden right now. Careful, it hits hard.";
+		else
+			mes "No sign of the Floral Pegasus. It comes back about an hour after it falls.";
+		close;
+	case 2:
+		mes "[Management Soldier]";
+		mes "In the sanctuary's battles, regular attacks are much weaker than outside, and skills weaker still.";
+		mes "Defence scrolls and the stronger potions don't work there either. That's why everyone uses Herosria equipment.";
+		close;
+	case 3:
+		close;
+	}
+}
+
+hero_lb,148,153,4	script	Priest#wsf	630,{
+	mes "[Priest]";
+	mes "May Rigel's light heal your wounds.";
+	close2;
+	percentheal 100, 100;
+	sc_end SC_POISON;
+	sc_end SC_BLIND;
+	sc_end SC_SILENCE;
+	sc_end SC_CONFUSION;
+	sc_end SC_CURSE;
+	sc_end SC_STONE;
+	specialeffect2 EF_HEAL2;
+	sc_start SC_BLESSING, 240000, 10;
+	sc_start SC_INCREASEAGI, 240000, 10;
+	specialeffect2 EF_BLESSING;
+	specialeffect2 EF_INCAGILITY;
+	end;
+}
+
+// ------------------------------------------------------------
+// The PvP dungeon (spring garden) and the four season gardens
+// ------------------------------------------------------------
+hero_dun1,108,108,4	script	Spring Jewel#wsf	21866,{
+	mes "^4d4dffThe Spring Jewel glows softly. Warmth pours out of it like sunlight through leaves.^000000";
+	next;
+	if (!callfunc("F_WSF_HasCastle")) {
+		mes "^4d4dffThe warmth stops at your fingertips. The jewel only blesses guilds that hold a castle.^000000";
+		close;
+	}
+	mes "^4d4dffThe light wraps around you. You feel ready to take on the garden's beasts.^000000";
+	close2;
+	// Combat blessing for 30 minutes: +10% damage to monsters (physical and magic).
+	bonus_script "{ bonus2 bAddRace,RC_ALL,10; bonus2 bMagicAddRace,RC_ALL,10; }", 1800, BSF_REM_ON_LOGOUT|BSF_REM_ON_DEAD, 0, EFST_BLESSING;
+	specialeffect2 EF_BLESSING;
+	end;
+}
+
+hero_dun1,122,122,4	script	Moving Stone#wsf_d	10248,{
+	mes "^4d4dffA moving stone. It hums when you touch it.^000000";
+	next;
+	if (select("Return to the Garden of Dawn:Stay") == 2)
+		close;
+	close2;
+	warp "hero_lb",136,143;
+	end;
+}
+hero_in1,122,122,4	duplicate(Moving Stone#wsf_d)	Moving Stone#wsf_1	10248
+hero_in2,122,122,4	duplicate(Moving Stone#wsf_d)	Moving Stone#wsf_2	10248
+hero_in3,122,122,4	duplicate(Moving Stone#wsf_d)	Moving Stone#wsf_3	10248
+hero_in4,122,122,4	duplicate(Moving Stone#wsf_d)	Moving Stone#wsf_4	10248
+
+hero_in1,100,100,4	script	BroadCastButler#wsf_1	55,{
+	setarray .@s$, "", "Spring", "Summer", "Autumn", "Winter";
+	.@m = atoi(charat(strcharinfo(3), 7));
+	mes "[Garden Butler]";
+	mes "Welcome to the " + .@s$[.@m] + " Garden of Herosria.";
+	mes "During the sanctuary's battle, I announce every jewel that breaks and every gate that opens.";
+	mes "Today the garden is quiet. The moving stone takes you back to the Garden of Dawn.";
+	close;
+}
+hero_in2,100,100,4	duplicate(BroadCastButler#wsf_1)	BroadCastButler#wsf_2	55
+hero_in3,100,100,4	duplicate(BroadCastButler#wsf_1)	BroadCastButler#wsf_3	55
+hero_in4,100,100,4	duplicate(BroadCastButler#wsf_1)	BroadCastButler#wsf_4	55
+
+// The Challenger's Monuments in the four corners of the Garden of Dawn:
+// in each region (Silvarium, Lacusarium, Bastitarium, Rabinarium) one
+// heals, one leads to the region's battlefield. The battlefields only
+// open with the sanctuary's battle, which this block doesn't run.
+hero_lb,209,205,4	script	Challenger's Monument#wsf_r1	21866,{
+	mes "^4d4dffThe monument hums. Warmth flows out of the stone and into your wounds.^000000";
+	close2;
+	percentheal 100, 100;
+	specialeffect2 EF_HEAL2;
+	end;
+}
+hero_lb,74,209,4	duplicate(Challenger's Monument#wsf_r1)	Challenger's Monument#wsf_r2	21866
+hero_lb,70,74,4	duplicate(Challenger's Monument#wsf_r1)	Challenger's Monument#wsf_r3	21866
+hero_lb,205,70,4	duplicate(Challenger's Monument#wsf_r1)	Challenger's Monument#wsf_r4	21866
+
+hero_lb,205,209,4	script	Challenger's Monument#wsf_m1	10248,{
+	setarray .@r$, "Silvarium", "Lacusarium", "Bastitarium", "Rabinarium";
+	.@i = atoi(charat(strnpcinfo(2), 5)) - 1;
+	mes "^4d4dffAn inscription on the monument:^000000";
+	mes "\"Challengers of " + .@r$[.@i] + ", the gate opens when Rigel's battle begins.\"";
+	next;
+	mes "^4d4dffThe stone is cold. Sanctuary Herosria's battle isn't being fought on this server: the way to " + .@r$[.@i] + " stays closed.^000000";
+	close;
+}
+hero_lb,70,205,4	duplicate(Challenger's Monument#wsf_m1)	Challenger's Monument#wsf_m2	10248
+hero_lb,74,70,4	duplicate(Challenger's Monument#wsf_m1)	Challenger's Monument#wsf_m3	10248
+hero_lb,209,74,4	duplicate(Challenger's Monument#wsf_m1)	Challenger's Monument#wsf_m4	10248

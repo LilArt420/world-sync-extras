@@ -1,0 +1,114 @@
+//===== World Sync Extras: Star Forest block ================
+//= Meteor Forest (Star Emperor job change), Sanctuary Herosria
+//= and Ash Village's services: shared functions.
+//===== Description: =========================================
+//= Written from the official clients' quest text (iRO; kRO with
+//= ROenglishRE's English where it exists), the navigation tables
+//= and the official guides; no official script exists.
+//=
+//= Character variables (prefixed so a future official script
+//= can't collide with them):
+//=   wsf_se    Star Emperor job change step (0 = not started,
+//=             140 = done)
+//= Chapter 1's story in Ash Village is World Sync Extras' Chapter 1
+//= part (wsv_ch1); this block only reads it.
+//============================================================
+
+// Who sees which story NPC. Every scene NPC is CLOAKED; this shows it
+// to a player whose step matches and hides it otherwise. Called on map
+// load and after every step change.
+function	script	F_WSF_Scenes	{
+	.@m$ = strcharinfo(3);
+	if (.@m$ == "star_frst") {
+		callfunc "F_WSF_Show", "Rancis#wsf_b", wsf_se == 50;
+		callfunc "F_WSF_Show", "Rancis#wsf_c", wsf_se == 60;
+	} else if (.@m$ == "star_in") {
+		callfunc "F_WSF_Show", "Chosung#wsf_tea", wsf_se == 20;
+		callfunc "F_WSF_Show", "Eunha#wsf_room", wsf_se == 110;
+	}
+	return;
+}
+
+// callfunc "F_WSF_Show", "<npc name>", <1 shown | 0 hidden>;
+function	script	F_WSF_Show	{
+	if (getarg(1))
+		cloakoffnpcself getarg(0);
+	else
+		cloakonnpcself getarg(0);
+	return;
+}
+
+// 1 when the character has finished Chapter 1's main story ("Immortal
+// Monarch", kept by World Sync Extras' Chapter 1 part in wsv_ch1).
+// Hotbeer More's armor, the Root Gold back room and the way to the
+// Sanctuary Beledor open after it, as on kRO.
+function	script	F_WSF_Ch1Done	{
+	return (wsv_ch1 >= 1000);
+}
+
+// Moves a story on: finishes the quests given, starts the next ones,
+// sets the step and refreshes who is visible.
+// callfunc "F_WSF_Step", "<variable>", <new step>, "<quests to complete>", "<quests to start>";
+// Quest lists are comma separated ids ("" for none).
+function	script	F_WSF_Step	{
+	.@done$ = getarg(2);
+	.@next$ = getarg(3);
+	if (.@done$ != "") {
+		explode .@d$, .@done$, ",";
+		.@n = getarraysize(.@d$);
+		for (.@i = 0; .@i < .@n; .@i++) {
+			.@q = atoi(.@d$[.@i]);
+			if (isbegin_quest(.@q) == 1)
+				completequest .@q;
+			else if (isbegin_quest(.@q) == 0) {
+				setquest .@q;
+				completequest .@q;
+			}
+		}
+	}
+	if (.@next$ != "") {
+		explode .@x$, .@next$, ",";
+		.@n = getarraysize(.@x$);
+		for (.@i = 0; .@i < .@n; .@i++) {
+			.@q = atoi(.@x$[.@i]);
+			if (isbegin_quest(.@q) == 0)
+				setquest .@q;
+		}
+	}
+	setd getarg(0), getarg(1);
+	callfunc "F_WSF_Scenes";
+	questinfo_refresh;
+	return;
+}
+
+-	script	WSF_SceneLoader	-1,{
+	end;
+OnPCLoadMapEvent:
+	callfunc "F_WSF_Scenes";
+	end;
+}
+
+star_frst	mapflag	loadevent
+star_in	mapflag	loadevent
+
+// The server's generic "Travel to ..." stand-ins stand on the cells of
+// the official NPCs this block places; the official NPCs take people
+// the same way, so the stand-ins are hidden while the block is on.
+-	script	WSF_Standins	-1,{
+	end;
+OnInit:
+	setarray .@n$,
+		"Travel to star_frst#ws30885",
+		"Travel to hero_dun1#ws30103",
+		"Travel to gef_fild13#ws30121",
+		"Travel to alde_gld#ws30125",
+		"Travel to prt_gld#ws30129",
+		"Travel to pay_gld#ws30133",
+		"Travel to yggdrasil01#ws19656",
+		"Travel to ygg_roots#ws19662",
+		"Travel to ygg_edge#ws19664";
+	for (.@i = 0; .@i < getarraysize(.@n$); .@i++)
+		if (getnpcid(0, .@n$[.@i]))
+			disablenpc .@n$[.@i];
+	end;
+}
