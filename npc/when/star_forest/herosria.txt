@@ -64,7 +64,7 @@ function	script	F_WSF_Craft	{
 	for (.@i = 0; .@i < .@n; .@i++)
 		mes "- " + .@amt[.@i] + " " + getitemname(.@in[.@i]) + " (you have " + countitem(.@in[.@i]) + ")";
 	if (.@zeny)
-		mes "- " + F_InsertComma(.@zeny) + " zeny";
+		mes "- " + callfunc("F_InsertComma", .@zeny) + " zeny";
 	if (.@max < 1) {
 		mes "You don't have enough for even one.";
 		close;
