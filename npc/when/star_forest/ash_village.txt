@@ -123,82 +123,144 @@ ygg_fruit,165,115,4	script	Cat Hand Merchant Group#wsf	553,{
 }
 -	shop	WSF_CatHand	-1,501:-1,502:-1,503:-1,504:-1,505:-1,506:-1,601:-1,602:-1,611:-1,1065:-1,645:-1,656:-1,7135:-1,7136:-1,717:-1,716:-1,715:-1
 
-// The Root Gold shop: basic items now, the rest after the main story
-// (kRO gates it by "Golden Root" reputation; prices are estimates).
+// The Root Gold Coin Exchanger (kRO's Chapter 1 page): Root Gold Coins
+// for Mana Rings and the minerals used to enhance the Chapter 1 gear,
+// once Chapter 1's story is over (kRO gates it by "Golden Root"
+// reputation). Before that, only the Traveler's Leaf. Prices in coins are
+// estimates.
 ygg_fruit,165,126,4	script	Root Gold Coin Exchanger#wsf	10611,{
 	mes "[Root Gold Coin Exchanger]";
-	mes "Welcome, welcome. Supplies for travellers of the World Tree.";
+	mes "Welcome, welcome. Root Gold Coins are good money in Ash Village.";
 	if (!callfunc("F_WSF_Ch1Done")) {
-		mes "Once you've done more for the village, I'll open the back room for you.";
+		mes "Until you've done more for the village, all I can sell you is a Traveler's Leaf.";
 		close2;
 		callshop "WSF_RootGold0", 1;
 		end;
 	}
-	mes "And for a friend of the village, the back room too.";
-	close2;
-	callshop "WSF_RootGold1", 1;
-	end;
+	next;
+	switch (select("Exchange coins for Mana Rings:Exchange coins for minerals:Buy a Traveler's Leaf:Leave")) {
+	case 1:
+		close2;
+		callshop "WSF_RootGoldRing", 1;
+		end;
+	case 2:
+		close2;
+		callshop "WSF_RootGoldOre", 1;
+		end;
+	case 3:
+		close2;
+		callshop "WSF_RootGold0", 1;
+		end;
+	case 4:
+		close;
+	}
 }
 -	shop	WSF_RootGold0	-1,104000:5000
--	shop	WSF_RootGold1	-1,104000:5000,1001972:100000,1001996:50000,1001997:20000,1001998:100000,1002003:200000,1002004:200000,1002005:200000,1002006:200000,1002007:300000,1002008:300000,1002009:300000,1002010:300000,1002038:500000,1002039:500000,1002040:500000,1002041:500000,1002015:300000,1002012:300000
+-	itemshop	WSF_RootGoldRing	-1,1001972,1001996:1
+-	itemshop	WSF_RootGoldOre	-1,1001972,1001997:1,1001998:3,1002003:5,1002004:5,1002005:5,1002006:5,1002007:5,1002008:5,1002009:5,1002010:5,1002038:10,1002039:10,1002040:10,1002041:10,1002015:5,1002012:5
 
-// Hot Beer More: the Tangled Magic armor series for Root Gold Coins,
-// after the main story.
+// Hotbeer More (kRO's Chapter 1 page): exchanges the Tangled Magic armor
+// and the Dimensional World shoes, and enchants them, after Chapter 1's
+// story. The Tangled Magic enchants are rAthena's item_enchant 160-162.
+// Costs aren't published: 100 Root Gold Coins a Tangled piece; a
+// Dimensional World pair takes 30 Runes of Chaotic Magic Power, 30 Runes
+// of Heterogeneous Magic Power, 100 Mana Rings and 50 Root Gold Coins.
 ygg_fruit,168,124,4	script	Hotbeer More#wsf	813,{
 	mes "[Hotbeer More]";
-	mes "Armor woven from the World Tree's own roots. Keeps the other worlds' magic off your skin.";
+	mes "Armor woven from the World Tree's own roots, and boots that walk between worlds. Keeps the other worlds' magic off your skin.";
 	if (!callfunc("F_WSF_Ch1Done")) {
-		mes "But I only sell it to people the village trusts. Help Ash Village through its troubles first.";
+		mes "But I only work for people the village trusts. Help Ash Village through its troubles first.";
 		close;
 	}
-	mes "Each piece costs ^0000FF100 Root Gold Coins^000000.";
 	next;
-	setarray .@it, 450440, 450441, 480545, 480546, 470333, 470334;
+	switch (select("Tangled Magic armor:Dimensional World shoes:Enchant Tangled armor or robe:Enchant Tangled manteau or muffler:Enchant Tangled boots or shoes:Enchant Dimensional World shoes:Leave")) {
+	case 1:
+		setarray .@it, 450440, 450441, 480545, 480546, 470333, 470334;
+		callfunc "F_WSF_MoreTrade", .@it, 1001972, 100, 0, 0, 0, 0, 0, 0;
+		end;
+	case 2:
+		setarray .@it, 470335, 470336, 470337, 470338, 470339;
+		callfunc "F_WSF_MoreTrade", .@it, 1002012, 30, 1002015, 30, 1001996, 100, 1001972, 50;
+		end;
+	case 3:
+		close2;
+		item_enchant 160;
+		end;
+	case 4:
+		close2;
+		item_enchant 161;
+		end;
+	case 5:
+		close2;
+		item_enchant 162;
+		end;
+	case 6:
+		mes "[Hotbeer More]";
+		mes "The Dimensional World shoes take Boundary Crystals, and they grow as you add them. It's delicate work.";
+		mes "^4d4dff(This enchant isn't available on this server yet.)^000000";
+		close;
+	case 7:
+		close;
+	}
+}
+
+// One of Hotbeer More's exchanges: pick an item, pay up to four materials.
+// callfunc "F_WSF_MoreTrade", <item array>, <mat1>, <n1>, <mat2>, <n2>, <mat3>, <n3>, <mat4>, <n4>;
+function	script	F_WSF_MoreTrade	{
+	.@cnt = getarraysize(getarg(0));
 	.@menu$ = "";
-	for (.@i = 0; .@i < getarraysize(.@it); .@i++)
-		.@menu$ += getitemname(.@it[.@i]) + ":";
+	for (.@i = 0; .@i < .@cnt; .@i++)
+		.@menu$ += getitemname(getelementofarray(getarg(0), .@i)) + ":";
 	.@menu$ += "Never mind";
 	.@c = select(.@menu$) - 1;
-	if (.@c >= getarraysize(.@it))
+	if (.@c >= .@cnt)
 		close;
-	if (countitem(1001972) < 100) {
-		mes "[Hotbeer More]";
-		mes "That's 100 Root Gold Coins. You have " + countitem(1001972) + ".";
-		close;
+	.@item = getelementofarray(getarg(0), .@c);
+	for (.@m = 0; .@m < 4; .@m++) {
+		.@mat[.@m] = getarg(1 + .@m * 2);
+		.@amt[.@m] = getarg(2 + .@m * 2);
 	}
-	if (!checkweight(.@it[.@c], 1)) {
+	mes "[Hotbeer More]";
+	mes getitemname(.@item) + "? That takes:";
+	for (.@m = 0; .@m < 4; .@m++)
+		if (.@mat[.@m])
+			mes "- " + .@amt[.@m] + " " + getitemname(.@mat[.@m]) + " (you have " + countitem(.@mat[.@m]) + ")";
+	next;
+	if (select("Make the trade:Never mind") == 2)
+		close;
+	for (.@m = 0; .@m < 4; .@m++) {
+		if (.@mat[.@m] && countitem(.@mat[.@m]) < .@amt[.@m]) {
+			mes "[Hotbeer More]";
+			mes "You're short of " + getitemname(.@mat[.@m]) + ".";
+			close;
+		}
+	}
+	if (!checkweight(.@item, 1)) {
 		mes "[Hotbeer More]";
 		mes "You can't carry it. Make some room first.";
 		close;
 	}
-	delitem 1001972, 100;	// Ch1_Root_Coin
-	getitem .@it[.@c], 1;
+	for (.@m = 0; .@m < 4; .@m++)
+		if (.@mat[.@m])
+			delitem .@mat[.@m], .@amt[.@m];
+	getitem .@item, 1;
 	mes "[Hotbeer More]";
 	mes "There you go. Wear it well.";
 	close;
 }
 
-// Vitoli: enchants the Tangled Magic armor series (rAthena's
-// item_enchant groups 160-162: Root Gold Coins, Mana Rings, Frontier
-// Magic Stones).
+// Vitoli: kRO's client has no role for her beyond living here (navi
+// group "ch1msz00"); she explains the village's currencies.
 ygg_fruit,162,126,4	script	Vitoli#wsf	410,{
 	mes "[Vitoli]";
-	mes "Tangled Magic armor? Let me see if the roots will take a little more magic.";
+	mes "New in Ash Village? Let me save you some confusion.";
 	next;
-	switch (select("Armor or robe:Manteau or muffler:Boots or shoes:Never mind")) {
-	case 1:
-		close2;
-		item_enchant 160;
-		end;
-	case 2:
-		close2;
-		item_enchant 161;
-		end;
-	case 3:
-		close2;
-		item_enchant 162;
-		end;
-	case 4:
-		close;
-	}
+	mes "[Vitoli]";
+	mes "^0000FFRoot Gold Coins^000000 are what the village pays you with when you help out. The exchanger next to me takes them.";
+	mes "^0000FFMana Rings^000000 come from the other Geffen, the one where the tower fell. Hotbeer More wants those for his finer work.";
+	next;
+	mes "[Vitoli]";
+	mes "And the runes of chaotic and heterogeneous magic... the exchanger has them, once the village trusts you.";
+	mes "Hotbeer More turns them into boots that walk between worlds.";
+	close;
 }
