@@ -1,13 +1,27 @@
 {
   "name": "world-sync-extras",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "author": "Lil Art",
-  "description": "Optional extras for the World Sync server content: entrances from rAthena's maps into the maps World Sync fills (Biosphere, Jormungandr, Chapter 2...), the official NPCs whose logic no server data has yet, and @npcplace to move NPCs. Needs Ragnarok Offline 1.6.6 or later (World Sync).",
+  "description": "World Sync's playable content and extras. The Jormungandr saga: Episode 20 (The Undying One) and Episode 21 (Age of Heroes) with full dialogue, the official quest steps, memorial dungeons, dailies and the Ice Castle and Lunaforma traders. The official NPCs whose logic no server data has yet, placed where the clients put them. Optional entrances into the World Sync maps, and @npcplace to move NPCs. Needs Ragnarok Offline 1.6.7 or later.",
   "requires": {
-    "app": ">=1.6.6",
+    "app": ">=1.6.7",
     "era": "renewal"
   },
   "settings": [
+    {
+      "key": "jormungandr",
+      "type": "boolean",
+      "default": true,
+      "label": "Jormungandr saga: Episodes 20 and 21",
+      "description": "Episode 20 starts from Horuru in the Ice Castle (Episode 19 done, level 200+); Episode 21 from Voglinde in the Ice Castle's west wing (level 230+). Includes the memorial dungeons, the dailies and the traders and enchanters. Turned off, its NPCs leave the Jormungandr maps entirely (their placeholders don't come back)."
+    },
+    {
+      "key": "skip_ep19",
+      "type": "boolean",
+      "default": false,
+      "label": "Jormungandr: start Episode 20 without Episode 19",
+      "description": "Horuru offers Episode 20 to any character of level 200 or more, even one that hasn't finished Issgard's Episode 19 story."
+    },
     {
       "key": "entrances",
       "type": "boolean",

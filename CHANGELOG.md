@@ -1,15 +1,22 @@
 # Changelog
 
-## 1.5.0
-- 52 more placeholders are gone: World Sync: Jormungandr 1.2.0 implements them for real (the 14 Magical Objects on jor_back5/6, Mandel, Counselor Ulus and the refugees, Libra, Parex, Balun Wok, the Mercenary Applicants and 4 Mercenaries, Lee, Popo, Lobelia, Sansan and the Wigner Exchanger). The other Mercenaries, Shupapa, Nyar, the Small Boat, the Hidden Ship and Walter Sailor stay. 543 placeholders remain, 44 of them working.
+## 2.0.0
+Needs Ragnarok Offline 1.6.7 or later.
 
-## 1.4.0
-- 21 more placeholders on the Episode 21 maps are gone: World Sync: Jormungandr 1.1.0 implements them for real with Episode 21, Age of Heroes. Two Mercenaries step 2 cells aside so they don't stand on its NPCs. 595 placeholders remain, 44 of them working.
-- 303 World Sync monsters whose stats Divine Pride doesn't show get real estimates: each missing value is the median of the 7 monsters of the same class nearest in level and HP. Before, they copied one similar monster, sometimes a boss: Yorker Worker and Yorker Religious Worker had 207 million HP (now 26-28 million), Flameanima and Feeos 614 million (now 47 million), three Vr Cst monsters 285,340 (now 27 million), and 29 monsters such as Violen, Medjed and Tatsi hit for 0 (now like their peers). EXP, ATK, MATK, DEF, stats, reach and speeds follow the same estimate. Temporary: it goes away once the app ships the fix (Flux159/rathena).
+### 🐍 New: the Jormungandr saga (setting `jormungandr`, on)
+The World Sync: Jormungandr mod is now part of World Sync Extras, so one install brings the stories with the maps.
+- Episode 20, The Undying One, start to finish (83 quests): the Ancient Ice Canyon, the Lair of the Rgans, the Sacred Roots, the Serpent's Maze, a guest in the Ice Castle (His Holiness Nadyagand), the Frozen Zone and the Nest of Small Branches, and the memorial dungeon Separated Sanctuary. Starts from Horuru in the Ice Castle (Episode 19 done, level 200+; setting `skip_ep19` lets anyone start).
+- Episode 21, Age of Heroes, start to finish (101 quests, with an English quest log): a rift on Scale Island, Lunaforma and Alberta of old, the Georborg resistance, the ghost ship (memorial dungeon), two infiltrations of the cult's temple Gimle, and the giant serpent in the Snake's Resting Place. Starts from Voglinde in the Ice Castle's west wing at level 230.
+- After the stories: dailies for both episodes (reset at 04:00), the memorial dungeons again every day, side stories, and the traders: Torr in the Ice Castle (Glacier and Dim Glacier enchants), and in Lunaforma the Wigner Company Exchanger, Blacksmith Sansan and Mage Lobelia.
+- Doors into the Ice Castle's west wing (icecastle 230,160, 157,206 and 46,164), which rAthena's World Sync content lacks; they step aside when `entrances` is on.
+- The Episode Valkyrie (standart-npc) can skip both episodes with their Clear Tickets, through F_WSJ_Skip20/21.
 
-## 1.3.0
-- 119 placeholders on the Jormungandr maps (and their scenes in icas_in2) are gone: the World Sync: Jormungandr mod (1.0.0) implements them for real, so the two never stand on the same spot. Likewise the 5 Overlook Water Dungeon signboards, which iRO Quests implements. The list is in replaced-placeholders.txt. 616 placeholders remain.
-- World Sync monsters drop again: 154 of them (e.g. all of Varmundt's) had drops with no chance published, which the server gave the 0.01% floor. They now use the typical chance of the same kind of item (materials 5%, cards 0.01%, equipment 0.03-0.3%), until the app ships the same fix (db/mob_db.yml, by drop slot).
+### 🧍 Placeholders
+- 192 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). Likewise the 5 Overlook Water Dungeon signboards, which iRO Quests implements. 543 placeholders remain, 44 of them working.
+
+### 👾 World Sync monsters (db/mob_db.yml, until the app ships the same fixes)
+- They drop again: 154 monsters had drops with no chance published, which the server gave the 0.01% floor. They now use the typical chance of the same kind of item (materials 5%, cards 0.01%, equipment 0.03-0.3%).
+- 303 monsters whose stats Divine Pride doesn't show get real estimates: each missing value is the median of the 7 monsters of the same class nearest in level and HP. Before, they copied one similar monster, sometimes a boss: Yorker Worker had 207 million HP (now 27.8 million), Flameanima and Feeos 614 million (now 47 million), three Vr Cst monsters 285,340 (now 27 million), and 29 monsters such as Violen, Medjed and Tatsi hit for 0.
 
 ## 1.2.0
 - 44 placeholders now work:

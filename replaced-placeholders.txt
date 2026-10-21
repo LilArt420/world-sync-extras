@@ -1,9 +1,9 @@
-# Placeholders other mods now implement: generate.py --exclude-ids leaves them out.
-# World Sync: Jormungandr 1.0.0 (LilArt420/world-sync-jormungandr), Episode 20 main story
+# Placeholders implemented for real, by this mod's blocks or by other mods: generate.py --exclude-ids leaves them out.
+# Jormungandr block (npc/when/jormungandr): Episode 20 main story
 14324 14329 14330 14331 14332 14333 14334 14335 14336 14396 14399 14400 14401 14420 14422 14423 14424 14425 14457 14464 14467 14472 14474 14476 14481 14506 14508-14527 14629 14633 14634 14635 14638 14647 14649-14660 14662 14664 14666 14668 14670 14672 14701 14706-14711 14735-14743 14745-14757 14760-14766 18376 18378 18658 18661 18664 18666 18668 18671 18684 18686 18688 18690 18692
 # iRO Quests (LilArt420/iro-quests, next version): Overlook Water Dungeon signboards
 30027-30031
-# World Sync: Jormungandr 1.1.0, Episode 21 (Age of Heroes)
+# Jormungandr block: Episode 21 (Age of Heroes)
 18985 18986 19079 19085 19097 19098 19099 19106 19136 19153 19154 19155 19156 19157 19177 19233 19282 19290 19354 19355 19359
-# World Sync: Jormungandr 1.2.0: the dailies, the ghost-ship dungeon, Alberta of old and the traders
+# Jormungandr block: the dailies, the ghost-ship dungeon, Alberta of old and the traders
 14438-14451 18790 18933-18939 18943 19043-19066 19069 19143 19144 19350 19351
