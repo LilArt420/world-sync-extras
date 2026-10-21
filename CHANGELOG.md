@@ -2,6 +2,7 @@
 
 ## 1.4.0
 - 21 more placeholders on the Episode 21 maps are gone: World Sync: Jormungandr 1.1.0 implements them for real with Episode 21, Age of Heroes. Two Mercenaries step 2 cells aside so they don't stand on its NPCs. 595 placeholders remain, 44 of them working.
+- 303 World Sync monsters whose stats Divine Pride doesn't show get real estimates: each missing value is the median of the 7 monsters of the same class nearest in level and HP. Before, they copied one similar monster, sometimes a boss: Yorker Worker and Yorker Religious Worker had 207 million HP (now 26-28 million), Flameanima and Feeos 614 million (now 47 million), three Vr Cst monsters 285,340 (now 27 million), and 29 monsters such as Violen, Medjed and Tatsi hit for 0 (now like their peers). EXP, ATK, MATK, DEF, stats, reach and speeds follow the same estimate. Temporary: it goes away once the app ships the fix (Flux159/rathena).
 
 ## 1.3.0
 - 119 placeholders on the Jormungandr maps (and their scenes in icas_in2) are gone: the World Sync: Jormungandr mod (1.0.0) implements them for real, so the two never stand on the same spot. Likewise the 5 Overlook Water Dungeon signboards, which iRO Quests implements. The list is in replaced-placeholders.txt. 616 placeholders remain.
