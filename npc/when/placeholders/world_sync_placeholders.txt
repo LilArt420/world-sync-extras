@@ -567,41 +567,6 @@ jor_back5,296,149,4	script	Contact Point#ws14379	10429,{
 	if (.@c == 7) warp "jor_twig", 192, 212;
 	end;
 }
-jor_back5,71,204,4	script	Magical Object#ws14438	10540,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,365,187,4	script	Magical Object#ws14439	10538,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,203,256,4	script	Magical Object#ws14440	10539,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,245,38,4	script	Magical Object#ws14441	10539,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,94,281,4	script	Magical Object#ws14442	10538,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,170,362,4	script	Magical Object#ws14443	10540,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,230,349,4	script	Magical Object#ws14444	10539,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_back6,353,260,4	script	Contact Point#ws14387	10429,{
 	mes "[Contact Point]";
 	if (!ws_cp_jor_back6) {
@@ -631,41 +596,6 @@ jor_back6,353,260,4	script	Contact Point#ws14387	10429,{
 	if (.@c == 6) warp "jor_twice", 76, 101;
 	if (.@c == 7) warp "jor_twig", 192, 212;
 	end;
-}
-jor_back6,214,80,4	script	Magical Object#ws14445	10538,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back6,51,47,4	script	Magical Object#ws14446	10540,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back6,122,180,4	script	Magical Object#ws14447	10539,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back6,310,304,4	script	Magical Object#ws14448	10538,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back6,45,38,4	script	Magical Object#ws14449	10539,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back6,190,201,4	script	Magical Object#ws14450	10540,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back6,330,22,4	script	Magical Object#ws14451	10538,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
 }
 jor_maze,253,267,4	script	Contact Point#ws14381	10429,{
 	mes "[Contact Point]";
@@ -1701,43 +1631,8 @@ jor_albe,201,200,4	script	Walter Sailor#ws18728	49,{
 	mes "Hello there, adventurer.";
 	close;
 }
-jor_albe,160,137,4	script	Counselor Ulus#ws18933	83,{
-	mes "[Counselor Ulus]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_albe,89,103,4	script	Yukter Ppuppu#ws18934	931,{
-	mes "[Yukter Ppuppu]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_albe,136,196,4	script	Totor Amber#ws18935	798,{
-	mes "[Totor Amber]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_albe,49,244,4	script	Gaerju Sansha#ws18936	841,{
-	mes "[Gaerju Sansha]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_albe,116,214,4	script	Mogaja Shield#ws18937	583,{
-	mes "[Mogaja Shield]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_albe,62,150,4	script	Nyar#ws19146	10537,{
 	mes "[Nyar]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_base,314,138,4	script	Libra#ws18938	10570,{
-	mes "[Libra]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_base,131,182,4	script	Parex#ws18939	10566,{
-	mes "[Parex]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -1766,11 +1661,6 @@ jor_mbase,161,343,4	script	Walter Sailor#ws18732	49,{
 	mes "Hello there, adventurer.";
 	close;
 }
-jor_mbase,217,172,4	script	Mandel#ws18790	901,{
-	mes "[Mandel]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_mbase,138,125,4	script	Lunapoma Worker#ws18905	120,{
 	mes "[Lunapoma Worker]";
 	mes "Hello there, adventurer.";
@@ -1778,11 +1668,6 @@ jor_mbase,138,125,4	script	Lunapoma Worker#ws18905	120,{
 }
 jor_mbase,243,229,4	script	Lunapoma Worker#ws18914	10568,{
 	mes "[Lunapoma Worker]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,213,280,4	script	Volunteer Balun Wok#ws18943	964,{
-	mes "[Volunteer Balun Wok]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -1818,126 +1703,6 @@ jor_mbase,138,115,4	script	Mercenary#ws19032	10565,{
 }
 jor_mbase,132,106,4	script	Mercenary#ws19033	10565,{
 	mes "[Mercenary]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,300,151,4	script	Mercenary#ws19043	10564,{
-	mes "[Mercenary]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,198,251,4	script	Mercenary#ws19044	10565,{
-	mes "[Mercenary]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,133,128,4	script	Mercenary#ws19045	10564,{
-	mes "[Mercenary]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,248,103,4	script	Mercenary#ws19046	10565,{
-	mes "[Mercenary]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,306,140,4	script	Mercenary Applicant#ws19047	10397,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,268,197,4	script	Mercenary Applicant#ws19048	854,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,274,237,4	script	Mercenary Applicant#ws19049	930,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,243,246,4	script	Mercenary Applicant#ws19050	99,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,211,232,4	script	Mercenary Applicant#ws19051	701,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,183,197,4	script	Mercenary Applicant#ws19052	870,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,128,186,4	script	Mercenary Applicant#ws19053	76,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,133,137,4	script	Mercenary Applicant#ws19054	570,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,100,114,4	script	Mercenary Applicant#ws19055	59,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,148,98,4	script	Mercenary Applicant#ws19056	101,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,159,129,4	script	Mercenary Applicant#ws19057	843,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,172,158,4	script	Mercenary Applicant#ws19058	713,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,217,133,4	script	Mercenary Applicant#ws19059	817,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,228,98,4	script	Mercenary Applicant#ws19060	65,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,202,70,4	script	Mercenary Applicant#ws19061	934,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,219,47,4	script	Mercenary Applicant#ws19062	570,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,278,52,4	script	Mercenary Applicant#ws19063	80,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,351,85,4	script	Mercenary Applicant#ws19064	862,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,185,125,4	script	Mercenary Applicant#ws19065	754,{
-	mes "[Mercenary Applicant]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,137,258,4	script	Mercenary Applicant#ws19066	70,{
-	mes "[Mercenary Applicant]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -2321,33 +2086,8 @@ mbase_in,289,123,4	script	Mercenary#ws18980	10565,{
 	mes "Hello there, adventurer.";
 	close;
 }
-mbase_in,298,121,4	script	Lee#ws19069	10591,{
-	mes "[Lee]";
-	mes "Hello there, adventurer.";
-	close;
-}
 mbase_in,85,141,4	script	Small Door#ws19114	10429,{
 	mes "[Small Door]";
-	mes "Hello there, adventurer.";
-	close;
-}
-mbase_in,220,127,4	script	Wigner Company Member Popo#ws19143	700,{
-	mes "[Wigner Company Member Popo]";
-	mes "Hello there, adventurer.";
-	close;
-}
-mbase_in,228,131,4	script	Mage Lobelia#ws19144	10490,{
-	mes "[Mage Lobelia]";
-	mes "Hello there, adventurer.";
-	close;
-}
-mbase_in,232,125,4	script	Blacksmith Sansan#ws19350	10504,{
-	mes "[Blacksmith Sansan]";
-	mes "Hello there, adventurer.";
-	close;
-}
-mbase_in,232,122,4	script	Wigner Company Exchanger#ws19351	68,{
-	mes "[Wigner Company Exchanger]";
 	mes "Hello there, adventurer.";
 	close;
 }
