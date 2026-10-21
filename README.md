@@ -8,7 +8,7 @@ monsters, spawns, warps and service NPCs from the iRO/kRO clients):
   Jormungandr, Chapter 2...). The server leaves them out on purpose: a
   player whose client lacks those maps would hang on the loading screen.
   Turn it on only with recent iRO/kRO client data.
-- **Placeholder NPCs** (setting `placeholders`): 595 official NPCs whose
+- **Placeholder NPCs** (setting `placeholders`): 543 official NPCs whose
   dialog and logic exist in no server data yet - mostly Episode 20/21 and
   Chapter 1/2 maps, plus markers from the client's signboard list (iRO's
   S3 Season NPCs, event exchanges). They stand where the client puts them,
