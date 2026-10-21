@@ -16,6 +16,13 @@
       "description": "Episode 20 starts from Horuru in the Ice Castle (Episode 19 done, level 200+); Episode 21 from Voglinde in the Ice Castle's west wing (level 230+). Includes the memorial dungeons, the dailies and the traders and enchanters. Turned off, its NPCs leave the Jormungandr maps entirely (their placeholders don't come back)."
     },
     {
+      "key": "varmundt",
+      "type": "boolean",
+      "default": true,
+      "label": "Varmundt, Amatsu, Juno Library and Chapter 1",
+      "description": "CI test only: the setting is the main session's to add."
+    },
+    {
       "key": "skip_ep19",
       "type": "boolean",
       "default": false,
