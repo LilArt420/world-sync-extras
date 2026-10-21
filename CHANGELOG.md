@@ -9,6 +9,7 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - Episode 21, Age of Heroes, start to finish (101 quests, with an English quest log): a rift on Scale Island, Lunaforma and Alberta of old, the Georborg resistance, the ghost ship (memorial dungeon), two infiltrations of the cult's temple Gimle, and the giant serpent in the Snake's Resting Place. Starts from Voglinde in the Ice Castle's west wing at level 230.
 - After the stories: dailies for both episodes (reset at 04:00), the memorial dungeons again every day, side stories, and the traders: Torr in the Ice Castle (Glacier and Dim Glacier enchants), and in Lunaforma the Wigner Company Exchanger, Blacksmith Sansan and Mage Lobelia.
 - Doors into the Ice Castle's west wing (icecastle 230,160, 157,206 and 46,164), which rAthena's World Sync content lacks; they step aside when `entrances` is on.
+- Koko's Secret Base side story (box delivery, Friederike's Kokos, the hunt for Rorohyu, the Sticky Sea memorial dungeon and its Corrupted Angel Snail) and Lalaha's four dailies.
 - The Episode Valkyrie (standart-npc) can skip both episodes with their Clear Tickets, through F_WSJ_Skip20/21.
 - Boats, Walter sailors, the hidden ship, the small door and Nyar are real transports (rAthena's 'Travel to' guides on those cells are switched off while the block is on); Lunaforma's mercenaries, soldiers, workers, children and refugees, Alberta's Wigner house staff, the working Rgans and the Frozen Zone guardians have their own lines.
 
@@ -28,7 +29,7 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - 99 placeholders become these NPCs. Prices, recipes and rewards kRO doesn't publish are estimates.
 
 ### 🧍 Placeholders
-- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 153 and the Star Forest block 99. Likewise the 5 Overlook Water Dungeon signboards, which iRO Quests implements. 215 placeholders remain, 44 of them working.
+- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 153 and the Star Forest block 99. Likewise the 5 Overlook Water Dungeon signboards, which iRO Quests implements. 213 placeholders remain, 44 of them working.
 
 ### 👾 World Sync monsters (db/mob_db.yml, until the app ships the same fixes)
 - They drop again: 154 monsters had drops with no chance published, which the server gave the 0.01% floor. They now use the typical chance of the same kind of item (materials 5%, cards 0.01%, equipment 0.03-0.3%).

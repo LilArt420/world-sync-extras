@@ -327,16 +327,6 @@ job4_tro,50,50,4	script	Guardian Tree's Spring#ws17307	10371,{
 	mes "Hello there, adventurer.";
 	close;
 }
-jor_back4,103,264,4	script	Friederike#ws14830	10458,{
-	mes "[Friederike]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back4,101,265,4	script	Copo#ws14831	4_M_01,{
-	mes "[Copo]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_back5,296,149,4	script	Contact Point#ws14379	10429,{
 	mes "[Contact Point]";
 	if (!ws_cp_jor_back5) {
