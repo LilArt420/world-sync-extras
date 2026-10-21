@@ -13,6 +13,10 @@
 # 22369/22370, the drowned crew and captain of the ghost ship (1@wtgs): known to
 # the client, not to rAthena. Stats follow the ship's place in the story: a
 # crew below the Yortus, a captain a little below the Eroded Tan.
+#
+# 21982 MD_EP20_FALLENANGEL, the corrupted angel snail of the Sticky Sea
+# (1@slug, Koko's Secret Base): known to the client, not to rAthena. Stats
+# follow the Angel Slug of the Frozen Scale Beach, made a solo boss.
 Header:
   Type: MOB_DB
   Version: 5
@@ -162,3 +166,42 @@ Body:
       - Item: Cap_Of_G_Ship_Card
         Rate: 1
         StealProtected: true
+  - Id: 21982
+    AegisName: MD_EP20_FALLENANGEL
+    Name: Corrupted Angel Snail
+    Level: 225
+    Hp: 50000000
+    BaseExp: 1200000
+    JobExp: 840000
+    Attack: 8800
+    Attack2: 2100
+    Defense: 315
+    MagicDefense: 170
+    Resistance: 220
+    MagicResistance: 165
+    Str: 88
+    Agi: 70
+    Vit: 84
+    Int: 88
+    Dex: 84
+    Luk: 80
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Angel
+    Element: Holy
+    ElementLevel: 2
+    WalkSpeed: 170
+    AttackDelay: 1000
+    AttackMotion: 1471
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Drops:
+      - Item: Ep20_Fluor_Cell_Salty
+        Rate: 5000
+      - Item: Slicky_Fluid
+        Rate: 5000
+      - Item: EP19_Unknown_Cell
+        Rate: 2000

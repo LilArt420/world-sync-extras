@@ -781,3 +781,78 @@ Body:
         Count: 1500
         MapName: Yorskalf 2F
         Location: jor_sklf2
+  # Koko's Secret Base and Lalaha's dailies.
+  - Id: 11928
+    Title: "Koko's Secret Base"
+  - Id: 11929
+    Title: "Koko's Secret Base"
+  - Id: 11930
+    Title: "Koko's Secret Base"
+  - Id: 11931
+    Title: "Koko's Secret Base"
+  - Id: 11932
+    Title: "Koko's Secret Base"
+  - Id: 11933
+    Title: "Koko's Secret Base"
+  - Id: 11934
+    Title: "Koko's Secret Base"
+  - Id: 11935
+    Title: "Koko's Secret Base"
+  - Id: 11936
+    Title: "Koko's Secret Base"
+  - Id: 11937
+    Title: "Koko's Secret Base"
+  - Id: 11938
+    Title: "Koko's Secret Base"
+  - Id: 11939
+    Title: "Koko's Secret Base"
+  - Id: 11940
+    Title: "Koko's Secret Base"
+  - Id: 11941
+    Title: "Koko's Secret Base"
+  - Id: 11942
+    Title: "Koko's Secret Base"
+  - Id: 11943
+    Title: "Koko's Secret Base"
+  - Id: 11944
+    Title: "Koko's Secret Base"
+  - Id: 11945
+    Title: "Koko's Secret Base"
+  - Id: 11946
+    Title: "Koko's Secret Base"
+    Targets:
+      - Mob: MD_EP20_FALLENANGEL
+        Count: 1
+  - Id: 11947
+    Title: "Koko's Secret Base"
+  - Id: 11948
+    Title: "Escargo!"
+  - Id: 11949
+    Title: "Escargo!"
+    Targets:
+      - Mob: MD_EP20_FALLENANGEL
+        Count: 1
+  - Id: 11950
+    Title: "[Standby] Escargo!"
+    TimeLimit: 4h
+  - Id: 11951
+    Title: "It's Dangerous!"
+  - Id: 11952
+    Title: "[Standby] It's Dangerous!"
+    TimeLimit: 4h
+  - Id: 11953
+    Title: "I Hope They Reconcile (1)"
+    Targets:
+      - Mob: EP20_ICEWIND1
+        Count: 10
+  - Id: 11954
+    Title: "[Standby] I Hope They Reconcile (1)"
+    TimeLimit: 4h
+  - Id: 11955
+    Title: "I Hope They Reconcile (2)"
+    Targets:
+      - Mob: EP20_ICEWIND2
+        Count: 10
+  - Id: 11956
+    Title: "[Standby] I Hope They Reconcile (2)"
+    TimeLimit: 4h
