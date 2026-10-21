@@ -300,8 +300,21 @@ ygg_edge,211,211,4	script	A Doctor's Record...#wsf	10519,{
 	close;
 }
 
-// The Rune Tablet, from the World Tree's edge.
-ygg_edge,209,203,4	duplicate(Rune Tablet#ws)	Rune Stone#wsf	10547
+// A Rune Stone of the Rune Tablet network: it carries the traveller to
+// the Rune Tablet in Prontera (World Sync's Rune Tablet#ws).
+ygg_edge,209,203,4	script	Rune Stone#wsf	10547,{
+	mes "^4d4dffA Rune Stone. The runes carved into it glow in the same pattern as the Rune Tablet in Prontera.^000000";
+	if (!getnpcid(0, "Rune Tablet#ws")) {
+		mes "^4d4dffBut the light is faint, as if nothing answered on the other side.^000000";
+		close;
+	}
+	next;
+	if (select("Touch the runes (go to the Rune Tablet):Leave it") == 2)
+		close;
+	close2;
+	warp "prontera",140,187;
+	end;
+}
 
 ygg_edge,150,178,4	script	Sanctuary Beledor#wsf	10620,{
 	if (!callfunc("F_WSF_Ch1Done") || BaseLevel < 225) {
