@@ -1,0 +1,259 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Seoyeon's Trial (iRO), Amatsu Dungeon.
+//= Quests 3519-3523. Step variable wsv_sy (0-5), spot wsv_sys.
+//===== Description: =========================================
+//= From the iRO client's quest log: Seoyeon in Amatsu tests the
+//= adventurer in the three floors of the Amatsu Dungeon, then
+//= sends them after the traces of Yeongwi, an ancient ninja whose
+//= soul still haunts the Battlefield in the Underground Forest.
+//= The traces lie at one of five places (the five copies in the
+//= navigation table); defeating Yeongwi releases his soul.
+//= The client names no reward: experience, once.
+//============================================================
+
+amatsu,82,118,4	script	Seoyeon#wsv	757,{
+	if (wsv_sy == 0) {
+		mes "[Seoyeon]";
+		mes "...You walk quietly for an outsider.";
+		mes "Are you here to see the castle, or what lies beneath it?";
+		next;
+		if (BaseLevel < 70) {
+			mes "[Seoyeon]";
+			mes "The dungeon under Himezi Castle would swallow you whole. Come back when you've grown stronger.";
+			mes "^4d4dffSeoyeon's Trial is for characters of base level 70 or more.^000000";
+			close;
+		}
+		mes "[Seoyeon]";
+		mes "My name is Seoyeon. I watch over the old battlefields under the castle.";
+		mes "Something stirs down there. A soul that refuses to rest.";
+		next;
+		mes "[Seoyeon]";
+		mes "Before I tell you more, I need to know you can survive it.";
+		mes "Defeat ^0000FF100 monsters^000000 on each floor: the ^0000FFTatami Maze^000000, the ^0000FFBattlefield in the Underground Forest^000000 and the ^0000FFUnderground Shrine^000000.";
+		next;
+		if (select("I'll take your trial.:Not now.") == 2) {
+			mes "[Seoyeon]";
+			mes "As you like. The dead are patient.";
+			close;
+		}
+		mes "[Seoyeon]";
+		mes "Good. The soldier on the fifth floor of the castle can let you into the dungeon, if the Feudal Lord has given you his permit.";
+		mes "Come back when all three floors know your name.";
+		callfunc "F_WSV_Step", "wsv_sy", 1, "", "3519,3520,3521";
+		close;
+	}
+	if (wsv_sy == 1) {
+		if (checkquest(3519, HUNTING) != 2 || checkquest(3520, HUNTING) != 2 || checkquest(3521, HUNTING) != 2) {
+			mes "[Seoyeon]";
+			mes "One hundred on each floor. Your quest log keeps the count, I'm told.";
+			close;
+		}
+		mes "[Seoyeon]";
+		mes "Three floors, three hundred monsters. You didn't even break a sweat.";
+		next;
+		mes "[Seoyeon]";
+		mes "Now listen. Long before Amatsu had a castle, a ninja called ^0000FFYeongwi^000000 fought in the forest that is now underground.";
+		mes "He was the last of his clan, and he died guarding a place no one remembers.";
+		next;
+		mes "[Seoyeon]";
+		mes "His soul never left. Lately, adventurers come back from the Battlefield in the Underground Forest talking about a shadow that moves like a man.";
+		mes "Find his traces down there. Wherever he walks, the ground remembers.";
+		wsv_sys = rand(1, 5);
+		callfunc "F_WSV_Step", "wsv_sy", 2, "3519,3520,3521", "3522";
+		close;
+	}
+	if (wsv_sy == 2) {
+		mes "[Seoyeon]";
+		mes "Search the Battlefield in the Underground Forest. Look for marks on the ground that shouldn't be there.";
+		close;
+	}
+	if (wsv_sy == 3 || wsv_sy == 4) {
+		mes "[Seoyeon]";
+		mes "I'll meet you where the traces are. Go on ahead.";
+		close;
+	}
+	mes "[Seoyeon]";
+	mes "Yeongwi's soul is at peace. Thank you, adventurer.";
+	mes "If you ever feel his strength in your hands, use it well.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 70 && wsv_sy == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_sy == 1 && checkquest(3519, HUNTING) == 2 && checkquest(3520, HUNTING) == 2 && checkquest(3521, HUNTING) == 2" );
+	end;
+}
+
+// The five places Yeongwi may have walked. Only the player's own
+// spot (wsv_sys) shows anything.
+ama_dun02,52,163,4	script	Traces of Yeongwi#wsv1	550,{
+	callfunc "F_WSV_SYTraces", 1;
+	end;
+}
+ama_dun02,67,97,4	script	Traces of Yeongwi#wsv2	550,{
+	callfunc "F_WSV_SYTraces", 2;
+	end;
+}
+ama_dun02,122,12,4	script	Traces of Yeongwi#wsv3	550,{
+	callfunc "F_WSV_SYTraces", 3;
+	end;
+}
+ama_dun02,154,140,4	script	Traces of Yeongwi#wsv4	550,{
+	callfunc "F_WSV_SYTraces", 4;
+	end;
+}
+ama_dun02,162,36,4	script	Traces of Yeongwi#wsv5	550,{
+	callfunc "F_WSV_SYTraces", 5;
+	end;
+}
+
+function	script	F_WSV_SYTraces	{
+	if (wsv_sy != 2 || wsv_sys != getarg(0)) {
+		mes "Old footprints in the dirt, half washed away.";
+		mes "Whoever left them is long gone.";
+		close;
+	}
+	mes "Footprints... but they start nowhere and end nowhere.";
+	mes "The soil around them is cold to the touch, and a torn strip of black cloth is caught on a root.";
+	next;
+	mes "You feel eyes on your back.";
+	callfunc "F_WSV_Step", "wsv_sy", 3, "3522", "3523";
+	specialeffect2 EF_SUMMONSLAVE;
+	close;
+}
+
+// Yeongwi and Seoyeon at each of the five spots, shown to the
+// player whose spot it is.
+ama_dun02,55,162,4	script(CLOAKED)	Yeongwi#wsv1	10434,{
+	callfunc "F_WSV_SYFight", 1;
+	end;
+}
+ama_dun02,64,95,4	script(CLOAKED)	Yeongwi#wsv2	10434,{
+	callfunc "F_WSV_SYFight", 2;
+	end;
+}
+ama_dun02,123,15,4	script(CLOAKED)	Yeongwi#wsv3	10434,{
+	callfunc "F_WSV_SYFight", 3;
+	end;
+}
+ama_dun02,150,140,4	script(CLOAKED)	Yeongwi#wsv4	10434,{
+	callfunc "F_WSV_SYFight", 4;
+	end;
+}
+ama_dun02,160,39,4	script(CLOAKED)	Yeongwi#wsv5	10434,{
+	callfunc "F_WSV_SYFight", 5;
+	end;
+}
+
+ama_dun02,57,160,4	script(CLOAKED)	Seoyeon#wsv1	757,{
+	callfunc "F_WSV_SYEnd";
+	end;
+}
+ama_dun02,66,93,4	script(CLOAKED)	Seoyeon#wsv2	757,{
+	callfunc "F_WSV_SYEnd";
+	end;
+}
+ama_dun02,121,17,4	script(CLOAKED)	Seoyeon#wsv3	757,{
+	callfunc "F_WSV_SYEnd";
+	end;
+}
+ama_dun02,152,142,4	script(CLOAKED)	Seoyeon#wsv4	757,{
+	callfunc "F_WSV_SYEnd";
+	end;
+}
+ama_dun02,158,41,4	script(CLOAKED)	Seoyeon#wsv5	757,{
+	callfunc "F_WSV_SYEnd";
+	end;
+}
+
+function	script	F_WSV_SYFight	{
+	.@s = getarg(0);
+	mes "[Yeongwi]";
+	mes "......";
+	mes "You followed my steps. Few can.";
+	next;
+	mes "[Yeongwi]";
+	mes "This forest burned, and I stayed. My clan fell, and I stayed.";
+	mes "If you want me gone, take it from me with your blade.";
+	next;
+	if (select("Draw your weapon.:Step back.") == 2)
+		close;
+	.@old = getd("$@wsv_sy_" + getcharid(0));
+	if (.@old && unitexists(.@old)) {
+		mes "Yeongwi is already waiting for you, blade drawn!";
+		close;
+	}
+	close2;
+	setarray .@x, 55, 64, 123, 150, 160;
+	setarray .@y, 162, 95, 15, 140, 39;
+	cloakonnpcself "Yeongwi#wsv" + .@s;
+	.@gid = monster("ama_dun02", .@x[.@s-1], .@y[.@s-1], "Yeongwi", 1401, 1, "WSV_Yeongwi::OnKill");
+	setunitdata .@gid, UMOB_MAXHP, 60000;
+	setunitdata .@gid, UMOB_HP, 60000;
+	setunitdata .@gid, UMOB_LEVEL, 99;
+	setd "$@wsv_sy_" + getcharid(0), .@gid;
+	setd "$@wsv_syo_" + .@gid, getcharid(0);
+	end;
+}
+
+-	script	WSV_Yeongwi	-1,{
+	end;
+OnKill:
+	// Only the one who called him out frees his soul.
+	.@cid = getd("$@wsv_syo_" + killedgid);
+	setd "$@wsv_syo_" + killedgid, 0;
+	if (.@cid)
+		setd "$@wsv_sy_" + .@cid, 0;
+	if (.@cid == getcharid(0) && wsv_sy == 3) {
+		callfunc "F_WSV_Step", "wsv_sy", 4, "3523", "";
+		dispbottom "Yeongwi's shadow breaks apart like smoke. Seoyeon has come running.";
+		specialeffect2 EF_HOLYHIT;
+	}
+	end;
+}
+
+function	script	F_WSV_SYEnd	{
+	if (wsv_sy == 3) {
+		mes "[Seoyeon]";
+		mes "That's him. Yeongwi.";
+		mes "Don't hold back. He wouldn't want you to.";
+		close;
+	}
+	if (wsv_sy != 4) {
+		mes "[Seoyeon]";
+		mes "...";
+		close;
+	}
+	mes "[Seoyeon]";
+	mes "It's over. Did you feel it, at the end? He bowed to you.";
+	next;
+	mes "[Seoyeon]";
+	mes "My clan's stories say Yeongwi swore to guard this forest until someone stronger came along.";
+	mes "I suppose that's you now.";
+	next;
+	mes "[Seoyeon]";
+	mes "Something of him stays with whoever sets him free. His strength, his patience.";
+	mes "Take it, and don't waste it.";
+	.@e = min(NextBaseExp / 2, 2000000);
+	.@j = min(NextJobExp / 2, 1000000);
+	getexp2 .@e, .@j;
+	callfunc "F_WSV_Step", "wsv_sy", 5, "", "";
+	close;
+}
+
+// Who sees which copy: the spot's Yeongwi while hunting him, Seoyeon
+// from the fight to the end.
+function	script	F_WSV_SYScenes	{
+	for (.@s = 1; .@s <= 5; .@s++) {
+		if (wsv_sys == .@s && wsv_sy == 3)
+			cloakoffnpcself "Yeongwi#wsv" + .@s;
+		else
+			cloakonnpcself "Yeongwi#wsv" + .@s;
+		if (wsv_sys == .@s && (wsv_sy == 3 || wsv_sy == 4))
+			cloakoffnpcself "Seoyeon#wsv" + .@s;
+		else
+			cloakonnpcself "Seoyeon#wsv" + .@s;
+	}
+	return;
+}
+
+ama_dun02	mapflag	loadevent

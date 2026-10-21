@@ -1,0 +1,136 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Chapter 1 "Song of the World Tree" (kRO 2025-03-19): shared
+//= functions and who is visible at which step.
+//===== Description: =========================================
+//= Written from the kRO client's quest text (ROenglishRE's
+//= translation where it has one, the rest translated here), the
+//= navigation tables and the official update notes (ro.gnjoy.com,
+//= update 292). No official script exists.
+//=
+//= Main story steps, wsv_ch1:
+//=     0  not started (Small Ash Trees near Prontera and Payon)
+//=    10- 30  the World Tree's Call (18368-18370), Ash Village
+//=    40-130  the Twisted Land of Darkness (18371, 24069-24085)
+//=   140-170  to each one's post (18378, 18379, 18372, 17891)
+//=   180-245  Destroyed Geffen and Soren Syndrome (17892-17898,
+//=            16912-16935)
+//=   250-345  Verus, the Dark Whisper, the plague (17899-17921)
+//=   350-425  Dr. Neumann's secrets (16936-16951)
+//=   430-590  the cure: Margot, Muspelheim (23271-23299,
+//=            18373-18376, 24086-24099)
+//=   600-630  destroy the Sky Fortress (12663, 12666, 12664, 12665)
+//=            and the Unknown Being (18377)
+//=  1000      Chapter 1 done (the Star Forest block's Ash Village
+//=            services check wsv_ch1 >= 1000)
+//= Bits: wsv_ch1b (patients, blood samples, clues...), see each file.
+//============================================================
+
+// Scene table for the Chapter 1 maps. NPC, first step, last step.
+// (The Laphine Heralds by the Small Ash Trees appear when the tree
+// is touched, not by step.)
+function	script	F_WSV_C1Scenes	{
+	.@m$ = strcharinfo(3);
+	.@s = wsv_ch1;
+	if (BaseLevel < 200)
+		.@s = -1;
+	if (.@m$ == "ygg_edge") {
+		setarray .@t$,
+			"Jeon Cheosa#wsv_c1e", "620", "629",
+			"Clover#wsv_c1e", "620", "629";
+	} else if (.@m$ == "ygg_fruit") {
+		setarray .@t$,
+			"Jeon Cheosa#wsv_c1af", "390", "394",
+			"Gregor#wsv_c1af", "390", "394";
+	} else if (.@m$ == "ygg_roots") {
+		setarray .@t$,
+			"Ivein#wsv_c1r", "67", "69",
+			"Magi#wsv_c1a", "70", "74",
+			"Magi#wsv_c1b", "75", "89",
+			"Jeon Cheosa#wsv_c1r", "160", "169";
+	} else if (.@m$ == "hem_fild") {
+		setarray .@t$,
+			"Rubiel#wsv_c1g", "150", "159",
+			"Jeon Cheosa#wsv_c1f", "170", "179",
+			"Clover#wsv_c1f", "170", "179",
+			"Charles#wsv_c1f", "170", "179";
+	} else if (.@m$ == "ch1_geffen") {
+		setarray .@t$,
+			"Tower Wizard#wsv_c1", "200", "249",
+			"Charles#wsv_c1t", "250", "254",
+			"Clover#wsv_c1t2", "325", "329",
+			"Jeon Cheosa#wsv_c1cl", "365", "369",
+			"Geffen Resident#wsv_c1c", "435", "437",
+			"Geffen Resident#wsv_c1d", "435", "437",
+			"Geffen Resident#wsv_c1e", "435", "437";
+	} else if (.@m$ == "ch1_gef_in") {
+		setarray .@t$,
+			"Einhar#wsv_c1a", "220", "224",
+			"Gregor#wsv_c1a", "220", "224",
+			"Gregor#wsv_c1b", "225", "229",
+			"Einhar#wsv_c1b", "225", "229",
+			"Gregor#wsv_c1c", "230", "249",
+			"Patient in Treatment#wsv_c1", "235", "235",
+			"Gregor#wsv_c1th", "330", "349",
+			"Jeon Cheosa#wsv_c1th", "330", "349",
+			"Gregor#wsv_c1h", "355", "359",
+			"Einhar#wsv_c1h", "360", "364",
+			"Maxim#wsv_c1o", "415", "419",
+			"Maxim#wsv_c1", "430", "9999",
+			"Bailey#wsv_c1g", "465", "9999",
+			"Maxim#wsv_c1m", "550", "564",
+			"Waiting Villager#wsv_c1a", "565", "569",
+			"Waiting Villager#wsv_c1b", "565", "569",
+			"Waiting Villager#wsv_c1c", "565", "569";
+	} else if (.@m$ == "hem_dun01") {
+		setarray .@t$,
+			"Clover#wsv_c1v0", "255", "259",
+			"Sua#wsv_c1", "260", "9999",
+			"Parzival#wsv_c1", "260", "9999",
+			"Verus Believer#wsv_c1a", "275", "299",
+			"Jeon Cheosa#wsv_c1v", "290", "299",
+			"Jeon Cheosa#wsv_c1v2", "320", "324";
+	} else if (.@m$ == "ch1_dw") {
+		setarray .@t$,
+			"Jeon Cheosa#wsv_c1d0", "300", "304",
+			"Clover#wsv_c1d1", "305", "319",
+			"Jeon Cheosa#wsv_c1d2", "310", "319";
+	} else if (.@m$ == "ch1_que01") {
+		setarray .@t$,
+			"Gregor#wsv_c1q", "395", "399",
+			"Jeon Cheosa#wsv_c1q", "400", "404",
+			"Jeon Cheosa#wsv_c1q2", "405", "409",
+			"Einhar#wsv_c1q", "410", "414";
+	} else if (.@m$ == "mu_fild01") {
+		setarray .@t$,
+			"Harvan#wsv_c1j", "530", "534";
+	} else
+		return;
+	for (.@i = 0; .@i < getarraysize(.@t$); .@i += 3) {
+		if (.@s >= atoi(.@t$[.@i+1]) && .@s <= atoi(.@t$[.@i+2]))
+			cloakoffnpcself .@t$[.@i];
+		else
+			cloakonnpcself .@t$[.@i];
+	}
+	return;
+}
+
+// The end of a part of the chapter: experience for level 200+.
+// Chapter 1's official rewards aren't published; these follow
+// Episode 20's chapters in this mod (getexp2 60M).
+// callfunc "F_WSV_C1Reward", <base exp>, <job exp>;
+function	script	F_WSV_C1Reward	{
+	getexp2 getarg(0), getarg(1);
+	return;
+}
+
+// Chapter 1 maps that refresh the scene on arrival.
+ygg_edge	mapflag	loadevent
+ygg_fruit	mapflag	loadevent
+ygg_roots	mapflag	loadevent
+hem_fild	mapflag	loadevent
+ch1_geffen	mapflag	loadevent
+ch1_gef_in	mapflag	loadevent
+hem_dun01	mapflag	loadevent
+ch1_dw	mapflag	loadevent
+ch1_que01	mapflag	loadevent
+mu_fild01	mapflag	loadevent

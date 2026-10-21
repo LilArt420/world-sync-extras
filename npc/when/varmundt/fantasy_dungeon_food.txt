@@ -1,0 +1,859 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Fantasy Series 006 "Dungeon Food" (iRO), by Sierra Morris.
+//= Quests 16667-16690. Step variable wsv_df (0-15).
+//===== Description: =========================================
+//= A Virtual Record Book of the Prontera East Library: the
+//= reader spends a holiday at a seaside lodge with Seyren
+//= Windsor, Margaretha Sorin and Kathryne Keyron and helps cook
+//= lunch. Once a day, from base level 100. Rewards per the
+//= official notes (playragnarok.com, "Fantasy Book", 2026-01-12):
+//= Fantasy Book Bookmark, Completion Card, a Shamrock Flower
+//= Ring, and EXP or Fantasy Growth Potions by level.
+//============================================================
+
+// ------------------------------------------------------------
+// The way in: rAthena still sends Prontera's east library door to
+// the old reading room in prt_in; the new wing is next door.
+// ------------------------------------------------------------
+prt_in,176,57,4	script	Fantasy Series Manager#wsv_door	123,{
+	mes "[Fantasy Series Manager]";
+	mes "Welcome to the Prontera East Library.";
+	mes "This old reading room is for reference books. The ^0000FFFantasy Series^000000 is shelved in the new wing.";
+	next;
+	switch (select("What is the Fantasy Series?:Take me to the new wing.:Never mind.")) {
+	case 1:
+		mes "[Fantasy Series Manager]";
+		mes "They're Virtual Record Books. You don't just read them: you step inside and live the story with its characters.";
+		next;
+		mes "[Fantasy Series Manager]";
+		mes "Each book can be experienced once a day, from base level 100. A fairy called Ink keeps the table of contents and sees readers out at the end.";
+		mes "Finished readers receive a bookmark and a completion card. The Commemorative Card Exchange in the new wing takes the cards.";
+		close;
+	case 2:
+		mes "[Fantasy Series Manager]";
+		mes "Right this way. Please keep your voice down in the reading hall.";
+		close2;
+		warp "prt_elib",18,46;
+		end;
+	}
+	close;
+}
+
+prt_elib,14,46,0	warp	#wsv_elib_out	1,1,prt_in,177,55
+
+// ------------------------------------------------------------
+// The book and its author
+// ------------------------------------------------------------
+prt_elib,59,45,4	script	Dungeon Food...#wsv	10518,{
+	if (wsv_df) {
+		mes "[Dungeon Food]";
+		mes "A bookmark sticks out from the middle of the book. Your reading isn't finished yet.";
+		next;
+		switch (select("Go back into the story.:Close the book for today.:Leave it.")) {
+		case 1:
+			close2;
+			warp "vr_bob",293,199;
+			end;
+		case 2:
+			mes "[Dungeon Food]";
+			mes "If you close it now, the story starts over from the first page next time.";
+			mes "The book can still only be read once a day.";
+			next;
+			if (select("Close it.:Keep reading later.") == 2)
+				close;
+			callfunc "F_WSV_DFAbandon";
+			mes "[Dungeon Food]";
+			mes "You slip the bookmark out and close the cover.";
+			close;
+		}
+		close;
+	}
+	cutin "vrbook006_k.bmp",4;
+	mes "[Dungeon Food]";
+	mes "^0000FFFantasy Series 006 - Dungeon Food, Volume 1^000000";
+	mes "by Sierra Morris";
+	next;
+	mes "[Dungeon Food]";
+	mes "\"Spend a joyful holiday alongside Seyren Windsor and his companions, and lend a hand in preparing a festive feast.\"";
+	next;
+	if (BaseLevel < 100) {
+		cutin "",255;
+		mes "^4d4dffThe pages won't open for you. The Fantasy Series can be experienced from base level 100.^000000";
+		close;
+	}
+	if (callfunc("F_WSV_Waiting", 16668)) {
+		cutin "",255;
+		mes "^4d4dffYou've already read this book today. A Virtual Record Book can only be experienced once a day; it opens again after 4 AM.^000000";
+		close;
+	}
+	if (select("Open the book.:Not now.") == 2) {
+		cutin "",255;
+		close;
+	}
+	cutin "",255;
+	mes "The letters on the first page start to glow...";
+	mes "and the smell of the sea fills the reading hall.";
+	close2;
+	callfunc "F_WSV_Erase", "16669,16670,16671,16672,16673,16674,16675,16676,16677,16678,16679,16680,16681,16682,16683,16684,16685,16686,16687,16688,16689,16690";
+	wsv_dfb = wsv_dfb & 1;
+	if (!(wsv_dfb & 1) && isbegin_quest(16667) == 0)
+		setquest 16667;
+	callfunc "F_WSV_Step", "wsv_df", 1, "", "16669";
+	specialeffect2 EF_TELEPORTATION2;
+	warp "vr_bob",293,199;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 100 && wsv_df == 0 && isbegin_quest(16668) == 0" );
+	end;
+}
+
+prt_elib,61,43,3	script	Sierra#wsv	982,{
+	mes "[Sierra]";
+	if (wsv_dfb & 1) {
+		mes "Oh! You're the reader who cooked with them, aren't you? I can always tell. Readers come back smelling faintly of crab.";
+		next;
+		mes "[Sierra]";
+		mes "Did Seyren burn anything? He insists he never does. He absolutely does.";
+		close;
+	}
+	mes "Hello! Are you here for ^0000FFDungeon Food^000000? That one's mine. Well, I wrote it.";
+	next;
+	mes "[Sierra]";
+	mes "Sierra Morris. I know, I know, you expected someone older.";
+	mes "I wanted to write a story about heroes on their day off. No dungeons to clear, just lunch to make.";
+	next;
+	mes "[Sierra]";
+	mes "Volume one takes place at a seaside lodge. The crabs on that beach are real enough to pinch, so bring something sharp.";
+	mes "Open the book whenever you like, it's right here.";
+	close;
+}
+
+prt_elib,22,50,4	script	Commemorative Card Exchange#wsv	91,{
+	mes "[Commemorative Card Exchange]";
+	mes "Readers who finish a Fantasy Series book receive a ^0000FF" + getitemname(1000925) + "^000000.";
+	mes "The editorial department will trade them for something useful.";
+	next;
+	// item, cards
+	setarray .@it, 101404, 101406, 12507, 14583, 14584, 14585, 101461;
+	setarray .@co, 7, 7, 1, 1, 1, 1, 2;
+	for (.@i = 0; .@i < getarraysize(.@it); .@i++)
+		.@menu$ += getitemname(.@it[.@i]) + " (" + .@co[.@i] + " cards):";
+	.@s = select(.@menu$ + "Cancel") - 1;
+	if (.@s >= getarraysize(.@it))
+		close;
+	mes "[Commemorative Card Exchange]";
+	mes "How many ^0000FF" + getitemname(.@it[.@s]) + "^000000?";
+	mes "You have " + countitem(1000925) + " cards.";
+	next;
+	input .@n, 0, 100;
+	if (.@n < 1)
+		close;
+	if (countitem(1000925) < .@n * .@co[.@s]) {
+		mes "[Commemorative Card Exchange]";
+		mes "You don't have enough cards for that.";
+		close;
+	}
+	if (!checkweight(.@it[.@s], .@n)) {
+		mes "[Commemorative Card Exchange]";
+		mes "You're carrying too much to take them.";
+		close;
+	}
+	delitem 1000925, .@n * .@co[.@s];
+	getitem .@it[.@s], .@n;
+	mes "[Commemorative Card Exchange]";
+	mes "Here you are. Happy reading!";
+	close;
+}
+
+// Closing the book early: the story starts over next time.
+function	script	F_WSV_DFAbandon	{
+	callfunc "F_WSV_Erase", "16669,16670,16671,16672,16673,16674,16675,16676,16677,16678,16679,16680,16681,16682,16683,16684,16685,16686,16687,16688,16689,16690";
+	wsv_dfb = wsv_dfb & 1;
+	wsv_dft = 0;
+	callfunc "F_WSV_Step", "wsv_df", 0, "", "";
+	return;
+}
+
+// ------------------------------------------------------------
+// Inside the book: the lodge
+// ------------------------------------------------------------
+vr_bob,293,202,4	script	Ink#wsv_df	10509,{
+	cutin "vr_ink.png",2;
+	if (wsv_df == 0) {
+		mes "[Ink]";
+		mes "Oh my, a reader without a bookmark? You must have wandered in through the wrong page.";
+		mes "Let me show you out. Open the book in the library if you want to read it properly!";
+		close2;
+		cutin "",255;
+		warp "prt_elib",59,42;
+		end;
+	}
+	if (wsv_df == 1) {
+		mes "[Ink]";
+		mes "Welcome, welcome! I'm Ink, the fairy who keeps this book's table of contents.";
+		mes "You are now inside ^0000FFDungeon Food^000000, Volume 1.";
+		next;
+		mes "[Ink]";
+		mes "In this story, you're a guest at a little lodge by the sea. Your friends have the day off, and nobody has decided what to eat yet.";
+		mes "Just be yourself and help them out. The story will follow you.";
+		next;
+		mes "[Ink]";
+		mes "If you need to go somewhere quickly, touch the ^0000FFMagical Stones^000000. They know the shortcuts of the book.";
+		mes "And when the story is over, come and see me. I'll close the book for you.";
+		next;
+		mes "[Ink]";
+		mes "Oh! Somebody's been staring at you this whole time. Go on, say hello.";
+		callfunc "F_WSV_Step", "wsv_df", 2, "16669", "16670";
+		close3;
+	}
+	if (wsv_df == 15) {
+		cutin "vr_ink.png",2;
+		mes "[Ink]";
+		mes "The end! And what an end. My pages smell of crab bisque now.";
+		mes "Thank you for reading ^0000FFDungeon Food^000000.";
+		next;
+		callfunc "F_WSV_DFReward";
+		mes "[Ink]";
+		mes "Let me close the cover for you. See you in another story!";
+		close2;
+		cutin "",255;
+		warp "prt_elib",59,42;
+		end;
+	}
+	mes "[Ink]";
+	mes "The story is still going! Here's where you are:";
+	if (wsv_df == 2) mes "^0000FFSeyren is waiting for a word with you, right next to me.^000000";
+	else if (wsv_df <= 4) mes "^0000FFMargaretha and Kathryne are out on the beach. Ask them what they want for lunch.^000000";
+	else if (wsv_df <= 7) mes "^0000FFLunch is being caught on the beach. Seyren and Kathryne are there.^000000";
+	else if (wsv_df <= 11) mes "^0000FFThe kitchen of the lodge needs your hands. Seyren is in charge.^000000";
+	else mes "^0000FFLunch is served at the table outside.^000000";
+	next;
+	if (select("Keep reading.:Close the book for today.") == 1)
+		close3;
+	mes "[Ink]";
+	mes "Close it already? The story will start over from the first page next time, and you can only read once a day.";
+	next;
+	if (select("Keep reading.:Close it.") == 1)
+		close3;
+	callfunc "F_WSV_DFAbandon";
+	close2;
+	cutin "",255;
+	warp "prt_elib",59,42;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_df == 1 || wsv_df == 15" );
+	end;
+}
+
+// Rewards: bookmark and completion card, the book's random bonus
+// item, and EXP or Fantasy Growth Potions depending on level.
+function	script	F_WSV_DFReward	{
+	.@n = 0;
+	if (BaseLevel >= 170) .@n = 5;
+	else if (BaseLevel >= 150) .@n = 2;
+	else if (BaseLevel >= 130) .@n = 1;
+	mes "[Ink]";
+	mes "Readers get to choose their reward. Experience now, or Fantasy Growth Potions for later?";
+	next;
+	.@pick = 1;
+	if (.@n)
+		.@pick = select("Experience.:" + .@n + " " + getitemname(101404) + (.@n > 1 ? "s" : "") + ".");
+	getitem 1000924, 1;	// VR_Bookmark
+	getitem 1000925, 1;	// VR_Reading_Card
+	getitem 1000952, 1;	// VR_Clover_Ring
+	if (.@pick == 2)
+		getitem 101404, .@n;	// Fantastic_Exp_Potion
+	else
+		callfunc "F_WSV_GrowthExp", (.@n ? .@n : 1);
+	if (!(wsv_dfb & 1)) {
+		wsv_dfb = wsv_dfb | 1;
+		if (isbegin_quest(16667) == 1)
+			completequest 16667;
+	}
+	if (wsv_dfb & 8) {
+		// Kathryne pays her bet.
+		getitem 1000952, 1;
+	}
+	callfunc "F_WSV_Step", "wsv_df", 0, "16690", "";
+	callfunc "F_WSV_Erase", "16669,16670,16671,16672,16673,16674,16675,16676,16677,16678,16679,16680,16681,16682,16683,16684,16685,16686,16687,16688,16689,16690";
+	wsv_dfb = wsv_dfb & 1;
+	wsv_dft = 0;
+	setquest 16668;
+	return;
+}
+
+// The value of <n> Fantasy Growth Potions, as experience now.
+function	script	F_WSV_GrowthExp	{
+	.@e = NextBaseExp / 10;
+	if (BaseLevel >= 200)
+		.@e = NextBaseExp / 50;
+	if (.@e < 1)
+		.@e = 1;
+	getexp2 .@e * getarg(0), 0;
+	return;
+}
+
+// Fantasy (Job) Growth Potion: a tenth of the current level, a
+// fiftieth from level 200 on (db/when/varmundt/item_db.yml).
+// callfunc "F_WSV_GrowthPotion", <0 base | 1 job>;
+function	script	F_WSV_GrowthPotion	{
+	if (getarg(0)) {
+		.@e = NextJobExp / 10;
+		if (BaseLevel >= 200)
+			.@e = NextJobExp / 50;
+		getexp2 0, max(.@e, 1);
+	} else {
+		.@e = NextBaseExp / 10;
+		if (BaseLevel >= 200)
+			.@e = NextBaseExp / 50;
+		getexp2 max(.@e, 1), 0;
+	}
+	return;
+}
+
+vr_bob,291,201,4	script	Magical Stone#wsv_df1	10443,{
+	callfunc "F_WSV_DFStone";
+	end;
+}
+vr_bob,288,183,4	script	Magical Stone#wsv_df2	10443,{
+	callfunc "F_WSV_DFStone";
+	end;
+}
+vr_bob,82,388,4	script	Magical Stone#wsv_df3	10443,{
+	callfunc "F_WSV_DFStone";
+	end;
+}
+
+// The book's shortcuts between the lodge and the beach.
+function	script	F_WSV_DFStone	{
+	mes "[Magical Stone]";
+	mes "A smooth stone humming with the book's magic. Words drift across its surface:";
+	mes "^0000FF\"Where to, reader?\"^000000";
+	next;
+	switch (select("The lodge.:The beach.:Nowhere.")) {
+	case 1:
+		close2;
+		specialeffect2 EF_TELEPORTATION2;
+		warp "vr_bob",293,199;
+		end;
+	case 2:
+		close2;
+		specialeffect2 EF_TELEPORTATION2;
+		warp "vr_bob",150,285;
+		end;
+	}
+	close;
+}
+
+vr_bob,308,211,4	script	Pecopeco#wsv_df	428,{
+	mes "[Pecopeco]";
+	mes "Kweh!";
+	next;
+	mes "Seyren's Pecopeco is enjoying the day off too. It eyes your pockets, hoping for a carrot.";
+	if (wsv_df >= 8 && wsv_df <= 11) {
+		next;
+		mes "[Pecopeco]";
+		mes "Kweh... kweh?";
+		mes "It sniffs the air in the direction of the kitchen.";
+	}
+	close;
+}
+
+vr_bob,296,200,3	script(CLOAKED)	Seyren Windsor#wsv_df1	10318,{
+	if (wsv_df == 2) {
+		cutin "bio_seyren01.bmp",2;
+		mes "[Seyren Windsor]";
+		mes "...";
+		mes "Ah. You're up. Good morning.";
+		next;
+		mes "[Seyren Windsor]";
+		mes "Sorry for staring. I've been standing here trying to work out what to make for lunch, and my head's gone blank.";
+		next;
+		cutin "bio_seyren02.bmp",2;
+		mes "[Seyren Windsor]";
+		mes "We came here to rest, so I said I'd cook today. Margaretha and Kathryne went down to the beach first thing.";
+		mes "If I make something they don't like, I'll never hear the end of it.";
+		next;
+		select("Why not just ask them?");
+		mes "[Seyren Windsor]";
+		mes "...That's what a sensible person would do, isn't it.";
+		mes "Would you go and ask them for me? I need to check what's left in the kitchen.";
+		next;
+		mes "[Seyren Windsor]";
+		mes "The beach is to the northwest, past the lodge. Or use the Magical Stone next to Ink, it's quicker.";
+		callfunc "F_WSV_Step", "wsv_df", 3, "16670", "16671";
+		close3;
+	}
+	cutin "bio_seyren01.bmp",2;
+	mes "[Seyren Windsor]";
+	mes "Margaretha and Kathryne are on the beach. Let me know what they'd like to eat.";
+	close3;
+}
+
+// ------------------------------------------------------------
+// The beach
+// ------------------------------------------------------------
+vr_bob,146,293,4	script(CLOAKED)	Margaretha Sorin#wsv_df1	10321,{
+	cutin "bio_sorin01.bmp",2;
+	if (wsv_df == 3) {
+		mes "[Margaretha Sorin]";
+		mes "Oh, good morning! Did you sleep well? The sea breeze here is wonderful, isn't it?";
+		next;
+		select("Seyren sent me to ask about lunch.");
+		cutin "bio_sorin02.bmp",2;
+		mes "[Margaretha Sorin]";
+		mes "Hehe, he sent you instead of coming himself? That's so like him.";
+		mes "Kathryne, come here! Seyren wants to know what we want for lunch!";
+		next;
+		cutin "bio_katrinn01.bmp",0;
+		mes "[Kathryne Keyron]";
+		mes "Hmph. He could have asked us himself.";
+		mes "...Fine. Ask us one at a time, adventurer. We each have our own opinion.";
+		callfunc "F_WSV_Step", "wsv_df", 4, "16671", "16672,16673";
+		close3;
+	}
+	if (wsv_df == 4 && !(wsv_dfb & 2)) {
+		mes "[Margaretha Sorin]";
+		mes "What would I like? Hmm...";
+		next;
+		mes "[Margaretha Sorin]";
+		mes "Something warm. We've been in the water all morning and my fingers are freezing.";
+		mes "A soup, maybe? Something we can all share at one table.";
+		next;
+		cutin "bio_sorin03.bmp",2;
+		mes "[Margaretha Sorin]";
+		mes "Oh, and nothing too fancy. Seyren gets so nervous when he tries something fancy.";
+		wsv_dfb = wsv_dfb | 2;
+		callfunc "F_WSV_Step", "wsv_df", 4, "16672", "";
+		callfunc "F_WSV_DFAsked";
+		close3;
+	}
+	mes "[Margaretha Sorin]";
+	if (wsv_df == 4)
+		mes "Did you ask Kathryne too? She'll sulk if she's left out.";
+	else if (wsv_df >= 6)
+		mes "Good luck with the hunt! I'll keep the fire going for when you're back.";
+	else
+		mes "Something warm we can share. That's all I ask!";
+	close3;
+}
+
+vr_bob,149,290,4	script(CLOAKED)	Kathryne Keyron#wsv_df1	10323,{
+	cutin "bio_katrinn01.bmp",2;
+	if (wsv_df == 4 && !(wsv_dfb & 4)) {
+		mes "[Kathryne Keyron]";
+		mes "Lunch. Right.";
+		next;
+		mes "[Kathryne Keyron]";
+		mes "I don't care what it is, as long as it's fresh. I won't eat anything that's been sitting in a cellar since the last war.";
+		next;
+		cutin "bio_katrinn02.bmp",2;
+		mes "[Kathryne Keyron]";
+		mes "There's seafood all over this beach. Crabs, clams... Seafood is the obvious answer, isn't it?";
+		mes "...Don't tell Seyren I said so. He'll get smug.";
+		wsv_dfb = wsv_dfb | 4;
+		callfunc "F_WSV_Step", "wsv_df", 4, "16673", "";
+		callfunc "F_WSV_DFAsked";
+		close3;
+	}
+	if (wsv_df == 6) {
+		mes "[Kathryne Keyron]";
+		mes "So we're catching lunch ourselves. Fine by me.";
+		next;
+		cutin "bio_katrinn02.bmp",2;
+		mes "[Kathryne Keyron]";
+		mes "Let's make it interesting. ^0000FF5 Crabs and 10 Shellfish^000000. Whoever brings them back first wins.";
+		mes "The loser does the dishes tonight.";
+		next;
+		select("You're on.");
+		cutin "bio_katrinn03.bmp",2;
+		mes "[Kathryne Keyron]";
+		mes "Hmph, confident. I like that. Don't cry when you lose.";
+		mes "Ready... go!";
+		wsv_dft = gettimetick(2);
+		callfunc "F_WSV_Step", "wsv_df", 7, "16675", "16676,16677";
+		close3;
+	}
+	if (wsv_df == 7) {
+		if (checkquest(16676, HUNTING) != 2) {
+			mes "[Kathryne Keyron]";
+			mes "Still hunting? ^0000FF5 Crabs and 10 Shellfish^000000. I'm almost done, you know.";
+			close3;
+		}
+		.@t = gettimetick(2) - wsv_dft;
+		if (.@t <= 420) {
+			cutin "bio_katrinn04.bmp",2;
+			mes "[Kathryne Keyron]";
+			mes "What? You're back already?!";
+			mes "...I still had two clams to go.";
+			next;
+			mes "[Kathryne Keyron]";
+			mes "Fine. You win. A bet's a bet.";
+			mes "I'll do the dishes. And I'll find you something for your trouble before the day is over.";
+			wsv_dfb = wsv_dfb | 8;
+			callfunc "F_WSV_Step", "wsv_df", 7, "16677", "16678";
+			completequest 16678;
+		} else {
+			cutin "bio_katrinn03.bmp",2;
+			mes "[Kathryne Keyron]";
+			mes "There you are. I finished ages ago.";
+			mes "Hope you like washing dishes~";
+			callfunc "F_WSV_Erase", "16677";
+		}
+		next;
+		cutin "bio_katrinn01.bmp",2;
+		mes "[Kathryne Keyron]";
+		mes "Anyway. Take the catch to Seyren, he's back in the lodge's kitchen.";
+		mes "Margaretha and I will catch up once we've rinsed the sand off.";
+		callfunc "F_WSV_Step", "wsv_df", 8, "16676", "16679";
+		close3;
+	}
+	mes "[Kathryne Keyron]";
+	if (wsv_df == 4)
+		mes "Did you ask Margaretha? Then go tell Seyren.";
+	else
+		mes "Fresh. Food. That's all I ask.";
+	close3;
+}
+
+// Both asked: Seyren comes down to the beach.
+function	script	F_WSV_DFAsked	{
+	if ((wsv_dfb & 6) == 6) {
+		callfunc "F_WSV_Step", "wsv_df", 5, "", "16674";
+		dispbottom "You've heard both of them. Seyren has come down to the beach to hear the verdict.";
+	}
+	return;
+}
+
+vr_bob,144,289,5	script(CLOAKED)	Seyren Windsor#wsv_df2	10318,{
+	cutin "bio_seyren01.bmp",2;
+	if (wsv_df == 5) {
+		mes "[Seyren Windsor]";
+		mes "I couldn't wait in the kitchen. Well? What did they say?";
+		next;
+		select("Margaretha wants something warm to share. Kathryne wants it fresh.");
+		mes "[Seyren Windsor]";
+		mes "Warm, shareable and fresh...";
+		next;
+		cutin "bio_seyren03.bmp",2;
+		mes "[Seyren Windsor]";
+		mes "Then it's seafood. A soup. A crab bisque!";
+		mes "The kitchen has bread and spices, but nothing fresh. We'll have to catch the crabs ourselves.";
+		next;
+		mes "[Seyren Windsor]";
+		mes "Kathryne already looks like she's itching to hunt something. Go and talk to her, I'll get the pot ready.";
+		callfunc "F_WSV_Step", "wsv_df", 6, "16674", "16675";
+		close3;
+	}
+	mes "[Seyren Windsor]";
+	mes "Crabs and shellfish. Fresh ones. Kathryne is in charge of the hunt.";
+	close3;
+}
+
+// The beach's catch: Crabs and Shellfish (Fantasy Series monsters).
+vr_bob,150,300,40,30	monster	Crab	21860,7,60000,0,0
+vr_bob,150,300,40,30	monster	Shellfish	21861,10,60000,0,0
+
+// ------------------------------------------------------------
+// Back at the lodge: the kitchen
+// ------------------------------------------------------------
+vr_bob,295,209,4	script(CLOAKED)	Seyren Windsor#wsv_df3	10318,{
+	cutin "bio_seyren01.bmp",2;
+	if (wsv_df == 8) {
+		mes "[Seyren Windsor]";
+		mes "You're back! And with a full basket. These crabs are still kicking.";
+		next;
+		mes "[Seyren Windsor]";
+		mes "Right. A bisque starts with the shells. The crabs need to be grilled first, so the shells roast and give off their flavor.";
+		next;
+		cutin "bio_seyren02.bmp",2;
+		mes "[Seyren Windsor]";
+		mes "Margaretha has the ^0000FFoven^000000 going by the wall. Could you grill the crabs with her? Then shell the meat and bring both to me.";
+		mes "I'll handle the stock.";
+		callfunc "F_WSV_Step", "wsv_df", 9, "16679", "16680";
+		close3;
+	}
+	if (wsv_df == 10) {
+		mes "[Seyren Windsor]";
+		mes "Let's see...";
+		next;
+		cutin "bio_seyren03.bmp",2;
+		mes "[Seyren Windsor]";
+		mes "The shells are roasted right through and the meat came off cleanly. This is better than I'd have done.";
+		mes "Into the pot they go.";
+		next;
+		cutin "bio_seyren02.bmp",2;
+		mes "[Seyren Windsor]";
+		mes "Now the seasoning. I need ^0000FFtomato paste^000000 and ^0000FFpaprika powder^000000. They're in the ^0000FFcupboard^000000 by the door.";
+		mes "Careful, Kathryne keeps her reagents in there too. Don't bring me anything that glows.";
+		callfunc "F_WSV_Step", "wsv_df", 11, "16681", "16682";
+		close3;
+	}
+	if (wsv_df == 11 && isbegin_quest(16683) == 1) {
+		mes "[Seyren Windsor]";
+		mes "Tomato paste and paprika powder. Exactly right.";
+		next;
+		cutin "bio_seyren03.bmp",2;
+		mes "[Seyren Windsor]";
+		mes "A spoon of each, a little cream, and now we wait...";
+		next;
+		cutin "vr_food01.png",4;
+		mes "The kitchen fills with the smell of the sea and roasted shells.";
+		mes "A deep red crab bisque bubbles in the pot.";
+		next;
+		cutin "bio_seyren02.bmp",2;
+		mes "[Seyren Windsor]";
+		mes "Done! I'll carry the pot out. Go and sit at the ^0000FFtable outside^000000, the others are already there.";
+		callfunc "F_WSV_Step", "wsv_df", 12, "16682,16683", "16687";
+		close3;
+	}
+	if (wsv_df == 11 && (isbegin_quest(16684) == 1 || isbegin_quest(16685) == 1 || isbegin_quest(16686) == 1)) {
+		cutin "bio_seyren04.bmp",2;
+		mes "[Seyren Windsor]";
+		if (isbegin_quest(16686) == 1)
+			mes "...This is neither tomato paste nor paprika. Is this one of Kathryne's reagents? It's humming.";
+		else
+			mes "Hmm. One of these is right, but the other... I don't think this goes in a bisque.";
+		mes "Could you take another look in the cupboard?";
+		callfunc "F_WSV_Erase", "16683,16684,16685,16686";
+		close3;
+	}
+	mes "[Seyren Windsor]";
+	if (wsv_df == 9)
+		mes "Grill the crabs at the oven with Margaretha, then bring me the shells and the meat.";
+	else
+		mes "Tomato paste and paprika powder, from the cupboard by the door.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_df == 8 || wsv_df == 10 || (wsv_df == 11 && isbegin_quest(16683) + isbegin_quest(16684) + isbegin_quest(16685) + isbegin_quest(16686) > 0)" );
+	end;
+}
+
+vr_bob,290,207,4	script(CLOAKED)	Margaretha Sorin#wsv_df2	10321,{
+	cutin "bio_sorin01.bmp",2;
+	mes "[Margaretha Sorin]";
+	if (wsv_df == 9)
+		mes "The oven's hot! Come over when you're ready, I'll hand you the crabs one by one.";
+	else if (wsv_df >= 10)
+		mes "Hehe, the whole lodge smells wonderful. I'm starving.";
+	else
+		mes "Welcome back! Seyren has been pacing around the kitchen.";
+	close3;
+}
+
+vr_bob,293,208,4	script(CLOAKED)	Kathryne Keyron#wsv_df2	10323,{
+	cutin "bio_katrinn01.bmp",2;
+	mes "[Kathryne Keyron]";
+	if (wsv_dfb & 8)
+		mes "Don't look at me like that. I said I'd do the dishes.";
+	else
+		mes "I'm supervising. Somebody has to make sure Seyren doesn't put sugar in the soup again.";
+	close3;
+}
+
+vr_bob,289,209,4	script	Oven#wsv_df	10428,{
+	if (wsv_df != 9) {
+		mes "[Oven]";
+		mes "A stone oven, still warm.";
+		close;
+	}
+	cutin "bio_sorin01.bmp",2;
+	mes "[Margaretha Sorin]";
+	mes "Here's the first batch. Put them on the grate, and take them out when the shells turn bright red.";
+	mes "Too early and they're raw. Too late and they'll taste of charcoal!";
+	next;
+	cutin "vr_cooking01.png",4;
+	setarray .@look$, "The shells are still a dull grey-green.", "The edges are turning orange.", "The shells are bright red and smell sweet.", "Thin smoke is curling up from the legs.";
+	.@good = 0;
+	for (.@round = 1; .@round <= 3; .@round++) {
+		mes "[Oven]";
+		mes "^0000FFBatch " + .@round + " of 3.^000000";
+		.@heat = 0;
+		while (1) {
+			mes .@look$[.@heat];
+			next;
+			if (select("Leave them a little longer.:Take them out now.") == 2)
+				break;
+			.@heat++;
+			if (.@heat > 3) {
+				mes "[Oven]";
+				mes "Black smoke pours out of the oven!";
+				next;
+				break;
+			}
+		}
+		if (.@heat == 2) {
+			.@good++;
+			mes "[Oven]";
+			mes "Perfect. The shells crackle and the meat is juicy.";
+		} else if (.@heat < 2) {
+			mes "[Oven]";
+			mes "Hmm, still a bit raw inside. Margaretha puts them back for a moment.";
+		} else {
+			mes "[Oven]";
+			mes "A little too dark... Margaretha scrapes the burnt bits off.";
+		}
+		next;
+	}
+	cutin "bio_sorin02.bmp",2;
+	mes "[Margaretha Sorin]";
+	if (.@good == 3)
+		mes "Every batch just right! You've done this before, haven't you?";
+	else if (.@good)
+		mes "Not bad at all! A little uneven, but the bisque will hide it.";
+	else
+		mes "Hehe... well, they're cooked. Seyren doesn't need to know.";
+	next;
+	mes "[Margaretha Sorin]";
+	mes "Now let's crack them open and pick out the meat. Careful, they're hot!";
+	next;
+	progressbar "ffffff", 3;
+	mes "[Margaretha Sorin]";
+	mes "There we go: the grilled shells and a bowl of crab meat. Take them to Seyren!";
+	callfunc "F_WSV_Step", "wsv_df", 10, "16680", "16681";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_df == 9" );
+	end;
+}
+
+vr_bob,302,210,4	script	Cupboard#wsv_df	10428,{
+	if (wsv_df != 11 || isbegin_quest(16683) + isbegin_quest(16684) + isbegin_quest(16685) + isbegin_quest(16686) > 0) {
+		mes "[Cupboard]";
+		mes "Rows of jars with handwritten labels. Some of the handwriting is Kathryne's, and some of the jars are humming.";
+		close;
+	}
+	mes "[Cupboard]";
+	mes "Rows of jars with handwritten labels. Seyren wants tomato paste and paprika powder.";
+	mes "Which two do you take?";
+	next;
+	setarray .@jar$, "A jar of red paste labelled \"T. paste\"", "A tin of red powder labelled \"Paprika\"", "A jar of red powder labelled \"Fire Wand dust - K.\"", "A jar of brown paste labelled \"Bean paste\"", "A tin of white powder labelled \"Sugar\"";
+	for (.@i = 0; .@i < getarraysize(.@jar$); .@i++)
+		.@menu$ += .@jar$[.@i] + ":";
+	.@a = select(.@menu$) - 1;
+	mes "You take " + .@jar$[.@a] + ".";
+	mes "One more...";
+	next;
+	.@b = select(.@menu$) - 1;
+	mes "You take " + .@jar$[.@b] + ".";
+	.@ok = (.@a == 0 || .@b == 0) + (.@a == 1 || .@b == 1);
+	if (.@a == .@b)
+		.@ok = (.@a <= 1);
+	if (.@ok == 2)
+		setquest 16683;
+	else if (.@ok == 1 && (.@a == 0 || .@b == 0))
+		setquest 16684;
+	else if (.@ok == 1)
+		setquest 16685;
+	else
+		setquest 16686;
+	questinfo_refresh;
+	mes "Take them to Seyren.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Lunch outside
+// ------------------------------------------------------------
+vr_bob,291,195,6	script(CLOAKED)	Kathryne Keyron#wsv_df3	10323,{
+	cutin "bio_katrinn01.bmp",2;
+	if (wsv_df == 12) {
+		mes "[Kathryne Keyron]";
+		mes "Finally. Sit down, I've been holding your chair for ages.";
+		next;
+		cutin "vr_food01.png",4;
+		mes "Seyren sets the pot down in the middle of the table.";
+		mes "Margaretha ladles out four bowls, and the bread goes around.";
+		next;
+		cutin "bio_katrinn02.bmp",2;
+		mes "[Kathryne Keyron]";
+		mes "...";
+		mes "......";
+		next;
+		mes "[Kathryne Keyron]";
+		mes "It's good.";
+		mes "Don't make that face, Seyren. I said it's good, that's all.";
+		next;
+		cutin "bio_seyren03.bmp",0;
+		mes "[Seyren Windsor]";
+		mes "I'll take it! Thanks to our guest, mostly. The crabs were grilled perfectly.";
+		next;
+		cutin "bio_sorin02.bmp",0;
+		mes "[Margaretha Sorin]";
+		mes "We should do this every holiday. No monsters, no laboratories... just lunch.";
+		next;
+		cutin "vr_food02.png",4;
+		mes "Bowl after bowl, the pot slowly empties.";
+		mes "Out at sea, the sun climbs high over the waves.";
+		callfunc "F_WSV_Step", "wsv_df", 13, "16687", "16688";
+		close3;
+	}
+	mes "[Kathryne Keyron]";
+	if (wsv_dfb & 8)
+		mes "Yes, yes, I'm doing the dishes. Stop gloating.";
+	else
+		mes "Somebody has to do the dishes. And it isn't going to be me.";
+	close3;
+}
+
+vr_bob,294,196,4	script(CLOAKED)	Margaretha Sorin#wsv_df3	10321,{
+	cutin "bio_sorin01.bmp",2;
+	if (wsv_df == 13) {
+		mes "[Margaretha Sorin]";
+		mes "Ahh, I'm so full. I could sleep right here in the sun.";
+		next;
+		mes "[Margaretha Sorin]";
+		mes "Leave the bowls, I'll clear the table. You helped with everything today!";
+		if (wsv_dfb & 8)
+			mes "And Kathryne owes you the dishes anyway. Hehe.";
+		next;
+		cutin "bio_sorin03.bmp",2;
+		mes "[Margaretha Sorin]";
+		mes "Seyren wanted a word before the day ends, I think. He's been fidgeting by the table.";
+		callfunc "F_WSV_Step", "wsv_df", 14, "16688", "16689";
+		close3;
+	}
+	mes "[Margaretha Sorin]";
+	mes "What a lovely day. Thank you for spending it with us.";
+	close3;
+}
+
+vr_bob,290,198,5	script(CLOAKED)	Seyren Windsor#wsv_df4	10318,{
+	cutin "bio_seyren01.bmp",2;
+	if (wsv_df == 14) {
+		mes "[Seyren Windsor]";
+		mes "Hey. I wanted to say thanks.";
+		next;
+		mes "[Seyren Windsor]";
+		mes "We don't get days like this often. Usually it's one dungeon after another, and nobody eats properly.";
+		mes "Cooking for everyone... it felt good. Normal.";
+		next;
+		cutin "bio_seyren05.bmp",2;
+		mes "[Seyren Windsor]";
+		mes "Come back sometime. I'll cook something new. Maybe something fancy.";
+		next;
+		cutin "bio_sorin02.bmp",0;
+		mes "[Margaretha Sorin]";
+		mes "Nothing fancy!";
+		cutin "bio_katrinn02.bmp",0;
+		mes "[Kathryne Keyron]";
+		mes "Nothing fancy.";
+		next;
+		cutin "bio_seyren06.bmp",2;
+		mes "[Seyren Windsor]";
+		mes "...Fine. Nothing fancy.";
+		next;
+		cutin "",255;
+		mes "The waves wash the afternoon away, and the page turns by itself.";
+		mes "^0000FFThe story is over. Ink is waiting to close the book.^000000";
+		callfunc "F_WSV_Step", "wsv_df", 15, "16689", "16690";
+		close;
+	}
+	mes "[Seyren Windsor]";
+	mes "Thanks again, for everything.";
+	close3;
+}

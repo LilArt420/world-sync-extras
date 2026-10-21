@@ -1,0 +1,629 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Chapter 1, part C: Between Civilization and Barbarism (the
+//= Verus under Geffen), the Sky Fortress Dark Whisper and the
+//= identity of the plague. Quests 17899-17921. Steps 250-349.
+//= Also Clover's Worry (17922-17925) and the dailies "This Is a
+//= Miraculous Prescription" (17926-17932) and "Save Them First"
+//= (17933, 17934). wsv_ch1c bits: 1-16 talismans given today,
+//= 32 Clover's Worry done; 64-256 legion soldiers examined,
+//= 512 mechanisms examined.
+//============================================================
+
+// ------------------------------------------------------------
+// The way down: Jeon Cheosa at the tower (part B) moves the story
+// to 250; the tower door (part B) lets players down from 255.
+// ------------------------------------------------------------
+ch1_geffen,124,116,4	script(CLOAKED)	Charles#wsv_c1t	10247,{
+	if (wsv_ch1 == 250) {
+		mes "[Charles]";
+		mes "The barrier's open. Look at it: it peels back like a curtain when you get close.";
+		next;
+		cutin "ch1_clover01.png",2;
+		mes "[Clover]";
+		mes "Master Parzival... Sua... I'm coming.";
+		next;
+		cutin "",255;
+		mes "[Jeon Cheosa]";
+		mes "Steady, child. We go down together. Whatever is down there, we face it as one.";
+		next;
+		mes "^4d4dffEnter the Geffen Tower and go down the stairs.^000000";
+		callfunc "F_WSV_Step", "wsv_ch1", 255, "17899", "17900";
+		close;
+	}
+	mes "[Charles]";
+	mes "Down the stairs, into the dark. After you. No, really, after you.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Destroyed Verus (hem_dun01)
+// ------------------------------------------------------------
+hem_dun01,27,118,4	script(CLOAKED)	Clover#wsv_c1v0	123,{
+	cutin "ch1_clover01.png",2;
+	if (wsv_ch1 == 255) {
+		mes "[Clover]";
+		mes "This is... Verus? Under Geffen?";
+		mes "In our world, Verus is a city of science, far away. In this one it's... buried. Broken.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "The second world folds in strange ways. What was far is near, what was above is below.";
+		next;
+		mes "[Clover]";
+		mes "My master and Sua must have taken shelter somewhere. People still live here, I can hear them.";
+		mes "Let's search the west side first.";
+		callfunc "F_WSV_Step", "wsv_ch1", 260, "17900", "17901";
+		close3;
+	}
+	mes "[Clover]";
+	mes "West. They'll be somewhere west.";
+	close3;
+}
+
+hem_dun01,85,139,4	script(CLOAKED)	Sua#wsv_c1	77,{
+	if (wsv_ch1 == 260) {
+		cutin "ch1_clover01.png",0;
+		mes "[Clover]";
+		mes "Sua! Master!";
+		next;
+		cutin "",255;
+		mes "[Sua]";
+		mes "Clover?! What are you... how did you get down here?";
+		mes "Oh, you idiot, you wonderful idiot. You came back for us.";
+		next;
+		mes "[Parzival]";
+		mes "Clover. My dear student.";
+		mes "You came at just the right time. A new world is about to begin.";
+		next;
+		mes "The old mage's eyes don't quite focus on Clover. They look past her, at something no one else can see.";
+		callfunc "F_WSV_Step", "wsv_ch1", 265, "17901", "17902";
+		close;
+	}
+	if (wsv_ch1 == 265) {
+		mes "[Sua]";
+		mes "*whisper* Don't look at the master like that. He's... not himself.";
+		next;
+		mes "[Sua]";
+		mes "When Geffen fell, a few of us survived down here. We hid, we scavenged, we kept each other alive.";
+		mes "But there's something in these ruins that hunts. Soldiers that don't die. ^0000FFThe Immortal Legion^000000.";
+		next;
+		mes "[Sua]";
+		mes "They are what's dangerous here. Not the hunger, not the dark. Them.";
+		mes "The master... sees it differently. Ask him, if you want. I can't listen to it any more.";
+		callfunc "F_WSV_Step", "wsv_ch1", 270, "17902", "17903";
+		close;
+	}
+	if (wsv_ch1 >= 350 && !(wsv_ch1c & 32) && isbegin_quest(17922) == 1) {
+		mes "[Sua]";
+		mes "Clover sent you? She worries too much.";
+		next;
+		mes "[Sua]";
+		mes "...But she's right to. It's not the Legion that frightens me most now. It's the people.";
+		mes "Some of the believers have gone mad. They scream at night, they scratch at the walls. They follow the master's words like a song they can't stop hearing.";
+		next;
+		mes "[Sua]";
+		mes "If there were some way to quiet their minds... a charm, a prayer, anything.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "17922", "17923";
+		close;
+	}
+	mes "[Sua]";
+	if (wsv_ch1 < 350)
+		mes "Stay close to Clover. Please.";
+	else
+		mes "We'll hold on down here. Thank you for not forgetting us.";
+	close;
+}
+
+hem_dun01,87,141,4	script(CLOAKED)	Parzival#wsv_c1	755,{
+	if (wsv_ch1 == 270) {
+		mes "[Parzival]";
+		mes "Ah, the guest. Sua has been telling you frightening stories, hasn't she?";
+		mes "Soldiers who do not die. She says it as if it were a curse.";
+		next;
+		mes "[Parzival]";
+		mes "I have studied magic for sixty years, and I tell you: it is a ^0000FFgift^000000.";
+		mes "This world is ending. Hunger, sickness, ruin. But some of us will not end with it.";
+		next;
+		mes "[Parzival]";
+		mes "Come. I will show you the new world. You will understand once you see.";
+		callfunc "F_WSV_Step", "wsv_ch1", 275, "17903", "17904";
+		close;
+	}
+	mes "[Parzival]";
+	if (wsv_ch1 >= 275 && wsv_ch1 < 300)
+		mes "To the east. The faithful are gathering.";
+	else
+		mes "......";
+	close;
+}
+
+hem_dun01,182,199,4	script(CLOAKED)	Verus Believer#wsv_c1a	10021,{
+	if (wsv_ch1 == 275) {
+		mes "A dozen people stand in a circle in the rubble, swaying slightly. Their eyes are bright with fever.";
+		next;
+		mes "[Verus Believer]";
+		mes "Welcome, friends of the master. Have you come to witness the rebirth?";
+		mes "Soon one of us will rise again, freed from hunger, freed from death.";
+		callfunc "F_WSV_Step", "wsv_ch1", 280, "17904", "17905";
+		close;
+	}
+	if (wsv_ch1 == 280) {
+		mes "[Verus Believer]";
+		mes "There, by the wall. Our sister has suffered the sickness to its end. Her body is spent.";
+		mes "Come closer. Watch. This is the moment.";
+		callfunc "F_WSV_Step", "wsv_ch1", 285, "17905", "17906";
+		close;
+	}
+	if (wsv_ch1 == 285) {
+		mes "A woman lies against the wall, thin as a branch. Her chest rises... and stops.";
+		mes "The believers hold their breath.";
+		next;
+		mes "......";
+		next;
+		specialeffect2 EF_DARKBREATH;
+		mes "Her fingers twitch. Then her arms. She stands, slowly, jerkily, like a puppet pulled up by its strings.";
+		mes "Her skin has gone gray, and her eyes are empty.";
+		next;
+		mes "[Verus Believer]";
+		mes "Reborn! She is reborn! Glory to the Legion!";
+		next;
+		mes "The thing that was a woman turns without a word and walks away, east, toward the ruined towers. It doesn't look back.";
+		callfunc "F_WSV_Step", "wsv_ch1", 290, "17906", "17907";
+		close;
+	}
+	mes "[Verus Believer]";
+	if (wsv_ch1 < 275)
+		mes "The master says the new world is close.";
+	else
+		mes "Glory to the Legion! Glory to the reborn!";
+	close;
+}
+
+hem_dun01,179,197,4	script(CLOAKED)	Jeon Cheosa#wsv_c1v	754,{
+	if (wsv_ch1 == 290) {
+		mes "[Jeon Cheosa]";
+		mes "......";
+		mes "So that is the Immortal Legion. Not soldiers. The dead of the plague, raised.";
+		next;
+		cutin "ch1_clover01.png",2;
+		mes "[Clover]";
+		mes "And the master calls it a gift... Master, how could you...";
+		next;
+		cutin "",255;
+		mes "[Charles]";
+		mes "The sickness kills them, and then something makes them get up again. That's not a disease. That's a harvest.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "Then we find the farmer. The dead one walked east, with purpose. Let us follow the Legion and see where it goes.";
+		callfunc "F_WSV_Step", "wsv_ch1", 295, "17907", "17908";
+		close;
+	}
+	mes "[Jeon Cheosa]";
+	mes "East. We follow the dead.";
+	close;
+}
+
+// Following the Legion east, to where the sky fortress hangs.
+hem_dun01,223,206,0	script	#wsv_c1trail	-1,3,3,{
+	end;
+OnTouch:
+	if (wsv_ch1 == 295) {
+		callfunc "F_WSV_Step", "wsv_ch1", 300, "17908", "17909";
+		dispbottom "The Legion walks straight into the shadow of something huge hanging above the ruins: a fortress, floating in the dark. The Dark Whisper.";
+	}
+	end;
+}
+
+// ------------------------------------------------------------
+// The Sky Fortress Dark Whisper (ch1_dw)
+// ------------------------------------------------------------
+ch1_dw,260,295,4	script(CLOAKED)	Jeon Cheosa#wsv_c1d0	754,{
+	if (wsv_ch1 == 300) {
+		mes "[Jeon Cheosa]";
+		mes "A fortress in the sky, under the earth. This world has no shame.";
+		mes "The dead went inside. So shall we, carefully.";
+		next;
+		mes "[Charles]";
+		mes "I'll take the rear. Clover, stay in the middle.";
+		callfunc "F_WSV_Step", "wsv_ch1", 305, "17909", "17910";
+		close;
+	}
+	mes "[Jeon Cheosa]";
+	mes "Inside, quietly.";
+	close;
+}
+
+ch1_dw,269,67,4	script(CLOAKED)	Clover#wsv_c1d1	123,{
+	cutin "ch1_clover01.png",2;
+	if (wsv_ch1 == 305) {
+		mes "[Clover]";
+		mes "The Legion keeps going deeper. Some of them go west, toward that clanking noise. Others stand in rows to the east, like they're waiting for orders.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "Then we split. You look west, at whatever makes that noise. Clover and Charles will watch the rows in the east.";
+		mes "Find anything that tells us what this sickness is, then we meet back here.";
+		callfunc "F_WSV_Step", "wsv_ch1", 310, "17910", "17911,17912";
+		close3;
+	}
+	if (wsv_ch1 == 315) {
+		mes "[Clover]";
+		mes "You're back! What did you find?";
+		next;
+		select("Machines pumping dark mist into the vents, and soldiers branded with the same sigil.");
+		mes "[Jeon Cheosa]";
+		mes "The sickness is brewed here and breathed out over the ruins. And those it kills come here to be... collected.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "We have enough. Back to Verus, to look at what you found in the light.";
+		callfunc "F_WSV_Step", "wsv_ch1", 320, "17916", "17917";
+		close3;
+	}
+	mes "[Clover]";
+	mes "Find the clues, then come back here.";
+	close3;
+}
+
+// The machines in the west wing and the Legion in the east wing are
+// the two clues (17911, 17912; three soldiers 17913-17915).
+ch1_dw,217,96,4	script	Mechanism#wsv_1	10432,{
+	callfunc "F_WSV_C1Mech";
+	end;
+}
+ch1_dw,192,84,4	script	Mechanism#wsv_2	10432,{
+	callfunc "F_WSV_C1Mech";
+	end;
+}
+ch1_dw,217,87,4	script	Mechanism#wsv_3	10432,{
+	callfunc "F_WSV_C1Mech";
+	end;
+}
+ch1_dw,210,90,4	script	Mechanism#wsv_4	10432,{
+	callfunc "F_WSV_C1Mech";
+	end;
+}
+
+function	script	F_WSV_C1Mech	{
+	mes "[Mechanism]";
+	mes "A machine of pipes and glass, taller than a man. Something dark and oily churns inside it, and a thin black mist hisses out of the vents.";
+	if (wsv_ch1 == 310 && !(wsv_ch1c & 512)) {
+		next;
+		mes "You scrape a little residue off the glass into a vial. Even through the stopper it smells of fever.";
+		wsv_ch1c = wsv_ch1c | 512;
+		callfunc "F_WSV_Step", "wsv_ch1", 310, "17911", "";
+		callfunc "F_WSV_C1Clues";
+	}
+	close;
+}
+
+ch1_dw,338,85,4	script	Immortal Legion#wsv_1	22461,{
+	callfunc "F_WSV_C1Legion", 64, "17913";
+	end;
+}
+ch1_dw,338,82,4	script	Immortal Legion#wsv_2	22460,{
+	callfunc "F_WSV_C1Legion", 128, "17914";
+	end;
+}
+ch1_dw,338,78,4	script	Immortal Legion#wsv_3	22462,{
+	callfunc "F_WSV_C1Legion", 256, "17915";
+	end;
+}
+
+function	script	F_WSV_C1Legion	{
+	mes "[Immortal Legion]";
+	mes "A soldier of the Legion stands in line, perfectly still. It doesn't breathe. It doesn't blink.";
+	if (wsv_ch1 == 310 && !(wsv_ch1c & getarg(0))) {
+		next;
+		mes "On its neck, burned into the gray skin, is a sigil: a circle broken by a single line.";
+		mes "You copy it down.";
+		wsv_ch1c = wsv_ch1c | getarg(0);
+		callfunc "F_WSV_Step", "wsv_ch1", 310, getarg(1), "";
+		if ((wsv_ch1c & 448) == 448)
+			callfunc "F_WSV_Step", "wsv_ch1", 310, "17912", "";
+		callfunc "F_WSV_C1Clues";
+	}
+	close;
+}
+
+function	script	F_WSV_C1Clues	{
+	if ((wsv_ch1c & 960) == 960) {
+		callfunc "F_WSV_Step", "wsv_ch1", 315, "", "17916";
+		dispbottom "That's enough clues. Go back to the party near the entrance.";
+	}
+	return;
+}
+
+ch1_dw,264,66,4	script(CLOAKED)	Jeon Cheosa#wsv_c1d2	754,{
+	mes "[Jeon Cheosa]";
+	mes "Hm. Clover will hear your report.";
+	close;
+}
+
+// Back in Verus: the believers have come for them.
+hem_dun01,184,201,4	script(CLOAKED)	Jeon Cheosa#wsv_c1v2	754,{
+	if (wsv_ch1 == 320) {
+		mes "[Jeon Cheosa]";
+		mes "Let me see the vial... and the sigil.";
+		mes "Hm, hm. The same magic, in both. Whoever runs that fortress makes the sickness and marks the dead with it.";
+		next;
+		mes "Shouting, from the ruins: the believers have seen you come back from the fortress.";
+		mes "\"Thieves! They stole from the Legion!\"";
+		next;
+		mes "[Charles]";
+		mes "Time to go! Back up the tower stairs, to Geffen!";
+		callfunc "F_WSV_Step", "wsv_ch1", 325, "17917", "17918";
+		close;
+	}
+	mes "[Jeon Cheosa]";
+	mes "To Geffen, quickly!";
+	close;
+}
+
+// Out of the tower: on to the town hall.
+ch1_geffen,124,120,4	script(CLOAKED)	Clover#wsv_c1t2	123,{
+	cutin "ch1_clover01.png",2;
+	if (wsv_ch1 == 325) {
+		mes "[Clover]";
+		mes "*pant* *pant* ...They didn't follow us up. The barrier held.";
+		next;
+		mes "[Clover]";
+		mes "Master Parzival... he's one of them now, isn't he. In his heart.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "Not yet, child. Not while there is someone who still calls him master.";
+		mes "Come, to the town hall. Gregor and Einhar must hear everything.";
+		callfunc "F_WSV_Step", "wsv_ch1", 330, "17918", "17919";
+		close3;
+	}
+	mes "[Clover]";
+	mes "To the town hall.";
+	close3;
+}
+
+// ------------------------------------------------------------
+// The identity of the plague: the town hall
+// ------------------------------------------------------------
+ch1_gef_in,173,186,4	script(CLOAKED)	Gregor#wsv_c1th	627,{
+	cutin "4job_gregor_01.png",2;
+	if (wsv_ch1 == 330) {
+		mes "[Gregor]";
+		mes "You're alive! And you brought souvenirs! Is that... a vial of fortress gunk? For me?";
+		next;
+		cutin "4job_einhar_01.png",2;
+		mes "[Einhar]";
+		mes "Gregor. Let them sit down.";
+		mes "Jeon Cheosa has something to tell us. Everyone, listen.";
+		callfunc "F_WSV_Step", "wsv_ch1", 335, "17919", "17920";
+		close3;
+	}
+	mes "[Gregor]";
+	mes "Fortress gunk. Marvellous, horrible fortress gunk.";
+	close3;
+}
+
+ch1_gef_in,175,188,4	script(CLOAKED)	Jeon Cheosa#wsv_c1th	754,{
+	if (wsv_ch1 == 335) {
+		mes "[Jeon Cheosa]";
+		mes "Hear me. This Soren Syndrome is no ordinary plague.";
+		mes "It is brewed in a fortress below the city and breathed out over the ruins, like seed scattered on a field.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "It eats its host from within: that is the hunger. And when the host is empty, the magic in the blood raises it and calls it home. That is the Immortal Legion.";
+		next;
+		cutin "4job_gregor_01.png",2;
+		mes "[Gregor]";
+		mes "It fits the blood! The magic particles, the recovered man's blood fighting them off... if we could teach the body to fight like his did...";
+		next;
+		cutin "4job_einhar_01.png",2;
+		mes "[Einhar]";
+		mes "Then we need a doctor who knows these patients. Neumann.";
+		mes "Adventurer, go to the clinic and tell him what we know. A cure needs his hands as much as our heads.";
+		callfunc "F_WSV_Step", "wsv_ch1", 340, "17920", "17921";
+		callfunc "F_WSV_C1Reward", 60000000, 30000000;
+		close3;
+	}
+	mes "[Jeon Cheosa]";
+	mes "The doctor must hear this.";
+	close;
+}
+
+// The pacing patient (part B) tells where the doctor has gone and
+// moves the story to Neumann's secrets (part D).
+
+// ------------------------------------------------------------
+// Jeon Cheosa at the tower: Clover's Worry and the daily
+// talismans (from step 350, once the plague is understood).
+// ------------------------------------------------------------
+function	script	F_WSV_C1Cheosa	{
+	if (wsv_ch1 < 350) {
+		mes "[Jeon Cheosa]";
+		if (wsv_ch1 < 205)
+			mes "Hm? A wanderer in a broken city. Mind your step.";
+		else
+			mes "Hm, hm. Every thread of this barrier is knotted twice.";
+		close;
+	}
+	if (isbegin_quest(17923) == 1) {
+		mes "[Jeon Cheosa]";
+		mes "Madness among the believers, you say. Minds that hear a song they cannot stop.";
+		mes "Hm... I must see them myself. Give me time; I will walk the ruins of Verus.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "17923", "17924";
+		close;
+	}
+	if (isbegin_quest(17924) == 1) {
+		mes "[Jeon Cheosa]";
+		mes "I have walked Verus and listened to the mad ones.";
+		mes "It is the fortress's magic, seeping into their minds through their sickness. Their ears are full of it.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "I know what to do. Meet me back at the tower, by the broken door.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "17924", "17925";
+		close;
+	}
+	if (isbegin_quest(17925) == 1) {
+		mes "[Jeon Cheosa]";
+		mes "Here. Purification talismans, written on mulberry paper with ink ground from a root of the World Tree.";
+		mes "Hung on a mad one's neck, it quiets the song for a day. No more than a day.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "It is not a cure. But a quiet day is a gift to a frightened mind.";
+		mes "Bring these to the believers of Verus whenever you can spare the time. I will write more each morning.";
+		wsv_ch1c = wsv_ch1c | 32;
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "17925", "";
+		getexp2 20000000, 10000000;
+		close;
+	}
+	if (!(wsv_ch1c & 32)) {
+		mes "[Jeon Cheosa]";
+		mes "Clover has been sighing at the stairs all day. Go and see what weighs on her.";
+		close;
+	}
+	// Daily: This Is a Miraculous Prescription.
+	if (isbegin_quest(17931) == 1) {
+		mes "[Jeon Cheosa]";
+		mes "All five talismans given? Good, good. The ruins will sleep tonight.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "17931", "";
+		erasequest 17931;
+		setquest 17932;
+		getexp2 30000000, 15000000;
+		getitem 1001972, 3;	// Ch1_Root_Coin
+		close;
+	}
+	if (isbegin_quest(17926) + isbegin_quest(17927) + isbegin_quest(17928) + isbegin_quest(17929) + isbegin_quest(17930) > 0) {
+		mes "[Jeon Cheosa]";
+		mes "The talismans won't hang themselves. To Verus, to the mad ones.";
+		close;
+	}
+	if (callfunc("F_WSV_Waiting", 17932)) {
+		mes "[Jeon Cheosa]";
+		mes "The ink is still drying. Come back tomorrow, after dawn.";
+		close;
+	}
+	mes "[Jeon Cheosa]";
+	mes "Fresh talismans, for the believers of Verus. Will you take them?";
+	next;
+	if (select("I'll take them.:Not today.") == 2)
+		close;
+	callfunc "F_WSV_Erase", "17926,17927,17928,17929,17930,17931";
+	wsv_ch1c = wsv_ch1c &~ 31;
+	if (countitem(1001973))
+		delitem 1001973, countitem(1001973);
+	getitem 1001973, 5;	// Ch1_Purifi_Amulet
+	callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "", "17926,17927,17928,17929,17930";
+	mes "[Jeon Cheosa]";
+	mes "Five talismans, for five troubled souls. You'll find them scattered through the ruins.";
+	close;
+}
+
+ch1_geffen,122,118,4	script	Clover#wsv_c1g	123,{
+	cutin "ch1_clover01.png",2;
+	if (wsv_ch1 >= 350 && !(wsv_ch1c & 32) && isbegin_quest(17922) == 0) {
+		mes "[Clover]";
+		mes "Oh, it's you. Sorry, I was miles away.";
+		next;
+		mes "[Clover]";
+		mes "I keep thinking about Sua and the others, down in Verus. And the master, smiling like that.";
+		mes "Could you go down and ask them if they need anything? They won't ask me. Sua thinks I'm still a child.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "", "17922";
+		close3;
+	}
+	if (!(wsv_ch1c & 32)) {
+		mes "[Clover]";
+		if (wsv_ch1 < 350)
+			mes "......";
+		else
+			mes "Sua will tell you what they need. I hope.";
+		close3;
+	}
+	// Daily: Save Them First.
+	if (isbegin_quest(17933) == 1) {
+		if (checkquest(17933, HUNTING) != 2) {
+			mes "[Clover]";
+			mes "The monsters near the western entrance of Verus. Please be careful.";
+			close3;
+		}
+		mes "[Clover]";
+		mes "You cleared them out? Sua will be able to fetch water without looking over her shoulder.";
+		mes "Thank you. Really.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "17933", "";
+		erasequest 17933;
+		setquest 17934;
+		getexp2 30000000, 15000000;
+		getitem 1001972, 3;	// Ch1_Root_Coin
+		close3;
+	}
+	if (callfunc("F_WSV_Waiting", 17934)) {
+		mes "[Clover]";
+		mes "It's quiet down there for now. More will come by tomorrow, I'm sure.";
+		close3;
+	}
+	mes "[Clover]";
+	mes "More monsters keep crawling into Verus from the west. The people down there can barely leave their shelter.";
+	mes "Could you thin them out again? Just until they can breathe.";
+	next;
+	if (select("I'll do it.:Not today.") == 2)
+		close3;
+	callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "", "17933";
+	mes "[Clover]";
+	mes "Thank you! The western side of Verus, by the old entrance.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch1 >= 350 && (wsv_ch1c & 32) == 0 && isbegin_quest(17922) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "(wsv_ch1c & 32) && isbegin_quest(17933) == 0 && (isbegin_quest(17934) == 0 || checkquest(17934, PLAYTIME) == 2)" );
+	end;
+}
+
+// The believers of Verus, tainted by madness: talisman targets.
+hem_dun01,61,197,4	script	Verus Believer#wsv_1	10021,{
+	callfunc "F_WSV_C1Talisman", 1, "17926";
+	end;
+}
+hem_dun01,139,134,4	script	Verus Believer#wsv_2	10022,{
+	callfunc "F_WSV_C1Talisman", 2, "17927";
+	end;
+}
+hem_dun01,76,120,4	script	Verus Believer#wsv_3	10023,{
+	callfunc "F_WSV_C1Talisman", 4, "17928";
+	end;
+}
+hem_dun01,151,247,4	script	Verus Believer#wsv_4	10021,{
+	callfunc "F_WSV_C1Talisman", 8, "17929";
+	end;
+}
+hem_dun01,215,202,4	script	Verus Believer#wsv_5	10022,{
+	callfunc "F_WSV_C1Talisman", 16, "17930";
+	end;
+}
+
+function	script	F_WSV_C1Talisman	{
+	if (isbegin_quest(atoi(getarg(1))) == 1) {
+		if (countitem(1001973) < 1) {
+			mes "[Verus Believer]";
+			mes "The song... the song...";
+			next;
+			mes "^4d4dffYou have no " + getitemname(1001973) + " left. Jeon Cheosa can write you new ones tomorrow.^000000";
+			close;
+		}
+		mes "[Verus Believer]";
+		mes "The song... the song won't stop... glory to the... glory...";
+		next;
+		delitem 1001973, 1;
+		mes "You hang a " + getitemname(1001973) + " around the believer's neck.";
+		mes "Their shaking slows. Their eyes clear, a little.";
+		next;
+		mes "[Verus Believer]";
+		mes "...Quiet. It's quiet. Thank you. Thank you.";
+		wsv_ch1c = wsv_ch1c | getarg(0);
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, getarg(1), "";
+		if ((wsv_ch1c & 31) == 31) {
+			callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "", "17931";
+			dispbottom "All five talismans given. Report to Jeon Cheosa at the Geffen Tower.";
+		}
+		close;
+	}
+	mes "[Verus Believer]";
+	if (wsv_ch1 >= 350 && (wsv_ch1c & getarg(0)))
+		mes "It's quiet today. I can almost think.";
+	else
+		mes "Glory... to the Legion... the song, the song...";
+	close;
+}
