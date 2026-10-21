@@ -1,0 +1,606 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Chapter 1, part A: the World Tree's Call and the Twisted Land
+//= of Darkness. Quests 18368-18371, 24069-24085, 18378.
+//= Steps 0-139.
+//============================================================
+
+// ------------------------------------------------------------
+// The Small Ash Trees near Prontera and Payon (update 292:
+// prt_fild05 353,252 and pay_fild01 308,341). Touching one calls
+// a Laphine Herald, who takes level 200 adventurers to Ash Village.
+// ------------------------------------------------------------
+prt_fild05,353,252,4	script	Small Ash Tree#wsv_c1p	10620,{
+	callfunc "F_WSV_C1Tree", "Laphine Herald#wsv_c1p";
+	end;
+}
+pay_fild01,308,341,4	script	Small Ash Tree#wsv_c1y	10620,{
+	callfunc "F_WSV_C1Tree", "Laphine Herald#wsv_c1y";
+	end;
+}
+
+function	script	F_WSV_C1Tree	{
+	mes "[Small Ash Tree]";
+	mes "A young ash tree, no taller than you. Its leaves rustle although there is no wind.";
+	if (BaseLevel < 200) {
+		mes "For a moment you think you hear singing from between the branches... but it fades.";
+		close;
+	}
+	next;
+	if (select("Touch the branches.:Leave it alone.") == 2)
+		close;
+	mes "As your fingers brush the bark, a tiny light slips out from between the leaves...";
+	close2;
+	cloakoffnpcself getarg(0);
+	specialeffect2 EF_GREENLIGHT;
+	end;
+}
+
+prt_fild05,351,250,6	script(CLOAKED)	Laphine Herald#wsv_c1p	10606,{
+	callfunc "F_WSV_C1Herald";
+	end;
+}
+pay_fild01,306,339,6	script(CLOAKED)	Laphine Herald#wsv_c1y	10606,{
+	callfunc "F_WSV_C1Herald";
+	end;
+}
+
+function	script	F_WSV_C1Herald	{
+	cutin "ch1_delegacy01.png",2;
+	if (wsv_ch1 == 0) {
+		mes "[Laphine Herald]";
+		mes "Ah! You touched it! You actually touched it!";
+		mes "Hello, hello, adventurer! I'm a herald of the Laphine.";
+		next;
+		mes "[Laphine Herald]";
+		mes "These little ash trees are saplings of the World Tree. They only answer to people the World Tree wants to meet.";
+		mes "Which means... the World Tree is calling you!";
+		next;
+		select("The World Tree? Calling me?");
+		mes "[Laphine Herald]";
+		mes "That's what I said! Isn't it wonderful?";
+		mes "Beyond these branches there's a village under the World Tree's roots. We call it ^0000FFAsh Village^000000.";
+		next;
+		mes "[Laphine Herald]";
+		mes "Something has gone wrong with the land around the World Tree, and the elders want brave people to help.";
+		mes "Will you come? I can take you there right now.";
+		next;
+		if (select("Take me to Ash Village.:Not right now.") == 2) {
+			mes "[Laphine Herald]";
+			mes "Oh... All right. The sapling will remember you. Touch it again when you're ready!";
+			close3;
+		}
+		callfunc "F_WSV_Step", "wsv_ch1", 10, "", "18368";
+		mes "[Laphine Herald]";
+		mes "Hold on to my hand, and don't let go! Here we goooo~";
+		close2;
+		cutin "",255;
+		specialeffect2 EF_TELEPORTATION2;
+		warp "ygg_edge",250,243;
+		end;
+	}
+	mes "[Laphine Herald]";
+	mes "Off to Ash Village again? Hold on tight!";
+	next;
+	if (select("Yes, please.:Not now.") == 2)
+		close3;
+	close2;
+	cutin "",255;
+	warp "ygg_edge",250,243;
+	end;
+}
+
+// The herald who brought the player, at the village entrance.
+ygg_edge,253,246,4	script	Laphine Herald#wsv_c1e	10609,{
+	cutin "ch1_delegacy01.png",2;
+	if (wsv_ch1 == 10) {
+		mes "[Laphine Herald]";
+		mes "Ta-da! Welcome to ^0000FFAsh Village^000000!";
+		mes "Everything you see grows from the roots of the World Tree. The houses, the bridges, even the lamps.";
+		next;
+		mes "[Laphine Herald]";
+		mes "I'd love to show you around, but more saplings are calling. Other adventurers are waiting!";
+		mes "Please go and see ^0000FFSasha^000000. She looks after the village. You'll find her in the great hall of the village's fruit.";
+		next;
+		mes "[Laphine Herald]";
+		mes "Byeee~!";
+		callfunc "F_WSV_Step", "wsv_ch1", 20, "18368", "18369";
+		close3;
+	}
+	mes "[Laphine Herald]";
+	if (wsv_ch1 < 10) {
+		mes "Oh? How did you get in here without the World Tree's call?";
+		mes "Ah well, any friend of the roots is welcome.";
+	} else
+		mes "Want to go back to Rune-Midgarts? I can open the way to the Small Ash Trees near Prontera or Payon.";
+	next;
+	switch (select("To the Small Ash Tree near Prontera.:To the Small Ash Tree near Payon.:I'll stay.")) {
+	case 1:
+		close2;
+		cutin "",255;
+		warp "prt_fild05",350,249;
+		end;
+	case 2:
+		close2;
+		cutin "",255;
+		warp "pay_fild01",305,338;
+		end;
+	}
+	close3;
+}
+
+// ------------------------------------------------------------
+// Ash Village: Sasha and Meisel
+// ------------------------------------------------------------
+ygg_fruit,80,122,4	script	Sasha#wsv_c1	435,{
+	if (wsv_ch1 == 20) {
+		mes "[Sasha]";
+		mes "So you're the one the World Tree called. Welcome, welcome.";
+		mes "I am Sasha. I keep an eye on this village, and on the Laphine who live in it.";
+		next;
+		mes "[Sasha]";
+		mes "You must have a hundred questions. Let me start with the one that matters most.";
+		mes "The World Tree is not only a tree. Its roots hold the worlds together, the way a loom holds threads.";
+		next;
+		mes "[Sasha]";
+		mes "Below Ash Village lies the ^0000FFLand of Darkness^000000, where the deepest roots grow. It was always a dark place, but a quiet one.";
+		mes "Lately it has started to twist. The ground shakes, paths appear where there were none... and some of those paths lead to places that are not our world.";
+		next;
+		select("Places that aren't our world?");
+		mes "[Sasha]";
+		mes "We call them ^0000FFintersections^000000. Where the roots have been bent, a piece of another world touches ours.";
+		mes "Meisel has been studying them. He explains these things far better than I do.";
+		next;
+		mes "[Sasha]";
+		mes "Go and speak with him, would you? He's right here in the hall, probably buried in notes.";
+		callfunc "F_WSV_Step", "wsv_ch1", 30, "18369", "18370";
+		close;
+	}
+	if (wsv_ch1 == 140) {
+		mes "[Sasha]";
+		mes "You're back, and in one piece. Ivein told me what you did in the Land of Darkness.";
+		mes "Thank you. Some of those investigators wouldn't have come home without you.";
+		next;
+		mes "[Sasha]";
+		mes "Here is what we know now: the intersections lead into a ^0000FFsecond world^000000. Not a dream, not a memory. A world like ours, but broken.";
+		mes "One of them opens onto the fields outside a ruined city the investigators recognised. ^0000FFGeffen^000000.";
+		next;
+		mes "[Sasha]";
+		mes "We can't wander into a broken world blindly. Everyone is taking up a post.";
+		mes "Rubiel is holding the gate open from the other side, on the ^0000FFGeffen field of the second world^000000. She asked for you.";
+		next;
+		mes "[Sasha]";
+		mes "Go to the designated spot on that field and meet her. The investigators can show you the way through the Land of Darkness.";
+		callfunc "F_WSV_Step", "wsv_ch1", 150, "18378", "18379";
+		callfunc "F_WSV_C1Reward", 30000000, 15000000;
+		close;
+	}
+	if (wsv_ch1 == 480) {
+		mes "[Sasha]";
+		mes "A catalyst... The bad news first: I've read every record of the roots, and the World Tree has never cured a sickness like this one.";
+		mes "It was made by someone. Things that are made, the Tree does not know.";
+		callfunc "F_WSV_Step", "wsv_ch1", 485, "18374", "";
+		next;
+		mes "[Sasha]";
+		mes "But there is good news too. Hmm, here... In the oldest records, there's a substance called ^0000FFHal^000000.";
+		mes "Heat given form. It grows only in ^0000FFMuspelheim^000000, the land of fire. The records say it gives strength to any living thing it touches.";
+		next;
+		mes "[Sasha]";
+		mes "One of the intersections in the Land of Darkness opens onto Muspelheim's Volund Valley. Our advance party went through days ago.";
+		mes "But you cannot walk into Muspelheim as you are. Go and see ^0000FFDevries^000000 in the Tube Fruit house. She makes potions against heat.";
+		callfunc "F_WSV_Step", "wsv_ch1", 490, "", "18375";
+		close;
+	}
+	if (wsv_ch1 == 630) {
+		mes "[Sasha]";
+		mes "Jeon Cheosa told me. Something that tears the air between worlds and takes what it wants.";
+		next;
+		mes "[Sasha]";
+		mes "The roots have been bent for months, and we blamed the quakes. Now I wonder if the quakes were only the sound of someone pulling.";
+		next;
+		mes "[Sasha]";
+		mes "We will find out who. Not today; today, Geffen breathes, and that is your doing.";
+		mes "Rest, adventurer. When the World Tree calls again, I think it will call you first.";
+		callfunc "F_WSV_Step", "wsv_ch1", 700, "18377", "";
+		callfunc "F_WSV_C1Reward", 100000000, 50000000;
+		getitem 1001972, 20;	// Ch1_Root_Coin
+		close;
+	}
+	if (wsv_ch1 >= 700 && wsv_c1br == 0) {
+		mes "[Sasha]";
+		mes "Ellis and Maura took a small party through one of the western intersections, the one Alf found. They call the place beyond it ^0000FFBrimir^000000.";
+		mes "They haven't sent word in days. Would you go after them?";
+		next;
+		if (select("I'll go.:Not now.") == 2)
+			close;
+		mes "[Sasha]";
+		mes "Thank you. The intersection is west in the Land of Darkness, where Tamarin marked it with her arrows.";
+		callfunc "F_WSV_Step", "wsv_c1br", 1, "", "8955";
+		close;
+	}
+	if (wsv_c1br == 10) {
+		mes "[Sasha]";
+		mes "Valkyries, chained in a hall that floats in nothing... and gray, even when they're free.";
+		next;
+		mes "[Sasha]";
+		mes "The World Tree remembers Brimir. It was a place of feasting, once, for the brave dead. Whatever bent the roots bent that place too.";
+		mes "Thank you. Ellis and Maura will keep watch there. And I suspect the sisters will be glad of a visitor now and then.";
+		callfunc "F_WSV_Step", "wsv_c1br", 11, "8969", "";
+		getexp2 40000000, 20000000;
+		getitem 1001972, 5;	// Ch1_Root_Coin
+		close;
+	}
+	mes "[Sasha]";
+	if (wsv_ch1 < 20)
+		mes "Welcome to Ash Village, traveler. Make yourself at home.";
+	else if (wsv_ch1 < 140)
+		mes "Be careful in the Land of Darkness. It is not the same place two days in a row any more.";
+	else
+		mes "The roots remember everyone who helps them. Thank you.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch1 == 20 || wsv_ch1 == 140 || wsv_ch1 == 480 || wsv_ch1 == 630 || wsv_c1br == 10" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch1 >= 700 && wsv_c1br == 0" );
+	end;
+}
+
+ygg_fruit,84,119,3	script	Meisel#wsv_c1	621,{
+	if (wsv_ch1 == 30) {
+		mes "[Meisel]";
+		mes "Hm? Oh! A visitor. Sorry, sorry. Mind the papers, they're in order. Mostly.";
+		mes "Meisel. I study the roots. Or I did, before the roots started studying us back.";
+		next;
+		mes "[Meisel]";
+		mes "Sasha sent you? Then you've heard about the intersections.";
+		mes "Picture the worlds as leaves on one branch. Normally they never touch. Now the branch is being bent, and some of the leaves are pressed together.";
+		next;
+		mes "[Meisel]";
+		mes "Where they touch, you can step from one into the other. That's an intersection.";
+		mes "The trouble is that whatever is bending the branch is still bending it. Every quake makes new intersections and closes old ones.";
+		next;
+		select("Can I help?");
+		mes "[Meisel]";
+		mes "You'd have to see it first. Reading my notes won't prepare you for the Land of Darkness.";
+		mes "Our investigation team went down this morning. Take the ^0000FFbranch path at the west end of the village^000000 and follow the roots down.";
+		next;
+		mes "[Meisel]";
+		mes "There's a ^0000FFsurvey marker^000000 right where you arrive. Start there. And... if the ground starts shaking, hold on to something.";
+		callfunc "F_WSV_Step", "wsv_ch1", 40, "18370", "18371";
+		close;
+	}
+	mes "[Meisel]";
+	if (wsv_ch1 < 140)
+		mes "The survey markers in the Land of Darkness are numbered. Follow them and you'll find the team.";
+	else
+		mes "Intersections into a broken world... I need more paper.";
+	close;
+}
+
+// ------------------------------------------------------------
+// The Twisted Land of Darkness (ygg_roots)
+// ------------------------------------------------------------
+ygg_roots,334,138,4	script	Investigation Point#wsv_c1a	10429,{
+	if (wsv_ch1 == 40) {
+		mes "[Investigation Point]";
+		mes "A wooden marker driven into the soil. A note is pinned to it:";
+		mes "^0000FF\"Survey 1. Ground stable. Proceeding south to point 2.\"^000000";
+		next;
+		mes "The ink is still fresh. The team can't be far.";
+		mes "Behind you, the root you came down on creaks as the whole land shudders.";
+		callfunc "F_WSV_Step", "wsv_ch1", 50, "18371", "24069";
+		close;
+	}
+	mes "[Investigation Point]";
+	mes "^0000FF\"Survey 1. Ground stable.\"^000000";
+	close;
+}
+
+ygg_roots,299,59,4	script	Investigation Point#wsv_c1b	10429,{
+	if (wsv_ch1 == 50) {
+		mes "[Investigation Point]";
+		mes "The second marker is knocked over. Somebody has scribbled on the note in a hurry:";
+		mes "^0000FF\"Point 2: tremor, cracks to the west. Team splitting up. Meet at point 3.\"^000000";
+		callfunc "F_WSV_Step", "wsv_ch1", 55, "24069", "24070";
+		close;
+	}
+	mes "[Investigation Point]";
+	mes "^0000FF\"Point 2: tremor, cracks to the west.\"^000000";
+	close;
+}
+
+ygg_roots,186,117,4	script	Investigation Point#wsv_c1c	10429,{
+	if (wsv_ch1 == 55) {
+		mes "[Investigation Point]";
+		mes "Point 3. There's no note on this one, only a satchel left on the ground, half buried in soil.";
+		next;
+		mes "Then you hear it: a scream, somewhere close, to the west.";
+		callfunc "F_WSV_Step", "wsv_ch1", 60, "24070", "24071";
+		close;
+	}
+	mes "[Investigation Point]";
+	mes "A survey marker. Its note has been torn away.";
+	close;
+}
+
+ygg_roots,167,135,4	script	Where the Sound Came From#wsv	10429,{
+	if (wsv_ch1 == 60) {
+		mes "[Where the Sound Came From]";
+		mes "A heap of roots has collapsed here, as thick as tree trunks.";
+		mes "From underneath comes a weak voice: \"Help... somebody, please...\"";
+		callfunc "F_WSV_Step", "wsv_ch1", 65, "24071", "24072";
+		close;
+	}
+	if (wsv_ch1 == 65) {
+		mes "[Where the Sound Came From]";
+		mes "Someone is trapped under the roots. You'll have to lift them.";
+		next;
+		if (select("Lift the roots.:Not yet.") == 2)
+			close;
+		mes "You brace your shoulder against the heaviest root and push...";
+		close2;
+		progressbar "ffffff", 5;
+		specialeffect2 EF_HIT3;
+		callfunc "F_WSV_Step", "wsv_ch1", 67, "", "";
+		dispbottom "The roots shift with a groan. A small fairy crawls out from underneath.";
+		end;
+	}
+	mes "[Where the Sound Came From]";
+	mes "A pile of roots that collapsed in a quake.";
+	close;
+}
+
+ygg_roots,166,133,6	script(CLOAKED)	Ivein#wsv_c1r	437,{
+	cutin "ch1_yvain01.png",2;
+	if (wsv_ch1 == 67) {
+		mes "[Ivein]";
+		mes "Ow, ow, ow... my wings...";
+		mes "Thank you! I thought I'd be stuck under there until the next quake squashed me flat.";
+		next;
+		mes "[Ivein]";
+		mes "I'm Ivein. I came down with the investigation team to look after the wounded. And then I became the wounded. Ha...";
+		next;
+		mes "[Ivein]";
+		mes "The quake split us up. I saw ^0000FFMagi^000000 run north, toward the big roots. She said she'd seen something glowing.";
+		mes "Please go after her. I'll patch myself up and head back to the village.";
+		callfunc "F_WSV_Step", "wsv_ch1", 70, "24072", "24073";
+		close3;
+	}
+	mes "[Ivein]";
+	mes "I'll be fine, really. Magi went north!";
+	close3;
+}
+
+ygg_roots,153,203,4	script(CLOAKED)	Magi#wsv_c1a	10365,{
+	if (wsv_ch1 == 70) {
+		mes "[Magi]";
+		mes "Who's there?! ...Oh. You're not a monster. Good.";
+		mes "Sorry. It's been a long morning.";
+		next;
+		mes "[Magi]";
+		mes "The ground split right under our feet. One moment the whole team was here, the next I was alone.";
+		mes "Ivein's safe? Thank goodness.";
+		next;
+		mes "[Magi]";
+		mes "Listen, before the quake I saw a light just north of here. Not a lamp. Something like a tear in the air.";
+		mes "I think it's an intersection. Come on, I'll show you.";
+		callfunc "F_WSV_Step", "wsv_ch1", 75, "24073", "24074";
+		close;
+	}
+	mes "[Magi]";
+	mes "The light was just north of here.";
+	close;
+}
+
+ygg_roots,161,237,4	script(CLOAKED)	Magi#wsv_c1b	10365,{
+	if (wsv_ch1 == 75) {
+		mes "[Magi]";
+		mes "There. Do you see it? The air is... folded.";
+		mes "On the other side there's light, and grass, and wind. Real wind.";
+		next;
+		mes "[Magi]";
+		mes "I'd go myself, but somebody has to stay and mark this spot for the others.";
+		mes "Step through and have a look around. Don't go far. Just tell me what's on the other side.";
+		callfunc "F_WSV_Step", "wsv_ch1", 80, "24074", "24075";
+		close;
+	}
+	if (wsv_ch1 == 85) {
+		mes "[Magi]";
+		mes "You're back! What did you see?";
+		next;
+		select("A field. And an investigator who says it's the Geffen field, but ruined.");
+		mes "[Magi]";
+		mes "Geffen? But we're nowhere near Geffen...";
+		mes "...So that's what an intersection does. It doesn't connect places. It connects worlds.";
+		next;
+		mes "[Magi]";
+		mes "Mark will want to hear this. And Tamarin, and Alf, and Dew... if we can find them.";
+		next;
+		mes "...The ground trembles one more time, and then everything goes still.";
+		mes "In the silence, another scream echoes from the northwest.";
+		next;
+		mes "[Magi]";
+		mes "That came from the northwest! Go, go! I'll catch up!";
+		callfunc "F_WSV_Step", "wsv_ch1", 90, "24076", "24077";
+		close;
+	}
+	mes "[Magi]";
+	if (wsv_ch1 == 80)
+		mes "The intersection is right there. Step through!";
+	else
+		mes "I'm marking this intersection for the others.";
+	close;
+}
+
+// Just inside the first intersection: the Geffen field of the
+// second world.
+hem_fild,208,22,4	script	Investigator#wsv_c1	750,{
+	if (wsv_ch1 == 80) {
+		mes "[Investigator]";
+		mes "Whoa! Another one came through!";
+		mes "Don't worry, I'm from the team. I fell through this thing when the ground split.";
+		next;
+		mes "[Investigator]";
+		mes "Look around. Recognise it? Those hills, that river bend... this is the field outside ^0000FFGeffen^000000.";
+		mes "Except Geffen's tower should be standing over there, and it's... broken. Everything's broken.";
+		next;
+		mes "[Investigator]";
+		mes "I've been taking notes, but I'm not going any further alone. Tell Magi what you saw. I'll hold this side.";
+		callfunc "F_WSV_Step", "wsv_ch1", 85, "24075", "24076";
+		close;
+	}
+	mes "[Investigator]";
+	if (wsv_ch1 < 80)
+		mes "This field... it looks like Geffen's, but something is very wrong with it.";
+	else
+		mes "I'm keeping watch on this side of the intersection. The way back is right behind me.";
+	close;
+}
+
+ygg_roots,112,246,4	script	Investigator#wsv_c1b	484,{
+	if (wsv_ch1 == 90) {
+		mes "[Investigator]";
+		mes "Gah! Th-that was me screaming. Sorry. A root nearly grabbed my ankle.";
+		next;
+		mes "[Investigator]";
+		mes "You're looking for the rest of the team? I saw ^0000FFMark^000000 head up the slope to the northwest, toward the old stump.";
+		mes "He was shouting for Tamarin.";
+		callfunc "F_WSV_Step", "wsv_ch1", 95, "24077", "24078";
+		close;
+	}
+	mes "[Investigator]";
+	mes "These roots move when you're not looking at them. I'm sure of it.";
+	close;
+}
+
+ygg_roots,39,268,4	script	Mark#wsv_c1a	10383,{
+	if (wsv_ch1 == 95) {
+		mes "[Mark]";
+		mes "...You're with Magi? Good.";
+		mes "Tamarin was right behind me when the ground went. Now she's gone.";
+		next;
+		mes "[Mark]";
+		mes "But look here. Scratches on the roots, arrows. She does that, marks her way so she can find it again.";
+		mes "They lead south. I'll stay in case she comes back this way. Follow the arrows.";
+		callfunc "F_WSV_Step", "wsv_ch1", 100, "24078", "24079";
+		close;
+	}
+	mes "[Mark]";
+	mes "Tamarin always marks her way. Always.";
+	close;
+}
+
+ygg_roots,91,149,4	script	Tamarin#wsv_c1a	10381,{
+	if (wsv_ch1 == 100) {
+		mes "[Tamarin]";
+		mes "Oh! Did Mark send you? I knew my arrows would work!";
+		mes "I'm Tamarin, investigator, professional getter-lost-and-found-again.";
+		next;
+		mes "[Tamarin]";
+		mes "Listen, listen. Alf and I found another one of those folded-air things, an intersection, over west.";
+		mes "Alf is keeping an eye on it. Come on, I'll show you!";
+		callfunc "F_WSV_Step", "wsv_ch1", 105, "24079", "24080";
+		close;
+	}
+	mes "[Tamarin]";
+	mes "The intersection is to the west, past the twisted stump.";
+	close;
+}
+
+ygg_roots,40,129,4	script	Tamarin#wsv_c1b	10381,{
+	if (wsv_ch1 == 105) {
+		mes "[Tamarin]";
+		mes "Here it is! See how the air shimmers?";
+		mes "...Wait. Where's Alf? He was right here.";
+		next;
+		mes "[Tamarin]";
+		mes "Don't tell me he went in by himself. Ugh, of course he did.";
+		mes "Could you go in after him? I'll mark the entrance so we don't lose it.";
+		callfunc "F_WSV_Step", "wsv_ch1", 110, "24080", "24081";
+		close;
+	}
+	if (wsv_ch1 == 115) {
+		mes "[Tamarin]";
+		mes "You're back! Is Alf all right?";
+		next;
+		select("He's fine. But the place on the other side... it's a ruin. Chained people, gray flowers.");
+		mes "[Tamarin]";
+		mes "......";
+		mes "That doesn't sound like somewhere we should poke around on our own.";
+		next;
+		mes "[Tamarin]";
+		mes "We need to tell Ash Village. Everyone's accounted for except ^0000FFDew^000000. He was mapping the path back to the village.";
+		mes "Head back along the road. If he's on it, you'll run into him.";
+		callfunc "F_WSV_Step", "wsv_ch1", 120, "24082", "24083";
+		close;
+	}
+	mes "[Tamarin]";
+	mes "I'm marking this intersection. Arrow, arrow, arrow~";
+	close;
+}
+
+uknw_ruin,244,239,4	script	Alf#wsv_c1	10384,{
+	if (wsv_ch1 == 110) {
+		mes "[Alf]";
+		mes "Shh! Keep your voice down.";
+		mes "Tamarin sent you? Figures.";
+		next;
+		mes "[Alf]";
+		mes "Look at this place. Stone halls, floating in nothing. And those people over there... they're chained by the ankle.";
+		mes "Some of them have wings, gray ones. They don't move. They just sit there, counting.";
+		next;
+		mes "[Alf]";
+		mes "The flowers here aren't right either. They turn to look at you.";
+		mes "I've seen enough. Go back and tell Tamarin. I'll be right behind you.";
+		callfunc "F_WSV_Step", "wsv_ch1", 115, "24081", "24082";
+		close;
+	}
+	mes "[Alf]";
+	mes "This place gives me the creeps. Don't touch the flowers.";
+	close;
+}
+
+ygg_roots,204,178,4	script	Investigator#wsv_c1c	10160,{
+	if (wsv_ch1 == 120) {
+		mes "[Investigator]";
+		mes "Dew? Tall, quiet, always has a map in his hands?";
+		mes "Yeah, he passed me not long ago, heading toward the village. He said he wanted to check the eastern path.";
+		callfunc "F_WSV_Step", "wsv_ch1", 125, "24083", "24084";
+		close;
+	}
+	mes "[Investigator]";
+	mes "The road to the village is clear, at least for now.";
+	close;
+}
+
+ygg_roots,297,200,4	script	Investigator#wsv_c1d	10351,{
+	if (wsv_ch1 == 125) {
+		mes "[Investigator]";
+		mes "You're the adventurer everyone's been talking about? Hah, news travels fast down here.";
+		mes "Dew went east, toward the big bend. He was muttering about the path having moved.";
+		callfunc "F_WSV_Step", "wsv_ch1", 130, "24084", "24085";
+		close;
+	}
+	mes "[Investigator]";
+	mes "Strange, isn't it? Even the roads move around here.";
+	close;
+}
+
+ygg_roots,338,243,4	script	Mark#wsv_c1b	10383,{
+	if (wsv_ch1 == 130) {
+		mes "[Mark]";
+		mes "There you are. I came round the long way, along the eastern bend.";
+		mes "Tamarin's safe? ...Good. She owes me a new pair of boots.";
+		next;
+		mes "[Mark]";
+		mes "And Dew, I ran into him just here. He had his nose in that map of his, complaining that the path had moved twelve paces east overnight.";
+		mes "He's gone ahead to the village to redraw it. So that's everyone.";
+		next;
+		mes "[Mark]";
+		mes "Let's get back. Sasha will want to hear what you saw on the other side of those intersections.";
+		callfunc "F_WSV_Step", "wsv_ch1", 140, "24085", "18378";
+		close;
+	}
+	mes "[Mark]";
+	mes "The whole team is back. Not bad for one morning.";
+	close;
+}

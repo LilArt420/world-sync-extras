@@ -35,6 +35,10 @@ function	script	F_WSV_Scenes	{
 		callfunc "F_WSV_SYScenes";
 		return;
 	}
+	if (compare("ygg_edge ygg_fruit ygg_roots hem_fild hem_dun01 ch1_geffen ch1_gef_in ch1_dw ch1_que01 mu_fild01", .@m$)) {
+		callfunc "F_WSV_C1Scenes";
+		return;
+	}
 	// NPC name, step variable, first step, last step (inclusive)
 	if (.@m$ == "vr_bob") {
 		setarray .@t$,
@@ -135,7 +139,10 @@ OnInit:
 		// the Chess Garden's own exit and Deep Abyss entrance
 		"Travel to ba_maison#ws14256", "Travel to bl_depth2#ws14258",
 		// "entrances" setting: the pagoda's chessboard checks the level
-		"ws_ba_maison_14253";
+		"ws_ba_maison_14253",
+		// Chapter 1: the Shaking Crossroads of the Geffen field
+		"Travel to hem_dun02#ws19771", "Travel to ch1_gfn03#ws19775",
+		"Travel to ch1_gfn01#ws19779";
 	for (.@i = 0; .@i < getarraysize(.@n$); .@i++) {
 		if (getnpcid(0, .@n$[.@i]))
 			disablenpc .@n$[.@i];

@@ -1,0 +1,85 @@
+# World Sync Extras: Varmundt block - monsters the server doesn't have yet.
+#
+# 22497 CH1_MD_HEMEL (Himmelmez, the Immortal Lord) and 22499 CH1_MD_VESSEL are
+# the official ids the client draws for Chapter 1's memorial dungeon (sprite and
+# name in the client's tables; rAthena only has commented-out placeholders).
+# Their stats aren't published: Himmelmez follows the Immortal Legion Officers
+# of the Verus ruins (level 243) the way Episode 20's Rasgand follows its
+# episode's strongest monsters; the Vessel sits between an officer and a
+# Legion soldier.
+Header:
+  Type: MOB_DB
+  Version: 5
+
+Body:
+  - Id: 22497
+    AegisName: CH1_MD_HEMEL
+    Name: Himmelmez
+    Level: 248
+    Hp: 220000000
+    BaseExp: 3300000
+    JobExp: 2310000
+    Attack: 41000
+    Attack2: 12000
+    Defense: 420
+    MagicDefense: 900
+    Resistance: 420
+    MagicResistance: 430
+    Str: 210
+    Agi: 140
+    Vit: 190
+    Int: 230
+    Dex: 200
+    Luk: 120
+    AttackRange: 3
+    SkillRange: 12
+    ChaseRange: 14
+    Size: Large
+    Race: Undead
+    Element: Undead
+    ElementLevel: 4
+    WalkSpeed: 150
+    AttackDelay: 900
+    AttackMotion: 1320
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Drops:
+      - Item: Zelunium
+        Rate: 1500
+      - Item: Shadowdecon
+        Rate: 1500
+      - Item: aegis_1001977
+        Rate: 5000
+  - Id: 22499
+    AegisName: CH1_MD_VESSEL
+    Name: Vessel of the Immortal
+    Level: 238
+    Hp: 90000000
+    BaseExp: 1500000
+    JobExp: 1050000
+    Attack: 30000
+    Attack2: 8000
+    Defense: 380
+    MagicDefense: 700
+    Resistance: 300
+    MagicResistance: 320
+    Str: 180
+    Agi: 90
+    Vit: 200
+    Int: 150
+    Dex: 160
+    Luk: 60
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 250
+    AttackDelay: 1200
+    AttackMotion: 1500
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss

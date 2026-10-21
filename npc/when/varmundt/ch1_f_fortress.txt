@@ -1,0 +1,297 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Chapter 1, part F: Destroy the Sky Fortress (memorial dungeon
+//= 1@ch1a), the return to Ash Village and the Unknown Being.
+//= Quests 12663, 12666, 12664, 12665, 18377. Steps 600-700.
+//= The Recreated Dark Whisper (1@ch1b) for those who finished the
+//= chapter: 12660 (the Wizard Professor's call), 12662 (find the
+//= clues), 12661 (three days to wait).
+//= Monsters: Himmelmez (22497) and the Vessel (22499) are defined
+//= in db/when/varmundt/mob_db.yml; the Legion and its officers are
+//= the World Sync monsters of the Verus ruins.
+//============================================================
+
+hem_dun01,209,248,4	script	Est#wsv	10183,{
+	cutin "ep162_est01.png",2;
+	if (wsv_ch1 == 600) {
+		mes "[Est]";
+		mes "You're the one Maxim sent? Good. I've heard what you did in the fortress, and in the clinic.";
+		next;
+		mes "[Est]";
+		mes "The Dark Whisper brews the sickness and calls the dead home. Cut the head off, and the body stops.";
+		mes "The head is the ^0000FFImmortal Lord^000000. A creature called ^0000FFHimmelmez^000000, sitting in the deepest hall of the fortress.";
+		next;
+		mes "[Est]";
+		mes "I've found a way in that the Legion doesn't guard: through the fortress's shadow, right here. It won't stay open long.";
+		mes "Tell me when you're ready to go in.";
+		callfunc "F_WSV_Step", "wsv_ch1", 605, "12663", "12666";
+		close3;
+	}
+	if (wsv_ch1 == 605 || wsv_ch1 == 610) {
+		mes "[Est]";
+		mes "The way stays open for an hour. Inside, fight your way through the Legion; the officers guard the inner hall, and Himmelmez waits at the far end.";
+		mes "Ready?";
+		next;
+		if (select("Open the way.:Not yet.") == 2)
+			close3;
+		if (wsv_ch1 == 605)
+			callfunc "F_WSV_Step", "wsv_ch1", 610, "12666", "12664";
+		if (instance_enter("Destroy the Sky Fortress") != IE_OK) {
+			.@id = instance_create("Destroy the Sky Fortress", IM_CHAR);
+			if (.@id < 0 || instance_enter("Destroy the Sky Fortress") != IE_OK) {
+				mes "[Est]";
+				mes "...The shadow won't open. Try again in a moment.";
+				close3;
+			}
+		}
+		cutin "",255;
+		end;
+	}
+	mes "[Est]";
+	if (wsv_ch1 < 600)
+		mes "Don't mind me. I'm watching the fortress.";
+	else
+		mes "The fortress still hangs there, but it's empty now. Quiet.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch1 >= 600 && wsv_ch1 <= 610" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Memorial dungeon: Destroy the Sky Fortress (1@ch1a)
+// ------------------------------------------------------------
+1@ch1a	mapflag	nosave	SavePoint
+1@ch1a	mapflag	noteleport
+1@ch1a	mapflag	nomemo
+1@ch1a	mapflag	nowarpto
+1@ch1a	mapflag	nobranch
+1@ch1a	mapflag	monster_noteleport
+1@ch1a	mapflag	nopenalty
+1@ch1b	mapflag	nosave	SavePoint
+1@ch1b	mapflag	noteleport
+1@ch1b	mapflag	nomemo
+1@ch1b	mapflag	nowarpto
+1@ch1b	mapflag	nobranch
+1@ch1b	mapflag	monster_noteleport
+1@ch1b	mapflag	nopenalty
+
+1@ch1a,1,1,0	script	#wsv_md	-1,{
+	end;
+OnInstanceInit:
+	'stage = 1;
+	'left = 15;
+	disablenpc instance_npcname("Est#wsv_md");
+	.@m$ = instance_mapname("1@ch1a");
+	monster .@m$,262,285,"Meat Cleaver Soldier",22460,5,instance_npcname("#wsv_md") + "::OnLegion";
+	monster .@m$,258,280,"Hate Scythe Soldier",22461,5,instance_npcname("#wsv_md") + "::OnLegion";
+	monster .@m$,266,280,"Crushing Plow Soldier",22462,5,instance_npcname("#wsv_md") + "::OnLegion";
+	end;
+OnLegion:
+	'left--;
+	if ('left > 0)
+		end;
+	.@m$ = instance_mapname("1@ch1a");
+	mapannounce .@m$, "Est: That's the gate guard down. The inner hall is open: officers, two of them, and something they're carrying.", bc_map, "0x88CCFF";
+	'left = 3;
+	monster .@m$,270,70,"Immortal Legion Officer",22474,1,instance_npcname("#wsv_md") + "::OnOfficer";
+	monster .@m$,262,70,"Immortal Legion Officer",22475,1,instance_npcname("#wsv_md") + "::OnOfficer";
+	monster .@m$,266,64,"Vessel of the Immortal",22499,1,instance_npcname("#wsv_md") + "::OnOfficer";
+	end;
+OnOfficer:
+	'left--;
+	if ('left > 0)
+		end;
+	.@m$ = instance_mapname("1@ch1a");
+	mapannounce .@m$, "A cold voice rolls through the fortress: \"Who dares walk into my house?\"", bc_map, "0xFF4444";
+	sleep 2000;
+	mapannounce .@m$, "Est: Himmelmez. East wing, the deepest hall. Go!", bc_map, "0x88CCFF";
+	monster .@m$,330,70,"Himmelmez",22497,1,instance_npcname("#wsv_md") + "::OnBoss";
+	end;
+OnBoss:
+	.@m$ = instance_mapname("1@ch1a");
+	mapannounce .@m$, "Himmelmez: Impossible... I am... immortal...", bc_map, "0xFF4444";
+	sleep 3000;
+	mapannounce .@m$, "The air above Himmelmez's body tears open like cloth. A hand of shadow reaches out, takes the body, and pulls it through.", bc_map, "0xCCCCCC";
+	sleep 3000;
+	mapannounce .@m$, "A second voice, older and far colder: \"Not yet. You are still useful.\" The tear closes.", bc_map, "0xCCCCCC";
+	enablenpc instance_npcname("Est#wsv_md");
+	end;
+}
+
+1@ch1a,326,72,4	script	Est#wsv_md	10183,{
+	cutin "ep162_est03.png",2;
+	if (wsv_ch1 == 610) {
+		mes "[Est]";
+		mes "You did it. The fortress's heart has stopped; can you feel it? The vents are going quiet.";
+		next;
+		mes "[Est]";
+		mes "But that... thing. The hand. The voice. Whatever took Himmelmez's body was stronger than she ever was.";
+		mes "We won the battle and lost the answer.";
+		next;
+		mes "[Est]";
+		mes "Go back to Ash Village. Your friends need to hear this, all of it.";
+		callfunc "F_WSV_Step", "wsv_ch1", 620, "12664", "12665";
+		callfunc "F_WSV_C1Reward", 100000000, 50000000;
+		getitem 104007, 1;	// Ch1_MD_Reward_2
+		close2;
+		cutin "",255;
+		warp "ygg_edge",167,133;
+		end;
+	}
+	mes "[Est]";
+	mes "Let's get out of here.";
+	close2;
+	cutin "",255;
+	warp "hem_dun01",208,244;
+	end;
+}
+
+// ------------------------------------------------------------
+// Back in Ash Village
+// ------------------------------------------------------------
+ygg_edge,167,136,4	script(CLOAKED)	Jeon Cheosa#wsv_c1e	754,{
+	if (wsv_ch1 == 620) {
+		mes "[Jeon Cheosa]";
+		mes "Ho... you're back. And the wind from the intersection no longer smells of fever.";
+		mes "Sit. Tell an old man everything.";
+		next;
+		select("Himmelmez is dead. But something tore the air and took her body.");
+		mes "[Jeon Cheosa]";
+		mes "......";
+		mes "Something that can tear the air between worlds as easily as paper. Hm.";
+		next;
+		cutin "ch1_clover01.png",2;
+		mes "[Clover]";
+		mes "Then the fortress was never the whole story. Someone built it. Someone is still out there.";
+		next;
+		cutin "",255;
+		mes "[Jeon Cheosa]";
+		mes "Sasha must hear this. If something can bend the worlds at will, the World Tree is in danger, and all of us with it.";
+		callfunc "F_WSV_Step", "wsv_ch1", 630, "12665", "18377";
+		close;
+	}
+	mes "[Jeon Cheosa]";
+	mes "Sasha must hear this.";
+	close;
+}
+
+ygg_edge,169,135,4	script(CLOAKED)	Clover#wsv_c1e	123,{
+	cutin "ch1_clover01.png",2;
+	mes "[Clover]";
+	mes "Sua sent word: the believers are sleeping through the night now. Even the master.";
+	mes "Thank you.";
+	close3;
+}
+
+// Sasha's last words in this chapter are in ch1_a_call.txt (step 630).
+
+// ------------------------------------------------------------
+// The Recreated Dark Whisper (1@ch1b): the Wizard Professor
+// ------------------------------------------------------------
+hem_dun01,205,248,4	script	Mage Professor#wsv	10589,{
+	if (wsv_ch1 < 700) {
+		mes "[Mage Professor]";
+		mes "Hmm? Not now, not now. I'm measuring the fortress's magic.";
+		close;
+	}
+	if (isbegin_quest(12660) == 0) {
+		mes "[Mage Professor]";
+		mes "Ah! You're the one who brought down Himmelmez. I've been wanting to meet you.";
+		next;
+		mes "[Mage Professor]";
+		mes "The fortress kept a record of itself, the way a seashell keeps the sound of the sea. With enough energy, I can recreate the Dark Whisper as it was that day.";
+		next;
+		mes "[Mage Professor]";
+		mes "Why? Because whatever took Himmelmez's body left a mark. If we replay the battle enough times, we might see a little more of it each time.";
+		mes "The energy only lets me do it once every three days, mind you.";
+		setquest 12660;
+		completequest 12660;
+		next;
+	}
+	if (isbegin_quest(12662) == 1) {
+		mes "[Mage Professor]";
+		mes "The recreation is still running. Step in and finish what you started.";
+		next;
+		if (select("Go in.:Not now.") == 2)
+			close;
+		if (instance_enter("Recreated Dark Whisper") != IE_OK) {
+			.@id = instance_create("Recreated Dark Whisper", IM_CHAR);
+			if (.@id < 0 || instance_enter("Recreated Dark Whisper") != IE_OK) {
+				mes "[Mage Professor]";
+				mes "...The recreation collapsed. Try again in a moment.";
+				close;
+			}
+		}
+		end;
+	}
+	if (callfunc("F_WSV_Waiting", 12661)) {
+		mes "[Mage Professor]";
+		mes "The energy needs time to gather. Three days between recreations; I can't change physics.";
+		close;
+	}
+	mes "[Mage Professor]";
+	mes "Shall I recreate the Dark Whisper? You'll face Himmelmez again, as she was.";
+	next;
+	if (select("Recreate it.:Not now.") == 2)
+		close;
+	if (isbegin_quest(12662) == 2)
+		erasequest 12662;
+	setquest 12662;
+	questinfo_refresh;
+	if (instance_enter("Recreated Dark Whisper") != IE_OK) {
+		.@id = instance_create("Recreated Dark Whisper", IM_CHAR);
+		if (.@id < 0 || instance_enter("Recreated Dark Whisper") != IE_OK) {
+			mes "[Mage Professor]";
+			mes "...The recreation collapsed. Try again in a moment.";
+			close;
+		}
+	}
+	end;
+}
+
+1@ch1b,1,1,0	script	#wsv_md2	-1,{
+	end;
+OnInstanceInit:
+	'left = 10;
+	disablenpc instance_npcname("Mage Professor#wsv_md2");
+	.@m$ = instance_mapname("1@ch1b");
+	monster .@m$,262,285,"Meat Cleaver Soldier",22460,4,instance_npcname("#wsv_md2") + "::OnLegion";
+	monster .@m$,258,280,"Hate Scythe Soldier",22461,3,instance_npcname("#wsv_md2") + "::OnLegion";
+	monster .@m$,266,280,"Crushing Plow Soldier",22462,3,instance_npcname("#wsv_md2") + "::OnLegion";
+	end;
+OnLegion:
+	'left--;
+	if ('left > 0)
+		end;
+	.@m$ = instance_mapname("1@ch1b");
+	mapannounce .@m$, "The recreation shudders. In the east wing, the Immortal Lord takes shape again.", bc_map, "0xCCCCCC";
+	monster .@m$,330,70,"Himmelmez",22497,1,instance_npcname("#wsv_md2") + "::OnBoss";
+	end;
+OnBoss:
+	.@m$ = instance_mapname("1@ch1b");
+	mapannounce .@m$, "For a heartbeat the air tears again, and a shadow looks back at you. Then the recreation fades.", bc_map, "0xCCCCCC";
+	enablenpc instance_npcname("Mage Professor#wsv_md2");
+	end;
+}
+
+1@ch1b,326,72,4	script	Mage Professor#wsv_md2	10589,{
+	if (isbegin_quest(12662) == 1) {
+		mes "[Mage Professor]";
+		mes "Did you see it? The shadow, at the very end? It looked at you. It knows you now.";
+		mes "Fascinating. Terrifying. Fascinating.";
+		completequest 12662;
+		erasequest 12662;
+		if (isbegin_quest(12661))
+			erasequest 12661;
+		setquest 12661;
+		getexp2 80000000, 40000000;
+		getitem 104006, 1;	// Ch1_MD_Reward_1
+		next;
+	}
+	mes "[Mage Professor]";
+	mes "Back to the real world, then.";
+	close2;
+	warp "hem_dun01",206,244;
+	end;
+}
