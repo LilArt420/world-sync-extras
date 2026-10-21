@@ -16,10 +16,12 @@
 //=            16912-16935)
 //=   250-345  Verus, the Dark Whisper, the plague (17899-17921)
 //=   350-425  Dr. Neumann's secrets (16936-16951)
-//=   430-530  the cure: Margot, Muspelheim (23271-23299,
+//=   430-590  the cure: Margot, Muspelheim (23271-23299,
 //=            18373-18376, 24086-24099)
-//=   540-590  destroy the Sky Fortress (12663, 12666, 12664, 12665)
-//=   600      the Unknown Being (18377): Chapter 1 done
+//=   600-630  destroy the Sky Fortress (12663, 12666, 12664, 12665)
+//=            and the Unknown Being (18377)
+//=  1000      Chapter 1 done (the Star Forest block's Ash Village
+//=            services check wsv_ch1 >= 1000)
 //= Bits: wsv_ch1b (patients, blood samples, clues...), see each file.
 //============================================================
 

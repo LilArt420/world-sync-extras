@@ -1,5 +1,5 @@
 //===== World Sync Extras: Varmundt block ====================
-//= Chapter 1, part G: after the main story (wsv_ch1 >= 700).
+//= Chapter 1, part G: after the main story (wsv_ch1 >= 1000).
 //= - Schrodinger's Land of Darkness (24100-24103) and the daily
 //=   "Help Me, Doctor!" (24104-24106): Ivein in Ash Village.
 //= - "Give Me Something to Do" (24107-24109) and the Volund
@@ -17,7 +17,7 @@
 // ------------------------------------------------------------
 ygg_edge,178,185,4	script	Ivein#wsv	437,{
 	cutin "ch1_yvain01.png",2;
-	if (wsv_ch1 < 700) {
+	if (wsv_ch1 < 1000) {
 		mes "[Ivein]";
 		if (wsv_ch1 >= 70)
 			mes "Oh, my rescuer! My wings are almost healed. I flap them twice a day, like Devries told me.";
@@ -85,7 +85,7 @@ ygg_edge,178,185,4	script	Ivein#wsv	437,{
 	close3;
 
 OnInit:
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch1 >= 700 && (wsv_c1s & 1) == 0 && isbegin_quest(24100) == 0" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch1 >= 1000 && (wsv_c1s & 1) == 0 && isbegin_quest(24100) == 0" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "(wsv_c1s & 1) && isbegin_quest(24104) == 0 && isbegin_quest(24105) == 0 && (isbegin_quest(24106) == 0 || checkquest(24106, PLAYTIME) == 2)" );
 	end;
 }
@@ -138,7 +138,7 @@ function	script	F_WSV_C1Inv	{
 // Jubilus in Volund Valley, after the story
 // ------------------------------------------------------------
 function	script	F_WSV_C1Jubilus	{
-	if (wsv_ch1 < 700) {
+	if (wsv_ch1 < 1000) {
 		mes "[Jubilus]";
 		if (wsv_ch1 < 515)
 			mes "A visitor from Ash Village? Keep your regulator switched on. Muspelheim isn't kind to the unprepared.";
@@ -568,7 +568,7 @@ ygg_edge,175,186,4	script	Rubiel#wsv	10610,{
 // the central fountain closes the book.
 // ------------------------------------------------------------
 ygg_edge,211,211,4	script	A Doctor's Record..#wsv	10519,{
-	if (wsv_ch1 < 700) {
+	if (wsv_ch1 < 1000) {
 		mes "[A Doctor's Record..]";
 		mes "A plain white book on Professor Telkos's table. Its pages are blank.";
 		close;

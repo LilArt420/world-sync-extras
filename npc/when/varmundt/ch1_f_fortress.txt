@@ -1,7 +1,7 @@
 //===== World Sync Extras: Varmundt block ====================
 //= Chapter 1, part F: Destroy the Sky Fortress (memorial dungeon
 //= 1@ch1a), the return to Ash Village and the Unknown Being.
-//= Quests 12663, 12666, 12664, 12665, 18377. Steps 600-700.
+//= Quests 12663, 12666, 12664, 12665, 18377. Steps 600-630, then 1000.
 //= The Recreated Dark Whisper (1@ch1b) for those who finished the
 //= chapter: 12660 (the Wizard Professor's call), 12662 (find the
 //= clues), 12661 (three days to wait).
@@ -190,7 +190,7 @@ ygg_edge,169,135,4	script(CLOAKED)	Clover#wsv_c1e	123,{
 // The Recreated Dark Whisper (1@ch1b): the Wizard Professor
 // ------------------------------------------------------------
 hem_dun01,205,248,4	script	Mage Professor#wsv	10589,{
-	if (wsv_ch1 < 700) {
+	if (wsv_ch1 < 1000) {
 		mes "[Mage Professor]";
 		mes "Hmm? Not now, not now. I'm measuring the fortress's magic.";
 		close;

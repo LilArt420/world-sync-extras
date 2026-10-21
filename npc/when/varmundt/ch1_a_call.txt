@@ -200,12 +200,12 @@ ygg_fruit,80,122,4	script	Sasha#wsv_c1	435,{
 		mes "[Sasha]";
 		mes "We will find out who. Not today; today, Geffen breathes, and that is your doing.";
 		mes "Rest, adventurer. When the World Tree calls again, I think it will call you first.";
-		callfunc "F_WSV_Step", "wsv_ch1", 700, "18377", "";
+		callfunc "F_WSV_Step", "wsv_ch1", 1000, "18377", "";
 		callfunc "F_WSV_C1Reward", 100000000, 50000000;
 		getitem 1001972, 20;	// Ch1_Root_Coin
 		close;
 	}
-	if (wsv_ch1 >= 700 && wsv_c1br == 0) {
+	if (wsv_ch1 >= 1000 && wsv_c1br == 0) {
 		mes "[Sasha]";
 		mes "Ellis and Maura took a small party through one of the western intersections, the one Alf found. They call the place beyond it ^0000FFBrimir^000000.";
 		mes "They haven't sent word in days. Would you go after them?";
@@ -240,7 +240,7 @@ ygg_fruit,80,122,4	script	Sasha#wsv_c1	435,{
 
 OnInit:
 	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch1 == 20 || wsv_ch1 == 140 || wsv_ch1 == 480 || wsv_ch1 == 630 || wsv_c1br == 10" );
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch1 >= 700 && wsv_c1br == 0" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch1 >= 1000 && wsv_c1br == 0" );
 	end;
 }
 
