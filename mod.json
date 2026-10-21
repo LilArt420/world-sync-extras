@@ -1,0 +1,33 @@
+{
+  "name": "world-sync-extras",
+  "version": "1.1.0",
+  "author": "Lil Art",
+  "description": "Optional extras for the World Sync server content: entrances from rAthena's maps into the maps World Sync fills (Biosphere, Jormungandr, Chapter 2...), the official NPCs whose logic no server data has yet, and @npcplace to move NPCs. Needs Ragnarok Offline 1.6.6 or later (World Sync).",
+  "requires": {
+    "app": ">=1.6.6",
+    "era": "renewal"
+  },
+  "settings": [
+    {
+      "key": "entrances",
+      "type": "boolean",
+      "default": false,
+      "label": "Entrances into the World Sync maps",
+      "description": "34 portals from towns and fields into Biosphere, Jormungandr, Chapter 2 and other maps World Sync fills. Only turn this on if your client has those maps (recent iRO/kRO data): without them the game hangs on the loading screen."
+    },
+    {
+      "key": "placeholders",
+      "type": "boolean",
+      "default": true,
+      "label": "Place the official NPCs that have no logic yet",
+      "description": "740 NPCs from the official clients' maps and signboards; they only greet you until their quests and services are written."
+    },
+    {
+      "key": "npc_mover",
+      "type": "boolean",
+      "default": true,
+      "label": "@npcplace: move NPCs in game (GM)",
+      "description": "Stand next to an NPC and type @npcplace to move it where you stand or nudge it; the spot is kept across restarts. @npcplace list shows what you moved."
+    }
+  ]
+}
