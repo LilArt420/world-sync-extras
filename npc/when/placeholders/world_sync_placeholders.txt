@@ -427,31 +427,6 @@ iz_dun00,130,138,4	script	Village Little Boy#ws14157	706,{
 	mes "Hello there, adventurer.";
 	close;
 }
-iz_dun00t,174,169,4	script	Overlook Dungeon Hunt#ws30027	837,{
-	mes "[Overlook Dungeon Hunt]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iz_dun01t,122,147,4	script	Overlook Dungeon Hunt#ws30028	837,{
-	mes "[Overlook Dungeon Hunt]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iz_dun02t,236,214,4	script	Overlook Dungeon Hunt#ws30029	837,{
-	mes "[Overlook Dungeon Hunt]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iz_dun03t,42,59,4	script	Overlook Dungeon Hunt#ws30030	837,{
-	mes "[Overlook Dungeon Hunt]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iz_dun04t,25,37,4	script	Overlook Dungeon Hunt#ws30031	837,{
-	mes "[Overlook Dungeon Hunt]";
-	mes "Hello there, adventurer.";
-	close;
-}
 job4_bio,31,30,4	script	Gregor#ws17324	90,{
 	mes "[Gregor]";
 	mes "Hello there, adventurer.";
@@ -2331,7 +2306,7 @@ kindlbrk,191,187,4	script	Weaponsmith Harvan#ws20126	10657,{
 	mes "Hello there, adventurer.";
 	close;
 }
-kindlbrk,173,120,4	script	White Powder#ws20127	557,{
+kindlbrk,171,120,4	script	White Powder#ws20127	557,{
 	mes "[White Powder]";
 	mes "Hello there, adventurer.";
 	close;

@@ -1,7 +1,7 @@
 # Changelog
 
 ## 1.3.0
-- 119 placeholders on the Jormungandr maps (and their scenes in icas_in2) are gone: the World Sync: Jormungandr mod (1.0.0) implements them for real, so the two never stand on the same spot. The list is in replaced-placeholders.txt. 621 placeholders remain.
+- 119 placeholders on the Jormungandr maps (and their scenes in icas_in2) are gone: the World Sync: Jormungandr mod (1.0.0) implements them for real, so the two never stand on the same spot. Likewise the 5 Overlook Water Dungeon signboards, which iRO Quests implements. The list is in replaced-placeholders.txt. 616 placeholders remain.
 - World Sync monsters drop again: 154 of them (e.g. all of Varmundt's) had drops with no chance published, which the server gave the 0.01% floor. They now use the typical chance of the same kind of item (materials 5%, cards 0.01%, equipment 0.03-0.3%), until the app ships the same fix (db/mob_db.yml, by drop slot).
 
 ## 1.2.0
