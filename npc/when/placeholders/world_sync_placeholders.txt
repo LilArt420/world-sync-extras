@@ -317,8 +317,20 @@ hero_lb,126,148,4	script	Management Soldier#ws15742	105,{
 }
 hero_lb,131,153,4	script	Guild Storage Manager#ws15748	896,{
 	mes "[Guild Storage Manager]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!getcharid(2)) {
+		mes "Only guild members can use the guild storage.";
+		close;
+	}
+	mes "Your guild's storage is ^0000FF200 zeny^000000.";
+	if (select("Open it:Cancel") == 2) close;
+	if (Zeny < 200) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 200;
+	close2;
+	guildopenstorage;
+	end;
 }
 hero_lb,148,153,4	script	Priest#ws15749	630,{
 	mes "[Priest]";
@@ -627,8 +639,33 @@ jor_back4,101,265,4	script	Copo#ws14831	4_M_01,{
 }
 jor_back5,296,149,4	script	Contact Point#ws14379	10429,{
 	mes "[Contact Point]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!ws_cp_jor_back5) {
+		ws_cp_jor_back5 = 1;
+		mes "Contact point registered: ^0000FFAncient Ice Canyon East^000000.";
+		next;
+		mes "[Contact Point]";
+	}
+	mes "Where to? You can travel to every contact point you've touched.";
+	.@menu$ = "";
+	.@menu$ += ((ws_cp_jor_back5 && "jor_back5" != "jor_back5") ? "Ancient Ice Canyon East" : "") + ":";
+	.@menu$ += ((ws_cp_jor_back6 && "jor_back6" != "jor_back5") ? "Ancient Ice Canyon West" : "") + ":";
+	.@menu$ += ((ws_cp_jor_maze && "jor_maze" != "jor_back5") ? "Snake Labyrinth" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root1 && "jor_root1" != "jor_back5") ? "Snake God's Root 1F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root2 && "jor_root2" != "jor_back5") ? "Snake God's Root 2F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root3 && "jor_root3" != "jor_back5") ? "Deep Root Cave" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twice && "jor_twice" != "jor_back5") ? "Drift Ice Zone" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twig && "jor_twig" != "jor_back5") ? "Issgard Sanctuary" : "") + ":";
+	.@c = select(.@menu$ + "Stay here") - 1;
+	close2;
+	if (.@c == 0) warp "jor_back5", 296, 150;
+	if (.@c == 1) warp "jor_back6", 353, 261;
+	if (.@c == 2) warp "jor_maze", 253, 268;
+	if (.@c == 3) warp "jor_root1", 39, 94;
+	if (.@c == 4) warp "jor_root2", 19, 45;
+	if (.@c == 5) warp "jor_root3", 347, 148;
+	if (.@c == 6) warp "jor_twice", 76, 101;
+	if (.@c == 7) warp "jor_twig", 192, 212;
+	end;
 }
 jor_back5,350,75,4	script	Lehar#ws14396	10469,{
 	mes "[Lehar]";
@@ -712,8 +749,33 @@ jor_back5,230,349,4	script	Magical Object#ws14444	10539,{
 }
 jor_back6,353,260,4	script	Contact Point#ws14387	10429,{
 	mes "[Contact Point]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!ws_cp_jor_back6) {
+		ws_cp_jor_back6 = 1;
+		mes "Contact point registered: ^0000FFAncient Ice Canyon West^000000.";
+		next;
+		mes "[Contact Point]";
+	}
+	mes "Where to? You can travel to every contact point you've touched.";
+	.@menu$ = "";
+	.@menu$ += ((ws_cp_jor_back5 && "jor_back5" != "jor_back6") ? "Ancient Ice Canyon East" : "") + ":";
+	.@menu$ += ((ws_cp_jor_back6 && "jor_back6" != "jor_back6") ? "Ancient Ice Canyon West" : "") + ":";
+	.@menu$ += ((ws_cp_jor_maze && "jor_maze" != "jor_back6") ? "Snake Labyrinth" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root1 && "jor_root1" != "jor_back6") ? "Snake God's Root 1F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root2 && "jor_root2" != "jor_back6") ? "Snake God's Root 2F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root3 && "jor_root3" != "jor_back6") ? "Deep Root Cave" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twice && "jor_twice" != "jor_back6") ? "Drift Ice Zone" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twig && "jor_twig" != "jor_back6") ? "Issgard Sanctuary" : "") + ":";
+	.@c = select(.@menu$ + "Stay here") - 1;
+	close2;
+	if (.@c == 0) warp "jor_back5", 296, 150;
+	if (.@c == 1) warp "jor_back6", 353, 261;
+	if (.@c == 2) warp "jor_maze", 253, 268;
+	if (.@c == 3) warp "jor_root1", 39, 94;
+	if (.@c == 4) warp "jor_root2", 19, 45;
+	if (.@c == 5) warp "jor_root3", 347, 148;
+	if (.@c == 6) warp "jor_twice", 76, 101;
+	if (.@c == 7) warp "jor_twig", 192, 212;
+	end;
 }
 jor_back6,214,80,4	script	Magical Object#ws14445	10538,{
 	mes "[Magical Object]";
@@ -752,8 +814,33 @@ jor_back6,330,22,4	script	Magical Object#ws14451	10538,{
 }
 jor_maze,253,267,4	script	Contact Point#ws14381	10429,{
 	mes "[Contact Point]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!ws_cp_jor_maze) {
+		ws_cp_jor_maze = 1;
+		mes "Contact point registered: ^0000FFSnake Labyrinth^000000.";
+		next;
+		mes "[Contact Point]";
+	}
+	mes "Where to? You can travel to every contact point you've touched.";
+	.@menu$ = "";
+	.@menu$ += ((ws_cp_jor_back5 && "jor_back5" != "jor_maze") ? "Ancient Ice Canyon East" : "") + ":";
+	.@menu$ += ((ws_cp_jor_back6 && "jor_back6" != "jor_maze") ? "Ancient Ice Canyon West" : "") + ":";
+	.@menu$ += ((ws_cp_jor_maze && "jor_maze" != "jor_maze") ? "Snake Labyrinth" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root1 && "jor_root1" != "jor_maze") ? "Snake God's Root 1F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root2 && "jor_root2" != "jor_maze") ? "Snake God's Root 2F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root3 && "jor_root3" != "jor_maze") ? "Deep Root Cave" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twice && "jor_twice" != "jor_maze") ? "Drift Ice Zone" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twig && "jor_twig" != "jor_maze") ? "Issgard Sanctuary" : "") + ":";
+	.@c = select(.@menu$ + "Stay here") - 1;
+	close2;
+	if (.@c == 0) warp "jor_back5", 296, 150;
+	if (.@c == 1) warp "jor_back6", 353, 261;
+	if (.@c == 2) warp "jor_maze", 253, 268;
+	if (.@c == 3) warp "jor_root1", 39, 94;
+	if (.@c == 4) warp "jor_root2", 19, 45;
+	if (.@c == 5) warp "jor_root3", 347, 148;
+	if (.@c == 6) warp "jor_twice", 76, 101;
+	if (.@c == 7) warp "jor_twig", 192, 212;
+	end;
 }
 jor_maze,140,72,4	script	Rippling Wall#ws14506	10527,{
 	mes "[Rippling Wall]";
@@ -827,8 +914,33 @@ jor_maze,197,34,4	script	Miriam#ws14672	10471,{
 }
 jor_root1,39,93,4	script	Contact Point#ws14382	10429,{
 	mes "[Contact Point]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!ws_cp_jor_root1) {
+		ws_cp_jor_root1 = 1;
+		mes "Contact point registered: ^0000FFSnake God's Root 1F^000000.";
+		next;
+		mes "[Contact Point]";
+	}
+	mes "Where to? You can travel to every contact point you've touched.";
+	.@menu$ = "";
+	.@menu$ += ((ws_cp_jor_back5 && "jor_back5" != "jor_root1") ? "Ancient Ice Canyon East" : "") + ":";
+	.@menu$ += ((ws_cp_jor_back6 && "jor_back6" != "jor_root1") ? "Ancient Ice Canyon West" : "") + ":";
+	.@menu$ += ((ws_cp_jor_maze && "jor_maze" != "jor_root1") ? "Snake Labyrinth" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root1 && "jor_root1" != "jor_root1") ? "Snake God's Root 1F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root2 && "jor_root2" != "jor_root1") ? "Snake God's Root 2F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root3 && "jor_root3" != "jor_root1") ? "Deep Root Cave" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twice && "jor_twice" != "jor_root1") ? "Drift Ice Zone" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twig && "jor_twig" != "jor_root1") ? "Issgard Sanctuary" : "") + ":";
+	.@c = select(.@menu$ + "Stay here") - 1;
+	close2;
+	if (.@c == 0) warp "jor_back5", 296, 150;
+	if (.@c == 1) warp "jor_back6", 353, 261;
+	if (.@c == 2) warp "jor_maze", 253, 268;
+	if (.@c == 3) warp "jor_root1", 39, 94;
+	if (.@c == 4) warp "jor_root2", 19, 45;
+	if (.@c == 5) warp "jor_root3", 347, 148;
+	if (.@c == 6) warp "jor_twice", 76, 101;
+	if (.@c == 7) warp "jor_twig", 192, 212;
+	end;
 }
 jor_root1,32,34,4	script	Rgan Shaman#ws14457	21985,{
 	mes "[Rgan Shaman]";
@@ -872,8 +984,33 @@ jor_root1,278,74,4	script	Mark#ws14711	10432,{
 }
 jor_root2,19,44,4	script	Contact Point#ws14383	10429,{
 	mes "[Contact Point]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!ws_cp_jor_root2) {
+		ws_cp_jor_root2 = 1;
+		mes "Contact point registered: ^0000FFSnake God's Root 2F^000000.";
+		next;
+		mes "[Contact Point]";
+	}
+	mes "Where to? You can travel to every contact point you've touched.";
+	.@menu$ = "";
+	.@menu$ += ((ws_cp_jor_back5 && "jor_back5" != "jor_root2") ? "Ancient Ice Canyon East" : "") + ":";
+	.@menu$ += ((ws_cp_jor_back6 && "jor_back6" != "jor_root2") ? "Ancient Ice Canyon West" : "") + ":";
+	.@menu$ += ((ws_cp_jor_maze && "jor_maze" != "jor_root2") ? "Snake Labyrinth" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root1 && "jor_root1" != "jor_root2") ? "Snake God's Root 1F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root2 && "jor_root2" != "jor_root2") ? "Snake God's Root 2F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root3 && "jor_root3" != "jor_root2") ? "Deep Root Cave" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twice && "jor_twice" != "jor_root2") ? "Drift Ice Zone" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twig && "jor_twig" != "jor_root2") ? "Issgard Sanctuary" : "") + ":";
+	.@c = select(.@menu$ + "Stay here") - 1;
+	close2;
+	if (.@c == 0) warp "jor_back5", 296, 150;
+	if (.@c == 1) warp "jor_back6", 353, 261;
+	if (.@c == 2) warp "jor_maze", 253, 268;
+	if (.@c == 3) warp "jor_root1", 39, 94;
+	if (.@c == 4) warp "jor_root2", 19, 45;
+	if (.@c == 5) warp "jor_root3", 347, 148;
+	if (.@c == 6) warp "jor_twice", 76, 101;
+	if (.@c == 7) warp "jor_twig", 192, 212;
+	end;
 }
 jor_root2,43,63,4	script	Hardened Spot#ws14508	10428,{
 	mes "[Hardened Spot]";
@@ -977,8 +1114,33 @@ jor_root2,170,178,4	script	Hardened Spot#ws14527	10428,{
 }
 jor_root3,347,147,4	script	Contact Point#ws14386	10429,{
 	mes "[Contact Point]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!ws_cp_jor_root3) {
+		ws_cp_jor_root3 = 1;
+		mes "Contact point registered: ^0000FFDeep Root Cave^000000.";
+		next;
+		mes "[Contact Point]";
+	}
+	mes "Where to? You can travel to every contact point you've touched.";
+	.@menu$ = "";
+	.@menu$ += ((ws_cp_jor_back5 && "jor_back5" != "jor_root3") ? "Ancient Ice Canyon East" : "") + ":";
+	.@menu$ += ((ws_cp_jor_back6 && "jor_back6" != "jor_root3") ? "Ancient Ice Canyon West" : "") + ":";
+	.@menu$ += ((ws_cp_jor_maze && "jor_maze" != "jor_root3") ? "Snake Labyrinth" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root1 && "jor_root1" != "jor_root3") ? "Snake God's Root 1F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root2 && "jor_root2" != "jor_root3") ? "Snake God's Root 2F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root3 && "jor_root3" != "jor_root3") ? "Deep Root Cave" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twice && "jor_twice" != "jor_root3") ? "Drift Ice Zone" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twig && "jor_twig" != "jor_root3") ? "Issgard Sanctuary" : "") + ":";
+	.@c = select(.@menu$ + "Stay here") - 1;
+	close2;
+	if (.@c == 0) warp "jor_back5", 296, 150;
+	if (.@c == 1) warp "jor_back6", 353, 261;
+	if (.@c == 2) warp "jor_maze", 253, 268;
+	if (.@c == 3) warp "jor_root1", 39, 94;
+	if (.@c == 4) warp "jor_root2", 19, 45;
+	if (.@c == 5) warp "jor_root3", 347, 148;
+	if (.@c == 6) warp "jor_twice", 76, 101;
+	if (.@c == 7) warp "jor_twig", 192, 212;
+	end;
 }
 jor_safty2,75,360,4	script	Bishop Rgan#ws14464	10474,{
 	mes "[Bishop Rgan]";
@@ -1037,8 +1199,33 @@ jor_twice,43,331,4	script	White Cat#ws14324	4_M_01,{
 }
 jor_twice,76,100,4	script	Contact Point#ws14380	10429,{
 	mes "[Contact Point]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!ws_cp_jor_twice) {
+		ws_cp_jor_twice = 1;
+		mes "Contact point registered: ^0000FFDrift Ice Zone^000000.";
+		next;
+		mes "[Contact Point]";
+	}
+	mes "Where to? You can travel to every contact point you've touched.";
+	.@menu$ = "";
+	.@menu$ += ((ws_cp_jor_back5 && "jor_back5" != "jor_twice") ? "Ancient Ice Canyon East" : "") + ":";
+	.@menu$ += ((ws_cp_jor_back6 && "jor_back6" != "jor_twice") ? "Ancient Ice Canyon West" : "") + ":";
+	.@menu$ += ((ws_cp_jor_maze && "jor_maze" != "jor_twice") ? "Snake Labyrinth" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root1 && "jor_root1" != "jor_twice") ? "Snake God's Root 1F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root2 && "jor_root2" != "jor_twice") ? "Snake God's Root 2F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root3 && "jor_root3" != "jor_twice") ? "Deep Root Cave" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twice && "jor_twice" != "jor_twice") ? "Drift Ice Zone" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twig && "jor_twig" != "jor_twice") ? "Issgard Sanctuary" : "") + ":";
+	.@c = select(.@menu$ + "Stay here") - 1;
+	close2;
+	if (.@c == 0) warp "jor_back5", 296, 150;
+	if (.@c == 1) warp "jor_back6", 353, 261;
+	if (.@c == 2) warp "jor_maze", 253, 268;
+	if (.@c == 3) warp "jor_root1", 39, 94;
+	if (.@c == 4) warp "jor_root2", 19, 45;
+	if (.@c == 5) warp "jor_root3", 347, 148;
+	if (.@c == 6) warp "jor_twice", 76, 101;
+	if (.@c == 7) warp "jor_twig", 192, 212;
+	end;
 }
 jor_twice,235,111,4	script	Kororo#ws14629	10461,{
 	mes "[Kororo]";
@@ -1112,8 +1299,33 @@ jor_twice,162,246,4	script	White Cat#ws14653	10537,{
 }
 jor_twig,192,211,4	script	Contact Point#ws14384	10429,{
 	mes "[Contact Point]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!ws_cp_jor_twig) {
+		ws_cp_jor_twig = 1;
+		mes "Contact point registered: ^0000FFIssgard Sanctuary^000000.";
+		next;
+		mes "[Contact Point]";
+	}
+	mes "Where to? You can travel to every contact point you've touched.";
+	.@menu$ = "";
+	.@menu$ += ((ws_cp_jor_back5 && "jor_back5" != "jor_twig") ? "Ancient Ice Canyon East" : "") + ":";
+	.@menu$ += ((ws_cp_jor_back6 && "jor_back6" != "jor_twig") ? "Ancient Ice Canyon West" : "") + ":";
+	.@menu$ += ((ws_cp_jor_maze && "jor_maze" != "jor_twig") ? "Snake Labyrinth" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root1 && "jor_root1" != "jor_twig") ? "Snake God's Root 1F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root2 && "jor_root2" != "jor_twig") ? "Snake God's Root 2F" : "") + ":";
+	.@menu$ += ((ws_cp_jor_root3 && "jor_root3" != "jor_twig") ? "Deep Root Cave" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twice && "jor_twice" != "jor_twig") ? "Drift Ice Zone" : "") + ":";
+	.@menu$ += ((ws_cp_jor_twig && "jor_twig" != "jor_twig") ? "Issgard Sanctuary" : "") + ":";
+	.@c = select(.@menu$ + "Stay here") - 1;
+	close2;
+	if (.@c == 0) warp "jor_back5", 296, 150;
+	if (.@c == 1) warp "jor_back6", 353, 261;
+	if (.@c == 2) warp "jor_maze", 253, 268;
+	if (.@c == 3) warp "jor_root1", 39, 94;
+	if (.@c == 4) warp "jor_root2", 19, 45;
+	if (.@c == 5) warp "jor_root3", 347, 148;
+	if (.@c == 6) warp "jor_twice", 76, 101;
+	if (.@c == 7) warp "jor_twig", 192, 212;
+	end;
 }
 jor_twig,187,198,4	script	White Cat#ws14735	4_M_01,{
 	mes "[White Cat]";
@@ -2007,7 +2219,21 @@ hero_lb,205,70,4	script	Challenger's Monument#ws30195	4_M_01,{
 }
 jalbe_in,32,142,4	script	Inn Employee#ws19147	53,{
 	mes "[Inn Employee]";
-	mes "Hello there, adventurer.";
+	mes "A night's rest is ^0000FF5,000 zeny^000000. I'll also note this inn as your return point.";
+	if (select("Rest here:Save my return point here:Cancel") == 3) close;
+	if (@menu == 2) {
+		savepoint "jalbe_in",32,142,1,1;
+		mes "Saved. You'll return here.";
+		close;
+	}
+	if (Zeny < 5000) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 5000;
+	percentheal 100,100;
+	savepoint "jalbe_in",32,142,1,1;
+	mes "Sleep well. You're fully rested, and you'll return here.";
 	close;
 }
 jalbe_in,69,147,4	script	Mamasina#ws19287	899,{
@@ -2912,33 +3138,101 @@ mu_fild01,121,236,4	script	Worker#ws19444	851,{
 }
 pay_mk,155,126,4	script	Guide#ws29212	708,{
 	mes "[Guide]";
-	mes "Hello there, adventurer.";
+	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
+	viewpoint 1, 133, 163, 1, 0xFF8800;
+	viewpoint 1, 146, 157, 2, 0xFF8800;
+	viewpoint 1, 71, 165, 3, 0xFF8800;
+	viewpoint 1, 58, 156, 4, 0xFF8800;
+	viewpoint 1, 63, 37, 5, 0xFF8800;
+	viewpoint 1, 74, 39, 6, 0xFF8800;
+	viewpoint 1, 148, 43, 7, 0xFF8800;
+	viewpoint 1, 132, 43, 8, 0xFF8800;
+	viewpoint 1, 139, 165, 9, 0xFF8800;
+	viewpoint 1, 73, 161, 10, 0xFF8800;
+	viewpoint 1, 59, 46, 11, 0xFF8800;
+	viewpoint 1, 138, 40, 12, 0xFF8800;
 	close;
 }
 pay_mk,52,73,4	script	Guide#ws29218	708,{
 	mes "[Guide]";
-	mes "Hello there, adventurer.";
+	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
+	viewpoint 1, 133, 163, 1, 0xFF8800;
+	viewpoint 1, 146, 157, 2, 0xFF8800;
+	viewpoint 1, 71, 165, 3, 0xFF8800;
+	viewpoint 1, 58, 156, 4, 0xFF8800;
+	viewpoint 1, 63, 37, 5, 0xFF8800;
+	viewpoint 1, 74, 39, 6, 0xFF8800;
+	viewpoint 1, 148, 43, 7, 0xFF8800;
+	viewpoint 1, 132, 43, 8, 0xFF8800;
+	viewpoint 1, 139, 165, 9, 0xFF8800;
+	viewpoint 1, 73, 161, 10, 0xFF8800;
+	viewpoint 1, 59, 46, 11, 0xFF8800;
+	viewpoint 1, 138, 40, 12, 0xFF8800;
 	close;
 }
 pay_mk,136,46,4	script	Guide#ws29224	708,{
 	mes "[Guide]";
-	mes "Hello there, adventurer.";
+	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
+	viewpoint 1, 133, 163, 1, 0xFF8800;
+	viewpoint 1, 146, 157, 2, 0xFF8800;
+	viewpoint 1, 71, 165, 3, 0xFF8800;
+	viewpoint 1, 58, 156, 4, 0xFF8800;
+	viewpoint 1, 63, 37, 5, 0xFF8800;
+	viewpoint 1, 74, 39, 6, 0xFF8800;
+	viewpoint 1, 148, 43, 7, 0xFF8800;
+	viewpoint 1, 132, 43, 8, 0xFF8800;
+	viewpoint 1, 139, 165, 9, 0xFF8800;
+	viewpoint 1, 73, 161, 10, 0xFF8800;
+	viewpoint 1, 59, 46, 11, 0xFF8800;
+	viewpoint 1, 138, 40, 12, 0xFF8800;
 	close;
 }
 pay_mk,71,152,4	script	Guide#ws29230	708,{
 	mes "[Guide]";
-	mes "Hello there, adventurer.";
+	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
+	viewpoint 1, 133, 163, 1, 0xFF8800;
+	viewpoint 1, 146, 157, 2, 0xFF8800;
+	viewpoint 1, 71, 165, 3, 0xFF8800;
+	viewpoint 1, 58, 156, 4, 0xFF8800;
+	viewpoint 1, 63, 37, 5, 0xFF8800;
+	viewpoint 1, 74, 39, 6, 0xFF8800;
+	viewpoint 1, 148, 43, 7, 0xFF8800;
+	viewpoint 1, 132, 43, 8, 0xFF8800;
+	viewpoint 1, 139, 165, 9, 0xFF8800;
+	viewpoint 1, 73, 161, 10, 0xFF8800;
+	viewpoint 1, 59, 46, 11, 0xFF8800;
+	viewpoint 1, 138, 40, 12, 0xFF8800;
 	close;
 }
 pay_mk,99,93,4	script	Guide#ws29236	708,{
 	mes "[Guide]";
-	mes "Hello there, adventurer.";
+	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
+	viewpoint 1, 133, 163, 1, 0xFF8800;
+	viewpoint 1, 146, 157, 2, 0xFF8800;
+	viewpoint 1, 71, 165, 3, 0xFF8800;
+	viewpoint 1, 58, 156, 4, 0xFF8800;
+	viewpoint 1, 63, 37, 5, 0xFF8800;
+	viewpoint 1, 74, 39, 6, 0xFF8800;
+	viewpoint 1, 148, 43, 7, 0xFF8800;
+	viewpoint 1, 132, 43, 8, 0xFF8800;
+	viewpoint 1, 139, 165, 9, 0xFF8800;
+	viewpoint 1, 73, 161, 10, 0xFF8800;
+	viewpoint 1, 59, 46, 11, 0xFF8800;
+	viewpoint 1, 138, 40, 12, 0xFF8800;
 	close;
 }
 pay_mk,133,163,4	script	Storage Locker#ws29252	10249,{
 	mes "[Storage Locker]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Storage is ^0000FF40 zeny^000000.";
+	if (select("Open storage:Cancel") == 2) close;
+	if (Zeny < 40) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 40;
+	close2;
+	openstorage;
+	end;
 }
 pay_mk,146,157,4	script	Catalog Dispenser#ws29253	10081,{
 	mes "[Catalog Dispenser]";
@@ -2947,8 +3241,16 @@ pay_mk,146,157,4	script	Catalog Dispenser#ws29253	10081,{
 }
 pay_mk,71,165,4	script	Storage Locker#ws29254	10249,{
 	mes "[Storage Locker]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Storage is ^0000FF40 zeny^000000.";
+	if (select("Open storage:Cancel") == 2) close;
+	if (Zeny < 40) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 40;
+	close2;
+	openstorage;
+	end;
 }
 pay_mk,58,156,4	script	Catalog Dispenser#ws29255	10081,{
 	mes "[Catalog Dispenser]";
@@ -2957,8 +3259,16 @@ pay_mk,58,156,4	script	Catalog Dispenser#ws29255	10081,{
 }
 pay_mk,63,37,4	script	Storage Locker#ws29256	10249,{
 	mes "[Storage Locker]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Storage is ^0000FF40 zeny^000000.";
+	if (select("Open storage:Cancel") == 2) close;
+	if (Zeny < 40) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 40;
+	close2;
+	openstorage;
+	end;
 }
 pay_mk,74,39,4	script	Catalog Dispenser#ws29257	10081,{
 	mes "[Catalog Dispenser]";
@@ -2967,8 +3277,16 @@ pay_mk,74,39,4	script	Catalog Dispenser#ws29257	10081,{
 }
 pay_mk,148,43,4	script	Storage Locker#ws29258	10249,{
 	mes "[Storage Locker]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Storage is ^0000FF40 zeny^000000.";
+	if (select("Open storage:Cancel") == 2) close;
+	if (Zeny < 40) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 40;
+	close2;
+	openstorage;
+	end;
 }
 pay_mk,132,43,4	script	Catalog Dispenser#ws29259	10081,{
 	mes "[Catalog Dispenser]";
@@ -2977,53 +3295,169 @@ pay_mk,132,43,4	script	Catalog Dispenser#ws29259	10081,{
 }
 pay_mk,139,165,4	script	Guild Storage Manager#ws29264	896,{
 	mes "[Guild Storage Manager]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!getcharid(2)) {
+		mes "Only guild members can use the guild storage.";
+		close;
+	}
+	mes "Your guild's storage is ^0000FF200 zeny^000000.";
+	if (select("Open it:Cancel") == 2) close;
+	if (Zeny < 200) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 200;
+	close2;
+	guildopenstorage;
+	end;
 }
 pay_mk,73,161,4	script	Guild Storage Manager#ws29265	896,{
 	mes "[Guild Storage Manager]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!getcharid(2)) {
+		mes "Only guild members can use the guild storage.";
+		close;
+	}
+	mes "Your guild's storage is ^0000FF200 zeny^000000.";
+	if (select("Open it:Cancel") == 2) close;
+	if (Zeny < 200) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 200;
+	close2;
+	guildopenstorage;
+	end;
 }
 pay_mk,59,46,4	script	Guild Storage Manager#ws29266	896,{
 	mes "[Guild Storage Manager]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!getcharid(2)) {
+		mes "Only guild members can use the guild storage.";
+		close;
+	}
+	mes "Your guild's storage is ^0000FF200 zeny^000000.";
+	if (select("Open it:Cancel") == 2) close;
+	if (Zeny < 200) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 200;
+	close2;
+	guildopenstorage;
+	end;
 }
 pay_mk,138,40,4	script	Guild Storage Manager#ws29267	896,{
 	mes "[Guild Storage Manager]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!getcharid(2)) {
+		mes "Only guild members can use the guild storage.";
+		close;
+	}
+	mes "Your guild's storage is ^0000FF200 zeny^000000.";
+	if (select("Open it:Cancel") == 2) close;
+	if (Zeny < 200) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 200;
+	close2;
+	guildopenstorage;
+	end;
 }
 prt_mk,299,67,4	script	Guide#ws29151	105,{
 	mes "[Guide]";
-	mes "Hello there, adventurer.";
+	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
+	viewpoint 1, 255, 304, 1, 0xFF8800;
+	viewpoint 1, 264, 304, 2, 0xFF8800;
+	viewpoint 1, 300, 64, 3, 0xFF8800;
+	viewpoint 1, 300, 55, 4, 0xFF8800;
+	viewpoint 1, 68, 19, 5, 0xFF8800;
+	viewpoint 1, 59, 19, 6, 0xFF8800;
+	viewpoint 1, 23, 259, 7, 0xFF8800;
+	viewpoint 1, 23, 268, 8, 0xFF8800;
+	viewpoint 1, 49, 27, 9, 0xFF8800;
+	viewpoint 1, 32, 279, 10, 0xFF8800;
+	viewpoint 1, 278, 293, 11, 0xFF8800;
+	viewpoint 1, 288, 41, 12, 0xFF8800;
 	close;
 }
 prt_mk,24,256,4	script	Guide#ws29157	105,{
 	mes "[Guide]";
-	mes "Hello there, adventurer.";
+	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
+	viewpoint 1, 255, 304, 1, 0xFF8800;
+	viewpoint 1, 264, 304, 2, 0xFF8800;
+	viewpoint 1, 300, 64, 3, 0xFF8800;
+	viewpoint 1, 300, 55, 4, 0xFF8800;
+	viewpoint 1, 68, 19, 5, 0xFF8800;
+	viewpoint 1, 59, 19, 6, 0xFF8800;
+	viewpoint 1, 23, 259, 7, 0xFF8800;
+	viewpoint 1, 23, 268, 8, 0xFF8800;
+	viewpoint 1, 49, 27, 9, 0xFF8800;
+	viewpoint 1, 32, 279, 10, 0xFF8800;
+	viewpoint 1, 278, 293, 11, 0xFF8800;
+	viewpoint 1, 288, 41, 12, 0xFF8800;
 	close;
 }
 prt_mk,71,20,4	script	Guide#ws29163	105,{
 	mes "[Guide]";
-	mes "Hello there, adventurer.";
+	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
+	viewpoint 1, 255, 304, 1, 0xFF8800;
+	viewpoint 1, 264, 304, 2, 0xFF8800;
+	viewpoint 1, 300, 64, 3, 0xFF8800;
+	viewpoint 1, 300, 55, 4, 0xFF8800;
+	viewpoint 1, 68, 19, 5, 0xFF8800;
+	viewpoint 1, 59, 19, 6, 0xFF8800;
+	viewpoint 1, 23, 259, 7, 0xFF8800;
+	viewpoint 1, 23, 268, 8, 0xFF8800;
+	viewpoint 1, 49, 27, 9, 0xFF8800;
+	viewpoint 1, 32, 279, 10, 0xFF8800;
+	viewpoint 1, 278, 293, 11, 0xFF8800;
+	viewpoint 1, 288, 41, 12, 0xFF8800;
 	close;
 }
 prt_mk,252,303,4	script	Guide#ws29169	105,{
 	mes "[Guide]";
-	mes "Hello there, adventurer.";
+	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
+	viewpoint 1, 255, 304, 1, 0xFF8800;
+	viewpoint 1, 264, 304, 2, 0xFF8800;
+	viewpoint 1, 300, 64, 3, 0xFF8800;
+	viewpoint 1, 300, 55, 4, 0xFF8800;
+	viewpoint 1, 68, 19, 5, 0xFF8800;
+	viewpoint 1, 59, 19, 6, 0xFF8800;
+	viewpoint 1, 23, 259, 7, 0xFF8800;
+	viewpoint 1, 23, 268, 8, 0xFF8800;
+	viewpoint 1, 49, 27, 9, 0xFF8800;
+	viewpoint 1, 32, 279, 10, 0xFF8800;
+	viewpoint 1, 278, 293, 11, 0xFF8800;
+	viewpoint 1, 288, 41, 12, 0xFF8800;
 	close;
 }
 prt_mk,161,171,4	script	Guide#ws29175	105,{
 	mes "[Guide]";
-	mes "Hello there, adventurer.";
+	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
+	viewpoint 1, 255, 304, 1, 0xFF8800;
+	viewpoint 1, 264, 304, 2, 0xFF8800;
+	viewpoint 1, 300, 64, 3, 0xFF8800;
+	viewpoint 1, 300, 55, 4, 0xFF8800;
+	viewpoint 1, 68, 19, 5, 0xFF8800;
+	viewpoint 1, 59, 19, 6, 0xFF8800;
+	viewpoint 1, 23, 259, 7, 0xFF8800;
+	viewpoint 1, 23, 268, 8, 0xFF8800;
+	viewpoint 1, 49, 27, 9, 0xFF8800;
+	viewpoint 1, 32, 279, 10, 0xFF8800;
+	viewpoint 1, 278, 293, 11, 0xFF8800;
+	viewpoint 1, 288, 41, 12, 0xFF8800;
 	close;
 }
 prt_mk,255,304,4	script	Storage Locker#ws29196	10249,{
 	mes "[Storage Locker]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Storage is ^0000FF40 zeny^000000.";
+	if (select("Open storage:Cancel") == 2) close;
+	if (Zeny < 40) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 40;
+	close2;
+	openstorage;
+	end;
 }
 prt_mk,264,304,4	script	Catalog Dispenser#ws29197	10081,{
 	mes "[Catalog Dispenser]";
@@ -3032,8 +3466,16 @@ prt_mk,264,304,4	script	Catalog Dispenser#ws29197	10081,{
 }
 prt_mk,300,64,4	script	Storage Locker#ws29198	10249,{
 	mes "[Storage Locker]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Storage is ^0000FF40 zeny^000000.";
+	if (select("Open storage:Cancel") == 2) close;
+	if (Zeny < 40) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 40;
+	close2;
+	openstorage;
+	end;
 }
 prt_mk,300,55,4	script	Catalog Dispenser#ws29199	10081,{
 	mes "[Catalog Dispenser]";
@@ -3042,8 +3484,16 @@ prt_mk,300,55,4	script	Catalog Dispenser#ws29199	10081,{
 }
 prt_mk,68,19,4	script	Storage Locker#ws29200	10249,{
 	mes "[Storage Locker]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Storage is ^0000FF40 zeny^000000.";
+	if (select("Open storage:Cancel") == 2) close;
+	if (Zeny < 40) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 40;
+	close2;
+	openstorage;
+	end;
 }
 prt_mk,59,19,4	script	Catalog Dispenser#ws29201	10081,{
 	mes "[Catalog Dispenser]";
@@ -3052,8 +3502,16 @@ prt_mk,59,19,4	script	Catalog Dispenser#ws29201	10081,{
 }
 prt_mk,23,259,4	script	Storage Locker#ws29202	10249,{
 	mes "[Storage Locker]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Storage is ^0000FF40 zeny^000000.";
+	if (select("Open storage:Cancel") == 2) close;
+	if (Zeny < 40) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 40;
+	close2;
+	openstorage;
+	end;
 }
 prt_mk,23,268,4	script	Catalog Dispenser#ws29203	10081,{
 	mes "[Catalog Dispenser]";
@@ -3062,23 +3520,71 @@ prt_mk,23,268,4	script	Catalog Dispenser#ws29203	10081,{
 }
 prt_mk,49,27,4	script	Guild Storage Manager#ws29208	896,{
 	mes "[Guild Storage Manager]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!getcharid(2)) {
+		mes "Only guild members can use the guild storage.";
+		close;
+	}
+	mes "Your guild's storage is ^0000FF200 zeny^000000.";
+	if (select("Open it:Cancel") == 2) close;
+	if (Zeny < 200) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 200;
+	close2;
+	guildopenstorage;
+	end;
 }
 prt_mk,32,279,4	script	Guild Storage Manager#ws29209	896,{
 	mes "[Guild Storage Manager]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!getcharid(2)) {
+		mes "Only guild members can use the guild storage.";
+		close;
+	}
+	mes "Your guild's storage is ^0000FF200 zeny^000000.";
+	if (select("Open it:Cancel") == 2) close;
+	if (Zeny < 200) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 200;
+	close2;
+	guildopenstorage;
+	end;
 }
 prt_mk,278,293,4	script	Guild Storage Manager#ws29210	896,{
 	mes "[Guild Storage Manager]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!getcharid(2)) {
+		mes "Only guild members can use the guild storage.";
+		close;
+	}
+	mes "Your guild's storage is ^0000FF200 zeny^000000.";
+	if (select("Open it:Cancel") == 2) close;
+	if (Zeny < 200) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 200;
+	close2;
+	guildopenstorage;
+	end;
 }
 prt_mk,288,41,4	script	Guild Storage Manager#ws29211	896,{
 	mes "[Guild Storage Manager]";
-	mes "Hello there, adventurer.";
-	close;
+	if (!getcharid(2)) {
+		mes "Only guild members can use the guild storage.";
+		close;
+	}
+	mes "Your guild's storage is ^0000FF200 zeny^000000.";
+	if (select("Open it:Cancel") == 2) close;
+	if (Zeny < 200) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 200;
+	close2;
+	guildopenstorage;
+	end;
 }
 ragsruth,124,47,4	script	Artea#ws20472	10661,{
 	mes "[Artea]";
@@ -3387,8 +3893,12 @@ vr_zrr01,85,149,4	script	Cooking Simulator#ws27859	10431,{
 }
 vr_zrr01,46,134,4	script	Warp Elevator#ws27860	10081,{
 	mes "[Warp Elevator]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Which floor?";
+	.@f = select("vr_zrr02:vr_zrr03:Cancel");
+	close2;
+	if (.@f == 1) warp "vr_zrr02", 0, 0;
+	if (.@f == 2) warp "vr_zrr03", 0, 0;
+	end;
 }
 vr_zrr01,43,134,4	script	Trash Can#ws27873	10540,{
 	mes "[Trash Can]";
@@ -3437,7 +3947,19 @@ ygg_edge,175,186,4	script	Rubiel#ws19765	10610,{
 }
 ygg_edge,202,204,4	script	Repairman#ws19908	86,{
 	mes "[Repairman]";
-	mes "Hello there, adventurer.";
+	if (!getbrokenid(1)) {
+		mes "Nothing of yours is broken. Come back if something is.";
+		close;
+	}
+	mes "I can mend everything you carry for ^0000FF5,000 zeny^000000.";
+	if (select("Repair it all:Cancel") == 2) close;
+	if (Zeny < 5000) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	Zeny -= 5000;
+	repairall;
+	mes "Good as new.";
 	close;
 }
 ygg_edge,209,209,4	script	Professor Telkos#ws19909	10210,{
@@ -3672,33 +4194,57 @@ alb2trea,64,62,4	script	High Level Exchange#wsb470	4_M_01,{
 }
 bphunt_low,234,185,4	script	Switch Channel#wsb471	4_M_01,{
 	mes "[Switch Channel]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Switch to the other channel of this hunting ground?";
+	if (select("Switch channel:Cancel") == 2) close;
+	getmapxy(.@m$, .@x, .@y, BL_PC);
+	close2;
+	warp "bphunt_low2", .@x, .@y;
+	end;
 }
 bphunt_mid,234,185,4	script	Switch Channel#wsb472	4_M_01,{
 	mes "[Switch Channel]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Switch to the other channel of this hunting ground?";
+	if (select("Switch channel:Cancel") == 2) close;
+	getmapxy(.@m$, .@x, .@y, BL_PC);
+	close2;
+	warp "bphunt_mid2", .@x, .@y;
+	end;
 }
 bphunt_high,234,185,4	script	Switch Channel#wsb473	4_M_01,{
 	mes "[Switch Channel]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Switch to the other channel of this hunting ground?";
+	if (select("Switch channel:Cancel") == 2) close;
+	getmapxy(.@m$, .@x, .@y, BL_PC);
+	close2;
+	warp "bphunt_hi2", .@x, .@y;
+	end;
 }
 bphunt_low2,234,185,4	script	Switch Channel#wsb474	4_M_01,{
 	mes "[Switch Channel]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Switch to the other channel of this hunting ground?";
+	if (select("Switch channel:Cancel") == 2) close;
+	getmapxy(.@m$, .@x, .@y, BL_PC);
+	close2;
+	warp "bphunt_low", .@x, .@y;
+	end;
 }
 bphunt_mid2,234,185,4	script	Switch Channel#wsb475	4_M_01,{
 	mes "[Switch Channel]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Switch to the other channel of this hunting ground?";
+	if (select("Switch channel:Cancel") == 2) close;
+	getmapxy(.@m$, .@x, .@y, BL_PC);
+	close2;
+	warp "bphunt_mid", .@x, .@y;
+	end;
 }
 bphunt_hi2,234,185,4	script	Switch Channel#wsb476	4_M_01,{
 	mes "[Switch Channel]";
-	mes "Hello there, adventurer.";
-	close;
+	mes "Switch to the other channel of this hunting ground?";
+	if (select("Switch channel:Cancel") == 2) close;
+	getmapxy(.@m$, .@x, .@y, BL_PC);
+	close2;
+	warp "bphunt_high", .@x, .@y;
+	end;
 }
 prontera,145,295,4	script	Redeem Code#wsb477	4_M_01,{
 	mes "[Redeem Code]";
