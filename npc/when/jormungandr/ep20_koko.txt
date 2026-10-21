@@ -1,0 +1,528 @@
+//===== World Sync: Jormungandr =============================
+//= Koko's Secret Base (side story, quests 11928-11947) and
+//= Lalaha's dailies (11948-11956).
+//= Friederike keeps a flock of Copos in her room at Ice Castle. The
+//= Iwins call them Kokos. One of them, Rorohyu, wanders off across the
+//= Frozen Scale lands and falls into the Sticky Sea (1@slug), where a
+//= corrupted angel snail has caught one of its friends.
+//= Char vars: wsj_koko (story step, 20 = done), wsj_kokob (the four Kokos
+//= called in), wsj_kscold (lost Copos sent home in the Sticky Sea).
+//= Starts at the Iwin Delivery, Ice Castle surroundings (icecastle 109,241),
+//= at base level 200 after Episode 19 (or with the skip_ep19 setting).
+//============================================================
+
+// Moves the story on: completes the quest(s) in "done", starts "next".
+// callfunc "F_WSJ_Koko", <new step>, "<done ids>", "<next ids>";
+function	script	F_WSJ_Koko	{
+	explode .@d$, getarg(1), ",";
+	.@n = getarraysize(.@d$);
+	for (.@i = 0; .@i < .@n; .@i++)
+		if (.@d$[.@i] != "" && isbegin_quest(atoi(.@d$[.@i])) == 1)
+			completequest atoi(.@d$[.@i]);
+	explode .@x$, getarg(2), ",";
+	.@n = getarraysize(.@x$);
+	for (.@i = 0; .@i < .@n; .@i++)
+		if (.@x$[.@i] != "" && isbegin_quest(atoi(.@x$[.@i])) == 0)
+			setquest atoi(.@x$[.@i]);
+	wsj_koko = getarg(0);
+	return;
+}
+
+-	script	#wsj_koko_ctl	-1,{
+	end;
+OnPCLoadMapEvent:
+	.@m$ = strcharinfo(3);
+	if (.@m$ == "icecastle" && wsj_koko >= 20)
+		cloakoffnpcself("Rorohyu#wsj_home");
+	// Rorohyu's trail leaves the village: the first tuft is on the hill.
+	if (.@m$ == "jor_back1" && wsj_koko == 10) {
+		callfunc "F_WSJ_Koko", 11, "11940", "11941";
+		dispbottom "There's a tuft of white fur on the snow up ahead. Rorohyu came this way.";
+	}
+	end;
+}
+jor_back1	mapflag	loadevent
+
+// ------------------------------------------------------------
+// The delivery (11928)
+// ------------------------------------------------------------
+icecastle,109,241,5	script	Iwin Delivery#wsj_k	10461,{
+	mes "[Iwin Delivery]";
+	if (wsj_koko == 0) {
+		if (BaseLevel < 200 || (ep19_main < 100 && !$wsj_skip19)) {
+			mes "Parcels, parcels, parcels. Nobody ever sends the delivery Iwin a parcel.";
+			close;
+		}
+		mes "Oh! You, the big one! You look like you know your way around the castle.";
+		mes "This box is for the Princess, Friederike. She ordered it ages ago, but my legs are short and the castle stairs are very tall.";
+		next;
+		if (select("I'll take it to her.:Not now.") == 2) {
+			mes "[Iwin Delivery]";
+			mes "Aww. Then it waits. Boxes are patient. I'm not.";
+			close;
+		}
+		callfunc "F_WSJ_Koko", 1, "", "11928";
+		mes "[Iwin Delivery]";
+		mes "Thank you! She lives in her room in the castle, the one with all the little footprints outside.";
+		mes "Careful, the box wiggles. That's normal. Probably.";
+		close;
+	}
+	if (wsj_koko == 1) {
+		mes "Her room's in the castle. Follow the little footprints.";
+		close;
+	}
+	if (wsj_koko == 6) {
+		mes "Rorohyu? The fluffy one that always hums? No, not today. I've been out here all morning.";
+		mes "The guards inside the castle see everyone come and go. Ask them.";
+		next;
+		callfunc "F_WSJ_Koko", 7, "11936", "11937";
+		mes "^4d4dffThe Iwin guards stand at the castle entrance. Maybe they saw Rorohyu.^000000";
+		close;
+	}
+	mes "Parcels, parcels, parcels. You were a big help with the Princess's box.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsj_koko == 0 && BaseLevel >= 200 && (ep19_main == 100 || $wsj_skip19)" );
+	end;
+}
+
+// Walking up to Friederike with the box (her own NPC stands at icas_in 32,123).
+icas_in,34,121,0	script	#wsj_k_frie	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch:
+	if (wsj_koko != 1)
+		end;
+	cutin "ep19_friederike01.png",2;
+	mes "[Friederike]";
+	mes "A box? For me? It's wiggling!";
+	next;
+	mes "^4d4dffShe lifts the lid. Inside, packed in straw, are a dozen dried fish and four little bowls with names painted on them.^000000";
+	next;
+	cutin "ep19_friederike03.png",2;
+	mes "[Friederike]";
+	mes "Their bowls! At last! Now the Kokos can eat properly, like a family.";
+	mes "Will you help me call them? It's mealtime and they never come when I call. They think it's a game.";
+	next;
+	callfunc "F_WSJ_Koko", 2, "11928", "11929,11930,11931,11932";
+	mes "[Friederike]";
+	mes "There are four of them somewhere in the room. Tap each one on the head and tell them it's dinner.";
+	close3;
+}
+
+// ------------------------------------------------------------
+// Mealtime (11929-11932)
+// ------------------------------------------------------------
+// callfunc "F_WSJ_KokoCall", <bit>, <quest>, "<line>";
+function	script	F_WSJ_KokoCall	{
+	.@b = getarg(0);
+	mes "[" + strnpcinfo(1) + "]";
+	if (wsj_koko != 2 || (wsj_kokob & .@b)) {
+		mes getarg(2);
+		close;
+	}
+	mes "Ko? Koko!";
+	next;
+	mes "^4d4dffYou tap it on the head and point at the bowls. It squeaks and waddles off toward Friederike.^000000";
+	wsj_kokob |= .@b;
+	completequest getarg(1);
+	if (wsj_kokob != 15)
+		close;
+	next;
+	cutin "ep19_friederike02.png",2;
+	mes "[Friederike]";
+	mes "One, two, three... four! And...";
+	mes "Wait. Chachako brought her little brother Kapopo to play this morning. Chachako's here, but where's Kapopo?";
+	next;
+	mes "[Friederike]";
+	mes "Oh no, she left him outside! He's tiny, he'll freeze! Can you bring him home? He lives just below my house, by the stairs.";
+	callfunc "F_WSJ_Koko", 3, "", "11933";
+	close3;
+}
+icas_in,32,116,5	script	Koko#wsj_k1	21965,{ callfunc "F_WSJ_KokoCall", 1, 11929, "Koko! Ko ko ko."; }
+icas_in,29,115,5	script	Koko#wsj_k2	21965,{ callfunc "F_WSJ_KokoCall", 2, 11930, "Kokooo. (It is chewing on a dried fish.)"; }
+icas_in,38,117,5	script	Koko#wsj_k3	21965,{ callfunc "F_WSJ_KokoCall", 4, 11931, "Ko! (It hides behind the bed post.)"; }
+icas_in,26,113,5	script	Koko#wsj_k4	21965,{ callfunc "F_WSJ_KokoCall", 8, 11932, "Koko? Ko. (It is asleep in its bowl.)"; }
+
+// ------------------------------------------------------------
+// Kapopo and Chachako (11933-11935)
+// ------------------------------------------------------------
+icecastle,65,213,5	script	Kapopo#wsj	21965,{
+	mes "[Kapopo]";
+	if (wsj_koko == 3) {
+		mes "Ko... ko... (He is shivering, all alone outside the house.)";
+		next;
+		mes "^4d4dffYou pick Kapopo up. He's light as a snowball and just as cold. His house is below Friederike's, by the stairs.^000000";
+		callfunc "F_WSJ_Koko", 4, "11933", "11934";
+		close;
+	}
+	if (wsj_koko == 4) {
+		mes "Ko. (He is tucked in your arms, warming up.)";
+		close;
+	}
+	mes "Ko! Koko! (He waddles in circles in the snow, very proud of himself.)";
+	close;
+}
+icecastle,63,158,5	script	Chachako#wsj	21965,{
+	mes "[Chachako]";
+	if (wsj_koko == 4)
+		mes "Ko?! KO! (She spots her brother in your arms and bounces on the spot.)";
+	else
+		mes "Koko. (She keeps one eye on her little brother at all times now.)";
+	close;
+}
+icecastle,65,159,5	script	Chacharo#wsj	10461,{
+	mes "[Chacharo]";
+	if (wsj_koko == 4) {
+		mes "Kapopo! There you are! Chachako came home alone and I was about to turn the whole castle upside down.";
+		next;
+		mes "^4d4dffYou set Kapopo down. He and Chachako tumble together into a fluffy ball.^000000";
+		next;
+		mes "[Chacharo]";
+		mes "Thank you, big one. Tell the Princess her Kokos are all home safe. Well, ours are.";
+		callfunc "F_WSJ_Koko", 5, "11934", "11935";
+		close;
+	}
+	mes "Kokos are easy to keep. Food, warmth and someone counting them three times a day.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Where is Rorohyu? (11936-11940)
+// ------------------------------------------------------------
+icecastle,67,218,5	script	Lalaha#wsj	10461,{
+	if (wsj_koko == 5) {
+		mes "[Lalaha]";
+		mes "You're the one helping the Princess with the Kokos? Then please, help me too.";
+		mes "Rorohyu, my Koko, set off home from the castle before you did. He never arrived.";
+		next;
+		mes "[Lalaha]";
+		mes "He likes to wander around outside the village. Could you look around the castle grounds for him?";
+		callfunc "F_WSJ_Koko", 6, "11935", "11936";
+		close;
+	}
+	if (wsj_koko >= 6 && wsj_koko < 17) {
+		mes "[Lalaha]";
+		mes "Any sign of Rorohyu? He's white, round, and he hums when he's happy.";
+		close;
+	}
+	if (wsj_koko == 17) {
+		mes "[Lalaha]";
+		mes "Rorohyu! And you brought his friend too!";
+		next;
+		mes "^4d4dffRorohyu rolls straight into Lalaha's arms, humming loudly. His friend hides behind your legs.^000000";
+		next;
+		mes "[Lalaha]";
+		mes "The Sticky Sea... and a snail with wings. I'll never let him out of my sight again. Well. I'll try.";
+		mes "Please take this. It's not much, but you saved my family.";
+		callfunc "F_WSJ_Koko", 20, "11947", "";
+		getexp2 30000000, 0;
+		getexp 0, 2000000;
+		getitem 1001251, 5;	// EP20_D_Scale
+		add_reputation_points( REPUTATION_EP19, 20 );
+		cloakoffnpcself("Rorohyu#wsj_home");
+		close;
+	}
+	if (wsj_koko < 20) {
+		mes "[Lalaha]";
+		mes "Have you seen the Princess's Kokos? Little round things, always hungry.";
+		close;
+	}
+	callfunc "F_WSJ_KokoDailies";
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsj_koko == 5 || wsj_koko == 17" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_koko >= 20 && ((isbegin_quest(11948) == 0 && isbegin_quest(11949) == 0 && (isbegin_quest(11950) == 0 || checkquest(11950,PLAYTIME) == 2)) || (isbegin_quest(11951) == 0 && (isbegin_quest(11952) == 0 || checkquest(11952,PLAYTIME) == 2)) || (isbegin_quest(11953) == 0 && (isbegin_quest(11954) == 0 || checkquest(11954,PLAYTIME) == 2)) || (isbegin_quest(11955) == 0 && (isbegin_quest(11956) == 0 || checkquest(11956,PLAYTIME) == 2)))" );
+	end;
+}
+icecastle,69,217,5	script(CLOAKED)	Rorohyu#wsj_home	21965,{
+	mes "[Rorohyu]";
+	mes "Hmmm hm hmmm. (He hums, very happily, and doesn't leave Lalaha's side.)";
+	close;
+}
+
+icas_in,113,38,5	script	Iwin Guards#wsj_k	10461,{
+	mes "[Iwin Guard]";
+	if (wsj_koko == 7) {
+		mes "A Koko? White, round, hums? Rorohyu, yes! He went past us this morning, heading for the village gate.";
+		mes "The guards on the gate will know more. They're bored, they notice everything.";
+		callfunc "F_WSJ_Koko", 8, "11937", "11938";
+		close;
+	}
+	mes "Nothing gets past the Ice Castle guard. Except Kokos. Kokos get past everything.";
+	close;
+}
+icecastle,22,131,5	script	Awin Guard#wsj_k	10461,{
+	mes "[Awin Guard]";
+	if (wsj_koko == 8) {
+		mes "Rorohyu? He was here all morning, sightseeing. Staring at the snow, humming at the clouds.";
+		mes "He was right by the gate a minute ago. Go and get him before he wanders off.";
+		callfunc "F_WSJ_Koko", 9, "11938", "11939";
+		close;
+	}
+	mes "The gate is quiet today. Quiet is good. Quiet means no Rgans.";
+	close;
+}
+icecastle,22,136,0	script	Fluffy Thread#wsj	4_POINT_WHITE,{
+	if (wsj_koko == 9) {
+		mes "^4d4dffRorohyu isn't at the gate. Caught on a snowy bush is a thread of white fluff, and beyond it a trail of little round footprints heads out of the village.^000000";
+		callfunc "F_WSJ_Koko", 10, "11939", "11940";
+		close;
+	}
+	mes "^4d4dffA wisp of white fluff caught on a frozen bush.^000000";
+	close;
+}
+
+// ------------------------------------------------------------
+// The trail (11941-11944)
+// ------------------------------------------------------------
+// callfunc "F_WSJ_KokoFur", <step it answers>, "<done>", "<next>", "<line>";
+function	script	F_WSJ_KokoFur	{
+	if (wsj_koko == getarg(0)) {
+		mes "^4d4dff" + getarg(3) + "^000000";
+		callfunc "F_WSJ_Koko", getarg(0) + 1, getarg(1), getarg(2);
+		close;
+	}
+	mes "^4d4dffA tuft of fluffy white fur, frozen to the snow.^000000";
+	close;
+}
+jor_back1,310,245,0	script	Fluffy Fur#wsj1	4_POINT_WHITE,{ callfunc "F_WSJ_KokoFur", 11, "11941", "11942", "More of Rorohyu's fur. The footprints lead west, onto the Frozen Scale Plateau."; }
+jor_back1,222,392,0	script	Fluffy Fur#wsj2	4_POINT_WHITE,{ callfunc "F_WSJ_KokoFur", -1, "", "", ""; }
+jor_back2,8,242,0	script	Fluffy Fur#wsj3	4_POINT_WHITE,{ callfunc "F_WSJ_KokoFur", 12, "11942", "11943", "A bigger tuft, as if Rorohyu rolled here. The trail goes on toward the glacier."; }
+jor_back3,95,324,0	script	Fluffy Fur#wsj4	4_POINT_WHITE,{ callfunc "F_WSJ_KokoFur", 13, "11943", "11944", "Fur, and a half-eaten snakeberry. Rorohyu stopped for a snack and went on, down to the Frozen Scale Beach."; }
+
+// ------------------------------------------------------------
+// The pit on Frozen Scale Beach (11945-11946)
+// ------------------------------------------------------------
+jor_back4,103,264,3	script	Friederike#wsj_beach	10458,{
+	cutin "ep19_friederike04.png",2;
+	mes "[Friederike]";
+	if (wsj_koko == 14) {
+		mes "You found the trail too? I couldn't sit still, so I followed it.";
+		mes "This Koko was guarding a hole in the ice. It won't stop pointing at it.";
+		next;
+		mes "[Friederike]";
+		mes "I think Rorohyu fell in. It's sticky down there, I can hear something squelching.";
+		mes "Please. I'll wait here with this one.";
+		callfunc "F_WSJ_Koko", 15, "11944", "11945";
+		close3;
+	}
+	if (wsj_koko == 15 || wsj_koko == 16) {
+		mes "The Koko will show you the way in. Be careful, it's sticky.";
+		close3;
+	}
+	mes "The beach is pretty when nothing's trying to eat you.";
+	close3;
+}
+jor_back4,101,265,3	script	Copo#wsj_pit	21965,{
+	mes "[Koko]";
+	if (wsj_koko == 15 || wsj_koko == 16) {
+		mes "Ko! KO! (It points at the hole with both stubby arms.)";
+		next;
+		if (select("Climb down into the pit.:Not yet.") == 2)
+			close;
+		if (wsj_koko == 15)
+			callfunc "F_WSJ_Koko", 16, "11945", "11946";
+		callfunc "F_WSJ_EnterMd", "Sticky Sea";
+		end;
+	}
+	if (wsj_koko >= 20 && (isbegin_quest(11948) == 1 || isbegin_quest(11949) == 1 || isbegin_quest(11951) == 1)) {
+		mes "Ko. Koko? (It points down at the Sticky Sea and then at you, hopefully.)";
+		next;
+		if (select("Go into the Sticky Sea.:Not yet.") == 2)
+			close;
+		if (isbegin_quest(11948) == 1) {
+			erasequest 11948;
+			setquest 11949;
+		}
+		callfunc "F_WSJ_EnterMd", "Sticky Sea";
+		end;
+	}
+	mes "Ko. (It sits by the hole, guarding it.)";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsj_koko == 15 || wsj_koko == 16" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(11948) == 1" );
+	end;
+}
+
+// ------------------------------------------------------------
+// The Sticky Sea (1@slug)
+// ------------------------------------------------------------
+1@slug	mapflag	nosave	SavePoint
+1@slug	mapflag	noteleport
+1@slug	mapflag	nomemo
+1@slug	mapflag	nowarpto
+1@slug	mapflag	nobranch
+1@slug	mapflag	monster_noteleport
+1@slug	mapflag	nopenalty
+
+1@slug,1,1,0	script	#wsj_slug	-1,{
+	end;
+OnInstanceInit:
+	.@m$ = instance_mapname("1@slug");
+	disablenpc instance_npcname("Rorohyu#wsj_md");
+	disablenpc instance_npcname("Copo#wsj_friend");
+	monster .@m$,0,0,"--ja--",21969,12;	// Snow Rabbit Slug
+	monster .@m$,0,0,"--ja--",21970,12;	// Melibe Slug
+	monster .@m$,200,200,"Corrupted Angel Snail",21982,1,instance_npcname("#wsj_slug") + "::OnSnailDown";
+	end;
+OnSnailDown:
+	.@m$ = instance_mapname("1@slug");
+	mapannounce .@m$, "The corrupted angel snail bursts into a puddle of glittering slime.", bc_map, "0x88CCFF";
+	enablenpc instance_npcname("Rorohyu#wsj_md");
+	enablenpc instance_npcname("Copo#wsj_friend");
+	end;
+}
+1@slug,196,198,5	script	Rorohyu#wsj_md	21965,{
+	mes "[Rorohyu]";
+	if (wsj_koko == 16) {
+		mes "Hmmm! Hmm hm HMMM! (He hums so loudly that bubbles of slime pop around him.)";
+		next;
+		mes "^4d4dffRorohyu and the little Koko the snail had trapped cling to your boots. Time to take them home to Lalaha.^000000";
+		callfunc "F_WSJ_Koko", 17, "11946", "11947";
+		next;
+	} else {
+		mes "Hmm hm. (He's glad you came back for the others.)";
+		next;
+	}
+	if (select("Climb out of the Sticky Sea.:Stay a little longer.") == 2)
+		close;
+	warp "jor_back4", 101, 262;
+	end;
+}
+1@slug,203,198,3	script	Copo#wsj_friend	21965,{
+	mes "[Koko]";
+	mes "Ko... ko. (Still sticky, still shaking, but free.)";
+	close;
+}
+1@slug,200,36,5	script	Sticky Current#wsj	4_POINT_BLUE,{
+	mes "^4d4dffA current of thick, warm water pushes up toward the hole in the ice.^000000";
+	next;
+	if (select("Ride it back up.:Stay.") == 2)
+		close;
+	warp "jor_back4", 101, 262;
+	end;
+}
+
+// Lost Copos for "It's Dangerous!" (11951).
+1@slug,150,150,5	script	Lost Copo#wsj_l1	21965,{
+	.@h$ = strnpcinfo(2);
+	callfunc "F_WSJ_KokoScold", atoi(charat(.@h$, getstrlen(.@h$) - 1));
+}
+1@slug,250,150,3	duplicate(Lost Copo#wsj_l1)	Lost Copo#wsj_l2	21965
+1@slug,120,250,5	duplicate(Lost Copo#wsj_l1)	Lost Copo#wsj_l3	21965
+1@slug,200,160,5	duplicate(Lost Copo#wsj_l1)	Lost Copo#wsj_l4	21965
+1@slug,230,230,3	duplicate(Lost Copo#wsj_l1)	Lost Copo#wsj_l5	21965
+
+function	script	F_WSJ_KokoScold	{
+	.@b = 1 << (getarg(0) - 1);
+	mes "[Lost Copo]";
+	if (isbegin_quest(11951) != 1 || (wsj_kscold & .@b)) {
+		mes "Ko? (It blinks at you, sticky but cheerful.)";
+		close;
+	}
+	mes "Ko! (It was very busy licking the slime off a rock.)";
+	next;
+	mes "^4d4dffYou wag your finger at it and point up toward the light. It hangs its head and waddles off toward the surface.^000000";
+	wsj_kscold |= .@b;
+	if (wsj_kscold == 31)
+		dispbottom "That's all five lost Copos sent home. Lalaha will want to hear about it.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Lalaha's dailies (11948-11956), after the story.
+// ------------------------------------------------------------
+function	script	F_WSJ_KokoDailies	{
+	mes "[Lalaha]";
+	mes "Rorohyu hasn't left my side since. But the other Kokos keep sneaking off to the Sticky Sea, and the Icewinds in the canyon scare the little ones.";
+	next;
+	.@e = 0;	// Escargo!
+	if (isbegin_quest(11948) == 1 || isbegin_quest(11949) == 1)
+		.@e = 1;
+	else
+		.@e = callfunc("F_WSJ_Daily", 11948, 11950);
+	.@d = callfunc("F_WSJ_Daily", 11951, 11952);
+	.@a = callfunc("F_WSJ_Daily", 11953, 11954);
+	.@b = callfunc("F_WSJ_Daily", 11955, 11956);
+	setarray .@st$, "", " ^777777(in progress)^000000", " ^777777(done today)^000000";
+	switch (select("Escargo!" + .@st$[.@e] + ":It's Dangerous!" + .@st$[.@d] + ":I Hope They Reconcile (1)" + .@st$[.@a] + ":I Hope They Reconcile (2)" + .@st$[.@b] + ":Nothing today.")) {
+	case 1:
+		if (.@e == 2) {
+			mes "[Lalaha]";
+			mes "The Sticky Sea is clean for today. Thank you. Let's both take a break.";
+			close;
+		}
+		if (.@e == 0) {
+			mes "[Lalaha]";
+			mes "Another snail has crawled into the Sticky Sea and the Kokos keep going down to look at it. Could you get rid of it?";
+			mes "The Koko by the hole on Frozen Scale Beach will show you in.";
+			setquest 11948;
+			close;
+		}
+		if (isbegin_quest(11949) != 1 || checkquest(11949,HUNTING) != 2) {
+			mes "[Lalaha]";
+			mes "The snail is still down there. The Koko by the hole on Frozen Scale Beach will show you in.";
+			close;
+		}
+		mes "[Lalaha]";
+		mes "Gone? Splat? Wonderful. Here, for your trouble.";
+		callfunc "F_WSJ_DailyDone", 11949, 11950, 15000000, 1;
+		close;
+	case 2:
+		if (.@d == 2) {
+			mes "[Lalaha]";
+			mes "No more Kokos in the Sticky Sea today. I counted.";
+			close;
+		}
+		if (.@d == 0) {
+			mes "[Lalaha]";
+			mes "Some Kokos have gone down into the Sticky Sea again. Five of them, I think. Could you find them and give them a good scolding? Then send them home.";
+			wsj_kscold = 0;
+			setquest 11951;
+			close;
+		}
+		if (wsj_kscold != 31) {
+			mes "[Lalaha]";
+			mes "There are still Kokos down there. Five in all. The Koko by the hole on the beach will show you in.";
+			close;
+		}
+		mes "[Lalaha]";
+		mes "All five back, sticky and sorry. Thank you.";
+		wsj_kscold = 0;
+		callfunc "F_WSJ_DailyDone", 11951, 11952, 15000000, 1;
+		close;
+	case 3:
+		callfunc "F_WSJ_KokoWind", .@a, 11953, 11954, "Ashen Icewinds", "the eastern part of the Ancient Ice Canyon";
+		end;
+	case 4:
+		callfunc "F_WSJ_KokoWind", .@b, 11955, 11956, "Icewinds", "the western part of the Ancient Ice Canyon";
+		end;
+	}
+	close;
+}
+
+// callfunc "F_WSJ_KokoWind", <state>, <quest>, <standby>, "<monsters>", "<where>";
+function	script	F_WSJ_KokoWind	{
+	mes "[Lalaha]";
+	if (getarg(0) == 2) {
+		mes "The " + getarg(3) + " are quiet today. Let's leave them be.";
+		close;
+	}
+	if (getarg(0) == 0) {
+		mes "The " + getarg(3) + " in " + getarg(4) + " blow the little Kokos right off their feet. They don't mean it, I think. They're just grumpy.";
+		mes "Could you go and scold about ten of them? Firmly. For the children.";
+		setquest getarg(1);
+		close;
+	}
+	if (checkquest(getarg(1),HUNTING) != 2) {
+		mes "About ten " + getarg(3) + ", in " + getarg(4) + ". Firmly!";
+		close;
+	}
+	mes "They've calmed down! The Kokos can play outside again. Thank you.";
+	callfunc "F_WSJ_DailyDone", getarg(1), getarg(2), 15000000, 1;
+	close;
+}
