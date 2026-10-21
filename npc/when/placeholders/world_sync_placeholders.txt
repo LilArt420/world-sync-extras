@@ -1696,16 +1696,6 @@ jalbe_in,68,134,4	script	Miyogi#ws19289	899,{
 	mes "Hello there, adventurer.";
 	close;
 }
-jalbe_in,56,138,4	script	Lalaira Wigner#ws19290	10585,{
-	mes "[Lalaira Wigner]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jalbe_in,71,174,4	script	Lalaira Wigner#ws19359	10585,{
-	mes "[Lalaira Wigner]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_albe,201,200,4	script	Walter Sailor#ws18728	49,{
 	mes "[Walter Sailor]";
 	mes "Hello there, adventurer.";
@@ -1741,11 +1731,6 @@ jor_albe,62,150,4	script	Nyar#ws19146	10537,{
 	mes "Hello there, adventurer.";
 	close;
 }
-jor_albe,192,209,4	script	Nilem#ws19177	10529,{
-	mes "[Nilem]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_base,314,138,4	script	Libra#ws18938	10570,{
 	mes "[Libra]";
 	mes "Hello there, adventurer.";
@@ -1761,18 +1746,8 @@ jor_crk,139,141,4	script	Shupapa#ws19076	10462,{
 	mes "Hello there, adventurer.";
 	close;
 }
-jor_crk,105,108,4	script	Nyar#ws19079	10537,{
-	mes "[Nyar]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_crk_p,79,64,4	script	Small Boat#ws18726	10429,{
 	mes "[Small Boat]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_crk_p,105,108,4	script	Nyar#ws19085	10537,{
-	mes "[Nyar]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -1826,7 +1801,7 @@ jor_mbase,139,112,4	script	Mercenary#ws19029	10564,{
 	mes "Hello there, adventurer.";
 	close;
 }
-jor_mbase,136,110,4	script	Mercenary#ws19030	10565,{
+jor_mbase,134,110,4	script	Mercenary#ws19030	10565,{
 	mes "[Mercenary]";
 	mes "Hello there, adventurer.";
 	close;
@@ -1966,21 +1941,6 @@ jor_mbase,137,258,4	script	Mercenary Applicant#ws19066	70,{
 	mes "Hello there, adventurer.";
 	close;
 }
-jor_mbase,189,249,4	script	Exhausted Soldier#ws19097	10565,{
-	mes "[Exhausted Soldier]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,218,298,4	script	Escaped Cultist#ws19098	10567,{
-	mes "[Escaped Cultist]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,60,196,4	script	Wounded Soldier#ws19099	10564,{
-	mes "[Wounded Soldier]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_mbase,220,165,4	script	Nyar#ws19145	10537,{
 	mes "[Nyar]";
 	mes "Hello there, adventurer.";
@@ -1988,36 +1948,6 @@ jor_mbase,220,165,4	script	Nyar#ws19145	10537,{
 }
 jor_mbase,176,254,4	script	Georborg Soldier#ws19149	10564,{
 	mes "[Georborg Soldier]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,53,150,4	script	Freya Believer#ws19153	917,{
-	mes "[Freya Believer]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,52,148,4	script	Freya Believer#ws19154	927,{
-	mes "[Freya Believer]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,51,152,4	script	Freya Believer#ws19155	926,{
-	mes "[Freya Believer]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,51,150,4	script	Freya Believer#ws19156	926,{
-	mes "[Freya Believer]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,53,153,4	script	Freya Believer#ws19157	916,{
-	mes "[Freya Believer]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,214,316,4	script	Lehar#ws19233	10469,{
-	mes "[Lehar]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -2038,11 +1968,6 @@ jor_mbase,218,317,4	script	Mamara#ws19236	899,{
 }
 jor_mbase,232,280,4	script	Mamari#ws19241	899,{
 	mes "[Mamari]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,185,311,4	script	Lyric#ws19282	10570,{
-	mes "[Lyric]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -2221,33 +2146,13 @@ jor_mbase,145,180,4	script	Combat Instructor#ws19339	10564,{
 	mes "Hello there, adventurer.";
 	close;
 }
-jor_mbase,233,277,4	script	Ivan#ws19354	10584,{
-	mes "[Ivan]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_mbase,332,148,4	script	Ivan#ws19355	10584,{
-	mes "[Ivan]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_raise1,199,190,4	script	Crack in the Rock#ws19100	10429,{
 	mes "[Crack in the Rock]";
 	mes "Hello there, adventurer.";
 	close;
 }
-jor_raise1,128,326,4	script	Ornamental Door#ws19106	10429,{
-	mes "[Ornamental Door]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_raise2,100,26,4	script	Hidden Ship#ws18734	10429,{
 	mes "[Hidden Ship]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,122,164,4	script	Nyar's Double#ws19136	10537,{
-	mes "[Nyar's Double]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -2411,18 +2316,8 @@ mbase_in,285,127,4	script	Mercenary#ws18979	10565,{
 	mes "Hello there, adventurer.";
 	close;
 }
-mbase_in,291,123,4	script	Mercenary#ws18980	10565,{
+mbase_in,289,123,4	script	Mercenary#ws18980	10565,{
 	mes "[Mercenary]";
-	mes "Hello there, adventurer.";
-	close;
-}
-mbase_in,299,126,4	script	Stack of Documents#ws18985	10391,{
-	mes "[Stack of Documents]";
-	mes "Hello there, adventurer.";
-	close;
-}
-mbase_in,302,123,4	script	Valdaris#ws18986	10580,{
-	mes "[Valdaris]";
 	mes "Hello there, adventurer.";
 	close;
 }
