@@ -1,6 +1,6 @@
 //===== World Sync Extras: Star Forest block ================
 //= Meteor Forest (Star Emperor job change), Sanctuary Herosria
-//= and Ash Village (the start of Chapter 1): shared functions.
+//= and Ash Village's services: shared functions.
 //===== Description: =========================================
 //= Written from the official clients' quest text (iRO; kRO with
 //= ROenglishRE's English where it exists), the navigation tables
@@ -10,9 +10,8 @@
 //= can't collide with them):
 //=   wsf_se    Star Emperor job change step (0 = not started,
 //=             140 = done)
-//=   wsf_ch1   Chapter 1 in Ash Village (0 = not started, 100 =
-//=             handed over to Destroyed Geffen: quest 18372)
-//=   wsf_ch1b  bits for Land of Darkness steps done in any order
+//= Chapter 1's story in Ash Village is World Sync Extras' Chapter 1
+//= part (wsv_ch1); this block only reads it.
 //============================================================
 
 // Who sees which story NPC. Every scene NPC is CLOAKED; this shows it
@@ -20,35 +19,12 @@
 // load and after every step change.
 function	script	F_WSF_Scenes	{
 	.@m$ = strcharinfo(3);
-	.@c = wsf_ch1;
 	if (.@m$ == "star_frst") {
 		callfunc "F_WSF_Show", "Rancis#wsf_b", wsf_se == 50;
 		callfunc "F_WSF_Show", "Rancis#wsf_c", wsf_se == 60;
 	} else if (.@m$ == "star_in") {
 		callfunc "F_WSF_Show", "Chosung#wsf_tea", wsf_se == 20;
 		callfunc "F_WSF_Show", "Eunha#wsf_room", wsf_se == 110;
-	} else if (.@m$ == "ygg_edge") {
-		// Ivein is out with the survey team until he's dug out of the roots.
-		callfunc "F_WSF_Show", "Ivein#wsf", .@c < 29 || .@c >= 34;
-	} else if (.@m$ == "ygg_roots") {
-		callfunc "F_WSF_Show", "Investigation Point#wsf_1", .@c == 29;
-		callfunc "F_WSF_Show", "Investigation Point#wsf_2", .@c == 30;
-		callfunc "F_WSF_Show", "Investigation Point#wsf_3", .@c == 31;
-		callfunc "F_WSF_Show", "Where the Sound Came From#wsf", .@c == 32 || .@c == 33;
-		callfunc "F_WSF_Show", "Magi#wsf_1", .@c == 34;
-		callfunc "F_WSF_Show", "Magi#wsf_2", .@c >= 35 && .@c <= 37;
-		callfunc "F_WSF_Show", "Investigator#wsf_1", .@c == 38;
-		callfunc "F_WSF_Show", "Mark#wsf_1", .@c == 39;
-		callfunc "F_WSF_Show", "Tamarin#wsf_1", .@c == 40;
-		callfunc "F_WSF_Show", "Tamarin#wsf_2", .@c >= 41 && .@c <= 43;
-		callfunc "F_WSF_Show", "Investigator#wsf_3", .@c == 44;
-		callfunc "F_WSF_Show", "Investigator#wsf_4", .@c == 45;
-		callfunc "F_WSF_Show", "Mark#wsf_2", .@c == 46;
-	} else if (.@m$ == "hem_fild") {
-		callfunc "F_WSF_Show", "Investigator#wsf_hem", .@c == 36;
-		callfunc "F_WSF_Show", "Designated Spot#wsf", wsf_ch1g == 1;
-	} else if (.@m$ == "uknw_ruin") {
-		callfunc "F_WSF_Show", "Alf#wsf", .@c == 42;
 	}
 	return;
 }
@@ -63,11 +39,11 @@ function	script	F_WSF_Show	{
 }
 
 // 1 when the character has finished Chapter 1's main story ("Immortal
-// Monarch"), which the Destroyed Geffen part of World Sync Extras tells
-// by setting wsv_ch1_done. The side quests, dailies and Root Gold shops
-// of Ash Village open after it, as on kRO.
+// Monarch", kept by World Sync Extras' Chapter 1 part in wsv_ch1).
+// Hotbeer More's armor, the Root Gold back room and the way to the
+// Sanctuary Beledor open after it, as on kRO.
 function	script	F_WSF_Ch1Done	{
-	return (wsv_ch1_done > 0);
+	return (wsv_ch1 >= 1000);
 }
 
 // Moves a story on: finishes the quests given, starts the next ones,
@@ -114,10 +90,6 @@ OnPCLoadMapEvent:
 
 star_frst	mapflag	loadevent
 star_in	mapflag	loadevent
-ygg_edge	mapflag	loadevent
-ygg_roots	mapflag	loadevent
-hem_fild	mapflag	loadevent
-uknw_ruin	mapflag	loadevent
 
 // The server's generic "Travel to ..." stand-ins stand on the cells of
 // the official NPCs this block places; the official NPCs take people
