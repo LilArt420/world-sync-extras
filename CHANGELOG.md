@@ -9,6 +9,7 @@
   - Battle Pass hunting grounds' Switch Channel (6): hop to the other copy of the map, at the same spot.
   - The Inn Employee (rest for 5,000 zeny and save there), the Repairman (mend everything for 5,000 zeny) and Varmundt's Warp Elevator (pick a floor).
 - Placed against every enabled mod's NPCs, so none stands on another.
+- 289 World Sync monsters and 34 NPC looks get their sprites on iRO clients (System/jobname.lub): the iRO client's table doesn't name these kRO-only ones, so they showed a stand-in. Needs a kRO fallback GRF for the art.
 
 ## 1.1.0
 - Needs Ragnarok Offline 1.6.6 or later.
