@@ -23,6 +23,20 @@
       "description": "Horuru offers Episode 20 to any character of level 200 or more, even one that hasn't finished Issgard's Episode 19 story."
     },
     {
+      "key": "varmundt",
+      "type": "boolean",
+      "default": true,
+      "label": "Varmundt, Amatsu, Juno Library and Chapter 1",
+      "description": "The Fantasy Book \"Dungeon Food\" in the Prontera East Library (level 100+, once a day), Varmundt's Chess Garden and the Biosphere Deep Abyss (level 250+), Seoyeon's Trial under Amatsu (level 70+), Chapter 1 \"Song of the World Tree\" from the small ash trees near Prontera and Payon to Destroyed Geffen and the Dark Whisper (level 200+), the Juno Library's VR books (level 200+) and the eroded wing of Varmundt's mansion (level 265+). Turned off, its NPCs leave those maps (their placeholders don't come back)."
+    },
+    {
+      "key": "star_forest",
+      "type": "boolean",
+      "default": true,
+      "label": "Star Forest, Herosria and Ash Village",
+      "description": "The Star Emperor job change in the Meteor Forest (TaeKwon Masters, base 99 / job 50: Nalson in Payon), Sanctuary Herosria's Garden of Dawn (portals in the four castle realms) and Ash Village's shops, enchants and signposts at the edge of the World Tree. Turned off, their NPCs leave the maps (their placeholders don't come back)."
+    },
+    {
       "key": "entrances",
       "type": "boolean",
       "default": false,
@@ -34,7 +48,7 @@
       "type": "boolean",
       "default": true,
       "label": "Place the official NPCs that have no logic yet",
-      "description": "467 NPCs from the official clients' maps and signboards. 44 of them already work (storage, guild storage, inns, repair, channel switches, the Varmundt elevator, Jormungandr's contact points, market guides); the rest greet you until their quests and services are written."
+      "description": "215 NPCs from the official clients' maps and signboards. 44 of them already work (storage, guild storage, inns, repair, channel switches, the Varmundt elevator, Jormungandr's contact points, market guides); the rest greet you until their quests and services are written."
     },
     {
       "key": "npc_mover",

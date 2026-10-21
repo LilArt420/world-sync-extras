@@ -30,9 +30,30 @@ the Ice Castle's west wing at level 230. Character variables: `wsj_ep20`,
 `wsj_ep20b`, `wsj_ep20c`, `wsj_ep21`, `wsj_ep21b`, `wsj_rg` and a few for the
 dailies.
 
+## 🏛️ Varmundt, Amatsu, Juno Library and Chapter 1 (setting `varmundt`, on)
+
+- The Fantasy Book "Dungeon Food" in the Prontera East Library's new wing (level 100+, once a day).
+- Varmundt's Chess Garden under the garden pagoda and the Biosphere Deep Abyss research, Rune Crowns
+  and enchants (level 250+).
+- Seoyeon's Trial under Amatsu (level 70+).
+- 🌳 Chapter 1 "Song of the World Tree", from the small ash trees near Prontera and Payon to Destroyed
+  Geffen, Verus and the Dark Whisper, with its memorial dungeons and dailies (level 200+).
+- 📚 The Juno Library's VR books, through the library annex (level 200+).
+- The eroded wing of Varmundt's mansion and the Dimensional Biosphere watchers (level 265+).
+
+## ⭐ Star Forest, Herosria and Ash Village (setting `star_forest`, on)
+
+- The Star Emperor job change in the Meteor Forest: talk to Nalson in Payon as a TaeKwon Master
+  (base 99 / job 50).
+- 🌸 Sanctuary Herosria's Garden of Dawn, through the portals in the four castle realms: gifts for
+  castle lords, Herosria gear, herb jams, the Dimensional Wanderer accessories, refining and enchanting.
+- 🌳 Ash Village's shops, enchants and signposts at the edge of the World Tree.
+
+Prices, recipes and rewards that kRO doesn't publish are estimates in both blocks.
+
 ## 🧍 Placeholder NPCs (setting `placeholders`, on)
 
-467 official NPCs whose dialog and logic exist in no server data yet, standing
+215 official NPCs whose dialog and logic exist in no server data yet, standing
 where the client puts them with their own sprite and name. 44 already work
 (storage lockers, guild storage, inns, repair, channel switches, the Varmundt
 elevator, Jormungandr's contact points, market guides); the rest greet you until

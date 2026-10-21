@@ -12,8 +12,23 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - The Episode Valkyrie (standart-npc) can skip both episodes with their Clear Tickets, through F_WSJ_Skip20/21.
 - Boats, Walter sailors, the hidden ship, the small door and Nyar are real transports (rAthena's 'Travel to' guides on those cells are switched off while the block is on); Lunaforma's mercenaries, soldiers, workers, children and refugees, Alberta's Wigner house staff, the working Rgans and the Frozen Zone guardians have their own lines.
 
+### 🏛️ New: Varmundt, Amatsu, Juno Library and Chapter 1 (setting `varmundt`, on)
+- The Fantasy Book "Dungeon Food" (iRO quests 16667-16690).
+- The Chess Garden and the Deep Abyss research (16778-16801), Rune Crowns and enchants.
+- Seoyeon's Trial (3519-3523).
+- Chapter 1's story from Ash Village to the Sky Fortress, with its side quests and dailies.
+- The Juno Library's VR books (Issgard Crafting Contest, the Demon King's Castle, Lazrigs).
+- The eroded wing of Varmundt's mansion.
+- 153 placeholders become these NPCs. Rewards, recipes and prices that kRO doesn't publish are estimates.
+
+### ⭐ New: Star Forest, Herosria and Ash Village (setting `star_forest`, on)
+- The Star Emperor job change (iRO quests 11573-11585).
+- Sanctuary Herosria's lobby services, portals, PvP dungeon blessing and gardens (not the siege itself).
+- Ash Village's shops, enchants and signposts.
+- 99 placeholders become these NPCs. Prices, recipes and rewards kRO doesn't publish are estimates.
+
 ### 🧍 Placeholders
-- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). Likewise the 5 Overlook Water Dungeon signboards, which iRO Quests implements. 467 placeholders remain, 44 of them working.
+- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 153 and the Star Forest block 99. Likewise the 5 Overlook Water Dungeon signboards, which iRO Quests implements. 215 placeholders remain, 44 of them working.
 
 ### 👾 World Sync monsters (db/mob_db.yml, until the app ships the same fixes)
 - They drop again: 154 monsters had drops with no chance published, which the server gave the 0.01% floor. They now use the typical chance of the same kind of item (materials 5%, cards 0.01%, equipment 0.03-0.3%).
