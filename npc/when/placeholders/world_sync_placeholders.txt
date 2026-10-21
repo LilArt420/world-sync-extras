@@ -357,81 +357,6 @@ hero_lb,163,163,4	script	Greenwood Lake#ws15762	10527,{
 	mes "Hello there, adventurer.";
 	close;
 }
-icas_in2,30,121,4	script	Nadyagand#ws14329	10474,{
-	mes "[Nadyagand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,31,116,4	script	Horuru#ws14330	10461,{
-	mes "[Horuru]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,32,120,4	script	Lazy#ws14331	10454,{
-	mes "[Lazy]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,37,118,4	script	Iwin Soldier#ws14332	10461,{
-	mes "[Iwin Soldier]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,34,117,4	script	Iwin Soldier#ws14333	10461,{
-	mes "[Iwin Soldier]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,29,114,4	script	Iwin Soldier#ws14334	10461,{
-	mes "[Iwin Soldier]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,27,118,4	script	Iwin Soldier#ws14335	10461,{
-	mes "[Iwin Soldier]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,37,115,4	script	Iwin Soldier#ws14336	10461,{
-	mes "[Iwin Soldier]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,247,122,4	script	Captured Bagot#ws14760	10386,{
-	mes "[Captured Bagot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,253,118,4	script	Voglinde#ws14761	10467,{
-	mes "[Voglinde]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,246,119,4	script	Maram#ws14762	10376,{
-	mes "[Maram]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,251,121,4	script	Miriam#ws14763	10377,{
-	mes "[Miriam]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,252,113,4	script	Lazy#ws14764	10454,{
-	mes "[Lazy]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,245,115,4	script	Leon#ws14765	10464,{
-	mes "[Leon]";
-	mes "Hello there, adventurer.";
-	close;
-}
-icas_in2,246,112,4	script	Aurelie#ws14766	10465,{
-	mes "[Aurelie]";
-	mes "Hello there, adventurer.";
-	close;
-}
 in_sphinx1,138,61,4	script	Blacksmith Haka#ws14165	726,{
 	mes "[Blacksmith Haka]";
 	mes "Hello there, adventurer.";
@@ -667,51 +592,6 @@ jor_back5,296,149,4	script	Contact Point#ws14379	10429,{
 	if (.@c == 7) warp "jor_twig", 192, 212;
 	end;
 }
-jor_back5,350,75,4	script	Lehar#ws14396	10469,{
-	mes "[Lehar]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,350,72,4	script	Lazy#ws14399	10454,{
-	mes "[Lazy]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,348,78,4	script	Miriam#ws14400	10377,{
-	mes "[Miriam]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,353,77,4	script	Horuru#ws14401	10461,{
-	mes "[Horuru]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,353,357,4	script	Miriam#ws14420	10377,{
-	mes "[Miriam]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,352,355,4	script	Lazy#ws14422	10454,{
-	mes "[Lazy]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,355,354,4	script	Lehar#ws14423	10469,{
-	mes "[Lehar]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,356,357,4	script	Magical Object#ws14424	10540,{
-	mes "[Magical Object]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_back5,353,353,4	script	Horuru#ws14425	10461,{
-	mes "[Horuru]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_back5,71,204,4	script	Magical Object#ws14438	10540,{
 	mes "[Magical Object]";
 	mes "Hello there, adventurer.";
@@ -842,76 +722,6 @@ jor_maze,253,267,4	script	Contact Point#ws14381	10429,{
 	if (.@c == 7) warp "jor_twig", 192, 212;
 	end;
 }
-jor_maze,140,72,4	script	Rippling Wall#ws14506	10527,{
-	mes "[Rippling Wall]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,137,69,4	script	Leon#ws14654	10471,{
-	mes "[Leon]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,142,70,4	script	Lehar#ws14655	10472,{
-	mes "[Lehar]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,145,53,4	script	Aurelie#ws14656	10470,{
-	mes "[Aurelie]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,150,36,4	script	Maram#ws14657	10472,{
-	mes "[Maram]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,150,33,4	script	Miriam#ws14658	10471,{
-	mes "[Miriam]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,145,41,4	script	Lazy#ws14659	10475,{
-	mes "[Lazy]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,52,238,4	script	Hoton Lokengand#ws14660	10470,{
-	mes "[Hoton Lokengand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,55,238,4	script	Sohem Garyugand#ws14662	10471,{
-	mes "[Sohem Garyugand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,154,244,4	script	Misu Gozengand#ws14664	10472,{
-	mes "[Misu Gozengand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,157,241,4	script	Naaryugand#ws14666	10473,{
-	mes "[Naaryugand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,281,191,4	script	Kengundrgand#ws14668	10474,{
-	mes "[Kengundrgand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,283,188,4	script	Hanaungand#ws14670	10475,{
-	mes "[Hanaungand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_maze,197,34,4	script	Miriam#ws14672	10471,{
-	mes "[Miriam]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_root1,39,93,4	script	Contact Point#ws14382	10429,{
 	mes "[Contact Point]";
 	if (!ws_cp_jor_root1) {
@@ -941,46 +751,6 @@ jor_root1,39,93,4	script	Contact Point#ws14382	10429,{
 	if (.@c == 6) warp "jor_twice", 76, 101;
 	if (.@c == 7) warp "jor_twig", 192, 212;
 	end;
-}
-jor_root1,32,34,4	script	Rgan Shaman#ws14457	21985,{
-	mes "[Rgan Shaman]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root1,32,75,4	script	Mark#ws14701	10429,{
-	mes "[Mark]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root1,69,128,4	script	Mark#ws14706	10432,{
-	mes "[Mark]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root1,25,145,4	script	Mark#ws14707	10432,{
-	mes "[Mark]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root1,35,211,4	script	Mark#ws14708	10432,{
-	mes "[Mark]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root1,17,194,4	script	Mark#ws14709	10432,{
-	mes "[Mark]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root1,254,66,4	script	Mark#ws14710	10432,{
-	mes "[Mark]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root1,278,74,4	script	Mark#ws14711	10432,{
-	mes "[Mark]";
-	mes "Hello there, adventurer.";
-	close;
 }
 jor_root2,19,44,4	script	Contact Point#ws14383	10429,{
 	mes "[Contact Point]";
@@ -1012,106 +782,6 @@ jor_root2,19,44,4	script	Contact Point#ws14383	10429,{
 	if (.@c == 7) warp "jor_twig", 192, 212;
 	end;
 }
-jor_root2,43,63,4	script	Hardened Spot#ws14508	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,90,50,4	script	Hardened Spot#ws14509	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,235,258,4	script	Hardened Spot#ws14510	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,77,191,4	script	Hardened Spot#ws14511	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,118,104,4	script	Hardened Spot#ws14512	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,143,79,4	script	Hardened Spot#ws14513	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,234,95,4	script	Hardened Spot#ws14514	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,114,149,4	script	Hardened Spot#ws14515	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,53,167,4	script	Hardened Spot#ws14516	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,211,225,4	script	Hardened Spot#ws14517	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,217,115,4	script	Hardened Spot#ws14518	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,171,114,4	script	Hardened Spot#ws14519	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,76,92,4	script	Hardened Spot#ws14520	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,45,257,4	script	Hardened Spot#ws14521	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,83,234,4	script	Hardened Spot#ws14522	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,147,189,4	script	Hardened Spot#ws14523	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,122,204,4	script	Hardened Spot#ws14524	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,48,111,4	script	Hardened Spot#ws14525	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,211,196,4	script	Hardened Spot#ws14526	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_root2,170,178,4	script	Hardened Spot#ws14527	10428,{
-	mes "[Hardened Spot]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_root3,347,147,4	script	Contact Point#ws14386	10429,{
 	mes "[Contact Point]";
 	if (!ws_cp_jor_root3) {
@@ -1142,11 +812,6 @@ jor_root3,347,147,4	script	Contact Point#ws14386	10429,{
 	if (.@c == 7) warp "jor_twig", 192, 212;
 	end;
 }
-jor_safty2,75,360,4	script	Bishop Rgan#ws14464	10474,{
-	mes "[Bishop Rgan]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_safty2,193,42,4	script	Rgan#ws14496	10475,{
 	mes "[Rgan]";
 	mes "Hello there, adventurer.";
@@ -1164,36 +829,6 @@ jor_safty2,305,44,4	script	Rgan#ws14503	10473,{
 }
 jor_safty2,303,41,4	script	Rgan#ws14504	10475,{
 	mes "[Rgan]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,162,86,4	script	Rgan#ws14467	10475,{
-	mes "[Rgan]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,161,88,4	script	Rgan#ws14472	10474,{
-	mes "[Rgan]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,164,86,4	script	Rgan#ws14474	10473,{
-	mes "[Rgan]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,185,128,4	script	Rgan#ws14476	10474,{
-	mes "[Rgan]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,42,105,4	script	Rgan#ws14481	10473,{
-	mes "[Rgan]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twice,43,331,4	script	White Cat#ws14324	4_M_01,{
-	mes "[White Cat]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -1227,28 +862,8 @@ jor_twice,76,100,4	script	Contact Point#ws14380	10429,{
 	if (.@c == 7) warp "jor_twig", 192, 212;
 	end;
 }
-jor_twice,235,111,4	script	Kororo#ws14629	10461,{
-	mes "[Kororo]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jor_twice,255,125,4	script	Maram#ws14632	10376,{
 	mes "[Maram]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twice,247,163,4	script	Miriam#ws14633	10377,{
-	mes "[Miriam]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twice,222,226,4	script	Lazy#ws14634	10454,{
-	mes "[Lazy]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twice,232,249,4	script	Lehar#ws14635	10469,{
-	mes "[Lehar]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -1259,41 +874,6 @@ jor_twice,237,310,4	script	Aurelie#ws14636	10465,{
 }
 jor_twice,238,330,4	script	Leon#ws14637	10464,{
 	mes "[Leon]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twice,158,243,4	script	Leon#ws14638	10464,{
-	mes "[Leon]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twice,161,243,4	script	Aurelie#ws14647	10465,{
-	mes "[Aurelie]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twice,164,244,4	script	Lehar#ws14649	10469,{
-	mes "[Lehar]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twice,159,247,4	script	Maram#ws14650	10376,{
-	mes "[Maram]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twice,163,248,4	script	Miriam#ws14651	10377,{
-	mes "[Miriam]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twice,169,249,4	script	Lazy#ws14652	10454,{
-	mes "[Lazy]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twice,162,246,4	script	White Cat#ws14653	10537,{
-	mes "[White Cat]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -1326,116 +906,6 @@ jor_twig,192,211,4	script	Contact Point#ws14384	10429,{
 	if (.@c == 6) warp "jor_twice", 76, 101;
 	if (.@c == 7) warp "jor_twig", 192, 212;
 	end;
-}
-jor_twig,187,198,4	script	White Cat#ws14735	4_M_01,{
-	mes "[White Cat]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,180,123,4	script	White Cat#ws14736	4_M_01,{
-	mes "[White Cat]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,179,120,4	script	Lehar#ws14737	10469,{
-	mes "[Lehar]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,184,121,4	script	Miriam#ws14738	10377,{
-	mes "[Miriam]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,178,126,4	script	Bagot#ws14739	10386,{
-	mes "[Bagot]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,176,129,4	script	Voglinde#ws14740	10467,{
-	mes "[Voglinde]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,142,153,4	script	White Cat#ws14741	4_M_01,{
-	mes "[White Cat]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,138,157,4	script	Leon#ws14742	10464,{
-	mes "[Leon]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,138,152,4	script	Aurelie#ws14743	10465,{
-	mes "[Aurelie]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,140,155,4	script	Rasgand#ws14745	10536,{
-	mes "[Rasgand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,140,164,4	script	Nyar's Clone#ws14746	4_M_01,{
-	mes "[Nyar's Clone]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,143,161,4	script	Nyar's Clone#ws14747	4_M_01,{
-	mes "[Nyar's Clone]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,146,158,4	script	Nyar's Clone#ws14748	4_M_01,{
-	mes "[Nyar's Clone]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,149,155,4	script	Nyar's Clone#ws14749	4_M_01,{
-	mes "[Nyar's Clone]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,146,152,4	script	Nyar's Clone#ws14750	4_M_01,{
-	mes "[Nyar's Clone]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,143,149,4	script	Nyar's Clone#ws14751	4_M_01,{
-	mes "[Nyar's Clone]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,140,146,4	script	Nyar's Clone#ws14752	4_M_01,{
-	mes "[Nyar's Clone]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,137,149,4	script	Nyar's Clone#ws14753	4_M_01,{
-	mes "[Nyar's Clone]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,134,152,4	script	Nyar's Clone#ws14754	4_M_01,{
-	mes "[Nyar's Clone]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,130,155,4	script	Nyar's Clone#ws14755	4_M_01,{
-	mes "[Nyar's Clone]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,134,158,4	script	Nyar's Clone#ws14756	4_M_01,{
-	mes "[Nyar's Clone]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_twig,137,161,4	script	Nyar's Clone#ws14757	4_M_01,{
-	mes "[Nyar's Clone]";
-	mes "Hello there, adventurer.";
-	close;
 }
 jupe_core,134,283,4	script	Monk Wabi#ws14094	808,{
 	mes "[Monk Wabi]";
@@ -2798,71 +2268,6 @@ jor_raise1,128,326,4	script	Ornamental Door#ws19106	10429,{
 }
 jor_raise2,100,26,4	script	Hidden Ship#ws18734	10429,{
 	mes "[Hidden Ship]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,157,171,4	script	Sarekgand#ws18376	10473,{
-	mes "[Sarekgand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,22,283,4	script	Supervisor#ws18378	10473,{
-	mes "[Supervisor]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,258,117,4	script	Doririrogand#ws18658	10470,{
-	mes "[Doririrogand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,257,115,4	script	Pamoshugand#ws18661	10474,{
-	mes "[Pamoshugand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,215,84,4	script	Gomiagand#ws18664	10475,{
-	mes "[Gomiagand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,218,86,4	script	Gamirabagand#ws18666	10471,{
-	mes "[Gamirabagand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,190,128,4	script	Holsibigand#ws18668	10474,{
-	mes "[Holsibigand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,101,138,4	script	Eririgand#ws18671	10475,{
-	mes "[Eririgand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,271,156,4	script	Nalsioramigand#ws18684	21529,{
-	mes "[Nalsioramigand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,264,160,4	script	Numkasaigagand#ws18686	21529,{
-	mes "[Numkasaigagand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,266,155,4	script	Onnaecheramelgand#ws18688	21529,{
-	mes "[Onnaecheramelgand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,268,160,4	script	Jakreudagumigand#ws18690	21529,{
-	mes "[Jakreudagumigand]";
-	mes "Hello there, adventurer.";
-	close;
-}
-jor_sanct,267,163,4	script	Kljeinamogand#ws18692	21529,{
-	mes "[Kljeinamogand]";
 	mes "Hello there, adventurer.";
 	close;
 }
