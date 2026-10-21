@@ -84,11 +84,11 @@ ygg_edge,259,245,4	script	Hvergelmir#wsf	10527,{
 	end;
 }
 ygg_edge,216,91,4	script	Prontera Field#wsf	10527,{
-	callfunc "F_WSF_Sign", "the fields of Prontera", "prt_fild05", 351, 250;
+	callfunc "F_WSF_Sign", "the fields of Prontera", "prt_fild05", 351, 248;
 	end;
 }
 ygg_edge,193,92,4	script	Payon Field#wsf	10527,{
-	callfunc "F_WSF_Sign", "the fields of Payon", "pay_fild01", 306, 339;
+	callfunc "F_WSF_Sign", "the fields of Payon", "pay_fild01", 306, 337;
 	end;
 }
 ygg_edge,31,117,4	script	Land of Darkness#wsf	10527,{
