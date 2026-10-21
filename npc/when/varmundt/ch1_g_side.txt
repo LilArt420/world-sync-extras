@@ -472,15 +472,15 @@ uknw_ruin,224,34,4	script	Frowning Nyaiz#wsv	22463,{
 // ------------------------------------------------------------
 // The Shaking Crossroads of the Geffen field, and Minuel.
 // ------------------------------------------------------------
-hem_fild,334,188,4	script	Shaking Crossroads#wsv1	21813,{
+hem_fild,334,188,4	script	Shaking Crossroads#wsv1	10527,{
 	callfunc "F_WSV_C1Cross", "hem_dun02", 160, 242, 160, 51, "the north side of the ruins", "the south side of the ruins";
 	end;
 }
-hem_fild,133,337,4	script	Shaking Crossroads#wsv2	21813,{
+hem_fild,133,337,4	script	Shaking Crossroads#wsv2	10527,{
 	callfunc "F_WSV_C1Cross", "ch1_gfn03", 180, 230, 70, 205, "the east of the eroded West Geffenia", "the west of the eroded West Geffenia";
 	end;
 }
-hem_fild,231,299,4	script	Shaking Crossroads#wsv3	21813,{
+hem_fild,231,299,4	script	Shaking Crossroads#wsv3	10527,{
 	callfunc "F_WSV_C1Cross", "ch1_gfn01", 194, 238, 212, 77, "the north of the eroded East Geffenia", "the south of the eroded East Geffenia";
 	end;
 }
