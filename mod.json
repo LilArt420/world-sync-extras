@@ -27,7 +27,7 @@
       "type": "boolean",
       "default": true,
       "label": "Varmundt, Amatsu, Juno Library and Chapter 1",
-      "description": "The Fantasy Book \"Dungeon Food\" in the Prontera East Library (level 100+, once a day), Varmundt's Chess Garden and the Biosphere Deep Abyss (level 250+), Seoyeon's Trial under Amatsu (level 70+), Chapter 1 \"Song of the World Tree\" from the small ash trees near Prontera and Payon to Destroyed Geffen and the Dark Whisper (level 200+), the Juno Library's VR books (level 200+) and the eroded wing of Varmundt's mansion (level 265+). Turned off, its NPCs leave those maps (their placeholders don't come back)."
+      "description": "The Fantasy Book \"Dungeon Food\" in Prontera's east library (level 100+), Varmundt's Chess Garden and the Deep Abyss (250+), Seoyeon's Trial under Amatsu (70+), Chapter 1 from the small ash trees near Prontera and Payon to the Dark Whisper (200+), the Juno Library's VR books (200+) and the mansion's eroded wing (265+). Turned off, its NPCs leave those maps."
     },
     {
       "key": "star_forest",
