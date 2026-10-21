@@ -1,0 +1,152 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Shared functions, scene visibility and the doors into the
+//= block's maps.
+//===== Description: =========================================
+//= The Fantasy Book "Dungeon Food" (Prontera East Library,
+//= vr_bob), Varmundt's Chess Garden (Biosphere Deep Abyss),
+//= Seoyeon's Trial (Amatsu Dungeon), the eroded wing of
+//= Varmundt's mansion, the Juno Library's VR rooms and the
+//= Chapter 1 story (Ash Village, Destroyed Geffen, Verus and the
+//= Dark Whisper).
+//=
+//= Written from the official clients' quest text (iRO English,
+//= kRO through ROenglishRE's translation), the navigation tables
+//= and the official update notes (playragnarok.com, ro.gnjoy.com).
+//= No official script exists; steps, goals and places follow the
+//= client's quest log.
+//=
+//= Character variables (prefixed so a future official script
+//= can't collide with them):
+//=   wsv_df    Dungeon Food reading step (0 = not reading)
+//=   wsv_dfb   Dungeon Food bits (1 first reading done, 2/4 asked
+//=             Margaretha/Kathryne, 8 bet won)
+//=   wsv_dft   Dungeon Food: when the bet hunt started
+//=   wsv_abyss_rep  Deep Abyss research reputation (0-5000)
+//=   wsv_abyss 1 once briefed for the Deep Abyss
+//=   wsv_sy    Seoyeon's Trial step (0-5), wsv_sys its spot (1-5)
+//============================================================
+
+// Who can see which scene NPC. Every scene NPC is CLOAKED; this
+// shows it to a player whose step is in its range and hides it
+// otherwise. Called on map load and after every step change.
+function	script	F_WSV_Scenes	{
+	.@m$ = strcharinfo(3);
+	if (.@m$ == "ama_dun02") {
+		callfunc "F_WSV_SYScenes";
+		return;
+	}
+	// NPC name, step variable, first step, last step (inclusive)
+	if (.@m$ == "vr_bob") {
+		setarray .@t$,
+			"Seyren Windsor#wsv_df1","wsv_df","1","4",
+			"Margaretha Sorin#wsv_df1","wsv_df","1","7",
+			"Kathryne Keyron#wsv_df1","wsv_df","1","7",
+			"Seyren Windsor#wsv_df2","wsv_df","5","7",
+			"Seyren Windsor#wsv_df3","wsv_df","8","11",
+			"Margaretha Sorin#wsv_df2","wsv_df","8","11",
+			"Kathryne Keyron#wsv_df2","wsv_df","8","11",
+			"Kathryne Keyron#wsv_df3","wsv_df","12","15",
+			"Margaretha Sorin#wsv_df3","wsv_df","12","15",
+			"Seyren Windsor#wsv_df4","wsv_df","12","15";
+	} else
+		return;
+	for (.@i = 0; .@i < getarraysize(.@t$); .@i += 4) {
+		.@s = getd(.@t$[.@i+1]);
+		if (.@s >= atoi(.@t$[.@i+2]) && .@s <= atoi(.@t$[.@i+3]))
+			cloakoffnpcself .@t$[.@i];
+		else
+			cloakonnpcself .@t$[.@i];
+	}
+	return;
+}
+
+// Finishes the quests given, starts the next ones (comma separated
+// ids, "" for none), sets a step variable and refreshes the scene.
+// callfunc "F_WSV_Step", "<variable>", <new step>, "<done>", "<next>";
+function	script	F_WSV_Step	{
+	.@done$ = getarg(2);
+	.@next$ = getarg(3);
+	if (.@done$ != "") {
+		explode .@d$, .@done$, ",";
+		.@n = getarraysize(.@d$);
+		for (.@i = 0; .@i < .@n; .@i++) {
+			.@q = atoi(.@d$[.@i]);
+			if (isbegin_quest(.@q) == 0)
+				setquest .@q;
+			if (isbegin_quest(.@q) == 1)
+				completequest .@q;
+		}
+	}
+	if (.@next$ != "") {
+		explode .@x$, .@next$, ",";
+		.@n = getarraysize(.@x$);
+		for (.@i = 0; .@i < .@n; .@i++) {
+			.@q = atoi(.@x$[.@i]);
+			if (isbegin_quest(.@q) == 2)
+				erasequest .@q;
+			if (isbegin_quest(.@q) == 0)
+				setquest .@q;
+		}
+	}
+	setd getarg(0), getarg(1);
+	callfunc "F_WSV_Scenes";
+	questinfo_refresh;
+	return;
+}
+
+// Drops quests from the log whatever their state (a reading closed
+// early, a daily started over).
+// callfunc "F_WSV_Erase", "<ids>";
+function	script	F_WSV_Erase	{
+	explode .@d$, getarg(0), ",";
+	.@n = getarraysize(.@d$);
+	for (.@i = 0; .@i < .@n; .@i++) {
+		.@q = atoi(.@d$[.@i]);
+		if (isbegin_quest(.@q))
+			erasequest .@q;
+	}
+	return;
+}
+
+// A daily that resets at 4 AM: 1 while its cooldown quest is still
+// running, 0 when it's over (or never started; the quest is dropped).
+// callfunc("F_WSV_Waiting", <cooldown quest>)
+function	script	F_WSV_Waiting	{
+	.@q = getarg(0);
+	if (isbegin_quest(.@q) == 0)
+		return 0;
+	if (checkquest(.@q, PLAYTIME) == 2) {
+		erasequest .@q;
+		return 0;
+	}
+	return 1;
+}
+
+// Hides the generic "Travel to" guides World Sync placed where this
+// block's own NPCs now stand (the server keeps them when the block
+// is switched off).
+-	script	WSV_Loader	-1,{
+	end;
+OnInit:
+	setarray .@n$,
+		// vr_bob: Ink, the Magical Stones and Seyren stand there now
+		"Travel to vr_bob#ws14909", "Travel to vr_bob#ws14917",
+		"Travel to vr_bob#ws14920", "Travel to vr_bob#ws14928",
+		// the Chess Garden's own exit and Deep Abyss entrance
+		"Travel to ba_maison#ws14256", "Travel to bl_depth2#ws14258",
+		// "entrances" setting: the pagoda's chessboard checks the level
+		"ws_ba_maison_14253";
+	for (.@i = 0; .@i < getarraysize(.@n$); .@i++) {
+		if (getnpcid(0, .@n$[.@i]))
+			disablenpc .@n$[.@i];
+	}
+	end;
+OnPCLoadMapEvent:
+	callfunc "F_WSV_Scenes";
+	end;
+}
+
+vr_bob	mapflag	loadevent
+vr_bob	mapflag	nomemo
+vr_bob	mapflag	nosave	SavePoint
+vr_bob	mapflag	nobranch

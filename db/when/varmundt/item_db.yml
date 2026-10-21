@@ -1,0 +1,28 @@
+# World Sync Extras: Varmundt block - the Fantasy Series' growth potions.
+# rAthena ships them without a script; these follow the official note
+# ("the number of level-ups gained from the obtained experience is limited to
+# once; above Lv 200 the effect is significantly reduced"): a tenth of the
+# current level's experience, a fiftieth from level 200 on.
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Body:
+  - Id: 101404
+    AegisName: Fantastic_Exp_Potion
+    Name: Fantasy Growth Potion
+    Type: Usable
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      callfunc "F_WSV_GrowthPotion", 0;
+  - Id: 101406
+    AegisName: Fantastic_JobExp_Potion
+    Name: Fantasy Job Growth Potion
+    Type: Usable
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      callfunc "F_WSV_GrowthPotion", 1;
