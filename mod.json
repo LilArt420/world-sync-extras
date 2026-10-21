@@ -23,6 +23,13 @@
       "description": "Horuru offers Episode 20 to any character of level 200 or more, even one that hasn't finished Issgard's Episode 19 story."
     },
     {
+      "key": "star_forest",
+      "type": "boolean",
+      "default": true,
+      "label": "Star Forest, Herosria and Ash Village",
+      "description": "The Star Emperor job change in the Meteor Forest (TaeKwon Masters, base 99 / job 50: Nalson in Payon), Sanctuary Herosria's Garden of Dawn (portals in the four castle realms) and Ash Village at the edge of the World Tree, where Chapter 1 begins (level 200+: the small ash trees near Prontera and Payon). Turned off, their NPCs leave the maps (their placeholders don't come back)."
+    },
+    {
       "key": "entrances",
       "type": "boolean",
       "default": false,
