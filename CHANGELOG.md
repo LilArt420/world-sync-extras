@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.1
+- World Sync monsters drop again: 154 of them (e.g. all of Varmundt's) had drops with no chance published, which the server gave the 0.01% floor. They now use the typical chance of the same kind of item (materials 5%, cards 0.01%, equipment 0.03-0.3%), until the app ships the same fix (db/mob_db.yml, by drop slot).
+
 ## 1.2.0
 - 44 placeholders now work:
   - Storage Lockers (8): your storage, for 40 zeny like a Kafra.

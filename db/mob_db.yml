@@ -1,0 +1,1911 @@
+# World Sync Extras: drop chances for the World Sync monsters whose chances Divine Pride
+# doesn't show (the server shipped them at 0.01%). Each drop takes its slot by Index, so
+# this replaces the old rate instead of adding a second drop. Estimated from the known
+# chances of the same item type (rathena world sync, divine_pride.py). Temporary: it goes
+# away once the app ships the fix (Flux159/rathena, world sync drop chances).
+
+Header:
+  Type: MOB_DB
+  Version: 5
+
+Body:
+  - Id: 22314
+    Drops:
+      - Index: 0
+        Item: aegis_1001640
+        Rate: 500
+      - Index: 1
+        Item: Scalleg_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22315
+    Drops:
+      - Index: 0
+        Item: aegis_1001643
+        Rate: 500
+      - Index: 1
+        Item: Velelling_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22316
+    Drops:
+      - Index: 0
+        Item: aegis_1001645
+        Rate: 500
+      - Index: 1
+        Item: Letterster_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22319
+    Drops:
+      - Index: 0
+        Item: aegis_1001644
+        Rate: 500
+      - Index: 1
+        Item: Skipskipper_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22383
+    Drops:
+      - Index: 0
+        Item: Golden_Jewel
+        Rate: 500
+      - Index: 1
+        Item: Hot_Water_Drop_Gem
+        Rate: 500
+      - Index: 2
+        Item: Shining_Crystal
+        Rate: 500
+      - Index: 3
+        Item: Small_Sewing_Box
+        Rate: 500
+  - Id: 22384
+    Drops:
+      - Index: 0
+        Item: Shining_Crystal
+        Rate: 500
+      - Index: 1
+        Item: Small_Sewing_Box
+        Rate: 500
+      - Index: 2
+        Item: Etel_Stone
+        Rate: 500
+  - Id: 22385
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Congealed_Poison
+        Rate: 500
+      - Index: 2
+        Item: Firm_Land_Crystal
+        Rate: 500
+      - Index: 3
+        Item: Ectoplasmic_Stone
+        Rate: 500
+  - Id: 22386
+    Drops:
+      - Index: 0
+        Item: Congealed_Poison
+        Rate: 500
+      - Index: 1
+        Item: Firm_Land_Crystal
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon
+        Rate: 500
+  - Id: 22389
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Ice_Water_Drop_Gem
+        Rate: 500
+      - Index: 2
+        Item: Small_Sewing_Box
+        Rate: 500
+      - Index: 3
+        Item: Evil_Minded_Ruby
+        Rate: 500
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 5
+        Item: Amber
+        Rate: 500
+  - Id: 22390
+    Drops:
+      - Index: 0
+        Item: Evil_Minded_Ruby
+        Rate: 500
+      - Index: 1
+        Item: Small_Sewing_Box
+        Rate: 500
+      - Index: 2
+        Item: Ice_Water_Drop_Gem
+        Rate: 500
+  - Id: 22391
+    Drops:
+      - Index: 0
+        Item: Blue_Flame_Heart_Gem
+        Rate: 500
+      - Index: 1
+        Item: Evil_Minded_Ruby
+        Rate: 500
+      - Index: 2
+        Item: Heavy_Chain
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 4
+        Item: Etel_Stone
+        Rate: 500
+      - Index: 5
+        Item: Zelunium
+        Rate: 500
+      - Index: 6
+        Item: Violet_Jewel
+        Rate: 500
+  - Id: 22392
+    Drops:
+      - Index: 0
+        Item: Violet_Jewel
+        Rate: 500
+      - Index: 1
+        Item: Zelunium
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 3
+        Item: Evil_Minded_Ruby
+        Rate: 500
+      - Index: 4
+        Item: Heavy_Chain
+        Rate: 500
+      - Index: 5
+        Item: Blue_Flame_Heart_Gem
+        Rate: 500
+  - Id: 22395
+    Drops:
+      - Index: 0
+        Item: Turn_Yellow_Leaf
+        Rate: 500
+      - Index: 1
+        Item: Whittling
+        Rate: 500
+      - Index: 2
+        Item: Amber
+        Rate: 500
+      - Index: 3
+        Item: Golden_Jewel
+        Rate: 500
+  - Id: 22396
+    Drops:
+      - Index: 0
+        Item: Whittling
+        Rate: 500
+      - Index: 1
+        Item: Turn_Yellow_Leaf
+        Rate: 500
+      - Index: 2
+        Item: Blue_Flame_Heart_Gem
+        Rate: 500
+  - Id: 22397
+    Drops:
+      - Index: 0
+        Item: Red_Flame_Heart_Gem
+        Rate: 500
+      - Index: 1
+        Item: Blaze_Stone
+        Rate: 500
+      - Index: 2
+        Item: Evil_Minded_Ruby
+        Rate: 500
+      - Index: 3
+        Item: Amber
+        Rate: 500
+  - Id: 22398
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Evil_Minded_Ruby
+        Rate: 500
+      - Index: 2
+        Item: Blaze_Stone
+        Rate: 500
+  - Id: 22399
+    Drops:
+      - Index: 0
+        Item: Congealed_Poison
+        Rate: 500
+      - Index: 1
+        Item: Dry_Wind_Leaf_Gem
+        Rate: 500
+      - Index: 2
+        Item: Evil_Black_Bid
+        Rate: 500
+      - Index: 3
+        Item: Violet_Jewel
+        Rate: 500
+  - Id: 22400
+    Drops:
+      - Index: 0
+        Item: Congealed_Poison
+        Rate: 500
+  - Id: 22401
+    Drops:
+      - Index: 0
+        Item: Slicky_Fluid
+        Rate: 500
+      - Index: 1
+        Item: Shining_Crystal
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon
+        Rate: 500
+  - Id: 22402
+    Drops:
+      - Index: 0
+        Item: Shining_Crystal
+        Rate: 500
+      - Index: 1
+        Item: Slicky_Fluid
+        Rate: 500
+  - Id: 22412
+    Drops:
+      - Index: 0
+        Item: Yorscalp_Spirit
+        Rate: 500
+      - Index: 1
+        Item: Shining_Crystal
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001638
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
+  - Id: 22413
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001639
+        Rate: 500
+      - Index: 2
+        Item: Shining_Crystal
+        Rate: 500
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 500
+  - Id: 22414
+    Drops:
+      - Index: 0
+        Item: Shadowdecon_Ore
+        Rate: 500
+      - Index: 1
+        Item: Zelunium_Ore
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001637
+        Rate: 500
+      - Index: 3
+        Item: Evil_Black_Bid
+        Rate: 500
+  - Id: 22415
+    Drops:
+      - Index: 0
+        Item: Whittling
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001629
+        Rate: 500
+  - Id: 22416
+    Drops:
+      - Index: 0
+        Item: aegis_1001635
+        Rate: 500
+      - Index: 1
+        Item: Evil_Minded_Ruby
+        Rate: 500
+      - Index: 2
+        Item: Zelunium_Ore
+        Rate: 500
+  - Id: 22417
+    Drops:
+      - Index: 0
+        Item: Zelunium_Ore
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001634
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001633
+        Rate: 500
+      - Index: 3
+        Item: aegis_1001628
+        Rate: 500
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 500
+  - Id: 22418
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001629
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001633
+        Rate: 500
+      - Index: 3
+        Item: aegis_1001634
+        Rate: 500
+  - Id: 22419
+    Drops:
+      - Index: 0
+        Item: aegis_1001636
+        Rate: 500
+      - Index: 1
+        Item: Congealed_Poison
+        Rate: 500
+  - Id: 22420
+    Drops:
+      - Index: 0
+        Item: Congealed_Poison
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001636
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 3
+        Item: Yorscalp_Spirit
+        Rate: 500
+  - Id: 22431
+    Drops:
+      - Index: 0
+        Item: Skyblue_Jewel
+        Rate: 500
+      - Index: 1
+        Item: Hard_Ice
+        Rate: 500
+      - Index: 2
+        Item: Ice_Water_Drop_Gem
+        Rate: 500
+      - Index: 3
+        Item: Slicky_Fluid
+        Rate: 500
+      - Index: 4
+        Item: Cool_Liquid
+        Rate: 500
+      - Index: 5
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 6
+        Item: Etel_Stone
+        Rate: 500
+  - Id: 22433
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Slicky_Fluid
+        Rate: 500
+      - Index: 2
+        Item: Ice_Water_Drop_Gem
+        Rate: 500
+      - Index: 3
+        Item: Hard_Ice
+        Rate: 500
+      - Index: 4
+        Item: Skyblue_Jewel
+        Rate: 500
+      - Index: 5
+        Item: Zelunium
+        Rate: 500
+  - Id: 22434
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Skyblue_Jewel
+        Rate: 500
+      - Index: 2
+        Item: Blue_Flame_Heart_Gem
+        Rate: 500
+      - Index: 3
+        Item: Green_Crystal_Fragment
+        Rate: 500
+      - Index: 4
+        Item: Cool_Liquid
+        Rate: 500
+      - Index: 5
+        Item: Etel_Dust
+        Rate: 500
+  - Id: 22435
+    Drops:
+      - Index: 0
+        Item: Cool_Liquid
+        Rate: 500
+      - Index: 1
+        Item: Weird_Tentacle
+        Rate: 500
+      - Index: 2
+        Item: Green_Land_Crystal
+        Rate: 500
+      - Index: 3
+        Item: Violet_Jewel
+        Rate: 500
+      - Index: 4
+        Item: Zelunium
+        Rate: 500
+  - Id: 22436
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Hot_Water_Drop_Gem
+        Rate: 500
+      - Index: 2
+        Item: Blaze_Stone
+        Rate: 500
+      - Index: 3
+        Item: Aromatic_Flower
+        Rate: 500
+      - Index: 4
+        Item: Amber
+        Rate: 500
+      - Index: 5
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 6
+        Item: Etel_Stone
+        Rate: 500
+  - Id: 22437
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Shining_Crystal
+        Rate: 500
+      - Index: 2
+        Item: Cool_Liquid
+        Rate: 500
+      - Index: 3
+        Item: Storm_Wind_Leaf_Gem
+        Rate: 500
+      - Index: 4
+        Item: Zelunium
+        Rate: 500
+      - Index: 5
+        Item: Golden_Jewel
+        Rate: 500
+  - Id: 22439
+    Drops:
+      - Index: 0
+        Item: Skyblue_Jewel
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Blue_Flame_Heart_Gem
+        Rate: 500
+      - Index: 3
+        Item: Cool_Liquid
+        Rate: 500
+      - Index: 4
+        Item: Green_Crystal_Fragment
+        Rate: 500
+  - Id: 22440
+    Drops:
+      - Index: 0
+        Item: Cool_Liquid
+        Rate: 500
+      - Index: 1
+        Item: Weird_Tentacle
+        Rate: 500
+      - Index: 2
+        Item: Green_Land_Crystal
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 4
+        Item: Etel_Stone
+        Rate: 500
+      - Index: 5
+        Item: Zelunium
+        Rate: 500
+      - Index: 6
+        Item: Violet_Jewel
+        Rate: 500
+  - Id: 22441
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Hot_Water_Drop_Gem
+        Rate: 500
+      - Index: 2
+        Item: Blaze_Stone
+        Rate: 500
+      - Index: 3
+        Item: Aromatic_Flower
+        Rate: 500
+  - Id: 22442
+    Drops:
+      - Index: 0
+        Item: Shining_Crystal
+        Rate: 500
+      - Index: 1
+        Item: Cool_Liquid
+        Rate: 500
+      - Index: 2
+        Item: Storm_Wind_Leaf_Gem
+        Rate: 500
+  - Id: 22443
+    Drops:
+      - Index: 0
+        Item: aegis_1002021
+        Rate: 500
+      - Index: 1
+        Item: aegis_300633
+        Rate: 1
+        StealProtected: true
+  - Id: 22444
+    Drops:
+      - Index: 0
+        Item: aegis_1002021
+        Rate: 500
+      - Index: 1
+        Item: aegis_300634
+        Rate: 1
+        StealProtected: true
+  - Id: 22445
+    Drops:
+      - Index: 0
+        Item: aegis_1001989
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001977
+        Rate: 500
+      - Index: 2
+        Item: Coal
+        Rate: 500
+      - Index: 3
+        Item: aegis_300635
+        Rate: 1
+        StealProtected: true
+  - Id: 22446
+    Drops:
+      - Index: 0
+        Item: Live_Coal
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001977
+        Rate: 500
+      - Index: 2
+        Item: aegis_1002048
+        Rate: 500
+      - Index: 3
+        Item: aegis_300636
+        Rate: 1
+        StealProtected: true
+  - Id: 22447
+    Drops:
+      - Index: 0
+        Item: aegis_1001977
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001990
+        Rate: 500
+      - Index: 2
+        Item: Solid_Shell
+        Rate: 500
+      - Index: 3
+        Item: aegis_300637
+        Rate: 1
+        StealProtected: true
+  - Id: 22448
+    Drops:
+      - Index: 0
+        Item: Blossom_Of_Maneater
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001977
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001987
+        Rate: 500
+      - Index: 3
+        Item: aegis_300638
+        Rate: 1
+        StealProtected: true
+  - Id: 22449
+    Drops:
+      - Index: 0
+        Item: aegis_1001977
+        Rate: 500
+      - Index: 1
+        Item: aegis_1002048
+        Rate: 500
+      - Index: 2
+        Item: Flesh_Of_Clam
+        Rate: 500
+      - Index: 3
+        Item: aegis_300639
+        Rate: 1
+        StealProtected: true
+  - Id: 22450
+    Drops:
+      - Index: 0
+        Item: Root_Of_Maneater
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001977
+        Rate: 500
+      - Index: 2
+        Item: aegis_300640
+        Rate: 1
+        StealProtected: true
+  - Id: 22451
+    Drops:
+      - Index: 0
+        Item: aegis_1002020
+        Rate: 500
+      - Index: 1
+        Item: Sticky_Poison
+        Rate: 500
+      - Index: 2
+        Item: aegis_300641
+        Rate: 1
+        StealProtected: true
+  - Id: 22453
+    Drops:
+      - Index: 0
+        Item: Shell
+        Rate: 500
+      - Index: 1
+        Item: aegis_300643
+        Rate: 1
+        StealProtected: true
+  - Id: 22454
+    Drops:
+      - Index: 0
+        Item: Iron
+        Rate: 500
+      - Index: 1
+        Item: Steel
+        Rate: 500
+      - Index: 2
+        Item: Mystery_Piece
+        Rate: 500
+      - Index: 3
+        Item: Screw
+        Rate: 500
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 5
+        Item: aegis_300644
+        Rate: 1
+        StealProtected: true
+  - Id: 22455
+    Drops:
+      - Index: 0
+        Item: Screw
+        Rate: 500
+      - Index: 1
+        Item: Mystery_Piece
+        Rate: 500
+      - Index: 2
+        Item: Coal
+        Rate: 500
+      - Index: 3
+        Item: Sword_Mace
+        Rate: 3
+      - Index: 4
+        Item: aegis_300645
+        Rate: 1
+        StealProtected: true
+  - Id: 22456
+    Drops:
+      - Index: 0
+        Item: Steel
+        Rate: 500
+      - Index: 1
+        Item: Screw
+        Rate: 500
+      - Index: 2
+        Item: Old_Steel_Plate
+        Rate: 500
+      - Index: 3
+        Item: aegis_300646
+        Rate: 1
+        StealProtected: true
+  - Id: 22457
+    Drops:
+      - Index: 0
+        Item: Screw
+        Rate: 500
+      - Index: 1
+        Item: Old_Steel_Plate
+        Rate: 500
+      - Index: 2
+        Item: aegis_300646
+        Rate: 1
+        StealProtected: true
+  - Id: 22458
+    Drops:
+      - Index: 0
+        Item: Screw
+        Rate: 500
+      - Index: 1
+        Item: Old_Steel_Plate
+        Rate: 500
+      - Index: 2
+        Item: aegis_300646
+        Rate: 1
+        StealProtected: true
+  - Id: 22459
+    Drops:
+      - Index: 0
+        Item: Screw
+        Rate: 500
+      - Index: 1
+        Item: aegis_300646
+        Rate: 1
+        StealProtected: true
+  - Id: 22460
+    Drops:
+      - Index: 0
+        Item: Transparent_Cloth
+        Rate: 500
+  - Id: 22461
+    Drops:
+      - Index: 0
+        Item: Transparent_Cloth
+        Rate: 500
+  - Id: 22462
+    Drops:
+      - Index: 0
+        Item: Transparent_Cloth
+        Rate: 500
+  - Id: 22463
+    Drops:
+      - Index: 0
+        Item: Mystery_Piece
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 3
+        Item: aegis_300647
+        Rate: 1
+        StealProtected: true
+  - Id: 22464
+    Drops:
+      - Index: 0
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 1
+        Item: Zelunium_Ore
+        Rate: 500
+      - Index: 2
+        Item: Mystery_Piece
+        Rate: 500
+      - Index: 3
+        Item: aegis_300648
+        Rate: 1
+        StealProtected: true
+  - Id: 22465
+    Drops:
+      - Index: 0
+        Item: Shadowdecon_Ore
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001975
+        Rate: 500
+      - Index: 3
+        Item: aegis_1001994
+        Rate: 500
+      - Index: 4
+        Item: aegis_300649
+        Rate: 1
+        StealProtected: true
+  - Id: 22466
+    Drops:
+      - Index: 0
+        Item: aegis_1001975
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001995
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 3
+        Item: Zelunium_Ore
+        Rate: 500
+      - Index: 4
+        Item: aegis_300650
+        Rate: 1
+        StealProtected: true
+  - Id: 22467
+    Drops:
+      - Index: 0
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 1
+        Item: aegis_1002017
+        Rate: 500
+      - Index: 2
+        Item: aegis_300651
+        Rate: 1
+        StealProtected: true
+  - Id: 22468
+    Drops:
+      - Index: 0
+        Item: aegis_1002019
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon_Ore
+        Rate: 500
+      - Index: 3
+        Item: aegis_300652
+        Rate: 1
+        StealProtected: true
+  - Id: 22469
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 2
+        Item: aegis_1002018
+        Rate: 500
+      - Index: 3
+        Item: aegis_300653
+        Rate: 1
+        StealProtected: true
+  - Id: 22470
+    Drops:
+      - Index: 0
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001993
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon_Ore
+        Rate: 500
+      - Index: 3
+        Item: Violet_Jewel
+        Rate: 500
+      - Index: 4
+        Item: aegis_300654
+        Rate: 1
+        StealProtected: true
+  - Id: 22471
+    Drops:
+      - Index: 0
+        Item: Rouge
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001986
+        Rate: 500
+      - Index: 2
+        Item: aegis_300655
+        Rate: 1
+        StealProtected: true
+  - Id: 22472
+    Drops:
+      - Index: 0
+        Item: Rune_Of_Darkness
+        Rate: 500
+      - Index: 1
+        Item: aegis_300656
+        Rate: 1
+        StealProtected: true
+  - Id: 22473
+    Drops:
+      - Index: 0
+        Item: aegis_1001988
+        Rate: 500
+      - Index: 1
+        Item: aegis_300657
+        Rate: 1
+        StealProtected: true
+  - Id: 22474
+    Drops:
+      - Index: 0
+        Item: Moving_Black_Things
+        Rate: 500
+      - Index: 1
+        Item: aegis_300658
+        Rate: 1
+        StealProtected: true
+  - Id: 22475
+    Drops:
+      - Index: 0
+        Item: Moving_Black_Things
+        Rate: 500
+      - Index: 1
+        Item: aegis_300658
+        Rate: 1
+        StealProtected: true
+  - Id: 22478
+    Drops:
+      - Index: 0
+        Item: Moving_Black_Things
+        Rate: 500
+      - Index: 1
+        Item: aegis_300660
+        Rate: 1
+        StealProtected: true
+  - Id: 22484
+    Drops:
+      - Index: 0
+        Item: Fruit_Of_Mastela
+        Rate: 2750
+      - Index: 1
+        Item: Shining_Crystal
+        Rate: 500
+      - Index: 2
+        Item: aegis_300663
+        Rate: 1
+        StealProtected: true
+  - Id: 22488
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
+      - Index: 1
+        Item: aegis_300665
+        Rate: 1
+        StealProtected: true
+  - Id: 22507
+    Drops:
+      - Index: 0
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 1
+        Item: Chaotic_Rune_Ore
+        Rate: 500
+  - Id: 22508
+    Drops:
+      - Index: 0
+        Item: Chaotic_Rune_Ore
+        Rate: 500
+      - Index: 1
+        Item: Encroached_Mace
+        Rate: 3
+      - Index: 2
+        Item: Frontier_Magic_Dust
+        Rate: 500
+  - Id: 22509
+    Drops:
+      - Index: 0
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 1
+        Item: Disparate_Rune_Ore
+        Rate: 500
+      - Index: 2
+        Item: Encroached_Dagger
+        Rate: 3
+      - Index: 3
+        Item: Chaotic_Rune_Ore
+        Rate: 500
+  - Id: 22510
+    Drops:
+      - Index: 0
+        Item: Tiem_SpellScroll
+        Rate: 500
+      - Index: 1
+        Item: Encroached_Bow
+        Rate: 3
+      - Index: 2
+        Item: Frontier_Magic_Dust
+        Rate: 500
+  - Id: 22511
+    Drops:
+      - Index: 0
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 1
+        Item: Encroached_Foxtail
+        Rate: 3
+      - Index: 2
+        Item: Pure_SpellScoll
+        Rate: 500
+  - Id: 22512
+    Drops:
+      - Index: 0
+        Item: Encroached_Staff
+        Rate: 3
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+  - Id: 22513
+    Drops:
+      - Index: 0
+        Item: Frontier_Magic_Dust
+        Rate: 500
+  - Id: 22514
+    Drops:
+      - Index: 0
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 1
+        Item: Encroached_Humma
+        Rate: 3
+  - Id: 22516
+    Drops:
+      - Index: 0
+        Item: Chaotic_Rune_Ore
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: Encroached_Spear
+        Rate: 3
+  - Id: 22517
+    Drops:
+      - Index: 0
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 1
+        Item: Chaotic_Rune_Ore
+        Rate: 500
+  - Id: 22518
+    Drops:
+      - Index: 0
+        Item: Chaotic_Rune_Ore
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: Encroached_Book
+        Rate: 3
+  - Id: 22519
+    Drops:
+      - Index: 0
+        Item: Chaotic_Rune
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: Chaotic_Rune_Ore
+        Rate: 500
+      - Index: 3
+        Item: Encroached_Katar
+        Rate: 3
+      - Index: 4
+        Item: Chaotic_Essence
+        Rate: 500
+  - Id: 22520
+    Drops:
+      - Index: 0
+        Item: Chaotic_Rune_Ore
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: Chaotic_Rune
+        Rate: 500
+      - Index: 3
+        Item: Encroached_Rifle
+        Rate: 3
+  - Id: 22521
+    Drops:
+      - Index: 0
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 1
+        Item: Chaotic_Rune_Ore
+        Rate: 500
+  - Id: 22522
+    Drops:
+      - Index: 0
+        Item: Chaotic_Rune_Ore
+        Rate: 500
+      - Index: 1
+        Item: Chaotic_Essence
+        Rate: 500
+      - Index: 2
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 3
+        Item: Chaotic_Rune
+        Rate: 500
+  - Id: 22523
+    Drops:
+      - Index: 0
+        Item: Chaotic_Rune
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: Chaotic_Rune_Ore
+        Rate: 500
+  - Id: 22685
+    Drops:
+      - Index: 0
+        Item: aegis_1002679
+        Rate: 500
+      - Index: 1
+        Item: Chain_Mail_
+        Rate: 50
+  - Id: 22687
+    Drops:
+      - Index: 0
+        Item: aegis_1001980
+        Rate: 500
+      - Index: 1
+        Item: aegis_1002681
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon
+        Rate: 500
+  - Id: 22688
+    Drops:
+      - Index: 0
+        Item: aegis_1002683
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001981
+        Rate: 500
+  - Id: 22689
+    Drops:
+      - Index: 0
+        Item: aegis_1002682
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001982
+        Rate: 500
+  - Id: 22690
+    Drops:
+      - Index: 0
+        Item: aegis_1002686
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001983
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+  - Id: 22691
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001983
+        Rate: 500
+      - Index: 2
+        Item: aegis_1002687
+        Rate: 500
+  - Id: 22692
+    Drops:
+      - Index: 0
+        Item: aegis_1002688
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001982
+        Rate: 500
+  - Id: 22693
+    Drops:
+      - Index: 0
+        Item: aegis_1002689
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001981
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 500
+  - Id: 22694
+    Drops:
+      - Index: 0
+        Item: aegis_1002690
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001980
+        Rate: 500
+  - Id: 22695
+    Drops:
+      - Index: 0
+        Item: aegis_1002691
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001979
+        Rate: 500
+  - Id: 22696
+    Drops:
+      - Index: 0
+        Item: aegis_1001978
+        Rate: 500
+      - Index: 1
+        Item: aegis_1002685
+        Rate: 500
+  - Id: 22699
+    Drops:
+      - Index: 0
+        Item: aegis_1002695
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Cold_Ice
+        Rate: 500
+  - Id: 22700
+    Drops:
+      - Index: 0
+        Item: Ice_Piece
+        Rate: 500
+      - Index: 1
+        Item: aegis_1002693
+        Rate: 500
+  - Id: 22701
+    Drops:
+      - Index: 0
+        Item: aegis_1002694
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Ice_Heart
+        Rate: 500
+      - Index: 3
+        Item: End_Sektura
+        Rate: 3
+  - Id: 22702
+    Drops:
+      - Index: 0
+        Item: aegis_1002696
+        Rate: 500
+      - Index: 1
+        Item: aegis_1002697
+        Rate: 500
+  - Id: 22703
+    Drops:
+      - Index: 0
+        Item: aegis_1002697
+        Rate: 500
+      - Index: 1
+        Item: aegis_1002696
+        Rate: 500
+  - Id: 22704
+    Drops:
+      - Index: 0
+        Item: aegis_1002696
+        Rate: 500
+      - Index: 1
+        Item: aegis_1002697
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+  - Id: 22714
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: aegis_1002679
+        Rate: 500
+      - Index: 3
+        Item: aegis_1002842
+        Rate: 500
+      - Index: 4
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 5
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 6
+        Item: ABI_Lava_Essence
+        Rate: 500
+        StealProtected: true
+  - Id: 22715
+    Drops:
+      - Index: 0
+        Item: ABI_Lava_Essence
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 3
+        Item: aegis_1002679
+        Rate: 500
+      - Index: 4
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 5
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 6
+        Item: Zelunium
+        Rate: 500
+  - Id: 22716
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Chaotic_Rune
+        Rate: 500
+      - Index: 3
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 4
+        Item: aegis_1001990
+        Rate: 500
+      - Index: 5
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 6
+        Item: ABI_Lava_Essence
+        Rate: 500
+        StealProtected: true
+  - Id: 22717
+    Drops:
+      - Index: 0
+        Item: aegis_1001990
+        Rate: 500
+      - Index: 1
+        Item: Zelunium
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+  - Id: 22718
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 3
+        Item: BurningSkin
+        Rate: 500
+      - Index: 4
+        Item: ABI_Lava_Essence
+        Rate: 500
+  - Id: 22719
+    Drops:
+      - Index: 0
+        Item: ABI_Lava_Essence
+        Rate: 500
+      - Index: 1
+        Item: BurningSkin
+        Rate: 500
+      - Index: 2
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 3
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 5
+        Item: Zelunium
+        Rate: 500
+  - Id: 22720
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: aegis_1002681
+        Rate: 500
+      - Index: 3
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 4
+        Item: ABI_Lava_Essence
+        Rate: 500
+  - Id: 22721
+    Drops:
+      - Index: 0
+        Item: aegis_1002681
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 500
+  - Id: 22724
+    Drops:
+      - Index: 0
+        Item: Earthworm_Peeling
+        Rate: 500
+  - Id: 22725
+    Drops:
+      - Index: 0
+        Item: ABI_Ground_Rune_Ore
+        Rate: 500
+      - Index: 1
+        Item: Chaotic_Essence
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 3
+        Item: Earthworm_Peeling
+        Rate: 500
+  - Id: 22728
+    Drops:
+      - Index: 0
+        Item: Sticky_Mucus
+        Rate: 500
+      - Index: 1
+        Item: ABI_Ground_Rune_Ore
+        Rate: 500
+      - Index: 2
+        Item: ABI_Ground_Essence
+        Rate: 500
+      - Index: 3
+        Item: Dimension_Energy_BL
+        Rate: 500
+      - Index: 4
+        Item: Frontier_Magic_Dust
+        Rate: 500
+  - Id: 22730
+    Drops:
+      - Index: 0
+        Item: Goat's_Horn
+        Rate: 500
+  - Id: 22731
+    Drops:
+      - Index: 0
+        Item: Goat's_Horn
+        Rate: 500
+  - Id: 22732
+    Drops:
+      - Index: 0
+        Item: ABI_Ground_Rune_Ore
+        Rate: 500
+  - Id: 22771
+    Drops:
+      - Index: 0
+        Item: Zelunium_Ore
+        Rate: 500
+  - Id: 22773
+    Drops:
+      - Index: 0
+        Item: Zelunium_Ore
+        Rate: 500
+  - Id: 22777
+    Drops:
+      - Index: 0
+        Item: Zelunium_Ore
+        Rate: 500
+  - Id: 22779
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Zelunium_Ore
+        Rate: 500
+  - Id: 22780
+    Drops:
+      - Index: 0
+        Item: Shadowdecon_Ore
+        Rate: 500
+  - Id: 22781
+    Drops:
+      - Index: 0
+        Item: Zelunium_Ore
+        Rate: 500
+  - Id: 22782
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+  - Id: 22783
+    Drops:
+      - Index: 0
+        Item: Zelunium_Ore
+        Rate: 500
+  - Id: 22784
+    Drops:
+      - Index: 0
+        Item: Shadowdecon_Ore
+        Rate: 500
+  - Id: 22797
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Transparent_Cloth
+        Rate: 500
+  - Id: 22798
+    Drops:
+      - Index: 0
+        Item: Transparent_Cloth
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+  - Id: 22799
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Rotten_Bandage
+        Rate: 500
+  - Id: 22800
+    Drops:
+      - Index: 0
+        Item: Rotten_Bandage
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+  - Id: 22801
+    Drops:
+      - Index: 0
+        Item: Dimension_Energy_YL
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Blaze_Stone
+        Rate: 500
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 4
+        Item: Zelunium
+        Rate: 500
+  - Id: 22802
+    Drops:
+      - Index: 0
+        Item: Zelunium
+        Rate: 500
+      - Index: 1
+        Item: Blaze_Stone
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+  - Id: 22803
+    Drops:
+      - Index: 0
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 3
+        Item: Brigan
+        Rate: 500
+  - Id: 22804
+    Drops:
+      - Index: 0
+        Item: Brigan
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 3
+        Item: Chaotic_Rune
+        Rate: 500
+  - Id: 22805
+    Drops:
+      - Index: 0
+        Item: Zelunium
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Soft_Feather
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 4
+        Item: Chaotic_Rune
+        Rate: 500
+        StealProtected: true
+  - Id: 22806
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Soft_Feather
+        Rate: 500
+  - Id: 22807
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: CrudeAmmo
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 3
+        Item: Frontier_Magic_Dust
+        Rate: 500
+  - Id: 22808
+    Drops:
+      - Index: 0
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: CrudeAmmo
+        Rate: 500
+      - Index: 4
+        Item: Shadowdecon
+        Rate: 500
+  - Id: 22809
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Soft_Feather
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 4
+        Item: Frontier_Magic_Dust
+        Rate: 500
+  - Id: 22810
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Zelunium
+        Rate: 500
+      - Index: 2
+        Item: Soft_Feather
+        Rate: 500
+  - Id: 22811
+    Drops:
+      - Index: 0
+        Item: Zelunium
+        Rate: 500
+      - Index: 1
+        Item: Dragon_Canine
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+  - Id: 22812
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: Dragon_Canine
+        Rate: 500
+      - Index: 3
+        Item: Zelunium
+        Rate: 500
+      - Index: 4
+        Item: Shadowdecon
+        Rate: 500
+  - Id: 22813
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Zelunium
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 3
+        Item: Skel_Bone
+        Rate: 500
+  - Id: 22814
+    Drops:
+      - Index: 0
+        Item: Skel_Bone
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 500
+  - Id: 22815
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Clattering_Skull
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 4
+        Item: Frontier_Magic_Dust
+        Rate: 500
+        StealProtected: true
+  - Id: 22816
+    Drops:
+      - Index: 0
+        Item: Clattering_Skull
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+  - Id: 22817
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Skull
+        Rate: 500
+      - Index: 4
+        Item: Dimension_Energy_BL
+        Rate: 500
+      - Index: 5
+        Item: Frontier_Magic_Dust
+        Rate: 500
+        StealProtected: true
+  - Id: 22818
+    Drops:
+      - Index: 0
+        Item: Skull
+        Rate: 500
+      - Index: 1
+        Item: Zelunium
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 500
+  - Id: 22819
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Rent_Spell_Book
+        Rate: 500
+  - Id: 22820
+    Drops:
+      - Index: 0
+        Item: Chaotic_Rune
+        Rate: 500
+      - Index: 1
+        Item: Rent_Spell_Book
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 4
+        Item: Zelunium
+        Rate: 500
