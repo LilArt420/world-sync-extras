@@ -1,0 +1,768 @@
+//===== World Sync Extras: Star Forest block ================
+//= The Star Emperor job change in the Meteor Forest.
+//= Quests 11573-11585 (the iRO client's quest log). Steps 0-140
+//= in wsf_se. Requirements and goals as on iRO: TaeKwon Master,
+//= base level 99, job level 50; 10 Minerals in the Einbroch
+//= Mine Dungeon, 50 Nine Tails in the Payon Cave.
+//============================================================
+
+// Who can take the job change test.
+function	script	F_WSF_SeCan	{
+	if (Class != JOB_STAR_GLADIATOR && Class != JOB_STAR_GLADIATOR2)
+		return 0;
+	if (BaseLevel < 99 || JobLevel < 50)
+		return 1;
+	return 2;
+}
+
+// ------------------------------------------------------------
+// Payon: Nalson and the butlers
+// ------------------------------------------------------------
+payon,171,171,4	script	Man in Star Emperor Uniform#wsf	798,{
+	.@c = callfunc("F_WSF_SeCan");
+	if (wsf_se >= 140) {
+		mes "[Nalson]";
+		mes "Ah, a Star Emperor! You walk differently now, did you notice?";
+		mes "Like someone who knows where the stars will be tomorrow.";
+		next;
+		mes "[Nalson]";
+		mes "Give my regards to the masters of the Meteor Forest when you go back.";
+		close;
+	}
+	if (wsf_se >= 10) {
+		mes "[Nalson]";
+		mes "The Meteor Forest is beyond the narrow mountain path on the north side of Mt. Mjolnir.";
+		mes "Ask the <NAVI>[Mountain Keeper]<INFO>mjolnir_03,238,186,0,101,0</INFO></NAVI> there. He knows the way.";
+		close;
+	}
+	if (.@c == 0) {
+		mes "[Nalson]";
+		mes "This uniform? It's the uniform of the Star Emperors.";
+		mes "Those who read the sun, the moon and the stars, and fight with all three.";
+		next;
+		mes "[Nalson]";
+		mes "Only a TaeKwon Master can walk that road. If you know one, tell them Nalson is in Payon.";
+		close;
+	}
+	if (.@c == 1) {
+		mes "[Nalson]";
+		mes "A TaeKwon Master! Good, good. But you're not quite ready yet.";
+		mes "Come back when you've reached ^0000FFbase level 99 and job level 50^000000.";
+		mes "The Meteor Forest doesn't open its gate to anyone less.";
+		close;
+	}
+	if (!wsf_se_met) {
+		mes "[Nalson]";
+		mes "Oh? You there. TaeKwon Master, aren't you?";
+		mes "I can tell from the way you stand. Feet steady, eyes on the sky.";
+		next;
+		mes "[Nalson]";
+		mes "My name is Nalson. I'm a disciple of Master Chosi.";
+		mes "Master Chosi trains Star Emperors in the Meteor Forest, deep in the mountains.";
+		next;
+		mes "[Nalson]";
+		mes "The sun, the moon and the stars... a TaeKwon Master feels them. A Star Emperor commands them.";
+		mes "If you're interested, talk to me again. I'll tell you how to get there.";
+		wsf_se_met = 1;
+		close;
+	}
+	mes "[Nalson]";
+	mes "So, you want to know the way to the Meteor Forest?";
+	next;
+	if (select("Yes, tell me.:Not now.") == 2) {
+		mes "[Nalson]";
+		mes "No hurry. The stars aren't going anywhere.";
+		close;
+	}
+	mes "[Nalson]";
+	mes "The forest lies beyond a narrow mountain path, on the north side of Mt. Mjolnir.";
+	mes "Not many people know about it, and the master likes it that way.";
+	next;
+	mes "[Nalson]";
+	mes "There's a <NAVI>[Mountain Keeper]<INFO>mjolnir_03,238,186,0,101,0</INFO></NAVI> who watches over the path.";
+	mes "Ask him how to get to the Meteor Forest. He'll show you.";
+	next;
+	mes "[Nalson]";
+	mes "Once you're inside, find one of the master's students and say you've come to become a Star Emperor.";
+	mes "Good luck. May the stars watch over you.";
+	callfunc "F_WSF_Step", "wsf_se", 10, "", "11573";
+	close;
+
+OnInit:
+	questinfo( QTYPE_JOB, QMARK_YELLOW, "(Class == JOB_STAR_GLADIATOR || Class == JOB_STAR_GLADIATOR2) && BaseLevel >= 99 && JobLevel >= 50 && wsf_se == 0" );
+	end;
+}
+
+payon,170,169,4	script	Butler Chung#wsf1	88,{
+	mes "[Butler Chung]";
+	switch (rand(3)) {
+	case 0:
+		mes "Master Nalson came down from the mountains to find students worthy of the Meteor Forest.";
+		mes "We came along to carry his things. He brings a lot of tea.";
+		break;
+	case 1:
+		mes "The uniform suits him, doesn't it? Star Emperors wear the night sky on their backs.";
+		break;
+	default:
+		mes "If you're a TaeKwon Master, speak to Master Nalson. He's been waiting for someone like you.";
+		break;
+	}
+	close;
+}
+payon,168,173,4	duplicate(Butler Chung#wsf1)	Butler Chung#wsf2	88
+payon,173,173,4	duplicate(Butler Chung#wsf1)	Butler Chung#wsf3	88
+payon,173,169,4	duplicate(Butler Chung#wsf1)	Butler Chung#wsf4	88
+
+// ------------------------------------------------------------
+// Mt. Mjolnir: the Mountain Keeper (Master Chosi in disguise)
+// ------------------------------------------------------------
+mjolnir_03,238,186,4	script	Mountain Keeper#wsf	59,{
+	if (wsf_se == 120) {
+		mes "[Mountain Keeper]";
+		mes "Hm? Back already? Lost your way in the forest?";
+		next;
+		switch (select("How can I get to the Meteor Forest?:Investigate")) {
+		case 1:
+			mes "[Mountain Keeper]";
+			mes "Same way as before. Off you go.";
+			close2;
+			warp "star_frst",89,32;
+			end;
+		case 2:
+			break;
+		}
+		mes "^4d4dffSomething about the old man doesn't add up.";
+		mes "His back is bent, but his feet don't make a sound on the gravel. And his eyes have been following you since you arrived.^000000";
+		next;
+		select("You're no mountain keeper, are you?");
+		mes "[Mountain Keeper]";
+		mes "......";
+		mes "Ho ho ho! Sharp eyes. Ilgwang said you'd come looking.";
+		next;
+		emotion ET_SMILE;
+		mes "[Chosi]";
+		mes "Yes, I am Chosi. The one my students call master.";
+		mes "I like to sit here and watch who climbs the mountain. You learn a lot about people from the way they walk up a slope.";
+		next;
+		mes "[Chosi]";
+		mes "I watched you, too. You went to the mine for Eunha, to the cave for Ilgwang, and you carried Chosung's temper all the way to Eunha's door.";
+		mes "Not one of them taught you a single move, and you never complained.";
+		next;
+		mes "[Chosi]";
+		mes "That's the first lesson of the Star Emperor. The sun doesn't ask the moon for thanks, and the stars don't complain about the night.";
+		next;
+		mes "[Chosi]";
+		mes "I'm old. It's time I gave my seat to my students. Ilgwang, Chosung and Eunha will be masters in my place.";
+		mes "Each of them walks a different road. The sun, the moon, the stars... you'll see.";
+		next;
+		mes "[Chosi]";
+		mes "Go back to the Meteor Forest and choose the one you want to grow with.";
+		mes "<NAVI>[Ilgwang]<INFO>star_in,98,67,0,101,0</INFO></NAVI>, <NAVI>[Chosung]<INFO>star_frst,69,118,0,101,0</INFO></NAVI> or <NAVI>[Eunha]<INFO>star_frst,157,39,0,101,0</INFO></NAVI>. Whoever you choose will make you a Star Emperor.";
+		callfunc "F_WSF_Step", "wsf_se", 130, "11584", "11585";
+		close2;
+		warp "star_frst",89,32;
+		end;
+	}
+	mes "[Mountain Keeper]";
+	if (wsf_se >= 140)
+		mes "Ho, the new Star Emperor. Going home to the forest?";
+	else if (wsf_se >= 10)
+		mes "Back again? The path is steep, mind your step.";
+	else {
+		mes "This is the end of the trail, traveller.";
+		mes "Beyond these rocks there's only a narrow path, and the forest where the stars fall.";
+	}
+	next;
+	if (select("How can I get to the Meteor Forest?:Never mind.") == 2) {
+		mes "[Mountain Keeper]";
+		mes "Then enjoy the view and go back down carefully.";
+		close;
+	}
+	mes "[Mountain Keeper]";
+	mes "The Meteor Forest? Ho ho. Not many come asking for it.";
+	mes "Master Chosi and his students train there. They don't mind visitors, as long as they're quiet.";
+	next;
+	mes "[Mountain Keeper]";
+	mes "Hold on tight, I'll take you up the path.";
+	close2;
+	warp "star_frst",89,32;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsf_se == 120" );
+	end;
+}
+
+// ------------------------------------------------------------
+// The Meteor Forest
+// ------------------------------------------------------------
+star_frst,88,36,4	script	Chosi's Student#wsf	914,{
+	if (wsf_se == 10) {
+		mes "[Chosi's Student]";
+		mes "Welcome to the Meteor Forest.";
+		mes "The Mountain Keeper sent you up? Then you must have business with our master.";
+		next;
+		switch (select("I want to be a Star Emperor.:Just looking around.")) {
+		case 1:
+			break;
+		case 2:
+			mes "[Chosi's Student]";
+			mes "Please do. But don't disturb the trainees, they bite.";
+			close;
+		}
+		mes "[Chosi's Student]";
+		mes "A Star Emperor! Then you'd be joining Master Chosi's school.";
+		mes "Do you want to join?";
+		next;
+		if (select("Join:Let me think about it.") == 2) {
+			mes "[Chosi's Student]";
+			mes "Think as long as you like. The forest is patient.";
+			close;
+		}
+		mes "[Chosi's Student]";
+		mes "Wonderful! New students fill out an application first.";
+		mes "We keep the forms in the <NAVI>[teahouse]<INFO>star_frst,61,121,0,101,0</INFO></NAVI>. I'll meet you inside.";
+		callfunc "F_WSF_Step", "wsf_se", 20, "11573", "11574";
+		close;
+	}
+	mes "[Chosi's Student]";
+	if (wsf_se == 20)
+		mes "The <NAVI>[teahouse]<INFO>star_frst,61,121,0,101,0</INFO></NAVI> is up the path to the north-west. I'll meet you there.";
+	else if (wsf_se >= 140)
+		mes "Master Chosi's newest Star Emperor! The trainees still talk about you.";
+	else if (wsf_se > 20)
+		mes "How is the training going? Don't let Eunha talk you into doing his chores.";
+	else {
+		mes "Welcome to the Meteor Forest, where Master Chosi trains his students.";
+		mes "Stars fall here more than anywhere else in Rune-Midgard. Some nights the whole sky comes down.";
+	}
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsf_se == 10" );
+	end;
+}
+
+star_frst,69,118,4	script	Chosung#wsf	10297,{
+	if (wsf_se == 30) {
+		mes "[Chosung]";
+		mes "So you're the new one. Hmph. You saw what happened in there?";
+		mes "Those two drink until they think they're stronger than the mountain.";
+		next;
+		mes "[Chosung]";
+		mes "I'd show you around myself, but I have business that won't wait.";
+		mes "Rancis! Show the new student the forest.";
+		next;
+		mes "[Rancis]";
+		mes "Ye-yes, Brother Chosung!";
+		next;
+		mes "[Chosung]";
+		mes "Rancis will guide you. Listen to her.";
+		emotion ET_GO;
+		callfunc "F_WSF_Step", "wsf_se", 40, "11575", "11576";
+		close;
+	}
+	if (wsf_se == 130) {
+		callfunc "F_WSF_SeChoose", 2;
+		end;
+	}
+	mes "[Chosung]";
+	if (wsf_se >= 140 && wsf_se_m == 2) {
+		mes "There you are. Did you warm up?";
+		mes "The sun doesn't rest, and neither does my student. Go on, a hundred kicks before lunch.";
+	} else if (wsf_se >= 140)
+		mes "A Star Emperor who chose another teacher. Hmph. Show me you didn't choose wrong.";
+	else if (wsf_se >= 40)
+		mes "What are you doing here? Rancis is showing you around, isn't she?";
+	else
+		mes "The forest isn't a playground. If you're here to train, train.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsf_se == 30 || wsf_se == 130" );
+	end;
+}
+
+star_frst,66,118,4	script	Rancis#wsf_a	914,{
+	if (wsf_se == 40) {
+		mes "[Rancis]";
+		mes "Sorry about that. Brother Chosung is always in a hurry.";
+		mes "I'm Rancis, one of the master's students. I'll show you around the Meteor Forest!";
+		next;
+		mes "[Rancis]";
+		mes "The training grounds are up north, the masters' houses are scattered around the forest, and the teahouse is right here.";
+		mes "Come, let's walk. Follow me to the <NAVI>[east path]<INFO>star_frst,129,86,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSF_Step", "wsf_se", 50, "11576", "11577";
+		close;
+	}
+	mes "[Rancis]";
+	if (wsf_se == 50)
+		mes "This way! The <NAVI>[east path]<INFO>star_frst,129,86,0,101,0</INFO></NAVI>, come on!";
+	else if (wsf_se >= 140)
+		mes "Congratulations again! I hope I'll be a Star Emperor one day, too.";
+	else
+		mes "Hello! Are you here to train? The trainees are up north, the teahouse is right behind me.";
+	close;
+}
+
+star_frst,129,86,4	script(CLOAKED)	Rancis#wsf_b	914,{
+	if (wsf_se != 50)
+		end;
+	mes "[Rancis]";
+	mes "See those trees? Every one of them was planted where a star fell.";
+	mes "The master says the forest remembers the sky. That's why we train here.";
+	next;
+	mes "[Rancis]";
+	mes "Over there are Brother Ilgwang's house and Brother Chosung's house. And Brother Eunha lives... well, wherever he falls asleep.";
+	next;
+	emotion ET_SURPRISE;
+	mes "[Rancis]";
+	mes "Hm? What's that by the stream?";
+	mes "Come on, quick! Down to the <NAVI>[south]<INFO>star_frst,151,40,0,101,0</INFO></NAVI>!";
+	callfunc "F_WSF_Step", "wsf_se", 60, "11577", "11578";
+	close;
+}
+
+star_frst,151,40,4	script(CLOAKED)	Rancis#wsf_c	914,{
+	mes "[Rancis]";
+	mes "It's Brother Eunha! Sleeping in the sun again...";
+	mes "Wake him up, will you? He listens to new students. Sometimes.";
+	close;
+}
+
+star_frst,157,39,4	script	Eunha#wsf	10298,{
+	if (wsf_se == 60) {
+		mes "[Eunha]";
+		mes "Zzz... five more minutes... zzz...";
+		next;
+		select("Excuse me...");
+		emotion ET_HUK;
+		mes "[Eunha]";
+		mes "Wha-! Who's there? Oh. A new face.";
+		mes "Rancis brought you? Then you must be the new student.";
+		next;
+		mes "[Eunha]";
+		mes "Training, right. Hmm. Training, training...";
+		mes "I know! There are these ^0000FFMinerals^000000 in the <NAVI>[Einbroch Mine Dungeon, 2nd floor]<INFO>ein_dun02,291,292,0,101,0</INFO></NAVI>. Hard as rocks, because they are rocks.";
+		next;
+		mes "[Eunha]";
+		mes "Break ^0000FF10 of them^000000 and come back. That'll build your... uh... kicking. Yes.";
+		mes "Take the train from Einbroch to Einbech, the mine is north of town.";
+		next;
+		mes "[Rancis]";
+		mes "Brother Eunha...";
+		next;
+		mes "[Eunha]";
+		mes "What? It's real training! Off you go. Zzz...";
+		callfunc "F_WSF_Step", "wsf_se", 70, "11578", "11579";
+		close;
+	}
+	if (wsf_se == 70) {
+		if (checkquest(11579, HUNTING) != 2) {
+			mes "[Eunha]";
+			mes "Zzz... huh? Not done yet? ^0000FF10 Minerals^000000, Einbroch Mine Dungeon 2nd floor. Zzz...";
+			close;
+		}
+		emotion ET_OTL;
+		mes "[Eunha]";
+		mes "You... actually went? All the way to Einbech?";
+		mes "I was hoping you'd get lost and I could sleep.";
+		next;
+		mes "[Eunha]";
+		mes "Fine, fine. You're serious. Too serious for me.";
+		mes "Go see <NAVI>[Ilgwang]<INFO>star_frst,151,175,0,101,0</INFO></NAVI>. He likes serious people. His house is up north.";
+		callfunc "F_WSF_Step", "wsf_se", 80, "11579", "11580";
+		close;
+	}
+	if (wsf_se == 100) {
+		mes "[Eunha]";
+		mes "Zzz... hm? You again. What now?";
+		next;
+		select("Chosung wants to see you in Ilgwang's room.");
+		emotion ET_SCRATCH;
+		mes "[Eunha]";
+		mes "Ugh. He found out, didn't he. About the Minerals.";
+		mes "And the Nine Tails, I bet Ilgwang pulled the same trick.";
+		next;
+		mes "[Eunha]";
+		mes "Fine. But you're coming with me. If he yells, he yells at both of us.";
+		mes "Let's go to <NAVI>[Ilgwang's room]<INFO>star_frst,151,175,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSF_Step", "wsf_se", 110, "11582", "11583";
+		close;
+	}
+	if (wsf_se == 130) {
+		callfunc "F_WSF_SeChoose", 3;
+		end;
+	}
+	mes "[Eunha]";
+	if (wsf_se >= 140 && wsf_se_m == 3) {
+		mes "Ah, my student. Sit down, look at the sky.";
+		mes "Stars move when you're not looking. That's the lesson for today. Zzz...";
+	} else if (wsf_se >= 140)
+		mes "Congratulations, Star Emperor. Now let me sleep.";
+	else if (wsf_se == 110)
+		mes "I'm coming, I'm coming. <NAVI>[Ilgwang's room]<INFO>star_frst,151,175,0,101,0</INFO></NAVI>, right?";
+	else if (wsf_se >= 80 && wsf_se < 100)
+		mes "Shouldn't you be with Ilgwang? Zzz...";
+	else
+		mes "Zzz... the stars come out at night... why wake up before then... zzz...";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsf_se == 60 || wsf_se == 100 || wsf_se == 130" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsf_se == 70 && checkquest(11579, HUNTING) == 2" );
+	end;
+}
+
+// The trainees of the yard. Ambient only.
+star_frst,72,158,4	script	Trainee#wsf1	787,{
+	mes "[Trainee]";
+	switch (rand(5)) {
+	case 0:
+		mes "Hyah! Hyah! ...Ninety-eight... ninety-nine...";
+		break;
+	case 1:
+		mes "The master says a kick should fall like a star. I keep falling like a rock.";
+		break;
+	case 2:
+		mes "Don't stand there, you'll get kicked. Training's training.";
+		break;
+	case 3:
+		mes "Brother Chosung watches us from the hill. Don't let him see you slacking!";
+		break;
+	default:
+		mes "Sun stance, moon stance, star stance... and then the whole thing again.";
+		break;
+	}
+	close;
+}
+star_frst,70,158,4	duplicate(Trainee#wsf1)	Trainee#wsf2	787
+star_frst,68,158,4	duplicate(Trainee#wsf1)	Trainee#wsf3	787
+star_frst,66,158,4	duplicate(Trainee#wsf1)	Trainee#wsf4	787
+star_frst,64,158,4	duplicate(Trainee#wsf1)	Trainee#wsf5	787
+star_frst,72,156,4	duplicate(Trainee#wsf1)	Trainee#wsf6	787
+star_frst,70,156,4	duplicate(Trainee#wsf1)	Trainee#wsf7	787
+star_frst,68,156,4	duplicate(Trainee#wsf1)	Trainee#wsf8	787
+star_frst,66,156,4	duplicate(Trainee#wsf1)	Trainee#wsf9	787
+star_frst,64,156,4	duplicate(Trainee#wsf1)	Trainee#wsf10	787
+star_frst,72,154,4	duplicate(Trainee#wsf1)	Trainee#wsf11	787
+star_frst,70,154,4	duplicate(Trainee#wsf1)	Trainee#wsf12	787
+star_frst,68,154,4	duplicate(Trainee#wsf1)	Trainee#wsf13	787
+star_frst,66,154,4	duplicate(Trainee#wsf1)	Trainee#wsf14	787
+star_frst,64,154,4	duplicate(Trainee#wsf1)	Trainee#wsf15	787
+star_frst,72,152,4	duplicate(Trainee#wsf1)	Trainee#wsf16	787
+star_frst,70,152,4	duplicate(Trainee#wsf1)	Trainee#wsf17	787
+star_frst,68,152,4	duplicate(Trainee#wsf1)	Trainee#wsf18	787
+star_frst,66,152,4	duplicate(Trainee#wsf1)	Trainee#wsf19	787
+star_frst,64,152,4	duplicate(Trainee#wsf1)	Trainee#wsf20	787
+star_frst,117,156,4	duplicate(Trainee#wsf1)	Trainee#wsf21	787
+star_frst,104,150,4	duplicate(Trainee#wsf1)	Trainee#wsf22	787
+star_frst,106,150,4	duplicate(Trainee#wsf1)	Trainee#wsf23	787
+star_frst,108,150,4	duplicate(Trainee#wsf1)	Trainee#wsf24	787
+star_frst,110,150,4	duplicate(Trainee#wsf1)	Trainee#wsf25	787
+star_frst,112,150,4	duplicate(Trainee#wsf1)	Trainee#wsf26	787
+star_frst,114,150,4	duplicate(Trainee#wsf1)	Trainee#wsf27	787
+star_frst,86,126,4	duplicate(Trainee#wsf1)	Trainee#wsf28	787
+star_frst,113,99,4	duplicate(Trainee#wsf1)	Trainee#wsf29	787
+star_frst,152,158,4	duplicate(Trainee#wsf1)	Trainee#wsf30	819
+star_frst,152,156,4	duplicate(Trainee#wsf1)	Trainee#wsf31	929
+star_frst,152,154,4	duplicate(Trainee#wsf1)	Trainee#wsf32	841
+star_frst,152,152,4	duplicate(Trainee#wsf1)	Trainee#wsf33	843
+star_frst,154,158,4	duplicate(Trainee#wsf1)	Trainee#wsf34	934
+star_frst,154,156,4	duplicate(Trainee#wsf1)	Trainee#wsf35	964
+star_frst,154,154,4	duplicate(Trainee#wsf1)	Trainee#wsf36	979
+star_frst,154,152,4	duplicate(Trainee#wsf1)	Trainee#wsf37	644
+
+// ------------------------------------------------------------
+// Meteor Forest indoors: the teahouse, Ilgwang's and Chosung's rooms
+// ------------------------------------------------------------
+star_in,177,84,4	script	Chosi's Student#wsf_in	914,{
+	if (wsf_se == 20) {
+		mes "[Chosi's Student]";
+		mes "There you are. Sit, sit. Here's the application.";
+		mes "Name, home town, why you want to be a Star Emperor... the usual.";
+		next;
+		mes "^4d4dffYou start writing. At the next table, two guests have been getting louder and louder.^000000";
+		next;
+		mes "[Won]";
+		mes "I'm telling you, Dulson, those so-called masters are all talk!";
+		mes "One good punch and the whole forest would fall over!";
+		next;
+		mes "[Dulson]";
+		mes "Hah! You? You couldn't punch your way out of a teacup!";
+		mes "...But you're right. Hey! Student! Bring us more, and tell your masters to come out and fight!";
+		next;
+		mes "[Chosi's Student]";
+		mes "Oh no. Not again...";
+		next;
+		emotion ET_ANGER, getnpcid(0, "Chosung#wsf_tea");
+		mes "[Chosung]";
+		mes "Who wants to fight?";
+		next;
+		mes "^4d4dffBefore anyone can answer, there's a blur of feet. A chair goes one way, Won goes the other, and Dulson finds himself sitting on the floor without knowing how he got there.^000000";
+		next;
+		mes "[Dulson]";
+		mes "...Ow.";
+		next;
+		mes "[Chosung]";
+		mes "Finish your tea and go home. Quietly.";
+		mes "Rancis, with me.";
+		next;
+		mes "[Chosi's Student]";
+		mes "Phew. That's Brother Chosung, one of the master's top students.";
+		mes "He went outside with Rancis. You should catch him, he'll want to meet the new student.";
+		next;
+		mes "[Chosi's Student]";
+		mes "Leave the application with me. Go on, I'll show you out.";
+		callfunc "F_WSF_Step", "wsf_se", 30, "11574", "11575";
+		close2;
+		warp "star_frst",62,116;
+		end;
+	}
+	mes "[Chosi's Student]";
+	mes "Welcome to the teahouse. Tea for the road?";
+	next;
+	if (select("Go outside:Stay a while") == 1) {
+		close2;
+		warp "star_frst",62,116;
+		end;
+	}
+	mes "[Chosi's Student]";
+	if (wsf_se >= 30 && wsf_se < 140)
+		mes "Won and Dulson haven't said a word since Brother Chosung's visit. It's lovely.";
+	else
+		mes "Take your time. The forest tea is the best on the mountain.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsf_se == 20" );
+	end;
+}
+
+star_in,176,80,4	script(CLOAKED)	Chosung#wsf_tea	10297,{
+	mes "[Chosung]";
+	mes "......";
+	mes "^4d4dffChosung sips his tea and watches the two noisy guests.^000000";
+	close;
+}
+
+star_in,180,86,4	script	Won#wsf	778,{
+	mes "[Won]";
+	if (wsf_se >= 30)
+		mes "I slipped. That's all. Anyone can slip on a wet floor.";
+	else
+		mes "What are you looking at? Never seen a future champion before?";
+	close;
+}
+
+star_in,173,82,4	script	Dulson#wsf	866,{
+	mes "[Dulson]";
+	if (wsf_se >= 30)
+		mes "I didn't even see him move... Is this what they teach up here?";
+	else
+		mes "Hey, you! You one of Chosi's students? Your masters are scared of us, ha!";
+	close;
+}
+
+star_in,180,91,4	script	Guest#wsf1	68,{
+	mes "[Guest]";
+	switch (rand(4)) {
+	case 0:
+		mes "I come up the mountain once a month just for this tea.";
+		break;
+	case 1:
+		mes "Those two loudmouths at the next table again... someone should teach them manners.";
+		break;
+	case 2:
+		mes "If you sit by the window at night, you can watch the stars fall into the forest.";
+		break;
+	default:
+		mes "The students here are polite. Strong, too. I once saw one stop a cart with one foot.";
+		break;
+	}
+	close;
+}
+star_in,182,91,4	duplicate(Guest#wsf1)	Guest#wsf2	787
+star_in,184,91,4	duplicate(Guest#wsf1)	Guest#wsf3	814
+star_in,172,91,4	duplicate(Guest#wsf1)	Guest#wsf4	881
+star_in,172,75,4	duplicate(Guest#wsf1)	Guest#wsf5	931
+
+star_in,98,67,4	script	Ilgwang#wsf	10296,{
+	if (wsf_se == 80) {
+		mes "[Ilgwang]";
+		mes "Welcome. I am Ilgwang. Eunha sent you?";
+		mes "Then he must have given you something to do, so he could sleep.";
+		next;
+		select("He sent me to hunt Minerals.");
+		mes "[Ilgwang]";
+		mes "And you did it. I see.";
+		mes "......";
+		next;
+		mes "[Ilgwang]";
+		mes "To be honest, I don't know how to teach training. I only know how to do it.";
+		mes "But Brother Chosung, he loves it when someone hunts ^0000FFNine Tails^000000. He says they teach patience.";
+		next;
+		mes "[Ilgwang]";
+		mes "Hunt ^0000FF50 Nine Tails^000000 on the <NAVI>[3rd floor of the Payon Cave]<INFO>pay_dun02,19,63,0,101,0</INFO></NAVI> or deeper, then go to Brother Chosung.";
+		mes "His room is in the <NAVI>[house to the north-west]<INFO>star_frst,68,173,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSF_Step", "wsf_se", 90, "11580", "11581";
+		close;
+	}
+	if (wsf_se == 110) {
+		mes "[Ilgwang]";
+		mes "Ah, you brought Eunha. Brother Chosung was here a moment ago. He left a message.";
+		next;
+		mes "[Eunha]";
+		mes "Was he angry?";
+		next;
+		mes "[Ilgwang]";
+		mes "Very. But not at you, Eunha. At both of us.";
+		mes "He says we've been making the new student do our chores instead of teaching.";
+		next;
+		emotion ET_SORRY, getnpcid(0, "Eunha#wsf_room");
+		mes "[Eunha]";
+		mes "Well... the student did everything. Minerals, Nine Tails, carrying messages...";
+		mes "Maybe that IS the training?";
+		next;
+		mes "[Ilgwang]";
+		mes "That's not for us to decide. Master Chosi will.";
+		mes "The master is at the foot of the mountain. He always is, when someone new comes.";
+		next;
+		mes "[Ilgwang]";
+		mes "Go down to the <NAVI>[forest entrance]<INFO>mjolnir_03,238,186,0,101,0</INFO></NAVI> and look carefully. You'll find him.";
+		callfunc "F_WSF_Step", "wsf_se", 120, "11583", "11584";
+		close;
+	}
+	if (wsf_se == 130) {
+		callfunc "F_WSF_SeChoose", 1;
+		end;
+	}
+	mes "[Ilgwang]";
+	if (wsf_se >= 140 && wsf_se_m == 1) {
+		mes "Good morning, my student. Shall we greet the sun together?";
+		mes "Stand still. Breathe. Feel the light on your back. That's where your strength comes from.";
+	} else if (wsf_se >= 140)
+		mes "Star Emperor. The forest is proud of you.";
+	else if (wsf_se == 90)
+		mes "^0000FF50 Nine Tails^000000, then Brother Chosung's room. Patience.";
+	else if (wsf_se == 120)
+		mes "The master is at the <NAVI>[forest entrance]<INFO>mjolnir_03,238,186,0,101,0</INFO></NAVI>. Look carefully.";
+	else
+		mes "The sun rises the same way every day. That's what makes it strong.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsf_se == 80 || wsf_se == 110 || wsf_se == 130" );
+	end;
+}
+
+star_in,100,67,4	script(CLOAKED)	Eunha#wsf_room	10298,{
+	mes "[Eunha]";
+	mes "Talk to Ilgwang. I'm trying to look sorry.";
+	close;
+}
+
+star_in,146,48,4	script	Chosung#wsf_room	10297,{
+	if (wsf_se == 90) {
+		if (checkquest(11581, HUNTING) != 2) {
+			mes "[Chosung]";
+			mes "What do you want? I'm busy.";
+			close;
+		}
+		mes "[Chosung]";
+		mes "What's this? You smell like a fox den.";
+		next;
+		select("I hunted 50 Nine Tails. Ilgwang said you'd like that.");
+		mes "[Chosung]";
+		mes "Ilgwang said what?";
+		next;
+		mes "[Chosung]";
+		mes "And before that? Who sent you to Ilgwang?";
+		next;
+		select("Eunha, after I hunted 10 Minerals for him.");
+		emotion ET_FRET;
+		mes "[Chosung]";
+		mes "Minerals! Nine Tails! Those two...";
+		mes "A new student comes all this way to learn, and they send you running errands so they can nap and meditate!";
+		next;
+		mes "[Chosung]";
+		mes "Go and find <NAVI>[Eunha]<INFO>star_frst,157,39,0,101,0</INFO></NAVI>. Tell him I want to see him in Ilgwang's room. Now.";
+		mes "Ilgwang can hear it too.";
+		callfunc "F_WSF_Step", "wsf_se", 100, "11581", "11582";
+		close;
+	}
+	mes "[Chosung]";
+	if (wsf_se >= 140)
+		mes "Sit if you want, but don't touch anything. This room is for training, not for resting.";
+	else if (wsf_se >= 100)
+		mes "Did you find Eunha? I'll be in Ilgwang's room as soon as I've calmed down.";
+	else
+		mes "This is my room. Knock next time.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsf_se == 90 && checkquest(11581, HUNTING) == 2" );
+	end;
+}
+
+// The last step: the chosen master makes the player a Star Emperor.
+// callfunc "F_WSF_SeChoose", <1 Ilgwang | 2 Chosung | 3 Eunha>;
+function	script	F_WSF_SeChoose	{
+	.@m = getarg(0);
+	setarray .@name$, "", "Ilgwang", "Chosung", "Eunha";
+	setarray .@road$, "", "the sun", "the moon", "the stars";
+	.@n$ = "[" + .@name$[.@m] + "]";
+	mes .@n$;
+	switch (.@m) {
+	case 1:
+		mes "Master Chosi told me. You're choosing your teacher today.";
+		break;
+	case 2:
+		mes "The master sent you back to choose. Hmph. Well?";
+		break;
+	default:
+		mes "Oh, it's choosing day? I thought you'd pick Ilgwang. Everyone picks Ilgwang.";
+		break;
+	}
+	next;
+	if (select("I want to grow with you.:I'm still thinking.") == 2) {
+		mes .@n$;
+		mes "Then think. A choice like this should be made once.";
+		close;
+	}
+	if (Class != JOB_STAR_GLADIATOR && Class != JOB_STAR_GLADIATOR2) {
+		mes .@n$;
+		mes "Wait. You're not a TaeKwon Master any more. Only a TaeKwon Master can become a Star Emperor.";
+		close;
+	}
+	if (SkillPoint > 0) {
+		mes .@n$;
+		mes "Before that: you still have skill points left. Learn your skills first, then come back.";
+		close;
+	}
+	mes .@n$;
+	switch (.@m) {
+	case 1:
+		mes "Then we'll walk the road of " + .@road$[.@m] + " together. Slow, steady, and every day.";
+		break;
+	case 2:
+		mes "Good. The road of " + .@road$[.@m] + " is hard. I won't go easy on you.";
+		break;
+	default:
+		mes "Me? Really? Ha... then the road of " + .@road$[.@m] + " it is. We'll take it at night, when it's quiet.";
+		break;
+	}
+	next;
+	mes .@n$;
+	mes "Close your eyes. Feel the sun, the moon and the stars above you.";
+	close2;
+	specialeffect2 EF_ANGEL;
+	specialeffect2 EF_SPHERE;
+	sleep2 1000;
+	callfunc "F_WSF_Step", "wsf_se", 140, "11585", "";
+	wsf_se_m = .@m;
+	jobchange JOB_STAR_EMPEROR;
+	specialeffect2 EF_JOBLVUP;
+	announce strcharinfo(0) + " has become a Star Emperor in the Meteor Forest!", BC_MAP, 0xFFFF00;
+	end;
+}
