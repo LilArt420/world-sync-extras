@@ -638,3 +638,50 @@ ch1_vrgef2,120,113,4	script	Central Fountain#wsv	10432,{
 }
 
 // Telkos takes the report (19226): see ch1_d_neumann.txt.
+
+// ------------------------------------------------------------
+// Geffen Request Board: where the survivors post their daily
+// requests. Shows each one's state; the requests themselves are
+// taken from the people who posted them.
+// ------------------------------------------------------------
+ch1_geffen,119,63,4	script	Geffen Request Board#wsv	10669,{
+	mes "[Geffen Request Board]";
+	mes "Notes pinned over notes, in a dozen hands. The survivors' requests for anyone who can help.";
+	if (wsv_ch1 < 350) {
+		mes "^4d4dffMost of them ask for help the town can't trust a stranger with yet.^000000";
+		close;
+	}
+	next;
+	// title, giver and place, prerequisite met, request quests, cooldown quest
+	setarray .@t$, "This Is a Miraculous Prescription", "Jeon Cheosa, by the Geffen Tower", "Talismans for the believers of Verus.",
+		"Save Them First", "Clover, by the Geffen Tower", "Clearing the Destroyed Verus.",
+		"Help Me, Doctor!", "Ivein, in Ash Village", "Ivein's patients.",
+		"Jubilus's Requests", "Jubilus, in Muspelheim", "Jubilus never runs out of chores.";
+	setarray .@ok, (wsv_ch1c & 32) != 0, (wsv_ch1c & 32) != 0, (wsv_c1s & 1) != 0, (wsv_c1s & 2) != 0;
+	setarray .@q$, "17926,17927,17928,17929,17930,17931", "17933", "24104,24105", "24110,24112,24114,24116";
+	setarray .@cd$, "17932", "17934", "24106", "24111,24113,24115,24117";
+	for (.@i = 0; .@i < 4; .@i++) {
+		.@st$ = "^4d4dffnot open to you yet^000000";
+		if (.@ok[.@i]) {
+			.@st$ = "^0000FFopen^000000";
+			explode(.@c$, .@cd$[.@i], ",");
+			for (.@j = 0; .@j < getarraysize(.@c$); .@j++) {
+				if (isbegin_quest(atoi(.@c$[.@j])) == 1 && checkquest(atoi(.@c$[.@j]), PLAYTIME) != 2)
+					.@st$ = "^777777done for today^000000";
+			}
+			deletearray .@c$;
+			explode(.@c$, .@q$[.@i], ",");
+			for (.@j = 0; .@j < getarraysize(.@c$); .@j++) {
+				if (isbegin_quest(atoi(.@c$[.@j])) == 1)
+					.@st$ = "^FF8800in progress^000000";
+			}
+			deletearray .@c$;
+		}
+		mes "- ^000000" + .@t$[.@i * 3] + "^000000: " + .@st$;
+		mes "  " + .@t$[.@i * 3 + 2] + " (" + .@t$[.@i * 3 + 1] + ")";
+	}
+	next;
+	mes "[Geffen Request Board]";
+	mes "At the bottom, in a careful hand: ^0000FF\"The Mage Professor at the Sky Fortress Entrance is looking for people to test the recreated Dark Whisper. Every three days.\"^000000";
+	close;
+}

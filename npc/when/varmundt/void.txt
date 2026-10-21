@@ -1,0 +1,256 @@
+//===== World Sync Extras: Varmundt block ====================
+//= The eroded wing of Varmundt's mansion (ba_void) and the
+//= Dimensional Biosphere beyond it.
+//===== Description: =========================================
+//= From kRO's update notes "Dimensional Biosphere" (ro.gnjoy.com
+//= update 302, 2026): the dimensional rift that ate into the
+//= mansion's east wing opened onto ten biospheres. The mansion's
+//= automatons watch over them and pay adventurers who thin out
+//= their monsters: 500 a day, 1500 a week.
+//= - Mansion Manager (ba_in01): the way in, base level 265.
+//= - Hongsi: the wing's head maid; sends newcomers round the
+//=   four watchers first.
+//= - Geonsi: Earth and Volcano. Banshi: Venom and Cold.
+//=   Yeonsi: Soul, Temple and Death. Cheongsi: Factory, Jungle
+//=   and Valley.
+//= - All-purpose Donggeuli: trades the watchers' Rift Points.
+//= The client the app ships predates the update: it has the maps
+//= and monsters but not its items or quest text, so the rewards
+//= are kept as points (wsv_rift) and the duties use this block's
+//= own quests (64101-64131).
+//=
+//= Variables: wsv_rift (Rift Points), wsv_riftb (1/2/4/8 met
+//= Geonsi/Banshi/Yeonsi/Cheongsi, 16 the wing's duties open).
+//============================================================
+
+ba_in01,338,299,4	script	Mansion Manager#wsv	10354,{
+	mes "[Mansion Manager]";
+	mes "Beyond this door is the ^0000FFeast wing^000000. Or what's left of it.";
+	mes "A dimensional rift ate into it. The wing now opens onto places that were never part of this mansion.";
+	next;
+	if (BaseLevel < 265) {
+		mes "[Mansion Manager]";
+		mes "I can't let you through. The other side is dangerous for anyone below ^0000FFbase level 265^000000.";
+		close;
+	}
+	if (select("Enter the eroded wing.:Never mind.") == 2)
+		close;
+	close2;
+	warp "ba_void",127,62;
+	end;
+}
+
+// ------------------------------------------------------------
+// Hongsi: the introduction (quest 64131).
+// ------------------------------------------------------------
+ba_void,140,101,4	script	Hongsi#wsv	10345,{
+	mes "[Hongsi]";
+	if (wsv_riftb & 16) {
+		mes "Welcome back, adventurer. The watchers have work for you, as always.";
+		mes "You have ^0000FF" + wsv_rift + "^000000 Rift Point(s). Donggeuli, over there, will trade them.";
+		close;
+	}
+	if (isbegin_quest(64131) == 1) {
+		if ((wsv_riftb & 15) == 15) {
+			mes "You've met all four. Good. Then you know where everything is.";
+			next;
+			mes "[Hongsi]";
+			mes "From today, the watchers will pay you for every monster you clear on the other side: ^0000FFonce a day^000000 for 500, and ^0000FFonce a week^000000 for 1500.";
+			mes "Here, your first Rift Points. Donggeuli will trade them for things you can use.";
+			completequest 64131;
+			wsv_riftb = wsv_riftb | 16;
+			callfunc "F_WSV_RiftPoints", 10;
+			getexp2 min(NextBaseExp / 20, 500000000), min(NextJobExp / 20, 250000000);
+			close;
+		}
+		mes "Have you met all four watchers? ^0000FFGeonsi^000000 to the north, ^0000FFBanshi^000000 to the west, ^0000FFYeonsi^000000 to the east and ^0000FFCheongsi^000000 right here by me.";
+		close;
+	}
+	mes "Oh. A guest. Please mind the floor: parts of it aren't here anymore.";
+	mes "I'm Hongsi. I keep the east wing, or I did, until the rift.";
+	next;
+	mes "[Hongsi]";
+	mes "Every door in this wing now opens onto another biosphere. Monsters keep coming through, and there are only five of us.";
+	mes "If you'd lend us your strength, start by meeting the other four watchers. Each one minds a few of the doors.";
+	next;
+	if (select("I'll meet them.:Not now.") == 2)
+		close;
+	setquest 64131;
+	questinfo_refresh;
+	mes "[Hongsi]";
+	mes "Thank you. Come back to me once you've met all four.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 265 && isbegin_quest(64131) == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(64131) == 1 && (wsv_riftb & 15) == 15" );
+	end;
+}
+
+function	script	F_WSV_RiftPoints	{
+	wsv_rift += getarg(0);
+	dispbottom "You received " + getarg(0) + " Rift Point(s) (" + wsv_rift + " in total).";
+	return;
+}
+
+// The watchers. callfunc "F_WSV_Rift", "<name>", <watcher 0-3>, <first area>, <areas>;
+// Areas 0-9 (quests 64101+a daily, 64111+a weekly); cooldowns 64121+w (day), 64125+w (week).
+function	script	F_WSV_Rift	{
+	setarray .@map$, "ab_ground1", "ab_lava1", "ab_venom1", "ab_ice1", "ab_soul1", "ab_temple1", "ab_death1", "ab_factory1", "ab_jungle1", "ab_valley1";
+	setarray .@area$, "Earth", "Volcano", "Venom", "Cold", "Soul", "Temple", "Death", "Factory", "Jungle", "Valley";
+	.@n$ = "[" + getarg(0) + "]";
+	.@w = getarg(1);
+	.@a0 = getarg(2);
+	.@na = getarg(3);
+	for (.@i = .@a0; .@i < .@a0 + .@na; .@i++)
+		.@mine$ += (.@i > .@a0 ? (.@i == .@a0 + .@na - 1 ? " and " : ", ") : "") + .@area$[.@i];
+	mes .@n$;
+	if (!(wsv_riftb & 16)) {
+		if (isbegin_quest(64131) == 1) {
+			if (!(wsv_riftb & (1 << .@w))) {
+				wsv_riftb = wsv_riftb | (1 << .@w);
+				mes "Hongsi sent you? Then I'm glad to meet you.";
+			}
+			mes "I watch the doors to the ^0000FF" + .@mine$ + "^000000 biospheres. When Hongsi says you're ready, I'll pay you to keep them clear.";
+			close;
+		}
+		mes "...A human, here? Talk to Hongsi first. She's in charge.";
+		close;
+	}
+	// Report finished duties.
+	for (.@i = .@a0; .@i < .@a0 + .@na; .@i++) {
+		if (isbegin_quest(64101 + .@i) == 1 && checkquest(64101 + .@i, HUNTING) == 2) {
+			mes "Five hundred, in the " + .@area$[.@i] + " biosphere. That will keep the door quiet for a day. Thank you.";
+			completequest 64101 + .@i;
+			erasequest 64101 + .@i;
+			if (isbegin_quest(64121 + .@w))
+				erasequest 64121 + .@w;
+			setquest 64121 + .@w;
+			callfunc "F_WSV_RiftPoints", 10;
+			getexp2 min(NextBaseExp / 20, 500000000), min(NextJobExp / 20, 250000000);
+			close;
+		}
+		if (isbegin_quest(64111 + .@i) == 1 && checkquest(64111 + .@i, HUNTING) == 2) {
+			mes "Fifteen hundred! The " + .@area$[.@i] + " biosphere hasn't been this calm since the rift opened.";
+			completequest 64111 + .@i;
+			erasequest 64111 + .@i;
+			if (isbegin_quest(64125 + .@w))
+				erasequest 64125 + .@w;
+			setquest 64125 + .@w;
+			callfunc "F_WSV_RiftPoints", 40;
+			getexp2 min(NextBaseExp / 7, 1500000000), min(NextJobExp / 7, 750000000);
+			close;
+		}
+	}
+	mes "The doors to the ^0000FF" + .@mine$ + "^000000 biospheres are mine to watch.";
+	next;
+	switch (select("Daily duty (500 monsters).:Weekly duty (1500 monsters).:Never mind.")) {
+	case 1:
+		.@q = 64101;
+		.@cd = 64121 + .@w;
+		break;
+	case 2:
+		.@q = 64111;
+		.@cd = 64125 + .@w;
+		break;
+	default:
+		close;
+	}
+	for (.@i = .@a0; .@i < .@a0 + .@na; .@i++) {
+		if (isbegin_quest(.@q + .@i) == 1) {
+			mes .@n$;
+			mes "You're still on it: the " + .@area$[.@i] + " biosphere.";
+			close;
+		}
+	}
+	if (callfunc("F_WSV_Waiting", .@cd)) {
+		mes .@n$;
+		mes "You've already done that one. Come back after " + (.@q == 64101 ? "4 AM" : "the week is out") + ".";
+		close;
+	}
+	mes .@n$;
+	mes "Which biosphere?";
+	next;
+	for (.@i = .@a0; .@i < .@a0 + .@na; .@i++)
+		.@menu$ += .@area$[.@i] + ":";
+	.@i = .@a0 + select(.@menu$) - 1;
+	if (isbegin_quest(.@q + .@i) == 2)
+		erasequest .@q + .@i;
+	setquest .@q + .@i;
+	questinfo_refresh;
+	mes .@n$;
+	mes (.@q == 64101 ? "Five hundred" : "Fifteen hundred") + " monsters in the " + .@area$[.@i] + " biosphere. The door is right behind me.";
+	close;
+}
+
+ba_void,130,207,4	script	Geonsi#wsv	10345,{
+	callfunc "F_WSV_Rift", "Geonsi", 0, 0, 2;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(64131) == 1 && (wsv_riftb & 1) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "(wsv_riftb & 16) && isbegin_quest(64101) == 0 && isbegin_quest(64102) == 0 && (isbegin_quest(64121) == 0 || checkquest(64121, PLAYTIME) == 2)" );
+	end;
+}
+ba_void,35,132,4	script	Banshi#wsv	10345,{
+	callfunc "F_WSV_Rift", "Banshi", 1, 2, 2;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(64131) == 1 && (wsv_riftb & 2) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "(wsv_riftb & 16) && isbegin_quest(64103) == 0 && isbegin_quest(64104) == 0 && (isbegin_quest(64122) == 0 || checkquest(64122, PLAYTIME) == 2)" );
+	end;
+}
+ba_void,242,136,4	script	Yeonsi#wsv	10345,{
+	callfunc "F_WSV_Rift", "Yeonsi", 2, 4, 3;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(64131) == 1 && (wsv_riftb & 4) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "(wsv_riftb & 16) && isbegin_quest(64105) == 0 && isbegin_quest(64106) == 0 && isbegin_quest(64107) == 0 && (isbegin_quest(64123) == 0 || checkquest(64123, PLAYTIME) == 2)" );
+	end;
+}
+ba_void,133,109,4	script	Cheongsi#wsv	10345,{
+	callfunc "F_WSV_Rift", "Cheongsi", 3, 7, 3;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(64131) == 1 && (wsv_riftb & 8) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "(wsv_riftb & 16) && isbegin_quest(64108) == 0 && isbegin_quest(64109) == 0 && isbegin_quest(64110) == 0 && (isbegin_quest(64124) == 0 || checkquest(64124, PLAYTIME) == 2)" );
+	end;
+}
+
+ba_void,138,112,4	script	All-purpose Donggeuli#wsv	10359,{
+	mes "[All-purpose Donggeuli]";
+	mes "Beep. All-purpose Donggeuli, at your service. I trade the watchers' ^0000FFRift Points^000000.";
+	mes "You have ^0000FF" + wsv_rift + "^000000 point(s).";
+	next;
+	setarray .@it, 1001550, 1001551, 25731, 25729, 6635, 12208;
+	setarray .@co, 1, 1, 10, 10, 30, 2;
+	for (.@i = 0; .@i < getarraysize(.@it); .@i++)
+		.@menu$ += getitemname(.@it[.@i]) + " (" + .@co[.@i] + " point" + (.@co[.@i] > 1 ? "s" : "") + "):";
+	.@s = select(.@menu$ + "Never mind.") - 1;
+	if (.@s >= getarraysize(.@it))
+		close;
+	mes "[All-purpose Donggeuli]";
+	mes "How many ^0000FF" + getitemname(.@it[.@s]) + "^000000?";
+	next;
+	input .@n, 0, 100;
+	if (.@n < 1)
+		close;
+	if (wsv_rift < .@n * .@co[.@s]) {
+		mes "[All-purpose Donggeuli]";
+		mes "Beep-boop. Not enough points.";
+		close;
+	}
+	if (!checkweight(.@it[.@s], .@n)) {
+		mes "[All-purpose Donggeuli]";
+		mes "Beep. You can't carry that much.";
+		close;
+	}
+	wsv_rift -= .@n * .@co[.@s];
+	getitem .@it[.@s], .@n;
+	mes "[All-purpose Donggeuli]";
+	mes "Trade complete. Beep!";
+	close;
+}

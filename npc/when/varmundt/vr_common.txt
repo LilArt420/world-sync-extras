@@ -142,7 +142,12 @@ OnInit:
 		"ws_ba_maison_14253",
 		// Chapter 1: the Shaking Crossroads of the Geffen field
 		"Travel to hem_dun02#ws19771", "Travel to ch1_gfn03#ws19775",
-		"Travel to ch1_gfn01#ws19779";
+		"Travel to ch1_gfn01#ws19779",
+		// the Juno Library's VR books (and Lazrigs' guild dungeon) open with passes
+		"Travel to vr_zrr01#ws27850", "Travel to vr_hero00#ws27898",
+		"Travel to vr_prtg#ws28088", "Travel to vr_prtd03#ws28152",
+		// "entrances" setting: the Mansion Manager checks the level
+		"ws_ba_in01_28644";
 	for (.@i = 0; .@i < getarraysize(.@n$); .@i++) {
 		if (getnpcid(0, .@n$[.@i]))
 			disablenpc .@n$[.@i];

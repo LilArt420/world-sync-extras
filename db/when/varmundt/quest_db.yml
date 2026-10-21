@@ -691,3 +691,244 @@ Body:
   - Id: 24117
     Title: "[Standby] Tricked!!!"
     TimeLimit: 4h
+  - Id: 64001
+    Title: "Issgard Crafting Contest: Inventions"
+    Targets:
+      - Id: 1
+        Count: 30
+        MapName: VR Juno - Frozen Treasure Storage
+        Location: vr_zrr03
+  - Id: 64002
+    Title: "Issgard Crafting Contest: Cooking"
+    Targets:
+      - Id: 1
+        Count: 30
+        MapName: VR Juno - Frozen Food Storage
+        Location: vr_zrr02
+  - Id: 64003
+    Title: "[Standby] Invention Judged"
+    TimeLimit: 4h
+  - Id: 64004
+    Title: "[Standby] Dish Judged"
+    TimeLimit: 4h
+  - Id: 64011
+    Title: "Demon King's Castle: Floor 1"
+    Targets:
+      - Id: 1
+        Count: 50
+        MapName: VR Juno - Demon King's Castle 1F
+        Location: vr_hero01
+  - Id: 64012
+    Title: "Demon King's Castle: Floor 2"
+    Targets:
+      - Id: 1
+        Count: 50
+        MapName: VR Juno - Demon King's Castle 2F
+        Location: vr_hero02
+  - Id: 64013
+    Title: "Demon King's Castle: Floor 3"
+    Targets:
+      - Id: 1
+        Count: 50
+        MapName: VR Juno - Demon King's Castle 3F
+        Location: vr_hero03
+  - Id: 64014
+    Title: "[Standby] Floor 1 Cleared"
+    TimeLimit: 4h
+  - Id: 64015
+    Title: "[Standby] Floor 2 Cleared"
+    TimeLimit: 4h
+  - Id: 64016
+    Title: "[Standby] Floor 3 Cleared"
+    TimeLimit: 4h
+  - Id: 64021
+    Title: "Lazrigs Guardian"
+    Targets:
+      - Id: 1
+        Count: 100
+        MapName: VR Juno - Lazrigs
+        Location: vr_prtg03
+  - Id: 64022
+    Title: "Lazrigs Guardian (Weekly)"
+    Targets:
+      - Id: 1
+        Count: 500
+        MapName: VR Juno - Lazrigs
+        Location: vr_prtg03
+  - Id: 64023
+    Title: "Lazrigs Rescue Team"
+  - Id: 64024
+    Title: "[Standby] Lazrigs Guardian"
+    TimeLimit: 4h
+  - Id: 64025
+    Title: "[Standby] Lazrigs Guardian (Weekly)"
+    TimeLimit: +7d
+  - Id: 64026
+    Title: "[Standby] Lazrigs Rescue Team"
+    TimeLimit: 4h
+  - Id: 64101
+    Title: "Watch the Rift: Earth"
+    Targets:
+      - Id: 1
+        Count: 500
+        MapName: Dimensional Biosphere - Earth
+        Location: ab_ground1
+  - Id: 64102
+    Title: "Watch the Rift: Volcano"
+    Targets:
+      - Id: 1
+        Count: 500
+        MapName: Dimensional Biosphere - Volcano
+        Location: ab_lava1
+  - Id: 64103
+    Title: "Watch the Rift: Venom"
+    Targets:
+      - Id: 1
+        Count: 500
+        MapName: Dimensional Biosphere - Venom
+        Location: ab_venom1
+  - Id: 64104
+    Title: "Watch the Rift: Cold"
+    Targets:
+      - Id: 1
+        Count: 500
+        MapName: Dimensional Biosphere - Cold
+        Location: ab_ice1
+  - Id: 64105
+    Title: "Watch the Rift: Soul"
+    Targets:
+      - Id: 1
+        Count: 500
+        MapName: Dimensional Biosphere - Soul
+        Location: ab_soul1
+  - Id: 64106
+    Title: "Watch the Rift: Temple"
+    Targets:
+      - Id: 1
+        Count: 500
+        MapName: Dimensional Biosphere - Temple
+        Location: ab_temple1
+  - Id: 64107
+    Title: "Watch the Rift: Death"
+    Targets:
+      - Id: 1
+        Count: 500
+        MapName: Dimensional Biosphere - Death
+        Location: ab_death1
+  - Id: 64108
+    Title: "Watch the Rift: Factory"
+    Targets:
+      - Id: 1
+        Count: 500
+        MapName: Dimensional Biosphere - Factory
+        Location: ab_factory1
+  - Id: 64109
+    Title: "Watch the Rift: Jungle"
+    Targets:
+      - Id: 1
+        Count: 500
+        MapName: Dimensional Biosphere - Jungle
+        Location: ab_jungle1
+  - Id: 64110
+    Title: "Watch the Rift: Valley"
+    Targets:
+      - Id: 1
+        Count: 500
+        MapName: Dimensional Biosphere - Valley
+        Location: ab_valley1
+  - Id: 64111
+    Title: "Watch the Rift: Earth (Weekly)"
+    Targets:
+      - Id: 1
+        Count: 1500
+        MapName: Dimensional Biosphere - Earth
+        Location: ab_ground1
+  - Id: 64112
+    Title: "Watch the Rift: Volcano (Weekly)"
+    Targets:
+      - Id: 1
+        Count: 1500
+        MapName: Dimensional Biosphere - Volcano
+        Location: ab_lava1
+  - Id: 64113
+    Title: "Watch the Rift: Venom (Weekly)"
+    Targets:
+      - Id: 1
+        Count: 1500
+        MapName: Dimensional Biosphere - Venom
+        Location: ab_venom1
+  - Id: 64114
+    Title: "Watch the Rift: Cold (Weekly)"
+    Targets:
+      - Id: 1
+        Count: 1500
+        MapName: Dimensional Biosphere - Cold
+        Location: ab_ice1
+  - Id: 64115
+    Title: "Watch the Rift: Soul (Weekly)"
+    Targets:
+      - Id: 1
+        Count: 1500
+        MapName: Dimensional Biosphere - Soul
+        Location: ab_soul1
+  - Id: 64116
+    Title: "Watch the Rift: Temple (Weekly)"
+    Targets:
+      - Id: 1
+        Count: 1500
+        MapName: Dimensional Biosphere - Temple
+        Location: ab_temple1
+  - Id: 64117
+    Title: "Watch the Rift: Death (Weekly)"
+    Targets:
+      - Id: 1
+        Count: 1500
+        MapName: Dimensional Biosphere - Death
+        Location: ab_death1
+  - Id: 64118
+    Title: "Watch the Rift: Factory (Weekly)"
+    Targets:
+      - Id: 1
+        Count: 1500
+        MapName: Dimensional Biosphere - Factory
+        Location: ab_factory1
+  - Id: 64119
+    Title: "Watch the Rift: Jungle (Weekly)"
+    Targets:
+      - Id: 1
+        Count: 1500
+        MapName: Dimensional Biosphere - Jungle
+        Location: ab_jungle1
+  - Id: 64120
+    Title: "Watch the Rift: Valley (Weekly)"
+    Targets:
+      - Id: 1
+        Count: 1500
+        MapName: Dimensional Biosphere - Valley
+        Location: ab_valley1
+  - Id: 64121
+    Title: "[Standby] Geonsi's Daily Duty"
+    TimeLimit: 4h
+  - Id: 64122
+    Title: "[Standby] Banshi's Daily Duty"
+    TimeLimit: 4h
+  - Id: 64123
+    Title: "[Standby] Yeonsi's Daily Duty"
+    TimeLimit: 4h
+  - Id: 64124
+    Title: "[Standby] Cheongsi's Daily Duty"
+    TimeLimit: 4h
+  - Id: 64125
+    Title: "[Standby] Geonsi's Weekly Duty"
+    TimeLimit: +7d
+  - Id: 64126
+    Title: "[Standby] Banshi's Weekly Duty"
+    TimeLimit: +7d
+  - Id: 64127
+    Title: "[Standby] Yeonsi's Weekly Duty"
+    TimeLimit: +7d
+  - Id: 64128
+    Title: "[Standby] Cheongsi's Weekly Duty"
+    TimeLimit: +7d
+  - Id: 64131
+    Title: "The Eroded Wing"
