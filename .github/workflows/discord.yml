@@ -1,0 +1,51 @@
+name: Announce Release on Discord
+
+# Posts each published release to a Discord channel through a webhook: the
+# release title, its notes (cut to fit Discord's limit) and the link.
+#
+# Off until you add the webhook. In Discord: Server Settings -> Integrations ->
+# Webhooks -> New Webhook -> pick the channel -> Copy Webhook URL. On GitHub:
+# Settings -> Secrets and variables -> Actions -> New repository secret, named
+# DISCORD_WEBHOOK_URL, with that URL. Without the secret this job does nothing.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post the release to Discord
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          TITLE: ${{ github.event.release.name }}
+          TAG: ${{ github.event.release.tag_name }}
+          URL: ${{ github.event.release.html_url }}
+          NOTES: ${{ github.event.release.body }}
+        run: |
+          if [ -z "$WEBHOOK" ]; then
+            echo "No DISCORD_WEBHOOK_URL secret: nothing to announce."
+            exit 0
+          fi
+          python3 - <<'EOF'
+          import json, os, urllib.request
+          title = os.environ.get("TITLE") or os.environ["TAG"]
+          notes = os.environ.get("NOTES", "").strip()
+          url = os.environ["URL"]
+          # Discord allows 2000 characters per message: keep the link whole.
+          room = 2000 - len(url) - len(title) - 16
+          if len(notes) > room:
+              notes = notes[: room - 2].rsplit("\n", 1)[0] + "\n…"
+          content = f"**{title}**\n{notes}\n\n{url}"
+          req = urllib.request.Request(
+              os.environ["WEBHOOK"],
+              data=json.dumps({"content": content, "allowed_mentions": {"parse": []}}).encode(),
+              headers={"Content-Type": "application/json", "User-Agent": "world-sync-extras-release"},
+          )
+          urllib.request.urlopen(req, timeout=30)
+          print("Announced", title)
+          EOF
