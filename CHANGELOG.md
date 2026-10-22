@@ -19,7 +19,7 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - After the stories: dailies for both episodes (reset at 04:00), the memorial dungeons again every day, side stories, and the traders: Torr in the Ice Castle (Glacier and Dim Glacier enchants), and in Lunaforma the Wigner Company Exchanger, Blacksmith Sansan and Mage Lobelia.
 - Doors into the Ice Castle's west wing (icecastle 230,160, 157,206 and 46,164), which rAthena's World Sync content lacks; they step aside when `entrances` is on.
 - Koko's Secret Base side story (box delivery, Friederike's Kokos, the hunt for Rorohyu, the Sticky Sea memorial dungeon and its Corrupted Angel Snail) and Lalaha's four dailies.
-- The Episode Valkyrie (standart-npc) can skip both episodes with their Clear Tickets, through F_WSJ_Skip20/21.
+- Ready for the Episode Valkyrie (standart-npc) to skip both episodes with their Clear Tickets, through F_WSJ_Skip20/21: that part of the Valkyrie is waiting on MondoTruth/standart-npc#118 and comes with the next standart-npc release.
 - Boats, Walter sailors, the hidden ship, the small door and Nyar are real transports (rAthena's 'Travel to' guides on those cells are switched off while the block is on); Lunaforma's mercenaries, soldiers, workers, children and refugees, Alberta's Wigner house staff, the working Rgans and the Frozen Zone guardians have their own lines.
 
 ### 🏛️ New: Varmundt, Amatsu, Juno Library and Chapters 1-2 (setting `varmundt`, on)
