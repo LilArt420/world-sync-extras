@@ -86,8 +86,7 @@ iRO's permanent quests the server has no script for, with full dialogue and iRO'
   Aldebaran and the Juno fields, Geffen, Rachel and Veins, Comodo, Alberta and the Eden Group's field missions.
 
 With akreao's Eden Group 2021 rework (`eden-rework-2021`) on as well, World Sync Extras takes priority (it is applied
-after it). Both use iRO's official ids for the 2021 town quests; until the app ships a fix to its quest loader, those
-quests show each objective twice in the quest log, but they complete normally.
+after it). Both use iRO's official ids for the 2021 town quests, which the app merges.
 
 ## 🧍 Placeholder NPCs (setting `placeholders`, on)
 
@@ -98,13 +97,6 @@ elevator, Jormungandr's contact points, market guides); the rest greet you until
 their quests and services are written. Each block of this mod (or another mod
 that implements some of them) takes its placeholders over: see
 `replaced-placeholders.txt`.
-
-## 👾 World Sync monsters
-
-`db/mob_db.yml` fixes what Divine Pride doesn't publish for 303 World Sync
-monsters, until the app ships the same fix: their stats (each the median of the
-7 monsters of the same class nearest in level and HP) and their drop chances
-(estimated by item type), and drops for 124 monsters Divine Pride lists none for (borrowed from their closest relative). Temporary.
 
 ## 🚪 Entrances (setting `entrances`, off)
 
@@ -121,7 +113,7 @@ them.
 
 ## 📦 Requirements
 
-Ragnarok Offline 1.6.7 or later, renewal, which ships the World Sync content
+Ragnarok Offline 1.6.9 or later, renewal, which ships the World Sync content
 (maps such as `jor_mbase`, `star_frst`, `ch1_geffen`), and a client with that
 data (recent iRO or kRO).
 

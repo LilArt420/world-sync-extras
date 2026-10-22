@@ -450,20 +450,20 @@ QuestInfoList = {
 	[11346] = {
 		Title = "Acolyte_damped creatures(LV.13)",
 		IconName = "ico_nq.bmp",
-		Description = { "Come back to Alice after hunting each 20 Roda frogs and Denopices occupying the 1st floor of the abandoned ship." },
-		Summary = "Roda frogs(20) Denopices(20)"
+		Description = { "Come back to Alice after hunting 20 Roda Frogs and 20 Dead Plankton on the 1st floor of the abandoned ship." },
+		Summary = "Roda Frogs (20), Dead Plankton (20)"
 	},
 	[11347] = {
 		Title = "Acolyte_soft bone(LV.18)",
 		IconName = "ico_nq.bmp",
-		Description = { "Hunt Greasles with soft bones which might be short of calcium before death. Hunt 30 of them and report to Alice." },
-		Summary = "Greasles(30)"
+		Description = { "Hunt the soft-boned Weak Skeletons, which may have been short of calcium in life. Hunt 30 of them and report to Alice." },
+		Summary = "Weak Skeletons (30)"
 	},
 	[11348] = {
 		Title = "Acolyte_Solid bone(LV.23)",
 		IconName = "ico_nq.bmp",
-		Description = { "Solid ones like wooden sticks can be easily broken, and rigid and solid ones like stone can be easily fragile. Report to Alice after catching 30 Tibia" },
-		Summary = "Tibias(30)"
+		Description = { "Solid ones like wooden sticks can be easily broken, and rigid and solid ones like stone can be easily fragile. Report to Alice after catching 30 Weak Soldier Skeletons." },
+		Summary = "Weak Soldier Skeletons (30)"
 	},
 	[12588] = {
 		Title = "[Standby] The Immortal",
