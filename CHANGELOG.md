@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+- Takes priority over akreao's Eden Group 2021 rework (`eden-rework-2021`) when both are on: World Sync Extras is applied after it, so its copy of any shared table wins.
+- Both mods use iRO's official ids for the 2021 town quests (299 of them), and the server's quest loader added a quest's objectives again when two mods declared it: those quests showed each objective twice, and 51 failed with "Targets list exceeds the maximum of 3". The loader fix is on its way into the app (Flux159/rathena#74). Until it ships, the quests still complete normally; only the doubled objective lines and the server log warnings remain.
+
 ## 2.0.0
 Needs Ragnarok Offline 1.6.7 or later.
 
