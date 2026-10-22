@@ -992,36 +992,6 @@ alberta,43,55,4	script	Zeny & BSB Gacha#wsb457	4_M_01,{
 	mes "Hello there, adventurer.";
 	close;
 }
-alb2trea,93,59,4	script	Treasure Hunt#wsb465	4_M_01,{
-	mes "[Treasure Hunt]";
-	mes "Hello there, adventurer.";
-	close;
-}
-alb2trea,96,61,4	script	Hunting Quest#wsb466	4_M_01,{
-	mes "[Hunting Quest]";
-	mes "Hello there, adventurer.";
-	close;
-}
-alb2trea,80,89,4	script	Gathering Quest#wsb467	4_M_01,{
-	mes "[Gathering Quest]";
-	mes "Hello there, adventurer.";
-	close;
-}
-alb2trea,96,71,4	script	Event Exchange#wsb468	4_M_01,{
-	mes "[Event Exchange]";
-	mes "Hello there, adventurer.";
-	close;
-}
-alb2trea,94,74,4	script	Enchantment#wsb469	4_M_01,{
-	mes "[Enchantment]";
-	mes "Hello there, adventurer.";
-	close;
-}
-alb2trea,64,62,4	script	High Level Exchange#wsb470	4_M_01,{
-	mes "[High Level Exchange]";
-	mes "Hello there, adventurer.";
-	close;
-}
 bphunt_low,234,185,4	script	Switch Channel#wsb471	4_M_01,{
 	mes "[Switch Channel]";
 	mes "Switch to the other channel of this hunting ground?";

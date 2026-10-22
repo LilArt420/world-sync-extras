@@ -27,3 +27,5 @@
 13960 13963
 # iRO Quests 0.3.0: the Prontera 2021 chain (Orc Village, Glast Heim)
 14003 14008
+# Left out as retired (user OK once confirmed; confirmed 2026-10-22): iRO's Talk Like a Pirate Event 2026 hub on alb2trea
+b465-b470
