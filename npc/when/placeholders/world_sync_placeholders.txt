@@ -826,11 +826,6 @@ prt_mk,288,41,4	script	Guild Storage Manager#ws29211	896,{
 	guildopenstorage;
 	end;
 }
-treasure_n1,167,44,4	script	Laforet#ws32149	890,{
-	mes "[Laforet]";
-	mes "Hello there, adventurer.";
-	close;
-}
 veledor,94,263,4	script	Whisper of Balkhiri#ws31484	802,{
 	mes "[Whisper of Balkhiri]";
 	mes "Hello there, adventurer.";

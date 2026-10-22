@@ -39,3 +39,5 @@ b465-b470
 16298-16307 29197 29199 29201 29203 29253 29255 29257 29259
 # Left out (user: drop them, 2026-10-22): the tra_fild Training Instructors; rAthena's own iRO Training Zone stays off
 17098 17101
+# iRO services block: Laforet (the Acolytes' Sunken Ship training)
+32149

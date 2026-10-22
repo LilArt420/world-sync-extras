@@ -85,7 +85,7 @@ iRO's permanent quests the server has no script for, with full dialogue and iRO'
 
 ## 🧍 Placeholder NPCs (setting `placeholders`, on)
 
-76 official NPCs whose dialog and logic exist in no server data yet, standing
+75 official NPCs whose dialog and logic exist in no server data yet, standing
 where the client puts them with their own sprite and name. 44 already work
 (storage lockers, guild storage, inns, repair, channel switches, the Varmundt
 elevator, Jormungandr's contact points, market guides); the rest greet you until
