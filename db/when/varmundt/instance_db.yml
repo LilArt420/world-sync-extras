@@ -1,0 +1,23 @@
+# World Sync Extras: Varmundt block - Chapter 1's memorial dungeons, both on
+# copies of the Dark Whisper (1@ch1a, 1@ch1b).
+Header:
+  Type: INSTANCE_DB
+  Version: 2
+
+Body:
+  - Id: 2030
+    Name: Destroy the Sky Fortress
+    TimeLimit: 3600
+    IdleTimeOut: 300
+    Enter:
+      Map: 1@ch1a
+      X: 264
+      Y: 290
+  - Id: 2031
+    Name: Recreated Dark Whisper
+    TimeLimit: 3600
+    IdleTimeOut: 300
+    Enter:
+      Map: 1@ch1b
+      X: 264
+      Y: 290

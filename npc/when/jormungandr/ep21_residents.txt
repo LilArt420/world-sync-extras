@@ -1,0 +1,245 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 21: the people and boats of Lunaforma, Alberta of old
+//= and the islands around them.
+//= - The client's transports (small boats, the Walter sailors, the
+//=   hidden ship, the small door, Nyar at the rift) take you where
+//=   its navigation table says. They stand where rAthena's World Sync
+//=   content has a plain "Travel to ..." guide, which is switched off
+//=   while this block is on.
+//= - Everyone else lives their life: soldiers drill, children play
+//=   war, the Wigner clerks count, the escaped believers try to sleep.
+//============================================================
+
+-	script	WSJ_Transports	-1,{
+	end;
+OnInit:
+	// rAthena's World Sync guides on the same cells (npc/re/world_sync/transports.txt).
+	setarray .@g$, "Travel to jor_tail#ws19077", "Travel to jor_mbase#ws18727", "Travel to jor_crk_p#ws18725",
+		"Travel to jor_albe#ws18731", "Travel to jor_mbase#ws18729", "Travel to jor_raise2#ws18733",
+		"Travel to jor_mbase#ws18735", "Travel to mbase_in#ws19115", "Travel to jor_crk_p#ws19080",
+		"Travel to jor_crk#ws19086";
+	for (.@i = 0; .@i < getarraysize(.@g$); .@i++)
+		disablenpc .@g$[.@i];
+	end;
+}
+
+// A transport: "<npc>", "<line>", "<choice>", "<map>", x, y
+function	script	F_WSJ_Ride	{
+	mes "[" + getarg(0) + "]";
+	mes getarg(1);
+	next;
+	if (select(getarg(2) + ":Not now.") == 2)
+		close;
+	close2;
+	warp getarg(3), getarg(4), getarg(5);
+	end;
+}
+
+jor_crk,139,141,3	script	Shupapa#wsj_crk	10462,{
+	cutin "ep19_iwin_diver02.png",2;
+	callfunc "F_WSJ_Ride", "Shupapa", "Back to the Frozen Tail? Hold my tail, it's a cold swim.", "Swim back to the Frozen Tail.", "jor_tail", 232, 43;
+}
+jor_crk_p,79,64,3	script	Small Boat#wsj_p	10429,{
+	callfunc "F_WSJ_Ride", "Georborg Rower", "Lunaforma's just across the strait. In you get.", "Row to Lunaforma.", "jor_mbase", 124, 28;
+}
+jor_mbase,122,27,3	script	Small Boat#wsj_m	10429,{
+	callfunc "F_WSJ_Ride", "Georborg Rower", "Scale Island? The cult patrols it, so we row quiet. Ready?", "Row to Scale Island.", "jor_crk_p", 77, 66;
+}
+jor_mbase,343,148,3	script	Walter Sailor#wsj_a	49,{
+	callfunc "F_WSJ_Ride", "Walter Sailor", "The Walter fleet runs to Alberta and back every tide. Room for one more.", "Sail to Alberta.", "jor_albe", 200, 197;
+}
+jor_albe,201,200,3	script	Walter Sailor#wsj_b	49,{
+	callfunc "F_WSJ_Ride", "Walter Sailor", "Back to Lunaforma? Mind the refugees' bundles, they're everything they own.", "Sail to Lunaforma.", "jor_mbase", 338, 148;
+}
+jor_mbase,161,343,3	script	Walter Sailor#wsj_c	49,{
+	callfunc "F_WSJ_Ride", "Walter Sailor", "The Raised Land. Cult country. I'll drop you at the hidden cove and not a step further.", "Sail to the Raised Land.", "jor_raise2", 103, 30;
+}
+jor_raise2,100,26,3	script	Hidden Ship#wsj	10429,{
+	callfunc "F_WSJ_Ride", "Hidden Ship", "A small ship hidden among the rocks, its sails painted grey. A Walter sailor waves you aboard.", "Sail back to Lunaforma.", "jor_mbase", 161, 338;
+}
+mbase_in,85,141,3	script	Small Door#wsj	10429,{
+	callfunc "F_WSJ_Ride", "Small Door", "A narrow door at the back of the barracks. It leads to the little room the resistance uses for quiet talks.", "Go through.", "mbase_in", 66, 182;
+}
+jor_crk,105,108,3	script	Nyar#wsj_now	4_EP20_NYAR,{
+	cutin "ep20_nyar01.png",1;
+	callfunc "F_WSJ_Ride", "Nyar", "^0000FFThe rift is mine. I keep it open, for now. Do you want to go through, to the old days?^000000", "Go through the rift.", "jor_crk_p", 108, 106;
+}
+jor_crk_p,105,108,3	script	Nyar#wsj_then	4_EP20_NYAR,{
+	cutin "ep20_nyar01.png",1;
+	callfunc "F_WSJ_Ride", "Nyar", "^0000FFHome, little one? Your own time is on the other side.^000000", "Go back to the present.", "jor_crk", 108, 105;
+}
+jor_mbase,220,165,3	script	Nyar#wsj_luna	10537,{
+	cutin "ep20_nyar01.png",1;
+	callfunc "F_WSJ_Ride", "Nyar", "^0000FFMrrow. Tired of the old days? I can take you to the rift on Scale Island.^000000", "Go to the rift.", "jor_crk_p", 108, 106;
+}
+jor_albe,62,150,3	script	Nyar#wsj_albe	10537,{
+	cutin "ep20_nyar01.png",1;
+	callfunc "F_WSJ_Ride", "Nyar", "^0000FFAlberta smells of fish and rope. I prefer the rift. Shall we go?^000000", "Go to the rift.", "jor_crk_p", 108, 106;
+}
+
+// ------------------------------------------------------------
+// Lunaforma's people. One line each, picked at random; a few
+// say something else once the last battle is won (wsj_ep21 >= 760).
+// ------------------------------------------------------------
+// callfunc "F_WSJ_Chat", "<line 1>", "<line 2>", "<line 3>"{, "<after the battle>"}
+function	script	F_WSJ_Chat	{
+	mes "[" + strnpcinfo(1) + "]";
+	if (getargcount() > 3 && wsj_ep21 >= 760)
+		mes getarg(3);
+	else
+		mes getarg(rand(3));
+	close;
+}
+
+// The training ground: Richard's mercenaries.
+jor_mbase,132,106,5	script	Mercenary#wsj_t1	10565,{ callfunc "F_WSJ_Chat", "Did you see Galaxia throw the boss? Best fight all month.", "Richard says we train until we stop falling over. I'm still falling over.", "Left foot, right foot, shield up. Left foot...", "We were there, in the Snake's Resting Place. I still can't believe we won."; }
+jor_mbase,134,107,5	script	Mercenary#wsj_t2	10565,{ callfunc "F_WSJ_Chat", "Lee keeps drawing me mid-sneeze. For the manual.", "Mercenaries get paid. Some days. Most days. Some.", "The boss never leaves anyone behind. That's why we're here.", "Vice-captain Tan... I'm going to train harder. For him."; }
+jor_mbase,134,110,5	script	Mercenary#wsj_t3	10565,{ callfunc "F_WSJ_Chat", "My sword arm hurts. My other arm hurts more.", "Valdaris counts every arrow we lose. Every single one.", "Don't stand there, you'll get hit by a training dummy. Don't ask.", "Lunaforma's still standing. So are we."; }
+jor_mbase,135,112,5	script	Mercenary#wsj_t4	10564,{ callfunc "F_WSJ_Chat", "I grew up in a cult village. Here, nobody tells me what to believe. Just where to stand.", "Galaxia says I hit like a snowflake. A strong snowflake, though.", "One more lap around the training ground and I'm done. Two more. Fine.", "We buried our dead and sharpened our swords. That's the mercenary way."; }
+jor_mbase,136,106,5	script	Mercenary#wsj_t5	10564,{ callfunc "F_WSJ_Chat", "Watch your footing, the ice under the snow is a killer.", "We train the applicants here. Most of them quit by lunch.", "Richard owes me five silver. He always owes everyone five silver.", "The serpent's gone. Now we just have the whole cult left. Easy."; }
+jor_mbase,138,115,5	script	Mercenary#wsj_t6	10565,{ callfunc "F_WSJ_Chat", "Fresh recruit? Grab a stick, we start with sticks.", "The Walter sailors bring us steel. The Wigners bring us bread. We bring the cult trouble.", "Shh, the instructor is looking.", "I saw you in the last battle. Thanks."; }
+jor_mbase,139,112,5	script	Mercenary#wsj_t7	10564,{ callfunc "F_WSJ_Chat", "Block, step, strike. Block, step, strike.", "If the cult comes over the hill, we're the first wall. So we'd better be a good wall.", "My mother wanted me to be a fisherman. I'm a fisherman who hits things.", "Peace? Not yet. But closer."; }
+
+// The mercenaries' office (mbase_in).
+mbase_in,285,127,5	script	Mercenary#wsj_o1	10565,{ callfunc "F_WSJ_Chat", "Forms, forms, forms. I joined to fight, not to write.", "Valdaris runs this place. Richard just signs things.", "Coffee? We have something brown and hot. Close enough."; }
+mbase_in,289,120,5	script	Mercenary#wsj_o2	10564,{ callfunc "F_WSJ_Chat", "New contract board's up. Escort duty to Alberta, again.", "Lee's drawings are pinned all over the wall. Mostly of Richard falling.", "If you see Gunter, tell him he owes me a shift."; }
+mbase_in,289,123,5	script	Mercenary#wsj_o3	10565,{ callfunc "F_WSJ_Chat", "I keep the duty roster. Nobody reads it. Everybody complains about it.", "We take any job that hurts the cult. Most of them do.", "Shh. Valdaris is doing the accounts. Nobody breathe."; }
+mbase_in,296,128,5	script	Mercenary#wsj_o4	10565,{ callfunc "F_WSJ_Chat", "Those application forms come in by the bucket since the last battle.", "Somebody wrote 'professional hero' on their form. We hired him. He's terrible.", "Want a job? Valdaris always has jobs."; }
+mbase_in,299,119,5	script	Mercenary#wsj_o5	10564,{ callfunc "F_WSJ_Chat", "I'm guarding the paperwork. Somebody has to.", "The boss's room is in the central barracks. He's never there.", "Galaxia is the only one Richard listens to. Mostly because she's bigger."; }
+mbase_in,302,127,5	script	Mercenary#wsj_o6	10564,{ callfunc "F_WSJ_Chat", "Rations are in the back. Don't touch the red crate. That's Galaxia's.", "Yorskalf, they're calling the new temple. Sounds cold. It is cold.", "Every applicant swears they're the best. Some even are."; }
+
+// Georborg's soldiers and their drill.
+jor_mbase,145,180,3	script	Combat Instructor#wsj	10564,{
+	mes "[Combat Instructor]";
+	mes "Georborg! Shields UP! Spears OUT! You call that a line? Snails make better lines!";
+	next;
+	switch (select("Watch the drill.:Ask about the resistance.:Leave.")) {
+	case 1:
+		mes "^4d4dffThe squad stamps, turns and lowers its spears as one. Mostly as one. One soldier at the end is a beat late every time.^000000";
+		break;
+	case 2:
+		mes "[Combat Instructor]";
+		mes "Georborg is Odin's shield in the north. Farmers, fishers, deserters from the cult. Tris turned us into an army.";
+		mes "Not a good one yet. But an army.";
+		break;
+	}
+	close;
+}
+jor_mbase,143,171,5	script	Georborg Soldier#wsj_d1	10565,{ callfunc "F_WSJ_Chat", "Hup! Hup! Sorry, I'm drilling.", "The instructor says I'm late on the turn. I'm not late, everyone else is early.", "For Odin and for Georborg!", "We held the line in the last battle. Me! I held the line!"; }
+jor_mbase,143,174,5	duplicate(Georborg Soldier#wsj_d1)	Georborg Soldier#wsj_d2	10565
+jor_mbase,143,177,5	duplicate(Georborg Soldier#wsj_d1)	Georborg Soldier#wsj_d3	10565
+jor_mbase,145,171,5	duplicate(Georborg Soldier#wsj_d1)	Georborg Soldier#wsj_d4	10565
+jor_mbase,145,174,5	duplicate(Georborg Soldier#wsj_d1)	Georborg Soldier#wsj_d5	10565
+jor_mbase,145,177,5	duplicate(Georborg Soldier#wsj_d1)	Georborg Soldier#wsj_d6	10565
+jor_mbase,147,171,5	duplicate(Georborg Soldier#wsj_d1)	Georborg Soldier#wsj_d7	10565
+jor_mbase,147,174,5	duplicate(Georborg Soldier#wsj_d1)	Georborg Soldier#wsj_d8	10565
+jor_mbase,147,177,5	duplicate(Georborg Soldier#wsj_d1)	Georborg Soldier#wsj_d9	10565
+jor_mbase,138,303,5	script	Georborg Soldier#wsj_g1	10564,{ callfunc "F_WSJ_Chat", "Shelter duty. I keep the line orderly and the soup hot.", "Ivan Wigner pays for the food. Don't tell him I take seconds.", "Everyone in this line escaped the cult. Be gentle."; }
+jor_mbase,176,254,5	script	Georborg Soldier#wsj_g2	10564,{ callfunc "F_WSJ_Chat", "Watch post. I watch. The sea watches back.", "If you see a black sail in the fog, ring the bell. Twice.", "Captain Tris walks the walls every night. Never sleeps, that one.", "No ghost ship in the fog anymore. I almost miss it. Almost."; }
+
+// Lunaforma's workers.
+jor_mbase,138,125,5	script	Lunapoma Worker#wsj1	120,{ callfunc "F_WSJ_Chat", "We rebuilt this fence three times. The cult knocks it down, we put it up.", "Nails are worth more than gold here.", "Hand me that plank? No, the other plank."; }
+jor_mbase,140,301,5	script	Lunapoma Worker#wsj2	10567,{ callfunc "F_WSJ_Chat", "More tents for the shelter. Always more tents.", "I was a cultist's carpenter. Now I build for people who escaped. Feels better.", "Careful, that rope's holding up the whole kitchen."; }
+jor_mbase,243,229,5	script	Lunapoma Worker#wsj3	10568,{ callfunc "F_WSJ_Chat", "The Wigner crates go there, the Walter crates go here. Simple. Nobody does it right.", "My hands are frozen. My heart is warm. Mostly my hands are frozen.", "Have you eaten? Lehar's rice is the talk of the base."; }
+jor_mbase,280,36,5	script	Lunapoma Worker#wsj4	10569,{ callfunc "F_WSJ_Chat", "Mending nets. The sea takes a bit of them every day.", "The fishing's good near the rocks, if the cult boats stay away.", "Balun Wok will cook anything I catch. Anything."; }
+jor_mbase,229,264,5	script	Trading Company Worker#wsj	10566,{ callfunc "F_WSJ_Chat", "Wigner Company, Lunaforma branch. We unload, we count, we unload again.", "Mister Ivan gave away another shipment. The ledger is crying.", "Sign here, here and here. Oh, you're not a supplier. Never mind."; }
+jor_mbase,265,257,5	script	Surveyor#wsj1	10567,{ callfunc "F_WSJ_Chat", "Mapping the Raised Land for the resistance. The cult keeps moving their paths.", "Gimle is here, the ornamental door is here. Don't go near either.", "If you find a new path through the cliffs, tell me. I'll name it after you."; }
+jor_mbase,267,260,5	script	Surveyor#wsj2	10569,{ callfunc "F_WSJ_Chat", "We measure the tides. Heine wants the numbers. Heine always wants numbers.", "Lee draws prettier maps than us. Ours are more accurate.", "The Raised Land rose out of the sea a hundred years ago, they say. The serpent pushed it up."; }
+jor_mbase,268,253,5	script	Wigner Company Clerk#wsj1	899,{ callfunc "F_WSJ_Chat", "Grain: 40 sacks in, 52 sacks out. How? Mister Ivan, that's how.", "Lady Lalaira sends a letter every week asking where the money went. I write back 'soup'.", "Do you need anything stamped? I'm very good at stamping."; }
+jor_mbase,197,310,5	script	Wigner Company Clerk#wsj2	899,{ callfunc "F_WSJ_Chat", "The shelter's accounts. Don't look, it'll only upset you.", "He's robbing the whole house! Wonderfully. Generously. But robbing it.", "Ivan says money is for moving. It's certainly moving."; }
+jor_mbase,211,315,5	script	Guwal#wsj	899,{ callfunc "F_WSJ_Chat", "I help Lehar with the cauldrons. He talks to the rice. It works.", "Next batch in ten minutes! Get your bowls ready!", "Lehar burnt his hand twice today and didn't stop stirring. That's dedication."; }
+jor_mbase,218,317,5	script	Mamara#wsj	899,{ callfunc "F_WSJ_Chat", "I serve the soup. Two scoops for adults, three for children, four for Wilhelm's brother.", "The shelter fed four hundred today. Four hundred!", "Ivan's money, Lehar's rice, my ladle. That's how we feed Lunaforma."; }
+jor_mbase,232,280,5	script	Mamari#wsj	899,{ callfunc "F_WSJ_Chat", "Ivan's my cousin. Third cousin. The Wigners are a big family.", "If you want to talk business, talk to Ivan. If you want to talk sense, talk to me.", "Lalaira says Ivan has a heart too big for his purse. She's not wrong."; }
+jor_mbase,212,311,5	script	Ivan#wsj_shelter	10584,{
+	cutin "ep21_ivan01.png",2;
+	mes "[Ivan]";
+	if (wsj_ep21 >= 760)
+		mes "The serpent's gone, the shelter's full, and my sister writes to me again. Best year of my life, stranger.";
+	else if (wsj_ep21 >= 400)
+		mes "Every bowl here is one less person the cult can claim. Worth every coin.";
+	else
+		mes "Ivan Wigner, at your service. Soup's free, smiles are free, the sword in my belt is not for sale.";
+	close3;
+}
+
+// The canteen.
+jor_mbase,173,302,5	script	Si Miyeon#wsj	10567,{ callfunc "F_WSJ_Chat", "Wilhelm runs this canteen. He hasn't said ten words to me all season.", "Potatoes again. We have a lot of potatoes.", "Taste this. Too salty? Wilhelm says it's never too salty.", "Wilhelm laughed today. I nearly dropped the pot."; }
+jor_mbase,176,301,5	script	Soyul#wsj	10566,{ callfunc "F_WSJ_Chat", "Bowls, bowls, bowls. I've washed a thousand bowls.", "The mercenaries eat like bears. Galaxia eats like two bears.", "If you're hungry, there's always something on the fire."; }
+jor_mbase,182,301,5	script	Vimal#wsj	10568,{ callfunc "F_WSJ_Chat", "I bake the bread. It's mostly grain and hope.", "The children sneak in for crusts. I pretend not to see.", "Balun Wok brings us whatever the sea gives. Today it gave seaweed."; }
+
+// The children of Lunaforma.
+jor_mbase,161,268,5	script	Captured Kid#wsj	10570,{ callfunc "F_WSJ_Chat", "I'm the prisoner! They captured me! ...It's my turn to be captured.", "When I'm big I'll be a mercenary and nobody will capture me for real.", "Help! Help! The cult's got me! (giggle)"; }
+jor_mbase,162,263,5	script	Young Challenger#wsj	10570,{ callfunc "F_WSJ_Chat", "I challenge you! To a duel! With sticks!", "I beat It three times today. It says it doesn't count. It counts.", "Galaxia taught me a move. I'm not allowed to use it on people."; }
+jor_mbase,163,269,5	script	It#wsj	10571,{ callfunc "F_WSJ_Chat", "I'm It. That's my name now. We're playing tag. I'm always It.", "Don't tell Young Challenger where I'm hiding.", "Tag! You're... no, you're too big. Never mind."; }
+jor_mbase,165,262,5	script	Kkakttugi Kid#wsj	10571,{ callfunc "F_WSJ_Chat", "Kkakttugi is radish. They call me radish because my face goes red. It doesn't! ...Does it?", "Wilhelm gave me radish stew. Radish for the radish.", "I'm the cult! Grr! Run!"; }
+jor_mbase,172,282,5	script	Daisy#wsj	10570,{ callfunc "F_WSJ_Chat", "I'm picking snow flowers for Lehar. He makes the best rice.", "My mama is a Walter sailor. She brings me shells from Alberta.", "Lyric says he saw a ghost ship. Lyric says a lot of things."; }
+jor_mbase,243,236,5	script	Jimin#wsj	10571,{ callfunc "F_WSJ_Chat", "Laura and I are counting crates. We're up to a million. Approximately.", "The Wigner clerk gave us a stamp. We stamp everything now.", "Are you a mercenary? Can I see your sword? Can I hold it? Can I keep it?"; }
+jor_mbase,245,234,5	script	Laura#wsj	10570,{ callfunc "F_WSJ_Chat", "Jimin counts wrong. I count right. We fight about it.", "When the snow melts we're going to plant a garden. Tris promised.", "Shh, the clerk is napping. Stamp quietly."; }
+jor_mbase,252,146,5	script	Hansu#wsj	10571,{ callfunc "F_WSJ_Chat", "I'm guarding the docks. With this stick. Very important.", "A Walter boat came in with oranges once. Oranges! I think about it every day.", "My big brother joined the mercenaries. I'm joining next year. Or the year after."; }
+jor_mbase,295,227,5	script	Mila#wsj	10571,{ callfunc "F_WSJ_Chat", "I don't remember my village. Nikka says that's okay.", "Valdaris let me help with the ledger. I drew a cat in it.", "Do you have a home? Lunaforma is my home now."; }
+jor_mbase,317,212,5	script	Nikka#wsj	10571,{ callfunc "F_WSJ_Chat", "I look after Mila and Sam. I'm the oldest. I'm nine.", "The cult took our grown-ups. The resistance took us. That's what Tris says.", "Sam, don't eat snow!"; }
+jor_mbase,320,211,5	script	Sam#wsj	10570,{ callfunc "F_WSJ_Chat", "Snow tastes like nothing. I keep checking.", "Nikka is bossy. Nikka is the best.", "When the giant snake is gone can we go to the beach? Nikka said maybe.", "The giant snake is gone! Nikka said yes to the beach!"; }
+
+// The escaped believers.
+jor_mbase,275,211,5	script	Escaped Believer#wsj1	10569,{ callfunc "F_WSJ_Chat", "I still wake up praying. Then I remember I don't have to.", "They told us the serpent loves us. Nobody here says that. Somehow I feel safer.", "Karmilgand came out too. If even he could leave, so could I."; }
+jor_mbase,280,215,5	script	Escaped Believer#wsj2	10569,{ callfunc "F_WSJ_Chat", "My son is still in Gimle. One day the resistance will bring him out.", "Reinhardt signed my name on the lists, once. He came to apologize. I forgave him. I think.", "Lehar's rice. I'd forgotten food could taste of anything."; }
+jor_mbase,293,95,5	script	Escaped Believer#wsj3	10568,{ callfunc "F_WSJ_Chat", "I keep to the edge of the base. Crowds still frighten me.", "Counselor Ulus in Alberta helps people like me. Maybe I'll go.", "The sea is so loud here. In Gimle everything was quiet. Too quiet."; }
+
+// Alberta of old: the Wigner house staff.
+jalbe_in,67,146,5	script	Toril#wsj	899,{ callfunc "F_WSJ_Chat", "Lady Lalaira works through the night. I bring her tea at midnight. She never drinks it.", "The Wigner Company feeds half the north. And the other half asks for credit.", "Mister Ivan? We don't mention Mister Ivan before Lady Lalaira's had her tea."; }
+jalbe_in,68,134,5	script	Miyogi#wsj	899,{ callfunc "F_WSJ_Chat", "Contracts, invoices, shipping lists. Alberta runs on paper.", "The Walter fleet and the Wigner Company are old friends. And old rivals. Mostly friends.", "The office upstairs is Lady Lalaira's. Knock twice."; }
+jalbe_in,69,147,5	script	Mamasina#wsj	899,{ callfunc "F_WSJ_Chat", "I've kept this house for thirty years. Ivan used to slide down that banister.", "The young master is in Lunaforma, saving the world one bowl at a time. His sister pretends not to be proud.", "Have a biscuit. Everyone who comes in gets a biscuit."; }
+
+// The Rgans at their new jobs (Sacred Roots job search, Episode 20).
+jor_safty2,193,42,5	script	Rgan#wsj_j1	10475,{
+	if (!callfunc("F_WSJ_IsRgan", "Rgan")) end;
+	callfunc "F_WSJ_Chat", "Rubbish dump duty! I sort the rubbish. Shiny rubbish here, sad rubbish there.", "Someone gave me this job. I love this job.", "Rgan rgan. Work is good.";
+}
+jor_safty2,196,40,5	script	Rgan#wsj_j2	10473,{
+	if (!callfunc("F_WSJ_IsRgan", "Rgan")) end;
+	callfunc "F_WSJ_Chat", "I watch the dump. Nothing gets dumped without me knowing.", "My friend sorts. I watch. Teamwork.", "The bishops never came down here. It's peaceful.";
+}
+jor_safty2,303,41,5	script	Rgan#wsj_j3	10475,{
+	if (!callfunc("F_WSJ_IsRgan", "Rgan")) end;
+	callfunc "F_WSJ_Chat", "The junk heap! Everything anyone ever threw away. I'm making it into a nest.", "A good attendant told me to come here. Best advice of my life.", "Want some junk? I have so much junk.";
+}
+jor_safty2,305,44,5	script	Rgan#wsj_j4	10473,{
+	if (!callfunc("F_WSJ_IsRgan", "Rgan")) end;
+	callfunc "F_WSJ_Chat", "Storehouse keeper. Forty crates of cores, eleven crates of beetles.", "Counting is the best job. Ask the clerk at the west wall, she agrees.", "No, you can't have a beetle.";
+}
+
+// The Frozen Zone after Episode 20: the guardians keep watch.
+jor_twice,237,310,5	script	Aurelie#wsj_fz	10465,{
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	if (wsj_ep20 >= 700)
+		mes "Leon and I check the floes every few days. Jormungandr's magic is calm. Nyar's doing well.";
+	else
+		mes "The magic here is strong. Be careful on the floes.";
+	close3;
+}
+jor_twice,238,330,5	script	Leon#wsj_fz	10464,{
+	cutin "ep19_leon01.png",0;
+	mes "[Leon]";
+	if (wsj_ep20 >= 700)
+		mes "The cultists keep coming back to chant at the ice. I keep sending them away. It's a good arrangement.";
+	else
+		mes "Something's watching from beyond those floes. I can feel it.";
+	close3;
+}
+jor_twice,255,125,5	script	Maram#wsj_fz	10376,{
+	cutin "ep18_maram_01.png",2;
+	mes "[Maram]";
+	mes "Miriam's out on the floes with the Iwin divers. I'm keeping the first-aid kit warm.";
+	close3;
+}
+
+// The camp at the crack in the rock (Raised Land), where Tan and Nadoyo watched Gimle.
+jor_raise1,199,190,0	script	Crack in the Rock#wsj	10429,{
+	mes "^4d4dffA cleft in the rock, just wide enough for two. Someone made camp here: a cold fire, two bedrolls, and scratch marks counting the nights.^000000";
+	if (wsj_ep21 >= 760) {
+		next;
+		mes "^4d4dffOne of the bedrolls has been rolled up and tied with care. A little bow made of string is tucked under the knot.^000000";
+	}
+	close;
+}

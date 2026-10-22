@@ -1,0 +1,41 @@
+# Placeholders implemented for real, by this mod's blocks or by other mods: generate.py --exclude-ids leaves them out.
+# Jormungandr block (npc/when/jormungandr): Episode 20 main story
+14324 14329 14330 14331 14332 14333 14334 14335 14336 14396 14399 14400 14401 14420 14422 14423 14424 14425 14457 14464 14467 14472 14474 14476 14481 14506 14508-14527 14629 14633 14634 14635 14638 14647 14649-14660 14662 14664 14666 14668 14670 14672 14701 14706-14711 14735-14743 14745-14757 14760-14766 18376 18378 18658 18661 18664 18666 18668 18671 18684 18686 18688 18690 18692
+# iRO Quests (LilArt420/iro-quests, next version): Overlook Water Dungeon signboards
+30027-30031
+# Jormungandr block: Episode 21 (Age of Heroes)
+18985 18986 19079 19085 19097 19098 19099 19106 19136 19153 19154 19155 19156 19157 19177 19233 19282 19290 19354 19355 19359
+# Jormungandr block: the dailies, the ghost-ship dungeon, Alberta of old and the traders
+14438-14451 18790 18933-18939 18943 19043-19066 19069 19143 19144 19350 19351
+# Jormungandr block: transports and residents (Lunaforma, Alberta, the Rgans, the Frozen Zone)
+14496 14498 14503 14504 14632 14636 14637 18724 18726 18728 18730 18732 18734 18905 18914 18975-18980 19027-19033 19076 19100 19114 19145 19146 19149 19234-19236 19241 19284-19289 19292-19305 19322-19339
+# Star Forest block (npc/when/star_forest): Star Emperor, Sanctuary Herosria, Ash Village's shops and signposts
+15730-15731 15736-15742 15749-15750 15754 15758 15762 15766-15769 15798-15801 15849 15853 18020-18021 18023-18074 19655 19657 19659 19661 19663 19904 19906-19907 20106 20151 28616 28619 29713 30188-30195
+# Varmundt block (npc/when/varmundt): Dungeon Food, Chess Garden, Seoyeon's Trial, Chapter 1, VR Juno, the eroded wing
+14248-14251 14255 14257 14908 14915-14916 14919 14922-14927 14929-14935 16230 16232-16233 16235-16236 16238-16239 16241-16242 16244 19362-19364 19366 19369 19372 19377 19381-19382 19386 19390 19395 19400 19405 19410-19411 19419 19422 19429 19437-19444 19446-19449 19475 19482 19553-19559 19566-19570 19758 19763-19766 19770 19773-19774 19778 19811-19813 19815-19816 19820-19826 19830 19834 19837 19842-19843 19852 19909-19910 20081-20082 27846-27847 27849 27853-27859 27873 27897 27923 27925 27927 27996-27997 28016 28029-28033 28073 28075-28083 28087 28149-28151 28620-28621 28657-28660 32803
+# Jormungandr block: Koko's Secret Base (Friederike, Copo)
+14830 14831
+# Left out as retired or online-only iRO content (user OK 2026-10-21): the Weekend Race (iroweekrace), the Battle Pass Season 3 signboards, the Redeem Code
+13857-13865 b459-b463 b477
+# iRO Quests 0.3.0 (LilArt420/iro-quests): City Investment delivery recipients, the Morroc 2021 chain
+14074 14087 14089 14090 14091 14094 14098 14100 14102 14105 14107 14108 14109 14110 14122 14123 14125 14126 14130 14131 14142 14149 14150 14152 14153 14154 14157 14158 14162 14165 14166 14167 14169 14173 14175 13945-13948
+# Already scripted by rAthena (found by iRO Quests): Myu, Girl, Old Man Patting His Back
+29307 29010 23832
+# Varmundt block: Chapter 2 (Yongjirak, Ragsruth, Beledor) and the Deep Abyss exit
+14262 20120 20122-20127 20129 20141 20147-20150 20153 20193 20264 20367 20408-20422 20459-20469 20472 30847 32824
+# iRO Quests 0.3.0: the Payon 2021 chain (Reno, Wandering Monk)
+13960 13963
+# iRO Quests 0.3.0: the Prontera 2021 chain (Orc Village, Glast Heim)
+14003 14008
+# Left out as retired (user OK once confirmed; confirmed 2026-10-22): iRO's Talk Like a Pirate Event 2026 hub on alb2trea
+b465-b470
+# Already scripted by rAthena (found by iRO Quests): Grunburti on que_god01t copies Grunburti#god
+27958
+# iRO Quests 0.3.0: the 2021 town and dungeon-mission chains, Vivi
+14014-14047 14177 14178
+# Star Forest block: Lala on ab_lava1 (biosphere return guide)
+28623
+# iRO services block (npc/when/iro_systems): Devil in the Box, Pet Mimics, Catalog Dispensers and town helpers
+16298-16307 29197 29199 29201 29203 29253 29255 29257 29259
+# Left out (user: drop them, 2026-10-22): the tra_fild Training Instructors; rAthena's own iRO Training Zone stays off
+17098 17101

@@ -1,0 +1,818 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Chapter 1, part B: to each one's post, the Geffen of the
+//= parallel world and Soren Syndrome.
+//= Quests 18379, 18372, 17891-17898, 16912-16935. Steps 150-249.
+//= wsv_ch1b bits: 1-16 patients visited (cough, bath, weight,
+//= child, elder), 32 towel, 64 extra meal, 128 sweets, 256
+//= symptoms reported, 512 clergy clinic, 1024 wizards' clinic,
+//= 2048/4096/8192 blood from a patient/a healthy person/a
+//= recovered person, 16384/32768/65536 those delivered.
+//============================================================
+
+// ------------------------------------------------------------
+// Rubiel holds the gate on the Geffen field of the second world.
+// ------------------------------------------------------------
+hem_fild,180,263,4	script	Designated Spot#wsv_c1	10429,{
+	if (wsv_ch1 == 150) {
+		mes "[Designated Spot]";
+		mes "A ring of white stones, laid out carefully on the scorched grass. The air above it hums faintly.";
+		next;
+		mes "Someone flutters down from above the stones.";
+		close2;
+		cloakoffnpcself "Rubiel#wsv_c1g";
+		end;
+	}
+	mes "[Designated Spot]";
+	mes "A ring of white stones. Laphine magic keeps the way to Ash Village open here.";
+	if (wsv_ch1 >= 150) {
+		next;
+		if (select("Go back to Ash Village.:Stay.") == 1) {
+			close2;
+			warp "ygg_edge",36,117;
+			end;
+		}
+	}
+	close;
+}
+
+hem_fild,182,265,4	script(CLOAKED)	Rubiel#wsv_c1g	10610,{
+	if (wsv_ch1 == 150) {
+		mes "[Rubiel]";
+		mes "You came! Sasha said you would.";
+		mes "I'm Rubiel. I keep the gates for the heralds. This one is the hardest I've ever held.";
+		next;
+		mes "[Rubiel]";
+		mes "Can you feel it? The ground here doesn't want us. The world is broken and it's trying to push everything out.";
+		mes "But as long as I hold this spot, you'll always have a way home. That's my post.";
+		next;
+		mes "[Rubiel]";
+		mes "Everyone has a post now. Jeon Cheosa is waiting for you at the ^0000FFbig intersection in the Land of Darkness^000000, northeast of the gnarled roots.";
+		mes "He's the one leading the way into this world's Geffen.";
+		next;
+		mes "[Rubiel]";
+		mes "And if you ever need to go home in a hurry, come back to the ring of stones.";
+		callfunc "F_WSV_Step", "wsv_ch1", 160, "18379", "18372";
+		close;
+	}
+	mes "[Rubiel]";
+	mes "I'm holding the gate. Go on, I'll be right here.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Jeon Cheosa, the hermit who leads the way into Geffen.
+// ------------------------------------------------------------
+ygg_roots,164,231,4	script(CLOAKED)	Jeon Cheosa#wsv_c1r	754,{
+	if (wsv_ch1 == 160) {
+		mes "[Jeon Cheosa]";
+		mes "Hm, hm. So this is the young one the World Tree sent for.";
+		mes "Sit, sit. No, don't sit, the roots bite. Stand, then.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "They call me Jeon Cheosa. A hermit, a reader of winds and signs. I wandered into Ash Village long ago and never quite wandered out.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "Since dawn, the wind from this intersection has smelled of sickness. Of fever, and of something that should be dead and is not.";
+		mes "It comes from the direction of Geffen. The broken Geffen, on the other side.";
+		next;
+		select("We should go and see.");
+		mes "[Jeon Cheosa]";
+		mes "Ho! No hesitation. Good, good.";
+		mes "The others went ahead. Clover and Charles are waiting on the ^0000FFGeffen field^000000, on the road to the city. Let us join them.";
+		callfunc "F_WSV_Step", "wsv_ch1", 170, "18372", "17891";
+		close;
+	}
+	mes "[Jeon Cheosa]";
+	mes "The wind smells of fever. Let us go.";
+	close;
+}
+
+// The party waiting on the road to Geffen.
+hem_fild,102,161,4	script(CLOAKED)	Clover#wsv_c1f	123,{
+	cutin "ch1_clover01.png",2;
+	if (wsv_ch1 == 170) {
+		mes "[Clover]";
+		mes "Oh, thank goodness. You're the adventurer from Ash Village?";
+		mes "I'm Clover. I... used to study magic in Geffen. This Geffen, I mean. The broken one.";
+		next;
+		mes "[Clover]";
+		mes "When the city fell, my master and my senior stayed behind in the tower. I got out. I've been trying to get back ever since.";
+		next;
+		cutin "",255;
+		mes "[Charles]";
+		mes "And I've been trying to keep her from running in alone. Charles. Pleased to meet you.";
+		mes "The city's just east of here. People still live there, if you can call it living.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "The sickness on the wind comes from there. We go together, and we keep our eyes open.";
+		callfunc "F_WSV_Step", "wsv_ch1", 180, "17891", "17892";
+		close;
+	}
+	mes "[Clover]";
+	mes "The city is just east of here.";
+	close3;
+}
+hem_fild,104,159,4	script(CLOAKED)	Charles#wsv_c1f	10247,{
+	mes "[Charles]";
+	mes "Stay close to Clover, will you? She's braver than is good for her.";
+	close;
+}
+hem_fild,100,162,4	script(CLOAKED)	Jeon Cheosa#wsv_c1f	754,{
+	mes "[Jeon Cheosa]";
+	mes "Hm. The wind is worse here. East, to the city.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Destroyed Geffen
+// ------------------------------------------------------------
+ch1_geffen,190,123,4	script	Geffen Resident#wsv_c1a	84,{
+	if (wsv_ch1 == 180) {
+		mes "You walk through what was once Geffen's eastern gate. Half the houses are rubble; the other half have boarded windows.";
+		mes "Somewhere, someone is coughing. Then someone else.";
+		next;
+		mes "[Geffen Resident]";
+		mes "...Outsiders? Don't come any closer. Not unless you want to catch it too.";
+		callfunc "F_WSV_Step", "wsv_ch1", 185, "17892", "17893";
+		close;
+	}
+	if (wsv_ch1 == 185) {
+		mes "[Geffen Resident]";
+		mes "Catch what? The sickness, of course. Where have you been?";
+		mes "It starts with a cough. Then you can't stop scratching, and you're always hungry, and you get thinner anyway.";
+		next;
+		mes "[Geffen Resident]";
+		mes "Half my street has it. The doctor calls it ^0000FFSoren Syndrome^000000, as if a name makes it better.";
+		mes "Ask the folks by the southern wells if you want to know more. They've buried more people than I have.";
+		callfunc "F_WSV_Step", "wsv_ch1", 190, "17893", "17894";
+		close;
+	}
+	mes "[Geffen Resident]";
+	if (wsv_ch1 < 180)
+		mes "Strangers don't come to Geffen any more. Not since the tower fell.";
+	else if (wsv_ch1 < 520)
+		mes "Keep your distance and cover your mouth. That's all the advice I have.";
+	else
+		mes "My neighbour's cough is gone. I didn't think I'd live to say that.";
+	close;
+}
+
+ch1_geffen,149,55,4	script	Geffen Resident#wsv_c1b	771,{
+	if (wsv_ch1 == 190) {
+		mes "[Geffen Resident]";
+		mes "More questions? Fine. I've got nothing but time and a cough.";
+		next;
+		mes "[Geffen Resident]";
+		mes "It started after the tower went dark. The wizards up there were always doing something with the old seal under it.";
+		mes "Then one night there was a sound like the sky tearing, and a week later the first people got sick.";
+		next;
+		mes "[Geffen Resident]";
+		mes "You want to know where it came from? Ask the ^0000FFwizard in the tower^000000. If you can get past him.";
+		callfunc "F_WSV_Step", "wsv_ch1", 195, "17894", "17895";
+		close;
+	}
+	mes "[Geffen Resident]";
+	if (wsv_ch1 < 190)
+		mes "*cough* *cough* ...What?";
+	else if (wsv_ch1 < 520)
+		mes "The tower. It all started at the tower.";
+	else
+		mes "They say the medicine came from people who don't even live in this world. Strange times.";
+	close;
+}
+
+// The broken tower of the parallel Geffen.
+ch1_geffen,120,115,4	script	Geffen Tower#wsv_c1	10429,{
+	if (wsv_ch1 == 195) {
+		mes "[Geffen Tower]";
+		mes "The great tower of Geffen, split down the middle. Its door hangs from a single hinge.";
+		mes "Inside, the staircase down to the basement glows with a pale blue barrier.";
+		next;
+		mes "Footsteps on the stairs. A tall figure in a stained robe blocks the doorway.";
+		callfunc "F_WSV_Step", "wsv_ch1", 200, "17895", "17896";
+		close;
+	}
+	mes "[Geffen Tower]";
+	mes "The great tower of Geffen, split down the middle.";
+	if (wsv_ch1 >= 255) {
+		next;
+		if (select("Go down to the basement.:Stay.") == 1) {
+			close2;
+			warp "hem_dun01",25,116;
+			end;
+		}
+	}
+	close;
+}
+
+ch1_geffen,122,118,4	script(CLOAKED)	Tower Wizard#wsv_c1	735,{
+	if (wsv_ch1 == 200) {
+		mes "[Tower Wizard]";
+		mes "That's far enough. Nobody goes down those stairs.";
+		next;
+		select("We're here about the sickness.");
+		mes "[Tower Wizard]";
+		mes "The sickness. Of course. Everyone thinks it's our fault.";
+		mes "Maybe it is. We kept the seal under this tower for a hundred years, and the night the sky tore open, it cracked.";
+		next;
+		mes "[Tower Wizard]";
+		mes "Something came up through the crack, and something went down. I put the barrier on the stairs myself. I won't take it off.";
+		mes "Whatever is down there stays down there.";
+		next;
+		mes "[Clover]";
+		mes "My master is down there! Master Parzival, and my senior, Sua!";
+		next;
+		mes "[Tower Wizard]";
+		mes "......";
+		mes "Then I'm sorry for you, girl. Nobody has come up in months.";
+		callfunc "F_WSV_Step", "wsv_ch1", 205, "17896", "17897";
+		close;
+	}
+	mes "[Tower Wizard]";
+	mes "The barrier stays.";
+	close;
+}
+
+ch1_geffen,117,117,4	script	Jeon Cheosa#wsv_c1g	754,{
+	if (wsv_ch1 == 205) {
+		mes "[Jeon Cheosa]";
+		mes "Hm, hm. A stubborn man, but not a fool. That barrier was made in a hurry, and in fear.";
+		mes "If we tear it down, whatever it holds back comes out all at once.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "There may be a way to unpick it, thread by thread, so that only we pass. It will take time. Charles, Clover and I will work on it.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "You, young one, go where you're needed more. There is a ^0000FFclinic^000000 in the south of the city. The sick are there.";
+		mes "Learn what this Soren Syndrome is. A cure starts with understanding.";
+		callfunc "F_WSV_Step", "wsv_ch1", 210, "17897", "17898";
+		close;
+	}
+	if (wsv_ch1 == 245) {
+		mes "[Jeon Cheosa]";
+		mes "Ho! There you are. I have news.";
+		mes "The barrier is unpicked. Not broken: unpicked. It will let us through, and close behind us.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "Gregor told me what your blood samples showed. Whatever this sickness is, its roots go down, under the tower. We must see it with our own eyes.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "Come. To the tower, and down.";
+		callfunc "F_WSV_Step", "wsv_ch1", 250, "16934", "17899";
+		close;
+	}
+	callfunc "F_WSV_C1Cheosa";
+	end;
+}
+
+// ------------------------------------------------------------
+// Dr. Neumann's clinic (ch1_gef_in)
+// ------------------------------------------------------------
+ch1_gef_in,81,74,4	script	Dr. Neumann#wsv_c1	10619,{
+	cutin "ch1_neumann01.png",2;
+	if (wsv_ch1 == 210) {
+		mes "[Dr. Neumann]";
+		mes "Shut the door behind you, please. The draft is bad for the patients.";
+		mes "...You're not from Geffen. Not with boots that clean.";
+		next;
+		mes "[Dr. Neumann]";
+		mes "Neumann. I'm the doctor here, as much as anyone is. Every bed in this clinic is full, and every patient has the same thing.";
+		mes "Soren Syndrome. The cough comes first. Then the rest.";
+		next;
+		select("I want to help find a cure.");
+		cutin "ch1_neumann02.png",2;
+		mes "[Dr. Neumann]";
+		mes "A cure. Hah.";
+		mes "...Forgive me. I haven't slept. If you truly want to help, meet my patients. Listen to them. I don't have the time to anymore.";
+		next;
+		mes "[Dr. Neumann]";
+		mes "There's a man with a ^0000FFbad cough^000000 by the south wall, a ^0000FFpatient who keeps asking for a bath^000000, an ^0000FFemaciated one^000000 in the west ward, a ^0000FFchild^000000 and an ^0000FFelderly patient^000000 in the east ward.";
+		mes "Tell me what you see.";
+		callfunc "F_WSV_Step", "wsv_ch1", 215, "17898", "16912,16913,16914,16915,16916";
+		close3;
+	}
+	if (wsv_ch1 >= 215 && (wsv_ch1b & 64) && !(wsv_ch1b & 256)) {
+		mes "[Dr. Neumann]";
+		mes "The emaciated patient ate a full second meal, and he's hungrier than before?";
+		next;
+		cutin "ch1_neumann03.png",2;
+		mes "[Dr. Neumann]";
+		mes "......";
+		mes "That's how it goes, at the end. The body eats and eats and gets nothing from it.";
+		mes "Thank you for telling me. I'll move him closer to my desk.";
+		wsv_ch1b = wsv_ch1b | 256;
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "16922", "";
+		close3;
+	}
+	if (wsv_ch1 == 235 && isbegin_quest(16928) == 1) {
+		mes "[Dr. Neumann]";
+		mes "Blood samples. From my patients.";
+		next;
+		mes "[Dr. Neumann]";
+		mes "...I don't like it. They've been poked and prodded enough.";
+		mes "But if those researchers of yours can see something I can't... Fine. One sample, from the patient on the treatment bed. Use this kit, and be gentle.";
+		callfunc "F_WSV_Step", "wsv_ch1", 235, "16928", "16935";
+		cloakoffnpcself "Patient in Treatment#wsv_c1";
+		close3;
+	}
+	mes "[Dr. Neumann]";
+	if (wsv_ch1 < 210)
+		mes "Unless you're sick or a doctor, I don't have time for you.";
+	else if (wsv_ch1 < 220)
+		mes "Go and meet the patients. All five of them.";
+	else if (wsv_ch1 < 350)
+		mes "Your researcher friends are welcome, as long as they stay out of the way.";
+	else
+		mes "......";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch1 == 210 || (wsv_ch1 == 235 && isbegin_quest(16928) == 1)" );
+	end;
+}
+
+// Visiting a patient: callfunc "F_WSV_C1Visit", <bit>, <quest>;
+function	script	F_WSV_C1Visit	{
+	.@b = getarg(0);
+	if (wsv_ch1 != 215 || (wsv_ch1b & .@b))
+		return 0;
+	wsv_ch1b = wsv_ch1b | .@b;
+	callfunc "F_WSV_Step", "wsv_ch1", 215, getarg(1), "";
+	if ((wsv_ch1b & 31) == 31) {
+		callfunc "F_WSV_Step", "wsv_ch1", 220, "", "16917";
+		dispbottom "You've met all five patients. Einhar and Gregor have arrived from Ash Village and are waiting by the clinic's entrance hall.";
+	}
+	return 1;
+}
+
+ch1_gef_in,107,39,4	script	Patient with a Bad Cough#wsv	10614,{
+	if (callfunc("F_WSV_C1Visit", 1, "16912")) {
+		cutin "ch1_sick01.png",2;
+		mes "[Patient with a Bad Cough]";
+		mes "*cough* *cough*... Sorry. I can't... *cough* stop.";
+		next;
+		mes "[Patient with a Bad Cough]";
+		mes "It started a month ago. Dry, at first. Now it hurts from here to here.";
+		mes "At night I dream I'm breathing dust.";
+		close3;
+	}
+	cutin "ch1_sick01.png",2;
+	mes "[Patient with a Bad Cough]";
+	if (wsv_ch1 >= 570)
+		mes "Listen to that. Nothing. I can breathe all the way down. Thank you.";
+	else
+		mes "*cough* *cough*";
+	close3;
+}
+
+ch1_gef_in,106,33,4	script	Patient Who Wants a Bath#wsv	10615,{
+	if (callfunc("F_WSV_C1Visit", 2, "16913")) {
+		mes "[Patient Who Wants a Bath]";
+		mes "Oh, a new face. You wouldn't happen to have a bathtub on you?";
+		next;
+		mes "[Patient Who Wants a Bath]";
+		mes "My skin itches all the time. It flakes off like old paint. A bath would help, I'm sure of it, but the water's rationed.";
+		mes "Even a warm wet towel would be heaven.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "", "16918";
+		close;
+	}
+	if (isbegin_quest(16919) == 1) {
+		mes "[Patient Who Wants a Bath]";
+		mes "Is that... a warm towel? For me?";
+		next;
+		mes "[Patient Who Wants a Bath]";
+		mes "Ahhh. Oh, that's wonderful. Thank you, thank you.";
+		mes "I'd almost forgotten what it's like to feel clean.";
+		wsv_ch1b = wsv_ch1b | 32;
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "16919", "";
+		getexp2 5000000, 2500000;
+		close;
+	}
+	mes "[Patient Who Wants a Bath]";
+	if (wsv_ch1 >= 570)
+		mes "The itching has stopped. Now I just want a bath because I like baths.";
+	else if (wsv_ch1 >= 215 && !(wsv_ch1b & 32))
+		mes "If you see the clinic volunteer, ask about a warm towel for me?";
+	else
+		mes "Itchy, itchy...";
+	close;
+}
+
+ch1_gef_in,115,40,4	script	Clinic Volunteer#wsv	66,{
+	if (isbegin_quest(16918) == 1) {
+		mes "[Clinic Volunteer]";
+		mes "A warm towel? For the one in the south ward? Of course.";
+		mes "I'll heat some water. Give me a moment...";
+		next;
+		progressbar "ffffff", 3;
+		mes "[Clinic Volunteer]";
+		mes "Here. Hurry, before it cools.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "16918", "16919";
+		close;
+	}
+	mes "[Clinic Volunteer]";
+	if (wsv_ch1 >= 570)
+		mes "For the first time in months, I'm folding clean sheets for beds that are emptying. Happy work.";
+	else
+		mes "Linens, water, bandages. There's never enough of anything.";
+	close;
+}
+
+ch1_gef_in,65,112,4	script	Emaciated Patient#wsv	10616,{
+	if (callfunc("F_WSV_C1Visit", 4, "16914")) {
+		mes "[Emaciated Patient]";
+		mes "Are you... from the kitchen? Is it time to eat?";
+		next;
+		mes "[Emaciated Patient]";
+		mes "I'm so hungry. I eat everything they give me, and I'm still hungry, and I keep getting thinner.";
+		mes "Could you ask the meal volunteer for a little more? Just a little.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "", "16920";
+		close;
+	}
+	if (isbegin_quest(16921) == 1) {
+		mes "[Emaciated Patient]";
+		mes "Food...!";
+		next;
+		mes "He eats the whole bowl in seconds, then stares at the empty bottom.";
+		next;
+		mes "[Emaciated Patient]";
+		mes "...I'm still hungry. Why am I still hungry?";
+		wsv_ch1b = wsv_ch1b | 64;
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "16921", "16922";
+		close;
+	}
+	mes "[Emaciated Patient]";
+	if (wsv_ch1 >= 570)
+		mes "I ate one bowl today and I'm full. Full! Do you know how good that word sounds?";
+	else
+		mes "Hungry...";
+	close;
+}
+
+ch1_gef_in,113,102,4	script	Clinic Meal Volunteer#wsv	91,{
+	if (isbegin_quest(16920) == 1) {
+		mes "[Clinic Meal Volunteer]";
+		mes "More food for the man in the west ward? Poor thing. He's always hungry.";
+		mes "I'll give you a second bowl. Don't tell the others.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "16920", "16921";
+		close;
+	}
+	if (isbegin_quest(16923) == 1) {
+		mes "[Clinic Meal Volunteer]";
+		mes "Something sweet for the little one? Oh, she's been dreaming about candy every night...";
+		mes "We have no sugar. But I've got a few dried berries and some flour. Let me try something.";
+		next;
+		progressbar "ffffff", 4;
+		mes "[Clinic Meal Volunteer]";
+		mes "Berry cakes! Well, berry... lumps. Tell her they're cakes.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "16923", "16924";
+		close;
+	}
+	mes "[Clinic Meal Volunteer]";
+	if (wsv_ch1 >= 570)
+		mes "The patients are eating normal portions again. My ladle arm is grateful.";
+	else
+		mes "Soup again today. Soup tomorrow, too.";
+	close;
+}
+
+ch1_gef_in,106,106,4	script	Young Patient#wsv	10618,{
+	if (callfunc("F_WSV_C1Visit", 8, "16915")) {
+		cutin "ch1_kid01.png",2;
+		mes "[Young Patient]";
+		mes "Are you a doctor? You don't look like a doctor.";
+		next;
+		mes "[Young Patient]";
+		mes "Last night I dreamed about a cake as big as the tower. With strawberries.";
+		mes "The soup here tastes like nothing. I want something sweet...";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "", "16923";
+		close3;
+	}
+	if (isbegin_quest(16924) == 1) {
+		cutin "ch1_kid01.png",2;
+		mes "[Young Patient]";
+		mes "Cakes? For me?";
+		next;
+		mes "[Young Patient]";
+		mes "They're lumpy. ...They're sweet! They're really sweet!";
+		mes "Thank you! When I get better, I'll make you a real one.";
+		wsv_ch1b = wsv_ch1b | 128;
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "16924", "";
+		getexp2 5000000, 2500000;
+		close3;
+	}
+	cutin "ch1_kid01.png",2;
+	mes "[Young Patient]";
+	if (wsv_ch1 >= 570)
+		mes "Grandma says I can go home soon! I'm going to bake a cake as big as the tower!";
+	else
+		mes "Sweets, sweets, sweets...";
+	close3;
+}
+
+ch1_gef_in,105,104,4	script	Elderly Patient#wsv	78,{
+	if (callfunc("F_WSV_C1Visit", 16, "16916")) {
+		mes "[Elderly Patient]";
+		mes "Don't worry about me, young one. I've had a long life.";
+		mes "It's the little one in the next bed I worry about. She's too young for this.";
+		next;
+		mes "[Elderly Patient]";
+		mes "And the doctor. He works like a man with a debt to pay. I've seen that look before.";
+		mes "Someone should make sure he sleeps.";
+		close;
+	}
+	mes "[Elderly Patient]";
+	if (wsv_ch1 >= 570)
+		mes "I'll be dancing at my grandson's wedding after all. Imagine that.";
+	else
+		mes "Look after the child, would you?";
+	close;
+}
+
+// Einhar and Gregor, the researchers from Ash Village.
+ch1_gef_in,75,58,4	script(CLOAKED)	Einhar#wsv_c1a	10370,{
+	cutin "4job_einhar_01.png",2;
+	if (wsv_ch1 == 220) {
+		mes "[Einhar]";
+		mes "So you're the one Sasha mentioned. Einhar. This is Gregor. We study diseases of the roots in Ash Village.";
+		next;
+		cutin "4job_gregor_01.png",0;
+		mes "[Gregor]";
+		mes "And now diseases of other worlds! What a time to be a researcher!";
+		mes "...Sorry. Inappropriate. It's the excitement.";
+		next;
+		cutin "4job_einhar_01.png",2;
+		mes "[Einhar]";
+		mes "Tell us what you saw.";
+		next;
+		select("A cough, flaking skin, endless hunger with weight loss...");
+		mes "[Einhar]";
+		mes "Hm. The body burning through itself. Something is feeding on them from the inside.";
+		next;
+		mes "[Einhar]";
+		mes "Neumann's clinic isn't the only one in the city. The priests run a ^0000FFtreatment center^000000 in the northwest, and the fallen wizards keep an ^0000FFinfirmary^000000 to the north.";
+		mes "Gregor and I will split up and visit them. Meet us there.";
+		callfunc "F_WSV_Step", "wsv_ch1", 225, "16917", "16925,16926";
+		close3;
+	}
+	mes "[Einhar]";
+	mes "We'll be at the other clinics.";
+	close3;
+}
+ch1_gef_in,77,58,4	script(CLOAKED)	Gregor#wsv_c1a	627,{
+	cutin "4job_gregor_01.png",2;
+	mes "[Gregor]";
+	mes "Fascinating, fascinating. Terrible, but fascinating.";
+	close3;
+}
+
+ch1_gef_in,35,173,4	script	Bedridden Patient#wsv	585,{
+	mes "[Bedridden Patient]";
+	if (wsv_ch1 >= 570)
+		mes "I sat up today. All by myself.";
+	else if (wsv_ch1 == 225)
+		mes "......";
+	else
+		mes "The priests pray over us every morning. It doesn't help, but they keep doing it.";
+	close;
+}
+
+ch1_gef_in,29,174,4	script(CLOAKED)	Gregor#wsv_c1b	627,{
+	cutin "4job_gregor_01.png",2;
+	if (wsv_ch1 == 225 && !(wsv_ch1b & 512)) {
+		mes "[Gregor]";
+		mes "Ah, you made it. Look at this poor fellow. He hasn't said a word all day.";
+		mes "The priests here treat the sick with prayers and boiled water. Not wrong, just... not enough.";
+		next;
+		mes "[Gregor]";
+		mes "But here's the thing. The ones who've been sick longest here are calm. Too calm. They stare at the ceiling like they're listening for something.";
+		next;
+		mes "[Gregor]";
+		mes "I'll write that down. Go and see Einhar at the wizards' infirmary when you're done here.";
+		wsv_ch1b = wsv_ch1b | 512;
+		callfunc "F_WSV_Step", "wsv_ch1", 225, "16925", "";
+		callfunc "F_WSV_C1Clinics";
+		close3;
+	}
+	mes "[Gregor]";
+	mes "Prayers and boiled water. Hmm.";
+	close3;
+}
+
+ch1_gef_in,69,175,4	script	Disgruntled Patient#wsv	849,{
+	mes "[Disgruntled Patient]";
+	if (wsv_ch1 >= 570)
+		mes "Fine, fine, the medicine worked. Happy? ...Thank you.";
+	else
+		mes "The wizards who caused this are the ones treating us. Do you see the joke? I don't.";
+	close;
+}
+
+ch1_gef_in,70,170,4	script(CLOAKED)	Einhar#wsv_c1b	10370,{
+	cutin "4job_einhar_01.png",2;
+	if (wsv_ch1 == 225 && !(wsv_ch1b & 1024)) {
+		mes "[Einhar]";
+		mes "The wizards here use magic to keep the fever down. It works for a while.";
+		mes "That patient is furious about it. He blames the wizards for the sickness and hates that they're the ones treating him.";
+		next;
+		mes "[Einhar]";
+		mes "But I noticed something. Their magic doesn't just cool the fever. Something in the blood pushes back against it, like it's alive.";
+		next;
+		mes "[Einhar]";
+		mes "We need samples. Gregor will want to set up in the ^0000FFtown hall^000000 in the north of the city. It has space, and fewer people coughing on the equipment.";
+		wsv_ch1b = wsv_ch1b | 1024;
+		callfunc "F_WSV_Step", "wsv_ch1", 225, "16926", "";
+		callfunc "F_WSV_C1Clinics";
+		close3;
+	}
+	mes "[Einhar]";
+	mes "The blood pushes back. Interesting.";
+	close3;
+}
+
+function	script	F_WSV_C1Clinics	{
+	if ((wsv_ch1b & 1536) == 1536) {
+		callfunc "F_WSV_Step", "wsv_ch1", 230, "", "16927";
+		dispbottom "Both clinics visited. Gregor is setting up in the town hall in the north of the city.";
+	}
+	return;
+}
+
+// The town hall: Gregor's makeshift laboratory.
+ch1_gef_in,179,193,4	script(CLOAKED)	Gregor#wsv_c1c	627,{
+	cutin "4job_gregor_01.png",2;
+	if (wsv_ch1 == 230) {
+		mes "[Gregor]";
+		mes "Welcome to my laboratory! It used to be the town hall. The desks are perfect for test tubes.";
+		next;
+		mes "[Gregor]";
+		mes "Now, at last, I can do what I'm actually good at: blood. Researchers specialise, you know, and mine is blood.";
+		mes "To understand Soren Syndrome, I need three kinds of samples.";
+		next;
+		mes "[Gregor]";
+		mes "One from a ^0000FFpatient^000000. Dr. Neumann will have to agree to that.";
+		mes "One from a ^0000FFhealthy person^000000 who's never had it. Try the streets.";
+		mes "And one from someone who ^0000FFcaught it and recovered^000000. If such a person exists. Ask around.";
+		next;
+		mes "[Gregor]";
+		mes "Here are the collection kits. Label everything!";
+		callfunc "F_WSV_Step", "wsv_ch1", 235, "16927", "16928,16929,16930";
+		close3;
+	}
+	if (wsv_ch1 == 235) {
+		.@n = 0;
+		if ((wsv_ch1b & 2048) && !(wsv_ch1b & 16384)) {
+			wsv_ch1b = wsv_ch1b | 16384;
+			callfunc "F_WSV_Step", "wsv_ch1", 235, "16931", "";
+			.@n++;
+		}
+		if ((wsv_ch1b & 4096) && !(wsv_ch1b & 32768)) {
+			wsv_ch1b = wsv_ch1b | 32768;
+			callfunc "F_WSV_Step", "wsv_ch1", 235, "16932", "";
+			.@n++;
+		}
+		if ((wsv_ch1b & 8192) && !(wsv_ch1b & 65536)) {
+			wsv_ch1b = wsv_ch1b | 65536;
+			callfunc "F_WSV_Step", "wsv_ch1", 235, "16933", "";
+			.@n++;
+		}
+		if (.@n)
+			delitem 1001974, min(.@n, countitem(1001974));
+		if ((wsv_ch1b & 114688) == 114688) {
+			mes "[Gregor]";
+			mes "All three! Give me a moment...";
+			next;
+			progressbar "ffffff", 5;
+			mes "[Gregor]";
+			mes "......";
+			mes "Oh. Oh, that's not good.";
+			next;
+			mes "[Gregor]";
+			mes "The patient's blood is full of something. Not a germ, not a curse. Particles of... of magic. Dark magic, the kind that clings.";
+			mes "The healthy blood has none. And the recovered blood has none either, but it has something else: it ^0000FFfought it off^000000.";
+			next;
+			mes "[Gregor]";
+			mes "This sickness was made. Or it comes from somewhere magic is made. Jeon Cheosa will want to hear this.";
+			mes "He was looking for you anyway. Something about the tower.";
+			callfunc "F_WSV_Step", "wsv_ch1", 245, "", "16934";
+			callfunc "F_WSV_C1Reward", 40000000, 20000000;
+			getitem 1001972, 5;	// Ch1_Root_Coin
+			close3;
+		}
+		mes "[Gregor]";
+		if (.@n)
+			mes "Sample received! Labeled and everything. You're a natural.";
+		else
+			mes "I still need samples from a patient, a healthy person and a recovered person.";
+		close3;
+	}
+	mes "[Gregor]";
+	mes "Test tubes, test tubes, everywhere test tubes.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch1 == 230 || (wsv_ch1 == 235 && (wsv_ch1b & 14336) > (wsv_ch1b & 114688) / 8)" );
+	end;
+}
+
+ch1_gef_in,79,72,4	script(CLOAKED)	Patient in Treatment#wsv_c1	10617,{
+	if (isbegin_quest(16935) == 1) {
+		mes "[Patient in Treatment]";
+		mes "The doctor said you'd come. Go on, I've had worse.";
+		next;
+		mes "You draw a small vial of blood with the collection kit.";
+		progressbar "ffffff", 3;
+		wsv_ch1b = wsv_ch1b | 2048;
+		getitem 1001974, 1;	// Ch1_Sample
+		callfunc "F_WSV_Step", "wsv_ch1", 235, "16935", "16931";
+		dispbottom "Patient's blood sample collected. Take it to Gregor in the town hall.";
+		close;
+	}
+	mes "[Patient in Treatment]";
+	mes "*cough*";
+	close;
+}
+
+ch1_geffen,180,147,4	script	Aire#wsv	893,{
+	if (isbegin_quest(16929) == 1) {
+		mes "[Aire]";
+		mes "If you're selling something, I'm not buying. If you're preaching, I'm not listening.";
+		next;
+		select("I'm collecting blood from healthy people. For a cure.");
+		mes "[Aire]";
+		mes "...Blood. For a cure.";
+		mes "Huh. That's a new one.";
+		next;
+		mes "[Aire]";
+		mes "I've never had a cough, never had the itch. My whole family's healthy, and I don't know why.";
+		mes "If it helps someone figure that out... fine. Make it quick.";
+		next;
+		progressbar "ffffff", 3;
+		wsv_ch1b = wsv_ch1b | 4096;
+		getitem 1001974, 1;	// Ch1_Sample
+		callfunc "F_WSV_Step", "wsv_ch1", 235, "16929", "16932";
+		mes "[Aire]";
+		mes "Done? Good. Now go on, before the neighbours think I've joined a cult.";
+		close;
+	}
+	mes "[Aire]";
+	if (wsv_ch1 >= 570)
+		mes "People are walking in the streets again. Without masks. I keep staring.";
+	else
+		mes "Keep walking. Nothing to see here but the ruins.";
+	close;
+}
+
+ch1_gef_in,75,143,4	script	Dapan#wsv	898,{
+	if (isbegin_quest(16930) == 1) {
+		mes "[Dapan]";
+		mes "Yes, yes, I had it. Coughed like a broken bellows for a month.";
+		mes "Then one morning I woke up and it was gone. Nobody knows why, least of all me.";
+		next;
+		mes "[Dapan]";
+		mes "My blood? For the researchers? Take as much as you like. Well. Not as much as you like. A little.";
+		next;
+		progressbar "ffffff", 3;
+		wsv_ch1b = wsv_ch1b | 8192;
+		getitem 1001974, 1;	// Ch1_Sample
+		callfunc "F_WSV_Step", "wsv_ch1", 235, "16930", "16933";
+		mes "[Dapan]";
+		mes "If my blood can save somebody, then that month of coughing was worth something.";
+		close;
+	}
+	mes "[Dapan]";
+	if (wsv_ch1 >= 570)
+		mes "Everyone's getting better now, not just lucky old me. Ha!";
+	else
+		mes "I'm the lucky one. I got better. Nobody knows why.";
+	close;
+}
+
+ch1_gef_in,115,73,4	script	Coughing Patient#wsv	86,{
+	mes "[Coughing Patient]";
+	if (wsv_ch1 >= 570)
+		mes "No more coughing. I keep taking deep breaths just because I can.";
+	else
+		mes "*cough* The doctor never sleeps, you know. I hear him pacing at night.";
+	close;
+}
+
+ch1_gef_in,75,66,4	script	Pacing Patient#wsv	48,{
+	if (wsv_ch1 == 340) {
+		mes "[Pacing Patient]";
+		mes "The doctor? He's not here. He left in a hurry an hour ago. Said he had to go home, said it was urgent.";
+		next;
+		mes "[Pacing Patient]";
+		mes "He never leaves. Never. Something's wrong, I can feel it. Back and forth, back and forth...";
+		next;
+		mes "^4d4dffDr. Neumann's house is in the southeast of the city.^000000";
+		callfunc "F_WSV_Step", "wsv_ch1", 350, "17921", "16936";
+		close;
+	}
+	mes "[Pacing Patient]";
+	if (wsv_ch1 >= 570)
+		mes "I'm only pacing out of habit now. Habit! Imagine.";
+	else
+		mes "Can't sit still. Can't sleep. Can't stop walking. Back and forth, back and forth.";
+	close;
+}

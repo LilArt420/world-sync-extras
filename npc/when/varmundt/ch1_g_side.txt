@@ -1,0 +1,689 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Chapter 1, part G: after the main story (wsv_ch1 >= 1000).
+//= - Schrodinger's Land of Darkness (24100-24103) and the daily
+//=   "Help Me, Doctor!" (24104-24106): Ivein in Ash Village.
+//= - "Give Me Something to Do" (24107-24109) and the Volund
+//=   Valley dailies (24110-24117): Jubilus.
+//= - To Brimir (8955-8969) and the Brimir dailies (8970-8978).
+//= - The Shaking Crossroads, Minuel, Naviel and Rubiel.
+//= - The Fantasy Book "A Doctor's Record.." (19225, 19226).
+//= Variables: wsv_c1s (bits: 1 Schrodinger done, 2 something to
+//= do, 4 doctor's record read), wsv_c1br (Brimir step 0-11),
+//= wsv_c1bb (Brimir bits), wsv_c1h (the injured investigator 1-3).
+//============================================================
+
+// ------------------------------------------------------------
+// Ivein, the Laphine healer
+// ------------------------------------------------------------
+ygg_edge,178,185,4	script	Ivein#wsv	437,{
+	cutin "ch1_yvain01.png",2;
+	if (wsv_ch1 < 1000) {
+		mes "[Ivein]";
+		if (wsv_ch1 >= 70)
+			mes "Oh, my rescuer! My wings are almost healed. I flap them twice a day, like Devries told me.";
+		else
+			mes "Hello! I'm Ivein. If you get hurt, come and see me. I patch up Laphine and people alike.";
+		close3;
+	}
+	if (!(wsv_c1s & 1)) {
+		if (isbegin_quest(24100) + isbegin_quest(24101) + isbegin_quest(24102) == 0 && isbegin_quest(24103) != 1) {
+			mes "[Ivein]";
+			mes "Things have calmed down since the fortress fell. But the Land of Darkness still shakes now and then.";
+			mes "The investigators are still down there, measuring. I worry about them.";
+			next;
+			mes "[Ivein]";
+			mes "Could you check on them for me? There are three of them, spread out across the Land of Darkness. Start with the one in the east.";
+			callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "", "24100";
+			close3;
+		}
+		if (isbegin_quest(24103) == 1) {
+			mes "[Ivein]";
+			mes "A twisted ankle? Oh, the poor thing. I'll go down with a splint right away.";
+			next;
+			mes "[Ivein]";
+			mes "It's like that land is two places at once: perfectly fine and terribly dangerous, and you never know which until you're standing in it.";
+			mes "Thank you for checking. From now on, whenever it shakes, I'll send for you, if that's all right.";
+			wsv_c1s = wsv_c1s | 1;
+			callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "24103", "";
+			getexp2 30000000, 15000000;
+			getitem 1001972, 3;	// Ch1_Root_Coin
+			close3;
+		}
+		mes "[Ivein]";
+		mes "Three investigators: east, then center, then west. Please make sure they're all right.";
+		close3;
+	}
+	// Daily: Help Me, Doctor!
+	if (isbegin_quest(24105) == 1) {
+		mes "[Ivein]";
+		mes "Hurt? Where? I'm on my way. Thank you for finding them.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "24105", "";
+		erasequest 24105;
+		setquest 24106;
+		getexp2 30000000, 15000000;
+		getitem 1001972, 3;	// Ch1_Root_Coin
+		close3;
+	}
+	if (isbegin_quest(24104) == 1) {
+		mes "[Ivein]";
+		mes "One of the investigators must be hurt somewhere down there. Please find them!";
+		close3;
+	}
+	if (callfunc("F_WSV_Waiting", 24106)) {
+		mes "[Ivein]";
+		mes "Everyone's patched up for today. Come back tomorrow, after dawn.";
+		close3;
+	}
+	mes "[Ivein]";
+	mes "The Land of Darkness shook again this morning. Someone's always hurt after a quake.";
+	mes "Will you go and look? Talk to the investigators until you find who needs me.";
+	next;
+	if (select("I'll go.:Not today.") == 2)
+		close3;
+	wsv_c1h = rand(1, 3);
+	callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "", "24104";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch1 >= 1000 && (wsv_c1s & 1) == 0 && isbegin_quest(24100) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "(wsv_c1s & 1) && isbegin_quest(24104) == 0 && isbegin_quest(24105) == 0 && (isbegin_quest(24106) == 0 || checkquest(24106, PLAYTIME) == 2)" );
+	end;
+}
+
+ygg_roots,280,99,4	script	Investigator#wsv_s1	545,{
+	callfunc "F_WSV_C1Inv", 1;
+	end;
+}
+ygg_roots,208,95,4	script	Investigator#wsv_s2	943,{
+	callfunc "F_WSV_C1Inv", 2;
+	end;
+}
+ygg_roots,120,170,4	script	Investigator#wsv_s3	881,{
+	callfunc "F_WSV_C1Inv", 3;
+	end;
+}
+
+// callfunc "F_WSV_C1Inv", <1 east | 2 center | 3 west>;
+function	script	F_WSV_C1Inv	{
+	.@i = getarg(0);
+	if (isbegin_quest(24099 + .@i) == 1) {
+		mes "[Investigator]";
+		if (.@i < 3) {
+			mes "Ivein sent you? Tell her we're fine. Measurements are fine. Everything is fine.";
+			mes "...My colleague further west hasn't checked in, though.";
+			callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "" + (24099 + .@i), "" + (24100 + .@i);
+		} else {
+			mes "Ow, ow... Did Ivein send you? Perfect timing.";
+			mes "The ground jumped and I came down on my ankle. I think it's twisted. Can you tell her?";
+			callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "24102", "24103";
+		}
+		close;
+	}
+	if (isbegin_quest(24104) == 1 && wsv_c1h == .@i) {
+		mes "[Investigator]";
+		mes "Over here! My leg, the root came down right on it...";
+		mes "Get Ivein. Please.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "24104", "24105";
+		close;
+	}
+	mes "[Investigator]";
+	if (isbegin_quest(24104) == 1)
+		mes "Me? I'm fine. Did you check on the others?";
+	else
+		mes "Measuring, measuring. The ground was six fingers lower yesterday.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Jubilus in Volund Valley, after the story
+// ------------------------------------------------------------
+function	script	F_WSV_C1Jubilus	{
+	if (wsv_ch1 < 1000) {
+		mes "[Jubilus]";
+		if (wsv_ch1 < 515)
+			mes "A visitor from Ash Village? Keep your regulator switched on. Muspelheim isn't kind to the unprepared.";
+		else
+			mes "The valley has more to teach than heat. I'm staying a while.";
+		close3;
+	}
+	if (!(wsv_c1s & 2)) {
+		if (isbegin_quest(24107) + isbegin_quest(24108) + isbegin_quest(24109) == 0) {
+			mes "[Jubilus]";
+			mes "You again! Good. I have Hal piling up and no idea what to do with half of it.";
+			mes "The locals farm it, so they must use it somehow. Ask Harvan what Hal is good for, besides curing plagues.";
+			callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "24107", "24108";
+			close3;
+		}
+		if (isbegin_quest(24109) == 1) {
+			mes "[Jubilus]";
+			mes "Farming! Hal feeds the soil, and the soil feeds the people. They need more Hal than they can gather, so...";
+			mes "So we help. I'll post requests every day; you take whichever suits you.";
+			wsv_c1s = wsv_c1s | 2;
+			callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "24109", "";
+			getexp2 20000000, 10000000;
+			close3;
+		}
+		mes "[Jubilus]";
+		mes "Harvan is at the entrance of the valley, by his field.";
+		close3;
+	}
+	// The four dailies: <quest>, <cooldown>, <what>.
+	setarray .@q, 24110, 24112, 24114, 24116;
+	setarray .@what$, "Grandpa Hal: bring 10 Hal from the valley's monsters", "Can It Be Grilled?: hunt 20 Volcano Clams", "Someone Wanted This?: hunt 20 Elixir Grass", "Tricked!!!: hunt 20 Rings of Fire";
+	for (.@i = 0; .@i < 4; .@i++) {
+		if (isbegin_quest(.@q[.@i]) != 1)
+			continue;
+		if (.@i == 0) {
+			if (countitem(1001977) < 10)
+				continue;
+			delitem 1001977, 10;
+		} else if (checkquest(.@q[.@i], HUNTING) != 2)
+			continue;
+		mes "[Jubilus]";
+		mes "Done already? Wonderful. Harvan will be dancing in his field.";
+		completequest .@q[.@i];
+		erasequest .@q[.@i];
+		setquest .@q[.@i] + 1;
+		getexp2 25000000, 12000000;
+		getitem 1001972, 2;	// Ch1_Root_Coin
+		close3;
+	}
+	mes "[Jubilus]";
+	mes "Today's requests. Take any you like.";
+	next;
+	for (.@i = 0; .@i < 4; .@i++) {
+		if (isbegin_quest(.@q[.@i]) == 1)
+			.@menu$ += "^aaaaaa" + .@what$[.@i] + " (in progress)^000000:";
+		else if (callfunc("F_WSV_Waiting", .@q[.@i] + 1))
+			.@menu$ += "^aaaaaa" + .@what$[.@i] + " (done today)^000000:";
+		else
+			.@menu$ += .@what$[.@i] + ":";
+	}
+	.@i = select(.@menu$ + "Nothing today.") - 1;
+	if (.@i >= 4 || isbegin_quest(.@q[.@i]) == 1 || callfunc("F_WSV_Waiting", .@q[.@i] + 1))
+		close3;
+	if (isbegin_quest(.@q[.@i]) == 2)
+		erasequest .@q[.@i];
+	setquest .@q[.@i];
+	questinfo_refresh;
+	mes "[Jubilus]";
+	mes "Thank you. Mind the lava.";
+	close3;
+}
+
+// ------------------------------------------------------------
+// To Brimir (uknw_ruin): the Gray Valkyries
+// ------------------------------------------------------------
+uknw_ruin,256,238,4	script	Ellis#wsv	79,{
+	if (wsv_c1br == 1) {
+		mes "[Ellis]";
+		mes "Sasha sent you? Thank the gods. Not that the gods can hear us here.";
+		mes "I'm Ellis, a priest. Maura and I came ahead to study this place.";
+		next;
+		mes "[Maura]";
+		mes "It's called ^0000FFBrimir^000000. Or it was, before it twisted. A hall where the dead were supposed to feast forever.";
+		mes "Now it floats in nothing, and the ones living here are... well. Go and meet them. The nearest is just east of us.";
+		callfunc "F_WSV_Step", "wsv_c1br", 2, "8955", "8956";
+		close;
+	}
+	if (wsv_c1br == 3) {
+		mes "[Ellis]";
+		mes "She said gods have no place here? That they turned their faces away?";
+		next;
+		mes "[Ellis]";
+		mes "......";
+		mes "When I pray here, I hear nothing back. Nothing at all. I've prayed every day since I was six, and I always heard something.";
+		mes "Maybe she's right. Maybe this is a land without divinity.";
+		next;
+		mes "[Ellis]";
+		mes "The others have gathered behind her. I think they want to talk to you too.";
+		callfunc "F_WSV_Step", "wsv_c1br", 4, "8957", "8958";
+		close;
+	}
+	mes "[Ellis]";
+	if (wsv_c1br < 1)
+		mes "A traveler, here? Be careful. The flowers watch you.";
+	else
+		mes "I keep praying. Out of habit, now.";
+	close;
+}
+
+uknw_ruin,258,236,4	script	Maura#wsv	10416,{
+	mes "[Maura]";
+	if (wsv_c1br >= 11)
+		mes "The Valkyries are gray now, but they move. They talk. That's something.";
+	else
+		mes "Chains, flowers and silence. Brimir is a strange place to take notes in.";
+	close;
+}
+
+uknw_ruin,272,235,4	script	Il#wsv	10605,{
+	callfunc "F_WSV_C2Il";	// Chapter 2: the branch to Ragsruth
+	if (wsv_c1br == 2) {
+		mes "[Il]";
+		mes "......";
+		mes "A living one. Your feet are not chained. How strange.";
+		next;
+		mes "[Il]";
+		mes "I am called Il. One. We were Valkyries, once. We carried the brave to the feast.";
+		mes "Now we sit, and count, and wait. The gods turned their faces from this place. There is no divinity here. Not anymore.";
+		next;
+		mes "[Il]";
+		mes "Go and tell your priest. She keeps praying. It is painful to watch.";
+		callfunc "F_WSV_Step", "wsv_c1br", 3, "8956", "8957";
+		close;
+	}
+	if (wsv_c1br == 4) {
+		mes "[Il]";
+		mes "The others want to speak with you. They have not spoken in a long time.";
+		next;
+		mes "[Gray Valkyrie]";
+		mes "We are the only ones left. The only Valkyries. All the rest went... somewhere. We stayed.";
+		mes "Some of us chose to. Some of us were chained.";
+		next;
+		mes "[Il]";
+		mes "Three of our sisters are chained across Brimir. Ask them what they think of this place. Then come to the square.";
+		callfunc "F_WSV_Step", "wsv_c1br", 5, "8958", "8959,8960,8961,8962";
+		close;
+	}
+	callfunc "F_WSV_C2Branch";
+	mes "[Il]";
+	mes "Count. Wait. Count.";
+	close;
+}
+
+// Il at the square, once the sisters have been heard.
+uknw_ruin,160,160,4	script	Il#wsv_sq	10605,{
+	if (wsv_c1br == 6) {
+		mes "[Il]";
+		mes "You want to break the chains. I can see it in your face.";
+		next;
+		mes "[Il]";
+		mes "There is a way. The ^0000FFShadow Guardians^000000 hold the chains' magic in their petals. Break ten of them, and gather the petals that scatter.";
+		mes "Five ^0000FFBroken Petals^000000 should be enough.";
+		callfunc "F_WSV_Step", "wsv_c1br", 7, "8963", "8964";
+		close;
+	}
+	if (wsv_c1br == 7) {
+		if (checkquest(8964, HUNTING) != 2 || countitem(1001976) < 5) {
+			mes "[Il]";
+			mes "Ten Shadow Guardians. Five " + getitemname(1001976) + ".";
+			close;
+		}
+		delitem 1001976, 5;
+		mes "[Il]";
+		mes "Yes. These will do. Press a petal against each chain, and it will remember that it was once a flower, and let go.";
+		mes "Lee first. Then Sam. Then Sa.";
+		callfunc "F_WSV_Step", "wsv_c1br", 8, "8964", "8965";
+		close;
+	}
+	if (wsv_c1br == 9) {
+		mes "[Il]";
+		mes "They are free. And gray. Like me.";
+		next;
+		mes "[Il]";
+		mes "We thought freedom would bring back our colors. It did not. But they stood up. They walked. They spoke to each other.";
+		mes "That is more than I hoped for. Go home, living one. Tell your village what Brimir is.";
+		callfunc "F_WSV_Step", "wsv_c1br", 10, "8968", "8969";
+		close;
+	}
+	mes "[Il]";
+	mes "Count. Wait. Count.";
+	close;
+}
+
+uknw_ruin,149,150,4	script	Lee#wsv	10605,{
+	callfunc "F_WSV_C1Sister", "Lee", 1, "8960", 8965, 8970, 8972, 8971;
+	end;
+}
+uknw_ruin,252,59,4	script	Sam#wsv	10605,{
+	callfunc "F_WSV_C1Sister", "Sam", 2, "8961", 8966, 8973, 8975, 8974;
+	end;
+}
+uknw_ruin,93,174,4	script	Sa#wsv	10605,{
+	callfunc "F_WSV_C1Sister", "Sa", 4, "8962", 8967, 8976, 8978, 8977;
+	end;
+}
+
+// callfunc "F_WSV_C1Sister", "<name>", <bit>, "<interview quest>",
+//          <freeing quest>, <daily first>, <daily repeat>, <cooldown>;
+function	script	F_WSV_C1Sister	{
+	.@n$ = "[" + getarg(0) + "]";
+	.@b = getarg(1);
+	if (wsv_c1br == 5 && !(wsv_c1bb & .@b)) {
+		mes .@n$;
+		if (.@b == 1) {
+			mes "God loved us. That is why He chained us here, where nothing can touch us.";
+			mes "Love is a chain too. Did you not know?";
+		} else if (.@b == 2) {
+			mes "We cannot feel the gods any more. That is the proof that we belong to them.";
+			mes "Only what is kept is cut off from the world.";
+		} else {
+			mes "One thousand and four. One thousand and five. One thousand and four.";
+			mes "...I am counting the days. I lose my place. I start again. Time here does not walk in a line.";
+		}
+		wsv_c1bb = wsv_c1bb | .@b;
+		callfunc "F_WSV_Step", "wsv_c1br", 5, getarg(2), "";
+		if ((wsv_c1bb & 7) == 7) {
+			callfunc "F_WSV_Step", "wsv_c1br", 6, "8959", "8963";
+			dispbottom "You've heard all three sisters. Il is waiting at the square of Brimir.";
+		}
+		close;
+	}
+	if (wsv_c1br == 8 && isbegin_quest(getarg(3)) == 1) {
+		mes .@n$;
+		mes "A petal? For me? ...It smells of a spring I don't remember.";
+		next;
+		mes "You press the Broken Petal against the chain. The iron softens like a stem, and slides away.";
+		next;
+		mes .@n$;
+		mes "......";
+		mes "My color didn't come back. But my feet are light.";
+		if (getarg(3) < 8967)
+			callfunc "F_WSV_Step", "wsv_c1br", 8, "" + getarg(3), "" + (getarg(3) + 1);
+		else
+			callfunc "F_WSV_Step", "wsv_c1br", 9, "8967", "8968";
+		close;
+	}
+	if (wsv_c1br < 10) {
+		mes .@n$;
+		mes "......";
+		close;
+	}
+	// Dailies, once the story has gone back to Ash Village.
+	.@d1 = getarg(4);
+	.@d2 = getarg(5);
+	.@w = getarg(6);
+	.@q = (isbegin_quest(.@d1) == 2 ? .@d2 : .@d1);
+	if (isbegin_quest(.@q) == 1) {
+		if (checkquest(.@q, HUNTING) != 2 || (.@b == 1 && countitem(1001975) < 20)) {
+			mes .@n$;
+			if (.@b == 1)
+				mes "Fifty Tulips, fifty Calendulas, and twenty " + getitemname(1001975) + " to mourn them.";
+			else if (.@b == 2)
+				mes "Twenty Nyaiz. They keep coming for my face.";
+			else
+				mes "Ten Shadow Guardians. They were us, once.";
+			close;
+		}
+		if (.@b == 1)
+			delitem 1001975, 20;
+		mes .@n$;
+		mes "Thank you. Brimir is a little quieter tonight.";
+		completequest .@q;
+		if (isbegin_quest(.@w))
+			erasequest .@w;
+		setquest .@w;
+		getexp2 25000000, 12000000;
+		getitem 1001972, 2;	// Ch1_Root_Coin
+		close;
+	}
+	if (callfunc("F_WSV_Waiting", .@w)) {
+		mes .@n$;
+		mes "Enough for today. Come back after the next dawn. If dawn still comes here.";
+		close;
+	}
+	mes .@n$;
+	if (.@b == 1)
+		mes "The flowers were people once. Destroy fifty Tulips and fifty Calendulas, and bring me twenty " + getitemname(1001975) + ", so we can give them a grave. A formal grave.";
+	else if (.@b == 2)
+		mes "The Nyaiz keep scratching my face. Cats are cats, even when the world ends. Hunt twenty of them?";
+	else
+		mes "The Shadow Guardians... they were us. Will you destroy ten of them, so they can rest?";
+	next;
+	if (select("I'll do it.:Not today.") == 2)
+		close;
+	if (isbegin_quest(.@q) == 2) {
+		erasequest .@q;
+		.@q = .@d2;
+	}
+	if (isbegin_quest(.@q) == 2)
+		erasequest .@q;
+	setquest .@q;
+	questinfo_refresh;
+	close;
+}
+
+// The Nyaiz of Brimir: cats, being cats.
+uknw_ruin,187,157,4	script	Curled-up Nyaiz#wsv	22463,{
+	mes "[Curled-up Nyaiz]";
+	mes "A gray cat curled into a perfect circle. It opens one eye, judges you, and closes it again.";
+	close;
+}
+uknw_ruin,115,223,4	script	Rolling Nyaiz#wsv	22463,{
+	mes "[Rolling Nyaiz]";
+	mes "It rolls across the stone floor, back and forth, entirely pleased with itself.";
+	close;
+}
+uknw_ruin,71,152,4	script	Grooming Nyaiz#wsv	22463,{
+	mes "[Grooming Nyaiz]";
+	mes "It licks one paw with great care. The end of the world can wait.";
+	close;
+}
+uknw_ruin,70,46,4	script	Dozing Nyaiz#wsv	22463,{
+	mes "[Dozing Nyaiz]";
+	mes "Zzz... *twitch*... zzz.";
+	close;
+}
+uknw_ruin,224,34,4	script	Frowning Nyaiz#wsv	22463,{
+	mes "[Frowning Nyaiz]";
+	mes "It glares at you as if you personally broke Brimir. Perhaps you look like someone who would.";
+	close;
+}
+
+// ------------------------------------------------------------
+// The Shaking Crossroads of the Geffen field, and Minuel.
+// ------------------------------------------------------------
+hem_fild,334,188,4	script	Shaking Crossroads#wsv1	10527,{
+	callfunc "F_WSV_C1Cross", "hem_dun02", 160, 242, 160, 51, "the north side of the ruins", "the south side of the ruins";
+	end;
+}
+hem_fild,133,337,4	script	Shaking Crossroads#wsv2	10527,{
+	callfunc "F_WSV_C1Cross", "ch1_gfn03", 180, 230, 70, 205, "the east of the eroded West Geffenia", "the west of the eroded West Geffenia";
+	end;
+}
+hem_fild,231,299,4	script	Shaking Crossroads#wsv3	10527,{
+	callfunc "F_WSV_C1Cross", "ch1_gfn01", 194, 238, 212, 77, "the north of the eroded East Geffenia", "the south of the eroded East Geffenia";
+	end;
+}
+
+function	script	F_WSV_C1Cross	{
+	mes "[Shaking Crossroads]";
+	mes "The air here trembles like the surface of a pond. Through it, other places flicker.";
+	if (BaseLevel < 200) {
+		mes "^4d4dffIt won't hold still long enough for you to step through (base level 200).^000000";
+		close;
+	}
+	next;
+	switch (select("Step through to " + getarg(5) + ".:Step through to " + getarg(6) + ".:Stay.")) {
+	case 1:
+		close2;
+		warp getarg(0), getarg(1), getarg(2);
+		end;
+	case 2:
+		close2;
+		warp getarg(0), getarg(3), getarg(4);
+		end;
+	}
+	close;
+}
+
+hem_fild,329,191,4	script	Minuel#wsv	447,{
+	mes "[Minuel]";
+	mes "Halt! ...Oh, an adventurer from Ash Village. Sorry. I guard the crossroads for the heralds.";
+	next;
+	mes "[Minuel]";
+	mes "These crossings shake. They lead deeper into this broken world: the ruins under the city, and the Geffenia the darkness has eaten.";
+	mes "Strong adventurers only. I've had to drag three people back by their collars this week.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Ash Village: Naviel and Rubiel
+// ------------------------------------------------------------
+ygg_edge,167,182,4	script	Naviel#wsv	447,{
+	mes "[Naviel]";
+	mes "Naviel, of the village watch. If you need to get somewhere in the Land of Darkness in a hurry, I know the shortcuts through the roots.";
+	if (wsv_ch1 < 40) {
+		next;
+		mes "[Naviel]";
+		mes "...Once Sasha says you're ready to go down there, that is.";
+		close;
+	}
+	next;
+	switch (select("The village entrance of the Land of Darkness.:The great intersection in the north.:The western intersection.:Never mind.")) {
+	case 1:
+		close2;
+		warp "ygg_roots",325,148;
+		end;
+	case 2:
+		close2;
+		warp "ygg_roots",160,232;
+		end;
+	case 3:
+		close2;
+		warp "ygg_roots",42,126;
+		end;
+	}
+	close;
+}
+
+ygg_edge,175,186,4	script	Rubiel#wsv	10610,{
+	mes "[Rubiel]";
+	if (wsv_ch1 < 150) {
+		mes "I'm Rubiel. I keep the gates for the heralds. Someday soon I'll be holding one open for you, I think.";
+		close;
+	}
+	mes "The gate on the Geffen field of the second world is steady. Want me to send you to the ring of stones?";
+	next;
+	if (select("Yes, please.:Not now.") == 2)
+		close;
+	close2;
+	warp "hem_fild",180,260;
+	end;
+}
+
+// ------------------------------------------------------------
+// The Fantasy Book "A Doctor's Record.." (19225, 19226): Telkos
+// turned Neumann's diary into a Virtual Record Book. It plays in
+// a Geffen recreated from the diary (ch1_vrgef1, ch1_vrgef2);
+// the central fountain closes the book.
+// ------------------------------------------------------------
+ygg_edge,211,211,4	script	A Doctor's Record..#wsv	10519,{
+	if (wsv_ch1 < 1000) {
+		mes "[A Doctor's Record..]";
+		mes "A plain white book on Professor Telkos's table. Its pages are blank.";
+		close;
+	}
+	mes "[A Doctor's Record..]";
+	mes "Professor Telkos made a Fantasy Book out of Neumann's diary. A note is tucked inside the cover:";
+	mes "^0000FF\"1) Don't quarrel with other readers. 2) These events are over; don't lose yourself in them or try to change them. 3) To stop reading, look at the central fountain of the recreated Geffen. - T.\"^000000";
+	next;
+	if (select("Open the book.:Not now.") == 2)
+		close;
+	if (isbegin_quest(19225) != 1) {
+		if (isbegin_quest(19225) == 2)
+			erasequest 19225;
+		setquest 19225;
+	}
+	wsv_c1s = wsv_c1s &~ (8 | 16 | 32);
+	close2;
+	specialeffect2 EF_TELEPORTATION2;
+	warp "ch1_vrgef2",120,104;
+	end;
+}
+
+// Three memories of the man who became Dr. Neumann.
+ch1_vrgef1,70,62,4	script	A Memory#wsv_vr1	10619,{
+	callfunc "F_WSV_C1Memory", 8, "The clinic, the first winter.", "A thin man in a borrowed coat kneels by a cot, a medical book open on his knee. He reads a line, looks at the patient, reads the line again.", "\"It says to boil the water first. Of course. I'm a schoolteacher; I should have read the whole page.\"";
+	end;
+}
+ch1_vrgef1,136,163,4	script	A Memory#wsv_vr2	10619,{
+	callfunc "F_WSV_C1Memory", 16, "The sickroom, a year later.", "The same man, older now, sits by Margot's bed and holds her hand while she sleeps. His other hand writes in a notebook, very fast.", "\"There must be a way. There is always a way. I'll find it. Whatever it takes.\"";
+	end;
+}
+ch1_vrgef2,123,119,4	script	A Memory#wsv_vr3	10619,{
+	callfunc "F_WSV_C1Memory", 32, "The tower, the night the sky tore.", "The man stands at the foot of the broken tower, watching black mist pour from the cracks into the city.", "\"The children. The children breathe that air.\" He pulls his coat over his mouth and runs toward the screams, not away.";
+	end;
+}
+
+function	script	F_WSV_C1Memory	{
+	mes "[A Memory]";
+	mes "^0000FF" + getarg(1) + "^000000";
+	mes getarg(2);
+	next;
+	mes "[A Memory]";
+	mes getarg(3);
+	if (isbegin_quest(19225) == 1 && !(wsv_c1s & getarg(0))) {
+		wsv_c1s = wsv_c1s | getarg(0);
+		if ((wsv_c1s & 56) == 56) {
+			next;
+			mes "^4d4dffThe book has nothing more to show you. The central fountain will close it.^000000";
+		}
+	}
+	close;
+}
+
+ch1_vrgef2,120,113,4	script	Central Fountain#wsv	10432,{
+	mes "[Central Fountain]";
+	mes "The fountain of the recreated Geffen, dry in the real one, sparkling in this one.";
+	if (isbegin_quest(19225) == 1 && (wsv_c1s & 56) == 56) {
+		mes "The water ripples, and the pages of the city begin to turn.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "19225", "19226";
+	}
+	next;
+	if (select("Close the book.:Keep looking around.") == 2)
+		close;
+	close2;
+	warp "ygg_edge",209,206;
+	end;
+}
+
+// Telkos takes the report (19226): see ch1_d_neumann.txt.
+
+// ------------------------------------------------------------
+// Geffen Request Board: where the survivors post their daily
+// requests. Shows each one's state; the requests themselves are
+// taken from the people who posted them.
+// ------------------------------------------------------------
+ch1_geffen,119,63,4	script	Geffen Request Board#wsv	10669,{
+	mes "[Geffen Request Board]";
+	mes "Notes pinned over notes, in a dozen hands. The survivors' requests for anyone who can help.";
+	if (wsv_ch1 < 350) {
+		mes "^4d4dffMost of them ask for help the town can't trust a stranger with yet.^000000";
+		close;
+	}
+	next;
+	// title, giver and place, prerequisite met, request quests, cooldown quest
+	setarray .@t$, "This Is a Miraculous Prescription", "Jeon Cheosa, by the Geffen Tower", "Talismans for the believers of Verus.",
+		"Save Them First", "Clover, by the Geffen Tower", "Clearing the Destroyed Verus.",
+		"Help Me, Doctor!", "Ivein, in Ash Village", "Ivein's patients.",
+		"Jubilus's Requests", "Jubilus, in Muspelheim", "Jubilus never runs out of chores.";
+	setarray .@ok, (wsv_ch1c & 32) != 0, (wsv_ch1c & 32) != 0, (wsv_c1s & 1) != 0, (wsv_c1s & 2) != 0;
+	setarray .@q$, "17926,17927,17928,17929,17930,17931", "17933", "24104,24105", "24110,24112,24114,24116";
+	setarray .@cd$, "17932", "17934", "24106", "24111,24113,24115,24117";
+	for (.@i = 0; .@i < 4; .@i++) {
+		.@st$ = "^4d4dffnot open to you yet^000000";
+		if (.@ok[.@i]) {
+			.@st$ = "^0000FFopen^000000";
+			explode(.@c$, .@cd$[.@i], ",");
+			for (.@j = 0; .@j < getarraysize(.@c$); .@j++) {
+				if (isbegin_quest(atoi(.@c$[.@j])) == 1 && checkquest(atoi(.@c$[.@j]), PLAYTIME) != 2)
+					.@st$ = "^777777done for today^000000";
+			}
+			deletearray .@c$;
+			explode(.@c$, .@q$[.@i], ",");
+			for (.@j = 0; .@j < getarraysize(.@c$); .@j++) {
+				if (isbegin_quest(atoi(.@c$[.@j])) == 1)
+					.@st$ = "^FF8800in progress^000000";
+			}
+			deletearray .@c$;
+		}
+		mes "- ^000000" + .@t$[.@i * 3] + "^000000: " + .@st$;
+		mes "  " + .@t$[.@i * 3 + 2] + " (" + .@t$[.@i * 3 + 1] + ")";
+	}
+	next;
+	mes "[Geffen Request Board]";
+	mes "At the bottom, in a careful hand: ^0000FF\"The Mage Professor at the Sky Fortress Entrance is looking for people to test the recreated Dark Whisper. Every three days.\"^000000";
+	close;
+}

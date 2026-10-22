@@ -1,0 +1,152 @@
+# World Sync Extras: Star Forest block - the rulers of Herosria's four
+# seasonal gardens, who appear during the siege after a garden's jewel
+# breaks (kRO's Herosria update page). The client knows them as
+# HEROS_DRAGON_1-4 (sprites in its own tables); rAthena only has them
+# commented out. Their stats aren't published: these follow the Garden
+# Floral Pegasus of the PvP dungeon (21904), with half its HP, no MVP
+# reward, and an element for each season.
+Header:
+  Type: MOB_DB
+  Version: 5
+
+Body:
+  - Id: 21855
+    AegisName: HEROS_DRAGON_1
+    Name: Floral Pegasus
+    Level: 255
+    Hp: 3400000
+    BaseExp: 2000000
+    JobExp: 1400000
+    Attack: 8678
+    Attack2: 2582
+    Defense: 780
+    MagicDefense: 436
+    Resistance: 486
+    MagicResistance: 374
+    Str: 162
+    Agi: 134
+    Vit: 154
+    Int: 162
+    Dex: 157
+    Luk: 154
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Dragon
+    Element: Poison
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 489
+    AttackMotion: 719
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Drops:
+      - Item: Herosria_Jewel_Fragment
+        Rate: 1000
+  - Id: 21856
+    AegisName: HEROS_DRAGON_2
+    Name: Coral Marine
+    Level: 255
+    Hp: 3400000
+    BaseExp: 2000000
+    JobExp: 1400000
+    Attack: 8678
+    Attack2: 2582
+    Defense: 780
+    MagicDefense: 436
+    Resistance: 486
+    MagicResistance: 374
+    Str: 162
+    Agi: 134
+    Vit: 154
+    Int: 162
+    Dex: 157
+    Luk: 154
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Fish
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 489
+    AttackMotion: 719
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Drops:
+      - Item: Herosria_Jewel_Fragment
+        Rate: 1000
+  - Id: 21857
+    AegisName: HEROS_DRAGON_3
+    Name: Maple Tree
+    Level: 255
+    Hp: 3400000
+    BaseExp: 2000000
+    JobExp: 1400000
+    Attack: 8678
+    Attack2: 2582
+    Defense: 780
+    MagicDefense: 436
+    Resistance: 486
+    MagicResistance: 374
+    Str: 162
+    Agi: 134
+    Vit: 154
+    Int: 162
+    Dex: 157
+    Luk: 154
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Plant
+    Element: Fire
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 489
+    AttackMotion: 719
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Drops:
+      - Item: Herosria_Jewel_Fragment
+        Rate: 1000
+  - Id: 21858
+    AegisName: HEROS_DRAGON_4
+    Name: Monarch Penguin
+    Level: 255
+    Hp: 3400000
+    BaseExp: 2000000
+    JobExp: 1400000
+    Attack: 8678
+    Attack2: 2582
+    Defense: 780
+    MagicDefense: 436
+    Resistance: 486
+    MagicResistance: 374
+    Str: 162
+    Agi: 134
+    Vit: 154
+    Int: 162
+    Dex: 157
+    Luk: 154
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Brute
+    Element: Water
+    ElementLevel: 4
+    WalkSpeed: 150
+    AttackDelay: 489
+    AttackMotion: 719
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Drops:
+      - Item: Herosria_Jewel_Fragment
+        Rate: 1000

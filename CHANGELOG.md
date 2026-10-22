@@ -1,7 +1,48 @@
 # Changelog
 
-## 1.2.1
-- World Sync monsters drop again: 154 of them (e.g. all of Varmundt's) had drops with no chance published, which the server gave the 0.01% floor. They now use the typical chance of the same kind of item (materials 5%, cards 0.01%, equipment 0.03-0.3%), until the app ships the same fix (db/mob_db.yml, by drop slot).
+## 2.0.0
+Needs Ragnarok Offline 1.6.7 or later.
+
+### 🐍 New: the Jormungandr saga (setting `jormungandr`, on)
+The World Sync: Jormungandr mod is now part of World Sync Extras, so one install brings the stories with the maps.
+- Episode 20, The Undying One, start to finish (83 quests): the Ancient Ice Canyon, the Lair of the Rgans, the Sacred Roots, the Serpent's Maze, a guest in the Ice Castle (His Holiness Nadyagand), the Frozen Zone and the Nest of Small Branches, and the memorial dungeon Separated Sanctuary. Starts from Horuru in the Ice Castle (Episode 19 done, level 200+; setting `skip_ep19` lets anyone start).
+- Episode 21, Age of Heroes, start to finish (101 quests, with an English quest log): a rift on Scale Island, Lunaforma and Alberta of old, the Georborg resistance, the ghost ship (memorial dungeon), two infiltrations of the cult's temple Gimle, and the giant serpent in the Snake's Resting Place. Starts from Voglinde in the Ice Castle's west wing at level 230.
+- After the stories: dailies for both episodes (reset at 04:00), the memorial dungeons again every day, side stories, and the traders: Torr in the Ice Castle (Glacier and Dim Glacier enchants), and in Lunaforma the Wigner Company Exchanger, Blacksmith Sansan and Mage Lobelia.
+- Doors into the Ice Castle's west wing (icecastle 230,160, 157,206 and 46,164), which rAthena's World Sync content lacks; they step aside when `entrances` is on.
+- Koko's Secret Base side story (box delivery, Friederike's Kokos, the hunt for Rorohyu, the Sticky Sea memorial dungeon and its Corrupted Angel Snail) and Lalaha's four dailies.
+- The Episode Valkyrie (standart-npc) can skip both episodes with their Clear Tickets, through F_WSJ_Skip20/21.
+- Boats, Walter sailors, the hidden ship, the small door and Nyar are real transports (rAthena's 'Travel to' guides on those cells are switched off while the block is on); Lunaforma's mercenaries, soldiers, workers, children and refugees, Alberta's Wigner house staff, the working Rgans and the Frozen Zone guardians have their own lines.
+
+### 🏛️ New: Varmundt, Amatsu, Juno Library and Chapters 1-2 (setting `varmundt`, on)
+- The Fantasy Book "Dungeon Food" (iRO quests 16667-16690).
+- The Chess Garden and the Deep Abyss research (16778-16801), Rune Crowns and enchants.
+- Seoyeon's Trial (3519-3523).
+- Chapter 1's story from Ash Village to the Sky Fortress, with its side quests and dailies.
+- The Juno Library's VR books (Issgard Crafting Contest, the Demon King's Castle, Lazrigs).
+- The eroded wing of Varmundt's mansion.
+- Chapter 2 "Song of the World Tree ~ Fragment of the End" (kRO update 301): the main story through Beledor, Volund Valley, Yongjirak, the Root of Death, Brimir and Ragsruth to Nirhult; Tamarin's sub-quest, nine dailies and Nirhult's Illusion; the Flame Gold Coin exchanger, Artisan Kadron, the Harvan merchant, the request board and the villagers; a warp from Volund Valley east into Muspelheim's fields; Beledor's signpost and Small Ash Tree, and the Deep Abyss's own exit back to the Chess Garden. The client has no Chapter 2 text or items, so its quests (64201-64246) are this block's own and the coins are points; kill counts, rewards, trades and Nirhult (a Feeos) are estimates.
+- 200 placeholders become these NPCs. Rewards, recipes and prices that kRO doesn't publish are estimates.
+
+### ⭐ New: Star Forest, Herosria and Ash Village (setting `star_forest`, on)
+- The Star Emperor job change (iRO quests 11573-11585).
+- Sanctuary Herosria's lobby services, portals, PvP dungeon blessing and gardens.
+- The Herosria siege (War of Emperium: Herosria), Sundays 20:00-22:00: region jewels, arches, three gates, the four garden jewels and their rulers, and the Jewel of Herosria. The holding guild gets the gift, the Spring Jewel and the gardens. GMs can start a 30-minute test battle at the Sanctuary Manager.
+- Ash Village's shops, enchants and signposts.
+- 100 placeholders become these NPCs (Lala on ab_lava1 included). Prices, recipes and rewards kRO doesn't publish are estimates.
+
+### 🛎️ New: iRO services (setting `iro_systems`, on)
+- The Devil in the Box's dailies in the Clock Tower Unknown Basement (5961-5971, with the 10 Pet Mimics).
+- Stall search in the Prontera and Payon markets and the Catalogue Magician.
+- The Eden Group's Dungeon Teleporter.
+- iRO's own services rAthena ships switched off (Keiki, Aperture, the Refining Researcher, Phelix, Izaac, Dark Luhir), placed where iRO has them; the Shadow Blacksmith, Madogear rental in Eclage and Mora, and Izlude's Increase AGI acolytes.
+- EXP rewards and a few rules are estimates. 18 placeholders become these NPCs.
+
+### 🧍 Placeholders
+- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 200, the Star Forest block 100 and the iRO services block 18. Likewise 48 placeholders that iRO Quests (0.2.0 and 0.3.0) implements: the Overlook Water Dungeon signboards, the City Investment delivery recipients and the 2021 town quest chains. 3 more (Myu, Girl, Old Man) are already scripted by rAthena. 21 placeholders for retired or online-only iRO content are left out: the Weekend Race, the Battle Pass Season 3 signboards, the Talk Like a Pirate Event 2026 hub and the Redeem Code. 76 placeholders remain, 44 of them working.
+
+### 👾 World Sync monsters (db/mob_db.yml, until the app ships the same fixes)
+- They drop again: 154 monsters had drops with no chance published, which the server gave the 0.01% floor. They now use the typical chance of the same kind of item (materials 5%, cards 0.01%, equipment 0.03-0.3%).
+- 303 monsters whose stats Divine Pride doesn't show get real estimates: each missing value is the median of the 7 monsters of the same class nearest in level and HP. Before, they copied one similar monster, sometimes a boss: Yorker Worker had 207 million HP (now 27.8 million), Flameanima and Feeos 614 million (now 47 million), three Vr Cst monsters 285,340 (now 27 million), and 29 monsters such as Violen, Medjed and Tatsi hit for 0.
 
 ## 1.2.0
 - 44 placeholders now work:

@@ -1,0 +1,63 @@
+//===== World Sync Extras: iRO systems block =================
+//= Shared functions and the doors this block takes over.
+//===== Description: =========================================
+//= iRO's permanent services and dailies that World Sync placed
+//= as greeting-only NPCs or left out:
+//=   - the Clock Tower's Devil in the Box and her dailies in the
+//=     Clock Tower Unknown Basement (clock_01), with the 10 Pet
+//=     Mimics;
+//=   - the market Catalog Dispensers (prt_mk, pay_mk) and
+//=     Prontera's Catalogue Magician;
+//=   - Izlude's Increase AGI acolytes and the east library's
+//=     Monster Encyclopedias.
+//=
+//= Written from the official clients' quest text (iRO English;
+//= kRO through ROenglishRE's translation), the navigation tables
+//= and iROWiki (Commerce). No official script exists for the
+//= Devil in the Box: steps and goals follow the quest log, the
+//= rewards and the level needed are estimates (kRO publishes
+//= neither).
+//=
+//= Character variables (prefixed so a future official script
+//= can't collide with them):
+//=   wsi_mimic  which of the 10 Pet Mimics is the Devil's pet in
+//=              today's errand (1-10, 0 = no errand)
+//============================================================
+
+// A daily or weekly whose cooldown quest is still running: 1, or 0
+// when it's over (or never started; the expired quest is dropped).
+// callfunc("F_WSI_Waiting", <cooldown quest>)
+function	script	F_WSI_Waiting	{
+	.@q = getarg(0);
+	if (isbegin_quest(.@q) == 0)
+		return 0;
+	if (checkquest(.@q, PLAYTIME) == 2) {
+		erasequest .@q;
+		return 0;
+	}
+	return 1;
+}
+
+// Starts a cooldown quest afresh.
+// callfunc "F_WSI_Cooldown", <cooldown quest>;
+function	script	F_WSI_Cooldown	{
+	.@q = getarg(0);
+	if (isbegin_quest(.@q))
+		erasequest .@q;
+	setquest .@q;
+	return;
+}
+
+// The World Sync doors this block's NPCs stand in for: the
+// "entrances" setting's portal into the Clock Tower Unknown Basement
+// (the Devil in the Box sends you down and checks the level).
+-	script	WSI_Loader	-1,{
+	end;
+OnInit:
+	setarray .@n$, "ws_c_tower1_26250";
+	for (.@i = 0; .@i < getarraysize(.@n$); .@i++) {
+		if (getnpcid(0, .@n$[.@i]))
+			disablenpc .@n$[.@i];
+	}
+	end;
+}

@@ -1,0 +1,282 @@
+//===== World Sync Extras: Star Forest block ================
+//= Ash Village (ygg_edge, ygg_fruit) at the edge of the World
+//= Tree: its services and signposts. Chapter 1's story (the small
+//= ash trees, the Laphines, Ivein's survey team, the Land of
+//= Darkness, the dailies) belongs to World Sync Extras' Chapter 1
+//= part (the varmundt block, wsv_ variables).
+//===== Description: =========================================
+//= From kRO's client tip box (ROenglishRE SystemEN tipbox 4415-
+//= 4419) and the 2025 Chapter 1 developer note: Root Gold Coins
+//= are Chapter 1's quest currency; Hotbeer More trades the Tangled
+//= Magic armor for them and the Root Gold Coin Exchanger's shop
+//= opens fully after Chapter 1's main story. Prices aren't
+//= published: they're estimates.
+//============================================================
+
+// A Rune Stone of the Rune Tablet network: it carries the traveller to
+// the Rune Tablet in Prontera (World Sync's Rune Tablet#ws).
+ygg_edge,209,203,4	script	Rune Stone#wsf	10547,{
+	mes "^4d4dffA Rune Stone. The runes carved into it glow in the same pattern as the Rune Tablet in Prontera.^000000";
+	if (!getnpcid(0, "Rune Tablet#ws")) {
+		mes "^4d4dffBut the light is faint, as if nothing answered on the other side.^000000";
+		close;
+	}
+	next;
+	if (select("Touch the runes (go to the Rune Tablet):Leave it") == 2)
+		close;
+	close2;
+	warp "prontera",140,187;
+	end;
+}
+
+ygg_edge,150,178,4	script	Sanctuary Beledor#wsf	10620,{
+	if (!callfunc("F_WSF_Ch1Done") || BaseLevel < 225) {
+		mes "^4d4dffA branch of the World Tree, reaching toward a far-off sanctuary. It doesn't answer your touch yet.^000000";
+		mes "^4d4dff(Opens after the Chapter 1 story, at base level 225.)^000000";
+		close;
+	}
+	mes "^4d4dffA branch of the World Tree. Its leaves point toward the Sanctuary Beledor.^000000";
+	next;
+	if (select("Go to the Sanctuary Beledor:Stay") == 2)
+		close;
+	close2;
+	warp "veledor",149,315;
+	end;
+}
+
+ygg_edge,229,221,4	script	Hongsi#wsf	10345,{
+	mes "[Hongsi]";
+	mes "Psst. Want to see something nobody's supposed to see?";
+	mes "There's a gap behind the world, a void between dimensions. I can take you there. The way back is your problem, though! Hehe.";
+	next;
+	if (BaseLevel < 200) {
+		mes "[Hongsi]";
+		mes "...On second thought, no. You'd get eaten. Come back at level 200.";
+		close;
+	}
+	if (select("Take me to the void:No thanks") == 2)
+		close;
+	close2;
+	warp "ba_void",140,104;
+	end;
+}
+
+ygg_edge,227,221,4	script	Lala#wsf	10611,{
+	mes "[Lala]";
+	mes "I'm Lala, I keep watch on the other-dimensional biospheres.";
+	mes "Someone copied Varmundt's biospheres into the space between worlds, and now they grow on their own. Wild, dangerous, wonderful.";
+	next;
+	if (BaseLevel < 200) {
+		mes "[Lala]";
+		mes "They're no place for you yet. Come back at level 200.";
+		close;
+	}
+	if (select("Take me to the Volcano biosphere:No thanks") == 2)
+		close;
+	close2;
+	warp "ab_lava1",18,158;
+	end;
+}
+
+// Lala's post in the Volcano biosphere (ab_lava1), the way back to Ash
+// Village (drafted by the iRO Quests session; navi 28623).
+ab_lava1,16,158,4	script	Lala#wsf_ab	10611,{
+	mes "[Lala]";
+	mes "I keep watch on the other-dimensional biospheres. This one is the volcano: mind the heat.";
+	next;
+	if (select("Take me back to Ash Village:I'll stay a while") == 2) {
+		mes "[Lala]";
+		mes "Come to me when you want to leave.";
+		close;
+	}
+	close2;
+	warp "ygg_edge", 225, 219;
+	end;
+}
+
+// Signposts on the village's branches.
+ygg_edge,259,245,4	script	Hvergelmir#wsf	10527,{
+	callfunc "F_WSF_Sign", "Hvergelmir's Fountain", "yggdrasil01", 145, 96;
+	end;
+}
+ygg_edge,216,91,4	script	Prontera Field#wsf	10527,{
+	callfunc "F_WSF_Sign", "the fields of Prontera", "prt_fild05", 351, 248;
+	end;
+}
+ygg_edge,193,92,4	script	Payon Field#wsf	10527,{
+	callfunc "F_WSF_Sign", "the fields of Payon", "pay_fild01", 306, 337;
+	end;
+}
+ygg_edge,31,117,4	script	Land of Darkness#wsf	10527,{
+	callfunc "F_WSF_Sign", "the Twisted Land of Darkness", "ygg_roots", 325, 147;
+	end;
+}
+ygg_roots,325,153,4	script	Ash Village#wsf	10527,{
+	callfunc "F_WSF_Sign", "Ash Village", "ygg_edge", 36, 117;
+	end;
+}
+
+// callfunc "F_WSF_Sign", "<place>", "<map>", <x>, <y>;
+function	script	F_WSF_Sign	{
+	mes "^4d4dffA branch of the World Tree, its leaves pointing toward " + getarg(0) + ".^000000";
+	next;
+	if (select("Follow the branch:Stay") == 2)
+		close;
+	close2;
+	warp getarg(1), getarg(2), getarg(3);
+	end;
+}
+
+// ------------------------------------------------------------
+// Inside Ash Village (ygg_fruit)
+// ------------------------------------------------------------
+ygg_fruit,165,115,4	script	Cat Hand Merchant Group#wsf	553,{
+	mes "[Cat Hand Merchant Group]";
+	mes "Nyaa! The Cat Hand Merchant Group goes everywhere there are customers. Even to the edge of the World Tree!";
+	close2;
+	callshop "WSF_CatHand", 1;
+	end;
+}
+-	shop	WSF_CatHand	-1,501:-1,502:-1,503:-1,504:-1,505:-1,506:-1,601:-1,602:-1,611:-1,1065:-1,645:-1,656:-1,7135:-1,7136:-1,717:-1,716:-1,715:-1
+
+// The Root Gold Coin Exchanger (kRO's Chapter 1 page): Root Gold Coins
+// for Mana Rings and the minerals used to enhance the Chapter 1 gear,
+// once Chapter 1's story is over (kRO gates it by "Golden Root"
+// reputation). Before that, only the Traveler's Leaf. Prices in coins are
+// estimates.
+ygg_fruit,165,126,4	script	Root Gold Coin Exchanger#wsf	10611,{
+	mes "[Root Gold Coin Exchanger]";
+	mes "Welcome, welcome. Root Gold Coins are good money in Ash Village.";
+	if (!callfunc("F_WSF_Ch1Done")) {
+		mes "Until you've done more for the village, all I can sell you is a Traveler's Leaf.";
+		close2;
+		callshop "WSF_RootGold0", 1;
+		end;
+	}
+	next;
+	switch (select("Exchange coins for Mana Rings:Exchange coins for minerals:Buy a Traveler's Leaf:Leave")) {
+	case 1:
+		close2;
+		callshop "WSF_RootGoldRing", 1;
+		end;
+	case 2:
+		close2;
+		callshop "WSF_RootGoldOre", 1;
+		end;
+	case 3:
+		close2;
+		callshop "WSF_RootGold0", 1;
+		end;
+	case 4:
+		close;
+	}
+}
+-	shop	WSF_RootGold0	-1,104000:5000
+-	itemshop	WSF_RootGoldRing	-1,1001972,1001996:1
+-	itemshop	WSF_RootGoldOre	-1,1001972,1001997:1,1001998:3,1002003:5,1002004:5,1002005:5,1002006:5,1002007:5,1002008:5,1002009:5,1002010:5,1002038:10,1002039:10,1002040:10,1002041:10,1002015:5,1002012:5
+
+// Hotbeer More (kRO's Chapter 1 page): exchanges the Tangled Magic armor
+// and the Dimensional World shoes, and enchants them, after Chapter 1's
+// story. The Tangled Magic enchants are rAthena's item_enchant 160-162.
+// Costs aren't published: 100 Root Gold Coins a Tangled piece; a
+// Dimensional World pair takes 30 Runes of Chaotic Magic Power, 30 Runes
+// of Heterogeneous Magic Power, 100 Mana Rings and 50 Root Gold Coins.
+ygg_fruit,168,124,4	script	Hotbeer More#wsf	813,{
+	mes "[Hotbeer More]";
+	mes "Armor woven from the World Tree's own roots, and boots that walk between worlds. Keeps the other worlds' magic off your skin.";
+	if (!callfunc("F_WSF_Ch1Done")) {
+		mes "But I only work for people the village trusts. Help Ash Village through its troubles first.";
+		close;
+	}
+	next;
+	switch (select("Tangled Magic armor:Dimensional World shoes:Enchant Tangled armor or robe:Enchant Tangled manteau or muffler:Enchant Tangled boots or shoes:Enchant Dimensional World shoes:Leave")) {
+	case 1:
+		setarray .@it, 450440, 450441, 480545, 480546, 470333, 470334;
+		callfunc "F_WSF_MoreTrade", .@it, 1001972, 100, 0, 0, 0, 0, 0, 0;
+		end;
+	case 2:
+		setarray .@it, 470335, 470336, 470337, 470338, 470339;
+		callfunc "F_WSF_MoreTrade", .@it, 1002012, 30, 1002015, 30, 1001996, 100, 1001972, 50;
+		end;
+	case 3:
+		close2;
+		item_enchant 160;
+		end;
+	case 4:
+		close2;
+		item_enchant 161;
+		end;
+	case 5:
+		close2;
+		item_enchant 162;
+		end;
+	case 6:
+		mes "[Hotbeer More]";
+		mes "The Dimensional World shoes take Boundary Crystals, and they grow as you add them. It's delicate work.";
+		mes "^4d4dff(This enchant isn't available on this server yet.)^000000";
+		close;
+	case 7:
+		close;
+	}
+}
+
+// One of Hotbeer More's exchanges: pick an item, pay up to four materials.
+// callfunc "F_WSF_MoreTrade", <item array>, <mat1>, <n1>, <mat2>, <n2>, <mat3>, <n3>, <mat4>, <n4>;
+function	script	F_WSF_MoreTrade	{
+	.@cnt = getarraysize(getarg(0));
+	.@menu$ = "";
+	for (.@i = 0; .@i < .@cnt; .@i++)
+		.@menu$ += getitemname(getelementofarray(getarg(0), .@i)) + ":";
+	.@menu$ += "Never mind";
+	.@c = select(.@menu$) - 1;
+	if (.@c >= .@cnt)
+		close;
+	.@item = getelementofarray(getarg(0), .@c);
+	for (.@m = 0; .@m < 4; .@m++) {
+		.@mat[.@m] = getarg(1 + .@m * 2);
+		.@amt[.@m] = getarg(2 + .@m * 2);
+	}
+	mes "[Hotbeer More]";
+	mes getitemname(.@item) + "? That takes:";
+	for (.@m = 0; .@m < 4; .@m++)
+		if (.@mat[.@m])
+			mes "- " + .@amt[.@m] + " " + getitemname(.@mat[.@m]) + " (you have " + countitem(.@mat[.@m]) + ")";
+	next;
+	if (select("Make the trade:Never mind") == 2)
+		close;
+	for (.@m = 0; .@m < 4; .@m++) {
+		if (.@mat[.@m] && countitem(.@mat[.@m]) < .@amt[.@m]) {
+			mes "[Hotbeer More]";
+			mes "You're short of " + getitemname(.@mat[.@m]) + ".";
+			close;
+		}
+	}
+	if (!checkweight(.@item, 1)) {
+		mes "[Hotbeer More]";
+		mes "You can't carry it. Make some room first.";
+		close;
+	}
+	for (.@m = 0; .@m < 4; .@m++)
+		if (.@mat[.@m])
+			delitem .@mat[.@m], .@amt[.@m];
+	getitem .@item, 1;
+	mes "[Hotbeer More]";
+	mes "There you go. Wear it well.";
+	close;
+}
+
+// Vitoli: kRO's client has no role for her beyond living here (navi
+// group "ch1msz00"); she explains the village's currencies.
+ygg_fruit,162,126,4	script	Vitoli#wsf	410,{
+	mes "[Vitoli]";
+	mes "New in Ash Village? Let me save you some confusion.";
+	next;
+	mes "[Vitoli]";
+	mes "^0000FFRoot Gold Coins^000000 are what the village pays you with when you help out. The exchanger next to me takes them.";
+	mes "^0000FFMana Rings^000000 come from the other Geffen, the one where the tower fell. Hotbeer More wants those for his finer work.";
+	next;
+	mes "[Vitoli]";
+	mes "And the runes of chaotic and heterogeneous magic... the exchanger has them, once the village trusts you.";
+	mes "Hotbeer More turns them into boots that walk between worlds.";
+	close;
+}

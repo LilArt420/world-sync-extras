@@ -1,0 +1,443 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Varmundt's Chess Garden: the Biosphere Deep Abyss.
+//= Quests 16778-16801 (dailies). Reputation wsv_abyss_rep.
+//===== Description: =========================================
+//= Official notes: playragnarok.com "Varmundt Biosphere Deep
+//= Level Abyss" (2026-10-06), ro.gnjoy.com update 283 and its
+//= enchant table (2023-11-14).
+//= - Entrance from the pagoda in the mansion garden (ba_maison
+//=   242,128), base level 250. Officially it also needs 2000
+//=   reputation from the Deep Level 1 research, which no server
+//=   script provides yet, so only the level is checked.
+//= - Research Quest Manager: the daily research requests. The
+//=   rewards (Abyss Magic Rune Ore/Rune and research reputation)
+//=   follow the notes; their amounts aren't published.
+//= - Sample Refiner Specialist: the zeny costs are the official
+//=   ones; the material counts are this block's (kRO shows only
+//=   icons).
+//= - Rune Crown Maker: the Time Dimensions Rune Crown of the
+//=   player's class (recipe estimated).
+//= - Enchant Master: the client's enchant window, rAthena's table
+//=   133 for Dimensional weapons and this block's table 132 for
+//=   the crowns (db/when/varmundt/item_enchant.yml).
+//============================================================
+
+ba_maison,242,128,0	script	#wsv_chessboard	10555,1,1,{
+	end;
+OnTouch:
+	mes "Strange power can be felt from the chessboard under the pagoda.";
+	mes "Move to the Chess Garden?";
+	next;
+	if (select("Move.:Stay.") == 2)
+		close;
+	if (BaseLevel < 250) {
+		mes "The chessboard's light flickers and fades under your feet.";
+		mes "^4d4dffThe Biosphere Deep Abyss is for adventurers of base level 250 or more.^000000";
+		close;
+	}
+	close2;
+	warp "ba_chess",16,16;
+	end;
+}
+
+ba_chess,13,16,4	script	Exit#wsv_chess	10555,{
+	mes "A way back to the mansion garden.";
+	next;
+	if (select("Go back to the garden.:Stay.") == 2)
+		close;
+	close2;
+	warp "ba_maison",242,122;
+	end;
+}
+
+ba_chess,13,36,4	script	Deep Abyss entrance#wsv	10527,{
+	mes "Do you want to move to the Biosphere Deep Abyss?";
+	next;
+	.@s = select("Move to the 2 o'clock position entrance.:Move to the 4 o'clock position entrance.:Move to the 8 o'clock position entrance.:Move to the 10 o'clock position entrance.:Cancel");
+	if (.@s == 5)
+		close;
+	if (BaseLevel < 250) {
+		mes "^4d4dffThe Biosphere Deep Abyss is for adventurers of base level 250 or more.^000000";
+		close;
+	}
+	if (isbegin_quest(16778) != 2) {
+		mes "[Research Quest Manager]";
+		mes "Ah, wait! Please talk to me first. Nobody goes down without a briefing.";
+		close;
+	}
+	setarray .@x, 194, 190, 57, 90;
+	setarray .@y, 188, 64, 87, 202;
+	close2;
+	warp "bl_depth2", .@x[.@s-1], .@y[.@s-1];
+	end;
+}
+
+// The Deep Abyss: no teleport, no memo, and a disconnect sends the
+// player back to their save point, as in the notes.
+bl_depth2	mapflag	noteleport
+bl_depth2	mapflag	nomemo
+bl_depth2	mapflag	nosave	SavePoint
+bl_depth2	mapflag	nowarp
+bl_depth2	mapflag	nowarpto
+bl_depth2	mapflag	nobranch
+bl_depth2	mapflag	loadevent
+
+// Some buffs are removed upon entering the Deep Abyss (update 283).
+-	script	WSV_DeepAbyss	-1,{
+	end;
+OnPCLoadMapEvent:
+	if (strcharinfo(3) != "bl_depth2")
+		end;
+	// Competentia, Musical Interlude, Serenade of Twilight, Prontera
+	// March, the Talismans of Protection, Warrior, Magician and Five
+	// Elements, Heaven and Earth, Spell Enchanting.
+	setarray .@sc,
+		SC_COMPETENTIA, SC_MUSICAL_INTERLUDE, SC_MOONLITSERENADE, SC_PRON_MARCH,
+		SC_TALISMAN_OF_PROTECTION, SC_TALISMAN_OF_WARRIOR, SC_TALISMAN_OF_MAGICIAN,
+		SC_TALISMAN_OF_FIVE_ELEMENTS, SC_HEAVEN_AND_EARTH, SC_SPELL_ENCHANTING;
+	for (.@i = 0; .@i < getarraysize(.@sc); .@i++)
+		sc_end .@sc[.@i];
+	end;
+}
+
+// ------------------------------------------------------------
+// Research Quest Manager: the daily research requests
+// ------------------------------------------------------------
+ba_chess,25,13,4	script	Research Quest Manager#wsv	10354,{
+	mes "[Research Quest Manager]";
+	if (isbegin_quest(16778) != 2) {
+		mes "Welcome to the Chess Garden. Sorry, I know it's an odd place for a research office.";
+		next;
+		mes "[Research Quest Manager]";
+		mes "While we were researching the deep layers of the Biosphere, a warp suddenly opened inside the mansion. Right here, in this garden nobody could get into.";
+		next;
+		mes "[Research Quest Manager]";
+		mes "It leads into twisted space and time. A region deeper than the deep layers, with no records at all. We've named it the ^0000FFAbyss^000000.";
+		mes "The monsters there have mutated beyond anything we've catalogued.";
+		next;
+		mes "[Research Quest Manager]";
+		mes "A few warnings before you go:";
+		mes "- Level differences don't reduce your experience or drops in there.";
+		mes "- Items and skills that move you around don't work.";
+		mes "- Some buffs fade the moment you enter.";
+		mes "- If you lose consciousness... I mean, disconnect, you'll wake up at your save point.";
+		next;
+		mes "[Research Quest Manager]";
+		mes "Every specimen you bring back helps. I'll hand out research requests every day, and the more reputation you earn with us, the more requests you'll see.";
+		mes "The entrance is the glowing board at the top corner of the garden.";
+		callfunc "F_WSV_Step", "wsv_abyss", 1, "16778", "";
+		close;
+	}
+	mes "What research request would you accept?";
+	mes "Research reputation: ^0000FF" + wsv_abyss_rep + "^000000";
+	next;
+	switch (select("Deep Abyss sample research (individual request):Accept all Deep Abyss specimen research requests:Complete all Deep Abyss specimen research requests:Deep Abyss multi-specimen research individual request:About the rewards:Never mind.")) {
+	case 1:
+		callfunc "F_WSV_AbyssQuest", 16779, 16780;
+		close;
+	case 2:
+		if (wsv_abyss_rep < 100) {
+			mes "[Research Quest Manager]";
+			mes "The specimen requests need a little more experience down there. Come back when your research reputation reaches ^0000FF100^000000.";
+			close;
+		}
+		.@n = 0;
+		for (.@q = 16781; .@q <= 16799; .@q += 2) {
+			if (!callfunc("F_WSV_AbyssOpen", .@q))
+				continue;
+			if (isbegin_quest(.@q) == 1 || callfunc("F_WSV_Waiting", .@q + 1))
+				continue;
+			if (isbegin_quest(.@q) == 2)
+				erasequest .@q;
+			setquest .@q;
+			.@n++;
+		}
+		mes "[Research Quest Manager]";
+		if (.@n)
+			mes "I've written down " + .@n + " specimen requests for you. Twenty-five of each monster, please.";
+		else
+			mes "You already have every specimen request I can give you today.";
+		questinfo_refresh;
+		close;
+	case 3:
+		.@n = 0;
+		for (.@q = 16781; .@q <= 16799; .@q += 2) {
+			if (isbegin_quest(.@q) == 1 && checkquest(.@q, HUNTING) == 2) {
+				callfunc "F_WSV_AbyssDone", .@q;
+				.@n++;
+			}
+		}
+		mes "[Research Quest Manager]";
+		if (.@n)
+			mes "Excellent work! " + .@n + " specimen reports, filed.";
+		else
+			mes "You haven't finished any specimen requests yet.";
+		close;
+	case 4:
+		if (wsv_abyss_rep < 100) {
+			mes "[Research Quest Manager]";
+			mes "The specimen requests need a little more experience down there. Come back when your research reputation reaches ^0000FF100^000000.";
+			close;
+		}
+		setarray .@name$, "Demi-human (Abyssal Duneyrr)", "Brute (Abyssal Naga)", "Plant (Abyssal Ancient Tree)", "Fish (Abyssal Dollocaris)", "Demon (Abyssal Frozen Gargoyle)", "Undead (Abyssal Flame Ghost)", "Dragon (Abyssal Acidus)", "Angel (Abyssal Morocc Avatar)", "Formless (Abyssal Salamander)", "Insect (Abyssal Moskillo)";
+		for (.@i = 0; .@i < 10; .@i++)
+			.@menu$ += (callfunc("F_WSV_AbyssOpen", 16781 + .@i * 2) ? .@name$[.@i] : "^aaaaaa" + .@name$[.@i] + " (reputation 300)^000000") + ":";
+		.@i = select(.@menu$ + "Cancel") - 1;
+		if (.@i >= 10)
+			close;
+		.@q = 16781 + .@i * 2;
+		if (!callfunc("F_WSV_AbyssOpen", .@q)) {
+			mes "[Research Quest Manager]";
+			mes "That one opens at research reputation ^0000FF300^000000.";
+			close;
+		}
+		callfunc "F_WSV_AbyssQuest", .@q, .@q + 1;
+		close;
+	case 5:
+		mes "[Research Quest Manager]";
+		mes "For each completed request you'll receive ^0000FF" + getitemname(1001554) + "^000000 and ^0000FF" + getitemname(1001555) + "^000000, plus research reputation.";
+		mes "The ore goes to our Sample Refiner Specialist, the runes to the Enchant Master.";
+		next;
+		mes "[Research Quest Manager]";
+		mes "Reputation opens more requests: the specimen requests at ^0000FF100^000000, all ten specimens at ^0000FF300^000000.";
+		close;
+	}
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 250 && isbegin_quest(16778) != 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(16778) == 2 && isbegin_quest(16779) != 1 && (isbegin_quest(16780) == 0 || checkquest(16780, PLAYTIME) == 2)" );
+	end;
+}
+
+// 1 when the specimen request <quest> is open at the player's
+// research reputation (the first five at 100, all ten at 300).
+function	script	F_WSV_AbyssOpen	{
+	if (wsv_abyss_rep >= 300)
+		return 1;
+	return (wsv_abyss_rep >= 100 && getarg(0) <= 16789);
+}
+
+// Gives or turns in one request: callfunc "F_WSV_AbyssQuest", <quest>, <cooldown quest>;
+function	script	F_WSV_AbyssQuest	{
+	.@q = getarg(0);
+	.@w = getarg(1);
+	mes "[Research Quest Manager]";
+	if (isbegin_quest(.@q) == 1) {
+		if (checkquest(.@q, HUNTING) != 2) {
+			mes "You're still on this one. Check your quest log for the count.";
+			return;
+		}
+		callfunc "F_WSV_AbyssDone", .@q;
+		mes "Good work! The data looks clean. Here's your share.";
+		return;
+	}
+	if (callfunc("F_WSV_Waiting", .@w)) {
+		mes "You've already done that request today. It resets at 4 AM.";
+		return;
+	}
+	if (isbegin_quest(.@q) == 2)
+		erasequest .@q;
+	setquest .@q;
+	questinfo_refresh;
+	if (.@q == 16779)
+		mes "Hunt ^0000FF450 monsters^000000 of any kind in the Deep Abyss and report back to me.";
+	else
+		mes "Twenty-five of them, please. The specimen cases are labeled.";
+	return;
+}
+
+// Rewards for a finished request.
+function	script	F_WSV_AbyssDone	{
+	.@q = getarg(0);
+	completequest .@q;
+	erasequest .@q;
+	if (isbegin_quest(.@q + 1))
+		erasequest .@q + 1;
+	setquest .@q + 1;
+	if (.@q == 16779) {
+		getitem 1001554, 5;	// Abyss_Rune_Ore
+		getitem 1001555, 2;	// Abyss_Rune
+		getexp2 120000000, 70000000;
+		.@rep = 30;
+	} else {
+		getitem 1001554, 2;
+		getitem 1001555, 1;
+		getexp2 20000000, 12000000;
+		.@rep = 10;
+	}
+	.@old = wsv_abyss_rep;
+	wsv_abyss_rep = min(wsv_abyss_rep + .@rep, 5000);
+	dispbottom "Research reputation +" + .@rep + " (" + wsv_abyss_rep + ").";
+	if (.@old < 100 && wsv_abyss_rep >= 100)
+		dispbottom "The Research Quest Manager now has specimen requests for you.";
+	if (.@old < 300 && wsv_abyss_rep >= 300)
+		dispbottom "All ten specimen requests are open to you now.";
+	if (wsv_abyss_rep >= 2000 && isbegin_quest(16801) != 2) {
+		setquest 16801;
+		completequest 16801;
+		dispbottom "You've studied the Biosphere Deep Abyss in depth: Abyss Researcher.";
+	}
+	questinfo_refresh;
+	return;
+}
+
+// ------------------------------------------------------------
+// Sample Refiner Specialist
+// ------------------------------------------------------------
+ba_chess,22,16,4	script	Sample Refiner Specialist#wsv	10345,{
+	mes "[Sample Refiner Specialist]";
+	mes "Bring me the shards and fragments you find in the Biosphere Deep Abyss and I'll refine them into jewels and runes.";
+	next;
+	// result, zeny, then up to three (material, amount) pairs
+	setarray .@r, 1001552, 1001553, 1001554, 1001555, 1001556;
+	setarray .@z, 10000, 10000, 20000, 30000, 50000;
+	setarray .@m1, 1001550, 1001551, 1001552, 1001554, 1001555;
+	setarray .@a1, 10, 10, 1, 3, 1;
+	setarray .@m2, 0, 0, 1001553, 1001552, 1001553;
+	setarray .@a2, 0, 0, 1, 5, 5;
+	setarray .@m3, 0, 0, 0, 0, 1001554;
+	setarray .@a3, 0, 0, 0, 0, 2;
+	for (.@i = 0; .@i < getarraysize(.@r); .@i++)
+		.@menu$ += getitemname(.@r[.@i]) + ":";
+	.@i = select(.@menu$ + "Never mind.") - 1;
+	if (.@i >= getarraysize(.@r))
+		close;
+	mes "[Sample Refiner Specialist]";
+	mes "One ^0000FF" + getitemname(.@r[.@i]) + "^000000 takes:";
+	mes "- " + .@a1[.@i] + " " + getitemname(.@m1[.@i]);
+	if (.@m2[.@i]) mes "- " + .@a2[.@i] + " " + getitemname(.@m2[.@i]);
+	if (.@m3[.@i]) mes "- " + .@a3[.@i] + " " + getitemname(.@m3[.@i]);
+	mes "- " + callfunc("F_InsertComma", .@z[.@i]) + " zeny";
+	next;
+	mes "[Sample Refiner Specialist]";
+	mes "How many? (up to 100)";
+	next;
+	input .@n, 0, 100;
+	if (.@n < 1)
+		close;
+	if (countitem(.@m1[.@i]) < .@a1[.@i] * .@n
+	|| (.@m2[.@i] && countitem(.@m2[.@i]) < .@a2[.@i] * .@n)
+	|| (.@m3[.@i] && countitem(.@m3[.@i]) < .@a3[.@i] * .@n)
+	|| Zeny < .@z[.@i] * .@n) {
+		mes "[Sample Refiner Specialist]";
+		mes "You don't have enough materials or zeny for that many.";
+		close;
+	}
+	if (!checkweight(.@r[.@i], .@n)) {
+		mes "[Sample Refiner Specialist]";
+		mes "You won't be able to carry them. Lighten your bag first.";
+		close;
+	}
+	delitem .@m1[.@i], .@a1[.@i] * .@n;
+	if (.@m2[.@i]) delitem .@m2[.@i], .@a2[.@i] * .@n;
+	if (.@m3[.@i]) delitem .@m3[.@i], .@a3[.@i] * .@n;
+	Zeny -= .@z[.@i] * .@n;
+	progressbar "ffffff", 2;
+	getitem .@r[.@i], .@n;
+	mes "[Sample Refiner Specialist]";
+	mes "Done. Clean cuts, every one of them.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Rune Crown Maker
+// ------------------------------------------------------------
+ba_chess,25,19,4	script	Rune Crown Maker#wsv	10345,{
+	mes "[Rune Crown Maker]";
+	mes "I make ^0000FFTime Dimensions Rune Crowns^000000 from refined Deep Abyss materials. Each crown is shaped for one class.";
+	next;
+	setarray .@crown,
+		400529, 400530, 400531, 400532, 400533, 400534, 400535, 400536, 400537,
+		400538, 400539, 400540, 400541, 400542, 400543, 400544, 400545, 400546;
+	setarray .@job1,
+		JOB_DRAGON_KNIGHT, JOB_IMPERIAL_GUARD, JOB_MEISTER, JOB_BIOLO, JOB_SHADOW_CROSS,
+		JOB_ABYSS_CHASER, JOB_ARCH_MAGE, JOB_ELEMENTAL_MASTER, JOB_CARDINAL, JOB_INQUISITOR,
+		JOB_WINDHAWK, JOB_TROUBADOUR, JOB_SHINKIRO, JOB_NIGHT_WATCH, JOB_SKY_EMPEROR,
+		JOB_SOUL_ASCETIC, JOB_HYPER_NOVICE, JOB_SPIRIT_HANDLER;
+	setarray .@job2,
+		JOB_DRAGON_KNIGHT2, JOB_IMPERIAL_GUARD2, JOB_MEISTER2, 0, 0,
+		0, 0, 0, 0, 0,
+		JOB_WINDHAWK2, JOB_TROUVERE, JOB_SHIRANUI, 0, JOB_SKY_EMPEROR2,
+		0, 0, 0;
+	.@c = -1;
+	for (.@i = 0; .@i < getarraysize(.@crown); .@i++) {
+		if (Class == .@job1[.@i] || (.@job2[.@i] && Class == .@job2[.@i]))
+			.@c = .@i;
+	}
+	if (.@c < 0) {
+		mes "[Rune Crown Maker]";
+		mes "Hmm. The runes don't answer to your class. Only the fourth classes can wear these crowns.";
+		close;
+	}
+	.@id = .@crown[.@c];
+	mes "[Rune Crown Maker]";
+	mes "For you, that's the ^0000FF" + getitemname(.@id) + "^000000.";
+	mes "I'll need:";
+	mes "- 30 " + getitemname(1001555);
+	mes "- 10 " + getitemname(1001556);
+	mes "- 20 " + getitemname(1001552);
+	mes "- 20 " + getitemname(1001553);
+	next;
+	if (select("Make it.:Not now.") == 2)
+		close;
+	if (countitem(1001555) < 30 || countitem(1001556) < 10 || countitem(1001552) < 20 || countitem(1001553) < 20) {
+		mes "[Rune Crown Maker]";
+		mes "You're short on materials. The Sample Refiner Specialist next to me can help with that.";
+		close;
+	}
+	if (!checkweight(.@id, 1)) {
+		mes "[Rune Crown Maker]";
+		mes "Make some room in your bag first.";
+		close;
+	}
+	delitem 1001555, 30;
+	delitem 1001556, 10;
+	delitem 1001552, 20;
+	delitem 1001553, 20;
+	progressbar "ffffff", 3;
+	getitem .@id, 1;
+	mes "[Rune Crown Maker]";
+	mes "There. It hums when you put it on, that's normal. Bring it to the Enchant Master if you want more out of it.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Enchant Master
+// ------------------------------------------------------------
+ba_chess,28,16,4	script	Enchant Master#wsv	10345,{
+	mes "[Enchant Master]";
+	mes "Welcome. Do you need rune crown enchantment? Dimensional weapons too, of course.";
+	mes "Which one do you have?";
+	next;
+	switch (select("Time Dimensions Rune Crown:Dimensional weapon:What do you need?:Never mind.")) {
+	case 1:
+		close2;
+		item_enchant 132;
+		end;
+	case 2:
+		close2;
+		item_enchant 133;
+		end;
+	case 3:
+		mes "[Enchant Master]";
+		mes "For crowns: ^0000FF" + getitemname(1001555) + "^000000 for the lower slots, ^0000FF" + getitemname(1001556) + "^000000 for the top one.";
+		mes "For weapons: both kinds of runes, and a little zeny.";
+		next;
+		mes "[Enchant Master]";
+		mes "A reset costs 15 Zelunium, 15 Shadowdecon and 30 Etel Dust on a crown. It always works.";
+		close;
+	}
+	close;
+}
+
+// The way back up from the Deep Abyss to the Chess Garden.
+bl_depth2,141,137,4	script	Exit#wsv_abyss	10527,{
+	mes "A way back up to the Chess Garden.";
+	next;
+	if (select("Go back to the Chess Garden.:Stay.") == 2)
+		close;
+	close2;
+	warp "ba_chess",15,36;
+	end;
+}

@@ -1,0 +1,664 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Chapter 1, part E: the doctor's truth, Margot, the hope of a
+//= cure and the land of heat (Muspelheim's Volund Valley).
+//= Quests 23271-23299, 18374, 18375, 18373, 18376, 24086-24099.
+//= Steps 430-599. wsv_ch1d bits: 1/2/4 residents asked, 8/16/32
+//= cure given to the clinic's patients, 64-8192 the eight Hal
+//= workers (in order).
+//= wsv_ch1t: when Margot stopped to rest (23282).
+//============================================================
+
+// ------------------------------------------------------------
+// Maxim at the town hall
+// ------------------------------------------------------------
+ch1_gef_in,172,187,4	script(CLOAKED)	Maxim#wsv_c1	788,{
+	if (wsv_ch1 == 430) {
+		mes "[Maxim]";
+		mes "Telkos's message reached me. A fake doctor. Of course he was.";
+		mes "And yet half this city is alive because of him. What do you do with that?";
+		next;
+		mes "[Maxim]";
+		mes "I don't know who he really was. I travel too much; I signed papers and sent supplies.";
+		mes "Ask the residents. Anyone who's been in Geffen long enough might remember when Neumann first appeared.";
+		callfunc "F_WSV_Step", "wsv_ch1", 435, "23271", "23272,23273,23274";
+		close;
+	}
+	if (wsv_ch1 == 437) {
+		mes "[Maxim]";
+		mes "Nobody knows him. A man who saved hundreds, and nobody even knows where he came from.";
+		next;
+		mes "[Maxim]";
+		mes "There's one person who would know. ^0000FFMargot^000000, his wife. She's in the sickroom upstairs in his house.";
+		mes "She was our best nurse, before. She won't like your questions. Be kind.";
+		callfunc "F_WSV_Step", "wsv_ch1", 440, "23275", "23276";
+		close;
+	}
+	if (wsv_ch1 == 540) {
+		mes "[Maxim]";
+		mes "A cure? A real one? From Ash Village?";
+		mes "......";
+		next;
+		mes "[Maxim]";
+		mes "No. Not yet. If it goes wrong, we lose everyone's trust and maybe their lives.";
+		mes "We try it on one patient first. The worst one. The one who has the most to gain and the least time to lose.";
+		next;
+		mes "[Maxim]";
+		mes "...Margot. Give it to Margot. I'll come with you.";
+		callfunc "F_WSV_Step", "wsv_ch1", 545, "23290", "23291";
+		close;
+	}
+	if (wsv_ch1 == 570) {
+		mes "[Maxim]";
+		mes "I've been going round the clinic all morning. Coughs stopping. People eating one bowl and feeling full.";
+		mes "The children are laughing in the east ward. I haven't heard that in a year.";
+		next;
+		mes "[Maxim]";
+		mes "Thank you. I don't have a better word than that.";
+		callfunc "F_WSV_Step", "wsv_ch1", 575, "23298", "23299";
+		close;
+	}
+	if (wsv_ch1 == 575) {
+		mes "[Maxim]";
+		mes "There's something else. While you were in Ash Village, a woman called ^0000FFEst^000000 came through Verus.";
+		mes "She says the fortress, the Dark Whisper, has to go. As long as it hangs there, the sickness will keep coming.";
+		next;
+		mes "[Maxim]";
+		mes "She's gathering people at the old entrance to the sky fortress, in the ruins of Verus, by the fortress's shadow.";
+		mes "I'm a merchant, not a fighter. But you... you could end this.";
+		next;
+		mes "[Maxim]";
+		mes "Here. Everything I can spare. Go and find Est.";
+		callfunc "F_WSV_Step", "wsv_ch1", 600, "23299", "12663";
+		callfunc "F_WSV_C1Reward", 80000000, 40000000;
+		getitem 1001972, 10;	// Ch1_Root_Coin
+		close;
+	}
+	mes "[Maxim]";
+	if (wsv_ch1 < 430)
+		mes "I keep this city's clinic supplied. Somebody has to.";
+	else
+		mes "The town hall is yours to use. The researchers already took the desks.";
+	close;
+}
+
+// Three residents asked about Neumann (23272-23274).
+ch1_geffen,183,161,4	script(CLOAKED)	Geffen Resident#wsv_c1c	87,{
+	callfunc "F_WSV_C1Asked", 1, "23272";
+	mes "[Geffen Resident]";
+	mes "The doctor? He showed up a year ago, maybe two. Right after the tower went dark.";
+	mes "Didn't talk much. Worked every hour there was. That's all I know.";
+	close;
+}
+ch1_geffen,61,92,4	script(CLOAKED)	Geffen Resident#wsv_c1d	69,{
+	callfunc "F_WSV_C1Asked", 2, "23273";
+	mes "[Geffen Resident]";
+	mes "Neumann? Came in with the refugees from the north, I think. Him and that nurse of his.";
+	mes "Or maybe she was here first. I don't remember. Everyone looks the same when they're hungry.";
+	close;
+}
+ch1_geffen,129,197,4	script(CLOAKED)	Geffen Resident#wsv_c1e	96,{
+	callfunc "F_WSV_C1Asked", 4, "23274";
+	mes "[Geffen Resident]";
+	mes "I asked him once where he studied medicine. He changed the subject.";
+	mes "Asked me where it hurt. It hurt everywhere. He fixed it anyway.";
+	close;
+}
+
+function	script	F_WSV_C1Asked	{
+	if (wsv_ch1 == 435 && !(wsv_ch1d & getarg(0))) {
+		wsv_ch1d = wsv_ch1d | getarg(0);
+		callfunc "F_WSV_Step", "wsv_ch1", 435, getarg(1), "";
+		if ((wsv_ch1d & 7) == 7) {
+			callfunc "F_WSV_Step", "wsv_ch1", 437, "", "23275";
+			dispbottom "Nobody really knew Neumann. Report back to Maxim at the town hall.";
+		}
+	}
+	return;
+}
+
+// ------------------------------------------------------------
+// Margot, in the sickroom of Neumann's house
+// ------------------------------------------------------------
+ch1_gef_in,138,162,4	script	Margot#wsv	10615,{
+	cutin "ch1_margot01.png",2;
+	switch (wsv_ch1) {
+	case 440:
+		mes "[Margot]";
+		mes "Visitors. How nice. Sit anywhere; there's only the one chair.";
+		next;
+		select("I wanted to ask about your husband.");
+		mes "[Margot]";
+		mes "...My husband is a doctor. A good one. That's all there is to say.";
+		callfunc "F_WSV_Step", "wsv_ch1", 445, "23276", "23277";
+		close3;
+	case 445:
+		mes "[Margot]";
+		mes "You're still here.";
+		mes "I'm tired. I don't want to talk about him.";
+		callfunc "F_WSV_Step", "wsv_ch1", 446, "23277", "23278";
+		close3;
+	case 446:
+		mes "[Margot]";
+		mes "Why does everyone want to know about him all of a sudden? Has he done something?";
+		mes "...Don't answer that.";
+		callfunc "F_WSV_Step", "wsv_ch1", 447, "23278", "23279";
+		close3;
+	case 447:
+		mes "[Margot]";
+		mes "Enough! Do you think I don't know what people whisper? 'The fake doctor', 'the man who came from nowhere'?";
+		mes "He's the only reason I'm alive!";
+		next;
+		mes "[Margot]";
+		mes "*cough* *cough*... I'm sorry. I'm sorry.";
+		mes "Fine. I'll tell you. But my throat... I haven't talked this much in months.";
+		mes "Could you bring me some water? There's a jug in the kitchen downstairs.";
+		callfunc "F_WSV_Step", "wsv_ch1", 450, "23279", "23280";
+		close3;
+	case 452:
+		mes "[Margot]";
+		mes "Thank you. Not too cold. You're a natural nurse.";
+		next;
+		mes "[Margot]";
+		mes "I was a nurse in a city up north. It was overrun, two years ago. We fled south with nothing.";
+		mes "That's where I met him, in a refugee column. He was carrying a child that wasn't his, and two others were holding his coat.";
+		next;
+		mes "[Margot]";
+		mes "He wasn't a doctor. He was a schoolteacher. But when we reached Geffen there were no doctors left, and people kept bringing him their sick...";
+		mes "So he learned. From books, from me, from them. He never stopped learning.";
+		next;
+		mes "[Margot]";
+		mes "*cough*... Give me a moment. Let me rest a little, and I'll tell you the rest.";
+		wsv_ch1t = gettimetick(2);
+		callfunc "F_WSV_Step", "wsv_ch1", 455, "23281", "23282";
+		close3;
+	case 455:
+		if (gettimetick(2) - wsv_ch1t < 20) {
+			mes "Margot's eyes are closed. Her breathing is shallow but even.";
+			mes "^4d4dffLet her rest a little longer.^000000";
+			close3;
+		}
+		mes "[Margot]";
+		mes "Where was I... the clinic. The sickness came, and we worked, and then I caught it.";
+		mes "And after that he... he...";
+		next;
+		mes "[Margot]";
+		mes "......";
+		mes "I can't remember. Isn't that strange? There was something important. Something he told me, at night.";
+		next;
+		mes "[Margot]";
+		mes "He wrote everything down. He hid the important things under the mattress, downstairs. A silly habit.";
+		mes "Would you bring me what's there? It might help me remember.";
+		callfunc "F_WSV_Step", "wsv_ch1", 458, "23282", "23283";
+		close3;
+	case 459:
+		mes "[Margot]";
+		mes "His records. Let me see...";
+		next;
+		mes "She reads in silence. Her hands begin to shake.";
+		next;
+		mes "[Margot]";
+		mes "I remember now. He told me, the night I got worse. He said he would find a cure for me, whatever it took.";
+		mes "He took the others. The sickest ones. He tested things on them, to save me.";
+		next;
+		mes "[Margot]";
+		mes "I knew. I let myself forget, because I wanted to live.";
+		next;
+		mes "[Margot]";
+		mes "......";
+		mes "If my blood can help make a real cure, take it. All of it, if you need to.";
+		mes "Tell the researchers of that village of yours. Let something good come out of me, at least.";
+		callfunc "F_WSV_Step", "wsv_ch1", 460, "23284", "23285";
+		close3;
+	case 465:
+		mes "[Margot]";
+		mes "This is the assistant? Bailey, was it? Go on, dear, I don't bite. Much.";
+		next;
+		mes "Bailey draws the blood carefully, with practised hands, and seals the vial in a box packed with cold moss.";
+		progressbar "ffffff", 4;
+		callfunc "F_WSV_Step", "wsv_ch1", 470, "23286", "23287";
+		close3;
+	case 545:
+		mes "[Margot]";
+		mes "So this is it. The cure.";
+		mes "...He'd have wanted to see this.";
+		next;
+		mes "Margot drinks the medicine. For a long moment, nothing happens. Then her breathing eases, and some colour comes back to her cheeks.";
+		next;
+		mes "[Margot]";
+		mes "Oh. Oh, it's warm. Like sunlight inside.";
+		callfunc "F_WSV_Step", "wsv_ch1", 550, "23291", "23292";
+		close3;
+	}
+	mes "[Margot]";
+	if (wsv_ch1 < 440)
+		mes "*cough* ...Hello? Are you here for the doctor? He's at the clinic.";
+	else if (wsv_ch1 < 545)
+		mes "*cough* Thank you for listening to an old nurse's story.";
+	else
+		mes "I'm getting better every day. Tell Bailey I said so.";
+	close3;
+}
+
+ch1_gef_in,104,173,4	script	Water Jug#wsv	10429,{
+	if (wsv_ch1 == 450) {
+		mes "[Water Jug]";
+		mes "A clay jug of water, cool from the cellar. You pour a cup and let it sit a moment so it isn't too cold.";
+		callfunc "F_WSV_Step", "wsv_ch1", 452, "23280", "23281";
+		close;
+	}
+	mes "[Water Jug]";
+	mes "A clay jug of water.";
+	close;
+}
+
+ch1_gef_in,110,166,4	script	Bed#wsv_c1	10429,{
+	if (wsv_ch1 == 458) {
+		mes "[Bed]";
+		mes "A narrow bed downstairs, neatly made. You lift the mattress.";
+		mes "Underneath: a bundle of notes tied with string. ^0000FFNeumann's records^000000.";
+		callfunc "F_WSV_Step", "wsv_ch1", 459, "23283", "23284";
+		close;
+	}
+	mes "[Bed]";
+	mes "A narrow bed, neatly made.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Bailey and the researchers of Ash Village
+// ------------------------------------------------------------
+ygg_fruit,103,73,4	script	Assistant Bailey#wsv	569,{
+	if (wsv_ch1 == 460) {
+		mes "[Assistant Bailey]";
+		mes "Blood from someone who's had Soren Syndrome longer than anyone? And she's willing?";
+		mes "That's... that's exactly what we've been missing!";
+		next;
+		mes "[Assistant Bailey]";
+		mes "Her blood has fought the sickness for two years. Even if it's losing, it's learned how to fight. We can learn from that.";
+		next;
+		mes "[Assistant Bailey]";
+		mes "I'll come with you to Geffen and draw it myself. Fresh blood, packed cold, straight back here.";
+		callfunc "F_WSV_Step", "wsv_ch1", 465, "23285", "23286";
+		close;
+	}
+	if (wsv_ch1 == 475) {
+		mes "[Assistant Bailey]";
+		mes "The sample! Quick, onto my shelf, into the cold box.";
+		next;
+		progressbar "ffffff", 4;
+		mes "[Assistant Bailey]";
+		mes "...It's good. It's very good. But it's not enough on its own.";
+		mes "The blood shows the body how to fight. Something has to give it the strength to win. A catalyst. And I have no idea what.";
+		next;
+		mes "[Assistant Bailey]";
+		mes "Sasha keeps the old records of the roots. Ask her. Maybe the World Tree has seen a sickness like this before.";
+		callfunc "F_WSV_Step", "wsv_ch1", 480, "23288", "18374";
+		close;
+	}
+	if (wsv_ch1 == 535) {
+		mes "[Assistant Bailey]";
+		mes "Special Hal from Muspelheim? Let me see!";
+		next;
+		mes "[Assistant Bailey]";
+		mes "It's warm. Even through the glove. And it hums when I put it next to Margot's blood... they're reacting!";
+		next;
+		progressbar "ffffff", 6;
+		mes "[Assistant Bailey]";
+		mes "That's it. That's the catalyst. We have a cure. We have a cure!";
+		next;
+		mes "[Assistant Bailey]";
+		mes "I'll make as much as I can. Take this first batch to Geffen. Maxim should decide how to hand it out.";
+		callfunc "F_WSV_Step", "wsv_ch1", 540, "23289", "23290";
+		close;
+	}
+	mes "[Assistant Bailey]";
+	if (wsv_ch1 < 460)
+		mes "Root diseases, leaf rot, sap fever... I'm Bailey, I help the researchers. Mostly by carrying things.";
+	else if (wsv_ch1 < 540)
+		mes "A cure is a puzzle. We have most of the pieces now.";
+	else
+		mes "More batches every day. My hands smell of Hal and moss.";
+	close;
+}
+
+ch1_gef_in,140,164,4	script(CLOAKED)	Bailey#wsv_c1g	569,{
+	if (wsv_ch1 == 470) {
+		mes "[Bailey]";
+		mes "Got it. She was very brave.";
+		mes "I want to stay a few days. Look after her, help at the clinic. There's so much to do here.";
+		next;
+		mes "[Bailey]";
+		mes "But the blood can't wait. It has to stay fresh. Could you take it back to Ash Village, to ^0000FFmy shelf^000000 in the researchers' room?";
+		mes "The cold box is labeled. You can't miss it.";
+		callfunc "F_WSV_Step", "wsv_ch1", 475, "23287", "23288";
+		close;
+	}
+	mes "[Bailey]";
+	mes "I'll look after Margot. Go, go!";
+	close;
+}
+
+// ------------------------------------------------------------
+// Devries and the fire resistance (Sasha's bad and good news are
+// in ch1_a_call.txt, step 480).
+// ------------------------------------------------------------
+ygg_fruit,71,78,4	script	Devries#wsv	865,{
+	if (wsv_ch1 == 490) {
+		mes "[Devries]";
+		mes "Muspelheim? Ha! You'd cook like an egg on a stove.";
+		mes "Fine, fine. A fire resistance tonic. I can make one, but I'm out of the key ingredient.";
+		next;
+		mes "[Devries]";
+		mes "Dragon scale. Five of them, ground to powder. Dragons are the only things that don't mind fire, so we borrow their skin.";
+		mes "Bring me ^0000FF5 " + getitemname(1036) + "^000000 and I'll do the rest.";
+		callfunc "F_WSV_Step", "wsv_ch1", 495, "18375", "18373";
+		close;
+	}
+	if (wsv_ch1 == 495) {
+		if (countitem(1036) < 5) {
+			mes "[Devries]";
+			mes "Five " + getitemname(1036) + ". You have " + countitem(1036) + ". I can count, you know.";
+			close;
+		}
+		delitem 1036, 5;
+		mes "[Devries]";
+		mes "Lovely. Now, stand back.";
+		next;
+		progressbar "ffffff", 4;
+		specialeffect2 EF_FIREARMOR;
+		mes "[Devries]";
+		mes "Drink. All of it. Don't make that face, it's supposed to taste like ash.";
+		mes "There, the heat won't bother you for a while. I've rigged one of Meisel's gadgets too: a little temperature regulator. Clip it to your belt.";
+		next;
+		mes "[Devries]";
+		mes "The intersection to Volund Valley is in the Land of Darkness. Find the advance party there.";
+		bonus_script "{ bonus2 bSubEle,Ele_Fire,20; }", 3600, 0, 0, EFST_RESIST_PROPERTY_FIRE;
+		callfunc "F_WSV_Step", "wsv_ch1", 500, "18373", "18376";
+		close;
+	}
+	mes "[Devries]";
+	if (wsv_ch1 > 495) {
+		mes "Need another tonic for Muspelheim? One " + getitemname(1036) + " for a dose.";
+		next;
+		if (select("Yes, please.:No, thanks.") == 1) {
+			if (countitem(1036) < 1) {
+				mes "[Devries]";
+				mes "No scale, no tonic.";
+				close;
+			}
+			delitem 1036, 1;
+			specialeffect2 EF_FIREARMOR;
+			bonus_script "{ bonus2 bSubEle,Ele_Fire,20; }", 3600, 0, 0, EFST_RESIST_PROPERTY_FIRE;
+			mes "[Devries]";
+			mes "Bottoms up.";
+		}
+		close;
+	}
+	mes "Plants, potions, and the occasional explosion. That's my house.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Muspelheim: Volund Valley (mu_fild01)
+// ------------------------------------------------------------
+mu_fild01,95,154,4	script	Investigation Point#wsv_c1m	10429,{
+	if (wsv_ch1 == 500) {
+		mes "[Investigation Point]";
+		mes "A marker of the advance party, scorched black at the edges. The note reads:";
+		mes "^0000FF\"Volund Valley entrance. Heat bearable with regulator. Camp set up further in, to the north.\"^000000";
+		next;
+		mes "The air shimmers. Even with Devries's tonic, every breath tastes of smoke.";
+		callfunc "F_WSV_Step", "wsv_ch1", 505, "18376", "24086";
+		close;
+	}
+	mes "[Investigation Point]";
+	mes "^0000FF\"Volund Valley entrance. Heat bearable with regulator.\"^000000";
+	close;
+}
+
+mu_fild01,151,221,4	script	Harvan#wsv	10655,{
+	if (wsv_ch1 == 505) {
+		mes "[Harvan]";
+		mes "Hoh! Another one with a little humming box on their belt. You're with the strangers from the tree-place?";
+		next;
+		mes "[Harvan]";
+		mes "I'm Harvan. I farm the valley. Yes, farm! We grow ^0000FFHal^000000 here, in the hot soil. Little red crystals that pulse like hearts.";
+		mes "Your friends are further in, northeast, by the cooling rocks. Go on, go on.";
+		callfunc "F_WSV_Step", "wsv_ch1", 510, "24086", "24087";
+		close;
+	}
+	if (isbegin_quest(24108) == 1) {
+		mes "[Harvan]";
+		mes "What's Hal good for? Hoho! Everything!";
+		mes "Crush it into the soil and the soil wakes up. Our fields need baskets and baskets of it, and there are never enough hands.";
+		next;
+		mes "[Harvan]";
+		mes "The monsters swallow Hal, you know. The beasties of the valley, all of them. Hunt them and you'll find Hal in their bellies.";
+		mes "Tell the lady. Maybe her people can help us farm.";
+		callfunc "F_WSV_Step", "wsv_ch1", wsv_ch1, "24108", "24109";
+		close;
+	}
+	mes "[Harvan]";
+	if (wsv_ch1 < 505)
+		mes "Hot today. Hot every day!";
+	else
+		mes "Hal likes the heat. So do I. We get along.";
+	close;
+}
+
+mu_fild01,222,244,4	script	Tamarin#wsv_c1m	10381,{
+	if (wsv_ch1 == 510) {
+		mes "[Tamarin]";
+		mes "You made it! Isn't it hot? I've stopped sweating, I think I ran out.";
+		next;
+		mes "[Tamarin]";
+		mes "The advance party is led by ^0000FFJubilus^000000. She's the one who talks to the locals and keeps everybody from melting.";
+		mes "She's at the camp, south of here, by the big rock. She's been asking about Hal for days.";
+		callfunc "F_WSV_Step", "wsv_ch1", 515, "24087", "24088";
+		close;
+	}
+	mes "[Tamarin]";
+	mes "Arrows don't work here. They burn. I've tried.";
+	close;
+}
+
+mu_fild01,198,186,4	script	Jubilus#wsv	611,{
+	cutin "ch1_jb01.png",2;
+	if (wsv_ch1 == 515) {
+		mes "[Jubilus]";
+		mes "So you're the one Sasha sent. Welcome to Volund Valley. Try not to touch anything that glows.";
+		next;
+		mes "[Jubilus]";
+		mes "Hal. Yes. The locals farm it, and their workers have been gathering it all over the valley.";
+		mes "I need a good amount of it for experiments, and the workers are scattered from one end of the valley to the other.";
+		next;
+		mes "[Jubilus]";
+		mes "Collect it from them for me? Start with the one by the eastern lava falls. They'll point you to the next.";
+		wsv_ch1d = wsv_ch1d &~ 16320;
+		callfunc "F_WSV_Step", "wsv_ch1", 520, "24088", "24089";
+		close3;
+	}
+	if (wsv_ch1 == 525) {
+		mes "[Jubilus]";
+		mes "That's all of it? Wonderful. Let me look...";
+		next;
+		mes "[Jubilus]";
+		mes "Hmm. Ordinary Hal gives strength, but it burns too hot for a sick body. It would cure the sickness and the patient both.";
+		mes "Harvan has been farming here all his life. He'll know if there's a gentler kind. He's just come to the camp.";
+		callfunc "F_WSV_Step", "wsv_ch1", 530, "24097", "24098";
+		close3;
+	}
+	if (wsv_ch1 == 532) {
+		mes "[Jubilus]";
+		mes "Hal grown in the cooling rocks, gentler than any other. Of course. The locals have known all along.";
+		next;
+		mes "[Jubilus]";
+		mes "Harvan gave me a handful. Here, take this ^0000FFspecial Hal^000000 to your researchers. Wrap it well; it bites when it's cold.";
+		mes "I'll stay and study the valley. There is more to this place than heat.";
+		callfunc "F_WSV_Step", "wsv_ch1", 535, "24099", "23289";
+		callfunc "F_WSV_C1Reward", 60000000, 30000000;
+		close3;
+	}
+	callfunc "F_WSV_C1Jubilus";
+	end;
+}
+
+mu_fild01,200,188,4	script(CLOAKED)	Harvan#wsv_c1j	10655,{
+	if (wsv_ch1 == 530) {
+		mes "[Harvan]";
+		mes "Hal that's gentle? For sick folk? Hoho, you want ^0000FFrock Hal^000000!";
+		mes "We grow it in the cooling rocks for our grannies and the little ones. Same strength, none of the burn.";
+		next;
+		mes "[Harvan]";
+		mes "I brought some for the lady already. Take it, take it. Help your sick people.";
+		callfunc "F_WSV_Step", "wsv_ch1", 532, "24098", "24099";
+		close;
+	}
+	mes "[Harvan]";
+	mes "Rock Hal for grannies, field Hal for strong backs!";
+	close;
+}
+
+// The eight Hal workers, visited in order (24089-24096).
+mu_fild01,237,299,4	script	Worker#wsv_1	10656,{
+	callfunc "F_WSV_C1Worker", 0, "the one by the stone bridge, to the southwest";
+	end;
+}
+mu_fild01,220,313,4	script	Worker#wsv_2	10657,{
+	callfunc "F_WSV_C1Worker", 1, "the one up on the northern ridge";
+	end;
+}
+mu_fild01,166,370,4	script	Worker#wsv_3	10656,{
+	callfunc "F_WSV_C1Worker", 2, "my cousin, down by the twin vents, to the south";
+	end;
+}
+mu_fild01,134,311,4	script	Worker#wsv_4	10657,{
+	callfunc "F_WSV_C1Worker", 3, "the one right next to the twin vents, west of here";
+	end;
+}
+mu_fild01,126,306,4	script	Worker#wsv_5	10656,{
+	callfunc "F_WSV_C1Worker", 4, "the one far off at the western edge of the valley";
+	end;
+}
+mu_fild01,35,194,4	script	Worker#wsv_6	10657,{
+	callfunc "F_WSV_C1Worker", 5, "the one by the cracked pillar, east of here";
+	end;
+}
+mu_fild01,91,196,4	script	Worker#wsv_7	10656,{
+	callfunc "F_WSV_C1Worker", 6, "the last one, northeast, near the middle of the valley";
+	end;
+}
+mu_fild01,121,236,4	script	Worker#wsv_8	10657,{
+	callfunc "F_WSV_C1Worker", 7, "";
+	end;
+}
+
+// callfunc "F_WSV_C1Worker", <index 0-7>, "<where the next one is>";
+function	script	F_WSV_C1Worker	{
+	.@i = getarg(0);
+	.@b = 64 << .@i;
+	if (wsv_ch1 == 520 && isbegin_quest(24089 + .@i) == 1) {
+		mes "[Worker]";
+		mes "Jubilus sent you for the Hal? Here, here, this basket's done.";
+		mes "Careful, it's warm. It's always warm.";
+		next;
+		wsv_ch1d = wsv_ch1d | .@b;
+		if (.@i < 7) {
+			mes "[Worker]";
+			mes "You'll want " + getarg(1) + ". They've got a full basket too.";
+			callfunc "F_WSV_Step", "wsv_ch1", 520, "" + (24089 + .@i), "" + (24090 + .@i);
+		} else {
+			mes "[Worker]";
+			mes "That's every basket in the valley! Go on back to Jubilus. She'll be pleased.";
+			callfunc "F_WSV_Step", "wsv_ch1", 525, "24096", "24097";
+		}
+		close;
+	}
+	mes "[Worker]";
+	if (wsv_ch1 < 520)
+		mes "Dig, pick, basket. Dig, pick, basket.";
+	else if (wsv_ch1d & .@b)
+		mes "My basket's empty now. Thanks for carrying it!";
+	else
+		mes "Waiting for my turn, eh? Jubilus has a list.";
+	close;
+}
+
+// ------------------------------------------------------------
+// The cure in Geffen: Margot first, then the clinic.
+// ------------------------------------------------------------
+ch1_gef_in,136,164,4	script(CLOAKED)	Maxim#wsv_c1m	788,{
+	if (wsv_ch1 == 550) {
+		mes "[Maxim]";
+		mes "Look at her. She hasn't had that much colour in a year.";
+		mes "I'll stay with her while it takes effect. Someone has to watch, write down every change.";
+		next;
+		mes "[Maxim]";
+		mes "I've been keeping a ^0000FFjournal^000000 of her condition for months. It's on my desk at the town hall. Could you fetch it?";
+		callfunc "F_WSV_Step", "wsv_ch1", 555, "23292", "23293";
+		close;
+	}
+	if (wsv_ch1 == 560) {
+		mes "[Maxim]";
+		mes "Thank you. ...See here: fever down, cough gone, pulse steady. In a single hour.";
+		next;
+		mes "[Maxim]";
+		mes "It works. It truly works.";
+		mes "Take the rest of the batch to the clinic. Start with the patients who've waited longest.";
+		wsv_ch1d = wsv_ch1d &~ 56;
+		callfunc "F_WSV_Step", "wsv_ch1", 565, "23294", "23295,23296,23297";
+		close;
+	}
+	mes "[Maxim]";
+	mes "Fever down. Pulse steady. I'm writing it all down.";
+	close;
+}
+
+ch1_gef_in,175,186,4	script	Maxim's Journal#wsv	10429,{
+	if (wsv_ch1 == 555) {
+		mes "[Maxim's Journal]";
+		mes "A worn notebook on the town hall desk, every page full of dates and careful notes in a merchant's neat hand.";
+		mes "^0000FF\"Margot. Day 311. Cough worse at night. Ate a little bread.\"^000000";
+		callfunc "F_WSV_Step", "wsv_ch1", 560, "23293", "23294";
+		close;
+	}
+	mes "[Maxim's Journal]";
+	mes "A worn notebook full of dates and notes.";
+	close;
+}
+
+// The clinic's patients who receive the first cures (23295-23297).
+ch1_gef_in,61,76,4	script(CLOAKED)	Waiting Villager#wsv_c1a	10614,{
+	callfunc "F_WSV_C1Cure", 8, "23295";
+	end;
+}
+ch1_gef_in,108,35,4	script(CLOAKED)	Waiting Villager#wsv_c1b	10617,{
+	callfunc "F_WSV_C1Cure", 16, "23296";
+	end;
+}
+ch1_gef_in,110,102,4	script(CLOAKED)	Waiting Villager#wsv_c1c	10616,{
+	callfunc "F_WSV_C1Cure", 32, "23297";
+	end;
+}
+
+function	script	F_WSV_C1Cure	{
+	if (wsv_ch1 == 565 && !(wsv_ch1d & getarg(0))) {
+		mes "[Waiting Villager]";
+		mes "Is that... the medicine? The real one? Not another tonic that tastes like boots?";
+		next;
+		mes "The villager drinks it, and for the first time in months, takes a deep breath without coughing.";
+		next;
+		mes "[Waiting Villager]";
+		mes "...Oh. Oh! Thank you! Thank you!";
+		wsv_ch1d = wsv_ch1d | getarg(0);
+		callfunc "F_WSV_Step", "wsv_ch1", 565, getarg(1), "";
+		if ((wsv_ch1d & 56) == 56) {
+			callfunc "F_WSV_Step", "wsv_ch1", 570, "", "23298";
+			dispbottom "The first patients are cured. Report to Maxim at the town hall.";
+		}
+		close;
+	}
+	mes "[Waiting Villager]";
+	mes "I can breathe. I keep saying it: I can breathe.";
+	close;
+}

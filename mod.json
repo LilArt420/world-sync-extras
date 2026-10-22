@@ -1,13 +1,48 @@
 {
   "name": "world-sync-extras",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "author": "Lil Art",
-  "description": "Optional extras for the World Sync server content: entrances from rAthena's maps into the maps World Sync fills (Biosphere, Jormungandr, Chapter 2...), the official NPCs whose logic no server data has yet, and @npcplace to move NPCs. Needs Ragnarok Offline 1.6.6 or later (World Sync).",
+  "description": "World Sync's playable content and extras. The Jormungandr saga: Episode 20 (The Undying One) and Episode 21 (Age of Heroes) with full dialogue, the official quest steps, memorial dungeons, dailies and the Ice Castle and Lunaforma traders. The official NPCs whose logic no server data has yet, placed where the clients put them. Optional entrances into the World Sync maps, and @npcplace to move NPCs. Needs Ragnarok Offline 1.6.7 or later.",
   "requires": {
-    "app": ">=1.6.6",
+    "app": ">=1.6.7",
     "era": "renewal"
   },
   "settings": [
+    {
+      "key": "jormungandr",
+      "type": "boolean",
+      "default": true,
+      "label": "Jormungandr saga: Episodes 20 and 21",
+      "description": "Episode 20 starts from Horuru in the Ice Castle (Episode 19 done, level 200+); Episode 21 from Voglinde in the Ice Castle's west wing (level 230+). Includes the memorial dungeons, the dailies and the traders and enchanters. Turned off, its NPCs leave the Jormungandr maps entirely (their placeholders don't come back)."
+    },
+    {
+      "key": "skip_ep19",
+      "type": "boolean",
+      "default": false,
+      "label": "Jormungandr: start Episode 20 without Episode 19",
+      "description": "Horuru offers Episode 20 to any character of level 200 or more, even one that hasn't finished Issgard's Episode 19 story."
+    },
+    {
+      "key": "varmundt",
+      "type": "boolean",
+      "default": true,
+      "label": "Varmundt, Amatsu, Juno Library, Chapters 1-2",
+      "description": "The Fantasy Book \"Dungeon Food\" in Prontera's east library (100+), Varmundt's Chess Garden and Deep Abyss (250+), Seoyeon's Trial in Amatsu (70+), Chapter 1 from the small ash trees near Prontera and Payon (200+), Chapter 2 in Yongjirak and Ragsruth (225+), the Juno Library's VR books (200+) and the mansion's eroded wing (265+). Turned off, its NPCs leave those maps."
+    },
+    {
+      "key": "star_forest",
+      "type": "boolean",
+      "default": true,
+      "label": "Star Forest, Herosria and Ash Village",
+      "description": "The Star Emperor job change in the Meteor Forest (TaeKwon Masters, base 99 / job 50: Nalson in Payon), Sanctuary Herosria's Garden of Dawn (portals in the four castle realms) and Ash Village's shops, enchants and signposts at the edge of the World Tree. Turned off, their NPCs leave the maps (their placeholders don't come back)."
+    },
+    {
+      "key": "iro_systems",
+      "type": "boolean",
+      "default": true,
+      "label": "iRO services: the Devil in the Box, market catalogs, Eden's Dungeon Teleporter and town helpers",
+      "description": "The Clock Tower's Devil in the Box and her Unknown Basement dailies (level 200+), stall search in the Prontera and Payon markets, the Catalogue Magician, Eden's Dungeon Teleporter, Aperture and kitchen traders, Keiki's warps, the Refining Researcher, the Shadow Blacksmith, Madogear rental in Eclage and Mora, and Izlude's Increase AGI acolytes. Turned off, they leave."
+    },
     {
       "key": "entrances",
       "type": "boolean",
@@ -20,7 +55,7 @@
       "type": "boolean",
       "default": true,
       "label": "Place the official NPCs that have no logic yet",
-      "description": "740 NPCs from the official clients' maps and signboards. 44 of them already work (storage, guild storage, inns, repair, channel switches, the Varmundt elevator, Jormungandr's contact points, market guides); the rest greet you until their quests and services are written."
+      "description": "76 NPCs from the official clients' maps and signboards. 44 of them already work (storage, guild storage, inns, repair, channel switches, the Varmundt elevator, Jormungandr's contact points, market guides); the rest greet you until their quests and services are written."
     },
     {
       "key": "npc_mover",

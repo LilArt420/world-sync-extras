@@ -1,0 +1,517 @@
+//===== World Sync Extras: Star Forest block ================
+//= Sanctuary Herosria's siege (kRO "Siege HE").
+//===== Description: =========================================
+//= From kRO's Herosria guide, developer note and update page
+//= (2022): every Sunday from 20:00 to 22:00, guilds start in the
+//= four regions of the Garden of Dawn, through the Challenger's
+//= Monuments:
+//=   Silvarium (hero_out1), Lacusarium (hero_out2),
+//=   Bastitarium (hero_out3), Rabinarium (hero_out4).
+//= Each region's Jewel opens its arch to the 1st Hero's Gate
+//= (hero_ent1), where three Blocking Stones stand on each arm
+//= before the pattern leading to the 2nd Hero's Gate (hero_ent2).
+//= From there the four seasonal gardens (hero_in1-4) each keep a
+//= Garden Jewel; when one breaks, after a while its ruler
+//= appears, and killing the ruler restores the jewel. With all
+//= four jewels broken the 3rd Hero's Gate (hero_ent3) opens, and
+//= its north door leads to the Jewel Room (herosria). The guild
+//= that breaks the Jewel of Herosria holds the sanctuary.
+//= Moving stones shorten the way once their jewel is broken; the
+//= holders' flags take them to the Jewel Room.
+//=
+//= Server specifics: the official item and equipment limits and
+//= per-skill damage tables can't be reproduced; players' skills
+//= deal 40% to players here (skill_damage), on top of the usual
+//= GvG rules. The ruler's delay (3 minutes) and stats are
+//= estimates. GMs (level 60+) can start a 60-minute test battle
+//= at the Sanctuary Manager.
+//=
+//= Server variables: $wsf_hero_gid / $wsf_hero_gname$ (holder),
+//= $@wsf_hs_on, $@wsf_hs_until, $@wsf_hs_out[1-4] (region jewel
+//= broken), $@wsf_hs_st[1-4] (stones left), $@wsf_hs_gj[1-4]
+//= (garden jewel broken), $@wsf_hs_due[1-4] (ruler due),
+//= $@wsf_hs_rul[1-4] (ruler out).
+//============================================================
+
+// Region data (1-4): name, outer map, start, jewel, arch, gate arm.
+function	script	F_WSF_HsRegion	{
+	setarray .@n$, "", "Silvarium", "Lacusarium", "Bastitarium", "Rabinarium";
+	return .@n$[getarg(0)];
+}
+
+// The battle's controller.
+-	script	WSF_HeroSiege	-1,{
+	end;
+
+OnInit:
+	setarray .maps$, "hero_out1", "hero_out2", "hero_out3", "hero_out4", "hero_ent1", "hero_ent2", "hero_ent3",
+		"hero_in1", "hero_in2", "hero_in3", "hero_in4", "herosria";
+	// Region jewels, arches and the 1st Hero's Gate arms.
+	setarray .jx, 0, 155, 129, 125, 127;
+	setarray .jy, 0, 255, 202, 226, 247;
+	// Blocking Stones: three per arm (east, west, south, north).
+	setarray .sx, 0, 232,206,180, 48,74,100, 142,142,142, 142,142,142;
+	setarray .sy, 0, 140,140,140, 140,140,140, 48,74,100, 232,206,180;
+	// Walls on the arm's opening into the central square.
+	setarray .wx, 0, 161, 118, 137, 137;
+	setarray .wy, 0, 137, 137, 118, 160;
+	setarray .wd, 0, 0, 0, 6, 6;
+	// Garden rulers (HEROS_DRAGON_1-4) and their spots.
+	setarray .rx, 0, 33, 33, 184, 184;
+	setarray .ry, 0, 187, 187, 184, 184;
+	setarray .rn$, "", "Floral Pegasus", "Coral Marine", "Maple Tree", "Monarch Penguin";
+	setarray .gn$, "", "Spring", "Summer", "Autumn", "Winter";
+	// Started again after a restart inside the Sunday window.
+	if (gettime(DT_DAYOFWEEK) == SUNDAY && gettime(DT_HOUR) >= 20 && gettime(DT_HOUR) < 22)
+		donpcevent strnpcinfo(3) + "::OnSunStart";
+	end;
+
+OnSun2000:
+OnSunStart:
+	$@wsf_hs_until = gettimetick(2) + (22 - gettime(DT_HOUR)) * 3600 - gettime(DT_MINUTE) * 60 - gettime(DT_SECOND);
+	donpcevent strnpcinfo(3) + "::OnBegin";
+	end;
+
+// GM test: 60 minutes from now.
+OnGMStart:
+	$@wsf_hs_until = gettimetick(2) + 3600;
+	donpcevent strnpcinfo(3) + "::OnBegin";
+	end;
+
+OnBegin:
+	if ($@wsf_hs_on)
+		end;
+	$@wsf_hs_on = 1;
+	for (.@i = 0; .@i < getarraysize(.maps$); .@i++)
+		setmapflag .maps$[.@i], MF_GVG;
+	callsub S_Reset;
+	initnpctimer;
+	if ($wsf_hero_gid)
+		announce "Sanctuary Herosria: Rigel's battle begins! The guild [" + $wsf_hero_gname$ + "] holds the sanctuary. Challengers, to the Garden of Dawn!", BC_ALL, 0x66CCFF;
+	else
+		announce "Sanctuary Herosria: Rigel's battle begins! No guild holds the sanctuary yet. Challengers, to the Garden of Dawn!", BC_ALL, 0x66CCFF;
+	end;
+
+OnSun2200:
+OnGMEnd:
+OnEnd:
+	if (!$@wsf_hs_on)
+		end;
+	$@wsf_hs_on = 0;
+	stopnpctimer;
+	for (.@i = 0; .@i < getarraysize(.maps$); .@i++) {
+		killmonsterall .maps$[.@i];
+		removemapflag .maps$[.@i], MF_GVG;
+		mapwarp .maps$[.@i], "hero_lb", 136, 143;
+	}
+	for (.@r = 1; .@r <= 4; .@r++)
+		callsub S_DelWall, .@r;
+	if ($wsf_hero_gid)
+		announce "Sanctuary Herosria: Rigel's battle is over. The guild [" + $wsf_hero_gname$ + "] holds the sanctuary until next Sunday.", BC_ALL, 0x66CCFF;
+	else
+		announce "Sanctuary Herosria: Rigel's battle is over. No guild took the sanctuary.", BC_ALL, 0x66CCFF;
+	end;
+
+OnTimer5000:
+	if (gettimetick(2) >= $@wsf_hs_until) {
+		donpcevent strnpcinfo(3) + "::OnEnd";
+		end;
+	}
+	for (.@g = 1; .@g <= 4; .@g++) {
+		if ($@wsf_hs_gj[.@g] && !$@wsf_hs_rul[.@g] && gettimetick(2) >= $@wsf_hs_due[.@g]) {
+			$@wsf_hs_rul[.@g] = 1;
+			monster "hero_in" + .@g, .rx[.@g], .ry[.@g], .rn$[.@g], 21854 + .@g, 1, strnpcinfo(3) + "::OnRuler" + .@g;
+			mapannounce "hero_in" + .@g, "The " + .gn$[.@g] + " Garden's ruler, the " + .rn$[.@g] + ", has appeared! Defeat it and the Garden Jewel returns.", BC_MAP, 0xFF9966;
+		}
+	}
+	initnpctimer;
+	end;
+
+// Everything back in place: jewels, stones, walls, rulers gone.
+S_Reset:
+	for (.@i = 0; .@i < getarraysize(.maps$); .@i++)
+		killmonsterall .maps$[.@i];
+	for (.@r = 1; .@r <= 4; .@r++) {
+		$@wsf_hs_out[.@r] = 0;
+		$@wsf_hs_gj[.@r] = 0;
+		$@wsf_hs_rul[.@r] = 0;
+		$@wsf_hs_due[.@r] = 0;
+		$@wsf_hs_st[.@r] = 3;
+		monster "hero_out" + .@r, .jx[.@r], .jy[.@r], "Jewel of " + callfunc("F_WSF_HsRegion", .@r), 21887, 1, strnpcinfo(3) + "::OnOuter" + .@r;
+		for (.@k = 1; .@k <= 3; .@k++) {
+			.@s = (.@r - 1) * 3 + .@k;
+			monster "hero_ent1", .sx[.@s], .sy[.@s], "Blocking Stone", 21887, 1, strnpcinfo(3) + "::OnStone" + .@r;
+		}
+		callsub S_DelWall, .@r;
+		setwall "hero_ent1", .wx[.@r], .wy[.@r], 6, .wd[.@r], 0, "wsf_hs_w" + .@r;
+		$@wsf_hs_wall[.@r] = 1;
+		monster "hero_in" + .@r, 108, 108, .gn$[.@r] + " Jewel", 21865 + .@r, 1, strnpcinfo(3) + "::OnGarden" + .@r;
+	}
+	monster "herosria", 166, 185, "Jewel of Herosria", 21887, 1, strnpcinfo(3) + "::OnFinal";
+	return;
+
+// Removes an arm's wall if it stands.
+S_DelWall:
+	if ($@wsf_hs_wall[getarg(0)]) {
+		delwall "wsf_hs_w" + getarg(0);
+		$@wsf_hs_wall[getarg(0)] = 0;
+	}
+	return;
+
+OnOuter1:	callsub S_Outer, 1;
+OnOuter2:	callsub S_Outer, 2;
+OnOuter3:	callsub S_Outer, 3;
+OnOuter4:	callsub S_Outer, 4;
+S_Outer:
+	$@wsf_hs_out[getarg(0)] = 1;
+	mapannounce "hero_out" + getarg(0), "The Jewel of " + callfunc("F_WSF_HsRegion", getarg(0)) + " is broken! The arch to the 1st Hero's Gate is open.", BC_MAP, 0xFF9966;
+	end;
+
+OnStone1:	callsub S_Stone, 1;
+OnStone2:	callsub S_Stone, 2;
+OnStone3:	callsub S_Stone, 3;
+OnStone4:	callsub S_Stone, 4;
+S_Stone:
+	.@r = getarg(0);
+	$@wsf_hs_st[.@r] = max(0, $@wsf_hs_st[.@r] - 1);
+	if ($@wsf_hs_st[.@r] > 0) {
+		mapannounce "hero_ent1", "A Blocking Stone falls. " + $@wsf_hs_st[.@r] + " left on that path.", BC_MAP, 0xFF9966;
+		end;
+	}
+	callsub S_DelWall, .@r;
+	mapannounce "hero_ent1", "The last Blocking Stone on the " + callfunc("F_WSF_HsRegion", .@r) + " path falls! The way to the central pattern is open.", BC_MAP, 0xFF9966;
+	end;
+
+OnGarden1:	callsub S_Garden, 1;
+OnGarden2:	callsub S_Garden, 2;
+OnGarden3:	callsub S_Garden, 3;
+OnGarden4:	callsub S_Garden, 4;
+S_Garden:
+	.@g = getarg(0);
+	$@wsf_hs_gj[.@g] = 1;
+	$@wsf_hs_due[.@g] = gettimetick(2) + 180;
+	.@left = 0;
+	for (.@i = 1; .@i <= 4; .@i++)
+		if (!$@wsf_hs_gj[.@i])
+			.@left++;
+	for (.@i = 0; .@i < getarraysize(.maps$); .@i++) {
+		if (.@left)
+			mapannounce .maps$[.@i], "The " + .gn$[.@g] + " Jewel is broken! " + .@left + " garden jewel(s) still stand.", BC_MAP, 0xFF9966;
+		else
+			mapannounce .maps$[.@i], "The " + .gn$[.@g] + " Jewel is broken! All four garden jewels are down: the 3rd Hero's Gate is open!", BC_MAP, 0xFF9966;
+	}
+	end;
+
+OnRuler1:	callsub S_Ruler, 1;
+OnRuler2:	callsub S_Ruler, 2;
+OnRuler3:	callsub S_Ruler, 3;
+OnRuler4:	callsub S_Ruler, 4;
+S_Ruler:
+	.@g = getarg(0);
+	if (!$@wsf_hs_on)
+		end;
+	$@wsf_hs_rul[.@g] = 0;
+	$@wsf_hs_gj[.@g] = 0;
+	monster "hero_in" + .@g, 108, 108, .gn$[.@g] + " Jewel", 21865 + .@g, 1, strnpcinfo(3) + "::OnGarden" + .@g;
+	for (.@i = 0; .@i < getarraysize(.maps$); .@i++)
+		mapannounce .maps$[.@i], "The " + .rn$[.@g] + " has fallen, and the " + .gn$[.@g] + " Jewel shines again.", BC_MAP, 0xFF9966;
+	end;
+
+OnFinal:
+	if (!$@wsf_hs_on)
+		end;
+	.@gid = 0;
+	if (playerattached())
+		.@gid = getcharid(2);
+	if (!.@gid) {
+		monster "herosria", 166, 185, "Jewel of Herosria", 21887, 1, strnpcinfo(3) + "::OnFinal";
+		mapannounce "herosria", "The Jewel of Herosria answers only to a guild. It shines again.", BC_MAP, 0xFF9966;
+		end;
+	}
+	$wsf_hero_gid = .@gid;
+	$wsf_hero_gname$ = getguildname(.@gid);
+	announce "Sanctuary Herosria: the guild [" + $wsf_hero_gname$ + "] has broken the Jewel of Herosria and holds the sanctuary!", BC_ALL, 0xFFCC00;
+	// Everyone else back to their save point; the sanctuary resets for the
+	// rest of the battle, with the new holders inside.
+	for (.@i = 0; .@i < getarraysize(.maps$); .@i++)
+		maprespawnguildid .maps$[.@i], .@gid, 2;
+	callsub S_Reset;
+	end;
+}
+
+// ------------------------------------------------------------
+// Moving stones, arches and portals of the battlefield
+// ------------------------------------------------------------
+
+// Shown when the battle isn't on: the only way is back.
+function	script	F_WSF_HsClosed	{
+	mes "^4d4dffThe way only opens while Rigel's battle is fought (Sundays, 20:00 to 22:00).^000000";
+	next;
+	if (select("Return to the Garden of Dawn:Stay") == 2)
+		close;
+	close2;
+	warp "hero_lb", 136, 143;
+	end;
+}
+
+// Region starts: the moving stone where each region's challengers arrive.
+// callfunc "F_WSF_HsStart", <region>;
+function	script	F_WSF_HsStart	{
+	.@r = getarg(0);
+	setarray .@ex, 0, 247, 32, 126, 126;
+	setarray .@ey, 0, 153, 153, 32, 247;
+	mes "[Moving Stone]";
+	mes "A moving stone of " + callfunc("F_WSF_HsRegion", .@r) + ".";
+	if (!$@wsf_hs_on) {
+		next;
+		callfunc "F_WSF_HsClosed";
+		end;
+	}
+	if (!$@wsf_hs_out[.@r]) {
+		mes "It stays dark while the Jewel of " + callfunc("F_WSF_HsRegion", .@r) + " stands.";
+		next;
+		if (select("Return to the Garden of Dawn:Stay") == 2)
+			close;
+		close2;
+		warp "hero_lb", 136, 143;
+		end;
+	}
+	mes "It glows: the region's jewel is broken.";
+	next;
+	switch (select("To the 1st Hero's Gate:Return to the Garden of Dawn:Stay")) {
+	case 1:
+		close2;
+		warp "hero_ent1", .@ex[.@r], .@ey[.@r];
+		end;
+	case 2:
+		close2;
+		warp "hero_lb", 136, 143;
+		end;
+	}
+	close;
+}
+hero_out1,176,38,4	script	Moving Stone#wsf_o1	10248,{ callfunc "F_WSF_HsStart", 1; end; }
+hero_out2,248,25,4	script	Moving Stone#wsf_o2	10248,{ callfunc "F_WSF_HsStart", 2; end; }
+hero_out3,252,27,4	script	Moving Stone#wsf_o3	10248,{ callfunc "F_WSF_HsStart", 3; end; }
+hero_out4,14,26,4	script	Moving Stone#wsf_o4	10248,{ callfunc "F_WSF_HsStart", 4; end; }
+
+// The arch behind each region's jewel.
+// callfunc "F_WSF_HsArch", <region>;
+function	script	F_WSF_HsArch	{
+	.@r = getarg(0);
+	setarray .@ex, 0, 247, 32, 126, 126;
+	setarray .@ey, 0, 153, 153, 32, 247;
+	if (!$@wsf_hs_on) {
+		mes "[Hero's Arch]";
+		callfunc "F_WSF_HsClosed";
+		end;
+	}
+	if (!$@wsf_hs_out[.@r]) {
+		mes "[Hero's Arch]";
+		mes "The arch is sealed. Its light comes from the Jewel of " + callfunc("F_WSF_HsRegion", .@r) + ": break the jewel to open it.";
+		close;
+	}
+	warp "hero_ent1", .@ex[.@r], .@ey[.@r];
+	end;
+}
+hero_out1,156,322,0	script	Hero's Arch#wsf_a1	45,1,1,{ callfunc "F_WSF_HsArch", 1; end; }
+hero_out2,129,213,0	script	Hero's Arch#wsf_a2	45,1,1,{ callfunc "F_WSF_HsArch", 2; end; }
+hero_out3,129,237,0	script	Hero's Arch#wsf_a3	45,1,1,{ callfunc "F_WSF_HsArch", 3; end; }
+hero_out4,127,257,0	script	Hero's Arch#wsf_a4	45,1,1,{ callfunc "F_WSF_HsArch", 4; end; }
+
+// The 1st Hero's Gate: the arm-tip moving stones lead back to the regions,
+// the central pattern to the 2nd Hero's Gate.
+// callfunc "F_WSF_HsTip", <region>;
+function	script	F_WSF_HsTip	{
+	.@r = getarg(0);
+	setarray .@sx, 0, 176, 248, 250, 16;
+	setarray .@sy, 0, 36, 23, 27, 26;
+	mes "[Moving Stone]";
+	mes "This stone leads back to " + callfunc("F_WSF_HsRegion", .@r) + ".";
+	next;
+	switch (select("Back to " + callfunc("F_WSF_HsRegion", .@r) + ":Return to the Garden of Dawn:Stay")) {
+	case 1:
+		close2;
+		warp "hero_out" + .@r, .@sx[.@r], .@sy[.@r];
+		end;
+	case 2:
+		close2;
+		warp "hero_lb", 136, 143;
+		end;
+	}
+	close;
+}
+hero_ent1,249,153,4	script	Moving Stone#wsf_e1	10248,{ callfunc "F_WSF_HsTip", 1; end; }
+hero_ent1,30,153,4	script	Moving Stone#wsf_e2	10248,{ callfunc "F_WSF_HsTip", 2; end; }
+hero_ent1,126,30,4	script	Moving Stone#wsf_e3	10248,{ callfunc "F_WSF_HsTip", 3; end; }
+hero_ent1,126,249,4	script	Moving Stone#wsf_e4	10248,{ callfunc "F_WSF_HsTip", 4; end; }
+
+hero_ent1,140,140,0	script	Hero's Pattern#wsf	45,1,1,{
+	if (!$@wsf_hs_on) {
+		mes "[Hero's Pattern]";
+		callfunc "F_WSF_HsClosed";
+		end;
+	}
+	warp "hero_ent2", 90, 20;
+	end;
+}
+
+// The 2nd Hero's Gate: the four gardens and the 3rd Hero's Gate.
+// callfunc "F_WSF_HsGardenIn", <garden>;
+function	script	F_WSF_HsGardenIn	{
+	setarray .@ax, 0, 194, 194, 192, 194;
+	setarray .@ay, 0, 22, 22, 20, 22;
+	if (!$@wsf_hs_on) {
+		mes "[Garden Gate]";
+		callfunc "F_WSF_HsClosed";
+		end;
+	}
+	warp "hero_in" + getarg(0), .@ax[getarg(0)], .@ay[getarg(0)];
+	end;
+}
+hero_ent2,22,105,0	script	Spring Garden#wsf_p1	45,1,1,{ callfunc "F_WSF_HsGardenIn", 1; end; }
+hero_ent2,48,26,0	script	Summer Garden#wsf_p2	45,1,1,{ callfunc "F_WSF_HsGardenIn", 2; end; }
+hero_ent2,131,26,0	script	Autumn Garden#wsf_p3	45,1,1,{ callfunc "F_WSF_HsGardenIn", 3; end; }
+hero_ent2,159,105,0	script	Winter Garden#wsf_p4	45,1,1,{ callfunc "F_WSF_HsGardenIn", 4; end; }
+
+hero_ent2,90,150,0	script	3rd Hero's Gate#wsf	45,1,1,{
+	if (!$@wsf_hs_on) {
+		mes "[3rd Hero's Gate]";
+		callfunc "F_WSF_HsClosed";
+		end;
+	}
+	setarray .@gn$, "", "Spring", "Summer", "Autumn", "Winter";
+	.@up$ = "";
+	for (.@g = 1; .@g <= 4; .@g++)
+		if (!$@wsf_hs_gj[.@g])
+			.@up$ += (.@up$ == "" ? "" : ", ") + .@gn$[.@g];
+	if (.@up$ != "") {
+		mes "[3rd Hero's Gate]";
+		mes "The gate won't open while a garden jewel stands.";
+		mes "Still standing: ^FF0000" + .@up$ + "^000000.";
+		close;
+	}
+	warp "hero_ent3", 70, 20;
+	end;
+}
+
+// The gardens' way back to the 2nd Hero's Gate.
+// callfunc "F_WSF_HsGardenOut", <garden>;
+function	script	F_WSF_HsGardenOut	{
+	setarray .@px, 0, 24, 50, 129, 157;
+	setarray .@py, 0, 103, 28, 28, 103;
+	if (!$@wsf_hs_on) {
+		mes "[Garden Gate]";
+		callfunc "F_WSF_HsClosed";
+		end;
+	}
+	warp "hero_ent2", .@px[getarg(0)], .@py[getarg(0)];
+	end;
+}
+hero_in1,198,16,0	script	Garden Gate#wsf_x1	45,1,1,{ callfunc "F_WSF_HsGardenOut", 1; end; }
+hero_in2,198,16,0	script	Garden Gate#wsf_x2	45,1,1,{ callfunc "F_WSF_HsGardenOut", 2; end; }
+hero_in3,198,16,0	script	Garden Gate#wsf_x3	45,1,1,{ callfunc "F_WSF_HsGardenOut", 3; end; }
+hero_in4,198,16,0	script	Garden Gate#wsf_x4	45,1,1,{ callfunc "F_WSF_HsGardenOut", 4; end; }
+
+// The 3rd Hero's Gate: the north door to the Jewel Room.
+hero_ent3,70,150,0	script	Jewel Room Door#wsf	45,1,1,{
+	if (!$@wsf_hs_on) {
+		mes "[Jewel Room Door]";
+		callfunc "F_WSF_HsClosed";
+		end;
+	}
+	warp "herosria", 39, 189;
+	end;
+}
+
+// The Jewel Room's moving stone, south of the jewel.
+herosria,166,125,4	script	Moving Stone#wsf_h	10248,{
+	mes "[Moving Stone]";
+	mes "A moving stone in the Jewel Room.";
+	next;
+	switch (select("To the 3rd Hero's Gate:Return to the Garden of Dawn:Stay")) {
+	case 1:
+		close2;
+		warp "hero_ent3", 70, 20;
+		end;
+	case 2:
+		close2;
+		warp "hero_lb", 136, 143;
+		end;
+	}
+	close;
+}
+
+// The holders' flags: the guild that holds Herosria goes straight to the
+// Jewel Room's five areas.
+function	script	F_WSF_HsFlag	{
+	mes "[Flag of Sanctuary Herosria]";
+	if ($wsf_hero_gid)
+		mes "The banner of the guild [" + $wsf_hero_gname$ + "] flies here.";
+	else
+		mes "The banner is blank: no guild holds the sanctuary.";
+	if (!$wsf_hero_gid || getcharid(2) != $wsf_hero_gid)
+		close;
+	next;
+	setarray .@x, 166, 60, 250, 60, 250;
+	setarray .@y, 190, 240, 240, 80, 80;
+	.@c = select("Jewel Room: center:Jewel Room: northwest:Jewel Room: northeast:Jewel Room: southwest:Jewel Room: southeast:Stay") - 1;
+	if (.@c == 5)
+		close;
+	close2;
+	warp "herosria", .@x[.@c], .@y[.@c];
+	end;
+}
+hero_ent1,146,146,4	script	Flag of Herosria#wsf_f1	722,{ callfunc "F_WSF_HsFlag"; end; }
+hero_ent2,96,90,4	script	Flag of Herosria#wsf_f2	722,{ callfunc "F_WSF_HsFlag"; end; }
+hero_ent3,76,22,4	script	Flag of Herosria#wsf_f3	722,{ callfunc "F_WSF_HsFlag"; end; }
+
+// Rules of the battlefield.
+hero_out1	mapflag	nowarpto
+hero_out2	mapflag	nowarpto
+hero_out3	mapflag	nowarpto
+hero_out4	mapflag	nowarpto
+hero_ent1	mapflag	nowarpto
+hero_ent2	mapflag	nowarpto
+hero_ent3	mapflag	nowarpto
+hero_in1	mapflag	nowarpto
+hero_in2	mapflag	nowarpto
+hero_in3	mapflag	nowarpto
+hero_in4	mapflag	nowarpto
+herosria	mapflag	nowarpto
+hero_out1	mapflag	nomemo
+hero_out2	mapflag	nomemo
+hero_out3	mapflag	nomemo
+hero_out4	mapflag	nomemo
+hero_ent1	mapflag	nomemo
+hero_ent2	mapflag	nomemo
+hero_ent3	mapflag	nomemo
+herosria	mapflag	nomemo
+hero_out1	mapflag	noteleport
+hero_out2	mapflag	noteleport
+hero_out3	mapflag	noteleport
+hero_out4	mapflag	noteleport
+hero_ent1	mapflag	noteleport
+hero_ent2	mapflag	noteleport
+hero_ent3	mapflag	noteleport
+herosria	mapflag	noteleport
+hero_out1	mapflag	nosave	SavePoint
+hero_out2	mapflag	nosave	SavePoint
+hero_out3	mapflag	nosave	SavePoint
+hero_out4	mapflag	nosave	SavePoint
+hero_ent1	mapflag	nosave	SavePoint
+hero_ent2	mapflag	nosave	SavePoint
+hero_ent3	mapflag	nosave	SavePoint
+herosria	mapflag	nosave	SavePoint
+hero_out1	mapflag	skill_damage	all,BL_PC,-60
+hero_out2	mapflag	skill_damage	all,BL_PC,-60
+hero_out3	mapflag	skill_damage	all,BL_PC,-60
+hero_out4	mapflag	skill_damage	all,BL_PC,-60
+hero_ent1	mapflag	skill_damage	all,BL_PC,-60
+hero_ent2	mapflag	skill_damage	all,BL_PC,-60
+hero_ent3	mapflag	skill_damage	all,BL_PC,-60
+hero_in1	mapflag	skill_damage	all,BL_PC,-60
+hero_in2	mapflag	skill_damage	all,BL_PC,-60
+hero_in3	mapflag	skill_damage	all,BL_PC,-60
+hero_in4	mapflag	skill_damage	all,BL_PC,-60
+herosria	mapflag	skill_damage	all,BL_PC,-60

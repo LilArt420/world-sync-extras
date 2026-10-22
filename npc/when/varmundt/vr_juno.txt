@@ -1,0 +1,717 @@
+//===== World Sync Extras: Varmundt block ====================
+//= The Juno Library annex and its VR books ("VR Juno").
+//===== Description: =========================================
+//= From kRO's update notes "Fantasy Series - Juno Library"
+//= (ro.gnjoy.com updates 308 and 312, 2026): combat-learning
+//= Virtual Record books in the annex of the Juno Library, read
+//= with Library Passes, rewarded with Orbs of Knowledge.
+//= - Library Pass Guide: passes in sets of 5, once a day; a pass
+//=   gives an hour of reading time in any book.
+//= - Issgard Crafting Contest (vr_zrr01-03): inventions judged by
+//=   Vellgunde, dishes judged by Zoryara, made with the AI
+//=   crafting and cooking simulators from materials of the VR
+//=   monsters.
+//= - How to Survive the Demon King's Castle (vr_hero00-03).
+//= - Lazrigs Mock Siege (vr_prtg, vr_prtg03) and the Guild
+//=   Underground Dungeon (vr_prtd03), by Igrid.
+//= The client the app ships predates these books: it has their
+//= maps, NPCs and monsters but not their items or quest text. So
+//= Orbs of Knowledge are kept as points (wsv_orb) and the books'
+//= duties use this block's own quests (64001-64026); the Orb
+//= exchanger offers refining materials instead of the official
+//= VR gear, which the client can't show.
+//=
+//= Variables: wsv_vrpass (passes), wsv_vrday (day the last set
+//= was bought), wsv_vrtime (reading time ends), wsv_orb (orbs),
+//= wsv_vrc (contest, rescue and dungeon bits).
+//============================================================
+
+// Into the annex from the Juno Library's lobby.
+yuno_in04,36,60,4	script	Library Annex Guide#wsv	90,{
+	mes "[Library Annex Guide]";
+	mes "Welcome to the Juno Library. The ^0000FFannex^000000 is through here: the combat-learning collection of the Fantasy Series.";
+	mes "Schweicherbil University's professors wrote these books so students could train in a world that can't really hurt them. Mostly.";
+	next;
+	if (select("Go to the annex.:Never mind.") == 2)
+		close;
+	close2;
+	warp "yuno_lib",49,27;
+	end;
+}
+
+yuno_lib,54,66,4	script	Library Pass Guide#wsv	90,{
+	mes "[Library Pass Guide]";
+	mes "The annex's books are read with ^0000FFJuno Library Passes^000000. Submit a pass at a book and you can read freely for an hour.";
+	mes "Passes come in sets of five, and I can sell you one set a day.";
+	next;
+	mes "[Library Pass Guide]";
+	mes "You have ^0000FF" + wsv_vrpass + "^000000 pass(es).";
+	if (wsv_vrtime > gettimetick(2))
+		mes "Your current reading time runs for another " + ((wsv_vrtime - gettimetick(2)) / 60) + " minute(s).";
+	next;
+	if (select("Buy a set of 5 passes (50,000 zeny).:Never mind.") == 2)
+		close;
+	.@today = gettime(DT_YEAR) * 1000 + gettime(DT_YEARDAY);
+	if (wsv_vrday == .@today) {
+		mes "[Library Pass Guide]";
+		mes "You've already bought today's set. Come back tomorrow.";
+		close;
+	}
+	if (Zeny < 50000) {
+		mes "[Library Pass Guide]";
+		mes "That's 50,000 zeny, I'm afraid.";
+		close;
+	}
+	Zeny -= 50000;
+	wsv_vrpass += 5;
+	wsv_vrday = .@today;
+	mes "[Library Pass Guide]";
+	mes "Five passes. Enjoy your reading, and please don't fight in the aisles.";
+	close;
+}
+
+// Opens a VR book: callfunc "F_WSV_VRBook", "<title>", <level>, "<map>", <x>, <y>;
+function	script	F_WSV_VRBook	{
+	mes "[" + getarg(0) + "]";
+	mes "A Fantasy Series book of the combat-learning collection. Recommended for base level " + getarg(1) + " or more.";
+	if (BaseLevel < getarg(1)) {
+		mes "^4d4dffThe pages won't open for you yet (base level " + getarg(1) + ").^000000";
+		close;
+	}
+	next;
+	if (wsv_vrtime > gettimetick(2)) {
+		mes "Your reading authentication is still valid for " + ((wsv_vrtime - gettimetick(2)) / 60) + " minute(s).";
+		next;
+		if (select("Open the book.:Not now.") == 2)
+			close;
+	} else {
+		if (wsv_vrpass < 1) {
+			mes "^4d4dffYou need a Juno Library Pass. The Library Pass Guide sells them.^000000";
+			close;
+		}
+		mes "Submit a Library Pass for an hour of reading? You have " + wsv_vrpass + ".";
+		next;
+		if (select("Submit a pass.:Not now.") == 2)
+			close;
+		wsv_vrpass--;
+		wsv_vrtime = gettimetick(2) + 3600;
+	}
+	close2;
+	specialeffect2 EF_TELEPORTATION2;
+	warp getarg(2), getarg(3), getarg(4);
+	end;
+}
+
+yuno_lib,61,84,4	script	Issgard Crafting Contest#wsv	10373,{
+	callfunc "F_WSV_VRBook", "Issgard Crafting Contest", 200, "vr_zrr01", 43, 129;
+	end;
+}
+yuno_lib,56,84,4	script	From the Demon King's Castle...#wsv	10372,{
+	callfunc "F_WSV_VRBook", "How to Survive the Demon King's Castle", 200, "vr_hero00", 45, 109;
+	end;
+}
+yuno_lib,50,84,4	script	Lazrigs Mock Siege#wsv	10374,{
+	callfunc "F_WSV_VRBook", "Lazrigs Mock Siege", 250, "vr_prtg", 83, 12;
+	end;
+}
+
+// The reading time runs out: back to the annex.
+-	script	WSV_VRTime	-1,{
+	end;
+OnPCLoadMapEvent:
+	.@m$ = strcharinfo(3);
+	if (compare(.@m$, "vr_zrr") || compare(.@m$, "vr_hero") || compare(.@m$, "vr_prt")) {
+		if (wsv_vrtime < gettimetick(2)) {
+			dispbottom "Your reading time is over. The book closes, and you're back in the annex.";
+			warp "yuno_lib",54,62;
+		}
+	}
+	end;
+}
+vr_zrr01	mapflag	loadevent
+vr_zrr02	mapflag	loadevent
+vr_zrr03	mapflag	loadevent
+vr_hero00	mapflag	loadevent
+vr_hero01	mapflag	loadevent
+vr_hero02	mapflag	loadevent
+vr_hero03	mapflag	loadevent
+vr_prtg	mapflag	loadevent
+vr_prtg03	mapflag	loadevent
+vr_prtd03	mapflag	loadevent
+
+yuno_lib,46,66,4	script	Orb of Knowledge Exchanger#wsv	59,{
+	mes "[Orb of Knowledge Exchanger]";
+	mes "Students who complete a book's duties well receive ^0000FFOrbs of Knowledge^000000. Bring them here and trade them for things that help your growth.";
+	mes "You have ^0000FF" + wsv_orb + "^000000 Orb(s) of Knowledge.";
+	next;
+	// item, orbs
+	setarray .@it, 25731, 25729, 1000322, 6635, 12208;
+	setarray .@co, 15, 15, 5, 40, 3;
+	for (.@i = 0; .@i < getarraysize(.@it); .@i++)
+		.@menu$ += getitemname(.@it[.@i]) + " (" + .@co[.@i] + " orbs):";
+	.@s = select(.@menu$ + "Never mind.") - 1;
+	if (.@s >= getarraysize(.@it))
+		close;
+	mes "[Orb of Knowledge Exchanger]";
+	mes "How many ^0000FF" + getitemname(.@it[.@s]) + "^000000?";
+	next;
+	input .@n, 0, 100;
+	if (.@n < 1)
+		close;
+	if (wsv_orb < .@n * .@co[.@s]) {
+		mes "[Orb of Knowledge Exchanger]";
+		mes "You don't have enough orbs.";
+		close;
+	}
+	if (!checkweight(.@it[.@s], .@n)) {
+		mes "[Orb of Knowledge Exchanger]";
+		mes "You can't carry that much.";
+		close;
+	}
+	wsv_orb -= .@n * .@co[.@s];
+	getitem .@it[.@s], .@n;
+	mes "[Orb of Knowledge Exchanger]";
+	mes "Here you are. Keep studying!";
+	close;
+}
+
+function	script	F_WSV_Orb	{
+	wsv_orb += getarg(0);
+	dispbottom "You received " + getarg(0) + " Orb(s) of Knowledge (" + wsv_orb + " in total).";
+	return;
+}
+
+// ------------------------------------------------------------
+// Issgard Crafting Contest (vr_zrr01)
+// Quests: 64001 invention materials (treasure storage, vr_zrr03),
+// 64002 dish materials (food storage, vr_zrr02), 64003/64004 the
+// day's invention/dish judged (cooldowns). wsv_vrc bits: 1 an
+// invention made, 2 a dish made; the result in wsv_vrc >> 4
+// (invention) and >> 8 (dish), 1 fail .. 4 masterpiece.
+// ------------------------------------------------------------
+vr_zrr01,50,134,4	script	VR Voglinde#wsv	10467,{
+	cutin "ep19_voglinde01.png",2;
+	mes "[VR Voglinde]";
+	mes "Welcome to the first ^0000FFVR Issgard Crafting Contest^000000! Organized by the Issgard Development Committee, with Juno's Schweicherbil University.";
+	next;
+	mes "[VR Voglinde]";
+	mes "There are two sections. ^0000FFInventions^000000, judged by Vellgunde, and ^0000FFcooking^000000, judged by Zoryara.";
+	mes "Only materials you get yourself from the VR monsters count, and only works made with the AI simulators are accepted.";
+	next;
+	mes "[VR Voglinde]";
+	mes "Invention materials come from the ^0000FFFrozen Treasure Storage^000000, cooking ingredients from the ^0000FFFrozen Food Storage^000000. The Warp Elevator next to me goes to both.";
+	mes "One entry per section per day. Good luck!";
+	close3;
+}
+
+vr_zrr01,44,84,4	script	VR Vellgunde#wsv	10468,{
+	cutin "ep19_vellgunde01.png",2;
+	callfunc "F_WSV_VRJudge", "VR Vellgunde", 1, 4, 64001, 64003, "vr_zrr03", "invention";
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 200 && isbegin_quest(64001) == 0 && (wsv_vrc & 1) == 0 && (isbegin_quest(64003) == 0 || checkquest(64003, PLAYTIME) == 2)" );
+	end;
+}
+vr_zrr01,94,142,4	script	VR Zoryara#wsv	10452,{
+	cutin "vr_zoryara01.png",2;
+	callfunc "F_WSV_VRJudge", "VR Zoryara", 2, 8, 64002, 64004, "vr_zrr02", "dish";
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 200 && isbegin_quest(64002) == 0 && (wsv_vrc & 2) == 0 && (isbegin_quest(64004) == 0 || checkquest(64004, PLAYTIME) == 2)" );
+	end;
+}
+
+// callfunc "F_WSV_VRJudge", "<name>", <made bit>, <result shift>,
+//          <materials quest>, <judged quest>, "<storage map>", "<kind>";
+function	script	F_WSV_VRJudge	{
+	.@n$ = "[" + getarg(0) + "]";
+	.@b = getarg(1);
+	.@sh = getarg(2);
+	.@q = getarg(3);
+	.@w = getarg(4);
+	if (wsv_vrc & .@b) {
+		.@r = (wsv_vrc >> .@sh) & 15;
+		mes .@n$;
+		setarray .@verdict$, "", "...This doesn't work. At all. But you tried, and the rules say I must give you something.", "It works. It's not remarkable, but it works. Issgard could use this.", "Oh, this is good. Practical, solid, clever. Well done!", "......This is a masterpiece. I want to take it home. Is that allowed? It's allowed.";
+		setarray .@orbs, 0, 1, 3, 6, 10;
+		mes .@verdict$[.@r];
+		wsv_vrc = wsv_vrc &~ (.@b | (15 << .@sh));
+		if (isbegin_quest(.@w))
+			erasequest .@w;
+		setquest .@w;
+		callfunc "F_WSV_Orb", .@orbs[.@r];
+		getexp2 15000000 * .@r, 7000000 * .@r;
+		close3;
+	}
+	if (isbegin_quest(.@q) == 1) {
+		mes .@n$;
+		if (checkquest(.@q, HUNTING) == 2)
+			mes "You have your materials. Now make your " + getarg(6) + " at the simulator, and bring it to me.";
+		else
+			mes "Gather the materials first: defeat 30 monsters in the " + (getarg(5) == "vr_zrr03" ? "Frozen Treasure Storage" : "Frozen Food Storage") + ".";
+		close3;
+	}
+	if (callfunc("F_WSV_Waiting", .@w)) {
+		mes .@n$;
+		mes "One entry a day. I'll judge your next " + getarg(6) + " tomorrow.";
+		close3;
+	}
+	mes .@n$;
+	if (.@b == 1) {
+		mes "The criterion is only one: is it an invention Issgard needs right now?";
+		mes "Free and original ideas, please.";
+	} else {
+		mes "I want Issgard's own taste, made with Issgard's ingredients!";
+	}
+	next;
+	if (select("Enter the contest.:Not today.") == 2)
+		close3;
+	if (isbegin_quest(.@q) == 2)
+		erasequest .@q;
+	setquest .@q;
+	questinfo_refresh;
+	mes .@n$;
+	mes "Then go and get your materials: 30 monsters in the " + (getarg(5) == "vr_zrr03" ? "Frozen Treasure Storage" : "Frozen Food Storage") + ".";
+	close3;
+}
+
+// Today's theme for each section, and the right parts for it.
+function	script	F_WSV_VRTheme	{
+	return gettime(DT_YEARDAY) % 4;
+}
+
+vr_zrr01,46,83,4	script	VR Lazy#wsv	10454,{
+	cutin "ep19_leizi01.png",2;
+	setarray .@hint$, "a heater for the patrol's boots", "a lamp that never freezes", "a sled that steers itself", "a scarf that keeps the wind out";
+	setarray .@tip$, "warm stone, a coil and a strap", "glow moss, a glass case and oil", "runners, a gyro and a rope", "wool, a wind rune and a clasp";
+	.@t = callfunc("F_WSV_VRTheme");
+	mes "[VR Lazy]";
+	mes "Psst. Want to know what Vellgunde wants today?";
+	mes "She's been grumbling about needing ^0000FF" + .@hint$[.@t] + "^000000.";
+	next;
+	mes "[VR Lazy]";
+	mes "If I were you, I'd put together ^0000FF" + .@tip$[.@t] + "^000000. You didn't hear it from me~";
+	close3;
+}
+
+vr_zrr01,97,141,4	script	VR Toryoryo#wsv	10451,{
+	setarray .@hint$, "a warm soup for the night watch", "a snack the children will love", "something to keep a long march going", "a feast dish for guests";
+	setarray .@tip$, "seaweed, snail meat and salt", "sweet cells, flour and berries", "dried meat, nuts and a fluorescent cell", "calamari, seaweed and sour cells";
+	.@t = callfunc("F_WSV_VRTheme");
+	mes "[VR Toryoryo]";
+	mes "My cousin Zoryara is judging today! She wants ^0000FF" + .@hint$[.@t] + "^000000.";
+	next;
+	mes "[VR Toryoryo]";
+	mes "Our family recipe: ^0000FF" + .@tip$[.@t] + "^000000! Shh, it's a secret.";
+	close;
+}
+
+vr_zrr01,39,96,4	script	Crafting Simulator#wsv	10431,{
+	callfunc "F_WSV_VRSim", 64001, 1, 4, "yuvr01_box_";
+	end;
+}
+vr_zrr01,85,149,4	script	Cooking Simulator#wsv	10431,{
+	callfunc "F_WSV_VRSim", 64002, 2, 8, "yuvr01_cook_";
+	end;
+}
+
+// callfunc "F_WSV_VRSim", <materials quest>, <made bit>, <result shift>, "<cut-in prefix>";
+// Three parts are picked; today's theme wants parts 3t, 3t+1, 3t+2.
+function	script	F_WSV_VRSim	{
+	.@q = getarg(0);
+	.@b = getarg(1);
+	.@sh = getarg(2);
+	.@cut$ = getarg(3);
+	if (.@cut$ == "yuvr01_box_")
+		setarray .@part$, "warm stone", "a coil", "a strap", "glow moss", "a glass case", "oil", "runners", "a gyro", "a rope", "wool", "a wind rune", "a clasp";
+	else
+		setarray .@part$, "seaweed", "snail meat", "salt", "sweet cells", "flour", "berries", "dried meat", "nuts", "a fluorescent cell", "calamari", "sour cells", "ice straw";
+	mes "[AI Simulator]";
+	if (wsv_vrc & .@b) {
+		mes "A finished work is waiting in the output tray. Take it to the judge, or throw it in the trash can to start over.";
+		close;
+	}
+	if (isbegin_quest(.@q) != 1 || checkquest(.@q, HUNTING) != 2) {
+		mes "INSERT MATERIALS. Materials must be obtained from VR monsters by the contestant.";
+		mes "^4d4dffEnter the contest with a judge, then gather the materials first.^000000";
+		close;
+	}
+	mes "Materials detected. Select three components.";
+	next;
+	for (.@i = 0; .@i < 12; .@i++)
+		.@menu$ += .@part$[.@i] + ":";
+	.@a = select(.@menu$) - 1;
+	.@b2 = select(.@menu$) - 1;
+	.@c = select(.@menu$) - 1;
+	.@t = callfunc("F_WSV_VRTheme");
+	.@hit = (.@a / 3 == .@t) + (.@b2 / 3 == .@t) + (.@c / 3 == .@t);
+	if (.@a == .@b2 || .@a == .@c || .@b2 == .@c)
+		.@hit = min(.@hit, 1);
+	mes "[AI Simulator]";
+	mes "Components: " + .@part$[.@a] + ", " + .@part$[.@b2] + ", " + .@part$[.@c] + ".";
+	mes "Processing...";
+	close2;
+	progressbar "ffffff", 4;
+	.@r = 1 + .@hit;
+	if (.@hit == 3 && rand(100) < 50)
+		.@r = 4;
+	else if (.@hit == 3)
+		.@r = 3;
+	setarray .@pic$, "", "fail", "norm", "succ01", "succ02";
+	if (.@cut$ == "yuvr01_cook_") {
+		setarray .@pic$, "", "fail", "norm", "norm", "epic01";
+		if (.@r == 4)
+			.@pic$[4] = (rand(2) ? "epic01" : "epic02");
+	}
+	cutin .@cut$ + .@pic$[.@r] + ".png", 4;
+	completequest .@q;
+	erasequest .@q;
+	wsv_vrc = (wsv_vrc &~ (15 << .@sh)) | .@b | (.@r << .@sh);
+	setarray .@word$, "", "a failure", "an ordinary work", "a fine work", "a masterpiece";
+	dispbottom "The simulator produced " + .@word$[.@r] + ". Show it to the judge.";
+	sleep2 3000;
+	cutin "", 255;
+	end;
+}
+
+vr_zrr01,43,134,4	script	Trash Can#wsv	10540,{
+	mes "[Trash Can]";
+	mes "A trash can for failed works. A note on the lid: ^0000FF\"No feelings allowed in the trash.\"^000000";
+	if (!(wsv_vrc & 3))
+		close;
+	next;
+	if (select("Throw away my work and start over.:Never mind.") == 2)
+		close;
+	if (wsv_vrc & 1)
+		wsv_vrc = wsv_vrc &~ (1 | (15 << 4));
+	if (wsv_vrc & 2)
+		wsv_vrc = wsv_vrc &~ (2 | (15 << 8));
+	mes "Into the trash it goes. Enter again with the judge and gather new materials to try once more.";
+	close;
+}
+
+// ------------------------------------------------------------
+// How to Survive the Demon King's Castle (vr_hero00-03)
+// Quests 64011-64013: survive a floor (defeat 50 of its monsters);
+// 64014-64016: their cooldowns.
+// ------------------------------------------------------------
+vr_hero00,46,121,4	script	Clerk#wsv_h1	86,{
+	mes "[Clerk]";
+	mes "Welcome to the Demon King's Castle! Under new management, as you can see.";
+	mes "The Hero runs the place now. He says the monsters keep wandering in, so he hires adventurers to keep the floors clear. Training, he calls it.";
+	next;
+	mes "[Clerk]";
+	mes "Each floor has its own duty: clear 50 of its monsters. Report back to my colleagues at the floor desks and you'll be paid in Orbs of Knowledge.";
+	close;
+}
+vr_hero00,39,117,4	shop	Clerk#wsv_h2	869,501:-1,503:-1,504:-1,505:-1,645:-1,656:-1,657:-1,601:-1,602:-1
+vr_hero00,52,111,4	script	Clerk#wsv_h3	101,{
+	mes "[Clerk]";
+	mes "The castle's guests are always asking about the dining hall.";
+	mes "One of our regulars wrote us a review: ^0000FF\"The food is tasty. The owner... well, he could be called kind, depending on your point of view. The food was tasty.\"^000000 Four stars!";
+	close;
+}
+vr_hero00,51,69,4	script	Clerk#wsv_h4	109,{
+	callfunc "F_WSV_VRFloor", 1, "vr_hero01", 236, 33, 64011;
+	end;
+}
+vr_hero00,48,73,4	script	Clerk#wsv_h5	895,{
+	callfunc "F_WSV_VRFloor", 2, "vr_hero02", 366, 48, 64012;
+	end;
+}
+vr_hero00,48,25,4	script	Clerk#wsv_h6	88,{
+	callfunc "F_WSV_VRFloor", 3, "vr_hero03", 314, 136, 64013;
+	end;
+}
+
+// callfunc "F_WSV_VRFloor", <floor>, "<map>", <x>, <y>, <duty quest>;
+function	script	F_WSV_VRFloor	{
+	.@f = getarg(0);
+	.@q = getarg(4);
+	mes "[Clerk]";
+	mes "This is the desk for the castle's floor " + .@f + ".";
+	if (isbegin_quest(.@q) == 1 && checkquest(.@q, HUNTING) == 2) {
+		mes "Fifty monsters cleared? The Hero will be pleased. Here's your pay.";
+		completequest .@q;
+		erasequest .@q;
+		if (isbegin_quest(.@q + 3))
+			erasequest .@q + 3;
+		setquest .@q + 3;
+		callfunc "F_WSV_Orb", 2 + .@f;
+		getexp2 20000000 * .@f, 10000000 * .@f;
+		close;
+	}
+	next;
+	switch (select("Go up to floor " + .@f + ".:Take today's duty (clear 50 monsters).:Never mind.")) {
+	case 1:
+		close2;
+		warp getarg(1), getarg(2), getarg(3);
+		end;
+	case 2:
+		if (isbegin_quest(.@q) == 1 || callfunc("F_WSV_Waiting", .@q + 3)) {
+			mes "[Clerk]";
+			mes "You already have today's duty for this floor.";
+			close;
+		}
+		if (isbegin_quest(.@q) == 2)
+			erasequest .@q;
+		setquest .@q;
+		questinfo_refresh;
+		mes "[Clerk]";
+		mes "Fifty monsters on floor " + .@f + ". Come back here when you're done.";
+		close;
+	}
+	close;
+}
+
+// Adventurers on the third floor, trying to survive the castle.
+vr_hero03,252,354,4	script	Adventurer#wsv_h1	687,{
+	mes "[Adventurer]";
+	mes "Third floor and I'm out of potions. The clerk downstairs sells them, but going down means coming back up.";
+	close;
+}
+vr_hero03,288,115,4	script	Adventurer#wsv_h2	689,{
+	mes "[Adventurer]";
+	mes "The Minorous here hit like a falling wall. Keep your distance and they lose interest.";
+	close;
+}
+vr_hero03,195,142,4	script	Adventurer#wsv_h3	692,{
+	mes "[Adventurer]";
+	mes "I came for the training and stayed for the dining hall. Don't tell my guild master.";
+	close;
+}
+vr_hero03,163,160,4	script	Adventurer#wsv_h4	697,{
+	mes "[Adventurer]";
+	mes "They say the book was written so that 'even a five-year-old could take the Demon King's castle'. I'd like to meet that five-year-old.";
+	close;
+}
+vr_hero03,152,309,4	script	Adventurer#wsv_h5	699,{
+	mes "[Adventurer]";
+	mes "The gargoyles come in pairs. Always pairs. Kill one and the other gets angry.";
+	close;
+}
+vr_hero03,347,343,4	script	Adventurer...#wsv_h6	10172,{
+	mes "[Adventurer...]";
+	mes "......";
+	mes "A pile of ash in a familiar shape. It used to be an adventurer.";
+	next;
+	mes "Since this is a book, they'll be back on page one tomorrow, none the worse for wear. Probably.";
+	close;
+}
+vr_hero03,270,205,4	script	Adventurer#wsv_h7	834,{
+	mes "[Adventurer]";
+	mes "The beholders see through walls. I'm sure of it.";
+	close;
+}
+vr_hero03,202,213,4	script	Adventurer#wsv_h8	79,{
+	mes "[Adventurer]";
+	mes "Need a heal? ...Of course you do. Everyone up here needs a heal.";
+	close2;
+	if (Hp < MaxHp) {
+		percentheal 30, 0;
+		specialeffect2 EF_HEAL2;
+	}
+	end;
+}
+vr_hero03,145,329,4	script	Adventurer#wsv_h9	849,{
+	mes "[Adventurer]";
+	mes "Fifty monsters per floor for the clerks downstairs. Easy money, they said. Easy!";
+	close;
+}
+vr_hero03,176,191,4	script	Adventurer#wsv_h10	697,{
+	mes "[Adventurer]";
+	mes "We're a party of two. He does the fighting, I do the running.";
+	close;
+}
+vr_hero03,177,194,4	script	Adventurer#wsv_h11	690,{
+	mes "[Adventurer]";
+	mes "Hey! I do fighting too. Sometimes.";
+	close;
+}
+vr_hero03,219,227,4	script	Adventurer#wsv_h12	846,{
+	mes "[Adventurer]";
+	mes "The Hero lives on the top floor, they say. Nobody's ever seen him come down. The food comes up on a cart.";
+	close;
+}
+vr_hero03,216,228,4	script	Adventurer#wsv_h13	716,{
+	mes "[Adventurer]";
+	mes "If you find the supply cart, help yourself. That's what it's there for.";
+	close;
+}
+vr_hero03,174,234,4	script	Adventurer#wsv_h14	901,{
+	mes "[Adventurer]";
+	mes "Shh. I'm hiding from a Minorous. Go away. Go away!";
+	close;
+}
+vr_hero03,218,315,4	script	Cart#wsv_h	10390,{
+	mes "[Cart]";
+	mes "A supply cart, half full: bread, bandages, a few potions. A sign reads: ^0000FF\"For adventurers. Take what you need. - The Management\"^000000";
+	next;
+	if (select("Take a moment to patch up.:Leave it.") == 2)
+		close;
+	if (getd("$@wsv_cart_" + getcharid(0)) > gettimetick(2)) {
+		mes "You've already helped yourself recently. Leave some for the others.";
+		close;
+	}
+	setd "$@wsv_cart_" + getcharid(0), gettimetick(2) + 600;
+	percentheal 100, 100;
+	specialeffect2 EF_HEAL2;
+	mes "You eat a little bread and change your bandages. Much better.";
+	close;
+}
+
+// ------------------------------------------------------------
+// Lazrigs Mock Siege (vr_prtg, vr_prtg03) and the Guild
+// Underground Dungeon (vr_prtd03). Quests 64021 Lazrigs Guardian
+// (daily, 100 monsters in Lazrigs), 64022 (weekly, 500), 64023
+// Lazrigs Rescue Team (daily: three stranded soldiers), 64024-64026
+// their cooldowns. wsv_vrc bits 4096-16384: soldiers rescued;
+// 32768: the Guild Underground Dungeon opened (first guardian duty).
+// ------------------------------------------------------------
+vr_prtg,40,22,4	script	Igrid#wsv	751,{
+	mes "[Igrid]";
+	mes "I'm Igrid, the author of this book. Welcome to the ^0000FFLazrigs Mock Siege^000000.";
+	mes "When Morroc's revival forced the three kingdoms together, our fighters were terrible at fighting as a group. I wrote this book so that never happens again.";
+	next;
+	mes "[Igrid]";
+	mes "Lazrigs is not a dungeon for fighting alone. Clear the outer castle, then inner zones 1 and 2, and finish in the Emperium room. It's training, so the castle resets when you're done.";
+	next;
+	if (isbegin_quest(64021) == 1 && checkquest(64021, HUNTING) == 2) {
+		mes "[Igrid]";
+		mes "Your guardian duty is done. Good work! And the Guild Underground Dungeon is open to you now.";
+		wsv_vrc = wsv_vrc | 32768;
+		completequest 64021;
+		erasequest 64021;
+		if (isbegin_quest(64024))
+			erasequest 64024;
+		setquest 64024;
+		callfunc "F_WSV_Orb", 4;
+		getexp2 60000000, 30000000;
+		close;
+	}
+	if (isbegin_quest(64022) == 1 && checkquest(64022, HUNTING) == 2) {
+		mes "[Igrid]";
+		mes "Five hundred! A week's work. Here, you've earned this.";
+		completequest 64022;
+		erasequest 64022;
+		if (isbegin_quest(64025))
+			erasequest 64025;
+		setquest 64025;
+		callfunc "F_WSV_Orb", 15;
+		getexp2 200000000, 100000000;
+		close;
+	}
+	switch (select("Lazrigs Guardian (daily).:Lazrigs Guardian (weekly).:Never mind.")) {
+	case 1:
+		callfunc "F_WSV_VRDuty", 64021, 64024, "Defeat 100 monsters in Lazrigs.";
+		break;
+	case 2:
+		callfunc "F_WSV_VRDuty", 64022, 64025, "Defeat 500 monsters in Lazrigs this week.";
+		break;
+	}
+	close;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 250 && isbegin_quest(64021) == 0 && (isbegin_quest(64024) == 0 || checkquest(64024, PLAYTIME) == 2)" );
+	end;
+}
+
+// callfunc "F_WSV_VRDuty", <quest>, <cooldown>, "<what>";
+function	script	F_WSV_VRDuty	{
+	if (isbegin_quest(getarg(0)) == 1) {
+		mes "You're still on it: " + getarg(2);
+		return;
+	}
+	if (callfunc("F_WSV_Waiting", getarg(1))) {
+		mes "You've done that duty already. It resets at 4 AM.";
+		return;
+	}
+	if (isbegin_quest(getarg(0)) == 2)
+		erasequest getarg(0);
+	setquest getarg(0);
+	questinfo_refresh;
+	mes getarg(2);
+	return;
+}
+
+vr_prtg,45,22,4	script	Suspicious Swordsman#wsv	899,{
+	mes "[Suspicious Swordsman]";
+	mes "Who, me? Not suspicious at all. I'm with the ^0000FFLazrigs Rescue Team^000000.";
+	mes "Every round of the mock siege, some soldiers get stranded in the castle. Somebody has to carry them out.";
+	next;
+	if (isbegin_quest(64023) == 1) {
+		if ((wsv_vrc & 28672) == 28672) {
+			mes "[Suspicious Swordsman]";
+			mes "All three out? You're quicker than I am. Here, for your trouble.";
+			completequest 64023;
+			erasequest 64023;
+			wsv_vrc = wsv_vrc &~ 28672;
+			if (isbegin_quest(64026))
+				erasequest 64026;
+			setquest 64026;
+			callfunc "F_WSV_Orb", 4;
+			getexp2 60000000, 30000000;
+			close;
+		}
+		mes "[Suspicious Swordsman]";
+		mes "Three soldiers are stranded in the castle. Find them and tell them to fall back.";
+		close;
+	}
+	if (callfunc("F_WSV_Waiting", 64026)) {
+		mes "[Suspicious Swordsman]";
+		mes "Everyone's out for today. Same time tomorrow?";
+		close;
+	}
+	if (select("I'll help.:Not today.") == 2)
+		close;
+	if (isbegin_quest(64023) == 2)
+		erasequest 64023;
+	setquest 64023;
+	wsv_vrc = wsv_vrc &~ 28672;
+	questinfo_refresh;
+	mes "[Suspicious Swordsman]";
+	mes "Three of them: one in the outer castle, two in the inner zones. Go!";
+	close;
+}
+
+vr_prtg03,165,40,4	script	Stranded Soldier#wsv1	105,{
+	callfunc "F_WSV_VRSoldier", 4096;
+	end;
+}
+vr_prtg03,48,60,4	script	Stranded Soldier#wsv2	105,{
+	callfunc "F_WSV_VRSoldier", 8192;
+	end;
+}
+vr_prtg03,160,175,4	script	Stranded Soldier#wsv3	105,{
+	callfunc "F_WSV_VRSoldier", 16384;
+	end;
+}
+
+function	script	F_WSV_VRSoldier	{
+	mes "[Stranded Soldier]";
+	if (isbegin_quest(64023) == 1 && !(wsv_vrc & getarg(0))) {
+		mes "The rescue team? Oh, thank the gods. I lost my squad in the last push.";
+		mes "I'll fall back to the base. Thank you!";
+		wsv_vrc = wsv_vrc | getarg(0);
+		close;
+	}
+	mes "Hold the line!";
+	close;
+}
+
+vr_prtg,50,22,4	script	Guild Underground Dungeon#wsv	10248,{
+	mes "[Guild Underground Dungeon]";
+	mes "A monument at the entrance of the Lazrigs base. Its runes open a way down into a guild dungeon that exists only in this book.";
+	if (!(wsv_vrc & 32768)) {
+		mes "^4d4dffIt opens once you've completed Igrid's guardian duty.^000000";
+		close;
+	}
+	next;
+	if (select("Go down.:Not now.") == 2)
+		close;
+	close2;
+	warp "vr_prtd03",164,179;
+	end;
+}

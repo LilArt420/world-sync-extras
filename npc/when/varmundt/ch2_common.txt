@@ -1,0 +1,204 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Chapter 2 "Song of the World Tree ~ Fragment of the End":
+//= shared functions, who is visible at which step, and the ways
+//= into Muspelheim's Harvan village and Ragsruth.
+//===== Description: =========================================
+//= From kRO's update notes (ro.gnjoy.com update 301, 2026-03-18):
+//= the main quests, their givers and places, the sub quest, the
+//= nine daily quests, Nirhult's Illusion and the Flame Gold Coin
+//= traders. The client the app ships predates the update: it has
+//= the maps, monsters and NPC looks, but no Chapter 2 quest text
+//= or items. So the quests are this block's own (64201-64246),
+//= the dialogue is written from the notes' summaries, and Flame
+//= Gold Coins are kept as points (wsv_flame). Kill counts, rewards
+//= and trades aren't published: they're estimates.
+//=
+//= Main story steps, wsv_ch2 (level 225+, Chapter 1 done):
+//=     0  not started (Sasha in Ash Village, ygg_edge 156,179)
+//=    10  Crossroads of Tangled Magic: three knots in Beledor
+//=    20  El, the World Tree's guardian, wakes (veledor)
+//=    30  report to Sasha in the Tube Fruit house (ygg_fruit)
+//=    40  News from the Burning Land: Chez in Volund Valley
+//=    50  Between Cold Spot and Hot Spot: Yongjirak (kindlbrk)
+//=    60  Beryl's boat to the Root of Death
+//=    70  What Was Met at the Root of Death (deadroot, Gregor)
+//=    80  A Fragmented Other Root: Brimir (Gregor, Il)
+//=    90  Residents of the Ragged Root (ch2safe4, Devries)
+//=   100  Suspicious Movement: Distorted Ragsruth (rgs_dun1)
+//=   110  Nirhult (ragsruth, Artea)
+//=   120  Fragment of the End: back to Sasha
+//=  1000  Chapter 2 done
+//= Bits, wsv_ch2b: 1/2/4 knots untangled, 8/16/32/64 the four
+//=   Harvan crafters asked, 128 White Powder looked at, 256/512/
+//=   1024 frozen Harvans freed, 2048/4096/8192 traces found in the
+//=   grass, 16384 the Branch of Distorted Ragsruth touched.
+//= After the story, wsv_c2s: 1 Time to Do What Must Be Done
+//=   done, 2 Helping Hands at the Nursery, 4 Shelter Visit,
+//=   8 Research Assistant, 16 Distorted Ragsruth, 32 Strange
+//=   Magic Investigation, 64/128/256/512 the four Harvans asked,
+//=   1024 Orion's parts collected, 2048/4096/8192 the nursery
+//=   children met.
+//= wsv_c2p: grass piles searched today (bit per pile), wsv_c2pd:
+//= that day; wsv_c2gf: Ghost Flowers found for today's daily.
+//============================================================
+
+// Who sees which Chapter 2 scene NPC (CLOAKED), by wsv_ch2.
+function	script	F_WSV_C2Scenes	{
+	.@m$ = strcharinfo(3);
+	.@s = wsv_ch2;
+	if (BaseLevel < 225)
+		.@s = -1;
+	if (.@m$ == "ygg_edge") {
+		setarray .@t$,
+			"Sasha#wsv_c2e", "0", "29";
+	} else if (.@m$ == "ygg_fruit") {
+		setarray .@t$,
+			"El#wsv_c2f", "40", "9999";
+	} else if (.@m$ == "veledor") {
+		setarray .@t$,
+			"Knot of Magic#wsv_c2a", "10", "19",
+			"Knot of Magic#wsv_c2b", "10", "19",
+			"Knot of Magic#wsv_c2c", "10", "19",
+			"El#wsv_c2v", "20", "29";
+	} else if (.@m$ == "mu_fild01") {
+		setarray .@t$,
+			"Chez#wsv_c2", "40", "59";
+	} else if (.@m$ == "deadroot") {
+		setarray .@t$,
+			"Gregor#wsv_c2d", "60", "79",
+			"Devries#wsv_c2d", "60", "79",
+			"Frozen Harvan#wsv_c2a", "70", "79",
+			"Frozen Harvan#wsv_c2b", "70", "79",
+			"Frozen Harvan#wsv_c2c", "70", "79";
+	} else if (.@m$ == "uknw_ruin") {
+		setarray .@t$,
+			"Gregor#wsv_c2b", "80", "89";
+	} else if (.@m$ == "ch2safe4") {
+		setarray .@t$,
+			"Devries#wsv_c2s", "90", "129",
+			"Gregor#wsv_c2s", "90", "129",
+			"Devries#wsv_c2r", "1000", "9999",
+			"Gregor#wsv_c2r", "1000", "9999";
+	} else
+		return;
+	for (.@i = 0; .@i < getarraysize(.@t$); .@i += 3) {
+		if (.@s >= atoi(.@t$[.@i+1]) && .@s <= atoi(.@t$[.@i+2]))
+			cloakoffnpcself .@t$[.@i];
+		else
+			cloakonnpcself .@t$[.@i];
+	}
+	// Harvans already thawed stay gone; knots already loosened too.
+	if (.@m$ == "deadroot") {
+		setarray .@f$, "Frozen Harvan#wsv_c2a", "Frozen Harvan#wsv_c2b", "Frozen Harvan#wsv_c2c";
+		for (.@i = 0; .@i < 3; .@i++)
+			if (wsv_ch2b & (256 << .@i))
+				cloakonnpcself .@f$[.@i];
+	} else if (.@m$ == "veledor") {
+		setarray .@f$, "Knot of Magic#wsv_c2a", "Knot of Magic#wsv_c2b", "Knot of Magic#wsv_c2c";
+		for (.@i = 0; .@i < 3; .@i++)
+			if (wsv_ch2b & (1 << .@i))
+				cloakonnpcself .@f$[.@i];
+	}
+	return;
+}
+
+// Flame Gold Coins (points: the client has no Flame Gold Coin).
+// callfunc "F_WSV_Flame", <coins>;
+function	script	F_WSV_Flame	{
+	wsv_flame += getarg(0);
+	dispbottom "You received " + getarg(0) + " Flame Gold Coin(s) (" + wsv_flame + " in total).";
+	return;
+}
+
+// Experience for level 225+: a share of the next level, capped.
+// callfunc "F_WSV_C2Reward", <percent of the next level>, <coins>;
+function	script	F_WSV_C2Reward	{
+	getexp2 min(NextBaseExp / 100 * getarg(0), 1500000000), min(NextJobExp / 100 * getarg(0), 750000000);
+	if (getarg(1))
+		callfunc "F_WSV_Flame", getarg(1);
+	return;
+}
+
+// 1 when Chapter 1's story is over (this block's step, or its last
+// quest done).
+function	script	F_WSV_C1Done	{
+	return (wsv_ch1 >= 1000 || isbegin_quest(18377) == 2);
+}
+
+// A one-time quest or a daily: starts it, or says it's running or
+// waiting. Returns 1 when it was started.
+// callfunc("F_WSV_C2Daily", "[<npc>]", <quest>, <cooldown>, "<what to do>")
+function	script	F_WSV_C2Daily	{
+	.@q = getarg(1);
+	.@cd = getarg(2);
+	if (isbegin_quest(.@q) == 1) {
+		mes getarg(0);
+		mes "You're still on it: " + getarg(3);
+		return 0;
+	}
+	if (.@cd && callfunc("F_WSV_Waiting", .@cd)) {
+		mes getarg(0);
+		mes "That's done for today. Come back after 4 AM.";
+		return 0;
+	}
+	if (isbegin_quest(.@q) == 2)
+		erasequest .@q;
+	setquest .@q;
+	questinfo_refresh;
+	mes getarg(0);
+	mes getarg(3);
+	return 1;
+}
+
+// Finishes a daily: completes it, starts its cooldown, pays.
+// callfunc "F_WSV_C2DailyDone", <quest>, <cooldown>, <percent>, <coins>;
+function	script	F_WSV_C2DailyDone	{
+	completequest getarg(0);
+	erasequest getarg(0);
+	if (isbegin_quest(getarg(1)))
+		erasequest getarg(1);
+	setquest getarg(1);
+	callfunc "F_WSV_C2Reward", getarg(2), getarg(3);
+	questinfo_refresh;
+	return;
+}
+
+kindlbrk	mapflag	loadevent
+kin_in01	mapflag	loadevent
+veledor	mapflag	loadevent
+deadroot	mapflag	loadevent
+uknw_ruin	mapflag	loadevent
+ch2safe4	mapflag	loadevent
+ragsruth	mapflag	loadevent
+rgs_dun1	mapflag	loadevent
+
+// ------------------------------------------------------------
+// Ways in. Volund Valley's eastern edge has no warp on the server:
+// this one leads on to Muspelheim's fields and Yongjirak.
+// ------------------------------------------------------------
+mu_fild01,389,180,0	warp	#wsv_c2_mu1	1,1,mu_fild02,15,178
+
+// Sanctuary Beledor: the signpost home and the small ash tree that
+// grows out towards Izlude.
+veledor,153,315,4	script	Ash Village#wsv	10620,{
+	mes "[Ash Village]";
+	mes "A signpost of woven branches. It points back down the path to ^0000FFAsh Village^000000.";
+	next;
+	if (select("Go to Ash Village.:Stay.") == 2)
+		close;
+	close2;
+	warp "ygg_edge",150,174;
+	end;
+}
+
+veledor,150,16,4	script	Small Ash Tree#wsv	10620,{
+	mes "[Small Ash Tree]";
+	mes "A small ash tree at the edge of the sanctuary. Its roots run far, far away. Somewhere you can hear the sea, and gulls.";
+	mes "^4d4dffIt seems to lead to Izlude.^000000";
+	next;
+	if (select("Hold on to a branch.:Leave it.") == 2)
+		close;
+	close2;
+	warp "izlude",117,240;
+	end;
+}

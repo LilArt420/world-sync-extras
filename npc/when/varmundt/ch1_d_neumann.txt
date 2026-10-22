@@ -1,0 +1,341 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Chapter 1, part D: what Dr. Neumann hides. His house, the
+//= locked door of the clinic, the basement and back to Ash
+//= Village. Quests 16936-16951. Steps 350-429.
+//============================================================
+
+// Outside Neumann's house: voices behind the door.
+ch1_geffen,176,66,4	script	Neumann's House#wsv	10429,{
+	if (wsv_ch1 == 350) {
+		mes "[Neumann's House]";
+		mes "A narrow house with drawn curtains. As you reach for the door, you hear voices inside.";
+		next;
+		mes "[Dr. Neumann's voice]";
+		mes "...not enough time. The last ones didn't respond either. I need more.";
+		next;
+		mes "[A rough voice]";
+		mes "More? People notice, doctor. Even here.";
+		next;
+		mes "[Dr. Neumann's voice]";
+		mes "Then make sure they don't. She doesn't have long. I don't care what it costs.";
+		next;
+		mes "A back door bangs. Footsteps hurry away down the alley. The house goes quiet.";
+		next;
+		mes "Behind you, someone clears their throat. Gregor and Einhar have caught up with you.";
+		mes "Einhar is already looking at the lock.";
+		callfunc "F_WSV_Step", "wsv_ch1", 355, "16936", "16937";
+		close;
+	}
+	mes "[Neumann's House]";
+	mes "The doctor's house. The curtains are always drawn.";
+	close;
+}
+
+ch1_gef_in,111,169,4	script(CLOAKED)	Gregor#wsv_c1h	627,{
+	cutin "4job_gregor_01.png",2;
+	if (wsv_ch1 == 355) {
+		mes "[Gregor]";
+		mes "We are in a man's house without his permission and I feel terrible about it. Also, look at this.";
+		next;
+		mes "[Gregor]";
+		mes "A ledger. Names of patients, dates... and next to some of them, a little cross. 'Moved.' 'Moved.' 'Moved.'";
+		mes "Moved where? None of these names are in the clinic's beds.";
+		next;
+		mes "[Gregor]";
+		mes "Einhar's upstairs. He's suspiciously good at this.";
+		callfunc "F_WSV_Step", "wsv_ch1", 360, "16937", "16938";
+		close3;
+	}
+	mes "[Gregor]";
+	mes "'Moved.' Moved where?";
+	close3;
+}
+
+ch1_gef_in,144,171,4	script(CLOAKED)	Einhar#wsv_c1h	10370,{
+	cutin "4job_einhar_01.png",2;
+	if (wsv_ch1 == 360) {
+		mes "[Einhar]";
+		mes "Don't look at me like that. When you've studied plagues long enough, you learn that the truth is usually in someone's drawer.";
+		next;
+		mes "[Einhar]";
+		mes "Letters, and a diary. Neumann's. Half of it is notes on Soren Syndrome, and good ones. Better than any doctor here could make.";
+		mes "The other half is in a cipher.";
+		next;
+		mes "[Einhar]";
+		mes "I'll take these to Professor Telkos in Ash Village. If anyone can read them, he can.";
+		mes "You and Gregor go back to the clinic. Jeon Cheosa is waiting outside it. Keep an eye on the doctor.";
+		callfunc "F_WSV_Step", "wsv_ch1", 365, "16938", "16939";
+		close3;
+	}
+	mes "[Einhar]";
+	mes "Ciphers. Doctors don't write in ciphers.";
+	close3;
+}
+
+ch1_geffen,167,173,4	script(CLOAKED)	Jeon Cheosa#wsv_c1cl	754,{
+	if (wsv_ch1 == 365) {
+		mes "[Jeon Cheosa]";
+		mes "Ho. You've been somewhere you shouldn't. I can tell by Gregor's face.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "While you were gone, the doctor came back to the clinic, very pale, and went straight to the west wing.";
+		mes "The door there, the one that is always locked? It is open. Just a crack.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "Go and look. Quietly.";
+		callfunc "F_WSV_Step", "wsv_ch1", 370, "16939", "16940";
+		close;
+	}
+	mes "[Jeon Cheosa]";
+	mes "The door in the west wing. Quietly.";
+	close;
+}
+
+ch1_gef_in,27,71,4	script	Slightly Open Door#wsv	10429,{
+	if (wsv_ch1 == 370) {
+		mes "[Slightly Open Door]";
+		mes "The door that is always locked stands slightly open.";
+		mes "Behind it, a narrow staircase leads down. From far below comes the sound of a struggle: something heavy falling, a shout.";
+		callfunc "F_WSV_Step", "wsv_ch1", 375, "16940", "16941";
+		close;
+	}
+	mes "[Slightly Open Door]";
+	if (wsv_ch1 < 370)
+		mes "A door to the west wing. It's locked.";
+	else
+		mes "The door to the clinic's basement stairs.";
+	close;
+}
+
+ch1_gef_in,25,34,4	script	Staircase#wsv	10429,{
+	if (wsv_ch1 == 375) {
+		mes "[Staircase]";
+		mes "You crouch on the stairs and listen.";
+		next;
+		mes "[Einhar's voice]";
+		mes "...don't you dare run! What did you do to them, Neumann? What did you do to these people?!";
+		next;
+		mes "[Dr. Neumann's voice]";
+		mes "What I had to! You wouldn't understand! Get out of my way!";
+		next;
+		mes "Running footsteps. A door slams at the bottom of the stairs. Einhar's footsteps go after them.";
+		callfunc "F_WSV_Step", "wsv_ch1", 380, "16941", "16942";
+		close;
+	}
+	mes "[Staircase]";
+	mes "Stairs down into the dark.";
+	close;
+}
+
+ch1_gef_in,31,24,4	script	Basement Door#wsv	10429,{
+	if (wsv_ch1 == 380) {
+		mes "[Basement Door]";
+		mes "You burst through the door. The room beyond is empty... except for a shimmering circle on the floor, still crackling.";
+		mes "A portal. Einhar's handwriting is chalked next to it: ^0000FF\"Ash Village. Hurry.\"^000000";
+		callfunc "F_WSV_Step", "wsv_ch1", 385, "16942", "16943";
+		close;
+	}
+	mes "[Basement Door]";
+	mes "A heavy door at the bottom of the clinic's stairs.";
+	close;
+}
+
+ch1_gef_in,29,29,4	script	Portal#wsv_c1	10527,{
+	if (wsv_ch1 == 385) {
+		mes "[Portal]";
+		mes "Einhar's portal, still open. It leads back to Ash Village.";
+		next;
+		if (select("Step through.:Wait.") == 2)
+			close;
+		callfunc "F_WSV_Step", "wsv_ch1", 390, "16943", "16944";
+		close2;
+		warp "ygg_fruit",42,70;
+		end;
+	}
+	if (wsv_ch1 == 395) {
+		mes "[Portal]";
+		mes "Jeon Cheosa has bent the portal back on itself. Now it opens on the real basement below the clinic: the place Einhar followed Neumann to.";
+		next;
+		if (select("Go down.:Wait.") == 2)
+			close;
+		close2;
+		warp "ch1_que01",135,117;
+		end;
+	}
+	mes "[Portal]";
+	mes "A faint circle chalked on the floor.";
+	close;
+}
+
+// In Ash Village: Einhar sent everyone back. Jeon Cheosa and Gregor.
+ygg_fruit,40,72,4	script(CLOAKED)	Jeon Cheosa#wsv_c1af	754,{
+	if (wsv_ch1 == 390) {
+		mes "[Jeon Cheosa]";
+		mes "So, Einhar's portal brought you here. He left a message with Telkos before he went back down: ^0000FF\"Neumann is running. Don't follow alone. Bring the others.\"^000000";
+		next;
+		cutin "4job_gregor_01.png",2;
+		mes "[Gregor]";
+		mes "He's down there alone? That idiot. That brave, brilliant idiot.";
+		next;
+		cutin "",255;
+		mes "[Jeon Cheosa]";
+		mes "Calm, both of you. A portal is a thread; I can follow it back and tie it to where he really went.";
+		mes "Return to the clinic's basement and step through again. This time it will take you to him.";
+		callfunc "F_WSV_Step", "wsv_ch1", 395, "16944", "16945";
+		close;
+	}
+	mes "[Jeon Cheosa]";
+	mes "Back to the clinic's basement, and through the portal.";
+	close;
+}
+ygg_fruit,42,73,4	script(CLOAKED)	Gregor#wsv_c1af	627,{
+	cutin "4job_gregor_01.png",2;
+	mes "[Gregor]";
+	mes "Einhar, you idiot...";
+	close3;
+}
+
+// ------------------------------------------------------------
+// The basement under the clinic (ch1_que01)
+// ------------------------------------------------------------
+ch1_que01,141,114,4	script(CLOAKED)	Gregor#wsv_c1q	627,{
+	cutin "4job_gregor_01.png",2;
+	if (wsv_ch1 == 395) {
+		mes "[Gregor]";
+		mes "Oh no. Oh no, no, no.";
+		mes "Look at the walls. Cells. Beds with straps. This is where the 'moved' patients went.";
+		next;
+		mes "[Gregor]";
+		mes "And there... chalk marks. Einhar's. He went this way, deeper. And something big went with him, from the scratches.";
+		callfunc "F_WSV_Step", "wsv_ch1", 400, "16945,16946", "16947";
+		close3;
+	}
+	mes "[Gregor]";
+	mes "Cells. Straps. I'm going to be sick.";
+	close3;
+}
+
+ch1_que01,126,57,4	script(CLOAKED)	Jeon Cheosa#wsv_c1q	754,{
+	if (wsv_ch1 == 400) {
+		mes "[Jeon Cheosa]";
+		mes "Stop. Do you feel that?";
+		mes "The air is heavy with the same magic as the fortress. The dead walk here.";
+		next;
+		mes "Gray shapes shuffle in the dark corridors: soldiers of the Immortal Legion, wandering between the cells.";
+		next;
+		mes "[Jeon Cheosa]";
+		mes "These were the patients. Hm. Keep moving. Einhar went west.";
+		callfunc "F_WSV_Step", "wsv_ch1", 405, "16947", "16948";
+		close;
+	}
+	mes "[Jeon Cheosa]";
+	mes "West. Quickly, before more of them gather.";
+	close;
+}
+
+ch1_que01,51,46,4	script(CLOAKED)	Jeon Cheosa#wsv_c1q2	754,{
+	if (wsv_ch1 == 405) {
+		mes "[Jeon Cheosa]";
+		mes "Here. Chalk, smeared. Blood, not his. And footprints going north.";
+		mes "He is alive, at least. Follow.";
+		callfunc "F_WSV_Step", "wsv_ch1", 410, "16948", "16949";
+		close;
+	}
+	mes "[Jeon Cheosa]";
+	mes "North. Follow the prints.";
+	close;
+}
+
+ch1_que01,67,128,4	script(CLOAKED)	Einhar#wsv_c1q	10370,{
+	cutin "4job_einhar_01.png",2;
+	if (wsv_ch1 == 410) {
+		mes "[Einhar]";
+		mes "......";
+		mes "You came. I told Telkos to tell you not to come alone. You didn't. Good.";
+		next;
+		mes "[Einhar]";
+		mes "I followed Neumann down here. He got away through some passage I couldn't find.";
+		mes "But I found what he'd been doing.";
+		next;
+		mes "[Einhar]";
+		mes "He took the sickest patients and tested things on them. Treatments, cures, poisons. Dozens of them. When they died, the fortress's magic took them, and now they walk these halls.";
+		next;
+		mes "[Einhar]";
+		mes "And all of it, every life, was for one person. It's in the diary. Someone called ^0000FFMargot^000000.";
+		next;
+		mes "[Einhar]";
+		mes "I need a moment. Go and tell Maxim, at the clinic office. He funds that clinic; he deserves to know what it was for.";
+		callfunc "F_WSV_Step", "wsv_ch1", 415, "16949", "16950";
+		close3;
+	}
+	mes "[Einhar]";
+	mes "...Give me a moment.";
+	close3;
+}
+
+// Maxim: the man who keeps the clinic supplied.
+ch1_gef_in,69,33,4	script(CLOAKED)	Maxim#wsv_c1o	788,{
+	if (wsv_ch1 == 415) {
+		mes "[Maxim]";
+		mes "You look like you've seen a ghost. Sit down. No? Then talk.";
+		next;
+		select("Tell him what you found under the clinic.");
+		mes "[Maxim]";
+		mes "......";
+		mes "I paid for those beds. For the medicine. For the cellar, even, when he said he needed storage.";
+		next;
+		mes "[Maxim]";
+		mes "I'm a merchant. I travel; I'm hardly ever in Geffen. I trusted him to run things. I trusted him.";
+		mes "Margot... that's his wife. She was the clinic's nurse, before she fell sick.";
+		next;
+		mes "[Maxim]";
+		mes "Your friend took the diary to Ash Village? Then go there. Find out what else is in it. I need to think.";
+		callfunc "F_WSV_Step", "wsv_ch1", 420, "16950", "16951";
+		close;
+	}
+	mes "[Maxim]";
+	mes "Leave me be a while.";
+	close;
+}
+
+// Professor Telkos, in Ash Village.
+ygg_edge,209,209,4	script	Professor Telkos#wsv	10210,{
+	if (wsv_ch1 == 420) {
+		mes "[Professor Telkos]";
+		mes "Ah, the adventurer. Einhar sent word you'd come. Come, look at this.";
+		mes "Neumann's diary. The cipher was a simple one; a doctor's habits leak into everything.";
+		next;
+		mes "[Professor Telkos]";
+		mes "The notes on Soren Syndrome are good. Remarkably good. But here's what bothers me.";
+		mes "There is no medical training in them. None. He learned everything from his patients, by trial and error.";
+		next;
+		mes "[Professor Telkos]";
+		mes "Your Dr. Neumann was never a doctor. He was something else, once. A refugee, maybe. The diary hints at it.";
+		next;
+		mes "[Professor Telkos]";
+		mes "Why would a man pretend to be a doctor in a dying city? The answer is in Geffen, not in these pages.";
+		mes "Ask the man who knew him there: Maxim. He's waiting at the town hall.";
+		callfunc "F_WSV_Step", "wsv_ch1", 430, "16951", "23271";
+		callfunc "F_WSV_C1Reward", 60000000, 30000000;
+		close;
+	}
+	if (isbegin_quest(19226) == 1) {
+		mes "[Professor Telkos]";
+		mes "You've read it, then. The whole of it.";
+		next;
+		mes "[Professor Telkos]";
+		mes "A schoolteacher who learned medicine one patient at a time, and then forgot where the line was. I don't know whether to admire him or fear him.";
+		mes "Perhaps both. Records are honest that way.";
+		completequest 19226;
+		wsv_c1s = wsv_c1s | 4;
+		getexp2 30000000, 15000000;
+		getitem 1001972, 3;	// Ch1_Root_Coin
+		close;
+	}
+	mes "[Professor Telkos]";
+	if (wsv_ch1 < 420)
+		mes "Roots, worlds, records. My shelves are never big enough.";
+	else
+		mes "Every record holds a little more than its writer meant to put in.";
+	close;
+}

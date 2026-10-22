@@ -1,0 +1,86 @@
+# World Sync Extras: Star Forest block - item effects rAthena lacks.
+#
+# rAthena has the five jams without an effect. The effects are the ones
+# kRO's Herosria update notes give (2022): Purple, all trait stats +5 for
+# 30 minutes; Red, P.ATK +5; Blue, S.MATK +5; Yellow, C.Rate +5; White,
+# RES +50 and MRES +50, each for 10 minutes. The Garden Herbalist in
+# hero_lb makes them.
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Body:
+  - Id: 101753
+    AegisName: Heros_Purple_H_Jam
+    Name: Herosria Purple Herb Jam
+    Type: Usable
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus_script "{ bonus bAllTraitStats,5; }",1800,BSF_REM_ON_DEAD,0,EFST_BLANK;
+      specialeffect2 EF_POTION_BERSERK;
+  - Id: 101754
+    AegisName: Heros_Red_H_Jam
+    Name: Herosria Red Herb Jam
+    Type: Usable
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus_script "{ bonus bPatk,5; }",600,BSF_REM_ON_DEAD,0,EFST_BLANK;
+      specialeffect2 EF_POTION_BERSERK;
+  - Id: 101755
+    AegisName: Heros_Blue_H_Jam
+    Name: Herosria Blue Herb Jam
+    Type: Usable
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus_script "{ bonus bSmatk,5; }",600,BSF_REM_ON_DEAD,0,EFST_BLANK;
+      specialeffect2 EF_POTION_BERSERK;
+  - Id: 101756
+    AegisName: Heros_Yellow_H_Jam
+    Name: Herosria Yellow Herb Jam
+    Type: Usable
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus_script "{ bonus bCrate,5; }",600,BSF_REM_ON_DEAD,0,EFST_BLANK;
+      specialeffect2 EF_POTION_BERSERK;
+  - Id: 101757
+    AegisName: Heros_White_H_Jam
+    Name: Herosria White Herb Jam
+    Type: Usable
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Script: |
+      bonus_script "{ bonus bRes,50; bonus bMres,50; }",600,BSF_REM_ON_DEAD,0,EFST_BLANK;
+      specialeffect2 EF_POTION_BERSERK;
+  # Traveler's Leaf, sold in Ash Village: the client's description names
+  # two places (Twisted Dark Land, Destroyed Geffen). Used up at once,
+  # like the official one, even if the menu is cancelled.
+  - Id: 104000
+    AegisName: Ch1_Warp_Leaf
+    Name: Traveler's Leaf
+    Type: Usable
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      if (isbegin_quest(18372) >= 1)
+        .@c = select("Twisted Dark Land:Destroyed Geffen:Cancel");
+      else
+        .@c = select("Twisted Dark Land:Cancel") == 1 ? 1 : 3;
+      if (.@c == 1)
+        warp "ygg_roots",325,147;
+      else if (.@c == 2)
+        warp "ch1_geffen",101,138;
