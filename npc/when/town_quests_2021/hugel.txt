@@ -19,7 +19,7 @@ hugel,97,149,4	script	Fisherman Ein#iqhu	712,{
 	next;
 	switch (select("A Noble War (daily):Clam-Digging Experience (daily):Never mind")) {
 	case 1: callfunc "F_IQ_TownDaily", 21294, 21297, 8400, 8380, 0, 0, "Fisherman Ein", 40; end;
-	case 2: callfunc "F_IQ_TownDaily", 21295, 21298, 8400, 8380, Flesh_Of_Clam, 5, "Fisherman Ein", 40; end;
+	case 2: callfunc "F_IQ_TownDaily", 21295, 21298, 8400, 8380, 966 /* Flesh_Of_Clam */, 5, "Fisherman Ein", 40; end;
 	case 3: close;
 	}
 }

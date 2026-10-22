@@ -113,7 +113,7 @@ moc_para01,29,35,4	script	Gramps#iqgramps	866,{
 				erasequest .@qid;
 				getexp .@be, .@je;
 				Zeny += 65000;
-				getitem Eden_Merit_Badge, 1;
+				getitem 6495 /* Eden_Merit_Badge */, 1;
 				.@paid++;
 				if (.@paid == 1)
 					mes "[Gramps]";

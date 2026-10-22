@@ -1,7 +1,8 @@
 -- World Sync Extras: sprite names for the monsters and NPC looks World Sync uses that
 -- the iRO client's own table lacks (kRO-only ones). The sprites themselves come from
 -- the kRO fallback GRF. Generated from kRO data.grf datainfo/npcidentity + jobname,
--- plus the Episode 21 characters of the Jormungandr block.
+-- plus the Episode 21 characters of the Jormungandr block, and the monsters and NPC looks
+-- the blocks' own scripts use (Herosria siege, Koko, the Rgan transformation...).
 JobNameTable = {
 	[10490] = "4_ragfes_08",
 	[10529] = "4_m_nillem",
@@ -64,6 +65,27 @@ JobNameTable = {
 	[10664] = "4_CH2_HARRBAN_G",
 	[10665] = "4_CH2_CHILD_C",	-- Chapter 2 (varmundt block)
 	[10669] = "4_kiosk",
+	[21530] = "ep19_rgan_e",
+	[21855] = "heros_dragon_1",
+	[21856] = "heros_dragon_2",
+	[21857] = "heros_dragon_3",
+	[21858] = "heros_dragon_4",
+	[21860] = "crab",
+	[21861] = "shellfish",
+	[21866] = "heros_in_orb_1",
+	[21867] = "heros_in_orb_2",
+	[21868] = "heros_in_orb_3",
+	[21869] = "heros_in_orb_4",
+	[21887] = "heros_out_orb",
+	[21904] = "heros_dragon_1",
+	[21965] = "ep20_copo",
+	[21969] = "ep20_rabbit_iceslug",
+	[21970] = "ep20_melibe_iceslug",
+	[21974] = "ep20_fake_iwin_sn",
+	[21977] = "ep20_fake_iwin_sg",
+	[21981] = "ep20_demigod_lasgand",
+	[21982] = "md_ep20_fallenangel",
+	[21985] = "ep20_rgan_warlock",
 	[22313] = "EP21_SEAWIND",	-- Seawind
 	[22314] = "EP21_SCALLEG",	-- Scalleg
 	[22315] = "EP21_VELELLING",	-- Velelling
