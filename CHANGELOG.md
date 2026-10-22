@@ -13,14 +13,15 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - The Episode Valkyrie (standart-npc) can skip both episodes with their Clear Tickets, through F_WSJ_Skip20/21.
 - Boats, Walter sailors, the hidden ship, the small door and Nyar are real transports (rAthena's 'Travel to' guides on those cells are switched off while the block is on); Lunaforma's mercenaries, soldiers, workers, children and refugees, Alberta's Wigner house staff, the working Rgans and the Frozen Zone guardians have their own lines.
 
-### 🏛️ New: Varmundt, Amatsu, Juno Library and Chapter 1 (setting `varmundt`, on)
+### 🏛️ New: Varmundt, Amatsu, Juno Library and Chapters 1-2 (setting `varmundt`, on)
 - The Fantasy Book "Dungeon Food" (iRO quests 16667-16690).
 - The Chess Garden and the Deep Abyss research (16778-16801), Rune Crowns and enchants.
 - Seoyeon's Trial (3519-3523).
 - Chapter 1's story from Ash Village to the Sky Fortress, with its side quests and dailies.
 - The Juno Library's VR books (Issgard Crafting Contest, the Demon King's Castle, Lazrigs).
 - The eroded wing of Varmundt's mansion.
-- 153 placeholders become these NPCs. Rewards, recipes and prices that kRO doesn't publish are estimates.
+- Chapter 2 "Song of the World Tree ~ Fragment of the End" (kRO update 301): the main story through Beledor, Volund Valley, Yongjirak, the Root of Death, Brimir and Ragsruth to Nirhult; Tamarin's sub-quest, nine dailies and Nirhult's Illusion; the Flame Gold Coin exchanger, Artisan Kadron, the Harvan merchant, the request board and the villagers; a warp from Volund Valley east into Muspelheim's fields; Beledor's signpost and Small Ash Tree, and the Deep Abyss's own exit back to the Chess Garden. The client has no Chapter 2 text or items, so its quests (64201-64246) are this block's own and the coins are points; kill counts, rewards, trades and Nirhult (a Feeos) are estimates.
+- 200 placeholders become these NPCs. Rewards, recipes and prices that kRO doesn't publish are estimates.
 
 ### ⭐ New: Star Forest, Herosria and Ash Village (setting `star_forest`, on)
 - The Star Emperor job change (iRO quests 11573-11585).
@@ -30,7 +31,7 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - 99 placeholders become these NPCs. Prices, recipes and rewards kRO doesn't publish are estimates.
 
 ### 🧍 Placeholders
-- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 153 and the Star Forest block 99. Likewise 44 placeholders that iRO Quests (0.2.0 and 0.3.0) implements: the Overlook Water Dungeon signboards, the City Investment delivery recipients and the Morroc chain. 3 more (Myu, Girl, Old Man) are already scripted by rAthena. 15 placeholders for retired or online-only iRO content are left out: the Weekend Race, the Battle Pass Season 3 signboards and the Redeem Code. 156 placeholders remain, 44 of them working.
+- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 200 and the Star Forest block 99. Likewise 44 placeholders that iRO Quests (0.2.0 and 0.3.0) implements: the Overlook Water Dungeon signboards, the City Investment delivery recipients and the Morroc chain. 3 more (Myu, Girl, Old Man) are already scripted by rAthena. 15 placeholders for retired or online-only iRO content are left out: the Weekend Race, the Battle Pass Season 3 signboards and the Redeem Code. 109 placeholders remain, 44 of them working.
 
 ### 👾 World Sync monsters (db/mob_db.yml, until the app ships the same fixes)
 - They drop again: 154 monsters had drops with no chance published, which the server gave the 0.01% floor. They now use the typical chance of the same kind of item (materials 5%, cards 0.01%, equipment 0.03-0.3%).

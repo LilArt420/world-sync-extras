@@ -3622,4 +3622,232 @@ QuestInfoList = {
 		Description = { "A dimensional rift ate into the east wing of Varmundt's mansion. <NAVI>[Hongsi]<INFO>ba_void,140,101,0,101,0</INFO></NAVI> asks me to meet the four watchers of its doors: Geonsi, Banshi, Yeonsi and Cheongsi, then report back." },
 		Summary = "Meet the four watchers"
 	},
+	[64201] = {
+		Title = "Crossroads of Tangled Magic",
+		IconName = "ico_ep.bmp",
+		Description = { "The ward a sage wove over the forest long ago has knotted itself up, and it's starting to hurt things. Loosen the three knots of magic in <NAVI>[Sanctuary Beledor]<INFO>veledor,149,312,0,101,0</INFO></NAVI>." },
+		Summary = "Loosen 3 knots in Beledor"
+	},
+	[64202] = {
+		Title = "Crossroads of Tangled Magic",
+		IconName = "ico_ep.bmp",
+		Description = { "El, the World Tree's guardian, woke when the knots came loose. Meet him and <NAVI>[Sasha]<INFO>ygg_fruit,80,122,0,101,0</INFO></NAVI> in the Tube Fruit house of Ash Village." },
+		Summary = "Talk to Sasha"
+	},
+	[64203] = {
+		Title = "News from the Burning Land",
+		IconName = "ico_ep.bmp",
+		Description = { "News came from the Harvans' village in Muspelheim: something cold. Find <NAVI>[Chez]<INFO>mu_fild01,110,166,0,101,0</INFO></NAVI>, who keeps watch in Volund Valley." },
+		Summary = "Talk to Chez"
+	},
+	[64204] = {
+		Title = "Between Cold Spot and Hot Spot",
+		IconName = "ico_ep.bmp",
+		Description = { "A cold spot in the land of fire, and Harvans missing. In Yongjirak, east of Volund Valley, talk to <NAVI>[Beryl]<INFO>kindlbrk,101,103,0,101,0</INFO></NAVI>, ask the four crafters what they saw and look at the white powder by the well." },
+		Summary = "Ask around Yongjirak"
+	},
+	[64205] = {
+		Title = "Between Cold Spot and Hot Spot",
+		IconName = "ico_ep.bmp",
+		Description = { "The missing Harvans went to the Root of Death. <NAVI>[Beryl]<INFO>kindlbrk,262,110,0,101,0</INFO></NAVI>'s boat at the east dock goes to its edge. Find out what's there." },
+		Summary = "To the Root of Death"
+	},
+	[64206] = {
+		Title = "What Was Met at the Root of Death",
+		IconName = "ico_ep.bmp",
+		Description = { "Gregor and Devries found Harvans frozen solid. Thaw the 3 frozen Harvans with Devries's warming draught, defeat 30 ice creatures at the Root of Death, and report to <NAVI>[Gregor]<INFO>deadroot,106,170,0,101,0</INFO></NAVI>." },
+		Summary = "Thaw 3 Harvans, 30 monsters"
+	},
+	[64207] = {
+		Title = "Sprout of the Ended World",
+		IconName = "ico_ep.bmp",
+		Description = { "A sprout grows out of the frozen lava at the Root of Death. It comes from a world that already ended. Show it to the Valkyrie Il in Brimir." },
+		Summary = "Show the sprout to Il"
+	},
+	[64208] = {
+		Title = "A Fragmented Other Root",
+		IconName = "ico_ep.bmp",
+		Description = { "Meet <NAVI>[Gregor]<INFO>uknw_ruin,273,237,0,101,0</INFO></NAVI> in Distorted Brimir and ask <NAVI>[Il]<INFO>uknw_ruin,272,235,0,101,0</INFO></NAVI> about the sprout." },
+		Summary = "Talk to Il"
+	},
+	[64209] = {
+		Title = "Residents of the Ragged Root",
+		IconName = "ico_ep.bmp",
+		Description = { "Il's branch led to Ragsruth, the Ragged Root of a world that ended. Devries says its people are the Folnirs; meet their leader, <NAVI>[Artea]<INFO>ragsruth,124,47,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Artea"
+	},
+	[64210] = {
+		Title = "Residents of the Ragged Root - Suspicious Movement",
+		IconName = "ico_ep.bmp",
+		Description = { "Something is moving in Distorted Ragsruth. Touch the old branch at its far end, search the grass piles for 3 traces, and report to <NAVI>[Artea]<INFO>ragsruth,124,47,0,101,0</INFO></NAVI>." },
+		Summary = "Branch and 3 traces"
+	},
+	[64211] = {
+		Title = "Nirhult",
+		IconName = "ico_ep.bmp",
+		Description = { "An intruder has come into Ragsruth: Nirhult. Drive him out, alone or with your party, and report to <NAVI>[Artea]<INFO>ragsruth,124,47,0,101,0</INFO></NAVI>." },
+		Summary = "Defeat Nirhult"
+	},
+	[64212] = {
+		Title = "Fragment of the End",
+		IconName = "ico_ep.bmp",
+		Description = { "Nirhult left a black, glittering fragment behind: a piece of whatever ended Ragsruth's world. Take it to <NAVI>[Sasha]<INFO>ygg_fruit,80,122,0,101,0</INFO></NAVI> and El in Ash Village." },
+		Summary = "Talk to Sasha"
+	},
+	[64220] = {
+		Title = "Time to Do What Must Be Done",
+		IconName = "ico_ep.bmp",
+		Description = { "Yongjirak is still getting back on its feet. Ask the four Harvans around the square what they need most, then report to <NAVI>[Tamarin]<INFO>kin_in01,34,251,0,101,0</INFO></NAVI>." },
+		Summary = "Ask 4 Harvans"
+	},
+	[64221] = {
+		Title = "Yongjirak's Specialty! Hot Kalguksu",
+		IconName = "ico_ep.bmp",
+		Description = { "Warm food for the Harvans: defeat 20 Flamebulls and 20 Urochs in Muspelheim for the broth and report to <NAVI>[Tamarin]<INFO>kin_in01,34,251,0,101,0</INFO></NAVI>." },
+		Summary = "20 Flamebull, 20 Urochs"
+	},
+	[64222] = {
+		Title = "[Standby] Yongjirak's Specialty! Hot Kalguksu",
+		IconName = "ico_ep.bmp",
+		Description = { "This is a daily quest: it can be done again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
+	[64223] = {
+		Title = "Hot! Hotter!",
+		IconName = "ico_ep.bmp",
+		Description = { "Blankets for the Harvans back from the Root of Death: defeat 30 Firecotton for stuffing and report to <NAVI>[Tamarin]<INFO>kin_in01,34,251,0,101,0</INFO></NAVI>." },
+		Summary = "30 Firecotton"
+	},
+	[64224] = {
+		Title = "[Standby] Hot! Hotter!",
+		IconName = "ico_ep.bmp",
+		Description = { "This is a daily quest: it can be done again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
+	[64225] = {
+		Title = "Hot! Hotter!",
+		IconName = "ico_ep.bmp",
+		Description = { "Snacks for the young Harvans: defeat 20 Logidogi and 20 Namunse for their seeds and report to <NAVI>[Tamarin]<INFO>kin_in01,34,251,0,101,0</INFO></NAVI>." },
+		Summary = "20 Logidogi, 20 Namunse"
+	},
+	[64226] = {
+		Title = "[Standby] Hot! Hotter!",
+		IconName = "ico_ep.bmp",
+		Description = { "This is a daily quest: it can be done again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
+	[64227] = {
+		Title = "Dream of Perpetual Motion",
+		IconName = "ico_ep.bmp",
+		Description = { "Nedim's temperature regulator needs power: defeat 20 Fireclaws and 20 Flameanima in the Muspelheim dungeon and report to <NAVI>[Nedim]<INFO>kindlbrk,110,218,0,101,0</INFO></NAVI>." },
+		Summary = "20 Fireclaw, 20 Flameanima"
+	},
+	[64228] = {
+		Title = "[Standby] Dream of Perpetual Motion",
+		IconName = "ico_ep.bmp",
+		Description = { "This is a daily quest: it can be done again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
+	[64229] = {
+		Title = "Helping Hands at the Nursery",
+		IconName = "ico_ep.bmp",
+		Description = { "Say hello to the three young Harvans at the nursery, then report to <NAVI>[Bartom]<INFO>kin_in01,86,47,0,101,0</INFO></NAVI>." },
+		Summary = "Meet 3 children"
+	},
+	[64231] = {
+		Title = "Work at the Nursery",
+		IconName = "ico_ep.bmp",
+		Description = { "Ruteun's snacks for the little ones keep getting stolen: defeat 20 each of Dudulson, Garakson and Tuktakson in the Muspelheim dungeon and report to <NAVI>[Bartom]<INFO>kin_in01,86,47,0,101,0</INFO></NAVI>." },
+		Summary = "20 each Dudulson, Garakson, Tuktakson"
+	},
+	[64232] = {
+		Title = "[Standby] Work at the Nursery",
+		IconName = "ico_ep.bmp",
+		Description = { "This is a daily quest: it can be done again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
+	[64233] = {
+		Title = "Shelter Visit",
+		IconName = "ico_ep.bmp",
+		Description = { "Yongjirak's heat exchanger needs parts from Shelter Gemis. Introduce the village to <NAVI>[Orion]<INFO>ch2gms,24,25,0,101,0</INFO></NAVI>, then report to <NAVI>[Karimun]<INFO>kin_in01,87,36,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Orion"
+	},
+	[64234] = {
+		Title = "Gemis Parts Supply",
+		IconName = "ico_ep.bmp",
+		Description = { "Defeat 30 Icy Blasts and 30 Ice Needles at the Root of Death, collect the parts from <NAVI>[Orion]<INFO>ch2gms,24,25,0,101,0</INFO></NAVI> and bring them to <NAVI>[Karimun]<INFO>kin_in01,87,36,0,101,0</INFO></NAVI>." },
+		Summary = "30 Icy Blast, 30 Ice Needle, Orion"
+	},
+	[64235] = {
+		Title = "[Standby] Gemis Parts Supply",
+		IconName = "ico_ep.bmp",
+		Description = { "This is a daily quest: it can be done again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
+	[64236] = {
+		Title = "Research Assistant",
+		IconName = "ico_ep.bmp",
+		Description = { "Samra wants to study the cold: defeat 20 Alpurings at the Root of Death and report to <NAVI>[Samra]<INFO>kin_in01,89,36,0,101,0</INFO></NAVI>." },
+		Summary = "20 Alpuring"
+	},
+	[64237] = {
+		Title = "Equipment Holding Heat",
+		IconName = "ico_ep.bmp",
+		Description = { "Materials for Samra's cold-proof gear: defeat 20 Morbangs and 20 Parusons in the Muspelheim dungeon and report to <NAVI>[Samra]<INFO>kin_in01,89,36,0,101,0</INFO></NAVI>." },
+		Summary = "20 Morbang, 20 Paruson"
+	},
+	[64238] = {
+		Title = "[Standby] Equipment Holding Heat",
+		IconName = "ico_ep.bmp",
+		Description = { "This is a daily quest: it can be done again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
+	[64239] = {
+		Title = "Distorted Ragsruth",
+		IconName = "ico_ep.bmp",
+		Description = { "Devries wants to understand Ragsruth's magic. Touch the old branch at the far end of Distorted Ragsruth and report to <NAVI>[Devries]<INFO>ch2safe4,217,234,0,101,0</INFO></NAVI>." },
+		Summary = "Touch the old branch"
+	},
+	[64240] = {
+		Title = "Even a Handful of Magic",
+		IconName = "ico_ep.bmp",
+		Description = { "Ghost Flowers grow in the grass piles of Distorted Ragsruth; each pile can be searched once a day. Bring 5 to <NAVI>[Devries]<INFO>ch2safe4,217,234,0,101,0</INFO></NAVI>." },
+		Summary = "5 Ghost Flowers"
+	},
+	[64241] = {
+		Title = "[Standby] Even a Handful of Magic",
+		IconName = "ico_ep.bmp",
+		Description = { "This is a daily quest: it can be done again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
+	[64242] = {
+		Title = "OK, Calm Down",
+		IconName = "ico_ep.bmp",
+		Description = { "Folnirs with unstable magic keep splitting. Defeat 30 each of Folnir Nilf, Folnir Hre and Folnir Myrk and report to <NAVI>[Gregor]<INFO>ch2safe4,215,234,0,101,0</INFO></NAVI>." },
+		Summary = "30 each Folnir"
+	},
+	[64243] = {
+		Title = "[Standby] OK, Calm Down",
+		IconName = "ico_ep.bmp",
+		Description = { "This is a daily quest: it can be done again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
+	[64244] = {
+		Title = "Distorted Ragsruth - Strange Magic Investigation",
+		IconName = "ico_ep.bmp",
+		Description = { "Foreign magic gathers in the south of Ragsruth's safe place, in a shape like Artea. Talk to the <NAVI>[Illusion of Artea]<INFO>ch2safe4,207,35,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to the illusion"
+	},
+	[64245] = {
+		Title = "Nirhult's Illusion",
+		IconName = "ico_ep.bmp",
+		Description = { "Nirhult's shadow gathers again every day. Break the Illusion of Nirhult, alone or with your party, and tell the <NAVI>[Illusion of Artea]<INFO>ch2safe4,207,35,0,101,0</INFO></NAVI>." },
+		Summary = "Break the illusion"
+	},
+	[64246] = {
+		Title = "[Standby] Nirhult's Illusion",
+		IconName = "ico_ep.bmp",
+		Description = { "This is a daily quest: it can be done again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
 }

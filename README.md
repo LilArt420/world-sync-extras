@@ -30,7 +30,7 @@ the Ice Castle's west wing at level 230. Character variables: `wsj_ep20`,
 `wsj_ep20b`, `wsj_ep20c`, `wsj_ep21`, `wsj_ep21b`, `wsj_rg` and a few for the
 dailies.
 
-## 🏛️ Varmundt, Amatsu, Juno Library and Chapter 1 (setting `varmundt`, on)
+## 🏛️ Varmundt, Amatsu, Juno Library and Chapters 1-2 (setting `varmundt`, on)
 
 - The Fantasy Book "Dungeon Food" in the Prontera East Library's new wing (level 100+, once a day).
 - Varmundt's Chess Garden under the garden pagoda and the Biosphere Deep Abyss research, Rune Crowns
@@ -38,6 +38,9 @@ dailies.
 - Seoyeon's Trial under Amatsu (level 70+).
 - 🌳 Chapter 1 "Song of the World Tree", from the small ash trees near Prontera and Payon to Destroyed
   Geffen, Verus and the Dark Whisper, with its memorial dungeons and dailies (level 200+).
+- 🔥 Chapter 2 "Song of the World Tree ~ Fragment of the End" (level 225+, after Chapter 1): from Sasha in
+  Ash Village to Muspelheim's Harvan village Yongjirak, the frozen Root of Death and Ragsruth, with Yongjirak's
+  dailies, Flame Gold Coins and Nirhult's Illusion.
 - 📚 The Juno Library's VR books, through the library annex (level 200+).
 - The eroded wing of Varmundt's mansion and the Dimensional Biosphere watchers (level 265+).
 
@@ -54,7 +57,7 @@ Prices, recipes and rewards that kRO doesn't publish are estimates in both block
 
 ## 🧍 Placeholder NPCs (setting `placeholders`, on)
 
-156 official NPCs whose dialog and logic exist in no server data yet, standing
+109 official NPCs whose dialog and logic exist in no server data yet, standing
 where the client puts them with their own sprite and name. 44 already work
 (storage lockers, guild storage, inns, repair, channel switches, the Varmundt
 elevator, Jormungandr's contact points, market guides); the rest greet you until

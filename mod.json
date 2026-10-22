@@ -26,8 +26,8 @@
       "key": "varmundt",
       "type": "boolean",
       "default": true,
-      "label": "Varmundt, Amatsu, Juno Library and Chapter 1",
-      "description": "The Fantasy Book \"Dungeon Food\" in Prontera's east library (level 100+), Varmundt's Chess Garden and the Deep Abyss (250+), Seoyeon's Trial under Amatsu (70+), Chapter 1 from the small ash trees near Prontera and Payon to the Dark Whisper (200+), the Juno Library's VR books (200+) and the mansion's eroded wing (265+). Turned off, its NPCs leave those maps."
+      "label": "Varmundt, Amatsu, Juno Library, Chapters 1-2",
+      "description": "The Fantasy Book \"Dungeon Food\" in Prontera's east library (100+), Varmundt's Chess Garden and Deep Abyss (250+), Seoyeon's Trial in Amatsu (70+), Chapter 1 from the small ash trees near Prontera and Payon (200+), Chapter 2 in Yongjirak and Ragsruth (225+), the Juno Library's VR books (200+) and the mansion's eroded wing (265+). Turned off, its NPCs leave those maps."
     },
     {
       "key": "star_forest",
@@ -48,7 +48,7 @@
       "type": "boolean",
       "default": true,
       "label": "Place the official NPCs that have no logic yet",
-      "description": "156 NPCs from the official clients' maps and signboards. 44 of them already work (storage, guild storage, inns, repair, channel switches, the Varmundt elevator, Jormungandr's contact points, market guides); the rest greet you until their quests and services are written."
+      "description": "109 NPCs from the official clients' maps and signboards. 44 of them already work (storage, guild storage, inns, repair, channel switches, the Varmundt elevator, Jormungandr's contact points, market guides); the rest greet you until their quests and services are written."
     },
     {
       "key": "npc_mover",
