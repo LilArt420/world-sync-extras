@@ -30,6 +30,13 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - Ash Village's shops, enchants and signposts.
 - 99 placeholders become these NPCs. Prices, recipes and rewards kRO doesn't publish are estimates.
 
+### 🛎️ New: iRO services (setting `iro_systems`, on)
+- The Devil in the Box's dailies in the Clock Tower Unknown Basement (5961-5971, with the 10 Pet Mimics).
+- Stall search in the Prontera and Payon markets and the Catalogue Magician.
+- The Eden Group's Dungeon Teleporter.
+- iRO's own services rAthena ships switched off (Keiki, Aperture, the Refining Researcher, Phelix, Izaac, Dark Luhir), placed where iRO has them; the Shadow Blacksmith, Madogear rental in Eclage and Mora, and Izlude's Increase AGI acolytes.
+- EXP rewards and a few rules are estimates. 18 placeholders become these NPCs.
+
 ### 🧍 Placeholders
 - 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 200 and the Star Forest block 99. Likewise 48 placeholders that iRO Quests (0.2.0 and 0.3.0) implements: the Overlook Water Dungeon signboards, the City Investment delivery recipients and the 2021 town quest chains. 3 more (Myu, Girl, Old Man) are already scripted by rAthena. 21 placeholders for retired or online-only iRO content are left out: the Weekend Race, the Battle Pass Season 3 signboards, the Talk Like a Pirate Event 2026 hub and the Redeem Code. 96 placeholders remain, 44 of them working.
 

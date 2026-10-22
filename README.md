@@ -55,6 +55,20 @@ dailies.
 
 Prices, recipes and rewards that kRO doesn't publish are estimates in both blocks.
 
+## 🛎️ iRO services (setting `iro_systems`, on)
+
+iRO's permanent services that World Sync placed as greeting-only NPCs.
+- The Clock Tower's **Devil in the Box** (Clock Tower 1F, level 200+) sends you into the Unknown Basement for
+  her daily meals (100/300/1000 monsters), a weekly feast (5000), a snack and her Pet Mimic's errand.
+- The **Catalog Dispensers** search the Prontera and Payon markets' stalls; the **Catalogue Magician**
+  (Prontera) sells the Window Shopper Catalogue.
+- The Eden Group's **Dungeon Teleporter** books a dungeon for your party (25,000z).
+- iRO's own NPCs that rAthena keeps switched off: Keiki and Aperture's warps, the Refining Researcher, Phelix
+  and Izaac, Dark Luhir. Plus the Shadow Blacksmith (Prontera), Madogear rental (Eclage, Mora) and Izlude's
+  Increase AGI acolytes.
+
+Rewards and a few rules are estimates where iRO doesn't publish them.
+
 ## 🧍 Placeholder NPCs (setting `placeholders`, on)
 
 96 official NPCs whose dialog and logic exist in no server data yet, standing

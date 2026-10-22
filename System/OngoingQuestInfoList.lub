@@ -34,6 +34,76 @@ QuestInfoList = {
 		Description = { "Let's release Yeongwi's soul and gain new strength." },
 		Summary = "Defeat Yeongwi"
 	},
+	[5961] = {
+		Title = "[Cooldown] Devil's Meal",
+		IconName = "ico_dq.bmp",
+		Description = { "Today, I served a meal to the <NAVI>[Devil in the Box]<INFO>c_tower1,243,202,0,101,0</INFO></NAVI>. Let's return tomorrow." },
+		Summary = "Reset after 20 hours",
+		CoolTimeQuest = 1
+	},
+	[5962] = {
+		Title = "[Daily] Devil's Breakfast",
+		IconName = "ico_dq.bmp",
+		Description = { "Let's treat the <NAVI>[Devil in the Box]<INFO>c_tower1,243,202,0,101,0</INFO></NAVI> to a meal. It is said that the remnants of the souls of 100 monsters in the <NAVI>[Clock Tower Unknown Basement]<INFO>clock_01,84,44,0,101,0</INFO></NAVI> are enough for a light breakfast." },
+		Summary = "Defeat 100 Monsters"
+	},
+	[5963] = {
+		Title = "[Daily] Devil's Lunch",
+		IconName = "ico_dq.bmp",
+		Description = { "Let's treat the <NAVI>[Devil in the Box]<INFO>c_tower1,243,202,0,101,0</INFO></NAVI> to a meal. It is said that the remnants of the souls of 300 monsters in the <NAVI>[Clock Tower Unknown Basement]<INFO>clock_01,84,44,0,101,0</INFO></NAVI> are enough for a lunch." },
+		Summary = "Defeat 300 Monsters"
+	},
+	[5964] = {
+		Title = "[Daily] Devil's Dinner",
+		IconName = "ico_dq.bmp",
+		Description = { "Let's treat the <NAVI>[Devil in the Box]<INFO>c_tower1,243,202,0,101,0</INFO></NAVI> to a meal. It is said that the remnants of the souls of 1000 monsters in the <NAVI>[Clock Tower Unknown Basement]<INFO>clock_01,84,44,0,101,0</INFO></NAVI> are enough for a big dinner." },
+		Summary = "Defeat 1000 Monsters"
+	},
+	[5965] = {
+		Title = "[Cooldown] Devil's Special Meal",
+		IconName = "ico_nq.bmp",
+		Description = { "The <NAVI>[Devil in the Box]<INFO>c_tower1,243,202,0,101,0</INFO></NAVI> was treated to this week's special meal. Well, can I treat you again on Monday?" },
+		Summary = "Reset at 4 AM",
+		CoolTimeQuest = 1
+	},
+	[5966] = {
+		Title = "[Weekly] Devil's Special Meal",
+		IconName = "ico_nq.bmp",
+		Description = { "The <NAVI>[Devil in the Box]<INFO>c_tower1,243,202,0,101,0</INFO></NAVI> requests a special meal about once a week. It is said that the remnants of the souls of 5000 monsters in the <NAVI>[Clock Tower Unknown Basement]<INFO>clock_01,84,44,0,101,0</INFO></NAVI> are enough for the special meal." },
+		Summary = "Defeat 5000 Monsters"
+	},
+	[5967] = {
+		Title = "[Cooldown] Devil's Snack",
+		IconName = "ico_dq.bmp",
+		Description = { "I served snacks to the <NAVI>[Devil in the Box]<INFO>c_tower1,243,202,0,101,0</INFO></NAVI>. I think she'll be asking again tomorrow. Should I gather 100 of <ITEM>[Joker's Wild]<INFO>25505</INFO></ITEM>, <ITEM>[Cute Broom]<INFO>25506</INFO></ITEM>, <ITEM>[Showy Coral Reef]<INFO>25507</INFO></ITEM>, and <ITEM>[Shiny round shell]<INFO>25509</INFO></ITEM>?" },
+		Summary = "Reset after 20 hours",
+		CoolTimeQuest = 1
+	},
+	[5968] = {
+		Title = "[Cooldown] Devil's Pet Mimic",
+		IconName = "ico_dq.bmp",
+		Description = { "I also took care of the meal for the <NAVI>[Devil in the Box]<INFO>c_tower1,243,202,0,101,0</INFO></NAVI>'s pet, Mimic." },
+		Summary = "Reset after 20 hours",
+		CoolTimeQuest = 1
+	},
+	[5969] = {
+		Title = "[Daily] Devil's Pet Mimic",
+		IconName = "ico_dq.bmp",
+		Description = { "The Devil in the box wants you to feed its pet Mimic. Let's find the pet Mimic somewhere in the <NAVI>[Clock Tower Unknown Basement]<INFO>clock_01,84,44,0,101,0</INFO></NAVI>." },
+		Summary = "Find Mimic"
+	},
+	[5970] = {
+		Title = "[Daily] Devil's Pet Mimic",
+		IconName = "ico_dq.bmp",
+		Description = { "The so-called pet stole the food, so I guess I did the job? Let's report back to the <NAVI>[Devil in the Box]<INFO>c_tower1,243,202,0,101,0</INFO></NAVI>." },
+		Summary = "Report to the Devil"
+	},
+	[5971] = {
+		Title = "Devil in the Box",
+		IconName = "ico_nq.bmp",
+		Description = { "I met a Devil in a box." },
+		Summary = ""
+	},
 	[8839] = {
 		Title = "Reluctantly pretending to help",
 		IconName = "ico_ep.bmp",
