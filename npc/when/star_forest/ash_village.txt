@@ -78,6 +78,22 @@ ygg_edge,227,221,4	script	Lala#wsf	10611,{
 	end;
 }
 
+// Lala's post in the Volcano biosphere (ab_lava1), the way back to Ash
+// Village (drafted by the iRO Quests session; navi 28623).
+ab_lava1,16,158,4	script	Lala#wsf_ab	10611,{
+	mes "[Lala]";
+	mes "I keep watch on the other-dimensional biospheres. This one is the volcano: mind the heat.";
+	next;
+	if (select("Take me back to Ash Village:I'll stay a while") == 2) {
+		mes "[Lala]";
+		mes "Come to me when you want to leave.";
+		close;
+	}
+	close2;
+	warp "ygg_edge", 225, 219;
+	end;
+}
+
 // Signposts on the village's branches.
 ygg_edge,259,245,4	script	Hvergelmir#wsf	10527,{
 	callfunc "F_WSF_Sign", "Hvergelmir's Fountain", "yggdrasil01", 145, 96;
