@@ -29,3 +29,5 @@
 14003 14008
 # Left out as retired (user OK once confirmed; confirmed 2026-10-22): iRO's Talk Like a Pirate Event 2026 hub on alb2trea
 b465-b470
+# Already scripted by rAthena (found by iRO Quests): Grunburti on que_god01t copies Grunburti#god
+27958
