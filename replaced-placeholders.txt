@@ -17,3 +17,7 @@
 14830 14831
 # Left out as retired or online-only iRO content (user OK 2026-10-21): the Weekend Race (iroweekrace), the Battle Pass Season 3 signboards, the Redeem Code
 13857-13865 b459-b463 b477
+# iRO Quests 0.3.0 (LilArt420/iro-quests): City Investment delivery recipients, the Morroc 2021 chain
+14074 14087 14089 14090 14091 14094 14098 14100 14102 14105 14107 14108 14109 14110 14122 14123 14125 14126 14130 14131 14142 14149 14150 14152 14153 14154 14157 14158 14162 14165 14166 14167 14169 14173 14175 13945-13948
+# Already scripted by rAthena (found by iRO Quests): Myu, Girl, Old Man Patting His Back
+29307 29010 23832

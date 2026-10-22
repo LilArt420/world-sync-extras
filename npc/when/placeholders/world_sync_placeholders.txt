@@ -5,28 +5,8 @@
 //= clients' navigation tables. Do not edit by hand.
 //============================================================
 
-abbey01,51,45,4	script	Shadow Chaser Acto#ws14074	481,{
-	mes "[Shadow Chaser Acto]";
-	mes "Hello there, adventurer.";
-	close;
-}
-abyss_01,247,267,4	script	Brother Cat#ws14175	561,{
-	mes "[Brother Cat]";
-	mes "Hello there, adventurer.";
-	close;
-}
-abyss_02,262,274,4	script	Rune Knight Wallaby#ws14142	468,{
-	mes "[Rune Knight Wallaby]";
-	mes "Hello there, adventurer.";
-	close;
-}
 alde_dun01,80,275,4	script	Wanderer Vivi#ws14177	704,{
 	mes "[Wanderer Vivi]";
-	mes "Hello there, adventurer.";
-	close;
-}
-beach_dun,90,40,4	script	Archmage Mil#ws14162	937,{
-	mes "[Archmage Mil]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -85,58 +65,8 @@ clock_01,37,70,4	script	Pet Mimic#ws16307	464,{
 	mes "Hello there, adventurer.";
 	close;
 }
-gef_dun00,171,174,4	script	Fire Beast#ws14169	889,{
-	mes "[Fire Beast]";
-	mes "Hello there, adventurer.";
-	close;
-}
-gl_cas01,198,37,4	script	Hunter Panini#ws14098	732,{
-	mes "[Hunter Panini]";
-	mes "Hello there, adventurer.";
-	close;
-}
 gl_chyard,144,119,4	script	Marylin#ws14008	677,{
 	mes "[Marylin]";
-	mes "Hello there, adventurer.";
-	close;
-}
-gl_chyard,156,52,4	script	Archbishop Tiles#ws14149	677,{
-	mes "[Archbishop Tiles]";
-	mes "Hello there, adventurer.";
-	close;
-}
-gl_dun01,124,265,4	script	Crusader Frost#ws14100	752,{
-	mes "[Crusader Frost]";
-	mes "Hello there, adventurer.";
-	close;
-}
-gl_in01,157,13,4	script	Archer Corel#ws14150	634,{
-	mes "[Archer Corel]";
-	mes "Hello there, adventurer.";
-	close;
-}
-gl_knt01,159,23,4	script	Rogue Irita#ws14102	747,{
-	mes "[Rogue Irita]";
-	mes "Hello there, adventurer.";
-	close;
-}
-gl_sew01,270,266,4	script	Knight Epad#ws14152	875,{
-	mes "[Knight Epad]";
-	mes "Hello there, adventurer.";
-	close;
-}
-gl_sew02,25,252,4	script	Cat Knight#ws14153	553,{
-	mes "[Cat Knight]";
-	mes "Hello there, adventurer.";
-	close;
-}
-gl_sew03,182,277,4	script	Bard Adolph#ws14105	486,{
-	mes "[Bard Adolph]";
-	mes "Hello there, adventurer.";
-	close;
-}
-gl_step,30,10,4	script	Desert Warrior#ws14154	946,{
-	mes "[Desert Warrior]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -157,28 +87,8 @@ hero_lb,131,153,4	script	Guild Storage Manager#ws15748	896,{
 	guildopenstorage;
 	end;
 }
-in_sphinx1,138,61,4	script	Blacksmith Haka#ws14165	726,{
-	mes "[Blacksmith Haka]";
-	mes "Hello there, adventurer.";
-	close;
-}
-in_sphinx3,205,37,4	script	Guardsman Seo#ws14122	570,{
-	mes "[Guardsman Seo]";
-	mes "Hello there, adventurer.";
-	close;
-}
 in_sphinx3,120,96,4	script	Elbury#ws17449	884,{
 	mes "[Elbury]";
-	mes "Hello there, adventurer.";
-	close;
-}
-in_sphinx4,130,130,4	script	Soldier Araki#ws14123	767,{
-	mes "[Soldier Araki]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iz_dun00,130,138,4	script	Village Little Boy#ws14157	706,{
-	mes "[Village Little Boy]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -522,58 +432,8 @@ jor_twig,192,211,4	script	Contact Point#ws14384	10429,{
 	if (.@c == 7) warp "jor_twig", 192, 212;
 	end;
 }
-jupe_core,134,283,4	script	Monk Wabi#ws14094	808,{
-	mes "[Monk Wabi]";
-	mes "Hello there, adventurer.";
-	close;
-}
-mag_dun01,221,198,4	script	Picnicer#ws14173	841,{
-	mes "[Picnicer]";
-	mes "Hello there, adventurer.";
-	close;
-}
-moc_pryd01,176,23,4	script	Old Signpost#ws13945	835,{
-	mes "[Old Signpost]";
-	mes "Hello there, adventurer.";
-	close;
-}
-moc_pryd01,20,192,4	script	Leader Maxim#ws13946	964,{
-	mes "[Leader Maxim]";
-	mes "Hello there, adventurer.";
-	close;
-}
-moc_pryd01,22,189,4	script	Jowon Ankana#ws13947	763,{
-	mes "[Jowon Ankana]";
-	mes "Hello there, adventurer.";
-	close;
-}
-moc_pryd01,17,190,4	script	Jowon Kusekili#ws13948	582,{
-	mes "[Jowon Kusekili]";
-	mes "Hello there, adventurer.";
-	close;
-}
-moc_pryd01,122,112,4	script	Rogue Misen#ws14166	747,{
-	mes "[Rogue Misen]";
-	mes "Hello there, adventurer.";
-	close;
-}
-moc_pryd03,92,83,4	script	Archbishop Shavil#ws14125	677,{
-	mes "[Archbishop Shavil]";
-	mes "Hello there, adventurer.";
-	close;
-}
-moc_pryd05,102,84,4	script	Rune Knight Press#ws14126	676,{
-	mes "[Rune Knight Press]";
-	mes "Hello there, adventurer.";
-	close;
-}
 orcsdun01,161,135,4	script	Extermination Squad Knight#ws14003	674,{
 	mes "[Extermination Squad Knight]";
-	mes "Hello there, adventurer.";
-	close;
-}
-orcsdun01,95,170,4	script	Band Member#ws14167	733,{
-	mes "[Band Member]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -587,38 +447,13 @@ pay_dun00,155,174,4	script	Reno#ws13960	10244,{
 	mes "Hello there, adventurer.";
 	close;
 }
-pay_dun00,36,53,4	script	Monk Tailing#ws14158	828,{
-	mes "[Monk Tailing]";
-	mes "Hello there, adventurer.";
-	close;
-}
 pay_dun00,15,31,4	script	Book of Illusion Vol. 1#ws17266	10372,{
 	mes "[Book of Illusion Vol. 1]";
 	mes "Hello there, adventurer.";
 	close;
 }
-pay_dun01,53,50,4	script	Ranger Motu#ws14107	10148,{
-	mes "[Ranger Motu]";
-	mes "Hello there, adventurer.";
-	close;
-}
 pay_dun02,134,123,4	script	Wandering Monk#ws13963	834,{
 	mes "[Wandering Monk]";
-	mes "Hello there, adventurer.";
-	close;
-}
-pay_dun02,33,63,4	script	Ranger Motu#ws14108	10148,{
-	mes "[Ranger Motu]";
-	mes "Hello there, adventurer.";
-	close;
-}
-prt_sewb2,19,33,4	script	Hunting Novice#ws14109	670,{
-	mes "[Hunting Novice]";
-	mes "Hello there, adventurer.";
-	close;
-}
-prt_sewb3,179,149,4	script	Deadly Thief#ws14110	670,{
-	mes "[Deadly Thief]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -629,36 +464,6 @@ prt_sewb3,144,181,4	script	Murian#ws17448	753,{
 }
 que_god01t,154,112,4	script	Grunburti#ws27958	826,{
 	mes "[Grunburti]";
-	mes "Hello there, adventurer.";
-	close;
-}
-ra_san02,219,256,4	script	Sanc. Research Center#ws14130	920,{
-	mes "[Sanc. Research Center]";
-	mes "Hello there, adventurer.";
-	close;
-}
-ra_san03,20,155,4	script	Sanc. Research Center#ws14131	920,{
-	mes "[Sanc. Research Center]";
-	mes "Hello there, adventurer.";
-	close;
-}
-tha_t07,37,178,4	script	Creator Elleg#ws14087	558,{
-	mes "[Creator Elleg]";
-	mes "Hello there, adventurer.";
-	close;
-}
-tha_t09,13,114,4	script	Creator Elleg#ws14089	558,{
-	mes "[Creator Elleg]";
-	mes "Hello there, adventurer.";
-	close;
-}
-tha_t10,158,111,4	script	Creator Elleg#ws14090	558,{
-	mes "[Creator Elleg]";
-	mes "Hello there, adventurer.";
-	close;
-}
-tha_t11,34,25,4	script	Creator Elleg#ws14091	558,{
-	mes "[Creator Elleg]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -679,11 +484,6 @@ ve_fild05,317,235,4	script	Verkhasel#ws17263	467,{
 }
 ve_fild05,313,110,4	script	Doomk#ws17332	481,{
 	mes "[Doomk]";
-	mes "Hello there, adventurer.";
-	close;
-}
-ve_fild05,327,308,4	script	Girl#ws29010	466,{
-	mes "[Girl]";
 	mes "Hello there, adventurer.";
 	close;
 }
@@ -1388,16 +1188,6 @@ rgs_dun1,203,156,4	script	Pile of Grass#ws20422	10430,{
 }
 treasure_n1,167,44,4	script	Laforet#ws32149	890,{
 	mes "[Laforet]";
-	mes "Hello there, adventurer.";
-	close;
-}
-um_fild04,201,200,4	script	Myu#ws29307	877,{
-	mes "[Myu]";
-	mes "Hello there, adventurer.";
-	close;
-}
-ve_fild05,257,130,4	script	Old Man Patting His Back#ws23832	945,{
-	mes "[Old Man Patting His Back]";
 	mes "Hello there, adventurer.";
 	close;
 }
