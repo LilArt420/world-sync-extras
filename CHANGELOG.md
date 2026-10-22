@@ -31,7 +31,7 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - 99 placeholders become these NPCs. Prices, recipes and rewards kRO doesn't publish are estimates.
 
 ### 🧍 Placeholders
-- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 200 and the Star Forest block 99. Likewise 46 placeholders that iRO Quests (0.2.0 and 0.3.0) implements: the Overlook Water Dungeon signboards, the City Investment delivery recipients, the Morroc and Payon chains. 3 more (Myu, Girl, Old Man) are already scripted by rAthena. 15 placeholders for retired or online-only iRO content are left out: the Weekend Race, the Battle Pass Season 3 signboards and the Redeem Code. 107 placeholders remain, 44 of them working.
+- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 200 and the Star Forest block 99. Likewise 46 placeholders that iRO Quests (0.2.0 and 0.3.0) implements: the Overlook Water Dungeon signboards, the City Investment delivery recipients, the Morroc and Payon chains. 3 more (Myu, Girl, Old Man) are already scripted by rAthena. 15 placeholders for retired or online-only iRO content are left out: the Weekend Race, the Battle Pass Season 3 signboards and the Redeem Code. 105 placeholders remain, 44 of them working.
 
 ### 👾 World Sync monsters (db/mob_db.yml, until the app ships the same fixes)
 - They drop again: 154 monsters had drops with no chance published, which the server gave the 0.01% floor. They now use the typical chance of the same kind of item (materials 5%, cards 0.01%, equipment 0.03-0.3%).

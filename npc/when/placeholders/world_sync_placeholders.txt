@@ -60,11 +60,6 @@ clock_01,37,70,4	script	Pet Mimic#ws16307	464,{
 	mes "Hello there, adventurer.";
 	close;
 }
-gl_chyard,144,119,4	script	Marylin#ws14008	677,{
-	mes "[Marylin]";
-	mes "Hello there, adventurer.";
-	close;
-}
 hero_lb,131,153,4	script	Guild Storage Manager#ws15748	896,{
 	mes "[Guild Storage Manager]";
 	if (!getcharid(2)) {
@@ -426,11 +421,6 @@ jor_twig,192,211,4	script	Contact Point#ws14384	10429,{
 	if (.@c == 6) warp "jor_twice", 76, 101;
 	if (.@c == 7) warp "jor_twig", 192, 212;
 	end;
-}
-orcsdun01,161,135,4	script	Extermination Squad Knight#ws14003	674,{
-	mes "[Extermination Squad Knight]";
-	mes "Hello there, adventurer.";
-	close;
 }
 orcsdun01,91,170,4	script	Book of Illusion Vol. 2#ws17267	10373,{
 	mes "[Book of Illusion Vol. 2]";

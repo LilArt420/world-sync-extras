@@ -57,7 +57,7 @@ Prices, recipes and rewards that kRO doesn't publish are estimates in both block
 
 ## 🧍 Placeholder NPCs (setting `placeholders`, on)
 
-107 official NPCs whose dialog and logic exist in no server data yet, standing
+105 official NPCs whose dialog and logic exist in no server data yet, standing
 where the client puts them with their own sprite and name. 44 already work
 (storage lockers, guild storage, inns, repair, channel switches, the Varmundt
 elevator, Jormungandr's contact points, market guides); the rest greet you until
