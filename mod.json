@@ -37,6 +37,13 @@
       "description": "The Star Emperor job change in the Meteor Forest (TaeKwon Masters, base 99 / job 50: Nalson in Payon), Sanctuary Herosria's Garden of Dawn (portals in the four castle realms) and Ash Village's shops, enchants and signposts at the edge of the World Tree. Turned off, their NPCs leave the maps (their placeholders don't come back)."
     },
     {
+      "key": "iro_systems",
+      "type": "boolean",
+      "default": true,
+      "label": "iRO services: the Devil in the Box, market catalogs, Eden's Dungeon Teleporter and town helpers",
+      "description": "The Clock Tower's Devil in the Box and her Unknown Basement dailies (level 200+), stall search in the Prontera and Payon markets, the Catalogue Magician, Eden's Dungeon Teleporter, Aperture and kitchen traders, Keiki's warps, the Refining Researcher, the Shadow Blacksmith, Madogear rental in Eclage and Mora, and Izlude's Increase AGI acolytes. Turned off, they leave."
+    },
+    {
       "key": "entrances",
       "type": "boolean",
       "default": false,
