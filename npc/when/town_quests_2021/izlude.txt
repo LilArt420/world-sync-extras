@@ -98,7 +98,7 @@ izlu2dun,105,68,4	script	Student Helden#iqizl	798,{
 		erasequest 21227;
 		iq_izl21 = iq_izl21 | 4;
 		next;
-		callfunc "F_IQ_TownDaily", 21228, 21229, 9600, 8380, Single_Cell, 10, "Student Helden", 40;
+		callfunc "F_IQ_TownDaily", 21228, 21229, 9600, 8380, 1052 /* Single_Cell */, 10, "Student Helden", 40;
 		end;
 	}
 	if (!(iq_izl21 & 4)) {
@@ -106,7 +106,7 @@ izlu2dun,105,68,4	script	Student Helden#iqizl	798,{
 		mes "courage...";
 		close;
 	}
-	callfunc "F_IQ_TownDaily", 21228, 21229, 9600, 8380, Single_Cell, 10, "Student Helden", 40;
+	callfunc "F_IQ_TownDaily", 21228, 21229, 9600, 8380, 1052 /* Single_Cell */, 10, "Student Helden", 40;
 	end;
 }
 
@@ -126,11 +126,11 @@ izlu2dun,108,68,4	script	Wandering Store Owner#iqizl	496,{
 			setquest 21230;
 			close;
 		}
-		if (countitem(Nipper) < 5) {
+		if (countitem(960 /* Nipper */) < 5) {
 			mes "5 Claws, from the Vadons.";
 			close;
 		}
-		delitem Nipper, 5;
+		delitem 960 /* Nipper */, 5;
 		erasequest 21230;
 		getexp 7800, 8380;
 		iq_izl21 = iq_izl21 | 8;
@@ -141,7 +141,7 @@ izlu2dun,108,68,4	script	Wandering Store Owner#iqizl	496,{
 	mes "The tweezers sell! Strike while";
 	mes "the iron is hot. More claws?";
 	next;
-	callfunc "F_IQ_TownDaily", 21231, 21232, 7800, 8380, Nipper, 5, "Wandering Store Owner", 40;
+	callfunc "F_IQ_TownDaily", 21231, 21232, 7800, 8380, 960 /* Nipper */, 5, "Wandering Store Owner", 40;
 	end;
 }
 
@@ -225,12 +225,12 @@ iz_dun02,229,231,4	script	Leader Maxim#iqizl	964,{
 			setquest 21241;
 			close;
 		}
-		if (!countitem(Fin) || !countitem(Lip_Of_Ancient_Fish)) {
+		if (!countitem(951 /* Fin */) || !countitem(1054 /* Lip_Of_Ancient_Fish */)) {
 			mes "A Fin and Ancient Lips! Proof!";
 			close;
 		}
-		delitem Fin, 1;
-		delitem Lip_Of_Ancient_Fish, 1;
+		delitem 951 /* Fin */, 1;
+		delitem 1054 /* Lip_Of_Ancient_Fish */, 1;
 		erasequest 21241;
 		getexp 17200, 15600;
 		iq_izl21 = iq_izl21 | 256;
@@ -261,11 +261,11 @@ iz_dun02,228,229,4	script	Jowon Kusekili#iqizl	582,{
 			setquest 21234;
 			close;
 		}
-		if (countitem(Chinese_Ink) < 10) {
+		if (countitem(1024 /* Chinese_Ink */) < 10) {
 			mes "10 Squid Ink, from the Marse.";
 			close;
 		}
-		delitem Chinese_Ink, 10;
+		delitem 1024 /* Chinese_Ink */, 10;
 		erasequest 21234;
 		getexp 10640, 10240;
 		iq_izl21 = iq_izl21 | 32;
@@ -276,7 +276,7 @@ iz_dun02,228,229,4	script	Jowon Kusekili#iqizl	582,{
 	}
 	mes "Want to bring me ink again?";
 	next;
-	callfunc "F_IQ_TownDaily", 21239, 21240, 10640, 10240, Chinese_Ink, 10, "Kusekili", 50;
+	callfunc "F_IQ_TownDaily", 21239, 21240, 10640, 10240, 1024 /* Chinese_Ink */, 10, "Kusekili", 50;
 	end;
 
 S_Soup:
@@ -307,11 +307,11 @@ iz_dun02,231,230,4	script	Jowon Ankana#iqizl	763,{
 			setquest 21235;
 			close;
 		}
-		if (checkquest(21235, HUNTING) != 2 || !countitem(Heart_Of_Mermaid)) {
+		if (checkquest(21235, HUNTING) != 2 || !countitem(950 /* Heart_Of_Mermaid */)) {
 			mes "10 of them... and a Heart. *hic*";
 			close;
 		}
-		delitem Heart_Of_Mermaid, 1;
+		delitem 950 /* Heart_Of_Mermaid */, 1;
 		erasequest 21235;
 		setquest 21244;
 		getexp 9600, 9600;
@@ -330,6 +330,6 @@ iz_dun02,231,230,4	script	Jowon Ankana#iqizl	763,{
 	}
 	mes "*hic* Did I really see her?";
 	next;
-	callfunc "F_IQ_TownDaily", 21235, 21244, 9600, 9600, Heart_Of_Mermaid, 1, "Nonda Ancana", 50;
+	callfunc "F_IQ_TownDaily", 21235, 21244, 9600, 9600, 950 /* Heart_Of_Mermaid */, 1, "Nonda Ancana", 50;
 	end;
 }

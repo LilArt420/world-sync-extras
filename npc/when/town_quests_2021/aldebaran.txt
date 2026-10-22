@@ -119,13 +119,13 @@ yuno_fild01,189,154,4	script	Kiel Hyre Academy Student#iqald1	906,{
 yuno_fild08,179,200,4	script	Kiel Hyre Academy Student#iqald2	906,{
 	mes "[Kiel Hyre Academy Student]";
 	if (checkquest(21279) >= 0 && checkquest(21279) < 2) {
-		if (countitem(7107) < 5 || countitem(Peco_Wing_Feather) < 5) {
+		if (countitem(7107) < 5 || countitem(7101 /* Peco_Wing_Feather */) < 5) {
 			mes "5 Antelope Skins and 5 Peco Peco";
 			mes "Feathers, please!";
 			close;
 		}
 		delitem 7107, 5;	// Antelope Skin
-		delitem Peco_Wing_Feather, 5;
+		delitem 7101 /* Peco_Wing_Feather */, 5;
 		erasequest 21279;
 		getexp 14200, 14200;
 		iq_ald21 = iq_ald21 | 2;
@@ -156,7 +156,7 @@ yuno_fild08,172,198,4	script	Cat Paw Merchant#iqald	495,{
 	next;
 	if (checkquest(21282) == 1 && countitem(7107) >= 10) {
 		// F_IQ_TownDaily takes one item; the skins are taken here.
-		if (countitem(Peco_Wing_Feather) < 10) {
+		if (countitem(7101 /* Peco_Wing_Feather */) < 10) {
 			mes "[Cat Paw Merchant]";
 			mes "10 Peco Peco Feathers too, meow.";
 			close;
@@ -168,7 +168,7 @@ yuno_fild08,172,198,4	script	Cat Paw Merchant#iqald	495,{
 		mes "Feathers, meow.";
 		close;
 	}
-	callfunc "F_IQ_TownDaily", 21282, 21283, 14200, 14200, Peco_Wing_Feather, 10, "Cat Paw Merchant", 70;
+	callfunc "F_IQ_TownDaily", 21282, 21283, 14200, 14200, 7101 /* Peco_Wing_Feather */, 10, "Cat Paw Merchant", 70;
 	end;
 }
 
@@ -210,7 +210,7 @@ aldebaran,143,132,4	script	Clock Tower Manager#iqald	712,{
 // The clock dailies also pay a Key of Clock Tower and a Key of Underground (Eden board).
 function	script	F_IQ_ClockDaily	{
 	if (checkquest(getarg(0)) == 1 && checkquest(getarg(0), HUNTING) == 2)
-		getitem Key_Of_Clock_Tower, 1;
-	callfunc "F_IQ_TownDaily", getarg(0), getarg(1), getarg(2), getarg(3), 0, 0, "Cerdin", 80, Underground_Key, 1;
+		getitem 7026 /* Key_Of_Clock_Tower */, 1;
+	callfunc "F_IQ_TownDaily", getarg(0), getarg(1), getarg(2), getarg(3), 0, 0, "Cerdin", 80, 7027 /* Underground_Key */, 1;
 	end;
 }

@@ -76,11 +76,11 @@ moc_fild17,358,277,4	script	Wandering Boy#iqmoc	896,{
 	}
 	if (iq_moc21 == 2) {
 		mes "[Wandering Boy]";
-		if (checkquest(21202, HUNTING) != 2 || countitem(Grit) < 5) {
+		if (checkquest(21202, HUNTING) != 2 || countitem(1056 /* Grit */) < 5) {
 			mes "10 Sandmen and 5 Grit, please!";
 			close;
 		}
-		delitem Grit, 5;
+		delitem 1056 /* Grit */, 5;
 		erasequest 21202;
 		setquest 21203;
 		getexp 10800, 9600;
@@ -92,7 +92,7 @@ moc_fild17,358,277,4	script	Wandering Boy#iqmoc	896,{
 		close;
 	}
 	if (iq_moc21 >= 3) {
-		callfunc "F_IQ_TownDaily", 21202, 21203, 10800, 9600, Grit, 5, "Wandering Boy", 50;
+		callfunc "F_IQ_TownDaily", 21202, 21203, 10800, 9600, 1056 /* Grit */, 5, "Wandering Boy", 50;
 		end;
 	}
 	mes "[Wandering Boy]";
@@ -118,13 +118,13 @@ moc_ruins,104,122,4	script	Elderly Scholar#iqmoc2	897,{
 		close;
 	}
 	if (iq_moc21 == 4) {
-		if (!countitem(Field_Shovel)) {
+		if (!countitem(6381 /* Field_Shovel */)) {
 			mes "My Field Shovel! Verits and";
 			mes "Minorous in the pyramid's basement";
 			mes "have it, I'm sure.";
 			close;
 		}
-		delitem Field_Shovel, 1;
+		delitem 6381 /* Field_Shovel */, 1;
 		erasequest 21204;
 		getexp 12000, 12800;
 		iq_moc21 = 5;
@@ -214,11 +214,11 @@ moc_ruins,101,124,4	script	Ernest#iqmoc	881,{
 		iq_moc21 = 11;
 		close;
 	case 11:
-		if (!countitem(Rotten_Bandage)) {
+		if (!countitem(930 /* Rotten_Bandage */)) {
 			mes "One Rotten Bandage, from an Isis.";
 			close;
 		}
-		delitem Rotten_Bandage, 1;
+		delitem 930 /* Rotten_Bandage */, 1;
 		erasequest 21210;
 		getexp 16740, 17880;
 		mes "Perfect. Look at the weave...";
@@ -249,12 +249,12 @@ moc_ruins,101,124,4	script	Ernest#iqmoc	881,{
 		iq_moc21 = 13;
 		close;
 	case 13:
-		if (!countitem(Worn_Out_Papyrus)) {
+		if (!countitem(25073 /* Worn_Out_Papyrus */)) {
 			mes "One Worn-out Papyrus, from a";
 			mes "Marduk in the Sphinx.";
 			close;
 		}
-		delitem Worn_Out_Papyrus, 1;
+		delitem 25073 /* Worn_Out_Papyrus */, 1;
 		erasequest 21212;
 		getexp 25640, 24210;
 		iq_moc21 = 14;
@@ -273,7 +273,7 @@ moc_ruins,101,124,4	script	Ernest#iqmoc	881,{
 		switch (select("Defeat Isis (daily):The Sphinx's workers (daily):Secrets of the Sphinx (daily):Never mind")) {
 		case 1: callfunc "F_IQ_TownDaily", 21213, 21214, 16740, 17880, 0, 0, "Ernest", 60; end;
 		case 2: callfunc "F_IQ_TownDaily", 21215, 21216, 19450, 20090, 0, 0, "Ernest", 60; end;
-		case 3: callfunc "F_IQ_TownDaily", 21217, 21218, 25640, 24210, Worn_Out_Papyrus, 10, "Ernest", 60; end;
+		case 3: callfunc "F_IQ_TownDaily", 21217, 21218, 25640, 24210, 25073 /* Worn_Out_Papyrus */, 10, "Ernest", 60; end;
 		case 4: close;
 		}
 	}
@@ -300,11 +300,11 @@ moc_pryd01,20,192,4	script	Leader Maxim#iqmoc	964,{
 		close;
 	}
 	if (iq_moc21 == 9) {
-		if (!countitem(Mementos)) {
+		if (!countitem(934 /* Mementos */)) {
 			mes "1 Memento, from a Mummy.";
 			close;
 		}
-		delitem Mementos, 1;
+		delitem 934 /* Mementos */, 1;
 		erasequest 21208;
 		getexp 7200, 7800;
 		setquest 21209;
@@ -319,7 +319,7 @@ moc_pryd01,20,192,4	script	Leader Maxim#iqmoc	964,{
 		mes "Still can't open the blue box.";
 		mes "Help us out again today?";
 		next;
-		callfunc "F_IQ_TownDaily", 21219, 21220, 7200, 7800, Mementos, 1, "Leader Maxim", 40;
+		callfunc "F_IQ_TownDaily", 21219, 21220, 7200, 7800, 934 /* Mementos */, 1, "Leader Maxim", 40;
 		end;
 	}
 	mes "Pyramid research team, Leader";

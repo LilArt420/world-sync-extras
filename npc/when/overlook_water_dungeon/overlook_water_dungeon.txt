@@ -68,7 +68,7 @@ iz_dun00t,174,169,4	script	Sign Board#iqowd1	837,{
 		mes "Byalan collection, carefully:";
 		mes "^FF0000you can only choose once.^000000";
 		next;
-		setarray .@card[0], Kukre_Card, Vadon_Card, Plankton_Card, Hydra_Card, Marina_Card, Cornutus_Card, Marse_Card, Obeaune_Card, Merman_Card, Marc_Card, Phen_Card, Sword_Fish_Card, Marine_Sphere_Card, Strouf_Card, Deviace_Card;
+		setarray .@card[0], 4027 /* Kukre_Card */, 4049 /* Vadon_Card */, 4024 /* Plankton_Card */, 4035 /* Hydra_Card */, 4055 /* Marina_Card */, 4061 /* Cornutus_Card */, 4095 /* Marse_Card */, 4093 /* Obeaune_Card */, 4199 /* Merman_Card */, 4105 /* Marc_Card */, 4077 /* Phen_Card */, 4089 /* Sword_Fish_Card */, 4084 /* Marine_Sphere_Card */, 4111 /* Strouf_Card */, 4125 /* Deviace_Card */;
 		.@menu$ = "";
 		for (.@i = 0; .@i < getarraysize(.@card); .@i++)
 			.@menu$ += getitemname(.@card[.@i]) + ":";
@@ -131,11 +131,11 @@ iz_dun00t,174,169,4	script	Sign Board#iqowd1	837,{
 	getexp .@be[.@f] / 2, .@je[.@f] / 2;
 	getexp .@be[.@f] - .@be[.@f] / 2, .@je[.@f] - .@je[.@f] / 2;
 	switch (.@f) {
-	case 1: getitem (.@c == 1 ? Guard_ : Buckler_), 1; break;
-	case 2: getitem (.@c == 1 ? Muffler_ : Manteau_), 1; break;
-	case 3: getitem Elunium, 2; break;
-	case 4: getitem Rosary, 1; break;
-	case 5: getitem Rosary, 1; getitem Elunium, 2; break;
+	case 1: getitem (.@c == 1 ? 2102 /* Guard_ */ : 2104 /* Buckler_ */), 1; break;
+	case 2: getitem (.@c == 1 ? 2504 /* Muffler_ */ : 2506 /* Manteau_ */), 1; break;
+	case 3: getitem 985 /* Elunium */, 2; break;
+	case 4: getitem 2608 /* Rosary */, 1; break;
+	case 5: getitem 2608 /* Rosary */, 1; getitem 985 /* Elunium */, 2; break;
 	}
 	if (.@f == 5) {
 		next;

@@ -42,12 +42,12 @@ comodo,206,304,4	script	Chef Bobby Q#iqcmd	46,{
 		iq_cmd21 = 1;
 		close;
 	case 1:
-		if (checkquest(21401, HUNTING) != 2 || countitem(Sticky_Webfoot) < 5) {
+		if (checkquest(21401, HUNTING) != 2 || countitem(918 /* Sticky_Webfoot */) < 5) {
 			mes "10 Thara Frogs and 5 Sticky";
 			mes "Webfoots, from the Eastern Cave!";
 			close;
 		}
-		delitem Sticky_Webfoot, 5;
+		delitem 918 /* Sticky_Webfoot */, 5;
 		erasequest 21401;
 		getexp 5500, 5500;
 		setquest 21402;
@@ -65,12 +65,12 @@ comodo,206,304,4	script	Chef Bobby Q#iqcmd	46,{
 		iq_cmd21 = 5;
 		close;
 	case 8:
-		if (countitem(Sticky_Webfoot) < 10) {
+		if (countitem(918 /* Sticky_Webfoot */) < 10) {
 			mes "10 Sticky Webfoots, to my camp!";
 			mes "From the Thara Frogs!";
 			close;
 		}
-		delitem Sticky_Webfoot, 10;
+		delitem 918 /* Sticky_Webfoot */, 10;
 		erasequest 21408;
 		getexp 5500, 5500;
 		iq_cmd21 = 9;
@@ -82,7 +82,7 @@ comodo,206,304,4	script	Chef Bobby Q#iqcmd	46,{
 	if (iq_cmd21 >= 9) {
 		mes "Back for more cooking?";
 		next;
-		callfunc "F_IQ_TownDaily", 21411, 21410, 5500, 5500, Sticky_Webfoot, 10, "Chef Bobby Q", 30;
+		callfunc "F_IQ_TownDaily", 21411, 21410, 5500, 5500, 918 /* Sticky_Webfoot */, 10, "Chef Bobby Q", 30;
 		end;
 	}
 	mes "The sauce! How is the sauce?";
@@ -150,11 +150,11 @@ comodo,249,300,4	script	Bunny Q#iqcmd	46,{
 		iq_cmd21 = 6;
 		close;
 	case 7:
-		if (checkquest(21407, HUNTING) != 2 || countitem(Tentacle) < 5) {
+		if (checkquest(21407, HUNTING) != 2 || countitem(962 /* Tentacle */) < 5) {
 			mes "10 Hydras, 5 Tentacles. Please!";
 			close;
 		}
-		delitem Tentacle, 5;
+		delitem 962 /* Tentacle */, 5;
 		erasequest 21407;
 		getexp 5500, 5500;
 		setquest 21408;
@@ -171,7 +171,7 @@ comodo,249,300,4	script	Bunny Q#iqcmd	46,{
 		mes "My skin's still not quite right.";
 		mes "Another massage?";
 		next;
-		callfunc "F_IQ_TownDaily", 21413, 21412, 5500, 5500, Tentacle, 5, "Bunny Q", 30;
+		callfunc "F_IQ_TownDaily", 21413, 21412, 5500, 5500, 962 /* Tentacle */, 5, "Bunny Q", 30;
 		end;
 	}
 	mes "Hi! Dad's out cooking somewhere.";

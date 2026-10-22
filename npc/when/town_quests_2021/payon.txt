@@ -25,11 +25,11 @@
 
 payon,192,109,4	script	Village Grandfather#iqpay	842,{
 	mes "[Village Grandfather]";
-	if (checkquest(21019) >= 0 && checkquest(21019) < 2 && countitem(Liqueur_Of_Lotus) < 10 && countitem(FaintBreathing) < 10) {
+	if (checkquest(21019) >= 0 && checkquest(21019) < 2 && countitem(25078 /* Liqueur_Of_Lotus */) < 10 && countitem(25079 /* FaintBreathing */) < 10) {
 		mes "The monk wants to calm the poor";
 		mes "souls with a drink? Here, ^0000FFHa";
 		mes "Soju^000000. The good stuff.";
-		getitem Liqueur_Of_Lotus, 10 - countitem(Liqueur_Of_Lotus);
+		getitem 25078 /* Liqueur_Of_Lotus */, 10 - countitem(25078 /* Liqueur_Of_Lotus */);
 		close;
 	}
 	switch (iq_pay21) {
@@ -137,7 +137,7 @@ pay_arche,41,131,4	script	Guard#iqpay	708,{
 	next;
 	switch (select("Undead War (daily):Soul Purification Ritual (daily):Never mind")) {
 	case 1: callfunc "F_IQ_TownDaily", 21015, 21016, 3200, 3000, 0, 0, "Guard", 15; end;
-	case 2: callfunc "F_IQ_TownDaily", 21017, 21018, 13200, 12300, Amulet, 15, "Guard", 50; end;
+	case 2: callfunc "F_IQ_TownDaily", 21017, 21018, 13200, 12300, 609 /* Amulet */, 15, "Guard", 50; end;
 	case 3: close;
 	}
 }
@@ -198,12 +198,12 @@ pay_arche,139,33,4	script	Elder Payon#iqpay	684,{
 	}
 	if (iq_pay21 >= 8) {
 		if (checkquest(21023) >= 0 && checkquest(21023) < 2) {
-			if (!countitem(FoxBeads)) {
+			if (!countitem(25080 /* FoxBeads */)) {
 				mes "The Moonlight Flower, in the";
 				mes "abandoned village. Her Fox Bead.";
 				close;
 			}
-			delitem FoxBeads, 1;
+			delitem 25080 /* FoxBeads */, 1;
 			erasequest 21023;
 			if (checkquest(21024) >= 0)
 				erasequest 21024;
@@ -231,7 +231,7 @@ pay_dun02,134,123,4	script	Wandering Monk#iqpay	834,{
 	mes "liquor calms them. The old man by";
 	mes "the well in Payon brews it.";
 	next;
-	callfunc "F_IQ_TownDaily", 21019, 21020, 9600, 9600, FaintBreathing, 10, "Wandering Monk", 50;
+	callfunc "F_IQ_TownDaily", 21019, 21020, 9600, 9600, 25079 /* FaintBreathing */, 10, "Wandering Monk", 50;
 	end;
 }
 
@@ -242,12 +242,12 @@ pay_dun03,210,133,0	script	Ghost Fire#iqpay1	10042,{
 		mes "A pale flame weeps in the dark.";
 		close;
 	}
-	if (countitem(FaintBreathing) >= 10) {
+	if (countitem(25079 /* FaintBreathing */) >= 10) {
 		mes "You already hold 10 Last Breaths.";
 		mes "Take them to the Wandering Monk.";
 		close;
 	}
-	if (!countitem(Liqueur_Of_Lotus)) {
+	if (!countitem(25078 /* Liqueur_Of_Lotus */)) {
 		mes "The flame waits. You have no Ha";
 		mes "Soju to offer it.";
 		close;
@@ -256,8 +256,8 @@ pay_dun03,210,133,0	script	Ghost Fire#iqpay1	10042,{
 	next;
 	if (select("Pour a cup:Leave it") == 2)
 		close;
-	delitem Liqueur_Of_Lotus, 1;
-	getitem FaintBreathing, 1;
+	delitem 25078 /* Liqueur_Of_Lotus */, 1;
+	getitem 25079 /* FaintBreathing */, 1;
 	mes "The flame sways and fades, leaving";
 	mes "a cold breath in your hand.";
 	close2;
@@ -345,7 +345,7 @@ payon,198,111,4	script	Young Apprentice#iqpay	754,{
 	mes "Handkerchiefs^000000. The Sohee in the";
 	mes "abandoned village carry them.";
 	next;
-	callfunc "F_IQ_TownDaily", 21021, 21022, 10480, 12400, Handkerchief_of_Girl, 3, "Young Apprentice", 50;
+	callfunc "F_IQ_TownDaily", 21021, 21022, 10480, 12400, 25188 /* Handkerchief_of_Girl */, 3, "Young Apprentice", 50;
 	end;
 }
 
@@ -377,7 +377,7 @@ payon,173,77,4	script	Anxious Middle-Aged Man#iqpay	88,{
 		iq_pay_dd = 4;
 		close;
 	}
-	callfunc "F_IQ_TownDaily", 21028, 21029, 800, 800, Tree_Of_Archer_3, 3, "Anxious Middle-Aged Man", 1;
+	callfunc "F_IQ_TownDaily", 21028, 21029, 800, 800, 1068 /* Tree_Of_Archer_3 */, 3, "Anxious Middle-Aged Man", 1;
 	end;
 }
 
@@ -395,11 +395,11 @@ pay_fild01,328,351,4	script	Relaxed Man#iqpay	881,{
 		close;
 	}
 	if (iq_pay_dd == 2) {
-		if (checkquest(21027, HUNTING) != 2 || countitem(Tree_Of_Archer_3) < 2) {
+		if (checkquest(21027, HUNTING) != 2 || countitem(1068 /* Tree_Of_Archer_3 */) < 2) {
 			mes "3 Willows, 2 Barren Trunks.";
 			close;
 		}
-		delitem Tree_Of_Archer_3, 2;
+		delitem 1068 /* Tree_Of_Archer_3 */, 2;
 		erasequest 21027;
 		setquest 21039;
 		iq_pay_dd = 3;
@@ -430,12 +430,12 @@ payon,217,94,4	script	Worried Young Lady#iqpay	77,{
 		}
 		erasequest 21030;
 		getexp 1600, 1400;
-		getitem Strawberry, 5;
+		getitem 578 /* Strawberry */, 5;
 		iq_pay_side = iq_pay_side | 1;
 		mes "Thank you! Have some strawberries.";
 		close;
 	}
-	callfunc "F_IQ_TownDaily", 21031, 21032, 1600, 1400, 0, 0, "Worried Young Lady", 15, Strawberry, 5;
+	callfunc "F_IQ_TownDaily", 21031, 21032, 1600, 1400, 0, 0, "Worried Young Lady", 15, 578 /* Strawberry */, 5;
 	end;
 }
 
@@ -529,6 +529,6 @@ payon,203,113,4	script	Wandering Monk#iqpay2	834,{
 	mes "The ghost fires in the abandoned";
 	mes "village weep for a cup of it.";
 	next;
-	callfunc "F_IQ_TownDaily", 21019, 21020, 9600, 9600, FaintBreathing, 10, "Wandering Monk", 50;
+	callfunc "F_IQ_TownDaily", 21019, 21020, 9600, 9600, 25079 /* FaintBreathing */, 10, "Wandering Monk", 50;
 	end;
 }

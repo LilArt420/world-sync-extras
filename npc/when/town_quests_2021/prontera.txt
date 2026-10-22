@@ -146,12 +146,12 @@ prontera,62,339,4	script	Knight's Office Staff#iqprt	893,{
 		mes "Leader in Orc Village, then his";
 		mes "deputy at the Goblin settlement.";
 		.@need = (checkquest(21267) >= 0 && checkquest(21267) < 2) ? 1 : 2;
-		if (countitem(KnightsSupply) < .@need) {
+		if (countitem(25077 /* KnightsSupply */) < .@need) {
 			next;
 			mes "[Knight's Office Staff]";
 			mes "Lost them? Here, more crates.";
 			mes "Try not to drop these.";
-			getitem KnightsSupply, .@need - countitem(KnightsSupply);
+			getitem 25077 /* KnightsSupply */, .@need - countitem(25077 /* KnightsSupply */);
 		}
 		close;
 	}
@@ -178,7 +178,7 @@ prontera,62,339,4	script	Knight's Office Staff#iqprt	893,{
 	if (checkquest(21266) == 2)
 		erasequest 21266;
 	setquest 21266;
-	getitem KnightsSupply, 2;
+	getitem 25077 /* KnightsSupply */, 2;
 	mes "[Knight's Office Staff]";
 	mes "Two crates. One for the Leader,";
 	mes "one for his deputy. Off you go.";
@@ -188,12 +188,12 @@ prontera,62,339,4	script	Knight's Office Staff#iqprt	893,{
 gef_fild10,78,340,4	script	Extermination Commander#iqprt	468,{
 	mes "[Subjugation Leader]";
 	if (checkquest(21266) >= 0 && checkquest(21266) < 2) {
-		if (countitem(KnightsSupply) < 2) {
+		if (countitem(25077 /* KnightsSupply */) < 2) {
 			mes "Supplies? Where? The office should";
 			mes "have given you two crates.";
 			close;
 		}
-		delitem KnightsSupply, 1;
+		delitem 25077 /* KnightsSupply */, 1;
 		erasequest 21266;
 		setquest 21267;
 		iq_prt21 = iq_prt21 | 8;
@@ -222,12 +222,12 @@ gef_fild10,78,340,4	script	Extermination Commander#iqprt	468,{
 gef_fild11,128,351,4	script	Deputy Leader#iqprt	733,{
 	mes "[Subjugation Deputy Leader]";
 	if (checkquest(21267) >= 0 && checkquest(21267) < 2) {
-		if (!countitem(KnightsSupply)) {
+		if (!countitem(25077 /* KnightsSupply */)) {
 			mes "The Leader sent you? Then where";
 			mes "are the supplies?";
 			close;
 		}
-		delitem KnightsSupply, 1;
+		delitem 25077 /* KnightsSupply */, 1;
 		erasequest 21267;
 		if (checkquest(21268) >= 0)
 			erasequest 21268;

@@ -66,20 +66,20 @@ alberta_in,20,19,4	script	Department of Employment Masha#iqss	73,{
 		.@q = iq_ssq;
 		if (checkquest(.@q + 1) == 1) {
 			// Receipt, box or data card back from the request.
-			if ((.@q == 8334 || .@q == 8342) && !countitem(Slightly_Old_Bax)) {
+			if ((.@q == 8334 || .@q == 8342) && !countitem(25359 /* Slightly_Old_Bax */)) {
 				mes "Where's the box? Murian or Elbury";
 				mes "gave you an antique box for me.";
 				close;
 			}
-			if (.@q == 8344 && !countitem(Retrieve_Datacard)) {
+			if (.@q == 8344 && !countitem(25358 /* Retrieve_Datacard */)) {
 				mes "The data card, please. The one you";
 				mes "put into the Bio Lab's device.";
 				close;
 			}
 			if (.@q == 8334 || .@q == 8342)
-				delitem Slightly_Old_Bax, 1;
+				delitem 25359 /* Slightly_Old_Bax */, 1;
 			if (.@q == 8344)
-				delitem Retrieve_Datacard, 1;
+				delitem 25358 /* Retrieve_Datacard */, 1;
 			erasequest .@q + 1;
 			if (checkquest(8323) >= 0)
 				erasequest 8323;
@@ -101,10 +101,10 @@ alberta_in,20,19,4	script	Department of Employment Masha#iqss	73,{
 		erasequest .@q;
 		if (checkquest(.@q + 1) >= 0)
 			erasequest .@q + 1;
-		if (countitem(Slightly_Old_Bax))
-			delitem Slightly_Old_Bax, countitem(Slightly_Old_Bax);
-		if (countitem(Retrieve_Datacard))
-			delitem Retrieve_Datacard, countitem(Retrieve_Datacard);
+		if (countitem(25359 /* Slightly_Old_Bax */))
+			delitem 25359 /* Slightly_Old_Bax */, countitem(25359 /* Slightly_Old_Bax */);
+		if (countitem(25358 /* Retrieve_Datacard */))
+			delitem 25358 /* Retrieve_Datacard */, countitem(25358 /* Retrieve_Datacard */);
 		iq_ssq = 0;
 		mes "[Masha]";
 		mes "All right. Come back when you're";
@@ -149,7 +149,7 @@ alberta_in,20,19,4	script	Department of Employment Masha#iqss	73,{
 	switch (.@q) {
 	case 8324: case 8326: case 8328: case 8330: case 8332:
 		setarray .@where$[8324], "Prontera's forge", "", "Payon", "", "Comodo's weapon shop", "", "Al De Baran's inn", "", "the north Morroc Kafra center";
-		getitem Slightly_Old_Bax, 1;
+		getitem 25359 /* Slightly_Old_Bax */, 1;
 		mes "Take this ^0000FFSlightly Aged Antique";
 		mes "Box^000000 to the Sheep at";
 		mes .@where$[.@q] + ", and bring";
@@ -168,7 +168,7 @@ alberta_in,20,19,4	script	Department of Employment Masha#iqss	73,{
 		mes "from him.";
 		break;
 	case 8344:
-		getitem Retrieve_Datacard, 1;
+		getitem 25358 /* Retrieve_Datacard */, 1;
 		mes "Take this ^0000FFData Retrieval Card^000000 to";
 		mes "the Bio Lab, 3rd floor. There's a";
 		mes "small sign with a card slot.";
@@ -209,11 +209,11 @@ alberta_in,20,17,4	script	Sheep#iqss0	890,{
 	.@q = atoi(replacestr(strnpcinfo(2), "iqss", ""));
 	mes "[Sheep]";
 	if (iq_ssq == .@q && checkquest(.@q) == 1) {
-		if (!countitem(Slightly_Old_Bax)) {
+		if (!countitem(25359 /* Slightly_Old_Bax */)) {
 			mes "Baa? No box?";
 			close;
 		}
-		delitem Slightly_Old_Bax, 1;
+		delitem 25359 /* Slightly_Old_Bax */, 1;
 		changequest .@q, .@q + 1;
 		mes "Baa! The box. Here's the receipt";
 		mes "for Masha.";
@@ -236,7 +236,7 @@ morocc,162,258,4	duplicate(Sheep#iqssdlv)	Sheep#iqss8332	890
 		mes "Masha sent you? Finally. Here's";
 		mes "the box. Careful, it's older than";
 		mes "it looks.";
-		getitem Slightly_Old_Bax, 1;
+		getitem 25359 /* Slightly_Old_Bax */, 1;
 		changequest .@q, .@q + 1;
 		close;
 	}
@@ -248,7 +248,7 @@ prt_sewb3,144,181,4	duplicate(Murian#iqsscol)	Murian#iqss1	753
 in_sphinx3,120,96,4	duplicate(Murian#iqsscol)	Elbury#iqss2	884
 
 lhz_dun03,120,96,0	script	Device#iqss	858,{
-	if (iq_ssq == 8344 && checkquest(8344) == 1 && countitem(Retrieve_Datacard)) {
+	if (iq_ssq == 8344 && checkquest(8344) == 1 && countitem(25358 /* Retrieve_Datacard */)) {
 		mes "A small sign with a card slot.";
 		next;
 		if (select("Insert the Data Retrieval Card:Leave it") == 2)

@@ -91,7 +91,7 @@ geffen,107,48,4	script	Vince Noir#iqcrim	4_M_BARD,{
 		mes "[Vince Noir]";
 		mes "Give Ling this ^0000FFRaccoon Doll^000000.";
 		mes "She'll know I sent you.";
-		getitem Raccoondog_Doll, 1;
+		getitem 754 /* Raccoondog_Doll */, 1;
 		iq_crim = 2;
 		callfunc "F_IQ_Next", iq_crim_q, 40002;
 		iq_crim_q = 40002;
@@ -119,7 +119,7 @@ geffen,107,48,4	script	Vince Noir#iqcrim	4_M_BARD,{
 geffen_in,30,131,4	script	Ling Mynmei#iqcrim	4_F_CHNDRESS1,{
 	mes "[Ling Mynmei]";
 	if (iq_crim == 2) {
-		if (!countitem(Raccoondog_Doll)) {
+		if (!countitem(754 /* Raccoondog_Doll */)) {
 			mes "Can I get you a drink?";
 			mes "...Sorry, I can't talk now.";
 			mes "She's watching.";
@@ -128,7 +128,7 @@ geffen_in,30,131,4	script	Ling Mynmei#iqcrim	4_F_CHNDRESS1,{
 		mes "That doll... Vince sent you!";
 		mes "Oh, I miss the band so much.";
 		next;
-		delitem Raccoondog_Doll, 1;
+		delitem 754 /* Raccoondog_Doll */, 1;
 		mes "[Ling Mynmei]";
 		mes "I can't leave this bar while";
 		mes "^0000FFOld Lady Kroot^000000 holds my contract.";
@@ -209,17 +209,17 @@ geffen_in,33,131,4	script	Old Lady Kroot#iqcrim	8_F_GRANDMOTHER,{
 		mes "a deal. Take the girl.";
 		break;
 	case 2:
-		if (!countitem(Str_Dish03) && !countitem(Str_Dish03_)) {
+		if (!countitem(12043 /* Str_Dish03 */) && !countitem(14553 /* Str_Dish03_ */)) {
 			mes "[Old Lady Kroot]";
 			mes "A Bomber Steak? Where? I don't";
 			mes "see a Bomber Steak. Don't tease";
 			mes "an old lady.";
 			close;
 		}
-		if (countitem(Str_Dish03))
-			delitem Str_Dish03, 1;
+		if (countitem(12043 /* Str_Dish03 */))
+			delitem 12043 /* Str_Dish03 */, 1;
 		else
-			delitem Str_Dish03_, 1;
+			delitem 14553 /* Str_Dish03_ */, 1;
 		iq_crim_steak = 1;
 		if (checkquest(40007) < 0)
 			setquest 40007;
@@ -633,6 +633,6 @@ izlude_in,67,113,4	script	Agent York#iqcrim2	4_M_MIDDLE1,{
 	iq_crim_bits = 0;
 	iq_crim_steak = 0;
 	getexp 1000000, 700000;
-	getitem Old_Violet_Box, 1;
+	getitem 617 /* Old_Violet_Box */, 1;
 	close;
 }

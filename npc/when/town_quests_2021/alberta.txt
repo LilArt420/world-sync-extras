@@ -250,16 +250,16 @@ S_Coins:
 	setquest getarg(0);
 	eden_mb_coins = 0;
 	eden_mb_crates = 0;
-	if (countitem(Antique_Coin) < 10)
-		getitem Antique_Coin, 10 - countitem(Antique_Coin);
+	if (countitem(25074 /* Antique_Coin */) < 10)
+		getitem 25074 /* Antique_Coin */, 10 - countitem(25074 /* Antique_Coin */);
 	return;
 
 S_Refill:
-	if (countitem(Antique_Coin) < 10 - eden_mb_coins) {
+	if (countitem(25074 /* Antique_Coin */) < 10 - eden_mb_coins) {
 		next;
 		mes "[Mulberry]";
 		mes "Lost some? Here. Don't tell anyone.";
-		getitem Antique_Coin, 10 - eden_mb_coins - countitem(Antique_Coin);
+		getitem 25074 /* Antique_Coin */, 10 - eden_mb_coins - countitem(25074 /* Antique_Coin */);
 	}
 	return;
 }
@@ -281,7 +281,7 @@ S_Refill:
 		mes "All 10 coins are hidden. Report to Mulberry.";
 		close;
 	}
-	if (countitem(Antique_Coin) < 2) {
+	if (countitem(25074 /* Antique_Coin */) < 2) {
 		mes "You need 2 Old Coins to hide here.";
 		mes "Mulberry has more.";
 		close;
@@ -291,7 +291,7 @@ S_Refill:
 	if (select("Hide the coins:Leave it") == 2)
 		close;
 	progressbar "ffff00", 2;
-	delitem Antique_Coin, 2;
+	delitem 25074 /* Antique_Coin */, 2;
 	eden_mb_crates |= .@bit;
 	eden_mb_coins += 2;
 	if (eden_mb_coins >= 10)

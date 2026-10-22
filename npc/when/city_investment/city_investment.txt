@@ -86,7 +86,7 @@ OnNPCKillEvent:
 	if (charat(.@map$, 1) == "@" || charat(.@map$, 2) == "@")
 		end;
 	if (rand(100) < 20)
-		getitem Union_Token, 1;
+		getitem 25051 /* Union_Token */, 1;
 	end;
 }
 
@@ -211,7 +211,7 @@ moc_para01,53,32,4	script	Secretary Governor#iqci	893,{
 				if (checkquest(.@cd[.@c]) >= 0)
 					erasequest .@cd[.@c];
 				setquest .@cd[.@c];
-				getitem Union_Token, .@tok[.@c];
+				getitem 25051 /* Union_Token */, .@tok[.@c];
 				iq_ci_jobs++;
 				.@paid += .@tok[.@c];
 			}
@@ -224,7 +224,7 @@ moc_para01,53,32,4	script	Secretary Governor#iqci	893,{
 			if (checkquest(5470) >= 0)
 				erasequest 5470;
 			setquest 5470;
-			getitem Union_Token, $@iquW_tok[.@i];
+			getitem 25051 /* Union_Token */, $@iquW_tok[.@i];
 			iq_ci_jobs++;
 			.@paid += $@iquW_tok[.@i];
 		}
@@ -356,7 +356,7 @@ function	script	F_IQ_UnionCity	{
 		mes "invest in. My deepest respects.";
 		close;
 	}
-	.@have = countitem(Union_Token);
+	.@have = countitem(25051 /* Union_Token */);
 	if (!.@have) {
 		mes "You have no Union Insignias.";
 		mes "Members of the City Merchant Union";
@@ -371,7 +371,7 @@ function	script	F_IQ_UnionCity	{
 		.@amt = .@have;
 	if (.@amt <= 0)
 		close;
-	delitem Union_Token, .@amt;
+	delitem 25051 /* Union_Token */, .@amt;
 	iq_ci_city[.@n] = .@p + .@amt * 11 / 2;
 	setquest 12371;
 	mes "[" + .@city$[.@n] + " Investment Manager]";
@@ -401,19 +401,19 @@ prontera,146,67,4	script	Prontera Merchant Union#iqcs1	726,{
 	.@s = callfunc("F_IQ_UnionCity", .@n, 0);
 	// weapons (1-2), shield, stat type (1 STR, 2 AGI, 3 DEX, 4 INT)
 	switch (.@n) {
-	case 1: setarray .@w[0], Union_Sword; .@sh = 0; .@t = 1; break;
-	case 2: setarray .@w[0], Union_Twohand_Staff; .@sh = 0; .@t = 4; break;
-	case 3: setarray .@w[0], Union_Bow; .@sh = 0; .@t = 3; break;
-	case 4: setarray .@w[0], Union_Katar; .@sh = 0; .@t = 2; break;
-	case 5: setarray .@w[0], Union_Wire, Union_Viollin; .@sh = 0; .@t = 3; break;
-	case 6: setarray .@w[0], Union_Revolver, Union_Huuma; .@sh = 0; .@t = 2; break;
-	case 7: setarray .@w[0], Union_Twohand_Axe, Union_Dagger; .@sh = 0; .@t = 1; break;
-	case 8: setarray .@w[0], Union_Bible; .@sh = Union_Buckler; .@t = 4; break;
-	case 9: setarray .@w[0], Union_Mace; .@sh = Union_Guard; .@t = 3; break;
+	case 1: setarray .@w[0], 13456 /* Union_Sword */; .@sh = 0; .@t = 1; break;
+	case 2: setarray .@w[0], 2030 /* Union_Twohand_Staff */; .@sh = 0; .@t = 4; break;
+	case 3: setarray .@w[0], 18132 /* Union_Bow */; .@sh = 0; .@t = 3; break;
+	case 4: setarray .@w[0], 28011 /* Union_Katar */; .@sh = 0; .@t = 2; break;
+	case 5: setarray .@w[0], 1997 /* Union_Wire */, 1941 /* Union_Viollin */; .@sh = 0; .@t = 3; break;
+	case 6: setarray .@w[0], 13129 /* Union_Revolver */, 13329 /* Union_Huuma */; .@sh = 0; .@t = 2; break;
+	case 7: setarray .@w[0], 28110 /* Union_Twohand_Axe */, 13457 /* Union_Dagger */; .@sh = 0; .@t = 1; break;
+	case 8: setarray .@w[0], 28606 /* Union_Bible */; .@sh = 28905 /* Union_Buckler */; .@t = 4; break;
+	case 9: setarray .@w[0], 16048 /* Union_Mace */; .@sh = 28904 /* Union_Guard */; .@t = 3; break;
 	}
-	setarray .@shoes[1], Union_STR_Boots, Union_AGI_Boots, Union_DEX_Shoes, Union_INT_Shoes;
-	setarray .@armor[1], Union_Mail, Union_Mattle, Union_Suit, Union_Robe;
-	setarray .@garm[1], Union_MHP_Manteau, Union_FLEE_Manteau, Union_CRI_Muffler, Union_SP_Muffler;
+	setarray .@shoes[1], 22078 /* Union_STR_Boots */, 22079 /* Union_AGI_Boots */, 22080 /* Union_DEX_Shoes */, 22081 /* Union_INT_Shoes */;
+	setarray .@armor[1], 15152 /* Union_Mail */, 15153 /* Union_Mattle */, 15154 /* Union_Suit */, 15155 /* Union_Robe */;
+	setarray .@garm[1], 20780 /* Union_MHP_Manteau */, 20781 /* Union_FLEE_Manteau */, 20787 /* Union_CRI_Muffler */, 20782 /* Union_SP_Muffler */;
 	// what this standing unlocks, and the price
 	.@k = 0;
 	if (.@s >= 1) {
