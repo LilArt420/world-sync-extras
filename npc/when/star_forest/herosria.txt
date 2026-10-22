@@ -154,7 +154,7 @@ hero_lb,151,151,4	script	Sanctuary Manager#wsf	55,{
 		mes "[Sanctuary Manager]";
 		mes "Rigel's battle is " + ($@wsf_hs_on ? "^0000FFon^000000" : "^FF0000off^000000") + ".";
 		next;
-		switch (select("Start a 30-minute test battle:End the battle now:Clear the holder:Cancel")) {
+		switch (select("Start a 60-minute test battle:End the battle now:Clear the holder:Cancel")) {
 		case 1:
 			donpcevent "WSF_HeroSiege::OnGMStart";
 			break;

@@ -23,7 +23,7 @@
 //= per-skill damage tables can't be reproduced; players' skills
 //= deal 40% to players here (skill_damage), on top of the usual
 //= GvG rules. The ruler's delay (3 minutes) and stats are
-//= estimates. GMs (level 60+) can start a 30-minute test battle
+//= estimates. GMs (level 60+) can start a 60-minute test battle
 //= at the Sanctuary Manager.
 //=
 //= Server variables: $wsf_hero_gid / $wsf_hero_gname$ (holder),
@@ -72,9 +72,9 @@ OnSunStart:
 	donpcevent strnpcinfo(3) + "::OnBegin";
 	end;
 
-// GM test: 30 minutes from now.
+// GM test: 60 minutes from now.
 OnGMStart:
-	$@wsf_hs_until = gettimetick(2) + 1800;
+	$@wsf_hs_until = gettimetick(2) + 3600;
 	donpcevent strnpcinfo(3) + "::OnBegin";
 	end;
 
@@ -467,6 +467,18 @@ hero_ent2,96,90,4	script	Flag of Herosria#wsf_f2	722,{ callfunc "F_WSF_HsFlag"; 
 hero_ent3,76,22,4	script	Flag of Herosria#wsf_f3	722,{ callfunc "F_WSF_HsFlag"; end; }
 
 // Rules of the battlefield.
+hero_out1	mapflag	nowarpto
+hero_out2	mapflag	nowarpto
+hero_out3	mapflag	nowarpto
+hero_out4	mapflag	nowarpto
+hero_ent1	mapflag	nowarpto
+hero_ent2	mapflag	nowarpto
+hero_ent3	mapflag	nowarpto
+hero_in1	mapflag	nowarpto
+hero_in2	mapflag	nowarpto
+hero_in3	mapflag	nowarpto
+hero_in4	mapflag	nowarpto
+herosria	mapflag	nowarpto
 hero_out1	mapflag	nomemo
 hero_out2	mapflag	nomemo
 hero_out3	mapflag	nomemo
