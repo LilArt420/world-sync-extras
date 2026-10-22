@@ -1,0 +1,246 @@
+//===== World Sync Extras: iRO systems block =================
+//= The Acolytes' training ground in the Izlude Sunken Ship
+//= (treasure_n1, treasure_n2).
+//===== Description: =========================================
+//= From kRO's navigation table and quest text (ROenglishRE and
+//= the iRO client's own English for 11343-11348):
+//=   - Acolyte Leader Alice (kRO's "복사 담당 엘리스", Prontera
+//=     Cathedral 186,36) sends Acolytes into the wreck at 163,43;
+//=   - Laforet (treasure_n1 167,44) sends them back to Prontera
+//=     (209,289);
+//=   - 11345 Conversation with Alice; 11346 damped creatures (lv 13):
+//=     20 Roda Frogs + 20 Denopices (Dead Plankton); 11347 soft
+//=     bone (lv 18): 30 Greasles (Weak Skeleton); 11348 solid bone
+//=     (lv 23): 30 Tibias (Weak Soldier Skeleton);
+//=   - the doors between the wreck's sections and floors.
+//= rAthena spawns the wreck's monsters (mobs/dungeons/treasure.txt)
+//= but has no way in. Alice is the Criatura Academy's Alice Yisha
+//= (rAthena's academy.txt), now at the Cathedral: same cut-ins.
+//= Estimates (no official figures): who may train (1st-job
+//= Acolytes), the levels needed and the rewards.
+//============================================================
+
+prt_church,186,36,4	script	Acolyte Leader Alice#wsi	4_F_ACOLYTE,{
+	.@acolyte = ((eaclass() & (EAJ_BASEMASK | EAJL_2)) == EAJ_ACOLYTE);
+	if (!.@acolyte) {
+		mes "[Alice Yisha]";
+		mes "Welcome to the Cathedral.";
+		mes "I look after the young";
+		mes "Acolytes of Prontera.";
+		cutin "acact_01.bmp", 2;
+		next;
+		mes "[Alice Yisha]";
+		mes "We train them in the old";
+		mes "ship that sank off Izlude.";
+		mes "Damp, dark and full of";
+		mes "restless bones: the perfect";
+		mes "classroom! May Odin bless you.";
+		close2;
+		cutin "", 255;
+		end;
+	}
+	if (isbegin_quest(11345) < 2) {
+		mes "[Alice Yisha]";
+		mes "Oh, Odin! An Acolyte!";
+		mes "Do you remember me? Alice";
+		mes "Yisha, from the Criatura";
+		mes "Academy. I'm in charge of";
+		mes "the Acolytes here now.";
+		cutin "acact_01.bmp", 2;
+		if (isbegin_quest(11345) == 0)
+			setquest 11345;
+		completequest 11345;
+		next;
+		mes "[Alice Yisha]";
+		mes "Prayer is important, but an";
+		mes "Acolyte must also be able to";
+		mes "stand on their own two feet.";
+		mes "So we train in the ^0000FFIzlude";
+		mes "Sunken Ship^000000.";
+		cutin "acact_02.bmp", 2;
+		next;
+		mes "[Alice Yisha]";
+		mes "A lamb named ^0000FFLaforet^000000 keeps";
+		mes "the entrance. She'll bring";
+		mes "you back here when you're";
+		mes "done. Talk to me whenever";
+		mes "you're ready to train.";
+		close2;
+		cutin "", 255;
+		end;
+	}
+	setarray .@q[0], 11346, 11347, 11348;
+	setarray .@lv[0], 13, 18, 23;
+	setarray .@task$[0],
+		"defeat ^0000FF20 Roda Frogs^000000 and ^0000FF20 Denopices^000000 on the wreck's 1st floor",
+		"defeat ^0000FF30 Greasles^000000, the soft-boned skeletons",
+		"defeat ^0000FF30 Tibias^000000, the hard-boned skeletons";
+	for (.@i = 0; .@i < 3; .@i++)
+		if (isbegin_quest(.@q[.@i]) < 2)
+			break;
+	mes "[Alice Yisha]";
+	mes "Welcome back, " + strcharinfo(0) + ".";
+	mes "How may I help you?";
+	cutin "acact_01.bmp", 2;
+	next;
+	switch (select("Training in the shipwreck:Take me to the shipwreck:Nothing, thank you")) {
+	case 1:
+		if (.@i == 3) {
+			mes "[Alice Yisha]";
+			mes "You've finished all of my";
+			mes "training! I'm so proud.";
+			mes "Odin will surely be pleased";
+			mes "with you, too.";
+			cutin "acact_02.bmp", 2;
+			close2;
+			cutin "", 255;
+			end;
+		}
+		if (isbegin_quest(.@q[.@i]) == 1) {
+			if (checkquest(.@q[.@i], HUNTING) != 2) {
+				mes "[Alice Yisha]";
+				mes "Your training: " + .@task$[.@i] + ".";
+				mes "Come back to me when it's done.";
+				cutin "acact_03.bmp", 2;
+				close2;
+				cutin "", 255;
+				end;
+			}
+			mes "[Alice Yisha]";
+			mes "You did it! Your faith is";
+			mes "strong, and so is your arm.";
+			mes "Take these with my blessing.";
+			cutin "acact_02.bmp", 2;
+			completequest .@q[.@i];
+			setarray .@base[0], 2000, 5000, 10000;
+			setarray .@job[0], 1500, 3000, 6000;
+			getexp .@base[.@i], .@job[.@i];
+			getitem 523, 5; // Holy Water
+			close2;
+			cutin "", 255;
+			end;
+		}
+		if (BaseLevel < .@lv[.@i]) {
+			mes "[Alice Yisha]";
+			mes "The next lesson is for";
+			mes "Acolytes of ^0000FFbase level " + .@lv[.@i] + "^000000.";
+			mes "Train a little more first.";
+			cutin "acact_03.bmp", 2;
+			close2;
+			cutin "", 255;
+			end;
+		}
+		mes "[Alice Yisha]";
+		mes "Here is your next lesson:";
+		mes .@task$[.@i] + ".";
+		cutin "acact_02.bmp", 2;
+		next;
+		if (select("I'll do it:Not now") == 2) {
+			mes "[Alice Yisha]";
+			mes "Whenever you're ready.";
+			close2;
+			cutin "", 255;
+			end;
+		}
+		setquest .@q[.@i];
+		mes "[Alice Yisha]";
+		mes "May Odin guide your mace!";
+		mes "Shall I send you to the";
+		mes "shipwreck right away?";
+		next;
+		if (select("Yes, please:I'll walk") == 2) {
+			mes "[Alice Yisha]";
+			mes "Then talk to me when you";
+			mes "want to go.";
+			close2;
+			cutin "", 255;
+			end;
+		}
+		break;
+	case 2:
+		mes "[Alice Yisha]";
+		mes "Watch your step: the deck";
+		mes "is slippery. Off you go!";
+		break;
+	case 3:
+		mes "[Alice Yisha]";
+		mes "May Odin be with you.";
+		close2;
+		cutin "", 255;
+		end;
+	}
+	close2;
+	cutin "", 255;
+	warp "treasure_n1", 163, 43;
+	end;
+}
+
+treasure_n1,167,44,4	script	Laforet#wsi	4_LAM,{
+	mes "[Laforet]";
+	mes "Baa~ Welcome aboard the";
+	mes "Izlude Sunken Ship! Well...";
+	mes "what's left of it.";
+	next;
+	switch (select("Where do I find what Alice asked?:Take me back to Prontera:Nothing")) {
+	case 1:
+		mes "[Laforet]";
+		mes "The ^0000FFRoda Frogs^000000 and ^0000FFDenopices^000000";
+		mes "splash around this floor.";
+		mes "The ^0000FFGreasles^000000 rattle in the";
+		mes "holds further in.";
+		next;
+		mes "[Laforet]";
+		mes "The ^0000FFTibias^000000 guard the lower";
+		mes "deck: the stairs down are at";
+		mes "the south end of the ship.";
+		mes "The doors between the holds";
+		mes "are old, but they still";
+		mes "open. Baa~";
+		close;
+	case 2:
+		mes "[Laforet]";
+		mes "Baa~ Say hello to Alice";
+		mes "for me!";
+		close2;
+		warp "prontera", 209, 289;
+		end;
+	}
+	mes "[Laforet]";
+	mes "Baa~";
+	close;
+}
+
+// The doors between the wreck's sections and floors (kRO's
+// navigation table, links 32151-32182).
+treasure_n1,58,37,0	warp	wsi_tn1_32151	1,1,treasure_n1,39,37
+treasure_n1,41,37,0	warp	wsi_tn1_32152	1,1,treasure_n1,61,37
+treasure_n1,79,37,0	warp	wsi_tn1_32153	1,1,treasure_n1,98,37
+treasure_n1,96,37,0	warp	wsi_tn1_32154	1,1,treasure_n1,77,37
+treasure_n1,69,75,0	warp	wsi_tn1_32155	1,1,treasure_n1,69,106
+treasure_n1,69,102,0	warp	wsi_tn1_32156	1,1,treasure_n1,69,77
+treasure_n1,62,110,0	warp	wsi_tn1_32157	1,1,treasure_n1,39,111
+treasure_n1,41,111,0	warp	wsi_tn1_32158	1,1,treasure_n1,63,111
+treasure_n1,74,110,0	warp	wsi_tn1_32159	1,1,treasure_n1,100,111
+treasure_n1,98,111,0	warp	wsi_tn1_32160	1,1,treasure_n1,74,111
+treasure_n1,69,125,0	warp	wsi_tn1_32161	1,1,treasure_n1,69,142
+treasure_n1,69,140,0	warp	wsi_tn1_32162	1,1,treasure_n1,69,123
+treasure_n1,38,164,0	warp	wsi_tn1_32163	1,1,treasure_n1,25,164
+treasure_n1,27,164,0	warp	wsi_tn1_32164	1,1,treasure_n1,40,164
+treasure_n1,99,164,0	warp	wsi_tn1_32165	1,1,treasure_n1,114,164
+treasure_n1,112,164,0	warp	wsi_tn1_32166	1,1,treasure_n1,97,164
+treasure_n1,125,161,0	warp	wsi_tn1_32167	1,1,treasure_n1,144,161
+treasure_n1,142,161,0	warp	wsi_tn1_32168	1,1,treasure_n1,123,161
+treasure_n1,164,114,0	warp	wsi_tn1_32169	1,1,treasure_n1,164,88
+treasure_n1,164,91,0	warp	wsi_tn1_32170	1,1,treasure_n1,164,116
+treasure_n1,68,25,0	warp	wsi_tn1_32171	1,1,treasure_n2,101,157
+treasure_n2,102,66,0	warp	wsi_tn2_32172	1,1,treasure_n1,163,43
+treasure_n2,80,72,0	warp	wsi_tn2_32173	1,1,treasure_n2,63,72
+treasure_n2,65,72,0	warp	wsi_tn2_32174	1,1,treasure_n2,82,72
+treasure_n2,49,99,0	warp	wsi_tn2_32175	1,1,treasure_n2,49,130
+treasure_n2,49,128,0	warp	wsi_tn2_32176	1,1,treasure_n2,49,97
+treasure_n2,123,72,0	warp	wsi_tn2_32177	1,1,treasure_n2,140,72
+treasure_n2,138,72,0	warp	wsi_tn2_32178	1,1,treasure_n2,121,72
+treasure_n2,155,99,0	warp	wsi_tn2_32179	1,1,treasure_n2,155,130
+treasure_n2,155,128,0	warp	wsi_tn2_32180	1,1,treasure_n2,155,97
+treasure_n2,102,103,0	warp	wsi_tn2_32181	1,1,treasure_n2,102,120
+treasure_n2,102,118,0	warp	wsi_tn2_32182	1,1,treasure_n2,102,101
