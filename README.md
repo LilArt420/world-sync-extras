@@ -71,7 +71,7 @@ Rewards and a few rules are estimates where iRO doesn't publish them.
 
 ## 🧍 Placeholder NPCs (setting `placeholders`, on)
 
-78 official NPCs whose dialog and logic exist in no server data yet, standing
+76 official NPCs whose dialog and logic exist in no server data yet, standing
 where the client puts them with their own sprite and name. 44 already work
 (storage lockers, guild storage, inns, repair, channel switches, the Varmundt
 elevator, Jormungandr's contact points, market guides); the rest greet you until

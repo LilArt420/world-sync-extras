@@ -382,16 +382,6 @@ prt_sewb3,144,181,4	script	Murian#ws17448	753,{
 	mes "Hello there, adventurer.";
 	close;
 }
-tra_fild,112,171,4	script	Training Instructor#ws17098	105,{
-	mes "[Training Instructor]";
-	mes "Hello there, adventurer.";
-	close;
-}
-tra_fild,111,79,4	script	Training Instructor#ws17101	105,{
-	mes "[Training Instructor]";
-	mes "Hello there, adventurer.";
-	close;
-}
 ve_fild05,317,235,4	script	Verkhasel#ws17263	467,{
 	mes "[Verkhasel]";
 	mes "Hello there, adventurer.";
