@@ -5,11 +5,6 @@
 //= clients' navigation tables. Do not edit by hand.
 //============================================================
 
-alde_dun01,80,275,4	script	Wanderer Vivi#ws14177	704,{
-	mes "[Wanderer Vivi]";
-	mes "Hello there, adventurer.";
-	close;
-}
 clock_01,77,79,4	script	Pet Mimic#ws16298	464,{
 	mes "[Pet Mimic]";
 	mes "Hello there, adventurer.";
