@@ -41,3 +41,5 @@ b465-b470
 17098 17101
 # iRO services block: Laforet (the Acolytes' Sunken Ship training)
 32149
+# City Investment block: Masha's street stall staffer requests (Murian in the Prontera Culvert, Elbury in the Sphinx)
+17448 17449

@@ -22,11 +22,6 @@ hero_lb,131,153,4	script	Guild Storage Manager#ws15748	896,{
 	guildopenstorage;
 	end;
 }
-in_sphinx3,120,96,4	script	Elbury#ws17449	884,{
-	mes "[Elbury]";
-	mes "Hello there, adventurer.";
-	close;
-}
 job4_bio,31,30,4	script	Gregor#ws17324	90,{
 	mes "[Gregor]";
 	mes "Hello there, adventurer.";
@@ -374,11 +369,6 @@ orcsdun01,91,170,4	script	Book of Illusion Vol. 2#ws17267	10373,{
 }
 pay_dun00,15,31,4	script	Book of Illusion Vol. 1#ws17266	10372,{
 	mes "[Book of Illusion Vol. 1]";
-	mes "Hello there, adventurer.";
-	close;
-}
-prt_sewb3,144,181,4	script	Murian#ws17448	753,{
-	mes "[Murian]";
 	mes "Hello there, adventurer.";
 	close;
 }

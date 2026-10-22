@@ -83,7 +83,7 @@
       "type": "boolean",
       "default": true,
       "label": "iRO quests: City Investment (Merchant Union)",
-      "description": "Join the City Merchant Union at the Eden Group, earn Union Insignias from monsters and Union requests (113 deliveries, weekly Wanted bosses), invest them in 9 cities and buy their account-bound Union gear."
+      "description": "Join the City Merchant Union at the Eden Group, earn Union Insignias from monsters and Union requests (113 deliveries, weekly Wanted bosses), invest them in 9 cities and buy their account-bound Union gear. Masha in Alberta hires out street stall staffers that keep a stall open while you're away (a stand-in)."
     },
     {
       "key": "town_quests_2021",
@@ -104,7 +104,7 @@
       "type": "boolean",
       "default": true,
       "label": "Place the official NPCs that have no logic yet",
-      "description": "75 NPCs from the official clients' maps and signboards. 44 of them already work (storage, guild storage, inns, repair, channel switches, the Varmundt elevator, Jormungandr's contact points, market guides); the rest greet you until their quests and services are written."
+      "description": "73 NPCs from the official clients' maps and signboards. 44 of them already work (storage, guild storage, inns, repair, channel switches, the Varmundt elevator, Jormungandr's contact points, market guides); the rest greet you until their quests and services are written."
     },
     {
       "key": "npc_mover",
