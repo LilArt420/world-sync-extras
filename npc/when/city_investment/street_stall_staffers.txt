@@ -271,6 +271,39 @@ function	script	F_IQ_SSCut	{
 	return substr(getarg(0), 0, getarg(1) - 1);
 }
 
+// getarg(0): item id, getarg(1): units to delete (0 or none: only count them).
+// Only plain stacks count: tradable, not equipped, bound, rented, refined, carded,
+// graded or with random options. delitem would take any copy, so a bound or rented
+// one could leave the inventory while the other side gets a plain new one.
+// Returns the units held, or when deleting, 1 on success.
+function	script	F_IQ_SSPlain	{
+	.@id = getarg(0);
+	.@del = getarg(1, 0);
+	getinventorylist;
+	for (.@i = 0; .@i < @inventorylist_count; .@i++) {
+		if (@inventorylist_id[.@i] != .@id || @inventorylist_equip[.@i] || @inventorylist_bound[.@i] || @inventorylist_expire[.@i]
+		|| !@inventorylist_tradable[.@i] || !@inventorylist_identify[.@i] || @inventorylist_refine[.@i] || @inventorylist_attribute[.@i]
+		|| @inventorylist_card1[.@i] || @inventorylist_card2[.@i] || @inventorylist_card3[.@i] || @inventorylist_card4[.@i]
+		|| @inventorylist_enchantgrade[.@i] || @inventorylist_option_id1[.@i])
+			continue;
+		.@idx[.@n] = @inventorylist_idx[.@i];
+		.@amt[.@n] = @inventorylist_amount[.@i];
+		.@have += .@amt[.@n];
+		.@n++;
+	}
+	if (!.@del)
+		return .@have;
+	if (.@del > .@have)
+		return 0;
+	for (.@j = 0; .@j < .@n && .@del > 0; .@j++) {
+		.@d = min(.@del, .@amt[.@j]);
+		if (!delitemidx(.@idx[.@j], .@d))
+			return 0;
+		.@del -= .@d;
+	}
+	return 1;
+}
+
 // Stall slots 1-80: 1-40 are Alberta's market cells, 41-80 Prontera's.
 // $iqss_owner[s] char id (0 = free), $iqss_owner$[s], $iqss_kind[s] (1 sell, 2 buy),
 // $iqss_end[s] unix time, $iqss_title$[s], $iqss_npc$[s] (the placed NPC),
@@ -352,11 +385,12 @@ OnInit:
 	initnpctimer;
 	end;
 OnTimer60000:
+	// Restart the timer first: a script error below would otherwise stop it for good.
+	initnpctimer;
 	.@now = gettimetick(2);
 	for (.@s = 1; .@s <= 80; .@s++)
 		if ($iqss_owner[.@s] && $iqss_end[.@s] <= .@now)
 			callfunc "F_IQ_SSClose", .@s;
-	initnpctimer;
 	end;
 }
 
@@ -423,16 +457,18 @@ OnTimer60000:
 		mes .@name$;
 		mes "Thank you for your purchase!";
 	} else {
-		.@have = countitem(.@id);
+		.@have = callfunc("F_IQ_SSPlain", .@id);
 		if (!.@have) {
-			mes "You don't have any " + getitemname(.@id) + ".";
+			mes "You don't have any " + getitemname(.@id);
+			mes "we can take. ^777777(Bound, rented or";
+			mes "untradable ones don't count.)^000000";
 			close;
 		}
 		mes "We're buying " + getitemname(.@id) + ".";
 		mes "How many will you sell?";
 		next;
 		input .@want, 1, min(.@have, getd(.@p$ + "amt[" + .@k + "]"));
-		if (!$iqss_owner[.@s] || getd(.@p$ + "id[" + .@k + "]") != .@id || .@want > getd(.@p$ + "amt[" + .@k + "]") || .@want < 1 || .@want > countitem(.@id)) {
+		if (!$iqss_owner[.@s] || getd(.@p$ + "id[" + .@k + "]") != .@id || .@want > getd(.@p$ + "amt[" + .@k + "]") || .@want < 1 || .@want > callfunc("F_IQ_SSPlain", .@id)) {
 			mes .@name$;
 			mes "Sorry, we can't buy that now.";
 			close;
@@ -443,7 +479,11 @@ OnTimer60000:
 			mes "Sorry, we can't pay for that.";
 			close;
 		}
-		delitem .@id, .@want;
+		if (!callfunc("F_IQ_SSPlain", .@id, .@want)) {
+			mes .@name$;
+			mes "Sorry, we can't buy that now.";
+			close;
+		}
 		Zeny += .@total;
 		$iqss_esc[.@s] -= .@total;
 		setd .@p$ + "amt[" + .@k + "]", getd(.@p$ + "amt[" + .@k + "]") - .@want;
@@ -576,7 +616,7 @@ alberta_in,20,21,4	script	Department of Employment Ridwan#iqss	58,{
 			.@menu$ = ""; .@c = 0;
 			for (.@i = 0; .@i < @inventorylist_count; .@i++) {
 				if (@inventorylist_equip[.@i] || @inventorylist_bound[.@i] || @inventorylist_expire[.@i] || @inventorylist_enchantgrade[.@i]
-				|| @inventorylist_option_id1[.@i] || !@inventorylist_identify[.@i] || @inventorylist_attribute[.@i])
+				|| @inventorylist_option_id1[.@i] || !@inventorylist_identify[.@i] || @inventorylist_attribute[.@i] || !@inventorylist_tradable[.@i])
 					continue;
 				.@inv[.@c] = .@i;
 				.@menu$ += (@inventorylist_refine[.@i] ? "+" + @inventorylist_refine[.@i] + " " : "") + getitemname(@inventorylist_id[.@i]) + " (" + @inventorylist_amount[.@i] + "):";
@@ -607,7 +647,16 @@ alberta_in,20,21,4	script	Department of Employment Ridwan#iqss	58,{
 			.@k1[.@n] = @inventorylist_card2[.@i];
 			.@k2[.@n] = @inventorylist_card3[.@i];
 			.@k3[.@n] = @inventorylist_card4[.@i];
-			delitem2 .@id[.@n], .@amt, 1, .@rf[.@n], 0, .@k0[.@n], .@k1[.@n], .@k2[.@n], .@k3[.@n];
+			// By inventory slot: delitem2 would take the first copy with the same refine and
+			// cards, even a bound or rented one, and the stall would sell a plain new one.
+			if (!delitemidx(@inventorylist_idx[.@i], .@amt)) {
+				for (.@k = 0; .@k < .@n; .@k++)
+					getitem2 .@id[.@k], .@am[.@k], 1, .@rf[.@k], 0, .@k0[.@k], .@k1[.@k], .@k2[.@k], .@k3[.@k];
+				mes "[Ridwan]";
+				mes "That item isn't in your bag";
+				mes "anymore. Here's the rest back.";
+				close;
+			}
 			.@n++;
 		}
 		if (!.@n)
