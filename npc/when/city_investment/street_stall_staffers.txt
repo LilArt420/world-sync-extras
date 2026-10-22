@@ -1,0 +1,701 @@
+//===== Ragnarok Offline mod: World Sync Extras ==============
+//= City Investment: the Merchant Union's street stall staffers
+//===== Description: =========================================
+//= Masha of the Alberta Merchant Union's employment department
+//= hands out one request a week: a delivery, a collection
+//= (Murian in the Prontera Culvert, Elbury in the Sphinx, the Bio
+//= Lab's data device) or a hunt. Finishing it earns an employment
+//= certificate: Beginner (easy requests), Regular (collections) or
+//= Master (Bio Lab requests).
+//= Ridwan, next to her, turns a certificate into a street stall
+//= staffer: a selling or buying stall that stays open in Alberta or
+//= Prontera while its owner is away. Buyers and sellers pay or are
+//= paid on the spot; the owner gets the zeny or the items by mail
+//= (RODEX). When the staffer's time runs out, or the owner closes
+//= the stall, whatever is left is mailed back.
+//=
+//= Sources: the iRO client's quest text (8323-8354) and navigation
+//= table (Masha, Ridwan, the Sheep, Murian, Elbury, the Device);
+//= kRO's developer note on the staffer system (2017-06-07):
+//= Beginner/Regular/Master staffers carry 3/4/5 kinds of items for
+//= 1 to 3 days, sales and purchases arrive by RODEX, one selling and
+//= one buying staffer per character.
+//= STAND-IN, not official: rAthena has no staffer units, so the
+//= staffer is a scripted NPC placed on a free market cell of Alberta
+//= or Prontera (not where the player stands), and the certificate
+//= is a character variable, not an item. Days per grade (1/2/3) and
+//= which requests give which grade are this script's reading of
+//= the sources. One request a week, as rAthena's quest 8323 says.
+//=
+//= Character variables: iq_ssq (the active request's quest id),
+//= iq_ssc1, iq_ssc2, iq_ssc3 (certificates held, by grade).
+//= Global variables: $iqss_* (stall slots 1-80, see F_IQ_SSPlace).
+//============================================================
+
+// ---------------------------------------------------- Requests
+// getarg(0): grade 1-3. Returns a random request quest id of that grade.
+function	script	F_IQ_SSPick	{
+	switch (getarg(0)) {
+	case 1: setarray .@q, 8324, 8326, 8328, 8330, 8332, 8336, 8338, 8340; break;
+	case 2: setarray .@q, 8334, 8342; break;
+	case 3: setarray .@q, 8344, 8346, 8348, 8350, 8352; break;
+	}
+	return .@q[rand(getarraysize(.@q))];
+}
+
+// getarg(0): request quest id. Returns its grade.
+function	script	F_IQ_SSGrade	{
+	.@q = getarg(0);
+	if (.@q == 8334 || .@q == 8342)
+		return 2;
+	if (.@q >= 8344)
+		return 3;
+	return 1;
+}
+
+function	script	F_IQ_SSGradeName	{
+	setarray .@n$[1], "Beginner", "Regular", "Master";
+	return .@n$[getarg(0)];
+}
+
+alberta_in,20,19,4	script	Department of Employment Masha#iqss	73,{
+	if (checkquest(8323, PLAYTIME) == 2)
+		erasequest 8323;
+	mes "[Masha]";
+	if (iq_ssq) {
+		.@q = iq_ssq;
+		if (checkquest(.@q + 1) == 1) {
+			// Receipt, box or data card back from the request.
+			if ((.@q == 8334 || .@q == 8342) && !countitem(Slightly_Old_Bax)) {
+				mes "Where's the box? Murian or Elbury";
+				mes "gave you an antique box for me.";
+				close;
+			}
+			if (.@q == 8344 && !countitem(Retrieve_Datacard)) {
+				mes "The data card, please. The one you";
+				mes "put into the Bio Lab's device.";
+				close;
+			}
+			if (.@q == 8334 || .@q == 8342)
+				delitem Slightly_Old_Bax, 1;
+			if (.@q == 8344)
+				delitem Retrieve_Datacard, 1;
+			erasequest .@q + 1;
+			if (checkquest(8323) >= 0)
+				erasequest 8323;
+			setquest 8323;
+			.@g = callfunc("F_IQ_SSGrade", .@q);
+			setd "iq_ssc" + .@g, getd("iq_ssc" + .@g) + 1;
+			iq_ssq = 0;
+			mes "Well done. Here's your ^0000FF" + callfunc("F_IQ_SSGradeName", .@g);
+			mes "Employment Certificate^000000. Take it to";
+			mes "Ridwan, next to me, to hire a";
+			mes "street stall staffer.";
+			close;
+		}
+		mes "Your request isn't finished yet.";
+		mes "Your quest log has the details.";
+		next;
+		if (select("I'll get to it:I give up on it") == 1)
+			close;
+		erasequest .@q;
+		if (checkquest(.@q + 1) >= 0)
+			erasequest .@q + 1;
+		if (countitem(Slightly_Old_Bax))
+			delitem Slightly_Old_Bax, countitem(Slightly_Old_Bax);
+		if (countitem(Retrieve_Datacard))
+			delitem Retrieve_Datacard, countitem(Retrieve_Datacard);
+		iq_ssq = 0;
+		mes "[Masha]";
+		mes "All right. Come back when you're";
+		mes "ready for another.";
+		close;
+	}
+	if (checkquest(8354) < 0) {
+		setquest 8354;
+		completequest 8354;
+	}
+	mes "Merchant Union, employment";
+	mes "department. Street stall staffers";
+	mes "keep your stall open while you're";
+	mes "away. To hire one, you need an";
+	mes "employment certificate, and you";
+	mes "earn one by doing a request for us.";
+	if (checkquest(8323) >= 0) {
+		next;
+		mes "[Masha]";
+		mes "You've done this week's request.";
+		mes "We take one a week per client, for";
+		mes "privacy. Come back next week.";
+		close;
+	}
+	next;
+	switch (select("Easy request (Beginner certificate):Collection (Regular certificate):Demanding request (Master certificate):Not now")) {
+	case 4: close;
+	default: .@g = @menu;
+	}
+	if (.@g == 3 && BaseLevel < 99) {
+		mes "[Masha]";
+		mes "The Bio Lab is no place for you";
+		mes "yet. ^777777(Base Level 99)^000000";
+		close;
+	}
+	.@q = callfunc("F_IQ_SSPick", .@g);
+	if (checkquest(.@q) >= 0)
+		erasequest .@q;
+	setquest .@q;
+	iq_ssq = .@q;
+	mes "[Masha]";
+	switch (.@q) {
+	case 8324: case 8326: case 8328: case 8330: case 8332:
+		setarray .@where$[8324], "Prontera's forge", "", "Payon", "", "Comodo's weapon shop", "", "Al De Baran's inn", "", "the north Morroc Kafra center";
+		getitem Slightly_Old_Bax, 1;
+		mes "Take this ^0000FFSlightly Aged Antique";
+		mes "Box^000000 to the Sheep at";
+		mes .@where$[.@q] + ", and bring";
+		mes "me the receipt.";
+		break;
+	case 8334:
+		mes "An adventurer called ^0000FFMurian^000000 is on";
+		mes "a job for us in the Prontera";
+		mes "Culvert, 3rd floor. Collect the";
+		mes "antique box from him.";
+		break;
+	case 8342:
+		mes "An adventurer called ^0000FFElbury^000000 is on";
+		mes "a job for us in the Sphinx, 3rd";
+		mes "floor. Collect the antique box";
+		mes "from him.";
+		break;
+	case 8344:
+		getitem Retrieve_Datacard, 1;
+		mes "Take this ^0000FFData Retrieval Card^000000 to";
+		mes "the Bio Lab, 3rd floor. There's a";
+		mes "small sign with a card slot.";
+		mes "Retrieve the data and bring the";
+		mes "card back.";
+		break;
+	default:
+		mes "A hunt. Your quest log says what";
+		mes "and where. When you're done, the";
+		mes "^0000FFSheep^000000 here will examine you and";
+		mes "write you a receipt.";
+	}
+	close;
+}
+
+// The examining Sheep: hunts become receipts.
+alberta_in,20,17,4	script	Sheep#iqss0	890,{
+	mes "[Sheep]";
+	if (iq_ssq == 8336 || iq_ssq == 8338 || iq_ssq == 8340 || iq_ssq >= 8346) {
+		if (checkquest(iq_ssq) == 1 && checkquest(iq_ssq, HUNTING) == 2) {
+			changequest iq_ssq, iq_ssq + 1;
+			mes "Baa. Examined. Hunt confirmed.";
+			mes "Here's your receipt. Give it to";
+			mes "Masha.";
+			close;
+		}
+		if (checkquest(iq_ssq) == 1) {
+			mes "Baa. Not done yet. Baa.";
+			close;
+		}
+	}
+	mes "Baa. Merchant Union examiner.";
+	close;
+}
+
+// The Sheep who receive the deliveries. Hidden name: "iqss" + the request id.
+-	script	Sheep#iqssdlv	-1,{
+	.@q = atoi(replacestr(strnpcinfo(2), "iqss", ""));
+	mes "[Sheep]";
+	if (iq_ssq == .@q && checkquest(.@q) == 1) {
+		if (!countitem(Slightly_Old_Bax)) {
+			mes "Baa? No box?";
+			close;
+		}
+		delitem Slightly_Old_Bax, 1;
+		changequest .@q, .@q + 1;
+		mes "Baa! The box. Here's the receipt";
+		mes "for Masha.";
+		close;
+	}
+	mes "Baa. Merchant Union business only.";
+	close;
+}
+prt_in,56,57,4	duplicate(Sheep#iqssdlv)	Sheep#iqss8324	890
+payon,140,174,4	duplicate(Sheep#iqssdlv)	Sheep#iqss8326	890
+cmd_in01,128,171,4	duplicate(Sheep#iqssdlv)	Sheep#iqss8328	890
+aldeba_in,97,55,4	duplicate(Sheep#iqssdlv)	Sheep#iqss8330	890
+morocc,162,258,4	duplicate(Sheep#iqssdlv)	Sheep#iqss8332	890
+
+// The adventurers who hold the antique boxes.
+-	script	Murian#iqsscol	-1,{
+	.@q = (strnpcinfo(1) == "Murian") ? 8334 : 8342;
+	mes "[" + strnpcinfo(1) + "]";
+	if (iq_ssq == .@q && checkquest(.@q) == 1) {
+		mes "Masha sent you? Finally. Here's";
+		mes "the box. Careful, it's older than";
+		mes "it looks.";
+		getitem Slightly_Old_Bax, 1;
+		changequest .@q, .@q + 1;
+		close;
+	}
+	mes "On a job for the Merchant Union.";
+	mes "Don't touch anything.";
+	close;
+}
+prt_sewb3,144,181,4	duplicate(Murian#iqsscol)	Murian#iqss1	753
+in_sphinx3,120,96,4	duplicate(Murian#iqsscol)	Elbury#iqss2	884
+
+lhz_dun03,120,96,0	script	Device#iqss	858,{
+	if (iq_ssq == 8344 && checkquest(8344) == 1 && countitem(Retrieve_Datacard)) {
+		mes "A small sign with a card slot.";
+		next;
+		if (select("Insert the Data Retrieval Card:Leave it") == 2)
+			close;
+		progressbar "ffff00", 3;
+		changequest 8344, 8345;
+		mes "The device hums and spits the card";
+		mes "back out. The data is on it.";
+		close;
+	}
+	mes "A small sign with a card slot.";
+	close;
+}
+
+// ---------------------------------------------------- Staffers
+// getarg(0): text, getarg(1): max length. Mail titles over 40 characters are refused.
+function	script	F_IQ_SSCut	{
+	if (getstrlen(getarg(0)) <= getarg(1))
+		return getarg(0);
+	return substr(getarg(0), 0, getarg(1) - 1);
+}
+
+// Stall slots 1-80: 1-40 are Alberta's market cells, 41-80 Prontera's.
+// $iqss_owner[s] char id (0 = free), $iqss_owner$[s], $iqss_kind[s] (1 sell, 2 buy),
+// $iqss_end[s] unix time, $iqss_title$[s], $iqss_npc$[s] (the placed NPC),
+// $iqss_esc[s] (zeny held by a buying stall), and per slot, up to 5 entries:
+// $iqss<s>_id[], _amt[], _price[], _ref[], _c0[] .. _c3[].
+
+// getarg(0): slot. Places the stall's NPC. Returns 1 on success.
+function	script	F_IQ_SSPlace	{
+	.@s = getarg(0);
+	setarray .@ax[0], 95, 95, 95, 95, 95, 95, 98, 98, 98, 98, 98, 101, 101, 101, 101, 101, 104, 104, 104, 104, 107, 107, 116, 116, 125, 125, 128, 128, 128, 128, 131, 131, 131, 134, 134, 137, 137, 137, 137, 137;
+	setarray .@ay[0], 40, 46, 64, 70, 76, 82, 43, 61, 67, 73, 79, 43, 55, 67, 73, 88, 43, 58, 70, 76, 43, 73, 43, 49, 43, 73, 46, 55, 73, 79, 67, 73, 79, 58, 70, 40, 46, 52, 58, 64;
+	setarray .@px[0], 130, 130, 130, 133, 133, 133, 136, 136, 136, 139, 139, 139, 139, 139, 142, 142, 142, 145, 145, 145, 145, 148, 148, 148, 148, 148, 151, 151, 151, 151, 151, 151, 151, 154, 154, 154, 154, 154, 154, 154;
+	setarray .@py[0], 90, 114, 120, 108, 114, 120, 108, 114, 120, 93, 111, 117, 132, 138, 108, 114, 120, 99, 105, 117, 132, 102, 108, 114, 120, 135, 90, 96, 102, 108, 114, 120, 132, 93, 99, 105, 111, 117, 123, 129;
+	if (.@s <= 40) {
+		.@map$ = "alberta"; .@x = .@ax[.@s - 1]; .@y = .@ay[.@s - 1];
+	} else {
+		.@map$ = "prontera"; .@x = .@px[.@s - 41]; .@y = .@py[.@s - 41];
+	}
+	.@n$ = duplicate("Street Stall Staffer#iqss", .@map$, .@x, .@y, $iqss_title$[.@s] + "#iqss" + .@s, ($iqss_kind[.@s] == 1 ? 4_M_JOB_BLACKSMITH : 4_F_JOB_BLACKSMITH), 4);
+	$iqss_npc$[.@s] = .@n$;
+	return (.@n$ != "");
+}
+
+// getarg(0): slot. Closes the stall: mails back what's left, removes the NPC.
+function	script	F_IQ_SSClose	{
+	.@s = getarg(0);
+	.@cid = $iqss_owner[.@s];
+	if (!.@cid)
+		return;
+	.@p$ = "$iqss" + .@s + "_";
+	if ($iqss_kind[.@s] == 1) {
+		.@n = 0;
+		for (.@k = 0; .@k < 5; .@k++) {
+			if (getd(.@p$ + "amt[" + .@k + "]") > 0) {
+				.@mid[.@n] = getd(.@p$ + "id[" + .@k + "]");
+				.@mamt[.@n] = getd(.@p$ + "amt[" + .@k + "]");
+				.@mref[.@n] = getd(.@p$ + "ref[" + .@k + "]");
+				.@mbnd[.@n] = 0;
+				.@mc0[.@n] = getd(.@p$ + "c0[" + .@k + "]");
+				.@mc1[.@n] = getd(.@p$ + "c1[" + .@k + "]");
+				.@mc2[.@n] = getd(.@p$ + "c2[" + .@k + "]");
+				.@mc3[.@n] = getd(.@p$ + "c3[" + .@k + "]");
+				.@n++;
+			}
+		}
+		if (.@n)
+			mail .@cid, "Street Stall Staffer", "Your stall has closed", "Your selling staffer has gone home. Here is what was left unsold.", 0, .@mid, .@mamt, .@mref, .@mbnd, .@mc0, .@mc1, .@mc2, .@mc3;
+	} else if ($iqss_esc[.@s] > 0)
+		mail .@cid, "Street Stall Staffer", "Your stall has closed", "Your buying staffer has gone home. Here is the zeny that wasn't spent.", $iqss_esc[.@s];
+	if ($iqss_npc$[.@s] != "")
+		unloadnpc $iqss_npc$[.@s];
+	for (.@k = 0; .@k < 5; .@k++) {
+		setd .@p$ + "id[" + .@k + "]", 0;
+		setd .@p$ + "amt[" + .@k + "]", 0;
+		setd .@p$ + "price[" + .@k + "]", 0;
+		setd .@p$ + "ref[" + .@k + "]", 0;
+		setd .@p$ + "c0[" + .@k + "]", 0;
+		setd .@p$ + "c1[" + .@k + "]", 0;
+		setd .@p$ + "c2[" + .@k + "]", 0;
+		setd .@p$ + "c3[" + .@k + "]", 0;
+	}
+	$iqss_owner[.@s] = 0;
+	$iqss_owner$[.@s] = "";
+	$iqss_kind[.@s] = 0;
+	$iqss_end[.@s] = 0;
+	$iqss_esc[.@s] = 0;
+	$iqss_title$[.@s] = "";
+	$iqss_npc$[.@s] = "";
+	return;
+}
+
+// Places the open stalls at start-up, closes expired ones every minute.
+-	script	IQ_SSControl	-1,{
+	end;
+OnInit:
+	for (.@s = 1; .@s <= 80; .@s++)
+		if ($iqss_owner[.@s])
+			callfunc "F_IQ_SSPlace", .@s;
+	initnpctimer;
+	end;
+OnTimer60000:
+	.@now = gettimetick(2);
+	for (.@s = 1; .@s <= 80; .@s++)
+		if ($iqss_owner[.@s] && $iqss_end[.@s] <= .@now)
+			callfunc "F_IQ_SSClose", .@s;
+	initnpctimer;
+	end;
+}
+
+// The staffer. Its hidden name is "iqss" + its slot.
+-	script	Street Stall Staffer#iqss	-1,{
+	.@s = atoi(replacestr(strnpcinfo(2), "iqss", ""));
+	.@p$ = "$iqss" + .@s + "_";
+	.@name$ = "[" + strnpcinfo(1) + "]";
+	if (!$iqss_owner[.@s] || $iqss_end[.@s] <= gettimetick(2)) {
+		mes .@name$;
+		mes "Sorry, we're closing up.";
+		close;
+	}
+	mes .@name$;
+	mes "Staffing " + $iqss_owner$[.@s] + "'s " + ($iqss_kind[.@s] == 1 ? "selling" : "buying") + " stall.";
+	if (getcharid(0) == $iqss_owner[.@s]) {
+		mes "Boss! All's well. You can close";
+		mes "the stall with Ridwan at the";
+		mes "Merchant Union in Alberta.";
+		close;
+	}
+	// The menu: one line per entry still open.
+	.@menu$ = "";
+	for (.@k = 0; .@k < 5; .@k++) {
+		.@id = getd(.@p$ + "id[" + .@k + "]");
+		.@amt = getd(.@p$ + "amt[" + .@k + "]");
+		.@ref = getd(.@p$ + "ref[" + .@k + "]");
+		if (.@id && .@amt > 0)
+			.@menu$ += (.@ref ? "+" + .@ref + " " : "") + getitemname(.@id) + " x" + .@amt + ", " + callfunc("F_InsertComma", getd(.@p$ + "price[" + .@k + "]")) + "z each";
+		.@menu$ += ":";
+	}
+	next;
+	.@k = select(.@menu$ + "Never mind") - 1;
+	if (.@k == 5)
+		close;
+	.@id = getd(.@p$ + "id[" + .@k + "]");
+	.@price = getd(.@p$ + "price[" + .@k + "]");
+	mes .@name$;
+	if ($iqss_kind[.@s] == 1) {
+		mes "How many?";
+		next;
+		input .@want, 1, getd(.@p$ + "amt[" + .@k + "]");
+		// Things may have changed while the window was open.
+		if (!$iqss_owner[.@s] || getd(.@p$ + "id[" + .@k + "]") != .@id || .@want > getd(.@p$ + "amt[" + .@k + "]") || .@want < 1) {
+			mes .@name$;
+			mes "Sorry, that's no longer available.";
+			close;
+		}
+		if (.@want > MAX_ZENY / .@price || .@want * .@price > Zeny) {
+			mes .@name$;
+			mes "You don't have enough zeny.";
+			close;
+		}
+		if (!checkweight(.@id, .@want)) {
+			mes .@name$;
+			mes "You can't carry that much.";
+			close;
+		}
+		.@total = .@want * .@price;
+		Zeny -= .@total;
+		getitem2 .@id, .@want, 1, getd(.@p$ + "ref[" + .@k + "]"), 0, getd(.@p$ + "c0[" + .@k + "]"), getd(.@p$ + "c1[" + .@k + "]"), getd(.@p$ + "c2[" + .@k + "]"), getd(.@p$ + "c3[" + .@k + "]");
+		setd .@p$ + "amt[" + .@k + "]", getd(.@p$ + "amt[" + .@k + "]") - .@want;
+		mail $iqss_owner[.@s], "Street Stall Staffer", callfunc("F_IQ_SSCut", "Sold: " + getitemname(.@id), 39), strcharinfo(0) + " bought " + .@want + " " + getitemname(.@id) + " from your stall for " + callfunc("F_InsertComma", .@total) + " zeny.", .@total;
+		mes .@name$;
+		mes "Thank you for your purchase!";
+	} else {
+		.@have = countitem(.@id);
+		if (!.@have) {
+			mes "You don't have any " + getitemname(.@id) + ".";
+			close;
+		}
+		mes "We're buying " + getitemname(.@id) + ".";
+		mes "How many will you sell?";
+		next;
+		input .@want, 1, min(.@have, getd(.@p$ + "amt[" + .@k + "]"));
+		if (!$iqss_owner[.@s] || getd(.@p$ + "id[" + .@k + "]") != .@id || .@want > getd(.@p$ + "amt[" + .@k + "]") || .@want < 1 || .@want > countitem(.@id)) {
+			mes .@name$;
+			mes "Sorry, we can't buy that now.";
+			close;
+		}
+		.@total = .@want * .@price;
+		if (.@total > $iqss_esc[.@s] || Zeny > MAX_ZENY - .@total) {
+			mes .@name$;
+			mes "Sorry, we can't pay for that.";
+			close;
+		}
+		delitem .@id, .@want;
+		Zeny += .@total;
+		$iqss_esc[.@s] -= .@total;
+		setd .@p$ + "amt[" + .@k + "]", getd(.@p$ + "amt[" + .@k + "]") - .@want;
+		setarray .@mid[0], .@id;
+		setarray .@mamt[0], .@want;
+		mail $iqss_owner[.@s], "Street Stall Staffer", callfunc("F_IQ_SSCut", "Bought: " + getitemname(.@id), 39), strcharinfo(0) + " sold your stall " + .@want + " " + getitemname(.@id) + " for " + callfunc("F_InsertComma", .@total) + " zeny.", 0, .@mid, .@mamt;
+		mes .@name$;
+		mes "Pleasure doing business!";
+	}
+	// Nothing left to sell or buy: the staffer goes home at the next check.
+	for (.@k = 0; .@k < 5; .@k++)
+		if (getd(.@p$ + "amt[" + .@k + "]") > 0)
+			close;
+	$iqss_end[.@s] = 0;
+	close;
+}
+
+alberta_in,20,21,4	script	Department of Employment Ridwan#iqss	58,{
+	.@cid = getcharid(0);
+	mes "[Ridwan]";
+	mes "Street stall staffers! They keep";
+	mes "your stall open while you're away.";
+	mes "Certificates: ^0000FFBeginner " + iq_ssc1 + "^000000, ^0000FFRegular " + iq_ssc2 + "^000000, ^0000FFMaster " + iq_ssc3 + "^000000.";
+	next;
+	switch (select("Hire a selling staffer:Hire a buying staffer:My staffers:How does it work?:Leave")) {
+	case 1: .@kind = 1; break;
+	case 2: .@kind = 2; break;
+	case 3:
+		.@menu$ = ""; .@n = 0;
+		for (.@s = 1; .@s <= 80; .@s++) {
+			if ($iqss_owner[.@s] == .@cid) {
+				.@mine[.@n] = .@s;
+				.@left = max(0, $iqss_end[.@s] - gettimetick(2)) / 3600;
+				.@menu$ += ($iqss_kind[.@s] == 1 ? "Selling" : "Buying") + " stall '" + $iqss_title$[.@s] + "' in " + (.@s <= 40 ? "Alberta" : "Prontera") + ", " + .@left + "h left:";
+				.@n++;
+			}
+		}
+		mes "[Ridwan]";
+		if (!.@n) {
+			mes "You have no staffers working.";
+			close;
+		}
+		mes "Close one of them now? What's left";
+		mes "comes back to you by mail.";
+		next;
+		.@c = select(.@menu$ + "Never mind") - 1;
+		if (.@c == .@n)
+			close;
+		callfunc "F_IQ_SSClose", .@mine[.@c];
+		mes "[Ridwan]";
+		mes "Done. Check your mail.";
+		close;
+	case 4:
+		mes "[Ridwan]";
+		mes "Earn a certificate with one of";
+		mes "Masha's requests. A Beginner";
+		mes "staffer handles 3 kinds of items";
+		mes "for 1 day, a Regular one 4 kinds";
+		mes "for 2 days, a Master 5 kinds for";
+		mes "3 days.";
+		next;
+		mes "[Ridwan]";
+		mes "A selling staffer holds your goods";
+		mes "and mails you the zeny of every";
+		mes "sale. A buying staffer holds your";
+		mes "zeny and mails you what it buys.";
+		mes "One of each per character. They";
+		mes "set up in Alberta or Prontera.";
+		close;
+	case 5:
+		close;
+	}
+	// Hiring.
+	for (.@s = 1; .@s <= 80; .@s++) {
+		if ($iqss_owner[.@s] == .@cid && $iqss_kind[.@s] == .@kind) {
+			mes "[Ridwan]";
+			mes "You already have a " + (.@kind == 1 ? "selling" : "buying") + " staffer";
+			mes "working.";
+			close;
+		}
+	}
+	.@menu$ = "";
+	for (.@g = 1; .@g <= 3; .@g++)
+		.@menu$ += (getd("iq_ssc" + .@g) ? callfunc("F_IQ_SSGradeName", .@g) + " certificate (" + (.@g + 2) + " kinds, " + .@g + " day" + (.@g > 1 ? "s" : "") + ")" : "") + ":";
+	if (!iq_ssc1 && !iq_ssc2 && !iq_ssc3) {
+		mes "[Ridwan]";
+		mes "You need an employment certificate";
+		mes "first. Masha has requests.";
+		close;
+	}
+	mes "[Ridwan]";
+	mes "Which certificate?";
+	next;
+	.@g = select(.@menu$ + "Never mind");
+	if (.@g == 4)
+		close;
+	.@kinds = .@g + 2;
+	mes "[Ridwan]";
+	mes "Where should the staffer set up?";
+	next;
+	.@town = select("Alberta:Prontera:Never mind");
+	if (.@town == 3)
+		close;
+	.@s0 = (.@town == 1) ? 1 : 41;
+	for (.@slot = .@s0; .@slot < .@s0 + 40; .@slot++)
+		if (!$iqss_owner[.@slot])
+			break;
+	if (.@slot == .@s0 + 40) {
+		mes "[Ridwan]";
+		mes "Every stall spot there is taken.";
+		mes "Try the other town, or later.";
+		close;
+	}
+	mes "[Ridwan]";
+	mes "A name for your stall? Up to 14";
+	mes "letters.";
+	next;
+	input .@title$;
+	.@title$ = replacestr(replacestr(replacestr(.@title$, "#", ""), ":", ""), "\"", "");
+	if (getstrlen(.@title$) < 1 || getstrlen(.@title$) > 14) {
+		mes "[Ridwan]";
+		mes "1 to 14 letters, please.";
+		close;
+	}
+	if (.@kind == 1) {
+		// Selling: take up to .@kinds entries from the inventory, exactly as they are.
+		.@n = 0;
+		while (.@n < .@kinds) {
+			getinventorylist;
+			.@menu$ = ""; .@c = 0;
+			for (.@i = 0; .@i < @inventorylist_count; .@i++) {
+				if (@inventorylist_equip[.@i] || @inventorylist_bound[.@i] || @inventorylist_expire[.@i] || @inventorylist_enchantgrade[.@i]
+				|| @inventorylist_option_id1[.@i] || !@inventorylist_identify[.@i] || @inventorylist_attribute[.@i])
+					continue;
+				.@inv[.@c] = .@i;
+				.@menu$ += (@inventorylist_refine[.@i] ? "+" + @inventorylist_refine[.@i] + " " : "") + getitemname(@inventorylist_id[.@i]) + " (" + @inventorylist_amount[.@i] + "):";
+				.@c++;
+			}
+			mes "[Ridwan]";
+			mes "Item " + (.@n + 1) + " of " + .@kinds + ". What will it sell?";
+			next;
+			.@pick = select(.@menu$ + (.@n ? "That's all" : "Never mind")) - 1;
+			if (.@pick == .@c)
+				break;
+			.@i = .@inv[.@pick];
+			mes "[Ridwan]";
+			mes "How many, and at what price each?";
+			next;
+			input .@amt, 1, @inventorylist_amount[.@i];
+			input .@price, 1, MAX_ZENY;
+			if (.@amt < 1 || .@price < 1) {
+				mes "[Ridwan]";
+				mes "That won't do.";
+				close;
+			}
+			.@id[.@n] = @inventorylist_id[.@i];
+			.@am[.@n] = .@amt;
+			.@pr[.@n] = .@price;
+			.@rf[.@n] = @inventorylist_refine[.@i];
+			.@k0[.@n] = @inventorylist_card1[.@i];
+			.@k1[.@n] = @inventorylist_card2[.@i];
+			.@k2[.@n] = @inventorylist_card3[.@i];
+			.@k3[.@n] = @inventorylist_card4[.@i];
+			delitem2 .@id[.@n], .@amt, 1, .@rf[.@n], 0, .@k0[.@n], .@k1[.@n], .@k2[.@n], .@k3[.@n];
+			.@n++;
+		}
+		if (!.@n)
+			close;
+	} else {
+		// Buying: up to .@kinds items, with zeny put down for all of them.
+		.@n = 0; .@esc = 0;
+		while (.@n < .@kinds) {
+			mes "[Ridwan]";
+			mes "Item " + (.@n + 1) + " of " + .@kinds + ". What will it buy?";
+			mes "^777777(Not equipment.)^000000";
+			next;
+			.@how = select("Enter the item's ID:" + (.@n ? "That's all" : "Never mind"));
+			if (.@how == 2)
+				break;
+			input .@iid;
+			.@type = getiteminfo(.@iid, ITEMINFO_TYPE);
+			if (getitemname(.@iid) == "null" || .@type == IT_WEAPON || .@type == IT_ARMOR || .@type == IT_SHADOWGEAR || .@type == IT_PETEGG || .@type == IT_PETARMOR) {
+				mes "[Ridwan]";
+				mes "No such item, or it's equipment.";
+				next;
+				continue;
+			}
+			mes "[Ridwan]";
+			mes "^0000FF" + getitemname(.@iid) + "^000000. How many, and";
+			mes "at what price each?";
+			next;
+			input .@amt, 1, 30000;
+			input .@price, 1, MAX_ZENY;
+			if (.@amt < 1 || .@price < 1 || .@amt > (MAX_ZENY - .@esc) / .@price || .@esc + .@amt * .@price > Zeny) {
+				mes "[Ridwan]";
+				mes "You can't put down that much zeny.";
+				next;
+				continue;
+			}
+			.@id[.@n] = .@iid;
+			.@am[.@n] = .@amt;
+			.@pr[.@n] = .@price;
+			.@esc += .@amt * .@price;
+			.@n++;
+		}
+		if (!.@n)
+			close;
+		if (.@esc > Zeny)
+			close;
+		Zeny -= .@esc;
+	}
+	// The slot may have been taken while the windows were open.
+	if ($iqss_owner[.@slot]) {
+		for (.@s = .@s0; .@s < .@s0 + 40; .@s++)
+			if (!$iqss_owner[.@s])
+				break;
+		if (.@s == .@s0 + 40) {
+			// Give everything back.
+			if (.@kind == 1) {
+				for (.@k = 0; .@k < .@n; .@k++)
+					getitem2 .@id[.@k], .@am[.@k], 1, .@rf[.@k], 0, .@k0[.@k], .@k1[.@k], .@k2[.@k], .@k3[.@k];
+			} else
+				Zeny += .@esc;
+			mes "[Ridwan]";
+			mes "Someone just took the last spot.";
+			mes "Here's everything back.";
+			close;
+		}
+		.@slot = .@s;
+	}
+	.@p$ = "$iqss" + .@slot + "_";
+	for (.@k = 0; .@k < .@n; .@k++) {
+		setd .@p$ + "id[" + .@k + "]", .@id[.@k];
+		setd .@p$ + "amt[" + .@k + "]", .@am[.@k];
+		setd .@p$ + "price[" + .@k + "]", .@pr[.@k];
+		setd .@p$ + "ref[" + .@k + "]", .@rf[.@k];
+		setd .@p$ + "c0[" + .@k + "]", .@k0[.@k];
+		setd .@p$ + "c1[" + .@k + "]", .@k1[.@k];
+		setd .@p$ + "c2[" + .@k + "]", .@k2[.@k];
+		setd .@p$ + "c3[" + .@k + "]", .@k3[.@k];
+	}
+	$iqss_owner[.@slot] = .@cid;
+	$iqss_owner$[.@slot] = strcharinfo(0);
+	$iqss_kind[.@slot] = .@kind;
+	$iqss_esc[.@slot] = .@esc;
+	$iqss_end[.@slot] = gettimetick(2) + .@g * 86400;
+	$iqss_title$[.@slot] = .@title$;
+	setd "iq_ssc" + .@g, getd("iq_ssc" + .@g) - 1;
+	callfunc "F_IQ_SSPlace", .@slot;
+	mes "[Ridwan]";
+	mes "Your staffer is setting up in";
+	mes (.@slot <= 40 ? "Alberta" : "Prontera") + ". Sales and purchases";
+	mes "will come to you by mail.";
+	close;
+}
