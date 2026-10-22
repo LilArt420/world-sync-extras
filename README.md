@@ -69,6 +69,19 @@ iRO's permanent services that World Sync placed as greeting-only NPCs.
 
 Rewards and a few rules are estimates where iRO doesn't publish them.
 
+## 🎯 iRO Quests (seven settings, all on)
+
+iRO's permanent quests the server has no script for, with full dialogue and iRO's own quest log
+(formerly the separate iRO Quests mod):
+- **Bounty Boards** (`bounty_boards`): 314 repeatable 150-kill hunts on 65 boards in 25 towns.
+- **Criminal Activities** (`criminal_activities`): Agent York and Jymmy the Thumb's casino airship (Base 70).
+- **Eye of the Beholder** (`eye_of_the_beholder`): Beho and Bianca in Rachel (Base 50).
+- **Overlook Water Dungeon** (`overlook_water_dungeon`): The Sign west of Geffen, the Aged monsters and the floor hunts.
+- **Gramps' weekly turn-ins** (`gramps_turn_ins`): 400-kill hunts at the Eden Group (Base 70-150).
+- **City Investment** (`city_investment`): the Merchant Union, Union Insignias, deliveries, Wanted bosses and Union gear.
+- **Town quests, 2021 revamp** (`town_quests_2021`): story chains and dailies in Morroc, Payon, Prontera, Izlude,
+  Aldebaran and the Juno fields, Geffen, Rachel and Veins, Comodo, Alberta and the Eden Group's field missions.
+
 ## 🧍 Placeholder NPCs (setting `placeholders`, on)
 
 76 official NPCs whose dialog and logic exist in no server data yet, standing

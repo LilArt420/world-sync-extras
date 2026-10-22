@@ -37,6 +37,17 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - iRO's own services rAthena ships switched off (Keiki, Aperture, the Refining Researcher, Phelix, Izaac, Dark Luhir), placed where iRO has them; the Shadow Blacksmith, Madogear rental in Eclage and Mora, and Izlude's Increase AGI acolytes.
 - EXP rewards and a few rules are estimates. 18 placeholders become these NPCs.
 
+### 🎯 New: iRO Quests (seven settings, on)
+The iRO Quests mod (0.1.0 was its last release) is now part of World Sync Extras, so one install brings the
+stories, the quests and the NPCs:
+- Bounty Boards: 314 repeatable hunts on 65 boards in 25 towns and the Illusion dungeons.
+- Criminal Activities, Eye of the Beholder and the Overlook Water Dungeon.
+- Gramps' weekly turn-ins at the Eden Group (184 hunts from the iRO client).
+- City Investment: the City Merchant Union in 9 towns, Union Insignias, A/B/C deliveries and weekly Wanted bosses.
+- The 2021 town quest chains and their dailies, from Morroc to Alberta, with the Eden Group's field mission givers.
+- 48 placeholders become these NPCs, and about 140 NPCs World Sync had removed come back with their quests.
+If you had installed iRO Quests on its own, remove it: World Sync Extras carries all of it now.
+
 ### 🧍 Placeholders
 - 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 200, the Star Forest block 100 and the iRO services block 18. Likewise 48 placeholders that iRO Quests (0.2.0 and 0.3.0) implements: the Overlook Water Dungeon signboards, the City Investment delivery recipients and the 2021 town quest chains. 3 more (Myu, Girl, Old Man) are already scripted by rAthena. 21 placeholders for retired or online-only iRO content are left out: the Weekend Race, the Battle Pass Season 3 signboards, the Talk Like a Pirate Event 2026 hub and the Redeem Code. 76 placeholders remain, 44 of them working.
 
