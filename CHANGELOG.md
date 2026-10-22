@@ -28,7 +28,7 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - Sanctuary Herosria's lobby services, portals, PvP dungeon blessing and gardens.
 - The Herosria siege (War of Emperium: Herosria), Sundays 20:00-22:00: region jewels, arches, three gates, the four garden jewels and their rulers, and the Jewel of Herosria. The holding guild gets the gift, the Spring Jewel and the gardens. GMs can start a 30-minute test battle at the Sanctuary Manager.
 - Ash Village's shops, enchants and signposts.
-- 99 placeholders become these NPCs. Prices, recipes and rewards kRO doesn't publish are estimates.
+- 100 placeholders become these NPCs (Lala on ab_lava1 included). Prices, recipes and rewards kRO doesn't publish are estimates.
 
 ### 🛎️ New: iRO services (setting `iro_systems`, on)
 - The Devil in the Box's dailies in the Clock Tower Unknown Basement (5961-5971, with the 10 Pet Mimics).
@@ -38,7 +38,7 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - EXP rewards and a few rules are estimates. 18 placeholders become these NPCs.
 
 ### 🧍 Placeholders
-- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 200 and the Star Forest block 99. Likewise 48 placeholders that iRO Quests (0.2.0 and 0.3.0) implements: the Overlook Water Dungeon signboards, the City Investment delivery recipients and the 2021 town quest chains. 3 more (Myu, Girl, Old Man) are already scripted by rAthena. 21 placeholders for retired or online-only iRO content are left out: the Weekend Race, the Battle Pass Season 3 signboards, the Talk Like a Pirate Event 2026 hub and the Redeem Code. 78 placeholders remain, 44 of them working.
+- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 200, the Star Forest block 100 and the iRO services block 18. Likewise 48 placeholders that iRO Quests (0.2.0 and 0.3.0) implements: the Overlook Water Dungeon signboards, the City Investment delivery recipients and the 2021 town quest chains. 3 more (Myu, Girl, Old Man) are already scripted by rAthena. 21 placeholders for retired or online-only iRO content are left out: the Weekend Race, the Battle Pass Season 3 signboards, the Talk Like a Pirate Event 2026 hub and the Redeem Code. 78 placeholders remain, 44 of them working.
 
 ### 👾 World Sync monsters (db/mob_db.yml, until the app ships the same fixes)
 - They drop again: 154 monsters had drops with no chance published, which the server gave the 0.01% floor. They now use the typical chance of the same kind of item (materials 5%, cards 0.01%, equipment 0.03-0.3%).
