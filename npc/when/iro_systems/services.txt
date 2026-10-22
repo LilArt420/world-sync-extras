@@ -1,0 +1,94 @@
+//===== World Sync Extras: iRO systems block =================
+//= iRO-only services rAthena lacks or places elsewhere.
+//===== Description: =========================================
+//= Dungeon Teleporter (Eden Group): iROWiki, Dungeon Teleporter.
+//=   Books a dungeon for the party for 25,000 zeny; after that
+//=   every member of the party is sent there for free until the
+//=   booking changes. A party of one is fine. (iRO lets VIPs book
+//=   for free; there's no VIP here.)
+//= The Shadow Blacksmith (prt_in) and the Madogear Managers
+//=   (Eclage, Mora) are rAthena's own scripts: see iro_ports.txt.
+//============================================================
+
+moc_para01,13,28,4	script	Dungeon Teleporter#wsi	4_M_04,{
+	setarray .@name$[0],
+		"Glast Heim", "Ruins of Juperos Entrance", "Somatology Laboratory 1F",
+		"Byalan Island", "Pyramid 1F", "Payon Cave 1F", "Ant Hell 1F",
+		"Prontera Culvert 1F", "Abyss Lake 1F", "Cursed Monastery 1F",
+		"Ice Cave 1F", "Holy Ground 1F", "Thor Volcano 1F",
+		"Amatsu Dungeon: Tatami Maze", "Beach Dungeon: West Cave, Karu",
+		"Bifrost Tower 1F", "Kamidal Tunnel", "Orc Dungeon 1F",
+		"Dragon's Nest 1F (Lasagna)", "Mjolnir Dead Pit";
+	setarray .@map$[0],
+		"glast_01", "jupe_cave", "lhz_dun01", "izlu2dun", "moc_pryd01",
+		"pay_dun00", "anthell01", "prt_sewb1", "abyss_01", "abbey01",
+		"ice_dun01", "ra_san01", "thor_v01", "ama_dun01", "beach_dun",
+		"ecl_tdun01", "dic_dun01", "orcsdun01", "lasa_dun01", "mjo_dun01";
+	setarray .@x[0], 370, 140, 150, 108, 192, 21, 35, 131, 261, 51, 157, 140, 21, 228, 266, 57, 364, 32, 24, 52;
+	setarray .@y[0], 304, 51, 288, 88, 9, 183, 262, 247, 272, 14, 14, 11, 228, 11, 67, 13, 44, 170, 143, 17;
+	.@fee = 25000;
+	.@party = getcharid(1);
+	mes "[Dungeon Teleporter]";
+	mes "The Eden Group sends parties";
+	mes "of adventurers straight into";
+	mes "the dungeons that need them.";
+	mes "Book a dungeon for your party";
+	mes "for ^0000FF" + callfunc("F_InsertComma", .@fee) + " zeny^000000, and each of";
+	mes "you can be sent there for free.";
+	next;
+	if (!.@party) {
+		mes "[Dungeon Teleporter]";
+		mes "I only book for parties.";
+		mes "A party of one will do!";
+		mes "Form a party and come back.";
+		close;
+	}
+	.@b = getd("$@wsi_dtp_" + .@party);
+	.@menu$ = "Book a dungeon for my party";
+	if (.@b > 0)
+		.@menu$ = .@menu$ + ":Send me to " + .@name$[.@b - 1];
+	.@menu$ = .@menu$ + ":Never mind";
+	.@s = select(.@menu$);
+	if (.@s == 1) {
+		mes "[Dungeon Teleporter]";
+		mes "Where shall I book your party?";
+		next;
+		.@d = select(implode(.@name$, ":") + ":Cancel") - 1;
+		if (.@d == getarraysize(.@name$)) {
+			mes "[Dungeon Teleporter]";
+			mes "Take your time.";
+			close;
+		}
+		if (Zeny < .@fee) {
+			mes "[Dungeon Teleporter]";
+			mes "The booking costs";
+			mes "^0000FF" + callfunc("F_InsertComma", .@fee) + " zeny^000000. You don't have";
+			mes "enough on you.";
+			close;
+		}
+		Zeny -= .@fee;
+		setd "$@wsi_dtp_" + .@party, .@d + 1;
+		mes "[Dungeon Teleporter]";
+		mes "Your party is booked for";
+		mes "^0000FF" + .@name$[.@d] + "^000000.";
+		mes "Anyone in your party can talk";
+		mes "to me to be sent there now.";
+		next;
+		if (select("Send me there now:Later") == 2) {
+			mes "[Dungeon Teleporter]";
+			mes "The booking stays until your";
+			mes "party books another dungeon.";
+			close;
+		}
+		.@b = .@d + 1;
+	} else if (.@s == 3 || (.@s == 2 && .@b == 0)) {
+		mes "[Dungeon Teleporter]";
+		mes "Good hunting out there.";
+		close;
+	}
+	mes "[Dungeon Teleporter]";
+	mes "Off you go. Good hunting!";
+	close2;
+	warp .@map$[.@b - 1], .@x[.@b - 1], .@y[.@b - 1];
+	end;
+}

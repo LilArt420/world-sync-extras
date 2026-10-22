@@ -1,0 +1,59 @@
+//===== World Sync Extras: iRO systems block =================
+//= Vending search in the markets and Izlude's Increase AGI
+//= acolytes.
+//===== Description: =========================================
+//= Catalog Dispensers: like iRO's Shopping Boards (iROWiki,
+//= Commerce), one search of the stalls on this map per click,
+//= with the shop opened from the result list.
+//= The Catalogue Magician and the east library's Monster
+//= Encyclopedias are rAthena's own scripts: see iro_ports.txt.
+//= Estimate: the acolytes' Increase AGI (level 10, 240 seconds).
+//============================================================
+
+-	script	Catalog Dispenser#wsi	-1,{
+	mes "[Catalog Dispenser]";
+	mes "Welcome to the market!";
+	mes "This dispenser keeps the";
+	mes "market's catalog up to date:";
+	mes "every stall here, what it";
+	mes "sells and what it buys.";
+	next;
+	if (select("Search the market's stalls:Cancel") == 2) {
+		mes "[Catalog Dispenser]";
+		mes "Happy shopping!";
+		close;
+	}
+	close2;
+	searchstores 1, SEARCHSTORE_EFFECT_REMOTE;
+	end;
+}
+prt_mk,264,304,4	duplicate(Catalog Dispenser#wsi)	Catalog Dispenser#wsi1	4_MACHINE_DEVICE
+prt_mk,300,55,4	duplicate(Catalog Dispenser#wsi)	Catalog Dispenser#wsi2	4_MACHINE_DEVICE
+prt_mk,59,19,4	duplicate(Catalog Dispenser#wsi)	Catalog Dispenser#wsi3	4_MACHINE_DEVICE
+prt_mk,23,268,4	duplicate(Catalog Dispenser#wsi)	Catalog Dispenser#wsi4	4_MACHINE_DEVICE
+pay_mk,146,157,4	duplicate(Catalog Dispenser#wsi)	Catalog Dispenser#wsi5	4_MACHINE_DEVICE
+pay_mk,58,156,4	duplicate(Catalog Dispenser#wsi)	Catalog Dispenser#wsi6	4_MACHINE_DEVICE
+pay_mk,74,39,4	duplicate(Catalog Dispenser#wsi)	Catalog Dispenser#wsi7	4_MACHINE_DEVICE
+pay_mk,132,43,4	duplicate(Catalog Dispenser#wsi)	Catalog Dispenser#wsi8	4_MACHINE_DEVICE
+
+-	script	Increase Agi Aco#wsi	-1,{
+	mes "[Acolyte]";
+	mes "May the blessings of Odin";
+	mes "speed your steps, adventurer.";
+	mes "Shall I cast Increase AGI on you?";
+	next;
+	if (select("Yes, please:No, thank you") == 2) {
+		mes "[Acolyte]";
+		mes "Then go in peace, and come";
+		mes "back whenever you need me.";
+		close;
+	}
+	mes "[Acolyte]";
+	mes "Odin, grant this traveler";
+	mes "swift feet!";
+	specialeffect2 EF_INCAGILITY;
+	sc_start SC_INCREASEAGI, 240000, 10;
+	close;
+}
+izlude,127,229,4	duplicate(Increase Agi Aco#wsi)	Increase Agi Aco#wsi1	4_F_ACOLYTE
+izlude,179,209,4	duplicate(Increase Agi Aco#wsi)	Increase Agi Aco#wsi2	4_F_ACOLYTE
