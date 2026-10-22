@@ -457,11 +457,6 @@ ab_ground1,119,228,4	script	Verkasel#ws28622	467,{
 	mes "Hello there, adventurer.";
 	close;
 }
-ab_lava1,16,158,4	script	Lala#ws28623	10611,{
-	mes "[Lala]";
-	mes "Hello there, adventurer.";
-	close;
-}
 jalbe_in,32,142,4	script	Inn Employee#ws19147	53,{
 	mes "[Inn Employee]";
 	mes "A night's rest is ^0000FF5,000 zeny^000000. I'll also note this inn as your return point.";
