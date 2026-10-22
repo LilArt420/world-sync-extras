@@ -1,10 +1,10 @@
 {
   "name": "world-sync-extras",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "Lil Art",
   "description": "World Sync's playable content and iRO's quests, in blocks you can switch: the Jormungandr saga (Episodes 20 and 21), Chapters 1 and 2 of the Song of the World Tree, Varmundt, Star Forest and Herosria, iRO services, and iRO Quests (Bounty Boards, City Investment, the 2021 town quests, Gramps and more). The official NPCs still without logic stand where the clients put them, and @npcplace moves any NPC. Needs Ragnarok Offline 1.6.7 or later.",
   "requires": {
-    "app": ">=1.6.7",
+    "app": ">=1.6.9",
     "era": "renewal"
   },
   "after": ["eden-rework-2021"],
