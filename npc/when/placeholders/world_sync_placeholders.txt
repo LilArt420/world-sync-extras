@@ -177,51 +177,6 @@ in_sphinx4,130,130,4	script	Soldier Araki#ws14123	767,{
 	mes "Hello there, adventurer.";
 	close;
 }
-iroweekrace,64,312,4	script	Barricade#ws13857	406,{
-	mes "[Barricade]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iroweekrace,64,291,4	script	Barricade#ws13858	406,{
-	mes "[Barricade]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iroweekrace,96,292,4	script	Barricade#ws13859	406,{
-	mes "[Barricade]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iroweekrace,82,312,4	script	Barricade#ws13860	406,{
-	mes "[Barricade]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iroweekrace,89,301,4	script	Starting Line#ws13861	722,{
-	mes "[Starting Line]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iroweekrace,87,309,4	script	Starting Line#ws13862	722,{
-	mes "[Starting Line]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iroweekrace,80,303,4	script	Event Staff Sunny#ws13863	845,{
-	mes "[Event Staff Sunny]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iroweekrace,146,208,4	script	Event Staff Sunny#ws13864	845,{
-	mes "[Event Staff Sunny]";
-	mes "Hello there, adventurer.";
-	close;
-}
-iroweekrace,134,208,4	script	Lovelean#ws13865	860,{
-	mes "[Lovelean]";
-	mes "Hello there, adventurer.";
-	close;
-}
 iz_dun00,130,138,4	script	Village Little Boy#ws14157	706,{
 	mes "[Village Little Boy]";
 	mes "Hello there, adventurer.";
@@ -1502,31 +1457,6 @@ alberta,43,55,4	script	Zeny & BSB Gacha#wsb457	4_M_01,{
 	mes "Hello there, adventurer.";
 	close;
 }
-prontera,133,328,4	script	S3 Hunting Zone#wsb459	4_M_01,{
-	mes "[S3 Hunting Zone]";
-	mes "Hello there, adventurer.";
-	close;
-}
-prontera,129,328,4	script	S3 Research#wsb460	4_M_01,{
-	mes "[S3 Research]";
-	mes "Hello there, adventurer.";
-	close;
-}
-prontera,125,328,4	script	S3 Token Exchange#wsb461	4_M_01,{
-	mes "[S3 Token Exchange]";
-	mes "Hello there, adventurer.";
-	close;
-}
-prontera,121,328,4	script	S3 Equipment#wsb462	4_M_01,{
-	mes "[S3 Equipment]";
-	mes "Hello there, adventurer.";
-	close;
-}
-prontera,117,328,4	script	S3 Daily Quest#wsb463	4_M_01,{
-	mes "[S3 Daily Quest]";
-	mes "Hello there, adventurer.";
-	close;
-}
 alb2trea,93,59,4	script	Treasure Hunt#wsb465	4_M_01,{
 	mes "[Treasure Hunt]";
 	mes "Hello there, adventurer.";
@@ -1610,9 +1540,4 @@ bphunt_hi2,234,185,4	script	Switch Channel#wsb476	4_M_01,{
 	close2;
 	warp "bphunt_high", .@x, .@y;
 	end;
-}
-prontera,145,295,4	script	Redeem Code#wsb477	4_M_01,{
-	mes "[Redeem Code]";
-	mes "Hello there, adventurer.";
-	close;
 }
