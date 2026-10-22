@@ -85,6 +85,10 @@ iRO's permanent quests the server has no script for, with full dialogue and iRO'
 - **Town quests, 2021 revamp** (`town_quests_2021`): story chains and dailies in Morroc, Payon, Prontera, Izlude,
   Aldebaran and the Juno fields, Geffen, Rachel and Veins, Comodo, Alberta and the Eden Group's field missions.
 
+With akreao's Eden Group 2021 rework (`eden-rework-2021`) on as well, World Sync Extras takes priority (it is applied
+after it). Both use iRO's official ids for the 2021 town quests; until the app ships a fix to its quest loader, those
+quests show each objective twice in the quest log, but they complete normally.
+
 ## 🧍 Placeholder NPCs (setting `placeholders`, on)
 
 73 official NPCs whose dialog and logic exist in no server data yet, standing
