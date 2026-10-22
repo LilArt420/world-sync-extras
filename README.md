@@ -84,7 +84,7 @@ that implements some of them) takes its placeholders over: see
 `db/mob_db.yml` fixes what Divine Pride doesn't publish for 303 World Sync
 monsters, until the app ships the same fix: their stats (each the median of the
 7 monsters of the same class nearest in level and HP) and their drop chances
-(estimated by item type). Temporary.
+(estimated by item type), and drops for 124 monsters Divine Pride lists none for (borrowed from their closest relative). Temporary.
 
 ## 🚪 Entrances (setting `entrances`, off)
 

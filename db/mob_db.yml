@@ -1,11 +1,14 @@
-# World Sync Extras: fixes for World Sync monsters, until the app ships them (Flux159/rathena,
-# world sync). Both come from rathena's tools/world_sync/divine_pride.py.
-# - Stats: what Divine Pride doesn't show (HP, EXP, ATK, MATK, DEF, stats, reach, speeds) was
-#   copied from one similar monster, sometimes a boss (Yorker Worker: 207,606,917 HP). Now each
-#   is the median of the 7 monsters of the same class nearest in level and HP that show it.
-# - Drops: the chances Divine Pride doesn't show (the server shipped them at 0.01%), estimated
-#   from the known chances of the same item type. Each drop takes its slot by Index, so it
-#   replaces the old rate instead of adding a second drop.
+# World Sync Extras: fixes for World Sync monsters, until the app ships them (Flux159/rathena, world sync).
+# All three come from rathena's tools/world_sync/divine_pride.py.
+# - Stats: what Divine Pride doesn't show (HP, EXP, ATK, MATK, DEF, stats, reach, speeds) is the median of the
+#   7 monsters of the same class nearest in level and HP that show it (it used to be copied from one monster,
+#   sometimes a boss: Yorker Worker had 207,606,917 HP).
+# - Drop chances Divine Pride doesn't show (the server shipped them at 0.01%): the known chance of the same
+#   item type.
+# - Monsters Divine Pride shows no drops for but the card (124 that spawn, e.g. the Yorkers on jor_base) borrow
+#   the drops of their closest relative: their base form, else a monster on the same map, else the same class
+#   and level.
+# Each drop takes its slot by Index, so it replaces the old one instead of adding a second.
 
 Header:
   Type: MOB_DB
@@ -88,6 +91,14 @@ Body:
     Int: 129
     Dex: 156
     Luk: 149
+    Drops:
+      - Index: 0
+        Item: Sea_Wind_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1001645
+        Rate: 500
   - Id: 22314
     BaseExp: 625452
     JobExp: 433791
@@ -164,6 +175,14 @@ Body:
     Int: 129
     Dex: 156
     Luk: 149
+    Drops:
+      - Index: 0
+        Item: Rock_Striker_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1001640
+        Rate: 500
   - Id: 22318
     BaseExp: 625452
     JobExp: 433791
@@ -175,6 +194,14 @@ Body:
     Int: 142
     Dex: 160
     Luk: 142
+    Drops:
+      - Index: 0
+        Item: Ice_Seahorse_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1001644
+        Rate: 500
   - Id: 22319
     BaseExp: 604691
     JobExp: 415305
@@ -205,6 +232,14 @@ Body:
     Int: 130
     Dex: 166
     Luk: 158
+    Drops:
+      - Index: 0
+        Item: Cliolima_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1001644
+        Rate: 500
   - Id: 22321
     Hp: 27752300
     BaseExp: 586912
@@ -222,6 +257,10 @@ Body:
     WalkSpeed: 150
     AttackDelay: 687
     AttackMotion: 1010
+    Drops:
+      - Index: 0
+        Item: aegis_1001645
+        Rate: 500
   - Id: 22322
     Hp: 25609178
     BaseExp: 513505
@@ -239,6 +278,10 @@ Body:
     WalkSpeed: 150
     AttackDelay: 687
     AttackMotion: 1010
+    Drops:
+      - Index: 0
+        Item: aegis_1001643
+        Rate: 500
   - Id: 22323
     BaseExp: 619701
     JobExp: 423073
@@ -251,6 +294,14 @@ Body:
     Int: 129
     Dex: 160
     Luk: 149
+    Drops:
+      - Index: 0
+        Item: Yoster_Cleaner_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1001640
+        Rate: 500
   - Id: 22324
     Hp: 34890060
     BaseExp: 625452
@@ -265,6 +316,23 @@ Body:
     Int: 142
     Dex: 160
     Luk: 142
+    Drops:
+      - Index: 0
+        Item: Yoster_Fixer_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: Ep20_Copo_Egg_Shell
+        Rate: 1500
+      - Index: 2
+        Item: Ep20_Copo_Head_F
+        Rate: 1250
+      - Index: 3
+        Item: Bill_Of_Birds
+        Rate: 2500
+      - Index: 4
+        Item: Piece_Of_Egg_Shell
+        Rate: 2500
   - Id: 22325
     BaseExp: 625452
     JobExp: 433791
@@ -278,6 +346,14 @@ Body:
     Int: 142
     Dex: 160
     Luk: 142
+    Drops:
+      - Index: 0
+        Item: Yoster_Collect_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1001640
+        Rate: 500
   - Id: 22326
     Hp: 34890060
     BaseExp: 625452
@@ -292,6 +368,23 @@ Body:
     Int: 142
     Dex: 160
     Luk: 142
+    Drops:
+      - Index: 0
+        Item: Yoster_Nego_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: Ep20_Copo_Egg_Shell
+        Rate: 1500
+      - Index: 2
+        Item: Ep20_Copo_Head_F
+        Rate: 1250
+      - Index: 3
+        Item: Bill_Of_Birds
+        Rate: 2500
+      - Index: 4
+        Item: Piece_Of_Egg_Shell
+        Rate: 2500
   - Id: 22327
     BaseExp: 619701
     JobExp: 423073
@@ -305,6 +398,14 @@ Body:
     Dex: 160
     Luk: 149
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yoster_Cooker_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1001640
+        Rate: 500
   - Id: 22353
     BaseExp: 619701
     JobExp: 423073
@@ -317,6 +418,20 @@ Body:
     Int: 129
     Dex: 160
     Luk: 149
+    Drops:
+      - Index: 0
+        Item: Yormi_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1002696
+        Rate: 500
+      - Index: 2
+        Item: aegis_1002697
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
   - Id: 22354
     BaseExp: 619701
     JobExp: 423073
@@ -329,6 +444,23 @@ Body:
     Int: 129
     Dex: 160
     Luk: 149
+    Drops:
+      - Index: 0
+        Item: Yormi_M_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001993
+        Rate: 500
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 500
+      - Index: 4
+        Item: Violet_Jewel
+        Rate: 500
   - Id: 22355
     BaseExp: 619701
     JobExp: 423073
@@ -342,6 +474,19 @@ Body:
     Dex: 160
     Luk: 149
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 1
+        Item: aegis_1001993
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon_Ore
+        Rate: 500
+      - Index: 3
+        Item: Violet_Jewel
+        Rate: 500
   - Id: 22356
     BaseExp: 625452
     JobExp: 433791
@@ -356,6 +501,19 @@ Body:
     Dex: 160
     Luk: 142
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Ep20_Copo_Egg_Shell
+        Rate: 1500
+      - Index: 1
+        Item: Ep20_Copo_Head_F
+        Rate: 1250
+      - Index: 2
+        Item: Bill_Of_Birds
+        Rate: 2500
+      - Index: 3
+        Item: Piece_Of_Egg_Shell
+        Rate: 2500
   - Id: 22357
     BaseExp: 619701
     JobExp: 423073
@@ -368,6 +526,23 @@ Body:
     Int: 129
     Dex: 160
     Luk: 149
+    Drops:
+      - Index: 0
+        Item: Yordos_Execute_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: Ep20_Copo_Egg_Shell
+        Rate: 1500
+      - Index: 2
+        Item: Ep20_Copo_Head_F
+        Rate: 1250
+      - Index: 3
+        Item: Bill_Of_Birds
+        Rate: 2500
+      - Index: 4
+        Item: Piece_Of_Egg_Shell
+        Rate: 2500
   - Id: 22358
     JobExp: 433791
     Attack: 9453
@@ -379,6 +554,20 @@ Body:
     Dex: 160
     Luk: 142
     AttackRange: 1
+    Drops:
+      - Index: 0
+        Item: Yoscopus_G_Cards
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1002019
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 500
   - Id: 22359
     JobExp: 433791
     Attack: 9453
@@ -389,6 +578,20 @@ Body:
     Int: 142
     Dex: 160
     Luk: 142
+    Drops:
+      - Index: 0
+        Item: Yoscopus_S_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1002019
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 500
   - Id: 22360
     Hp: 39954819
     BaseExp: 625452
@@ -406,6 +609,16 @@ Body:
     AttackRange: 2
     AttackDelay: 489
     AttackMotion: 719
+    Drops:
+      - Index: 0
+        Item: Ep20_Fluor_Cell_Sweet
+        Rate: 1200
+      - Index: 1
+        Item: Ep20_Fluor_Cell_Salty
+        Rate: 1200
+      - Index: 2
+        Item: EP19_Unknown_Cell
+        Rate: 750
   - Id: 22361
     Hp: 39954819
     BaseExp: 625452
@@ -423,6 +636,16 @@ Body:
     AttackRange: 2
     AttackDelay: 489
     AttackMotion: 719
+    Drops:
+      - Index: 0
+        Item: Ep20_Fluor_Cell_Sweet
+        Rate: 1200
+      - Index: 1
+        Item: Ep20_Fluor_Cell_Salty
+        Rate: 1200
+      - Index: 2
+        Item: EP19_Unknown_Cell
+        Rate: 750
   - Id: 22362
     Hp: 47189684
     BaseExp: 1039283
@@ -441,6 +664,14 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Ice_Horn_Card
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1001644
+        Rate: 500
   - Id: 22363
     Hp: 47189684
     BaseExp: 1039283
@@ -459,6 +690,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Whittling
+        Rate: 2250
+      - Index: 1
+        Item: Resin
+        Rate: 2000
+      - Index: 2
+        Item: Wooden_Block
+        Rate: 1500
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Shadowdecon
+        Rate: 25
+      - Index: 6
+        Item: Zelunium
+        Rate: 25
   - Id: 22364
     Hp: 47189684
     BaseExp: 1039283
@@ -477,6 +730,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Whittling
+        Rate: 2250
+      - Index: 1
+        Item: Resin
+        Rate: 2000
+      - Index: 2
+        Item: Wooden_Block
+        Rate: 1500
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Shadowdecon
+        Rate: 25
+      - Index: 6
+        Item: Zelunium
+        Rate: 25
   - Id: 22383
     Attack: 14816
     Attack2: 4993
@@ -543,10 +818,48 @@ Body:
     Attack: 14665
     Attack2: 5116
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Ice_Water_Drop_Gem
+        Rate: 500
+      - Index: 2
+        Item: Small_Sewing_Box
+        Rate: 500
+      - Index: 3
+        Item: Evil_Minded_Ruby
+        Rate: 500
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 5
+        Item: Amber
+        Rate: 500
   - Id: 22388
     Attack: 25986
     Attack2: 4193
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Ice_Water_Drop_Gem
+        Rate: 500
+      - Index: 2
+        Item: Small_Sewing_Box
+        Rate: 500
+      - Index: 3
+        Item: Evil_Minded_Ruby
+        Rate: 500
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 5
+        Item: Amber
+        Rate: 500
   - Id: 22389
     Attack: 14399
     Attack2: 5309
@@ -639,6 +952,28 @@ Body:
     WalkSpeed: 150
     AttackDelay: 441
     AttackMotion: 649
+    Drops:
+      - Index: 0
+        Item: Blue_Flame_Heart_Gem
+        Rate: 500
+      - Index: 1
+        Item: Evil_Minded_Ruby
+        Rate: 500
+      - Index: 2
+        Item: Heavy_Chain
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 4
+        Item: Etel_Stone
+        Rate: 500
+      - Index: 5
+        Item: Zelunium
+        Rate: 500
+      - Index: 6
+        Item: Violet_Jewel
+        Rate: 500
   - Id: 22395
     Attack: 14294
     Attack2: 5397
@@ -754,6 +1089,19 @@ Body:
   - Id: 22404
     Attack: 14084
     Attack2: 9791
+    Drops:
+      - Index: 0
+        Item: Congealed_Poison
+        Rate: 500
+      - Index: 1
+        Item: Dry_Wind_Leaf_Gem
+        Rate: 500
+      - Index: 2
+        Item: Evil_Black_Bid
+        Rate: 500
+      - Index: 3
+        Item: Violet_Jewel
+        Rate: 500
   - Id: 22412
     BaseExp: 1065428
     JobExp: 890485
@@ -981,6 +1329,19 @@ Body:
     WalkSpeed: 150
     AttackDelay: 441
     AttackMotion: 649
+    Drops:
+      - Index: 0
+        Item: Shadowdecon_Ore
+        Rate: 500
+      - Index: 1
+        Item: Zelunium_Ore
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001637
+        Rate: 500
+      - Index: 3
+        Item: Evil_Black_Bid
+        Rate: 500
   - Id: 22422
     Hp: 523575000
     BaseExp: 7479643
@@ -999,6 +1360,19 @@ Body:
     WalkSpeed: 150
     AttackDelay: 441
     AttackMotion: 649
+    Drops:
+      - Index: 0
+        Item: Yorscalp_Spirit
+        Rate: 500
+      - Index: 1
+        Item: Shining_Crystal
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001638
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
   - Id: 22431
     BaseExp: 3463024
     JobExp: 2422910
@@ -1216,6 +1590,25 @@ Body:
     WalkSpeed: 170
     AttackDelay: 343
     AttackMotion: 505
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Skyblue_Jewel
+        Rate: 500
+      - Index: 2
+        Item: Blue_Flame_Heart_Gem
+        Rate: 500
+      - Index: 3
+        Item: Green_Crystal_Fragment
+        Rate: 500
+      - Index: 4
+        Item: Cool_Liquid
+        Rate: 500
+      - Index: 5
+        Item: Etel_Dust
+        Rate: 500
   - Id: 22439
     BaseExp: 10389072
     JobExp: 7272728
@@ -1455,6 +1848,17 @@ Body:
         StealProtected: true
   - Id: 22452
     Attack2: 1728
+    Drops:
+      - Index: 0
+        Item: aegis_300642
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: aegis_1002020
+        Rate: 500
+      - Index: 2
+        Item: Sticky_Poison
+        Rate: 500
   - Id: 22453
     Attack2: 1698
     Drops:
@@ -1819,11 +2223,23 @@ Body:
   - Id: 22476
     Attack2: 4042
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: aegis_300659
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: Moving_Black_Things
+        Rate: 500
   - Id: 22477
     Attack2: 3983
     AttackRange: 2
     AttackDelay: 441
     AttackMotion: 649
+    Drops:
+      - Index: 0
+        Item: Moving_Black_Things
+        Rate: 500
   - Id: 22478
     Attack2: 4013
     AttackRange: 2
@@ -1840,26 +2256,54 @@ Body:
     AttackRange: 2
     AttackDelay: 441
     AttackMotion: 649
+    Drops:
+      - Index: 0
+        Item: Moving_Black_Things
+        Rate: 500
   - Id: 22480
     Attack2: 3983
     AttackRange: 2
     AttackDelay: 441
     AttackMotion: 649
+    Drops:
+      - Index: 0
+        Item: aegis_300661
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: Moving_Black_Things
+        Rate: 500
   - Id: 22481
     Attack2: 3916
     AttackRange: 2
     WalkSpeed: 150
     AttackDelay: 441
     AttackMotion: 649
+    Drops:
+      - Index: 0
+        Item: Moving_Black_Things
+        Rate: 500
   - Id: 22482
     Attack2: 3949
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: aegis_300662
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: Moving_Black_Things
+        Rate: 500
   - Id: 22483
     Attack2: 3877
     AttackRange: 2
     WalkSpeed: 150
     AttackDelay: 441
     AttackMotion: 649
+    Drops:
+      - Index: 0
+        Item: Moving_Black_Things
+        Rate: 500
   - Id: 22484
     Attack2: 3888
     AttackRange: 2
@@ -1880,6 +2324,13 @@ Body:
     WalkSpeed: 150
     AttackDelay: 441
     AttackMotion: 649
+    Drops:
+      - Index: 0
+        Item: Fruit_Of_Mastela
+        Rate: 2750
+      - Index: 1
+        Item: Shining_Crystal
+        Rate: 500
   - Id: 22486
     BaseExp: 4644516
     Attack2: 4012
@@ -1888,12 +2339,24 @@ Body:
     Vit: 357
     Int: 415
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: aegis_300664
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: Moving_Black_Things
+        Rate: 500
   - Id: 22487
     Attack2: 3943
     AttackRange: 2
     WalkSpeed: 150
     AttackDelay: 441
     AttackMotion: 649
+    Drops:
+      - Index: 0
+        Item: Moving_Black_Things
+        Rate: 500
   - Id: 22488
     Attack2: 4016
     AttackRange: 2
@@ -1913,14 +2376,43 @@ Body:
     WalkSpeed: 165
     AttackDelay: 441
     AttackMotion: 649
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22494
     Attack2: 3488
+    Drops:
+      - Index: 0
+        Item: aegis_300666
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: Root_Of_Maneater
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001977
+        Rate: 500
   - Id: 22495
     Attack2: 4264
     AttackRange: 2
     WalkSpeed: 150
     AttackDelay: 441
     AttackMotion: 649
+    Drops:
+      - Index: 0
+        Item: aegis_300667
+        Rate: 1
+        StealProtected: true
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: aegis_1001992
+        Rate: 500
+      - Index: 3
+        Item: aegis_1002018
+        Rate: 500
   - Id: 22507
     BaseExp: 17784980
     JobExp: 12427720
@@ -2273,96 +2765,160 @@ Body:
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22526
     BaseExp: 4644516
     Attack2: 4034
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22527
     BaseExp: 4644516
     Attack2: 4035
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22528
     BaseExp: 4644516
     Attack2: 4034
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22529
     BaseExp: 4644516
     Attack2: 4033
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22530
     BaseExp: 4644516
     Attack2: 4033
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22531
     BaseExp: 4644516
     Attack2: 4035
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22532
     BaseExp: 4644516
     Attack2: 4033
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22542
     BaseExp: 4644516
     Attack2: 4033
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22543
     BaseExp: 4644516
     Attack2: 4033
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22544
     BaseExp: 4644516
     Attack2: 4034
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22545
     BaseExp: 4644516
     Attack2: 4033
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22546
     BaseExp: 4644516
     Attack2: 4035
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22547
     BaseExp: 4644516
     Attack2: 4034
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22548
     BaseExp: 4644516
     Attack2: 4033
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22549
     BaseExp: 4644516
     Attack2: 4035
     Vit: 357
     Int: 387
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Yggdrasilberry
+        Rate: 2750
   - Id: 22669
     BaseExp: 17784980
     JobExp: 12427720
@@ -3028,6 +3584,22 @@ Body:
   - Id: 22729
     Attack2: 4075
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Sticky_Mucus
+        Rate: 500
+      - Index: 1
+        Item: ABI_Ground_Rune_Ore
+        Rate: 500
+      - Index: 2
+        Item: ABI_Ground_Essence
+        Rate: 500
+      - Index: 3
+        Item: Dimension_Energy_BL
+        Rate: 500
+      - Index: 4
+        Item: Frontier_Magic_Dust
+        Rate: 500
   - Id: 22730
     Attack2: 4160
     AttackRange: 2
@@ -3052,54 +3624,290 @@ Body:
   - Id: 22733
     Attack2: 4174
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: ABI_Ground_Rune_Ore
+        Rate: 500
   - Id: 22739
     Attack2: 4168
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: aegis_1002679
+        Rate: 500
+      - Index: 3
+        Item: aegis_1002842
+        Rate: 500
+      - Index: 4
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 5
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 6
+        Item: ABI_Lava_Essence
+        Rate: 500
+        StealProtected: true
   - Id: 22740
     Attack2: 4130
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: ABI_Lava_Essence
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 3
+        Item: aegis_1002679
+        Rate: 500
+      - Index: 4
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 5
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 6
+        Item: Zelunium
+        Rate: 500
   - Id: 22741
     Attack2: 4133
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 3
+        Item: Brigan
+        Rate: 500
   - Id: 22742
     Attack2: 4089
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Brigan
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 3
+        Item: Chaotic_Rune
+        Rate: 500
   - Id: 22743
     Attack2: 4201
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Rent_Spell_Book
+        Rate: 500
   - Id: 22744
     Attack2: 4167
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Chaotic_Rune
+        Rate: 500
+      - Index: 1
+        Item: Rent_Spell_Book
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 4
+        Item: Zelunium
+        Rate: 500
   - Id: 22745
     Attack2: 4237
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Zelunium
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Soft_Feather
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 4
+        Item: Chaotic_Rune
+        Rate: 500
+        StealProtected: true
   - Id: 22746
     Attack2: 4209
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Soft_Feather
+        Rate: 500
   - Id: 22747
     Attack2: 4214
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Skull
+        Rate: 500
+      - Index: 4
+        Item: Dimension_Energy_BL
+        Rate: 500
+      - Index: 5
+        Item: Frontier_Magic_Dust
+        Rate: 500
+        StealProtected: true
   - Id: 22748
     Attack2: 4182
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: aegis_1001990
+        Rate: 500
+      - Index: 1
+        Item: Zelunium
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
   - Id: 22749
     Attack2: 4087
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Rent_Spell_Book
+        Rate: 500
   - Id: 22750
     Attack2: 4037
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Chaotic_Rune
+        Rate: 500
+      - Index: 1
+        Item: Rent_Spell_Book
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 4
+        Item: Zelunium
+        Rate: 500
   - Id: 22751
     Attack2: 4181
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: ABI_Ground_Rune_Ore
+        Rate: 500
   - Id: 22752
     Attack2: 4144
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: ABI_Lava_Essence
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 3
+        Item: aegis_1002679
+        Rate: 500
+      - Index: 4
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 5
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 6
+        Item: Zelunium
+        Rate: 500
   - Id: 22753
     Attack2: 4161
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 3
+        Item: BurningSkin
+        Rate: 500
+      - Index: 4
+        Item: ABI_Lava_Essence
+        Rate: 500
   - Id: 22754
     Attack2: 4122
     AttackRange: 2
+    Drops:
+      - Index: 0
+        Item: ABI_Lava_Essence
+        Rate: 500
+      - Index: 1
+        Item: BurningSkin
+        Rate: 500
+      - Index: 2
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 3
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 5
+        Item: Zelunium
+        Rate: 500
   - Id: 22771
     BaseExp: 386607
     JobExp: 270625
@@ -3195,6 +4003,13 @@ Body:
     Int: 91
     Dex: 115
     Luk: 108
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Zelunium_Ore
+        Rate: 500
   - Id: 22779
     BaseExp: 439231
     JobExp: 305924
@@ -3298,6 +4113,22 @@ Body:
     Int: 173
     Dex: 225
     Luk: 209
+    Drops:
+      - Index: 0
+        Item: Harpy's_Feather
+        Rate: 2000
+      - Index: 1
+        Item: Harpy's_Claw
+        Rate: 1500
+      - Index: 2
+        Item: Shining_Crystal
+        Rate: 2000
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 17
+      - Index: 4
+        Item: Shadowdecon_Ore
+        Rate: 180
   - Id: 22786
     Hp: 23931278
     BaseExp: 1322755
@@ -3312,6 +4143,22 @@ Body:
     Int: 173
     Dex: 225
     Luk: 209
+    Drops:
+      - Index: 0
+        Item: Harpy's_Feather
+        Rate: 2000
+      - Index: 1
+        Item: Harpy's_Claw
+        Rate: 1500
+      - Index: 2
+        Item: Shining_Crystal
+        Rate: 2000
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 17
+      - Index: 4
+        Item: Shadowdecon_Ore
+        Rate: 180
   - Id: 22787
     Hp: 23931278
     BaseExp: 1322755
@@ -3326,6 +4173,22 @@ Body:
     Int: 173
     Dex: 225
     Luk: 209
+    Drops:
+      - Index: 0
+        Item: Harpy's_Feather
+        Rate: 2000
+      - Index: 1
+        Item: Harpy's_Claw
+        Rate: 1500
+      - Index: 2
+        Item: Shining_Crystal
+        Rate: 2000
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 17
+      - Index: 4
+        Item: Shadowdecon_Ore
+        Rate: 180
   - Id: 22789
     Hp: 27113233
     BaseExp: 1380517
@@ -3344,6 +4207,22 @@ Body:
     WalkSpeed: 220
     AttackDelay: 456
     AttackMotion: 671
+    Drops:
+      - Index: 0
+        Item: Mystic_Horn
+        Rate: 4000
+      - Index: 1
+        Item: Soft_Feather
+        Rate: 1500
+      - Index: 2
+        Item: Fresh_Pear
+        Rate: 2000
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 17
+      - Index: 4
+        Item: Shadowdecon_Ore
+        Rate: 180
   - Id: 22790
     Hp: 28033464
     BaseExp: 1356696
@@ -3361,6 +4240,22 @@ Body:
     AttackRange: 1
     AttackDelay: 489
     AttackMotion: 719
+    Drops:
+      - Index: 0
+        Item: Rotten_Bandage
+        Rate: 2207
+      - Index: 1
+        Item: Evil_Black_Bid
+        Rate: 2000
+      - Index: 2
+        Item: Silver_Ring
+        Rate: 50
+      - Index: 3
+        Item: Zelunium
+        Rate: 17
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 180
   - Id: 22791
     Hp: 28033464
     BaseExp: 1356696
@@ -3378,6 +4273,22 @@ Body:
     AttackRange: 1
     AttackDelay: 489
     AttackMotion: 719
+    Drops:
+      - Index: 0
+        Item: Rotten_Bandage
+        Rate: 2207
+      - Index: 1
+        Item: Evil_Black_Bid
+        Rate: 2000
+      - Index: 2
+        Item: Silver_Ring
+        Rate: 50
+      - Index: 3
+        Item: Zelunium
+        Rate: 17
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 180
   - Id: 22793
     Hp: 27113233
     BaseExp: 1380517
@@ -3396,6 +4307,22 @@ Body:
     WalkSpeed: 220
     AttackDelay: 456
     AttackMotion: 671
+    Drops:
+      - Index: 0
+        Item: Mystic_Horn
+        Rate: 4000
+      - Index: 1
+        Item: Soft_Feather
+        Rate: 1500
+      - Index: 2
+        Item: Fresh_Pear
+        Rate: 2000
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 17
+      - Index: 4
+        Item: Shadowdecon_Ore
+        Rate: 180
   - Id: 22794
     Hp: 27113233
     BaseExp: 1380517
@@ -3414,6 +4341,22 @@ Body:
     WalkSpeed: 220
     AttackDelay: 456
     AttackMotion: 671
+    Drops:
+      - Index: 0
+        Item: Mystic_Horn
+        Rate: 4000
+      - Index: 1
+        Item: Soft_Feather
+        Rate: 1500
+      - Index: 2
+        Item: Fresh_Pear
+        Rate: 2000
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 17
+      - Index: 4
+        Item: Shadowdecon_Ore
+        Rate: 180
   - Id: 22795
     Hp: 28018013
     BaseExp: 1380517
@@ -3432,6 +4375,22 @@ Body:
     WalkSpeed: 220
     AttackDelay: 456
     AttackMotion: 671
+    Drops:
+      - Index: 0
+        Item: Karvodailnirol
+        Rate: 10
+      - Index: 1
+        Item: Cool_Liquid
+        Rate: 2000
+      - Index: 2
+        Item: Starsand_Of_Witch
+        Rate: 1250
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 17
+      - Index: 4
+        Item: Shadowdecon_Ore
+        Rate: 180
   - Id: 22797
     Attack2: 4144
     AttackRange: 2
@@ -3831,6 +4790,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Evil_Minded_Ruby
+        Rate: 2350
+      - Index: 1
+        Item: Great_Nature
+        Rate: 250
+      - Index: 2
+        Item: Stone_Heart
+        Rate: 2500
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Zelunium
+        Rate: 25
+      - Index: 6
+        Item: Shadowdecon
+        Rate: 25
   - Id: 22825
     Hp: 46915251
     BaseExp: 1027707
@@ -3849,6 +4830,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Evil_Minded_Ruby
+        Rate: 2350
+      - Index: 1
+        Item: Great_Nature
+        Rate: 250
+      - Index: 2
+        Item: Stone_Heart
+        Rate: 2500
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Zelunium
+        Rate: 25
+      - Index: 6
+        Item: Shadowdecon
+        Rate: 25
   - Id: 22826
     Hp: 46915251
     BaseExp: 1027707
@@ -3867,6 +4870,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Fresh_Pear
+        Rate: 2250
+      - Index: 1
+        Item: Worm_Peelings
+        Rate: 250
+      - Index: 2
+        Item: Solid_Peeling
+        Rate: 3250
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Shadowdecon
+        Rate: 25
+      - Index: 6
+        Item: Zelunium
+        Rate: 25
   - Id: 22827
     Hp: 46915251
     BaseExp: 1027707
@@ -3885,6 +4910,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Fresh_Pear
+        Rate: 2250
+      - Index: 1
+        Item: Worm_Peelings
+        Rate: 250
+      - Index: 2
+        Item: Solid_Peeling
+        Rate: 3250
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Shadowdecon
+        Rate: 25
+      - Index: 6
+        Item: Zelunium
+        Rate: 25
   - Id: 22828
     Hp: 47189684
     BaseExp: 1039283
@@ -3902,6 +4949,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Slicky_Fluid
+        Rate: 2250
+      - Index: 1
+        Item: Short_Leg
+        Rate: 2668
+      - Index: 2
+        Item: Zargon
+        Rate: 600
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Shadowdecon
+        Rate: 25
+      - Index: 6
+        Item: Zelunium
+        Rate: 25
   - Id: 22829
     Hp: 46915251
     BaseExp: 1027707
@@ -3920,6 +4989,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Fresh_Pear
+        Rate: 2250
+      - Index: 1
+        Item: Worm_Peelings
+        Rate: 250
+      - Index: 2
+        Item: Solid_Peeling
+        Rate: 3250
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Shadowdecon
+        Rate: 25
+      - Index: 6
+        Item: Zelunium
+        Rate: 25
   - Id: 22830
     Hp: 46915251
     BaseExp: 1027707
@@ -3938,6 +5029,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Fresh_Pear
+        Rate: 2250
+      - Index: 1
+        Item: Worm_Peelings
+        Rate: 250
+      - Index: 2
+        Item: Solid_Peeling
+        Rate: 3250
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Shadowdecon
+        Rate: 25
+      - Index: 6
+        Item: Zelunium
+        Rate: 25
   - Id: 22831
     Hp: 46915251
     BaseExp: 1027707
@@ -3956,6 +5069,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Evil_Minded_Ruby
+        Rate: 2350
+      - Index: 1
+        Item: Great_Nature
+        Rate: 250
+      - Index: 2
+        Item: Stone_Heart
+        Rate: 2500
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Zelunium
+        Rate: 25
+      - Index: 6
+        Item: Shadowdecon
+        Rate: 25
   - Id: 22832
     Hp: 46915251
     BaseExp: 1027707
@@ -3974,6 +5109,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Evil_Minded_Ruby
+        Rate: 2350
+      - Index: 1
+        Item: Great_Nature
+        Rate: 250
+      - Index: 2
+        Item: Stone_Heart
+        Rate: 2500
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Zelunium
+        Rate: 25
+      - Index: 6
+        Item: Shadowdecon
+        Rate: 25
   - Id: 22833
     Hp: 46915251
     BaseExp: 1027707
@@ -3992,6 +5149,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Fresh_Pear
+        Rate: 2250
+      - Index: 1
+        Item: Worm_Peelings
+        Rate: 250
+      - Index: 2
+        Item: Solid_Peeling
+        Rate: 3250
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Shadowdecon
+        Rate: 25
+      - Index: 6
+        Item: Zelunium
+        Rate: 25
   - Id: 22834
     Hp: 46915251
     BaseExp: 1027707
@@ -4010,6 +5189,28 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Evil_Minded_Ruby
+        Rate: 2350
+      - Index: 1
+        Item: Great_Nature
+        Rate: 250
+      - Index: 2
+        Item: Stone_Heart
+        Rate: 2500
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Zelunium
+        Rate: 25
+      - Index: 6
+        Item: Shadowdecon
+        Rate: 25
   - Id: 22835
     Hp: 46915251
     BaseExp: 1027707
@@ -4028,139 +5229,468 @@ Body:
     WalkSpeed: 160
     AttackDelay: 447
     AttackMotion: 658
+    Drops:
+      - Index: 0
+        Item: Evil_Minded_Ruby
+        Rate: 2350
+      - Index: 1
+        Item: Great_Nature
+        Rate: 250
+      - Index: 2
+        Item: Stone_Heart
+        Rate: 2500
+      - Index: 3
+        Item: Shadowdecon_Ore
+        Rate: 150
+      - Index: 4
+        Item: Zelunium_Ore
+        Rate: 150
+      - Index: 5
+        Item: Zelunium
+        Rate: 25
+      - Index: 6
+        Item: Shadowdecon
+        Rate: 25
   - Id: 22836
     Attack2: 4176
     AttackRange: 2
     WalkSpeed: 150
     AttackDelay: 391
     AttackMotion: 575
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Rotten_Bandage
+        Rate: 500
   - Id: 22837
     Attack2: 4139
     AttackRange: 2
     AttackDelay: 391
     AttackMotion: 575
+    Drops:
+      - Index: 0
+        Item: Rotten_Bandage
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
   - Id: 22838
     Attack2: 4130
     AttackRange: 2
     WalkSpeed: 175
     AttackDelay: 654
     AttackMotion: 962
+    Drops:
+      - Index: 0
+        Item: Earthworm_Peeling
+        Rate: 500
   - Id: 22839
     Attack2: 4086
     AttackRange: 2
     WalkSpeed: 175
     AttackDelay: 586
     AttackMotion: 862
+    Drops:
+      - Index: 0
+        Item: ABI_Ground_Rune_Ore
+        Rate: 500
+      - Index: 1
+        Item: Chaotic_Essence
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 3
+        Item: Earthworm_Peeling
+        Rate: 500
   - Id: 22840
     Attack2: 4101
     AttackRange: 2
     WalkSpeed: 200
+    Drops:
+      - Index: 0
+        Item: Dimension_Energy_YL
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Blaze_Stone
+        Rate: 500
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 4
+        Item: Zelunium
+        Rate: 500
   - Id: 22841
     Attack2: 4052
     AttackRange: 2
     WalkSpeed: 200
     AttackDelay: 586
     AttackMotion: 862
+    Drops:
+      - Index: 0
+        Item: Zelunium
+        Rate: 500
+      - Index: 1
+        Item: Blaze_Stone
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
   - Id: 22842
     Attack2: 4183
     AttackRange: 2
     WalkSpeed: 175
     AttackDelay: 489
     AttackMotion: 719
+    Drops:
+      - Index: 0
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 3
+        Item: Brigan
+        Rate: 500
   - Id: 22843
     Attack2: 4147
     AttackRange: 2
     WalkSpeed: 175
     AttackDelay: 489
     AttackMotion: 719
+    Drops:
+      - Index: 0
+        Item: Brigan
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 3
+        Item: Chaotic_Rune
+        Rate: 500
   - Id: 22844
     Attack2: 4136
     AttackRange: 2
     WalkSpeed: 190
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Soft_Feather
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 4
+        Item: Frontier_Magic_Dust
+        Rate: 500
   - Id: 22845
     Attack2: 4092
     AttackRange: 2
     WalkSpeed: 190
     AttackDelay: 781
     AttackMotion: 1149
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Zelunium
+        Rate: 500
+      - Index: 2
+        Item: Soft_Feather
+        Rate: 500
   - Id: 22846
     Attack2: 4111
     AttackRange: 2
     WalkSpeed: 200
     AttackDelay: 489
     AttackMotion: 719
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Zelunium
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 3
+        Item: Skel_Bone
+        Rate: 500
   - Id: 22847
     Attack2: 4064
     AttackRange: 2
     AttackDelay: 489
     AttackMotion: 719
+    Drops:
+      - Index: 0
+        Item: Skel_Bone
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 500
   - Id: 22848
     Attack2: 4010
     AttackRange: 2
     WalkSpeed: 150
     AttackDelay: 391
     AttackMotion: 575
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Rotten_Bandage
+        Rate: 500
   - Id: 22849
     Attack2: 3948
     AttackRange: 2
     AttackDelay: 391
     AttackMotion: 575
+    Drops:
+      - Index: 0
+        Item: Rotten_Bandage
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
   - Id: 22850
     Attack2: 4179
     AttackRange: 2
     WalkSpeed: 170
     AttackDelay: 327
     AttackMotion: 481
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 2
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 3
+        Item: BurningSkin
+        Rate: 500
+      - Index: 4
+        Item: ABI_Lava_Essence
+        Rate: 500
   - Id: 22851
     Attack2: 4142
     AttackRange: 2
     WalkSpeed: 170
     AttackDelay: 523
     AttackMotion: 769
+    Drops:
+      - Index: 0
+        Item: ABI_Lava_Essence
+        Rate: 500
+      - Index: 1
+        Item: BurningSkin
+        Rate: 500
+      - Index: 2
+        Item: ABI_Lava_Rune_Ore
+        Rate: 500
+      - Index: 3
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 5
+        Item: Zelunium
+        Rate: 500
   - Id: 22852
     Attack2: 4171
     AttackRange: 2
     WalkSpeed: 190
     AttackDelay: 687
     AttackMotion: 1010
+    Drops:
+      - Index: 0
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 3
+        Item: Brigan
+        Rate: 500
   - Id: 22853
     Attack2: 4133
     AttackRange: 2
     WalkSpeed: 190
     AttackDelay: 687
     AttackMotion: 1010
+    Drops:
+      - Index: 0
+        Item: Brigan
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Frontier_Magic_Dust
+        Rate: 500
+      - Index: 3
+        Item: Chaotic_Rune
+        Rate: 500
   - Id: 22854
     Attack2: 4111
     AttackRange: 2
     WalkSpeed: 170
     AttackDelay: 391
     AttackMotion: 575
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Zelunium
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 3
+        Item: Skel_Bone
+        Rate: 500
   - Id: 22855
     Attack2: 4064
     AttackRange: 2
     WalkSpeed: 170
     AttackDelay: 687
     AttackMotion: 1010
+    Drops:
+      - Index: 0
+        Item: Skel_Bone
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Shadowdecon
+        Rate: 500
   - Id: 22856
     Attack2: 4164
     AttackRange: 2
     WalkSpeed: 180
     AttackDelay: 417
     AttackMotion: 613
+    Drops:
+      - Index: 0
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 1
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Skull
+        Rate: 500
+      - Index: 4
+        Item: Dimension_Energy_BL
+        Rate: 500
+      - Index: 5
+        Item: Frontier_Magic_Dust
+        Rate: 500
+        StealProtected: true
   - Id: 22857
     Attack2: 4124
     AttackRange: 2
     WalkSpeed: 180
     AttackDelay: 531
     AttackMotion: 781
+    Drops:
+      - Index: 0
+        Item: aegis_1001990
+        Rate: 500
+      - Index: 1
+        Item: Zelunium
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
   - Id: 22858
     Attack2: 4236
     AttackRange: 2
     WalkSpeed: 150
     AttackDelay: 391
     AttackMotion: 575
+    Drops:
+      - Index: 0
+        Item: Etel_Dust
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Zelunium
+        Rate: 500
+      - Index: 3
+        Item: Rotten_Bandage
+        Rate: 500
   - Id: 22859
     Attack2: 4207
     AttackRange: 2
     AttackDelay: 391
     AttackMotion: 575
+    Drops:
+      - Index: 0
+        Item: Rotten_Bandage
+        Rate: 500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 500
+      - Index: 2
+        Item: Etel_Dust
+        Rate: 500
