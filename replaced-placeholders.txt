@@ -23,3 +23,5 @@
 29307 29010 23832
 # Varmundt block: Chapter 2 (Yongjirak, Ragsruth, Beledor) and the Deep Abyss exit
 14262 20120 20122-20127 20129 20141 20147-20150 20153 20193 20264 20367 20408-20422 20459-20469 20472 30847 32824
+# iRO Quests 0.3.0: the Payon 2021 chain (Reno, Wandering Monk)
+13960 13963

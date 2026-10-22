@@ -437,18 +437,8 @@ orcsdun01,91,170,4	script	Book of Illusion Vol. 2#ws17267	10373,{
 	mes "Hello there, adventurer.";
 	close;
 }
-pay_dun00,155,174,4	script	Reno#ws13960	10244,{
-	mes "[Reno]";
-	mes "Hello there, adventurer.";
-	close;
-}
 pay_dun00,15,31,4	script	Book of Illusion Vol. 1#ws17266	10372,{
 	mes "[Book of Illusion Vol. 1]";
-	mes "Hello there, adventurer.";
-	close;
-}
-pay_dun02,134,123,4	script	Wandering Monk#ws13963	834,{
-	mes "[Wandering Monk]";
 	mes "Hello there, adventurer.";
 	close;
 }
