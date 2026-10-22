@@ -5,56 +5,6 @@
 //= clients' navigation tables. Do not edit by hand.
 //============================================================
 
-clock_01,77,79,4	script	Pet Mimic#ws16298	464,{
-	mes "[Pet Mimic]";
-	mes "Hello there, adventurer.";
-	close;
-}
-clock_01,267,180,4	script	Pet Mimic#ws16299	464,{
-	mes "[Pet Mimic]";
-	mes "Hello there, adventurer.";
-	close;
-}
-clock_01,244,198,4	script	Pet Mimic#ws16300	464,{
-	mes "[Pet Mimic]";
-	mes "Hello there, adventurer.";
-	close;
-}
-clock_01,136,143,4	script	Pet Mimic#ws16301	464,{
-	mes "[Pet Mimic]";
-	mes "Hello there, adventurer.";
-	close;
-}
-clock_01,110,173,4	script	Pet Mimic#ws16302	464,{
-	mes "[Pet Mimic]";
-	mes "Hello there, adventurer.";
-	close;
-}
-clock_01,195,269,4	script	Pet Mimic#ws16303	464,{
-	mes "[Pet Mimic]";
-	mes "Hello there, adventurer.";
-	close;
-}
-clock_01,111,259,4	script	Pet Mimic#ws16304	464,{
-	mes "[Pet Mimic]";
-	mes "Hello there, adventurer.";
-	close;
-}
-clock_01,37,221,4	script	Pet Mimic#ws16305	464,{
-	mes "[Pet Mimic]";
-	mes "Hello there, adventurer.";
-	close;
-}
-clock_01,20,158,4	script	Pet Mimic#ws16306	464,{
-	mes "[Pet Mimic]";
-	mes "Hello there, adventurer.";
-	close;
-}
-clock_01,37,70,4	script	Pet Mimic#ws16307	464,{
-	mes "[Pet Mimic]";
-	mes "Hello there, adventurer.";
-	close;
-}
 hero_lb,131,153,4	script	Guild Storage Manager#ws15748	896,{
 	mes "[Guild Storage Manager]";
 	if (!getcharid(2)) {
@@ -480,13 +430,13 @@ pay_mk,155,126,4	script	Guide#ws29212	708,{
 	mes "[Guide]";
 	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
 	viewpoint 1, 133, 163, 1, 0xFF8800;
-	viewpoint 1, 146, 157, 2, 0xFF8800;
+	viewpoint 1, 144, 157, 2, 0xFF8800;
 	viewpoint 1, 71, 165, 3, 0xFF8800;
-	viewpoint 1, 58, 156, 4, 0xFF8800;
+	viewpoint 1, 56, 156, 4, 0xFF8800;
 	viewpoint 1, 63, 37, 5, 0xFF8800;
-	viewpoint 1, 74, 39, 6, 0xFF8800;
+	viewpoint 1, 72, 39, 6, 0xFF8800;
 	viewpoint 1, 148, 43, 7, 0xFF8800;
-	viewpoint 1, 132, 43, 8, 0xFF8800;
+	viewpoint 1, 132, 41, 8, 0xFF8800;
 	viewpoint 1, 139, 165, 9, 0xFF8800;
 	viewpoint 1, 73, 161, 10, 0xFF8800;
 	viewpoint 1, 59, 46, 11, 0xFF8800;
@@ -497,13 +447,13 @@ pay_mk,52,73,4	script	Guide#ws29218	708,{
 	mes "[Guide]";
 	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
 	viewpoint 1, 133, 163, 1, 0xFF8800;
-	viewpoint 1, 146, 157, 2, 0xFF8800;
+	viewpoint 1, 144, 157, 2, 0xFF8800;
 	viewpoint 1, 71, 165, 3, 0xFF8800;
-	viewpoint 1, 58, 156, 4, 0xFF8800;
+	viewpoint 1, 56, 156, 4, 0xFF8800;
 	viewpoint 1, 63, 37, 5, 0xFF8800;
-	viewpoint 1, 74, 39, 6, 0xFF8800;
+	viewpoint 1, 72, 39, 6, 0xFF8800;
 	viewpoint 1, 148, 43, 7, 0xFF8800;
-	viewpoint 1, 132, 43, 8, 0xFF8800;
+	viewpoint 1, 132, 41, 8, 0xFF8800;
 	viewpoint 1, 139, 165, 9, 0xFF8800;
 	viewpoint 1, 73, 161, 10, 0xFF8800;
 	viewpoint 1, 59, 46, 11, 0xFF8800;
@@ -514,13 +464,13 @@ pay_mk,136,46,4	script	Guide#ws29224	708,{
 	mes "[Guide]";
 	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
 	viewpoint 1, 133, 163, 1, 0xFF8800;
-	viewpoint 1, 146, 157, 2, 0xFF8800;
+	viewpoint 1, 144, 157, 2, 0xFF8800;
 	viewpoint 1, 71, 165, 3, 0xFF8800;
-	viewpoint 1, 58, 156, 4, 0xFF8800;
+	viewpoint 1, 56, 156, 4, 0xFF8800;
 	viewpoint 1, 63, 37, 5, 0xFF8800;
-	viewpoint 1, 74, 39, 6, 0xFF8800;
+	viewpoint 1, 72, 39, 6, 0xFF8800;
 	viewpoint 1, 148, 43, 7, 0xFF8800;
-	viewpoint 1, 132, 43, 8, 0xFF8800;
+	viewpoint 1, 132, 41, 8, 0xFF8800;
 	viewpoint 1, 139, 165, 9, 0xFF8800;
 	viewpoint 1, 73, 161, 10, 0xFF8800;
 	viewpoint 1, 59, 46, 11, 0xFF8800;
@@ -531,13 +481,13 @@ pay_mk,71,152,4	script	Guide#ws29230	708,{
 	mes "[Guide]";
 	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
 	viewpoint 1, 133, 163, 1, 0xFF8800;
-	viewpoint 1, 146, 157, 2, 0xFF8800;
+	viewpoint 1, 144, 157, 2, 0xFF8800;
 	viewpoint 1, 71, 165, 3, 0xFF8800;
-	viewpoint 1, 58, 156, 4, 0xFF8800;
+	viewpoint 1, 56, 156, 4, 0xFF8800;
 	viewpoint 1, 63, 37, 5, 0xFF8800;
-	viewpoint 1, 74, 39, 6, 0xFF8800;
+	viewpoint 1, 72, 39, 6, 0xFF8800;
 	viewpoint 1, 148, 43, 7, 0xFF8800;
-	viewpoint 1, 132, 43, 8, 0xFF8800;
+	viewpoint 1, 132, 41, 8, 0xFF8800;
 	viewpoint 1, 139, 165, 9, 0xFF8800;
 	viewpoint 1, 73, 161, 10, 0xFF8800;
 	viewpoint 1, 59, 46, 11, 0xFF8800;
@@ -548,13 +498,13 @@ pay_mk,99,93,4	script	Guide#ws29236	708,{
 	mes "[Guide]";
 	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
 	viewpoint 1, 133, 163, 1, 0xFF8800;
-	viewpoint 1, 146, 157, 2, 0xFF8800;
+	viewpoint 1, 144, 157, 2, 0xFF8800;
 	viewpoint 1, 71, 165, 3, 0xFF8800;
-	viewpoint 1, 58, 156, 4, 0xFF8800;
+	viewpoint 1, 56, 156, 4, 0xFF8800;
 	viewpoint 1, 63, 37, 5, 0xFF8800;
-	viewpoint 1, 74, 39, 6, 0xFF8800;
+	viewpoint 1, 72, 39, 6, 0xFF8800;
 	viewpoint 1, 148, 43, 7, 0xFF8800;
-	viewpoint 1, 132, 43, 8, 0xFF8800;
+	viewpoint 1, 132, 41, 8, 0xFF8800;
 	viewpoint 1, 139, 165, 9, 0xFF8800;
 	viewpoint 1, 73, 161, 10, 0xFF8800;
 	viewpoint 1, 59, 46, 11, 0xFF8800;
@@ -574,11 +524,6 @@ pay_mk,133,163,4	script	Storage Locker#ws29252	10249,{
 	openstorage;
 	end;
 }
-pay_mk,146,157,4	script	Catalog Dispenser#ws29253	10081,{
-	mes "[Catalog Dispenser]";
-	mes "Hello there, adventurer.";
-	close;
-}
 pay_mk,71,165,4	script	Storage Locker#ws29254	10249,{
 	mes "[Storage Locker]";
 	mes "Storage is ^0000FF40 zeny^000000.";
@@ -591,11 +536,6 @@ pay_mk,71,165,4	script	Storage Locker#ws29254	10249,{
 	close2;
 	openstorage;
 	end;
-}
-pay_mk,58,156,4	script	Catalog Dispenser#ws29255	10081,{
-	mes "[Catalog Dispenser]";
-	mes "Hello there, adventurer.";
-	close;
 }
 pay_mk,63,37,4	script	Storage Locker#ws29256	10249,{
 	mes "[Storage Locker]";
@@ -610,11 +550,6 @@ pay_mk,63,37,4	script	Storage Locker#ws29256	10249,{
 	openstorage;
 	end;
 }
-pay_mk,74,39,4	script	Catalog Dispenser#ws29257	10081,{
-	mes "[Catalog Dispenser]";
-	mes "Hello there, adventurer.";
-	close;
-}
 pay_mk,148,43,4	script	Storage Locker#ws29258	10249,{
 	mes "[Storage Locker]";
 	mes "Storage is ^0000FF40 zeny^000000.";
@@ -627,11 +562,6 @@ pay_mk,148,43,4	script	Storage Locker#ws29258	10249,{
 	close2;
 	openstorage;
 	end;
-}
-pay_mk,132,43,4	script	Catalog Dispenser#ws29259	10081,{
-	mes "[Catalog Dispenser]";
-	mes "Hello there, adventurer.";
-	close;
 }
 pay_mk,139,165,4	script	Guild Storage Manager#ws29264	896,{
 	mes "[Guild Storage Manager]";
@@ -705,13 +635,13 @@ prt_mk,299,67,4	script	Guide#ws29151	105,{
 	mes "[Guide]";
 	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
 	viewpoint 1, 255, 304, 1, 0xFF8800;
-	viewpoint 1, 264, 304, 2, 0xFF8800;
+	viewpoint 1, 262, 304, 2, 0xFF8800;
 	viewpoint 1, 300, 64, 3, 0xFF8800;
-	viewpoint 1, 300, 55, 4, 0xFF8800;
+	viewpoint 1, 298, 55, 4, 0xFF8800;
 	viewpoint 1, 68, 19, 5, 0xFF8800;
-	viewpoint 1, 59, 19, 6, 0xFF8800;
+	viewpoint 1, 57, 19, 6, 0xFF8800;
 	viewpoint 1, 23, 259, 7, 0xFF8800;
-	viewpoint 1, 23, 268, 8, 0xFF8800;
+	viewpoint 1, 21, 268, 8, 0xFF8800;
 	viewpoint 1, 49, 27, 9, 0xFF8800;
 	viewpoint 1, 32, 279, 10, 0xFF8800;
 	viewpoint 1, 278, 293, 11, 0xFF8800;
@@ -722,13 +652,13 @@ prt_mk,24,256,4	script	Guide#ws29157	105,{
 	mes "[Guide]";
 	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
 	viewpoint 1, 255, 304, 1, 0xFF8800;
-	viewpoint 1, 264, 304, 2, 0xFF8800;
+	viewpoint 1, 262, 304, 2, 0xFF8800;
 	viewpoint 1, 300, 64, 3, 0xFF8800;
-	viewpoint 1, 300, 55, 4, 0xFF8800;
+	viewpoint 1, 298, 55, 4, 0xFF8800;
 	viewpoint 1, 68, 19, 5, 0xFF8800;
-	viewpoint 1, 59, 19, 6, 0xFF8800;
+	viewpoint 1, 57, 19, 6, 0xFF8800;
 	viewpoint 1, 23, 259, 7, 0xFF8800;
-	viewpoint 1, 23, 268, 8, 0xFF8800;
+	viewpoint 1, 21, 268, 8, 0xFF8800;
 	viewpoint 1, 49, 27, 9, 0xFF8800;
 	viewpoint 1, 32, 279, 10, 0xFF8800;
 	viewpoint 1, 278, 293, 11, 0xFF8800;
@@ -739,13 +669,13 @@ prt_mk,71,20,4	script	Guide#ws29163	105,{
 	mes "[Guide]";
 	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
 	viewpoint 1, 255, 304, 1, 0xFF8800;
-	viewpoint 1, 264, 304, 2, 0xFF8800;
+	viewpoint 1, 262, 304, 2, 0xFF8800;
 	viewpoint 1, 300, 64, 3, 0xFF8800;
-	viewpoint 1, 300, 55, 4, 0xFF8800;
+	viewpoint 1, 298, 55, 4, 0xFF8800;
 	viewpoint 1, 68, 19, 5, 0xFF8800;
-	viewpoint 1, 59, 19, 6, 0xFF8800;
+	viewpoint 1, 57, 19, 6, 0xFF8800;
 	viewpoint 1, 23, 259, 7, 0xFF8800;
-	viewpoint 1, 23, 268, 8, 0xFF8800;
+	viewpoint 1, 21, 268, 8, 0xFF8800;
 	viewpoint 1, 49, 27, 9, 0xFF8800;
 	viewpoint 1, 32, 279, 10, 0xFF8800;
 	viewpoint 1, 278, 293, 11, 0xFF8800;
@@ -756,13 +686,13 @@ prt_mk,252,303,4	script	Guide#ws29169	105,{
 	mes "[Guide]";
 	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
 	viewpoint 1, 255, 304, 1, 0xFF8800;
-	viewpoint 1, 264, 304, 2, 0xFF8800;
+	viewpoint 1, 262, 304, 2, 0xFF8800;
 	viewpoint 1, 300, 64, 3, 0xFF8800;
-	viewpoint 1, 300, 55, 4, 0xFF8800;
+	viewpoint 1, 298, 55, 4, 0xFF8800;
 	viewpoint 1, 68, 19, 5, 0xFF8800;
-	viewpoint 1, 59, 19, 6, 0xFF8800;
+	viewpoint 1, 57, 19, 6, 0xFF8800;
 	viewpoint 1, 23, 259, 7, 0xFF8800;
-	viewpoint 1, 23, 268, 8, 0xFF8800;
+	viewpoint 1, 21, 268, 8, 0xFF8800;
 	viewpoint 1, 49, 27, 9, 0xFF8800;
 	viewpoint 1, 32, 279, 10, 0xFF8800;
 	viewpoint 1, 278, 293, 11, 0xFF8800;
@@ -773,13 +703,13 @@ prt_mk,161,171,4	script	Guide#ws29175	105,{
 	mes "[Guide]";
 	mes "I've marked this market's services on your minimap: Catalog Dispenser, Guild Storage Manager, Storage Locker.";
 	viewpoint 1, 255, 304, 1, 0xFF8800;
-	viewpoint 1, 264, 304, 2, 0xFF8800;
+	viewpoint 1, 262, 304, 2, 0xFF8800;
 	viewpoint 1, 300, 64, 3, 0xFF8800;
-	viewpoint 1, 300, 55, 4, 0xFF8800;
+	viewpoint 1, 298, 55, 4, 0xFF8800;
 	viewpoint 1, 68, 19, 5, 0xFF8800;
-	viewpoint 1, 59, 19, 6, 0xFF8800;
+	viewpoint 1, 57, 19, 6, 0xFF8800;
 	viewpoint 1, 23, 259, 7, 0xFF8800;
-	viewpoint 1, 23, 268, 8, 0xFF8800;
+	viewpoint 1, 21, 268, 8, 0xFF8800;
 	viewpoint 1, 49, 27, 9, 0xFF8800;
 	viewpoint 1, 32, 279, 10, 0xFF8800;
 	viewpoint 1, 278, 293, 11, 0xFF8800;
@@ -799,11 +729,6 @@ prt_mk,255,304,4	script	Storage Locker#ws29196	10249,{
 	openstorage;
 	end;
 }
-prt_mk,264,304,4	script	Catalog Dispenser#ws29197	10081,{
-	mes "[Catalog Dispenser]";
-	mes "Hello there, adventurer.";
-	close;
-}
 prt_mk,300,64,4	script	Storage Locker#ws29198	10249,{
 	mes "[Storage Locker]";
 	mes "Storage is ^0000FF40 zeny^000000.";
@@ -816,11 +741,6 @@ prt_mk,300,64,4	script	Storage Locker#ws29198	10249,{
 	close2;
 	openstorage;
 	end;
-}
-prt_mk,300,55,4	script	Catalog Dispenser#ws29199	10081,{
-	mes "[Catalog Dispenser]";
-	mes "Hello there, adventurer.";
-	close;
 }
 prt_mk,68,19,4	script	Storage Locker#ws29200	10249,{
 	mes "[Storage Locker]";
@@ -835,11 +755,6 @@ prt_mk,68,19,4	script	Storage Locker#ws29200	10249,{
 	openstorage;
 	end;
 }
-prt_mk,59,19,4	script	Catalog Dispenser#ws29201	10081,{
-	mes "[Catalog Dispenser]";
-	mes "Hello there, adventurer.";
-	close;
-}
 prt_mk,23,259,4	script	Storage Locker#ws29202	10249,{
 	mes "[Storage Locker]";
 	mes "Storage is ^0000FF40 zeny^000000.";
@@ -852,11 +767,6 @@ prt_mk,23,259,4	script	Storage Locker#ws29202	10249,{
 	close2;
 	openstorage;
 	end;
-}
-prt_mk,23,268,4	script	Catalog Dispenser#ws29203	10081,{
-	mes "[Catalog Dispenser]";
-	mes "Hello there, adventurer.";
-	close;
 }
 prt_mk,49,27,4	script	Guild Storage Manager#ws29208	896,{
 	mes "[Guild Storage Manager]";
