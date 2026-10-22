@@ -1,0 +1,53 @@
+# World Sync Extras: iRO systems block - the Devil in the Box's dailies (Clock Tower Unknown Basement).
+# Titles and cooldowns from the iRO client's quest table (5961-5971); rAthena has none of them.
+Header:
+  Type: QUEST_DB
+  Version: 3
+
+Body:
+  - Id: 5961
+    Title: "[Cooldown] Devil's Meal"
+    TimeLimit: +20h
+  - Id: 5962
+    Title: "[Daily] Devil's Breakfast"
+    Targets:
+      - Id: 1
+        Count: 100
+        MapName: Clock Tower Unknown Basement
+        Location: clock_01
+  - Id: 5963
+    Title: "[Daily] Devil's Lunch"
+    Targets:
+      - Id: 1
+        Count: 300
+        MapName: Clock Tower Unknown Basement
+        Location: clock_01
+  - Id: 5964
+    Title: "[Daily] Devil's Dinner"
+    Targets:
+      - Id: 1
+        Count: 1000
+        MapName: Clock Tower Unknown Basement
+        Location: clock_01
+  - Id: 5965
+    Title: "[Cooldown] Devil's Special Meal"
+    TimeLimit: Monday 4h
+  - Id: 5966
+    Title: "[Weekly] Devil's Special Meal"
+    Targets:
+      - Id: 1
+        Count: 5000
+        MapName: Clock Tower Unknown Basement
+        Location: clock_01
+  - Id: 5967
+    Title: "[Cooldown] Devil's Snack"
+    TimeLimit: +20h
+  - Id: 5968
+    Title: "[Cooldown] Devil's Pet Mimic"
+    TimeLimit: +20h
+  - Id: 5969
+    Title: "[Daily] Devil's Pet Mimic"
+  - Id: 5970
+    Title: "[Daily] Devil's Pet Mimic"
+  - Id: 5971
+    Title: "Devil in the Box"

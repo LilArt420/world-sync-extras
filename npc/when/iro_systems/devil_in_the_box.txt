@@ -1,0 +1,358 @@
+//===== World Sync Extras: iRO systems block =================
+//= The Devil in the Box (Clock Tower 1F) and her dailies in the
+//= Clock Tower Unknown Basement.
+//===== Description: =========================================
+//= Quest log (iRO client):
+//=   5971        Devil in the Box (met her)
+//=   5962/63/64  [Daily] Devil's Breakfast / Lunch / Dinner:
+//=               100 / 300 / 1000 monsters in clock_01, one meal
+//=               a day; 5961 cooldown (20 hours)
+//=   5966        [Weekly] Devil's Special Meal: 5000 monsters;
+//=               5965 cooldown (Monday 4 AM)
+//=   5967        [Cooldown] Devil's Snack: 100 each of Joker's
+//=               Wild, Cute Broom, Colorful Coral and Shiny Round
+//=               Shell (20 hours)
+//=   5969/5970   [Daily] Devil's Pet Mimic: find her pet among the
+//=               basement's Mimics, report; 5968 cooldown (20 hours)
+//= Estimates (no official figures): the base level 200 to go down,
+//= the EXP rewards.
+//============================================================
+
+c_tower1,243,202,4	script	Mysterious Box#wsi	4_NONMYSTCASE,{
+	if (isbegin_quest(5971) < 2) {
+		mes "[Mysterious Box]";
+		mes "...";
+		next;
+		mes "- A battered box, wrapped in";
+		mes "chains and old clockwork locks.";
+		mes "Something inside rattles them. -";
+		next;
+		mes "[???]";
+		mes "Ooh, a visitor!";
+		mes "Don't run, don't run!";
+		mes "I won't bite... not today,";
+		mes "anyway. Hehe.";
+		next;
+		mes "[Devil in the Box]";
+		mes "I'm the Devil in the Box.";
+		mes "A clockmaker locked me in here";
+		mes "ages ago, and this tower has";
+		mes "been my home ever since.";
+		next;
+		mes "[Devil in the Box]";
+		mes "The trouble is, I'm ^FF0000starving^000000.";
+		mes "Right under our feet is a floor";
+		mes "nobody remembers: the";
+		mes "^0000FFClock Tower Unknown Basement^000000.";
+		next;
+		mes "[Devil in the Box]";
+		mes "When the monsters down there";
+		mes "fall, they leave the dregs of";
+		mes "their souls behind. Delicious!";
+		mes "But a box can't exactly go";
+		mes "hunting, now can it?";
+		next;
+		mes "[Devil in the Box]";
+		mes "So you'll hunt for me, and I'll";
+		mes "make it worth your while.";
+		mes "Devil's honor!";
+		mes "Talk to me again when you're";
+		mes "ready to eat... I mean, to work.";
+		if (isbegin_quest(5971) == 0)
+			setquest 5971;
+		completequest 5971;
+		close;
+	}
+	mes "[Devil in the Box]";
+	mes "Back again? Is it mealtime?";
+	mes "It's always mealtime.";
+	next;
+	switch (select("Go down to the Unknown Basement:Today's meal:This week's special meal:A snack:Your pet Mimic:Nothing for now")) {
+	case 1:
+		if (BaseLevel < 200) {
+			mes "[Devil in the Box]";
+			mes "You? Down there? Hehe, no.";
+			mes "The monsters in the basement";
+			mes "would swallow you whole, and";
+			mes "then where would my dinner be?";
+			mes "Come back at ^0000FFbase level 200^000000.";
+			close;
+		}
+		mes "[Devil in the Box]";
+		mes "The things down there are";
+		mes "older than the tower's gears,";
+		mes "and much meaner. Ready?";
+		next;
+		if (select("Send me down:Not yet") == 2) {
+			mes "[Devil in the Box]";
+			mes "Scared? Hehe. I don't blame you.";
+			close;
+		}
+		mes "[Devil in the Box]";
+		mes "Bon appetit! Well... for me.";
+		close2;
+		warp "clock_01", 84, 44;
+		end;
+	case 2:
+		setarray .@q[0], 5962, 5963, 5964;
+		setarray .@kills[0], 100, 300, 1000;
+		setarray .@meal$[0], "breakfast", "lunch", "dinner";
+		for (.@i = 0; .@i < 3; .@i++)
+			if (isbegin_quest(.@q[.@i]) == 1)
+				break;
+		if (.@i < 3) {
+			if (checkquest(.@q[.@i], HUNTING) != 2) {
+				mes "[Devil in the Box]";
+				mes "My " + .@meal$[.@i] + "! I'm still waiting.";
+				mes "The soul dregs of ^0000FF" + .@kills[.@i] + " monsters^000000";
+				mes "from the Unknown Basement.";
+				mes "Chop chop!";
+				close;
+			}
+			mes "[Devil in the Box]";
+			mes "Mmm... I can smell it on you.";
+			mes "Hand it over, hand it over!";
+			next;
+			mes "- The box's lid creaks open a";
+			mes "crack. Something swallows the";
+			mes "faint glow clinging to you. -";
+			next;
+			mes "[Devil in the Box]";
+			mes "*Burp* Ahh, that hit the spot.";
+			mes "Here's your pay, as promised.";
+			mes "Same time tomorrow?";
+			erasequest .@q[.@i];
+			callfunc "F_WSI_Cooldown", 5961;
+			setarray .@base[0], 30000000, 90000000, 300000000;
+			setarray .@job[0], 20000000, 60000000, 200000000;
+			getexp .@base[.@i], .@job[.@i];
+			close;
+		}
+		if (callfunc("F_WSI_Waiting", 5961)) {
+			mes "[Devil in the Box]";
+			mes "I've already eaten today.";
+			mes "A lady has to watch her";
+			mes "figure, you know. Come back";
+			mes "tomorrow.";
+			close;
+		}
+		mes "[Devil in the Box]";
+		mes "What are you treating me to";
+		mes "today? The more souls, the";
+		mes "better the meal... and the pay.";
+		next;
+		.@s = select("Breakfast: 100 monsters:Lunch: 300 monsters:Dinner: 1000 monsters:Not today") - 1;
+		if (.@s == 3) {
+			mes "[Devil in the Box]";
+			mes "Hmph. Cruel, cruel adventurer.";
+			close;
+		}
+		setquest .@q[.@s];
+		mes "[Devil in the Box]";
+		mes "A " + .@meal$[.@s] + " it is!";
+		mes "Defeat ^0000FF" + .@kills[.@s] + " monsters^000000 in the";
+		mes "Unknown Basement and bring me";
+		mes "what's left of their souls.";
+		close;
+	case 3:
+		if (isbegin_quest(5966) == 1) {
+			if (checkquest(5966, HUNTING) != 2) {
+				mes "[Devil in the Box]";
+				mes "My special meal: the soul";
+				mes "dregs of ^0000FF5000 monsters^000000 from the";
+				mes "Unknown Basement. Take your";
+				mes "time... but not too much!";
+				close;
+			}
+			mes "[Devil in the Box]";
+			mes "Five thousand! A feast!";
+			mes "Oh, I could cry.";
+			next;
+			mes "- The whole box shudders as";
+			mes "the Devil eats. The chains";
+			mes "rattle for a long while. -";
+			next;
+			mes "[Devil in the Box]";
+			mes "That was the best meal of";
+			mes "my week. Here, you earned it.";
+			mes "Treat me again next Monday?";
+			erasequest 5966;
+			callfunc "F_WSI_Cooldown", 5965;
+			getexp 1500000000, 1000000000;
+			close;
+		}
+		if (callfunc("F_WSI_Waiting", 5965)) {
+			mes "[Devil in the Box]";
+			mes "One special meal a week.";
+			mes "Any more and I wouldn't fit";
+			mes "in my box. Come back after";
+			mes "^0000FFMonday, 4 AM^000000.";
+			close;
+		}
+		mes "[Devil in the Box]";
+		mes "Once a week I deserve";
+		mes "something special: the soul";
+		mes "dregs of ^0000FF5000 monsters^000000 from the";
+		mes "Unknown Basement. Will you?";
+		next;
+		if (select("I'll do it:Maybe later") == 2) {
+			mes "[Devil in the Box]";
+			mes "Don't keep a devil waiting.";
+			close;
+		}
+		setquest 5966;
+		mes "[Devil in the Box]";
+		mes "Yay! I'll be right here.";
+		mes "Obviously.";
+		close;
+	case 4:
+		if (callfunc("F_WSI_Waiting", 5967)) {
+			mes "[Devil in the Box]";
+			mes "I had my snack already.";
+			mes "Tomorrow, bring me more!";
+			close;
+		}
+		mes "[Devil in the Box]";
+		mes "A snack! I love trinkets from";
+		mes "the basement. Bring me ^0000FF100 each^000000";
+		mes "of these and I'll reward you:";
+		mes "^0000FFJoker's Wild^000000, ^0000FFCute Broom^000000,";
+		mes "^0000FFColorful Coral^000000, ^0000FFShiny Round Shell^000000.";
+		next;
+		if (countitem(25505) < 100 || countitem(25506) < 100 || countitem(25507) < 100 || countitem(25509) < 100) {
+			mes "[Devil in the Box]";
+			mes "You don't have them all yet.";
+			mes "The Extra Jokers, Erzsebets,";
+			mes "Jennifers and Sieglouses down";
+			mes "there carry them.";
+			close;
+		}
+		if (select("Give her the trinkets:Keep them") == 2) {
+			mes "[Devil in the Box]";
+			mes "Meanie.";
+			close;
+		}
+		delitem 25505, 100;
+		delitem 25506, 100;
+		delitem 25507, 100;
+		delitem 25509, 100;
+		callfunc "F_WSI_Cooldown", 5967;
+		getexp 100000000, 70000000;
+		mes "[Devil in the Box]";
+		mes "*Crunch crunch* Mmm, cards and";
+		mes "brooms and seashells. Don't";
+		mes "ask. See you tomorrow!";
+		close;
+	case 5:
+		if (isbegin_quest(5970) == 1) {
+			mes "[Devil in the Box]";
+			mes "You found my baby? And it";
+			mes "ate everything? ...And it bit";
+			mes "you. Yes, that's my Mimic!";
+			next;
+			mes "[Devil in the Box]";
+			mes "Thank you for feeding it.";
+			mes "Here's a little something.";
+			erasequest 5970;
+			wsi_mimic = 0;
+			callfunc "F_WSI_Cooldown", 5968;
+			getexp 50000000, 35000000;
+			close;
+		}
+		if (isbegin_quest(5969) == 1) {
+			mes "[Devil in the Box]";
+			mes "My Mimic is wandering around";
+			mes "the Unknown Basement. Mine";
+			mes "wears a little ^FF0000red collar^000000.";
+			mes "The others are wild. Careful!";
+			close;
+		}
+		if (callfunc("F_WSI_Waiting", 5968)) {
+			mes "[Devil in the Box]";
+			mes "My Mimic had its dinner.";
+			mes "It's sleeping it off now.";
+			close;
+		}
+		mes "[Devil in the Box]";
+		mes "I have a pet down in the";
+		mes "basement: a cute little Mimic.";
+		mes "It must be hungry. Could you";
+		mes "bring it this lunch box?";
+		next;
+		if (select("I'll feed your Mimic:Not now") == 2) {
+			mes "[Devil in the Box]";
+			mes "Poor thing will starve...";
+			close;
+		}
+		setquest 5969;
+		wsi_mimic = rand(1, 10);
+		mes "[Devil in the Box]";
+		mes "It's somewhere in the Unknown";
+		mes "Basement. Mine wears a ^FF0000red";
+		mes "collar^000000, the others are wild.";
+		mes "Don't let them eat the lunch!";
+		close;
+	}
+	mes "[Devil in the Box]";
+	mes "Then go away, I'm sulking.";
+	close;
+}
+
+// The Pet Mimics of the Unknown Basement: one of them, picked when
+// the errand starts, is the Devil's pet; the others point the way.
+-	script	Pet Mimic#wsi	-1,{
+	.@me = atoi(substr(strnpcinfo(2), 3, 4));
+	if (isbegin_quest(5969) != 1 || wsi_mimic < 1) {
+		mes "- A Mimic is sniffing around.";
+		mes "It eyes your bag hungrily and";
+		mes "snaps its lid. Better keep";
+		mes "your distance. -";
+		close;
+	}
+	if (.@me != wsi_mimic) {
+		setarray .@x[1], 77, 267, 244, 136, 110, 195, 111, 37, 20, 37;
+		setarray .@y[1], 79, 180, 198, 143, 173, 269, 259, 221, 158, 70;
+		.@dx = .@x[wsi_mimic] - .@x[.@me];
+		.@dy = .@y[wsi_mimic] - .@y[.@me];
+		if (.@dy > 20)
+			.@dir$ = "north";
+		else if (.@dy < -20)
+			.@dir$ = "south";
+		if (.@dx > 20)
+			.@dir$ = .@dir$ + "east";
+		else if (.@dx < -20)
+			.@dir$ = .@dir$ + "west";
+		if (.@dir$ == "")
+			.@dir$ = "close by";
+		mes "- This Mimic has no collar:";
+		mes "a wild one, not the Devil's";
+		mes "pet. It snaps at the lunch box";
+		mes "and misses. -";
+		next;
+		mes "- Small lid-shaped prints in";
+		mes "the dust lead ^0000FF" + .@dir$ + "^000000. -";
+		close;
+	}
+	mes "- A Mimic with a little ^FF0000red";
+	mes "collar^000000! The moment you open the";
+	mes "lunch box, it lunges, gobbles";
+	mes "every crumb and nips your";
+	mes "fingers for good measure. -";
+	next;
+	mes "- ...Well, it ate. That counts.";
+	mes "Time to report to the Devil";
+	mes "in the Box. -";
+	erasequest 5969;
+	setquest 5970;
+	close;
+}
+clock_01,77,79,4	duplicate(Pet Mimic#wsi)	Pet Mimic#wsi01	4_MIMIC
+clock_01,267,180,4	duplicate(Pet Mimic#wsi)	Pet Mimic#wsi02	4_MIMIC
+clock_01,244,198,4	duplicate(Pet Mimic#wsi)	Pet Mimic#wsi03	4_MIMIC
+clock_01,136,143,4	duplicate(Pet Mimic#wsi)	Pet Mimic#wsi04	4_MIMIC
+clock_01,110,173,4	duplicate(Pet Mimic#wsi)	Pet Mimic#wsi05	4_MIMIC
+clock_01,195,269,4	duplicate(Pet Mimic#wsi)	Pet Mimic#wsi06	4_MIMIC
+clock_01,111,259,4	duplicate(Pet Mimic#wsi)	Pet Mimic#wsi07	4_MIMIC
+clock_01,37,221,4	duplicate(Pet Mimic#wsi)	Pet Mimic#wsi08	4_MIMIC
+clock_01,20,158,4	duplicate(Pet Mimic#wsi)	Pet Mimic#wsi09	4_MIMIC
+clock_01,37,70,4	duplicate(Pet Mimic#wsi)	Pet Mimic#wsi10	4_MIMIC
