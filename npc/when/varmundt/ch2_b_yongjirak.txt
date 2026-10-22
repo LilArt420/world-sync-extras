@@ -1,0 +1,552 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Chapter 2: Yongjirak, the Harvans' village in Muspelheim
+//= (kindlbrk, kin_in01), its people, services and daily quests
+//= after the story. Quests 64220-64238; Flame Gold Coins in
+//= wsv_flame. The notes publish givers, places and what each
+//= daily is about; the kill counts and coins are estimates.
+//============================================================
+
+// ------------------------------------------------------------
+// Tamarin: Time to Do What Must Be Done (64220) and her dailies
+// (64221/64223/64225, cooldowns +1).
+// ------------------------------------------------------------
+kin_in01,34,251,4	script	Tamarin#wsv_c2	10381,{
+	cutin "ep19_tamarin01.png",2;
+	.@n$ = "[Tamarin]";
+	if (wsv_ch2 < 1000) {
+		mes .@n$;
+		mes "Oh, hello! I came down from Ash Village to help. The Harvans are lovely, but they don't know what to do with themselves when they're cold. Neither do I, honestly.";
+		close3;
+	}
+	if (!(wsv_c2s & 1)) {
+		if (isbegin_quest(64220) == 1) {
+			if ((wsv_c2s & 960) == 960) {
+				mes .@n$;
+				mes "Warm food, warm blankets, something sweet for the little ones. And to be honest, someone to do the fetching. That's you!";
+				completequest 64220;
+				wsv_c2s = wsv_c2s | 1;
+				callfunc "F_WSV_C2Reward", 5, 5;
+				questinfo_refresh;
+				close3;
+			}
+			mes .@n$;
+			mes "Ask the four Harvans around the square what they need most. Then come back and we'll make a plan.";
+			close3;
+		}
+		mes .@n$;
+		mes "You must feel a bit bad, all the throwing-around the Harvans got at the Root. I know I do, and I wasn't even there.";
+		mes "Let's help Yongjirak get back on its feet. First, find out what they need most: ask the ^0000FFfour Harvans^000000 around the square.";
+		next;
+		if (select("Let's do it.:Not now.") == 2)
+			close3;
+		setquest 64220;
+		questinfo_refresh;
+		close3;
+	}
+	if (isbegin_quest(64221) == 1 && checkquest(64221, HUNTING) == 2) {
+		mes .@n$;
+		mes "Meat for the broth! The noodles are hand-cut, of course. Yongjirak's famous hot kalguksu. Everyone gets a bowl.";
+		callfunc "F_WSV_C2DailyDone", 64221, 64222, 3, 4;
+		close3;
+	}
+	if (isbegin_quest(64223) == 1 && checkquest(64223, HUNTING) == 2) {
+		mes .@n$;
+		mes "Firecotton! The fluffiest, warmest stuffing there is. Blankets for everyone who came back from the Root.";
+		callfunc "F_WSV_C2DailyDone", 64223, 64224, 3, 4;
+		close3;
+	}
+	if (isbegin_quest(64225) == 1 && checkquest(64225, HUNTING) == 2) {
+		mes .@n$;
+		mes "Perfect. Puffed snacks, toasted on a lava stone. The little ones will be bouncing off the walls.";
+		callfunc "F_WSV_C2DailyDone", 64225, 64226, 3, 4;
+		close3;
+	}
+	switch (select("Yongjirak's Specialty! Hot Kalguksu.:Hot! Hotter! (blankets):Hot! Hotter! (snacks):Never mind.")) {
+	case 1:
+		callfunc "F_WSV_C2Daily", .@n$, 64221, 64222, "Kalguksu needs a good broth. Bring meat from the fields: defeat ^0000FF20 Flamebulls and 20 Urochs^000000 in Muspelheim.";
+		break;
+	case 2:
+		callfunc "F_WSV_C2Daily", .@n$, 64223, 64224, "Blankets for the ones who came back from the Root of Death. Firecotton makes the best stuffing: defeat ^0000FF30 Firecotton^000000 in Muspelheim's fields.";
+		break;
+	case 3:
+		callfunc "F_WSV_C2Daily", .@n$, 64225, 64226, "Snacks for the young Harvans. Defeat ^0000FF20 Logidogi and 20 Namunse^000000; their seeds puff up beautifully on a hot stone.";
+		break;
+	}
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch2 >= 1000 && isbegin_quest(64220) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "(wsv_c2s & 1) && isbegin_quest(64221) + isbegin_quest(64223) + isbegin_quest(64225) == 0" );
+	end;
+}
+
+// The four Harvans of the square (sub quest 64220, bits 64-512).
+// callfunc "F_WSV_C2Need", <bit>, "<cut-in>", "<need>", "<everyday line>";
+function	script	F_WSV_C2Need	{
+	cutin getarg(1), 2;
+	mes "[Harvan]";
+	if (isbegin_quest(64220) == 1 && !(wsv_c2s & getarg(0))) {
+		mes getarg(2);
+		wsv_c2s = wsv_c2s | getarg(0);
+		if ((wsv_c2s & 960) == 960)
+			dispbottom "You've asked all four. Go back to Tamarin.";
+		close3;
+	}
+	mes getarg(3);
+	close3;
+}
+kindlbrk,200,105,4	script	Harvan#wsv_c2a	10656,{
+	callfunc "F_WSV_C2Need", 64, "ch2_harrban_b.png",
+		"What do we need? Something hot in the belly. Hot soup. I've been cold for three days and I want soup.",
+		"Soup weather. In Muspelheim, it's always soup weather.";
+	end;
+}
+kindlbrk,197,103,4	script	Harvan#wsv_c2b	10657,{
+	callfunc "F_WSV_C2Need", 128, "ch2_harrban_c.png",
+		"Blankets. The ones who came back from the Root still shiver at night. A Harvan shouldn't shiver.",
+		"I've stopped shivering. Mostly.";
+	end;
+}
+kindlbrk,177,98,4	script	Harvan#wsv_c2c	10664,{
+	callfunc "F_WSV_C2Need", 256, "ch2_harrban_g.png",
+		"The children. They were frightened, and they haven't been eating properly. Something sweet would cheer them up.",
+		"The children are loud again. Thank goodness. And also, oh no.";
+	end;
+}
+kindlbrk,181,137,4	script	Harvan#wsv_c2d	10659,{
+	callfunc "F_WSV_C2Need", 512, "ch2_harrban_e.png",
+		"Hands. We need hands. Half the village is still too cold to work, and the other half is looking after them.",
+		"Back to work, back to work. It's good to be busy.";
+	end;
+}
+
+// ------------------------------------------------------------
+// Nedim: Dream of Perpetual Motion (64227, 64228)
+// ------------------------------------------------------------
+kindlbrk,110,218,4	script	Nedim#wsv	10658,{
+	cutin "ch2_harrban_d.png",2;
+	.@n$ = "[Nedim]";
+	if (wsv_ch2 < 1000) {
+		mes .@n$;
+		mes "I'm building a device to keep the village warm, whatever happens under the ground. A temperature regulator! It just needs power. A lot of power.";
+		close3;
+	}
+	if (isbegin_quest(64227) == 1 && checkquest(64227, HUNTING) == 2) {
+		mes .@n$;
+		mes "Fireclaw cores and Flameanima sparks! The regulator purrs like a cat. A very hot cat.";
+		callfunc "F_WSV_C2DailyDone", 64227, 64228, 3, 4;
+		close3;
+	}
+	mes .@n$;
+	mes "My temperature regulator needs a steady source of power. The creatures of the Muspelheim dungeon burn with it.";
+	next;
+	if (select("Dream of Perpetual Motion (daily).:Never mind.") == 2)
+		close3;
+	callfunc "F_WSV_C2Daily", .@n$, 64227, 64228, "Defeat ^0000FF20 Fireclaws and 20 Flameanima^000000 in the Muspelheim dungeon and bring me what's left of their fire.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsv_ch2 >= 1000 && isbegin_quest(64227) == 0 && (isbegin_quest(64228) == 0 || checkquest(64228, PLAYTIME) == 2)" );
+	end;
+}
+
+// ------------------------------------------------------------
+// The nursery: Bartom (Helping Hands at the Nursery 64229; Work at
+// the Nursery 64231, 64232) and the children (bits 2048-8192).
+// ------------------------------------------------------------
+kin_in01,86,47,4	script	Bartom#wsv	10649,{
+	cutin "ch2_samsin01.png",2;
+	.@n$ = "[Bartom]";
+	if (wsv_ch2 < 1000) {
+		mes .@n$;
+		mes "Shh. The little ones are finally asleep. They had a fright. We all did.";
+		close3;
+	}
+	if (!(wsv_c2s & 2)) {
+		if (isbegin_quest(64229) == 1) {
+			if ((wsv_c2s & 14336) == 14336) {
+				mes .@n$;
+				mes "They like you! Ruteun says you can come back any time. She runs the nursery with me; she's the one with the patience.";
+				completequest 64229;
+				wsv_c2s = wsv_c2s | 2;
+				callfunc "F_WSV_C2Reward", 3, 3;
+				questinfo_refresh;
+				close3;
+			}
+			mes .@n$;
+			mes "Say hello to the three little ones. They're shy, but they're curious.";
+			close3;
+		}
+		mes .@n$;
+		mes "This is the nursery, where the young Harvans grow. Ruteun and I raise them. We could use a friendly face.";
+		mes "Would you say hello to the children? They need to see that outsiders aren't all scary.";
+		next;
+		if (select("Of course.:Not now.") == 2)
+			close3;
+		setquest 64229;
+		questinfo_refresh;
+		close3;
+	}
+	if (isbegin_quest(64231) == 1 && checkquest(64231, HUNTING) == 2) {
+		mes .@n$;
+		mes "The snacks are back! Ruteun is counting them. She'll find they're a few short. Don't tell her I ate them.";
+		callfunc "F_WSV_C2DailyDone", 64231, 64232, 3, 4;
+		close3;
+	}
+	mes .@n$;
+	mes "Ruteun has a problem: the little ones' snacks keep getting stolen. Those sneaky monsters in the Muspelheim dungeon take them.";
+	next;
+	if (select("Work at the Nursery (daily).:Never mind.") == 2)
+		close3;
+	callfunc "F_WSV_C2Daily", .@n$, 64231, 64232, "Get the snacks back: defeat ^0000FF20 each of Dudulson, Garakson and Tuktakson^000000 in the Muspelheim dungeon.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch2 >= 1000 && isbegin_quest(64229) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "(wsv_c2s & 2) && isbegin_quest(64231) == 0 && (isbegin_quest(64232) == 0 || checkquest(64232, PLAYTIME) == 2)" );
+	end;
+}
+
+// callfunc "F_WSV_C2Child", <bit>, "<cut-in>", "<line>";
+function	script	F_WSV_C2Child	{
+	cutin getarg(1), 2;
+	mes "[Young Harvan]";
+	mes getarg(2);
+	if (isbegin_quest(64229) == 1 && !(wsv_c2s & getarg(0))) {
+		wsv_c2s = wsv_c2s | getarg(0);
+		if ((wsv_c2s & 14336) == 14336)
+			dispbottom "All three have met you. Go back to Bartom.";
+	}
+	close3;
+}
+kin_in01,86,50,4	script	Young Harvan#wsv_c2a	10653,{
+	callfunc "F_WSV_C2Child", 2048, "ch2_harr_kid_a01.png", "Are you an outsider? Your hair isn't on fire. Is that sad?";
+	end;
+}
+kin_in01,88,50,4	script	Young Harvan#wsv_c2b	10654,{
+	callfunc "F_WSV_C2Child", 4096, "ch2_harr_kid_b01.png", "Bartom says outsiders are soft. You don't look soft. You look... medium.";
+	end;
+}
+kin_in01,83,45,4	script	Young Harvan#wsv_c2c	10665,{
+	callfunc "F_WSV_C2Child", 8192, "ch2_harr_kid_c01.png", "......(hides behind a pillar, then peeks out and waves)";
+	end;
+}
+
+// ------------------------------------------------------------
+// Karimun: Shelter Visit (64233) and Gemis Parts Supply (64234,
+// 64235), with Orion at Shelter Gemis (ch2gms).
+// ------------------------------------------------------------
+kin_in01,87,36,4	script	Karimun#wsv	10657,{
+	cutin "ch2_harrban_c.png",2;
+	.@n$ = "[Karimun]";
+	if (wsv_ch2 < 1000) {
+		mes .@n$;
+		mes "The heat exchanger keeps the inner rooms warm. It's held together with spare parts and stubbornness.";
+		close3;
+	}
+	if (!(wsv_c2s & 4)) {
+		if (isbegin_quest(64233) == 1) {
+			if (wsv_c2s & 1024) {
+				mes .@n$;
+				mes "Orion says yes? Wonderful. Shelter Gemis has the parts; we have the need. Now we just need someone to carry them.";
+				completequest 64233;
+				wsv_c2s = (wsv_c2s | 4) &~ 1024;
+				callfunc "F_WSV_C2Reward", 3, 3;
+				questinfo_refresh;
+				close3;
+			}
+			mes .@n$;
+			mes "Shelter Gemis is past the Root of Death, at its far corner. Ask for Orion.";
+			close3;
+		}
+		mes .@n$;
+		mes "To keep the heat exchanger running we need parts, steadily. The only place that makes them is ^0000FFShelter Gemis^000000, past the Root of Death.";
+		mes "Would you go and introduce us to their engineer, ^0000FFOrion^000000?";
+		next;
+		if (select("I'll go.:Not now.") == 2)
+			close3;
+		wsv_c2s = wsv_c2s &~ 1024;
+		setquest 64233;
+		questinfo_refresh;
+		close3;
+	}
+	if (isbegin_quest(64234) == 1 && checkquest(64234, HUNTING) == 2 && (wsv_c2s & 1024)) {
+		mes .@n$;
+		mes "Ice screws and a modified hydraulic tube! Orion does good work. The exchanger will run another day.";
+		wsv_c2s = wsv_c2s &~ 1024;
+		callfunc "F_WSV_C2DailyDone", 64234, 64235, 3, 4;
+		close3;
+	}
+	mes .@n$;
+	mes "Orion trades parts for work. The ice creatures around the Root keep getting into the shelter's pipes.";
+	next;
+	if (select("Gemis Parts Supply (daily).:Never mind.") == 2)
+		close3;
+	if (isbegin_quest(64234) != 1)
+		wsv_c2s = wsv_c2s &~ 1024;
+	callfunc "F_WSV_C2Daily", .@n$, 64234, 64235, "Defeat ^0000FF30 Icy Blasts and 30 Ice Needles^000000 at the Root of Death, then collect the parts from Orion at Shelter Gemis.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch2 >= 1000 && isbegin_quest(64233) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "(wsv_c2s & 4) && isbegin_quest(64234) == 0 && (isbegin_quest(64235) == 0 || checkquest(64235, PLAYTIME) == 2)" );
+	end;
+}
+
+ch2gms,24,25,4	script	Orion#wsv	10651,{
+	cutin "ch2_orion01.png",2;
+	.@n$ = "[Orion]";
+	if (isbegin_quest(64233) == 1 && !(wsv_c2s & 1024)) {
+		mes .@n$;
+		mes "Yongjirak? The Harvans want parts? Of course. They kept us in coal for years. We'll keep them in screws.";
+		mes "Tell Karimun: work for parts. Their heat, our hands. Fair trade.";
+		wsv_c2s = wsv_c2s | 1024;
+		close3;
+	}
+	if (isbegin_quest(64234) == 1) {
+		if (checkquest(64234, HUNTING) == 2 && !(wsv_c2s & 1024)) {
+			mes .@n$;
+			mes "The pipes are clear. Here: ice screws and a hydraulic tube, modified for Harvan heat. Take them to Karimun.";
+			wsv_c2s = wsv_c2s | 1024;
+			close3;
+		}
+		if (wsv_c2s & 1024) {
+			mes .@n$;
+			mes "Karimun is waiting for those parts.";
+			close3;
+		}
+		mes .@n$;
+		mes "Clear the ice creatures out of our pipes first: 30 Icy Blasts and 30 Ice Needles, out at the Root.";
+		close3;
+	}
+	mes .@n$;
+	mes "Welcome to Shelter Gemis. We fix things here. Mostly things that the cold broke.";
+	close3;
+}
+
+// ------------------------------------------------------------
+// Samra: Research Assistant (64236) and Equipment Holding Heat
+// (64237, 64238).
+// ------------------------------------------------------------
+kin_in01,89,36,4	script	Samra#wsv	10664,{
+	cutin "ch2_harrban_g.png",2;
+	.@n$ = "[Samra]";
+	if (wsv_ch2 < 1000) {
+		mes .@n$;
+		mes "Harvans can't go near the Root of Death. Not yet. I'm going to change that.";
+		close3;
+	}
+	if (!(wsv_c2s & 8)) {
+		if (isbegin_quest(64236) == 1) {
+			if (checkquest(64236, HUNTING) == 2) {
+				mes .@n$;
+				mes "Alpuring cores! They hold the cold the way we hold heat. If I can understand them, I can make gear that turns cold away.";
+				completequest 64236;
+				wsv_c2s = wsv_c2s | 8;
+				callfunc "F_WSV_C2Reward", 3, 3;
+				questinfo_refresh;
+				close3;
+			}
+			mes .@n$;
+			mes "20 Alpurings, at the Root of Death. Their cores are what I need.";
+			close3;
+		}
+		mes .@n$;
+		mes "I want to make protective gear, so Harvans can walk into the Root of Death themselves. For that I need to study the cold.";
+		mes "Would you be my research assistant? Bring me cores from ^0000FF20 Alpurings^000000 at the Root.";
+		next;
+		if (select("I'll help.:Not now.") == 2)
+			close3;
+		setquest 64236;
+		questinfo_refresh;
+		close3;
+	}
+	if (isbegin_quest(64237) == 1 && checkquest(64237, HUNTING) == 2) {
+		mes .@n$;
+		mes "Morbang hide and Paruson shells: heat-holding materials. The prototype is getting there. It only caught fire twice today.";
+		callfunc "F_WSV_C2DailyDone", 64237, 64238, 3, 4;
+		close3;
+	}
+	mes .@n$;
+	mes "My cold-proof gear needs materials that hold heat. The deep dungeon creatures are full of them.";
+	next;
+	if (select("Equipment Holding Heat (daily).:Never mind.") == 2)
+		close3;
+	callfunc "F_WSV_C2Daily", .@n$, 64237, 64238, "Defeat ^0000FF20 Morbangs and 20 Parusons^000000 in the Muspelheim dungeon's second level.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch2 >= 1000 && isbegin_quest(64236) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "(wsv_c2s & 8) && isbegin_quest(64237) == 0 && (isbegin_quest(64238) == 0 || checkquest(64238, PLAYTIME) == 2)" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Services
+// ------------------------------------------------------------
+// Officially Mana rings, Blue Flame armor and Hal; the server has
+// none of them, so the coins buy existing materials (estimate).
+kin_in01,27,197,4	script	Flame Gold Coin Exchanger#wsv	10656,{
+	cutin "ch2_harrban_b.png",2;
+	mes "[Flame Gold Coin Exchanger]";
+	mes "Flame Gold Coins! Flat as a pancake, shaped like a flame. Good in Yongjirak, good anywhere, good any age.";
+	mes "You have ^0000FF" + wsv_flame + "^000000 coin(s).";
+	next;
+	setarray .@it, 1000322, 25731, 25729, 6635, 12208, 12118, 12119;
+	setarray .@co, 2, 15, 15, 40, 3, 1, 1;
+	for (.@i = 0; .@i < getarraysize(.@it); .@i++)
+		.@menu$ += getitemname(.@it[.@i]) + " (" + .@co[.@i] + " coin" + (.@co[.@i] > 1 ? "s" : "") + "):";
+	.@s = select(.@menu$ + "Never mind.") - 1;
+	if (.@s >= getarraysize(.@it))
+		close3;
+	mes "[Flame Gold Coin Exchanger]";
+	mes "How many ^0000FF" + getitemname(.@it[.@s]) + "^000000?";
+	next;
+	input .@n, 0, 100;
+	if (.@n < 1)
+		close3;
+	if (wsv_flame < .@n * .@co[.@s]) {
+		mes "[Flame Gold Coin Exchanger]";
+		mes "Not enough coins, friend.";
+		close3;
+	}
+	if (!checkweight(.@it[.@s], .@n)) {
+		mes "[Flame Gold Coin Exchanger]";
+		mes "You'll never carry all that.";
+		close3;
+	}
+	wsv_flame -= .@n * .@co[.@s];
+	getitem .@it[.@s], .@n;
+	mes "[Flame Gold Coin Exchanger]";
+	mes "Pleasure doing business.";
+	close3;
+}
+
+// Officially enchants and upgrades the Blue Flame armor, which the
+// server lacks; here he tempers armor, garments and shoes one
+// level at a time up to +9, without risk (estimate).
+kin_in01,31,197,4	script	Harvan Artisan Kadron#wsv	10657,{
+	cutin "ch2_harrban_c.png",2;
+	.@n$ = "[Kadron]";
+	mes .@n$;
+	mes "I'm Kadron. I work Blue Flame: the cold blue fire under the Root, turned to good use. But I don't sell it to outsiders. Not yet.";
+	mes "What I can do is temper your gear in Harvan fire. One step at a time, and it never breaks.";
+	next;
+	mes .@n$;
+	mes "^0000FF10 Flame Gold Coins and 30,000 zeny^000000 a step, up to +9. You have " + wsv_flame + " coin(s).";
+	next;
+	setarray .@slot, EQI_ARMOR, EQI_GARMENT, EQI_SHOES;
+	for (.@i = 0; .@i < 3; .@i++)
+		.@menu$ += (getequipisequiped(.@slot[.@i]) ? getequipname(.@slot[.@i]) : "(nothing)") + ":";
+	.@s = select(.@menu$ + "Never mind.") - 1;
+	if (.@s >= 3)
+		close3;
+	.@e = .@slot[.@s];
+	if (!getequipisequiped(.@e)) {
+		mes .@n$;
+		mes "There's nothing there to temper.";
+		close3;
+	}
+	if (!getequipisenableref(.@e) || getequiprefinerycnt(.@e) >= 9) {
+		mes .@n$;
+		mes "That one can't take any more of my fire.";
+		close3;
+	}
+	if (wsv_flame < 10 || Zeny < 30000) {
+		mes .@n$;
+		mes "Ten coins and thirty thousand zeny. No discounts, even for heroes.";
+		close3;
+	}
+	mes .@n$;
+	mes "Temper ^0000FF" + getequipname(.@e) + "^000000 to +" + (getequiprefinerycnt(.@e) + 1) + "?";
+	next;
+	if (select("Temper it.:Not now.") == 2)
+		close3;
+	wsv_flame -= 10;
+	Zeny -= 30000;
+	successrefitem .@e;
+	mes .@n$;
+	mes "There. Feel how it holds the heat? That's Harvan work.";
+	close3;
+}
+
+kin_in01,30,182,4	shop	Harvan Merchant#wsv	10655,504:-1,505:-1,547:-1,12118:-1,12119:-1,12120:-1,12121:-1,601:-1,602:-1
+
+// Tros shows outsiders around the burrows.
+kin_in01,171,122,4	script	Tros#wsv	10660,{
+	cutin "ch2_harrban_f.png",2;
+	mes "[Tros]";
+	mes "Lost? Everyone gets lost in Yongjirak's burrows. Where to?";
+	next;
+	switch (select("The great hall.:Tamarin's kitchen.:The workshop (coins and tempering).:The nursery.:Outside.:Never mind.")) {
+	case 1: close2; cutin "",255; warp "kin_in01",166,133; end;
+	case 2: close2; cutin "",255; warp "kin_in01",34,247; end;
+	case 3: close2; cutin "",255; warp "kin_in01",29,193; end;
+	case 4: close2; cutin "",255; warp "kin_in01",86,43; end;
+	case 5: close2; cutin "",255; warp "kindlbrk",178,110; end;
+	}
+	close3;
+}
+
+// The sailor takes people to the Root of Death and Shelter Gemis.
+kindlbrk,256,120,4	script	Harvan Sailor#wsv	10613,{
+	cutin "ch2_harrban_a.png",2;
+	mes "[Harvan Sailor]";
+	if (wsv_ch2 < 70) {
+		mes "The Root of Death? Nobody sails there now. Ask Beryl, if you're mad enough.";
+		close3;
+	}
+	mes "The channel runs down to the edge of the Root of Death. From there you can walk to Shelter Gemis.";
+	next;
+	if (select("To the Root of Death.:Never mind.") == 2)
+		close3;
+	close2;
+	cutin "",255;
+	warp "ch2safe3",142,64;
+	end;
+}
+
+// ------------------------------------------------------------
+// The villagers of Yongjirak
+// ------------------------------------------------------------
+// callfunc "F_WSV_C2Villager", "<name>", "<cut-in>", "<before>", "<after>";
+function	script	F_WSV_C2Villager	{
+	cutin getarg(1), 2;
+	mes "[" + getarg(0) + "]";
+	mes (wsv_ch2 >= 60 && wsv_ch2 < 1000) ? getarg(2) : getarg(3);
+	close3;
+}
+kindlbrk,108,124,4	script	Serum#wsv	10660,{ callfunc "F_WSV_C2Villager", "Serum", "ch2_harrban_f.png", "Did you see the cold creeping up from the east? Like frost on a window, except the window is the whole world.", "Serum's the name, smelting's the game. Business is good when the fire's good."; end; }
+kindlbrk,151,101,4	script	Radion#wsv	10655,{ callfunc "F_WSV_C2Villager", "Radion", "ch2_harrban_a.png", "My brother went to the Root. If you see him, tell him his dinner's cold. Everything is cold.", "My brother's back! He's eating enough for three. Good."; end; }
+kindlbrk,162,113,4	script	Antion#wsv	10657,{ callfunc "F_WSV_C2Villager", "Antion", "ch2_harrban_c.png", "We've been keeping the forges burning day and night. If they go out, I don't know if we'll get them lit again.", "Forges roaring. Exactly as it should be."; end; }
+kindlbrk,199,121,4	script	Germion#wsv	10664,{ callfunc "F_WSV_C2Villager", "Germion", "ch2_harrban_g.png", "An outsider who came to help? In all my years... Well. Don't trip over the children.", "Outsiders in Yongjirak. Times change. I suppose that's all right."; end; }
+kindlbrk,220,82,4	script	Iron#wsv	10656,{ callfunc "F_WSV_C2Villager", "Iron", "ch2_harrban_b.png", "I'm guarding the east road. Against what? Against the cold. It's hard to hit, the cold.", "Nothing to guard against now. I'm guarding anyway. Habit."; end; }
+kindlbrk,222,120,4	script	Techron#wsv	10658,{ callfunc "F_WSV_C2Villager", "Techron", "ch2_harrban_d.png", "Nedim says he can build a machine to keep us warm forever. Nedim says a lot of things.", "Nedim's machine actually works. I'll never hear the end of it."; end; }
+kindlbrk,205,151,4	script	Chromis#wsv	10659,{ callfunc "F_WSV_C2Villager", "Chromis", "ch2_harrban_e.png", "Shh. Listen. The ground used to hum. It's gone quiet. Harvans don't like quiet.", "Hear that hum? That's the ground, happy again."; end; }
+
+// Yongjirak Request Board: the state of the village's requests.
+kindlbrk,178,115,4	script	Yongjirak Request Board#wsv	10669,{
+	mes "[Yongjirak Request Board]";
+	mes "Notes scorched into thin plates of stone: the village's requests for anyone willing.";
+	if (wsv_ch2 < 1000) {
+		mes "^4d4dffMost of them ask for help the village can't trust an outsider with yet.^000000";
+		close;
+	}
+	next;
+	setarray .@t$, "Yongjirak's Specialty! Hot Kalguksu", "Tamarin", "Hot! Hotter! (blankets)", "Tamarin", "Hot! Hotter! (snacks)", "Tamarin",
+		"Dream of Perpetual Motion", "Nedim", "Work at the Nursery", "Bartom", "Gemis Parts Supply", "Karimun", "Equipment Holding Heat", "Samra";
+	setarray .@q, 64221, 64223, 64225, 64227, 64231, 64234, 64237;
+	setarray .@ok, (wsv_c2s & 1) != 0, (wsv_c2s & 1) != 0, (wsv_c2s & 1) != 0, 1, (wsv_c2s & 2) != 0, (wsv_c2s & 4) != 0, (wsv_c2s & 8) != 0;
+	for (.@i = 0; .@i < 7; .@i++) {
+		.@st$ = "^4d4dffnot open to you yet^000000";
+		if (.@ok[.@i]) {
+			.@st$ = "^0000FFopen^000000";
+			if (isbegin_quest(.@q[.@i] + 1) == 1 && checkquest(.@q[.@i] + 1, PLAYTIME) != 2)
+				.@st$ = "^777777done for today^000000";
+			if (isbegin_quest(.@q[.@i]) == 1)
+				.@st$ = "^FF8800in progress^000000";
+		}
+		mes "- " + .@t$[.@i * 2] + " (" + .@t$[.@i * 2 + 1] + "): " + .@st$;
+	}
+	close;
+}

@@ -430,3 +430,14 @@ ba_chess,28,16,4	script	Enchant Master#wsv	10345,{
 	}
 	close;
 }
+
+// The way back up from the Deep Abyss to the Chess Garden.
+bl_depth2,141,137,4	script	Exit#wsv_abyss	10527,{
+	mes "A way back up to the Chess Garden.";
+	next;
+	if (select("Go back to the Chess Garden.:Stay.") == 2)
+		close;
+	close2;
+	warp "ba_chess",15,36;
+	end;
+}

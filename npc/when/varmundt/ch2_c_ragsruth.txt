@@ -1,0 +1,452 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Chapter 2, the main story's second half: Ragsruth, the Ragged
+//= Root (ch2safe4, ragsruth, rgs_dun1), Nirhult, and the dailies
+//= there after the story (Devries, Gregor, Nirhult's Illusion).
+//= Nirhult has no monster or memorial map in the client: he is a
+//= Feeos under his own name with lowered HP, called out for you
+//= and your party where you stand (estimate).
+//============================================================
+
+// ------------------------------------------------------------
+// The safe place of Ragsruth (ch2safe4)
+// ------------------------------------------------------------
+ch2safe4,201,111,4	script(CLOAKED)	Devries#wsv_c2s	865,{
+	mes "[Devries]";
+	if (wsv_ch2 == 90) {
+		mes "You came by the branch too? Gregor and I followed the sprout's scent, so to speak. This is where it leads.";
+		mes "They call this place ^0000FFRagsruth^000000. The Ragged Root. A piece of another world's tree that drifted here and took hold.";
+		next;
+		mes "[Devries]";
+		mes "And it has people. Little ones, called ^0000FFFolnirs^000000. Their leader is ^0000FFArtea^000000. The passage to the northeast leads to their village.";
+		mes "Go and introduce yourself. Politely. We're the strangers here.";
+		close;
+	}
+	mes "Fascinating place. Terrible place. Fascinating.";
+	next;
+	if (select("Take me back to Brimir.:Never mind.") == 1) {
+		close2;
+		warp "uknw_ruin2",263,240;
+		end;
+	}
+	close;
+}
+
+ch2safe4,198,110,4	script(CLOAKED)	Gregor#wsv_c2s	627,{
+	cutin "4job_gregor_01.png",2;
+	mes "[Gregor]";
+	mes "The grass here grows in ragged piles. The Folnirs say it hides things. I believe them.";
+	close3;
+}
+
+// ------------------------------------------------------------
+// Ragsruth: Artea and the Folnirs (64209-64212)
+// ------------------------------------------------------------
+ragsruth,124,47,4	script	Artea#wsv	10661,{
+	cutin "ch2_folnir_a.png",2;
+	if (wsv_ch2 == 90) {
+		mes "[Artea]";
+		mes "An outsider... from the trunk side? You smell of a living tree. We haven't smelled that in a long time.";
+		mes "I am Artea. The Folnirs of Ragsruth listen to me, mostly.";
+		next;
+		mes "[Artea]";
+		mes "Our root is all that's left of a world that ended. We live on it. We tend it. And lately, something has been moving in the twisted part of it, ^0000FFDistorted Ragsruth^000000.";
+		next;
+		mes "[Artea]";
+		mes "Will you look? The old ^0000FFbranch^000000 at the far end hums when something passes. And the grass piles: whoever it is, they hide in the grass.";
+		callfunc "F_WSV_Step", "wsv_ch2", 100, "64209", "64210";
+		callfunc "F_WSV_C2Reward", 5, 3;
+		close3;
+	}
+	if (wsv_ch2 == 100) {
+		if ((wsv_ch2b & 30720) == 30720) {
+			mes "[Artea]";
+			mes "Torn threads of magic in the grass, and the branch humming with a stranger's passing. So it's true.";
+			mes "Someone has come into Ragsruth. Someone who means to take what's left of our root.";
+			next;
+			mes "[Artea]";
+			mes "......!";
+			mes "Do you feel that? He's here. ^0000FFNirhult^000000.";
+			callfunc "F_WSV_Step", "wsv_ch2", 110, "64210", "64211";
+			close3;
+		}
+		mes "[Artea]";
+		mes "Touch the old branch in Distorted Ragsruth, and search the grass piles. Three of them should hold traces.";
+		close3;
+	}
+	if (wsv_ch2 == 110) {
+		if (wsv_ch2b & 32768) {
+			mes "[Artea]";
+			mes "He's gone. For now. And look, he left something behind: a ^0000FFfragment^000000, black and glittering. It's cold, and it isn't from our tree. It isn't from yours, either.";
+			next;
+			mes "[Artea]";
+			mes "A fragment of the end. Of whatever ended our world, I think. Take it to your guardian in Ash Village. He should know it exists.";
+			callfunc "F_WSV_Step", "wsv_ch2", 120, "64211", "64212";
+			callfunc "F_WSV_C2Reward", 10, 5;
+			close3;
+		}
+		mes "[Artea]";
+		mes "Nirhult is here. Drive him out of Ragsruth, please. Bring your friends if you have them.";
+		next;
+		if (select("Face Nirhult.:Not yet.") == 2)
+			close3;
+		close2;
+		cutin "",255;
+		callfunc "F_WSV_C2Nirhult", 0, "ragsruth", 124, 55;
+		end;
+	}
+	if (wsv_ch2 == 120) {
+		mes "[Artea]";
+		mes "Take the fragment to Ash Village. We'll be here. We always are.";
+		close3;
+	}
+	if (wsv_ch2 >= 1000) {
+		mes "[Artea]";
+		mes "Ragsruth is quiet again, thanks to you. Quiet for a ragged root, anyway. Come and visit. Bring your living-tree smell.";
+		close3;
+	}
+	mes "[Artea]";
+	mes "......";
+	mes "An outsider. Ragsruth has nothing for you. Go back the way you came.";
+	close3;
+}
+
+ragsruth,120,50,4	script	Folnir#wsv_c2a	10662,{
+	cutin "ch2_folnir_b.png",2;
+	mes "[Folnir]";
+	if (wsv_ch2 >= 1000)
+		mes "You chased off the stranger! Artea says we shouldn't make a fuss. I'm making a fuss! Thank you!";
+	else
+		mes "Artea says outsiders are dangerous. You don't look dangerous. You look tired.";
+	close3;
+}
+ragsruth,128,50,4	script	Folnir#wsv_c2b	10663,{
+	cutin "ch2_folnir_c.png",2;
+	mes "[Folnir]";
+	mes "Our root used to be part of a great tree. Then the world ended and the tree broke. We kept the piece we were standing on.";
+	close3;
+}
+
+// ------------------------------------------------------------
+// Distorted Ragsruth (rgs_dun1): the old branch and the grass
+// ------------------------------------------------------------
+rgs_dun1,273,80,4	script	Branch#wsv	10620,{
+	mes "[Branch]";
+	mes "An old branch, thicker than a man, growing out of the ragged root.";
+	if (wsv_ch2 == 100 && !(wsv_ch2b & 16384)) {
+		mes "It hums under your hand. Something passed by here not long ago, something that didn't belong.";
+		wsv_ch2b = wsv_ch2b | 16384;
+		if ((wsv_ch2b & 30720) == 30720)
+			dispbottom "That's everything. Go back to Artea.";
+		close;
+	}
+	if (isbegin_quest(64239) == 1) {
+		mes "It hums faintly. The stranger's trace is fading, but the magic of this place is restless: strange, foreign threads in it.";
+		wsv_c2s = wsv_c2s | 16;
+		dispbottom "Report to Devries at the safe place.";
+		close;
+	}
+	next;
+	if (select("Go back to the safe place.:Stay.") == 1) {
+		close2;
+		warp "ch2safe4",215,231;
+		end;
+	}
+	close;
+}
+
+// Story: piles 3, 8 and 12 hold traces (bits 2048, 4096, 8192).
+// Daily "Even a Handful of Magic": each pile once a day, a Ghost
+// Flower half of the time (wsv_c2p, wsv_c2pd, wsv_c2gf).
+function	script	F_WSV_C2Pile	{
+	.@n = getarg(0);
+	mes "[Pile of Grass]";
+	mes "A ragged pile of pale grass.";
+	if (wsv_ch2 == 100) {
+		setarray .@trace, 0, 0, 0, 2048, 0, 0, 0, 0, 4096, 0, 0, 0, 8192;
+		.@b = (.@n < getarraysize(.@trace)) ? .@trace[.@n] : 0;
+		next;
+		if (select("Search the grass.:Leave it.") == 2)
+			close;
+		close2;
+		progressbar "ffffff", 2;
+		if (.@b && !(wsv_ch2b & .@b)) {
+			wsv_ch2b = wsv_ch2b | .@b;
+			dispbottom "Under the grass: torn threads of magic, still warm, like someone lay here waiting.";
+			if ((wsv_ch2b & 30720) == 30720)
+				dispbottom "That's everything. Go back to Artea.";
+		} else
+			dispbottom "Just grass, and a beetle that's annoyed with you.";
+		end;
+	}
+	if (isbegin_quest(64240) == 1) {
+		.@today = gettime(DT_YEAR) * 1000 + gettime(DT_YEARDAY);
+		if (wsv_c2pd != .@today) {
+			wsv_c2pd = .@today;
+			wsv_c2p = 0;
+		}
+		if (wsv_c2p & (1 << .@n)) {
+			mes "You've already searched this one today.";
+			close;
+		}
+		next;
+		if (select("Look for Ghost Flowers.:Leave it.") == 2)
+			close;
+		close2;
+		progressbar "ffffff", 2;
+		wsv_c2p = wsv_c2p | (1 << .@n);
+		if (wsv_c2gf < 5 && rand(2)) {
+			wsv_c2gf++;
+			specialeffect2 EF_SPR_PLANT;
+			dispbottom "A Ghost Flower, glowing pale in the shadows of the grass. (" + wsv_c2gf + "/5)";
+		} else
+			dispbottom "No Ghost Flower in this one.";
+		end;
+	}
+	close;
+}
+
+rgs_dun1,154,237,4	script	Pile of Grass#wsv1	10430,{ callfunc "F_WSV_C2Pile", 1; end; }
+rgs_dun1,119,56,4	script	Pile of Grass#wsv2	10430,{ callfunc "F_WSV_C2Pile", 2; end; }
+rgs_dun1,169,54,4	script	Pile of Grass#wsv3	10430,{ callfunc "F_WSV_C2Pile", 3; end; }
+rgs_dun1,150,227,4	script	Pile of Grass#wsv4	10430,{ callfunc "F_WSV_C2Pile", 4; end; }
+rgs_dun1,94,204,4	script	Pile of Grass#wsv5	10430,{ callfunc "F_WSV_C2Pile", 5; end; }
+rgs_dun1,110,106,4	script	Pile of Grass#wsv6	10430,{ callfunc "F_WSV_C2Pile", 6; end; }
+rgs_dun1,96,94,4	script	Pile of Grass#wsv7	10430,{ callfunc "F_WSV_C2Pile", 7; end; }
+rgs_dun1,78,74,4	script	Pile of Grass#wsv8	10430,{ callfunc "F_WSV_C2Pile", 8; end; }
+rgs_dun1,157,58,4	script	Pile of Grass#wsv9	10430,{ callfunc "F_WSV_C2Pile", 9; end; }
+rgs_dun1,155,71,4	script	Pile of Grass#wsv10	10430,{ callfunc "F_WSV_C2Pile", 10; end; }
+rgs_dun1,193,107,4	script	Pile of Grass#wsv11	10430,{ callfunc "F_WSV_C2Pile", 11; end; }
+rgs_dun1,222,113,4	script	Pile of Grass#wsv12	10430,{ callfunc "F_WSV_C2Pile", 12; end; }
+rgs_dun1,263,119,4	script	Pile of Grass#wsv13	10430,{ callfunc "F_WSV_C2Pile", 13; end; }
+rgs_dun1,259,137,4	script	Pile of Grass#wsv14	10430,{ callfunc "F_WSV_C2Pile", 14; end; }
+rgs_dun1,203,156,4	script	Pile of Grass#wsv15	10430,{ callfunc "F_WSV_C2Pile", 15; end; }
+
+// ------------------------------------------------------------
+// Nirhult: callfunc "F_WSV_C2Nirhult", <0 story | 1 illusion>, "<map>", <x>, <y>;
+// He fights you and your party; whoever of the party is on the map
+// when he falls gets the credit.
+// ------------------------------------------------------------
+function	script	F_WSV_C2Nirhult	{
+	.@cid = getcharid(0);
+	.@old = getd("$@wsv_nir_" + .@cid);
+	if (.@old && unitexists(.@old)) {
+		dispbottom "Nirhult is already here!";
+		end;
+	}
+	.@name$ = getarg(0) ? "Illusion of Nirhult" : "Nirhult";
+	.@gid = monster(getarg(1), getarg(2), getarg(3), .@name$, 22705, 1, "WSV_Nirhult::OnKill");
+	setunitdata .@gid, UMOB_LEVEL, 240;
+	setunitdata .@gid, UMOB_MAXHP, getarg(0) ? 30000000 : 15000000;
+	setunitdata .@gid, UMOB_HP, getarg(0) ? 30000000 : 15000000;
+	setd "$@wsv_nir_" + .@cid, .@gid;
+	setd "$@wsv_niro_" + .@gid, .@cid;
+	setd "$@wsv_nira_" + .@gid, getcharid(3);
+	setd "$@wsv_nirp_" + .@gid, getcharid(1);
+	setd "$@wsv_nirm_" + .@gid, getarg(0);
+	specialeffect2 EF_LIGHTSPHERE;
+	dispbottom "A cold presence gathers into a shape: " + .@name$ + "!";
+	end;
+}
+
+-	script	WSV_Nirhult	-1,{
+	end;
+OnKill:
+	.@g = killedgid;
+	.@cid = getd("$@wsv_niro_" + .@g);
+	.@aid = getd("$@wsv_nira_" + .@g);
+	.@pid = getd("$@wsv_nirp_" + .@g);
+	.@mode = getd("$@wsv_nirm_" + .@g);
+	.@map$ = strcharinfo(3);
+	setd "$@wsv_niro_" + .@g, 0;
+	setd "$@wsv_nira_" + .@g, 0;
+	setd "$@wsv_nirp_" + .@g, 0;
+	setd "$@wsv_nirm_" + .@g, 0;
+	if (.@cid)
+		setd "$@wsv_nir_" + .@cid, 0;
+	if (.@pid) {
+		getpartymember .@pid, 1;
+		getpartymember .@pid, 2;
+		copyarray .@c[0], $@partymembercid[0], $@partymembercount;
+		copyarray .@a[0], $@partymemberaid[0], $@partymembercount;
+		.@n = $@partymembercount;
+	} else {
+		.@c[0] = .@cid;
+		.@a[0] = .@aid;
+		.@n = 1;
+	}
+	for (.@i = 0; .@i < .@n; .@i++) {
+		if (!isloggedin(.@a[.@i], .@c[.@i]) || !attachrid(.@a[.@i]))
+			continue;
+		if (getcharid(0) != .@c[.@i] || strcharinfo(3) != .@map$)
+			continue;
+		if (.@mode == 0 && wsv_ch2 == 110 && !(wsv_ch2b & 32768)) {
+			wsv_ch2b = wsv_ch2b | 32768;
+			questinfo_refresh;
+			dispbottom "Nirhult staggers back and is gone, leaving something glittering behind. Go back to Artea.";
+		}
+		if (.@mode == 1 && isbegin_quest(64245) == 1 && !(wsv_c2s & 16384)) {
+			wsv_c2s = wsv_c2s | 16384;
+			dispbottom "The illusion of Nirhult breaks apart. Tell Artea's illusion.";
+		}
+	}
+	detachrid;
+	end;
+}
+
+// ------------------------------------------------------------
+// After the story: the safe place's dailies.
+// Devries: Distorted Ragsruth (64239), Even a Handful of Magic
+// (64240, cooldown 64241). Gregor: OK, Calm Down (64242, 64243),
+// Strange Magic Investigation (64244). Artea's illusion:
+// Nirhult's Illusion (64245, 64246).
+// ------------------------------------------------------------
+ch2safe4,217,234,4	script(CLOAKED)	Devries#wsv_c2r	865,{
+	.@n$ = "[Devries]";
+	if (isbegin_quest(64239) == 1) {
+		if (wsv_c2s & 16) {
+			mes .@n$;
+			mes "Foreign threads in the magic? I thought so. This place has residual magic like a forge has residual heat.";
+			mes "I'd like to study it. If you're willing, I could use some help, now and then.";
+			completequest 64239;
+			callfunc "F_WSV_C2Reward", 5, 3;
+			questinfo_refresh;
+			close;
+		}
+		mes .@n$;
+		mes "Go and touch the old branch at the far end of Distorted Ragsruth. Tell me what you feel.";
+		close;
+	}
+	if (isbegin_quest(64239) == 0) {
+		mes .@n$;
+		mes "Now that things are calm, I want to understand this place. Would you have a look around ^0000FFDistorted Ragsruth^000000 for me? Start with the old branch at the far end.";
+		next;
+		if (select("I'll go.:Not now.") == 2)
+			close;
+		setquest 64239;
+		questinfo_refresh;
+		mes .@n$;
+		mes "Thank you. Mind the Folnirs out there. The wild ones, not Artea's.";
+		close;
+	}
+	if (isbegin_quest(64240) == 1 && wsv_c2gf >= 5) {
+		mes .@n$;
+		mes "Five Ghost Flowers! Look at them glow. Each one is a little knot of the magic that's left here.";
+		wsv_c2gf = 0;
+		callfunc "F_WSV_C2DailyDone", 64240, 64241, 3, 4;
+		close;
+	}
+	switch (select("Even a Handful of Magic (daily).:Take me back to Brimir.:Never mind.")) {
+	case 1:
+		if (isbegin_quest(64240) != 1)
+			wsv_c2gf = 0;
+		callfunc "F_WSV_C2Daily", .@n$, 64240, 64241, "Ghost Flowers grow in the grass piles of Distorted Ragsruth. Bring me ^0000FF5^000000; each pile can be searched once a day.";
+		close;
+	case 2:
+		close2;
+		warp "uknw_ruin2",263,240;
+		end;
+	}
+	close;
+}
+
+ch2safe4,215,234,4	script(CLOAKED)	Gregor#wsv_c2r	627,{
+	cutin "4job_gregor_01.png",2;
+	.@n$ = "[Gregor]";
+	if (isbegin_quest(64242) == 1 && checkquest(64242, HUNTING) == 2) {
+		mes .@n$;
+		mes "Fewer Folnirs splitting off, and the magic's steadier already. Thank you. They're not evil, you know. Just... too much magic in too small a body.";
+		callfunc "F_WSV_C2DailyDone", 64242, 64243, 3, 4;
+		close3;
+	}
+	if (isbegin_quest(64244) == 1) {
+		mes .@n$;
+		mes "Artea's... reflection, down by the south edge of the safe place. It's made of the same foreign magic Nirhult left behind. Talk to it.";
+		close3;
+	}
+	.@menu$ = "OK, Calm Down (daily).:";
+	if (isbegin_quest(64239) == 2 && isbegin_quest(64244) == 0)
+		.@menu$ += "Strange magic?:";
+	else
+		.@menu$ += ":";
+	switch (select(.@menu$ + "Never mind.")) {
+	case 1:
+		if (isbegin_quest(64239) != 2) {
+			mes .@n$;
+			mes "Have a look around Distorted Ragsruth for Devries first. You'll see what I mean about the Folnirs.";
+			close3;
+		}
+		callfunc "F_WSV_C2Daily", .@n$, 64242, 64243, "The wild Folnirs have unstable magic inside them, and they keep splitting. Thin them out: ^0000FF30 each^000000 of Folnir Nilf, Folnir Hre and Folnir Myrk.";
+		close3;
+	case 2:
+		mes .@n$;
+		mes "Devries found foreign threads in the magic. I found where they gather: in the south of the safe place, the air bends into a shape. It looks like Artea.";
+		mes "Go and see. Carefully.";
+		setquest 64244;
+		questinfo_refresh;
+		close3;
+	}
+	close3;
+}
+
+ch2safe4,207,35,4	script	Illusion of Artea#wsv	10661,{
+	cutin "ch2_folnir_a.png",2;
+	.@n$ = "[Illusion of Artea]";
+	if (wsv_ch2 < 1000) {
+		mes "A shimmer in the air, in a shape that might be a Folnir. It doesn't notice you.";
+		close3;
+	}
+	if (isbegin_quest(64244) == 1) {
+		mes .@n$;
+		mes "......You can see me. Then you can see him, too.";
+		mes "I am what's left of Artea's fear. Nirhult left it behind, in the magic. As long as it remains, he can come back here, as an illusion.";
+		next;
+		mes .@n$;
+		mes "Every day his shadow gathers again. Every day, someone has to break it.";
+		completequest 64244;
+		callfunc "F_WSV_C2Reward", 3, 2;
+		questinfo_refresh;
+		next;
+	}
+	if (isbegin_quest(64244) != 2) {
+		mes "A shimmer in the air, in a shape that might be a Folnir. It doesn't notice you.";
+		close3;
+	}
+	if (isbegin_quest(64245) == 1 && (wsv_c2s & 16384)) {
+		mes .@n$;
+		mes "His shadow is broken. For today.";
+		wsv_c2s = wsv_c2s &~ 16384;
+		callfunc "F_WSV_C2DailyDone", 64245, 64246, 8, 10;
+		close3;
+	}
+	if (isbegin_quest(64245) == 1) {
+		mes .@n$;
+		mes "He's gathering. Break his illusion. Bring your friends.";
+		next;
+		if (select("Face the Illusion of Nirhult.:Not yet.") == 2)
+			close3;
+		close2;
+		cutin "",255;
+		callfunc "F_WSV_C2Nirhult", 1, "ch2safe4", 207, 40;
+		end;
+	}
+	mes .@n$;
+	mes "Nirhult's Illusion: once a day, alone or with a party.";
+	next;
+	if (select("Break his illusion.:Not now.") == 2)
+		close3;
+	wsv_c2s = wsv_c2s &~ 16384;
+	if (callfunc("F_WSV_C2Daily", .@n$, 64245, 64246, "Then let's call him. Talk to me again when you're ready.")) {
+		next;
+		if (select("Face him now.:In a moment.") == 1) {
+			close2;
+			cutin "",255;
+			callfunc "F_WSV_C2Nirhult", 1, "ch2safe4", 207, 40;
+			end;
+		}
+	}
+	close3;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(64244) == 2 && isbegin_quest(64245) == 0 && (isbegin_quest(64246) == 0 || checkquest(64246, PLAYTIME) == 2)" );
+	end;
+}
