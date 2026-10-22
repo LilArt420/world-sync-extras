@@ -441,6 +441,30 @@ QuestInfoList = {
 		Description = { "Brimir's <NAVI>[Sa]<INFO>uknw_ruin,93,174,0,101,0</INFO></NAVI> asks you to destroy 10 Shadow Guardians." },
 		Summary = "Defeat monsters"
 	},
+	[11345] = {
+		Title = "Conversation with Alice",
+		IconName = "ico_nq.bmp",
+		Description = { "Talk with Alice of Prontera church." },
+		Summary = "Speak to Alice"
+	},
+	[11346] = {
+		Title = "Acolyte_damped creatures(LV.13)",
+		IconName = "ico_nq.bmp",
+		Description = { "Come back to Alice after hunting each 20 Roda frogs and Denopices occupying the 1st floor of the abandoned ship." },
+		Summary = "Roda frogs(20) Denopices(20)"
+	},
+	[11347] = {
+		Title = "Acolyte_soft bone(LV.18)",
+		IconName = "ico_nq.bmp",
+		Description = { "Hunt Greasles with soft bones which might be short of calcium before death. Hunt 30 of them and report to Alice." },
+		Summary = "Greasles(30)"
+	},
+	[11348] = {
+		Title = "Acolyte_Solid bone(LV.23)",
+		IconName = "ico_nq.bmp",
+		Description = { "Solid ones like wooden sticks can be easily broken, and rigid and solid ones like stone can be easily fragile. Report to Alice after catching 30 Tibia" },
+		Summary = "Tibias(30)"
+	},
 	[12588] = {
 		Title = "[Standby] The Immortal",
 		IconName = "ico_dq.bmp",

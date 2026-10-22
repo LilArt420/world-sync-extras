@@ -66,6 +66,7 @@ iRO's permanent services that World Sync placed as greeting-only NPCs.
 - iRO's own NPCs that rAthena keeps switched off: Keiki and Aperture's warps, the Refining Researcher, Phelix
   and Izaac, Dark Luhir. Plus the Shadow Blacksmith (Prontera), Madogear rental (Eclage, Mora) and Izlude's
   Increase AGI acolytes.
+- The Acolytes' training ground in the Izlude Sunken Ship (Acolyte Leader Alice in the Prontera Cathedral).
 
 Rewards and a few rules are estimates where iRO doesn't publish them.
 

@@ -35,7 +35,8 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - Stall search in the Prontera and Payon markets and the Catalogue Magician.
 - The Eden Group's Dungeon Teleporter.
 - iRO's own services rAthena ships switched off (Keiki, Aperture, the Refining Researcher, Phelix, Izaac, Dark Luhir), placed where iRO has them; the Shadow Blacksmith, Madogear rental in Eclage and Mora, and Izlude's Increase AGI acolytes.
-- EXP rewards and a few rules are estimates. 18 placeholders become these NPCs.
+- The Acolytes' training ground in the Izlude Sunken Ship: Acolyte Leader Alice in the Prontera Cathedral gives kRO's three Acolyte hunts (levels 13, 18, 23) and sends you in; Laforet sends you back; the wreck's doors open between its holds and floors.
+- EXP rewards and a few rules are estimates. 19 placeholders become these NPCs.
 
 ### 🎯 New: iRO Quests (seven settings, on)
 The iRO Quests mod (0.1.0 was its last release) is now part of World Sync Extras, so one install brings the
