@@ -14,18 +14,22 @@
 //=   "Dimension Enhancer") and enchants them (item_enchant 56).
 //= - Garden Herbalist: the five Herosria Herb Jams.
 //= - Equipment Merchant: the Herosria siege equipment.
-//= - Castle guild members get a combat buff in the PvP dungeon.
-//= The siege itself (Siege HE, twelve maps) isn't part of this
-//= block: the sanctuary honours the guilds that hold any castle
-//= of Rune-Midgard. Amounts the guides don't give (equipment
+//= - The holding guild's members get a combat buff in the PvP
+//=   dungeon.
+//= The siege itself (Siege HE) is herosria_siege.txt; until a
+//= guild first takes the sanctuary, its rewards go to the guilds
+//= that hold any castle of Rune-Midgard. Amounts the guides don't give (equipment
 //= price, smelting, cutting and herb recipes) are estimates.
 //============================================================
 
-// 1 when the player's guild holds a castle, else 0.
+// 1 when the player's guild holds Sanctuary Herosria, else 0. Before
+// any guild has taken it, holding any castle counts.
 function	script	F_WSF_HasCastle	{
 	.@g = getcharid(2);
 	if (!.@g)
 		return 0;
+	if ($wsf_hero_gid)
+		return (.@g == $wsf_hero_gid);
 	setarray .@c$,
 		"prtg_cas01","prtg_cas02","prtg_cas03","prtg_cas04","prtg_cas05",
 		"payg_cas01","payg_cas02","payg_cas03","payg_cas04","payg_cas05",
@@ -145,7 +149,24 @@ hero_lb,151,151,4	script	Sanctuary Manager#wsf	55,{
 	mes "[Sanctuary Manager]";
 	mes "Welcome to Sanctuary Herosria, the training ground of the constellation Rigel.";
 	next;
-	switch (select("What is Herosria?:Receive Herosria's Gift:Leave")) {
+	switch (select("What is Herosria?:Receive Herosria's Gift:Leave:" + (getgmlevel() >= 60 ? "(GM) Rigel's battle" : ""))) {
+	case 4:
+		mes "[Sanctuary Manager]";
+		mes "Rigel's battle is " + ($@wsf_hs_on ? "^0000FFon^000000" : "^FF0000off^000000") + ".";
+		next;
+		switch (select("Start a 30-minute test battle:End the battle now:Clear the holder:Cancel")) {
+		case 1:
+			donpcevent "WSF_HeroSiege::OnGMStart";
+			break;
+		case 2:
+			donpcevent "WSF_HeroSiege::OnGMEnd";
+			break;
+		case 3:
+			$wsf_hero_gid = 0;
+			$wsf_hero_gname$ = "";
+			break;
+		}
+		close;
 	case 1:
 		mes "[Sanctuary Manager]";
 		mes "Rigel, the constellation of life and earth, watched adventurers close the dimensional rifts, guild beside guild.";
@@ -156,8 +177,15 @@ hero_lb,151,151,4	script	Sanctuary Manager#wsf	55,{
 		mes "The Garden Cat takes you to the PvP dungeon and the training grounds.";
 		next;
 		mes "[Sanctuary Manager]";
-		mes "Rigel rewards the guilds that hold a castle. Their guild master may receive ^0000FF10 Herosria's Gifts^000000 from me ^0000FFonce a day^000000.";
-		mes "And their members fight harder in the PvP dungeon, with the blessing of the Spring Jewel.";
+		mes "Every Sunday from 20:00 to 22:00, Rigel's battle is fought here. Guilds start in the four regions, through the Challenger's Monuments in the corners of this garden.";
+		mes "Break each region's jewel, the stones of the 1st Hero's Gate, the four garden jewels, and finally the Jewel of Herosria in the Jewel Room.";
+		next;
+		mes "[Sanctuary Manager]";
+		if ($wsf_hero_gid)
+			mes "Today the guild ^0000FF[" + $wsf_hero_gname$ + "]^000000 holds the sanctuary.";
+		else
+			mes "No guild has taken the sanctuary yet. Until one does, Rigel honours the guilds that hold any castle.";
+		mes "The holding guild's master may receive ^0000FF10 Herosria's Gifts^000000 from me ^0000FFonce a day^000000, and its members fight harder in the PvP dungeon, with the blessing of the Spring Jewel.";
 		close;
 	case 2:
 		break;
@@ -166,11 +194,14 @@ hero_lb,151,151,4	script	Sanctuary Manager#wsf	55,{
 	}
 	mes "[Sanctuary Manager]";
 	if (!getcharid(2) || getguildmasterid(getcharid(2)) != getcharid(0)) {
-		mes "Herosria's Gifts are for the master of a guild that holds a castle.";
+		mes "Herosria's Gifts are for the master of the guild that holds the sanctuary.";
 		close;
 	}
 	if (!callfunc("F_WSF_HasCastle")) {
-		mes "Your guild doesn't hold a castle. Take one, and Rigel will notice.";
+		if ($wsf_hero_gid)
+			mes "The guild [" + $wsf_hero_gname$ + "] holds the sanctuary. Take it in Rigel's battle, on Sunday night.";
+		else
+			mes "Your guild doesn't hold a castle. Take one, or the sanctuary itself, and Rigel will notice.";
 		close;
 	}
 	if (wsf_hero_gift == gettime(DT_YYYYMMDD)) {
@@ -183,7 +214,7 @@ hero_lb,151,151,4	script	Sanctuary Manager#wsf	55,{
 	}
 	wsf_hero_gift = gettime(DT_YYYYMMDD);
 	getitem 101750, 10;	// Herosria_Gift
-	mes "Rigel's gifts for the lord of a castle. Use them well.";
+	mes "Rigel's gifts for the lords of Herosria. Use them well.";
 	close;
 }
 
@@ -195,7 +226,7 @@ hero_lb,153,148,4	script	Garden Cat#wsf	561,{
 	case 1:
 		mes "[Garden Cat]";
 		mes "The spring garden, nya! Garden wolves, cannons that bite, Ferus... and the Floral Pegasus, if you're lucky. Or unlucky.";
-		mes "Guilds that hold a castle can ask the Spring Jewel inside for its blessing.";
+		mes "The guild that holds the sanctuary can ask the Spring Jewel inside for its blessing.";
 		next;
 		if (select("Go:Not yet") == 2)
 			close;
@@ -214,11 +245,11 @@ hero_lb,153,148,4	script	Garden Cat#wsf	561,{
 	case 3:
 		mes "[Garden Cat]";
 		mes "The spring, summer, autumn and winter gardens are where the sanctuary's battle is won, nya.";
-		mes "Outside the battle, only the guilds that hold a castle may walk there.";
+		mes "Outside the battle, only the guild that holds the sanctuary may walk there.";
 		next;
 		if (!callfunc("F_WSF_HasCastle")) {
 			mes "[Garden Cat]";
-			mes "Your guild doesn't hold a castle. Sorry, nya.";
+			mes "Your guild doesn't hold the sanctuary. Sorry, nya.";
 			close;
 		}
 		.@g = select("Spring Garden:Summer Garden:Autumn Garden:Winter Garden:Not now");
@@ -456,7 +487,7 @@ hero_dun1,108,108,4	script	Spring Jewel#wsf	21866,{
 	mes "^4d4dffThe Spring Jewel glows softly. Warmth pours out of it like sunlight through leaves.^000000";
 	next;
 	if (!callfunc("F_WSF_HasCastle")) {
-		mes "^4d4dffThe warmth stops at your fingertips. The jewel only blesses guilds that hold a castle.^000000";
+		mes "^4d4dffThe warmth stops at your fingertips. The jewel only blesses the guild that holds the sanctuary.^000000";
 		close;
 	}
 	mes "^4d4dffThe light wraps around you. You feel ready to take on the garden's beasts.^000000";
@@ -476,10 +507,34 @@ hero_dun1,122,122,4	script	Moving Stone#wsf_d	10248,{
 	warp "hero_lb",136,143;
 	end;
 }
-hero_in1,122,122,4	duplicate(Moving Stone#wsf_d)	Moving Stone#wsf_1	10248
-hero_in2,122,122,4	duplicate(Moving Stone#wsf_d)	Moving Stone#wsf_2	10248
-hero_in3,122,122,4	duplicate(Moving Stone#wsf_d)	Moving Stone#wsf_3	10248
-hero_in4,122,122,4	duplicate(Moving Stone#wsf_d)	Moving Stone#wsf_4	10248
+// The gardens' moving stones: during the battle, once the garden's jewel
+// is broken, they lead to the 2nd Hero's Gate.
+hero_in1,122,122,4	script	Moving Stone#wsf_1	10248,{
+	.@g = atoi(charat(strcharinfo(3), 7));
+	mes "^4d4dffA moving stone. It hums when you touch it.^000000";
+	next;
+	if ($@wsf_hs_on && $@wsf_hs_gj[.@g]) {
+		switch (select("To the 2nd Hero's Gate:Return to the Garden of Dawn:Stay")) {
+		case 1:
+			close2;
+			warp "hero_ent2", 90, 20;
+			end;
+		case 2:
+			close2;
+			warp "hero_lb", 136, 143;
+			end;
+		}
+		close;
+	}
+	if (select("Return to the Garden of Dawn:Stay") == 2)
+		close;
+	close2;
+	warp "hero_lb", 136, 143;
+	end;
+}
+hero_in2,122,122,4	duplicate(Moving Stone#wsf_1)	Moving Stone#wsf_2	10248
+hero_in3,122,122,4	duplicate(Moving Stone#wsf_1)	Moving Stone#wsf_3	10248
+hero_in4,122,122,4	duplicate(Moving Stone#wsf_1)	Moving Stone#wsf_4	10248
 
 hero_in1,100,100,4	script	BroadCastButler#wsf_1	55,{
 	setarray .@s$, "", "Spring", "Summer", "Autumn", "Winter";
@@ -487,7 +542,15 @@ hero_in1,100,100,4	script	BroadCastButler#wsf_1	55,{
 	mes "[Garden Butler]";
 	mes "Welcome to the " + .@s$[.@m] + " Garden of Herosria.";
 	mes "During the sanctuary's battle, I announce every jewel that breaks and every gate that opens.";
-	mes "Today the garden is quiet. The moving stone takes you back to the Garden of Dawn.";
+	if (!$@wsf_hs_on) {
+		mes "Today the garden is quiet. The moving stone takes you back to the Garden of Dawn.";
+		close;
+	}
+	next;
+	mes "[Garden Butler]";
+	mes "Rigel's battle is on! The garden jewels:";
+	for (.@i = 1; .@i <= 4; .@i++)
+		mes "- " + .@s$[.@i] + ": " + ($@wsf_hs_gj[.@i] ? ($@wsf_hs_rul[.@i] ? "^FF8800broken, its ruler is out^000000" : "^FF0000broken^000000") : "^0000FFstanding^000000");
 	close;
 }
 hero_in2,100,100,4	duplicate(BroadCastButler#wsf_1)	BroadCastButler#wsf_2	55
@@ -496,8 +559,8 @@ hero_in4,100,100,4	duplicate(BroadCastButler#wsf_1)	BroadCastButler#wsf_4	55
 
 // The Challenger's Monuments in the four corners of the Garden of Dawn:
 // in each region (Silvarium, Lacusarium, Bastitarium, Rabinarium) one
-// heals, one leads to the region's battlefield. The battlefields only
-// open with the sanctuary's battle, which this block doesn't run.
+// heals, one leads to the region's battlefield while Rigel's battle is
+// on (herosria_siege.txt).
 hero_lb,209,205,4	script	Challenger's Monument#wsf_r1	21866,{
 	mes "^4d4dffThe monument hums. Warmth flows out of the stone and into your wounds.^000000";
 	close2;
@@ -512,11 +575,26 @@ hero_lb,205,70,4	duplicate(Challenger's Monument#wsf_r1)	Challenger's Monument#w
 hero_lb,205,209,4	script	Challenger's Monument#wsf_m1	10248,{
 	setarray .@r$, "Silvarium", "Lacusarium", "Bastitarium", "Rabinarium";
 	.@i = atoi(charat(strnpcinfo(2), 5)) - 1;
+	setarray .@sx, 176, 248, 250, 16;
+	setarray .@sy, 36, 23, 27, 26;
 	mes "^4d4dffAn inscription on the monument:^000000";
 	mes "\"Challengers of " + .@r$[.@i] + ", the gate opens when Rigel's battle begins.\"";
 	next;
-	mes "^4d4dffThe stone is cold. Sanctuary Herosria's battle isn't being fought on this server: the way to " + .@r$[.@i] + " stays closed.^000000";
-	close;
+	if (!$@wsf_hs_on) {
+		mes "^4d4dffThe stone is cold. Rigel's battle is fought on Sundays, from 20:00 to 22:00.^000000";
+		close;
+	}
+	if (!getcharid(2)) {
+		mes "^4d4dffThe stone stays cold under your hand. Only guilds fight in Rigel's battle.^000000";
+		close;
+	}
+	mes "^4d4dffThe stone is warm. The way to " + .@r$[.@i] + " is open.^000000";
+	next;
+	if (select("Go to " + .@r$[.@i] + ":Stay") == 2)
+		close;
+	close2;
+	warp "hero_out" + (.@i + 1), .@sx[.@i], .@sy[.@i];
+	end;
 }
 hero_lb,70,205,4	duplicate(Challenger's Monument#wsf_m1)	Challenger's Monument#wsf_m2	10248
 hero_lb,74,70,4	duplicate(Challenger's Monument#wsf_m1)	Challenger's Monument#wsf_m3	10248
