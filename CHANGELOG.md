@@ -35,12 +35,26 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 - Stall search in the Prontera and Payon markets and the Catalogue Magician.
 - The Eden Group's Dungeon Teleporter.
 - iRO's own services rAthena ships switched off (Keiki, Aperture, the Refining Researcher, Phelix, Izaac, Dark Luhir), placed where iRO has them; the Shadow Blacksmith, Madogear rental in Eclage and Mora, and Izlude's Increase AGI acolytes.
-- EXP rewards and a few rules are estimates. 18 placeholders become these NPCs.
+- The Acolytes' training ground in the Izlude Sunken Ship: Acolyte Leader Alice in the Prontera Cathedral gives kRO's three Acolyte hunts (levels 13, 18, 23) and sends you in; Laforet sends you back; the wreck's doors open between its holds and floors.
+- EXP rewards and a few rules are estimates. 19 placeholders become these NPCs.
+
+### 🎯 New: iRO Quests (seven settings, on)
+The iRO Quests mod (0.1.0 was its last release) is now part of World Sync Extras, so one install brings the
+stories, the quests and the NPCs:
+- Bounty Boards: 314 repeatable hunts on 65 boards in 25 towns and the Illusion dungeons.
+- Criminal Activities, Eye of the Beholder and the Overlook Water Dungeon.
+- Gramps' weekly turn-ins at the Eden Group (184 hunts from the iRO client).
+- City Investment: the City Merchant Union in 9 towns, Union Insignias, A/B/C deliveries and weekly Wanted bosses.
+- Street stall staffers (City Investment): Masha of the Alberta Merchant Union gives a weekly request (a delivery, collecting an antique box from Murian or Elbury, the Bio Lab device or a hunt) that earns a Beginner, Regular or Master certificate. Ridwan turns it into a staffer that keeps a selling or buying stall open in Alberta or Prontera for 1 to 3 days, with 3 to 5 kinds of items, and mails you the zeny or the items. A stand-in: rAthena has no staffer units, so the stall is a scripted NPC on a free market cell. Bound, rented and untradable items are refused.
+- The 2021 town quest chains and their dailies, from Morroc to Alberta, with the Eden Group's field mission givers.
+- 48 placeholders become these NPCs, and about 140 NPCs World Sync had removed come back with their quests.
+If you had installed iRO Quests on its own, remove it: World Sync Extras carries all of it now.
 
 ### 🧍 Placeholders
-- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 200, the Star Forest block 100 and the iRO services block 18. Likewise 48 placeholders that iRO Quests (0.2.0 and 0.3.0) implements: the Overlook Water Dungeon signboards, the City Investment delivery recipients and the 2021 town quest chains. 3 more (Myu, Girl, Old Man) are already scripted by rAthena. 21 placeholders for retired or online-only iRO content are left out: the Weekend Race, the Battle Pass Season 3 signboards, the Talk Like a Pirate Event 2026 hub and the Redeem Code. 76 placeholders remain, 44 of them working.
+- 268 placeholders on the Jormungandr maps are gone, because the saga implements them for real (the list is in replaced-placeholders.txt). The Varmundt block takes over 200, the Star Forest block 100 and the iRO services block 18. Likewise 50 placeholders that iRO Quests (0.2.0 and 0.3.0) and the street stall staffers implement: the Overlook Water Dungeon signboards, the City Investment delivery recipients, the 2021 town quest chains, Murian and Elbury. 3 more (Myu, Girl, Old Man) are already scripted by rAthena. 21 placeholders for retired or online-only iRO content are left out: the Weekend Race, the Battle Pass Season 3 signboards, the Talk Like a Pirate Event 2026 hub and the Redeem Code. 73 placeholders remain, 44 of them working.
 
 ### 👾 World Sync monsters (db/mob_db.yml, until the app ships the same fixes)
+- 124 monsters that drop nothing but their card (Divine Pride lists no drops for them, e.g. the 460 Yorkers on jor_base) get the drops of their closest relative: their base form for the Strong variants, else a monster on the same map, else the same class and level.
 - They drop again: 154 monsters had drops with no chance published, which the server gave the 0.01% floor. They now use the typical chance of the same kind of item (materials 5%, cards 0.01%, equipment 0.03-0.3%).
 - 303 monsters whose stats Divine Pride doesn't show get real estimates: each missing value is the median of the 7 monsters of the same class nearest in level and HP. Before, they copied one similar monster, sometimes a boss: Yorker Worker had 207 million HP (now 27.8 million), Flameanima and Feeos 614 million (now 47 million), three Vr Cst monsters 285,340 (now 27 million), and 29 monsters such as Violen, Medjed and Tatsi hit for 0.
 

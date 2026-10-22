@@ -2,7 +2,7 @@
   "name": "world-sync-extras",
   "version": "2.0.0",
   "author": "Lil Art",
-  "description": "World Sync's playable content and extras. The Jormungandr saga: Episode 20 (The Undying One) and Episode 21 (Age of Heroes) with full dialogue, the official quest steps, memorial dungeons, dailies and the Ice Castle and Lunaforma traders. The official NPCs whose logic no server data has yet, placed where the clients put them. Optional entrances into the World Sync maps, and @npcplace to move NPCs. Needs Ragnarok Offline 1.6.7 or later.",
+  "description": "World Sync's playable content and iRO's quests, in blocks you can switch: the Jormungandr saga (Episodes 20 and 21), Chapters 1 and 2 of the Song of the World Tree, Varmundt, Star Forest and Herosria, iRO services, and iRO Quests (Bounty Boards, City Investment, the 2021 town quests, Gramps and more). The official NPCs still without logic stand where the clients put them, and @npcplace moves any NPC. Needs Ragnarok Offline 1.6.7 or later.",
   "requires": {
     "app": ">=1.6.7",
     "era": "renewal"
@@ -41,7 +41,56 @@
       "type": "boolean",
       "default": true,
       "label": "iRO services: the Devil in the Box, market catalogs, Eden's Dungeon Teleporter and town helpers",
-      "description": "The Clock Tower's Devil in the Box and her Unknown Basement dailies (level 200+), stall search in the Prontera and Payon markets, the Catalogue Magician, Eden's Dungeon Teleporter, Aperture and kitchen traders, Keiki's warps, the Refining Researcher, the Shadow Blacksmith, Madogear rental in Eclage and Mora, and Izlude's Increase AGI acolytes. Turned off, they leave."
+      "description": "The Clock Tower's Devil in the Box and her Unknown Basement dailies (level 200+), stall search in the markets, the Catalogue Magician, Eden's Dungeon Teleporter and iRO's own services (Keiki, Aperture, the Refining Researcher, the Shadow Blacksmith, Madogear rental), Izlude's Increase AGI acolytes and the Acolytes' training in the Izlude Sunken Ship. Turned off, they leave."
+    },
+    {
+      "key": "bounty_boards",
+      "type": "boolean",
+      "default": true,
+      "label": "iRO quests: Bounty Boards",
+      "description": "iRO's Bounty Boards in 28 towns and dungeons: hunt 150 of a monster for EXP, zeny and Eden Merit Badges. Turning them off keeps everyone's hunts in their quest log."
+    },
+    {
+      "key": "criminal_activities",
+      "type": "boolean",
+      "default": true,
+      "label": "iRO quests: Criminal Activities",
+      "description": "iRO's Criminal Activities Quest (Base Level 70): free Vince Noir's band from Jymmy the Thumb, from Geffen to the domestic airship. Starts with Agent York in the Geffen inn."
+    },
+    {
+      "key": "eye_of_the_beholder",
+      "type": "boolean",
+      "default": true,
+      "label": "iRO quests: Eye of the Beholder",
+      "description": "iRO's Eye of the Beholder (Base Level 50): help Beho the beholder win Bianca's heart in Rachel. Starts with the Beholder on the international airship's deck."
+    },
+    {
+      "key": "overlook_water_dungeon",
+      "type": "boolean",
+      "default": true,
+      "label": "iRO quests: Overlook Water Dungeon",
+      "description": "iRO's Overlook Water Dungeon (Base Level 30-85): the Byalan copy under The Sign west of Geffen, with its 15 Aged monsters and 5 floor hunts. Turning it off removes the monsters and the hunts."
+    },
+    {
+      "key": "gramps_turn_ins",
+      "type": "boolean",
+      "default": true,
+      "label": "iRO quests: Gramps' weekly turn-ins",
+      "description": "iRO's Gramps at the Eden Group (Base Level 70-150): 400-kill hunts, two monsters a week per tier, for 400x the monster's EXP, 65,000 zeny and an Eden Merit Badge. Replaces rAthena's talk-only Gramps."
+    },
+    {
+      "key": "city_investment",
+      "type": "boolean",
+      "default": true,
+      "label": "iRO quests: City Investment (Merchant Union)",
+      "description": "Join the City Merchant Union at the Eden Group, earn Union Insignias from monsters and Union requests (113 deliveries, weekly Wanted bosses), invest them in 9 cities and buy their account-bound Union gear. Masha in Alberta hires out street stall staffers that keep a stall open while you're away (a stand-in)."
+    },
+    {
+      "key": "town_quests_2021",
+      "type": "boolean",
+      "default": true,
+      "label": "iRO quests: Town quests (2021 revamp)",
+      "description": "kRO's 2021 town quests that iRO runs: so far Morroc, Payon, Prontera (with Orc Village and Glast Heim), Izlude, Aldebaran and the Juno fields, Hugel, Einbroch, Lighthalzen, Geffen, Rachel, Veins, Comodo, Alberta, Juperos and the dungeon-mission givers, with their dailies, shared with the Eden Group's mission boards."
     },
     {
       "key": "entrances",
@@ -55,7 +104,7 @@
       "type": "boolean",
       "default": true,
       "label": "Place the official NPCs that have no logic yet",
-      "description": "76 NPCs from the official clients' maps and signboards. 44 of them already work (storage, guild storage, inns, repair, channel switches, the Varmundt elevator, Jormungandr's contact points, market guides); the rest greet you until their quests and services are written."
+      "description": "73 NPCs from the official clients' maps and signboards. 44 of them already work (storage, guild storage, inns, repair, channel switches, the Varmundt elevator, Jormungandr's contact points, market guides); the rest greet you until their quests and services are written."
     },
     {
       "key": "npc_mover",

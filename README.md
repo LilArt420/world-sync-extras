@@ -66,12 +66,28 @@ iRO's permanent services that World Sync placed as greeting-only NPCs.
 - iRO's own NPCs that rAthena keeps switched off: Keiki and Aperture's warps, the Refining Researcher, Phelix
   and Izaac, Dark Luhir. Plus the Shadow Blacksmith (Prontera), Madogear rental (Eclage, Mora) and Izlude's
   Increase AGI acolytes.
+- The Acolytes' training ground in the Izlude Sunken Ship (Acolyte Leader Alice in the Prontera Cathedral).
 
 Rewards and a few rules are estimates where iRO doesn't publish them.
 
+## 🎯 iRO Quests (seven settings, all on)
+
+iRO's permanent quests the server has no script for, with full dialogue and iRO's own quest log
+(formerly the separate iRO Quests mod):
+- **Bounty Boards** (`bounty_boards`): 314 repeatable 150-kill hunts on 65 boards in 25 towns.
+- **Criminal Activities** (`criminal_activities`): Agent York and Jymmy the Thumb's casino airship (Base 70).
+- **Eye of the Beholder** (`eye_of_the_beholder`): Beho and Bianca in Rachel (Base 50).
+- **Overlook Water Dungeon** (`overlook_water_dungeon`): The Sign west of Geffen, the Aged monsters and the floor hunts.
+- **Gramps' weekly turn-ins** (`gramps_turn_ins`): 400-kill hunts at the Eden Group (Base 70-150).
+- **City Investment** (`city_investment`): the Merchant Union, Union Insignias, deliveries, Wanted bosses and Union gear,
+  plus Masha's weekly requests in Alberta and the street stall staffers they earn (a stand-in:
+  a scripted stall in Alberta or Prontera that sells or buys while you're away, paid by mail).
+- **Town quests, 2021 revamp** (`town_quests_2021`): story chains and dailies in Morroc, Payon, Prontera, Izlude,
+  Aldebaran and the Juno fields, Geffen, Rachel and Veins, Comodo, Alberta and the Eden Group's field missions.
+
 ## 🧍 Placeholder NPCs (setting `placeholders`, on)
 
-76 official NPCs whose dialog and logic exist in no server data yet, standing
+73 official NPCs whose dialog and logic exist in no server data yet, standing
 where the client puts them with their own sprite and name. 44 already work
 (storage lockers, guild storage, inns, repair, channel switches, the Varmundt
 elevator, Jormungandr's contact points, market guides); the rest greet you until
@@ -84,7 +100,7 @@ that implements some of them) takes its placeholders over: see
 `db/mob_db.yml` fixes what Divine Pride doesn't publish for 303 World Sync
 monsters, until the app ships the same fix: their stats (each the median of the
 7 monsters of the same class nearest in level and HP) and their drop chances
-(estimated by item type). Temporary.
+(estimated by item type), and drops for 124 monsters Divine Pride lists none for (borrowed from their closest relative). Temporary.
 
 ## 🚪 Entrances (setting `entrances`, off)
 
