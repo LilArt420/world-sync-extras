@@ -24,7 +24,8 @@ The World Sync: Jormungandr mod is now part of World Sync Extras, so one install
 
 ### ⭐ New: Star Forest, Herosria and Ash Village (setting `star_forest`, on)
 - The Star Emperor job change (iRO quests 11573-11585).
-- Sanctuary Herosria's lobby services, portals, PvP dungeon blessing and gardens (not the siege itself).
+- Sanctuary Herosria's lobby services, portals, PvP dungeon blessing and gardens.
+- The Herosria siege (War of Emperium: Herosria), Sundays 20:00-22:00: region jewels, arches, three gates, the four garden jewels and their rulers, and the Jewel of Herosria. The holding guild gets the gift, the Spring Jewel and the gardens. GMs can start a 30-minute test battle at the Sanctuary Manager.
 - Ash Village's shops, enchants and signposts.
 - 99 placeholders become these NPCs. Prices, recipes and rewards kRO doesn't publish are estimates.
 

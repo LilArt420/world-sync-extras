@@ -47,6 +47,7 @@ dailies.
   (base 99 / job 50).
 - 🌸 Sanctuary Herosria's Garden of Dawn, through the portals in the four castle realms: gifts for
   castle lords, Herosria gear, herb jams, the Dimensional Wanderer accessories, refining and enchanting.
+- ⚔️ The Herosria siege, Sundays 20:00-22:00 (GMs can start a test battle at the Sanctuary Manager).
 - 🌳 Ash Village's shops, enchants and signposts at the edge of the World Tree.
 
 Prices, recipes and rewards that kRO doesn't publish are estimates in both blocks.
