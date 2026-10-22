@@ -132,6 +132,47 @@ ygg_edge,253,246,4	script	Laphine Herald#wsv_c1e	10609,{
 // Ash Village: Sasha and Meisel
 // ------------------------------------------------------------
 ygg_fruit,80,122,4	script	Sasha#wsv_c1	435,{
+	// Chapter 2 (ch2_*.txt): El's return, the news from Muspelheim, the end.
+	if (wsv_ch2 == 30) {
+		mes "[Sasha]";
+		mes "El! You're awake! And looking... well, looking like someone who slept for a hundred years. Which you did.";
+		next;
+		mes "[El]";
+		mes "Ninety-two. Thanks to our friend here.";
+		next;
+		mes "[Sasha]";
+		mes "Thank you. Truly. The forest feels lighter already.";
+		mes "I wish I could let you rest, but news came while you were in Beledor. From Muspelheim, from the Harvans' village. Something's wrong there. Something cold.";
+		next;
+		mes "[Sasha]";
+		mes "Chez keeps watch in ^0000FFVolund Valley^000000. She sent the message. Would you go and find her?";
+		callfunc "F_WSV_Step", "wsv_ch2", 40, "64202", "64203";
+		callfunc "F_WSV_C2Reward", 5, 3;
+		close;
+	}
+	if (wsv_ch2 == 40) {
+		mes "[Sasha]";
+		mes "Chez is in Volund Valley, at the near end, where the path from the Twisted Land comes in.";
+		close;
+	}
+	if (wsv_ch2 == 120) {
+		mes "[Sasha]";
+		mes "You're back! And what is... that?";
+		next;
+		mes "[El]";
+		mes "......";
+		mes "A fragment of an ending. Not ours. Someone else's world, broken, and the pieces are falling into ours: the ice under Muspelheim, the ragged root, this.";
+		next;
+		mes "[El]";
+		mes "Nirhult wanted what was left of Ragsruth. He will want more. The World Tree has felt this coming for a long time, I think. That's why the ward knotted. It was afraid.";
+		next;
+		mes "[Sasha]";
+		mes "Then we'll be ready. Ash Village, Yongjirak, Ragsruth, all of us. And you, of course. You always seem to be where it matters.";
+		mes "Rest now. The Harvans have a long list of things they want to thank you with. Mostly soup.";
+		callfunc "F_WSV_Step", "wsv_ch2", 1000, "64212", "";
+		callfunc "F_WSV_C2Reward", 20, 20;
+		close;
+	}
 	if (wsv_ch1 == 20) {
 		mes "[Sasha]";
 		mes "So you're the one the World Tree called. Welcome, welcome.";

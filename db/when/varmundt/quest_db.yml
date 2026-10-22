@@ -932,3 +932,139 @@ Body:
     TimeLimit: +7d
   - Id: 64131
     Title: "The Eroded Wing"
+  - Id: 64201
+    Title: "Crossroads of Tangled Magic"
+  - Id: 64202
+    Title: "Crossroads of Tangled Magic"
+  - Id: 64203
+    Title: "News from the Burning Land"
+  - Id: 64204
+    Title: "Between Cold Spot and Hot Spot"
+  - Id: 64205
+    Title: "Between Cold Spot and Hot Spot"
+  - Id: 64206
+    Title: "What Was Met at the Root of Death"
+    Targets:
+      - Id: 1
+        Count: 30
+        MapName: Root of Death
+        Location: deadroot
+  - Id: 64207
+    Title: "Sprout of the Ended World"
+  - Id: 64208
+    Title: "A Fragmented Other Root"
+  - Id: 64209
+    Title: "Residents of the Ragged Root"
+  - Id: 64210
+    Title: "Residents of the Ragged Root - Suspicious Movement"
+  - Id: 64211
+    Title: "Nirhult"
+  - Id: 64212
+    Title: "Fragment of the End"
+  - Id: 64220
+    Title: "Time to Do What Must Be Done"
+  - Id: 64221
+    Title: "Yongjirak's Specialty! Hot Kalguksu"
+    Targets:
+      - Mob: CH2_FLAMEBULL
+        Count: 20
+      - Mob: CH2_UROCHS
+        Count: 20
+  - Id: 64222
+    Title: "[Standby] Yongjirak's Specialty! Hot Kalguksu"
+    TimeLimit: 4h
+  - Id: 64223
+    Title: "Hot! Hotter!"
+    Targets:
+      - Mob: CH2_FIRECOTTON
+        Count: 30
+  - Id: 64224
+    Title: "[Standby] Hot! Hotter!"
+    TimeLimit: 4h
+  - Id: 64225
+    Title: "Hot! Hotter!"
+    Targets:
+      - Mob: CH2_LOGIDOGI
+        Count: 20
+      - Mob: CH2_NAMUNSE
+        Count: 20
+  - Id: 64226
+    Title: "[Standby] Hot! Hotter!"
+    TimeLimit: 4h
+  - Id: 64227
+    Title: "Dream of Perpetual Motion"
+    Targets:
+      - Mob: CH2_FIRECLAW
+        Count: 20
+      - Mob: CH2_FLAMEANIMA
+        Count: 20
+  - Id: 64228
+    Title: "[Standby] Dream of Perpetual Motion"
+    TimeLimit: 4h
+  - Id: 64229
+    Title: "Helping Hands at the Nursery"
+  - Id: 64231
+    Title: "Work at the Nursery"
+    Targets:
+      - Mob: CH2_DUDULSON
+        Count: 20
+      - Mob: CH2_GARAKSON
+        Count: 20
+      - Mob: CH2_TUKTAKSON
+        Count: 20
+  - Id: 64232
+    Title: "[Standby] Work at the Nursery"
+    TimeLimit: 4h
+  - Id: 64233
+    Title: "Shelter Visit"
+  - Id: 64234
+    Title: "Gemis Parts Supply"
+    Targets:
+      - Mob: CH2_ICYBLAST
+        Count: 30
+      - Mob: CH2_ICENEEDLE
+        Count: 30
+  - Id: 64235
+    Title: "[Standby] Gemis Parts Supply"
+    TimeLimit: 4h
+  - Id: 64236
+    Title: "Research Assistant"
+    Targets:
+      - Mob: CH2_ALPURING
+        Count: 20
+  - Id: 64237
+    Title: "Equipment Holding Heat"
+    Targets:
+      - Mob: CH2_MORBANG
+        Count: 20
+      - Mob: CH2_PARUSON
+        Count: 20
+  - Id: 64238
+    Title: "[Standby] Equipment Holding Heat"
+    TimeLimit: 4h
+  - Id: 64239
+    Title: "Distorted Ragsruth"
+  - Id: 64240
+    Title: "Even a Handful of Magic"
+  - Id: 64241
+    Title: "[Standby] Even a Handful of Magic"
+    TimeLimit: 4h
+  - Id: 64242
+    Title: "OK, Calm Down"
+    Targets:
+      - Mob: CH2_FOLNIR_NILF
+        Count: 30
+      - Mob: CH2_FOLNIR_HRE
+        Count: 30
+      - Mob: CH2_FOLNIR_MYRK
+        Count: 30
+  - Id: 64243
+    Title: "[Standby] OK, Calm Down"
+    TimeLimit: 4h
+  - Id: 64244
+    Title: "Distorted Ragsruth - Strange Magic Investigation"
+  - Id: 64245
+    Title: "Nirhult's Illusion"
+  - Id: 64246
+    Title: "[Standby] Nirhult's Illusion"
+    TimeLimit: 4h

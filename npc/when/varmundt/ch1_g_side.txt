@@ -258,6 +258,7 @@ uknw_ruin,258,236,4	script	Maura#wsv	10416,{
 }
 
 uknw_ruin,272,235,4	script	Il#wsv	10605,{
+	callfunc "F_WSV_C2Il";	// Chapter 2: the branch to Ragsruth
 	if (wsv_c1br == 2) {
 		mes "[Il]";
 		mes "......";
@@ -285,6 +286,7 @@ uknw_ruin,272,235,4	script	Il#wsv	10605,{
 		callfunc "F_WSV_Step", "wsv_c1br", 5, "8958", "8959,8960,8961,8962";
 		close;
 	}
+	callfunc "F_WSV_C2Branch";
 	mes "[Il]";
 	mes "Count. Wait. Count.";
 	close;
