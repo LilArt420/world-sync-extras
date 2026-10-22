@@ -72,9 +72,9 @@ prt_church,186,36,4	script	Acolyte Leader Alice#wsi	4_F_ACOLYTE,{
 	setarray .@q[0], 11346, 11347, 11348;
 	setarray .@lv[0], 13, 18, 23;
 	setarray .@task$[0],
-		"defeat ^0000FF20 Roda Frogs^000000 and ^0000FF20 Denopices^000000 on the wreck's 1st floor",
-		"defeat ^0000FF30 Greasles^000000, the soft-boned skeletons",
-		"defeat ^0000FF30 Tibias^000000, the hard-boned skeletons";
+		"defeat ^0000FF20 Roda Frogs^000000 and ^0000FF20 Dead Plankton^000000 on the wreck's 1st floor",
+		"defeat ^0000FF30 Weak Skeletons^000000, the soft-boned ones",
+		"defeat ^0000FF30 Weak Soldier Skeletons^000000, the hard-boned ones";
 	for (.@i = 0; .@i < 3; .@i++)
 		if (isbegin_quest(.@q[.@i]) < 2)
 			break;
@@ -184,13 +184,13 @@ treasure_n1,167,44,4	script	Laforet#wsi	4_LAM,{
 	switch (select("Where do I find what Alice asked?:Take me back to Prontera:Nothing")) {
 	case 1:
 		mes "[Laforet]";
-		mes "The ^0000FFRoda Frogs^000000 and ^0000FFDenopices^000000";
+		mes "The ^0000FFRoda Frogs^000000 and ^0000FFDead Plankton^000000";
 		mes "splash around this floor.";
-		mes "The ^0000FFGreasles^000000 rattle in the";
+		mes "The ^0000FFWeak Skeletons^000000 rattle in the";
 		mes "holds further in.";
 		next;
 		mes "[Laforet]";
-		mes "The ^0000FFTibias^000000 guard the lower";
+		mes "The ^0000FFWeak Soldier Skeletons^000000 guard the lower";
 		mes "deck: the stairs down are at";
 		mes "the south end of the ship.";
 		mes "The doors between the holds";
