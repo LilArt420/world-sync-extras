@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.3
+Needs Ragnarok Offline 1.6.9 or later.
+- 🧹 The World Sync monster fixes this mod carried until the app had them (estimated stats, drop chances, and drops for the 124 monsters that had none) are in Ragnarok Offline 1.6.9 itself, so the mod's copy (db/mob_db.yml) is gone. Checked: all 303 of its entries match 1.6.9's own table.
+- With 1.6.9, the 2021 town quests no longer show doubled objectives when akreao's Eden Group 2021 rework is installed too: the app's quest loader merges a quest two mods declare.
+
 ## 2.0.2
 - 👀 The Herosria siege can be seen and won: the region and garden jewels, the Jewel of Herosria, the stones and the four garden rulers were invisible, because the client had no sprite for their monster ids. Also now visible: Koko, the Episode 20 boss Rasgand, the Snow Rabbit and Melibe Slugs, the Corrupted Angel Snail, the fake Iwin soldiers, the Rgan Shaman, Varmundt's crabs and shellfish, and the Rgan transformation (System/jobname.lub, from kRO's own tables).
 - 🎁 iRO Quests blocks: 249 places named an item where the server needs its number, so they gave, took or checked "item 0" instead. Rewards, deliveries and turn-ins in City Investment (Union deliveries and tokens), the street stall staffers, the 2021 town quests, Eye of the Beholder, the Overlook Water Dungeon, Criminal Activities and Gramps now use the real items.
