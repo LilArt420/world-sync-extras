@@ -2,7 +2,8 @@
 // (npc/re/merchants/ticket_refiner.txt) with the [ROS] tickets for level 5 weapons
 // and level 2 armor and the +10 certificates. The server ships that NPC switched
 // off, so refine tickets do nothing without this copy. It has its own unique name;
-// drop it once the server's own Refine Master is on.
+// drop it once the server's own Refine Master is on. It stands at 186,178, not
+// rAthena's 184,177: the iro_systems block's Refining Researcher has that cell.
 
 //===== rAthena Script ======================================= 
 //= Ticket Refiner
@@ -27,7 +28,7 @@
 
 // Main NPC :: safety_Ref_NPC
 //============================================================
-prontera,184,177,6	script	Refine Master::wse_ticket_refiner	851,{
+prontera,186,178,4	script	Refine Master::wse_ticket_refiner	851,{
 	disable_items;
 	setarray .@cert_weapon[0],
 		6864,	// Guarantee_Weapon_19Up

@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.1.0
+Needs Ragnarok Offline 1.6.9 or later.
+
+### 🏷️ New: Regional items (always on)
+The Regional Items mod is now part of World Sync Extras. The server knows about 3,800 items your client has no name for; they showed as "Unknown Item".
+- 3,582 items get names and descriptions: about 1,700 with official text (translated from Korean or Japanese where needed), 1,380 with their own icons, the rest described from the server's data.
+- The 237 kRO-only items, all translated into English, and iRO's text for the 8 items with iRO's own abilities.
+If you had Regional Items installed on its own, remove it.
+
+### 🔨 New: Refine Master (setting `refine_master`, on)
+rAthena ships its Refine Master switched off, so refine certificates and tickets did nothing. This block's Refine Master in Prontera (186, 178) refines equipped gear with the +5 to +19 certificates and the [ROS] tickets (+13 to +15) for level 5 weapons and level 2 armor, with no chance of failure. It stands one step from rAthena's spot, which the iRO services block's Refining Researcher uses.
+
 ## 2.0.3
 Needs Ragnarok Offline 1.6.9 or later.
 - 🧹 The World Sync monster fixes this mod carried until the app had them (estimated stats, drop chances, and drops for the 124 monsters that had none) are in Ragnarok Offline 1.6.9 itself, so the mod's copy (db/mob_db.yml) is gone. Checked: all 303 of its entries match 1.6.9's own table.
