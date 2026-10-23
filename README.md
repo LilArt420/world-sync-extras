@@ -15,7 +15,6 @@ default except `skip_ep19` and `entrances`.
 | 🌳 | Varmundt & the World Tree | `varmundt` | Chapters 1 and 2, Varmundt, Amatsu, the Juno Library |
 | ⭐ | Star Forest & Herosria | `star_forest` | Star Emperor job change, Sanctuary Herosria and its siege, Ash Village |
 | 🛎️ | iRO services | `iro_systems` | Devil in the Box, catalogs, Dungeon Teleporter, town helpers, Acolyte training |
-| 🔨 | Refine Master | `refine_master` | Refine certificates and [ROS] tickets that actually work |
 | 🎯 | iRO Quests | seven settings | Bounty Boards, City Investment, Gramps, the 2021 town quests and more |
 | 🏷️ | Regional items | always on | Names, descriptions and icons for 3,800 items |
 | 🧍 | Official NPCs | `placeholders` | 73 official NPCs where the clients put them, 44 already working |
@@ -81,20 +80,11 @@ iRO's permanent services that World Sync placed as greeting-only NPCs, now worki
 - 🔎 **Catalog Dispensers** search the Prontera and Payon markets' stalls; the **Catalogue Magician**
   in Prontera sells the Window Shopper Catalogue.
 - 🌀 The Eden Group's **Dungeon Teleporter** books a dungeon for your party (25,000 z).
-- iRO's own NPCs that rAthena ships switched off: Keiki and Aperture's warps, the Refining
-  Researcher, Phelix and Izaac, Dark Luhir. Plus the Shadow Blacksmith, Madogear rental (Eclage,
+- iRO's own NPCs that rAthena ships switched off: Keiki and Aperture's warps, Phelix and Izaac,
+  Dark Luhir. Plus the Shadow Blacksmith, Madogear rental (Eclage,
   Mora) and Izlude's Increase AGI acolytes.
 - ⛪ **Acolyte training** in the Izlude Sunken Ship: Acolyte Leader Alice in the Prontera Cathedral
   gives three hunts (base 13, 18 and 23) and sends you to the wreck; Laforet brings you back.
-
-## 🔨 Refine Master (`refine_master`)
-
-A **Refine Master** in Prontera (186, 178) uses the refine certificates and tickets, which do
-nothing on a stock server because rAthena ships its Refine Master switched off.
-
-- The **+5 to +19 refine certificates** for weapons and armor.
-- The **[ROS] tickets** (+13 to +15) for level 5 weapons and level 2 armor.
-- No chance of failure; it never refines past the ticket's level, and keeps cards.
 
 ## 🎯 iRO Quests (seven settings)
 
@@ -131,6 +121,9 @@ icon. This block gives them:
   server's own data.
 - **237 kRO-only items**, all translated into English.
 - iRO's text for the 8 items with iRO's own abilities.
+
+Refine certificates and [ROS] tickets are used at standart-npc's **Grade Refiner** ("Refine with a
+ticket"), which comes with standart-npc's next release.
 
 ## 🧍 Official NPCs (`placeholders`)
 

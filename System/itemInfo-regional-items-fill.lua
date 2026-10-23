@@ -2621,7 +2621,7 @@ tbl = {
 		identifiedDisplayName = "Blue X Card",
 		identifiedResourceName = "금전주머니",
 		identifiedDescriptionName = {
-			"The letter ^000088X^000000 card which could be good for learning letters for the first time. It's frequently used for event.",
+			"The letter ^000088X^000000 card which could be good for learning letters for the first time. It's frequently used for event.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -2704,8 +2704,8 @@ tbl = {
 		identifiedDisplayName = "Black Devil Auger",
 		identifiedResourceName = "송곳",
 		identifiedDescriptionName = {
-			"This item can make Black devil mask with 1 slot , it only can use in 1 time",
-			"^ff0000For limited time only^000000",
+			"This item can make Black devil mask with 1 slot , it only can use in 1 time",
+			"^ff0000For limited time only^000000",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -2992,10 +2992,10 @@ tbl = {
 		identifiedDisplayName = "[Egg] LV5 Adrenaline Scroll",
 		identifiedResourceName = "불의주문서",
 		identifiedDescriptionName = {
-			"A scroll in which a single use of Level 5 Adrenaline Rush has been recorded.",
-			"Caution! - This item won't work while your character is casting a spell or skill.",
-			"Caution! - If the character is not equipped with an Axe or Mace, the scroll will be consumed with no effect.",
-			"^ffffff_^000000",
+			"A scroll in which a single use of Level 5 Adrenaline Rush has been recorded.",
+			"Caution! - This item won't work while your character is casting a spell or skill.",
+			"Caution! - If the character is not equipped with an Axe or Mace, the scroll will be consumed with no effect.",
+			"^ffffff_^000000",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -3008,10 +3008,10 @@ tbl = {
 		identifiedDisplayName = "[Egg] Abrasive",
 		identifiedResourceName = "그린에일",
 		identifiedDescriptionName = {
-			"An abrasive that sharpens the blade of a weapon.",
-			"Increases CRIT Rate by 30.",
-			"When the character becomes incapacitated, the item effect will also disappear.",
-			"^ffffff_^000000",
+			"An abrasive that sharpens the blade of a weapon.",
+			"Increases CRIT Rate by 30.",
+			"When the character becomes incapacitated, the item effect will also disappear.",
+			"^ffffff_^000000",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -3815,8 +3815,8 @@ tbl = {
 		identifiedDisplayName = "Maamoul",
 		identifiedResourceName = "마아모울",
 		identifiedDescriptionName = {
-			"Small shortbread  pastries filled with dates, pistachios or walnuts (or occasionally almonds, figs, or other fillings). They are popular in Lebanon, Syria and other Levantine  countries. They may be in the shape of balls or of domed or flattened cookies.",
-			"Recover HP 120, SP 60.",
+			"Small shortbread  pastries filled with dates, pistachios or walnuts (or occasionally almonds, figs, or other fillings). They are popular in Lebanon, Syria and other Levantine  countries. They may be in the shape of balls or of domed or flattened cookies.",
+			"Recover HP 120, SP 60.",
 			"Weight: ^77777710^000000",
 		},
 		slotCount = 0,
@@ -3829,8 +3829,8 @@ tbl = {
 		identifiedDisplayName = "Dates",
 		identifiedResourceName = "대추",
 		identifiedDescriptionName = {
-			"A sweet fruit that grows in Palm trees in Desert Oasis.",
-			"Recover HP 30",
+			"A sweet fruit that grows in Palm trees in Desert Oasis.",
+			"Recover HP 30",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -3843,8 +3843,8 @@ tbl = {
 		identifiedDisplayName = "Coffee",
 		identifiedResourceName = "커피",
 		identifiedDescriptionName = {
-			"A brewed drink prepared from roasted seeds, commonly called coffee beans, of the coffee plant.",
-			"Recover SP 10",
+			"A brewed drink prepared from roasted seeds, commonly called coffee beans, of the coffee plant.",
+			"Recover SP 10",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -4158,17 +4158,17 @@ tbl = {
 		identifiedDisplayName = "Convex Mirror",
 		identifiedResourceName = "볼록거울",
 		identifiedDescriptionName = {
-			"A well-polished, shiny, convex mirror that allow you to know when boss monsters appear on a map.",
-			"",
-			"If the boss monster exists, it will navigates the location of the boss monster.",
-			"",
-			"The item effect will last for 10 mins but the effect will be removed if the character moves to different map or disconnect from the server.",
-			"",
-			"Lord of the Dead, and Boss Monsters in the Bio Lab, Ktullanux, Memory of Thanatos, and",
-			"some other event MVP monsters cannot be detected by using this item.",
-			"",
-			"^ff0000If the character becomes incapacitated the item effect will also disappear.^000000",
-			"",
+			"A well-polished, shiny, convex mirror that allow you to know when boss monsters appear on a map.",
+			"",
+			"If the boss monster exists, it will navigates the location of the boss monster.",
+			"",
+			"The item effect will last for 10 mins but the effect will be removed if the character moves to different map or disconnect from the server.",
+			"",
+			"Lord of the Dead, and Boss Monsters in the Bio Lab, Ktullanux, Memory of Thanatos, and",
+			"some other event MVP monsters cannot be detected by using this item.",
+			"",
+			"^ff0000If the character becomes incapacitated the item effect will also disappear.^000000",
+			"",
 			"Weight:  ^7777771^000000",
 		},
 		slotCount = 0,
@@ -4479,7 +4479,7 @@ tbl = {
 		identifiedDisplayName = "Traditional Firecracker",
 		identifiedResourceName = "오래된파란상자",
 		identifiedDescriptionName = {
-			"New year item",
+			"New year item",
 			"Weight: ^7777770^000000",
 		},
 		slotCount = 0,
@@ -4492,7 +4492,7 @@ tbl = {
 		identifiedDisplayName = "New Year Gift Envelope",
 		identifiedResourceName = "신년선물봉투",
 		identifiedDescriptionName = {
-			"New year item",
+			"New year item",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -5314,11 +5314,11 @@ tbl = {
 		identifiedDisplayName = "[Egg] Songpyun",
 		identifiedResourceName = "송편",
 		identifiedDescriptionName = {
-			"Mass created with rice flour, milled in the right size to cover the entire sheet and form a delicious rice cake.",
-			"One of traditional holiday food in South Korea.",
-			"",
-			"Restores 10% of Max HP",
-			"",
+			"Mass created with rice flour, milled in the right size to cover the entire sheet and form a delicious rice cake.",
+			"One of traditional holiday food in South Korea.",
+			"",
+			"Restores 10% of Max HP",
+			"",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -5331,9 +5331,9 @@ tbl = {
 		identifiedDisplayName = "[Egg] Life Insurance",
 		identifiedResourceName = "생명보험증서",
 		identifiedDescriptionName = {
-			"Life insurance certificate issued by Kafra Headquarters.",
-			"This item loses its effect once the player receives its benefit. If the character dies within 30 minutes of using this item, there will be no EXP loss penalty.",
-			"",
+			"Life insurance certificate issued by Kafra Headquarters.",
+			"This item loses its effect once the player receives its benefit. If the character dies within 30 minutes of using this item, there will be no EXP loss penalty.",
+			"",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -5346,8 +5346,8 @@ tbl = {
 		identifiedDisplayName = "[Egg] Kafra Card",
 		identifiedResourceName = "카프라명함",
 		identifiedDescriptionName = {
-			"Kafra card issued by Kafra headquarters. The name Kafra is obliged to answer the call of the customer at any time.",
-			"When used, you can use the Kafra Warehouse Service once.",
+			"Kafra card issued by Kafra headquarters. The name Kafra is obliged to answer the call of the customer at any time.",
+			"When used, you can use the Kafra Warehouse Service once.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -5407,10 +5407,10 @@ tbl = {
 		identifiedDisplayName = "[Egg] Small Life Potion",
 		identifiedResourceName = "굴라만",
 		identifiedDescriptionName = {
-			"A small bottle of Yggdrasil Tree Sap that is effective in healing wounds.",
-			"Restores 5% of Max HP every 5 seconds for 10 minutes.",
-			"The effect is not active at the state of berserk.",
-			"When a character is incapable of combat, the effect of item disappears.",
+			"A small bottle of Yggdrasil Tree Sap that is effective in healing wounds.",
+			"Restores 5% of Max HP every 5 seconds for 10 minutes.",
+			"The effect is not active at the state of berserk.",
+			"When a character is incapable of combat, the effect of item disappears.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -5423,9 +5423,9 @@ tbl = {
 		identifiedDisplayName = "[Egg] Stew Of Immortality",
 		identifiedResourceName = "바탈요리10",
 		identifiedDescriptionName = {
-			"A funky smell, suspicious look stew that does make you feel like an immortal when you eat it.",
-			"VIT +10 for 30 minutes.",
-			"",
+			"A funky smell, suspicious look stew that does make you feel like an immortal when you eat it.",
+			"VIT +10 for 30 minutes.",
+			"",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -5438,8 +5438,8 @@ tbl = {
 		identifiedDisplayName = "[Egg] Cooked Nine Tail's Tails",
 		identifiedResourceName = "럭요리10",
 		identifiedDescriptionName = {
-			"Payon dish that bestows luck to those fortunate.",
-			"LUK +10 for 30 minutes.",
+			"Payon dish that bestows luck to those fortunate.",
+			"LUK +10 for 30 minutes.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -5452,9 +5452,9 @@ tbl = {
 		identifiedDisplayName = "[Egg] Hwergelmir's Tonic",
 		identifiedResourceName = "덱요리10",
 		identifiedDescriptionName = {
-			"This beverage is named after the legendary spring that is believed to be the source of the world's rivers, and is famous for its pure, amazing taste.",
-			"DEX + 10 for 30 minutes.",
-			"",
+			"This beverage is named after the legendary spring that is believed to be the source of the world's rivers, and is famous for its pure, amazing taste.",
+			"DEX + 10 for 30 minutes.",
+			"",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -5467,9 +5467,9 @@ tbl = {
 		identifiedDisplayName = "[Egg] Breath of Dragon Cocktail",
 		identifiedResourceName = "인트요리10",
 		identifiedDescriptionName = {
-			"A cocktail with an unforgettable flavor as impressive as a dragon's breath.",
-			"INT + 10 for 30 minutes.",
-			"",
+			"A cocktail with an unforgettable flavor as impressive as a dragon's breath.",
+			"INT + 10 for 30 minutes.",
+			"",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -5482,8 +5482,8 @@ tbl = {
 		identifiedDisplayName = "[Egg] Steamed Desert Scorpions",
 		identifiedResourceName = "어질요리10",
 		identifiedDescriptionName = {
-			"This scorpion dish is cooked with the heat of the desert sand, and is one of the four best dishes in Sograt Desert cuisine.",
-			"AGI + 10 for 30 minutes.",
+			"This scorpion dish is cooked with the heat of the desert sand, and is one of the four best dishes in Sograt Desert cuisine.",
+			"AGI + 10 for 30 minutes.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -5496,8 +5496,8 @@ tbl = {
 		identifiedDisplayName = "[Egg] Steamed Tongue",
 		identifiedResourceName = "힘요리10",
 		identifiedDescriptionName = {
-			"The epitome of Luoyang cuisine. Its ingredients may be hard to find, but culinarily speaking, it's a masterpiece.",
-			"STR + 10 for 30 minutes",
+			"The epitome of Luoyang cuisine. Its ingredients may be hard to find, but culinarily speaking, it's a masterpiece.",
+			"STR + 10 for 30 minutes",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -7027,111 +7027,111 @@ tbl = {
 		identifiedDisplayName = "Meta Angel Figure (OSM)",
 		identifiedResourceName = "황금천사조각상",
 		identifiedDescriptionName = {
-			"A statue made by a legendary blacksmith.",
-			"^FFFFFF_^000000",
-			"HP +300, SP +100",
-			"For every refinement level,",
-			"Increases ATK +1, MATK +1",
-			"^FFFFFF_^000000",
-			"^FF0000Knight^000000",
-			"Enables use of",
-			"^0000FFSpear Quicken^000000 Lvl.5",
-			"If player has learnt",
-			"^0000FFSpear Mastery^000000 Lvl.10",
-			"^FFFFFF_^000000",
-			"^FF0000Crusader^000000",
-			"Has a 12% chance to cast",
-			"^0000FFSpear Boomerang^000000 Lvl. 3",
-			"when physically attacking.",
-			"If player has learnt",
-			"^0000FFSpear Quicken^000000 Lvl.10",
-			"^FFFFFF_^000000",
-			"^FF0000Assassin^000000",
-			"Increases damage of^0000FFGrimtooth by 35%^000000",
-			"If player has learnt",
-			"^0000FFKatar Mastery^000000 Lvl. 10",
-			"^FFFFFF_^000000",
-			"^FF0000Rogue^000000",
-			"Enables use of",
-			"^0000FFTriple Attack^000000 Lvl.5",
-			"If player has learnt",
-			"^0000FFPlagiarism^000000 Lvl.10.",
-			"^FFFFFF_^000000",
-			"^FF0000Hunter^000000",
-			"Has a 7% chance to cast",
-			"^0000FFAdrenaline Rush^000000 Lvl. 1 when physically attacking.",
-			"If player has learnt",
-			"^0000FFBeast Bane^000000 Lvl.10",
-			"^FFFFFF_^000000",
-			"^FF0000Bard, Dancer^000000",
-			"When player equips",
-			"an Instrument or Whip weapon:",
-			"Has a 12% chance to cast",
-			"^0000FFArrow Vulcan^000000 Lvl. 5",
-			"If player has learnt",
-			"^0000FFDancer Lesson ^000000",
-			"or ^0000FFMusic Lesson ^000000 Lvl.10",
-			"^FFFFFF_^000000",
-			"^FF0000Priest^000000",
-			"Has a 12% chance to cast",
-			"^0000FFHoly Cross^000000 Lvl. 5",
-			"when physically attacking.",
-			"If player has learnt",
-			"^0000FFAspersio^000000 Lvl.5",
-			"^FFFFFF_^000000",
-			"^FF0000Monk^000000",
-			"Increases damage of",
-			"^0000FFTriple Attack ^000000by 35%",
-			"If player has learnt",
-			"^0000FFIron Fist^000000 Lvl.10",
-			"^FFFFFF_^000000",
-			"^FF0000Wizard^000000",
-			"Enables use of",
-			"^0000FFWater Evasion^000000 Lvl. 7",
-			"If player has learnt",
-			"^0000FFWater Ball^000000 Lv.5",
-			"^FFFFFF_^000000",
-			"^FF0000Sage^000000",
-			"Has a 7% chance to cast",
-			"^0000FFFlaming Petals^000000 Lvl.5",
-			"when physically attacking.",
-			"If player has learnt",
-			"^0000FFEndow Blaze^000000 Lvl.5",
-			"--------------------",
-			"Has a 7% chance to cast",
-			"^0000FFFreezing Spear^000000 Lvl.5",
-			"when physically attacking.",
-			"If player has learnt",
-			"^0000FFEndow Tsunami^000000 Lvl.5",
-			"--------------------",
-			"Has a 7% chance to cast",
-			"^0000FFWind Blade^000000 Lvl.5",
-			"when physically attacking.",
-			"If player has learnt",
-			"^0000FFEndow Tornado^000000 Lvl.5",
-			"^FFFFFF_^000000",
-			"^FF0000Blacksmith^000000",
-			"Has a 12% chance to cast",
-			"^0000FFTomahawk Throwing^000000",
-			"when physically attacking.",
-			"If player has learnt",
-			"^0000FFWeapon Research^000000 Lvl.10",
-			"^FFFFFF_^000000",
-			"^FF0000Alchemist^000000",
-			"Increases damage of",
-			"^0000FFCart Revolution ^000000by 50%",
-			"If player has learnt",
-			"^0000FFAxe Mastery^000000 Lvl. 10",
-			"^FFFFFF_^000000",
-			"When refined to +5 or higher,",
-			"All Stats +1,",
-			"Increase EXP +10% when killing monsters.",
-			"^FFFFFF_^000000",
-			"Equipment Type: ^777777Headgear^000000",
-			"Equip Slot: ^777777Upper^000000",
-			"Defense: ^77777715^000000",
-			"Weight: ^77777720^000000",
-			"Required Level: ^7777771^000000",
+			"A statue made by a legendary blacksmith.",
+			"^FFFFFF_^000000",
+			"HP +300, SP +100",
+			"For every refinement level,",
+			"Increases ATK +1, MATK +1",
+			"^FFFFFF_^000000",
+			"^FF0000Knight^000000",
+			"Enables use of",
+			"^0000FFSpear Quicken^000000 Lvl.5",
+			"If player has learnt",
+			"^0000FFSpear Mastery^000000 Lvl.10",
+			"^FFFFFF_^000000",
+			"^FF0000Crusader^000000",
+			"Has a 12% chance to cast",
+			"^0000FFSpear Boomerang^000000 Lvl. 3",
+			"when physically attacking.",
+			"If player has learnt",
+			"^0000FFSpear Quicken^000000 Lvl.10",
+			"^FFFFFF_^000000",
+			"^FF0000Assassin^000000",
+			"Increases damage of^0000FFGrimtooth by 35%^000000",
+			"If player has learnt",
+			"^0000FFKatar Mastery^000000 Lvl. 10",
+			"^FFFFFF_^000000",
+			"^FF0000Rogue^000000",
+			"Enables use of",
+			"^0000FFTriple Attack^000000 Lvl.5",
+			"If player has learnt",
+			"^0000FFPlagiarism^000000 Lvl.10.",
+			"^FFFFFF_^000000",
+			"^FF0000Hunter^000000",
+			"Has a 7% chance to cast",
+			"^0000FFAdrenaline Rush^000000 Lvl. 1 when physically attacking.",
+			"If player has learnt",
+			"^0000FFBeast Bane^000000 Lvl.10",
+			"^FFFFFF_^000000",
+			"^FF0000Bard, Dancer^000000",
+			"When player equips",
+			"an Instrument or Whip weapon:",
+			"Has a 12% chance to cast",
+			"^0000FFArrow Vulcan^000000 Lvl. 5",
+			"If player has learnt",
+			"^0000FFDancer Lesson ^000000",
+			"or ^0000FFMusic Lesson ^000000 Lvl.10",
+			"^FFFFFF_^000000",
+			"^FF0000Priest^000000",
+			"Has a 12% chance to cast",
+			"^0000FFHoly Cross^000000 Lvl. 5",
+			"when physically attacking.",
+			"If player has learnt",
+			"^0000FFAspersio^000000 Lvl.5",
+			"^FFFFFF_^000000",
+			"^FF0000Monk^000000",
+			"Increases damage of",
+			"^0000FFTriple Attack ^000000by 35%",
+			"If player has learnt",
+			"^0000FFIron Fist^000000 Lvl.10",
+			"^FFFFFF_^000000",
+			"^FF0000Wizard^000000",
+			"Enables use of",
+			"^0000FFWater Evasion^000000 Lvl. 7",
+			"If player has learnt",
+			"^0000FFWater Ball^000000 Lv.5",
+			"^FFFFFF_^000000",
+			"^FF0000Sage^000000",
+			"Has a 7% chance to cast",
+			"^0000FFFlaming Petals^000000 Lvl.5",
+			"when physically attacking.",
+			"If player has learnt",
+			"^0000FFEndow Blaze^000000 Lvl.5",
+			"--------------------",
+			"Has a 7% chance to cast",
+			"^0000FFFreezing Spear^000000 Lvl.5",
+			"when physically attacking.",
+			"If player has learnt",
+			"^0000FFEndow Tsunami^000000 Lvl.5",
+			"--------------------",
+			"Has a 7% chance to cast",
+			"^0000FFWind Blade^000000 Lvl.5",
+			"when physically attacking.",
+			"If player has learnt",
+			"^0000FFEndow Tornado^000000 Lvl.5",
+			"^FFFFFF_^000000",
+			"^FF0000Blacksmith^000000",
+			"Has a 12% chance to cast",
+			"^0000FFTomahawk Throwing^000000",
+			"when physically attacking.",
+			"If player has learnt",
+			"^0000FFWeapon Research^000000 Lvl.10",
+			"^FFFFFF_^000000",
+			"^FF0000Alchemist^000000",
+			"Increases damage of",
+			"^0000FFCart Revolution ^000000by 50%",
+			"If player has learnt",
+			"^0000FFAxe Mastery^000000 Lvl. 10",
+			"^FFFFFF_^000000",
+			"When refined to +5 or higher,",
+			"All Stats +1,",
+			"Increase EXP +10% when killing monsters.",
+			"^FFFFFF_^000000",
+			"Equipment Type: ^777777Headgear^000000",
+			"Equip Slot: ^777777Upper^000000",
+			"Defense: ^77777715^000000",
+			"Weight: ^77777720^000000",
+			"Required Level: ^7777771^000000",
 			"Usable By: ^777777All Character Types^000000",
 		},
 		slotCount = 1,
@@ -7144,76 +7144,76 @@ tbl = {
 		identifiedDisplayName = "Fierce Physique Armor",
 		identifiedResourceName = "Noblesse_Picky_Robe",
 		identifiedDescriptionName = {
-			"^777777 The coat sewed from white gold silk and decorated with Brasilis's jewelry ^000000",
-			"^FFFFFF_^000000",
-			"^FF0000 [Character Bound] ^000000",
-			"^FFFFFF_^000000",
-			"^FF6633 [Effect of Item] ^000000",
-			"Atk + 5, Str + 3, Dex + 3",
-			"----------",
-			"If refine to +5",
-			"Flee + 5",
-			"Def + 5",
-			"----------",
-			"If refine to +7",
-			"Additional Def + 10",
-			"Additional Mdef + 2",
-			"----------",
-			"If refine to +9",
-			"Additional Def + 15",
-			"Additional Mdef + 3",
-			"----------",
-			"If refine to +10",
-			"Additional Atk + 10",
-			"Additional Mdef + 5",
-			"Reduce damage from",
-			"^996633[Earth]^000000 property 2 %",
-			"Reduce damage from",
-			"^66CCFF[Water]^000000 property 2 %",
-			"Reduce damage from",
-			"^00CC33[Wind]^000000 property 2 %",
-			"Reduce damage from",
-			"^FF6633[Fire]^000000 property 2 %",
-			"Reduce damage from",
-			"^0000FF [Demi-Human, Player] race 1 % ^000000",
-			"----------",
-			"When equip by",
-			"^777777 [Swordman Classes] ^000000",
-			"^777777 [Merchant Classes] ^000000",
-			"If refine to +10",
-			"Max HP + 600",
-			"----------",
-			"When equip by",
-			"^777777 [Archer Classes] ^000000",
-			"^777777 [Thief Classes] ^000000",
-			"^777777 [Taekwondo-Kid] ^000000",
-			"^777777 [Star Gladiator] ^000000",
-			"^777777 [Gunslinger] ^000000",
-			"If refine to +10",
-			"Max HP + 800",
-			"----------",
-			"When equip by",
-			"^777777 [Novice Classes] ^000000",
-			"^777777 [Mage Classes] ^000000",
-			"^777777 [Acolyte Classes] ^000000",
-			"^777777 [Ninja Classes] ^000000",
-			"^777777 [Soul Linker] ^000000",
-			"If refine to +10",
-			"Max HP + 1000",
-			"----------",
-			"^800080 [Set Bonus] ^000000",
-			"^008080 Fierce Physique Armor ^000000",
-			"^008080 Fierce Physique Manteau ^000000",
-			"^008080 Fierce Physique Boots ^000000",
-			"All Status + 1",
-			"Max HP + 2 %",
-			"Max SP + 2 %",
-			"Reduce damage from",
-			"^008080 [Demi-Human, Player]^000000 race 1 %",
-			"^FFFFFF_^000000",
-			"Class: ^777777Armor^000000 Defense: ^77777750^000000",
-			"Weight: ^7777770^000000",
-			"Required Level: ^77777770^000000",
+			"^777777 The coat sewed from white gold silk and decorated with Brasilis's jewelry ^000000",
+			"^FFFFFF_^000000",
+			"^FF0000 [Character Bound] ^000000",
+			"^FFFFFF_^000000",
+			"^FF6633 [Effect of Item] ^000000",
+			"Atk + 5, Str + 3, Dex + 3",
+			"----------",
+			"If refine to +5",
+			"Flee + 5",
+			"Def + 5",
+			"----------",
+			"If refine to +7",
+			"Additional Def + 10",
+			"Additional Mdef + 2",
+			"----------",
+			"If refine to +9",
+			"Additional Def + 15",
+			"Additional Mdef + 3",
+			"----------",
+			"If refine to +10",
+			"Additional Atk + 10",
+			"Additional Mdef + 5",
+			"Reduce damage from",
+			"^996633[Earth]^000000 property 2 %",
+			"Reduce damage from",
+			"^66CCFF[Water]^000000 property 2 %",
+			"Reduce damage from",
+			"^00CC33[Wind]^000000 property 2 %",
+			"Reduce damage from",
+			"^FF6633[Fire]^000000 property 2 %",
+			"Reduce damage from",
+			"^0000FF [Demi-Human, Player] race 1 % ^000000",
+			"----------",
+			"When equip by",
+			"^777777 [Swordman Classes] ^000000",
+			"^777777 [Merchant Classes] ^000000",
+			"If refine to +10",
+			"Max HP + 600",
+			"----------",
+			"When equip by",
+			"^777777 [Archer Classes] ^000000",
+			"^777777 [Thief Classes] ^000000",
+			"^777777 [Taekwondo-Kid] ^000000",
+			"^777777 [Star Gladiator] ^000000",
+			"^777777 [Gunslinger] ^000000",
+			"If refine to +10",
+			"Max HP + 800",
+			"----------",
+			"When equip by",
+			"^777777 [Novice Classes] ^000000",
+			"^777777 [Mage Classes] ^000000",
+			"^777777 [Acolyte Classes] ^000000",
+			"^777777 [Ninja Classes] ^000000",
+			"^777777 [Soul Linker] ^000000",
+			"If refine to +10",
+			"Max HP + 1000",
+			"----------",
+			"^800080 [Set Bonus] ^000000",
+			"^008080 Fierce Physique Armor ^000000",
+			"^008080 Fierce Physique Manteau ^000000",
+			"^008080 Fierce Physique Boots ^000000",
+			"All Status + 1",
+			"Max HP + 2 %",
+			"Max SP + 2 %",
+			"Reduce damage from",
+			"^008080 [Demi-Human, Player]^000000 race 1 %",
+			"^FFFFFF_^000000",
+			"Class: ^777777Armor^000000 Defense: ^77777750^000000",
+			"Weight: ^7777770^000000",
+			"Required Level: ^77777770^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -10220,22 +10220,22 @@ tbl = {
 		identifiedDisplayName = "Charm Of Mistic Frozen",
 		identifiedResourceName = "챰오브미스틱프로즌",
 		identifiedDescriptionName = {
-			"Able to cast Lv 1 Endow Tsunami.",
-			"For every 15 pure AGI + VIT, increase healing rate by 1%.",
-			"",
-			"Equip with Manteau Of Mistic Froz,",
-			"Upon casting heal skill, has 100% chance to cast Auto Spell: Lv 1 Increase Agility (If the learned level is higher than Lv 1, higher skill will be casted)",
-			"",
-			"Upon casting Increase Agility, has 100% chance to cast Auto Spell: Lv 1 Blessing (If the learned level is higher than Lv 1, higher skill will be casted)",
-			"",
-			"Upon casting Cantocandidus, has 100% chance to cast Auto Spell: Lv 1 Clementia (If the learned level is higher than Lv 1, higher skill will be casted)",
-			"",
-			"If refine level of Manteau Of Mistic Froz is +10,",
-			"decrease skill cooldown of Coluseo Heal by 2 seconds.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
-			"Location: ^777777Lower^000000 Weight: ^77777720^000000",
-			"Required Level: ^7777771^000000",
+			"Able to cast Lv 1 Endow Tsunami.",
+			"For every 15 pure AGI + VIT, increase healing rate by 1%.",
+			"",
+			"Equip with Manteau Of Mistic Froz,",
+			"Upon casting heal skill, has 100% chance to cast Auto Spell: Lv 1 Increase Agility (If the learned level is higher than Lv 1, higher skill will be casted)",
+			"",
+			"Upon casting Increase Agility, has 100% chance to cast Auto Spell: Lv 1 Blessing (If the learned level is higher than Lv 1, higher skill will be casted)",
+			"",
+			"Upon casting Cantocandidus, has 100% chance to cast Auto Spell: Lv 1 Clementia (If the learned level is higher than Lv 1, higher skill will be casted)",
+			"",
+			"If refine level of Manteau Of Mistic Froz is +10,",
+			"decrease skill cooldown of Coluseo Heal by 2 seconds.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
+			"Location: ^777777Lower^000000 Weight: ^77777720^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -10248,18 +10248,18 @@ tbl = {
 		identifiedDisplayName = "Charm Of Leafwind",
 		identifiedResourceName = "챰오브미스틱프로즌",
 		identifiedDescriptionName = {
-			"Able to cast Lv1 [Endow Tornado].",
-			"For every 15 pure AGI + LUK, FLEE +2.",
-			"",
-			"Equip with ^008080Manteau Of Leafwind^000000,",
-			"decrease damage taken from [Spread Shot], [Soul destroyer] and [Blitz Beat] by 40%.",
-			"",
-			"For every refine level of ^008080Manteau Of Leafwind^000000,",
-			"Increase resistance against all properties attack by 1%.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
-			"Location: ^777777Lower^000000 Weight: ^77777720^000000",
-			"Required Level: ^7777771^000000",
+			"Able to cast Lv1 [Endow Tornado].",
+			"For every 15 pure AGI + LUK, FLEE +2.",
+			"",
+			"Equip with ^008080Manteau Of Leafwind^000000,",
+			"decrease damage taken from [Spread Shot], [Soul destroyer] and [Blitz Beat] by 40%.",
+			"",
+			"For every refine level of ^008080Manteau Of Leafwind^000000,",
+			"Increase resistance against all properties attack by 1%.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
+			"Location: ^777777Lower^000000 Weight: ^77777720^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -10304,15 +10304,15 @@ tbl = {
 		identifiedDisplayName = "Happy Turtle Hat",
 		identifiedResourceName = "꼬북이모자",
 		identifiedDescriptionName = {
-			"Indestructible,",
-			"ATK, MATK +30.",
-			"Physical and magical damage on Illusion of Abyss monsters +50%.",
-			"",
-			"Physical and magical damage taken from Illusion of Abyss monsters -50%.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^77777715^000000",
-			"Location: ^777777Upper^000000 Weight: ^7777770^000000",
-			"Required Level: ^77777790^000000",
+			"Indestructible,",
+			"ATK, MATK +30.",
+			"Physical and magical damage on Illusion of Abyss monsters +50%.",
+			"",
+			"Physical and magical damage taken from Illusion of Abyss monsters -50%.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^77777715^000000",
+			"Location: ^777777Upper^000000 Weight: ^7777770^000000",
+			"Required Level: ^77777790^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -10361,24 +10361,24 @@ tbl = {
 		identifiedDisplayName = "Metal Riff Ring",
 		identifiedResourceName = "Skull_Ring",
 		identifiedDescriptionName = {
-			"When you wear this ring, you can feel the rhythm of a well-composed metal song.",
-			"It is said that once heard, the great riffs are not easily forgotten.",
-			"",
-			"MATK +50, variable cast time -10%.",
-			"For every 12 Base Level, Neutral property magic damage +1%.",
-			"",
-			"For every Lv of ^008080[Song Of Mana], [Dances with Wargs] and [Lerad's Dew]^000000,",
-			"[Metallic Sound] damage +7%.",
-			"",
-			"If ^008080Lv5 [Severe Rainstorm]^000000 is learned,",
-			"[Metallic Sound] cooldown -1 second.",
-			"",
-			"Equip by ^008080Archer Classes,^000000",
-			"variable cast time -30%.",
-			"",
-			"Class: ^777777Accessory^000000 Defense: ^7777770^000000",
-			"Weight: ^77777710^000000",
-			"Required Level: ^777777100^000000",
+			"When you wear this ring, you can feel the rhythm of a well-composed metal song.",
+			"It is said that once heard, the great riffs are not easily forgotten.",
+			"",
+			"MATK +50, variable cast time -10%.",
+			"For every 12 Base Level, Neutral property magic damage +1%.",
+			"",
+			"For every Lv of ^008080[Song Of Mana], [Dances with Wargs] and [Lerad's Dew]^000000,",
+			"[Metallic Sound] damage +7%.",
+			"",
+			"If ^008080Lv5 [Severe Rainstorm]^000000 is learned,",
+			"[Metallic Sound] cooldown -1 second.",
+			"",
+			"Equip by ^008080Archer Classes,^000000",
+			"variable cast time -30%.",
+			"",
+			"Class: ^777777Accessory^000000 Defense: ^7777770^000000",
+			"Weight: ^77777710^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -11160,7 +11160,7 @@ tbl = {
 		identifiedDisplayName = "Xmas Bless",
 		identifiedResourceName = "크리스마스알",
 		identifiedDescriptionName = {
-			"The special scroll to celebrate the Christmas Festival. Wish everyone Merry Christmas.",
+			"The special scroll to celebrate the Christmas Festival. Wish everyone Merry Christmas.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11187,8 +11187,8 @@ tbl = {
 		identifiedDisplayName = "Majestic Devil Scroll",
 		identifiedResourceName = "태양신의상징",
 		identifiedDescriptionName = {
-			"An egg shines with the essence of magic. There might comes out an item such as Majestic Devil Horn!",
-			"^ff0000Cancellation of purchase or refund for this item is not available.^000000",
+			"An egg shines with the essence of magic. There might comes out an item such as Majestic Devil Horn!",
+			"^ff0000Cancellation of purchase or refund for this item is not available.^000000",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11305,8 +11305,8 @@ tbl = {
 		identifiedDisplayName = "Field Manual Box A",
 		identifiedResourceName = "빨간상자",
 		identifiedDescriptionName = {
-			"A box has 10 field manuals. There might be also an old card album or an old blue box.",
-			"^ff0000  This  item will  be excluded in withdrawl or refund.^000000",
+			"A box has 10 field manuals. There might be also an old card album or an old blue box.",
+			"^ff0000  This  item will  be excluded in withdrawl or refund.^000000",
 			"Weight: ^7777770^000000",
 		},
 		slotCount = 0,
@@ -11367,7 +11367,7 @@ tbl = {
 		identifiedDisplayName = "RWC 2010 Travel Sack 1",
 		identifiedResourceName = "힙색",
 		identifiedDescriptionName = {
-			"A suitcase celebrating RWC2010.  when opens, It is probable that there is a nice memento.",
+			"A suitcase celebrating RWC2010.  when opens, It is probable that there is a nice memento.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11380,7 +11380,7 @@ tbl = {
 		identifiedDisplayName = "RWC 2010 Travel Sack 2",
 		identifiedResourceName = "힙색",
 		identifiedDescriptionName = {
-			"A suitcase celebrating RWC2010.  when opens, It is probable that there is a nice memento.",
+			"A suitcase celebrating RWC2010.  when opens, It is probable that there is a nice memento.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11393,8 +11393,8 @@ tbl = {
 		identifiedDisplayName = "Scorpius Scroll",
 		identifiedResourceName = "전갈자리스크롤",
 		identifiedDescriptionName = {
-			"The Zodiac Scroll for Scorpius! Limited edition!",
-			"Hurry up to get something nice from this scroll.",
+			"The Zodiac Scroll for Scorpius! Limited edition!",
+			"Hurry up to get something nice from this scroll.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11407,8 +11407,8 @@ tbl = {
 		identifiedDisplayName = "Sagittarius Scroll",
 		identifiedResourceName = "사수자리스크롤",
 		identifiedDescriptionName = {
-			"The special scroll launching during the month of Sagittarrius.",
-			"Have chance to obtain Sagittarius Crown, Crown Of Deceit, Gym Membership Card Box and other valueable item.",
+			"The special scroll launching during the month of Sagittarrius.",
+			"Have chance to obtain Sagittarius Crown, Crown Of Deceit, Gym Membership Card Box and other valueable item.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11421,7 +11421,7 @@ tbl = {
 		identifiedDisplayName = "Sagittarius Scr Box",
 		identifiedResourceName = "캐시상자_빨강",
 		identifiedDescriptionName = {
-			"A box contain 10 pieces of Sagittarius Crown Scroll",
+			"A box contain 10 pieces of Sagittarius Crown Scroll",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11434,8 +11434,8 @@ tbl = {
 		identifiedDisplayName = "Sagittar Diadem Scroll",
 		identifiedResourceName = "오래된파란상자",
 		identifiedDescriptionName = {
-			"Limited sale scroll on Sagittarius month. Item contains Sagittarius, Spiked Scarf box ,Max_Weight_Up_Box and other valuable items.",
-			"^ff0000This item is not available for refund or cancel of purchase.^000000",
+			"Limited sale scroll on Sagittarius month. Item contains Sagittarius, Spiked Scarf box ,Max_Weight_Up_Box and other valuable items.",
+			"^ff0000This item is not available for refund or cancel of purchase.^000000",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11448,8 +11448,8 @@ tbl = {
 		identifiedDisplayName = "Sagittar Scroll Box",
 		identifiedResourceName = "캐시상자_빨강",
 		identifiedDescriptionName = {
-			"A box with 10 Sagittar_Diadem_Scrolls.",
-			"^ff0000This item is not available for refund or cancel of purchase.^000000",
+			"A box with 10 Sagittar_Diadem_Scrolls.",
+			"^ff0000This item is not available for refund or cancel of purchase.^000000",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11462,7 +11462,7 @@ tbl = {
 		identifiedDisplayName = "Santa Capricom Scroll",
 		identifiedResourceName = "오래된파란상자",
 		identifiedDescriptionName = {
-			"Special Scroll which sales only X-mas. Can acquire precious items such as Capricorn crown, rainbow muffler box ,Antonio card etc.",
+			"Special Scroll which sales only X-mas. Can acquire precious items such as Capricorn crown, rainbow muffler box ,Antonio card etc.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11475,7 +11475,7 @@ tbl = {
 		identifiedDisplayName = "Santa Capricom Box",
 		identifiedResourceName = "캐시상자_빨강",
 		identifiedDescriptionName = {
-			"A box be filled with 10 pieces of capricon crown scrolls",
+			"A box be filled with 10 pieces of capricon crown scrolls",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11488,7 +11488,7 @@ tbl = {
 		identifiedDisplayName = "New YearCapricon scroll",
 		identifiedResourceName = "오래된파란상자",
 		identifiedDescriptionName = {
-			"Special Scroll , celebrating New Year, there are capriocon diadem, robo eye and pirate's pride box and other precious items in it",
+			"Special Scroll , celebrating New Year, there are capriocon diadem, robo eye and pirate's pride box and other precious items in it",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11501,7 +11501,7 @@ tbl = {
 		identifiedDisplayName = "NewYear Capricon Box",
 		identifiedResourceName = "캐시상자_빨강",
 		identifiedDescriptionName = {
-			"A box which has 10 NewYear Capricon Scroll",
+			"A box which has 10 NewYear Capricon Scroll",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11568,7 +11568,7 @@ tbl = {
 		identifiedDisplayName = "Anubis Scroll II",
 		identifiedResourceName = "화속성알",
 		identifiedDescriptionName = {
-			"The legendary scroll of Anubis.",
+			"The legendary scroll of Anubis.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11581,7 +11581,7 @@ tbl = {
 		identifiedDisplayName = "Summer Scroll3",
 		identifiedResourceName = "여름스크롤",
 		identifiedDescriptionName = {
-			"A summer package designed for vacations. Open it to get a random surprise.",
+			"A summer package designed for vacations. Open it to get a random surprise.",
 			"Weight: ^77777710^000000",
 		},
 		slotCount = 0,
@@ -11624,7 +11624,7 @@ tbl = {
 		identifiedDisplayName = "Lovely Aquarius Box",
 		identifiedResourceName = "캐시상자_빨강",
 		identifiedDescriptionName = {
-			"A box contains 10 pieces of Lovely Aquarius Scroll. Have chance to obtain Aquarius Crown, Sleeper Hat, Bradium Brooch and other valuable item",
+			"A box contains 10 pieces of Lovely Aquarius Scroll. Have chance to obtain Aquarius Crown, Sleeper Hat, Bradium Brooch and other valuable item",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11637,8 +11637,8 @@ tbl = {
 		identifiedDisplayName = "Pisces Diadem Scroll",
 		identifiedResourceName = "오래된파란상자",
 		identifiedDescriptionName = {
-			"The special scroll launching to celebrate the month of Pisces.",
-			"Have chance to obtain Pisces Diadem, Ears of Ifrit, Gryphon Hat, Bradium Earring and other valuable item.",
+			"The special scroll launching to celebrate the month of Pisces.",
+			"Have chance to obtain Pisces Diadem, Ears of Ifrit, Gryphon Hat, Bradium Earring and other valuable item.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11651,8 +11651,8 @@ tbl = {
 		identifiedDisplayName = "Pisces Diadem Box",
 		identifiedResourceName = "캐시상자_빨강",
 		identifiedDescriptionName = {
-			"A box contains 10 pieces of Pisces Diadem Scroll.",
-			"Have chance to obtain Pisces Diadem, Ears of Ifrit, Gryphon Hat, Bradium Earring and other valuable item.",
+			"A box contains 10 pieces of Pisces Diadem Scroll.",
+			"Have chance to obtain Pisces Diadem, Ears of Ifrit, Gryphon Hat, Bradium Earring and other valuable item.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11665,8 +11665,8 @@ tbl = {
 		identifiedDisplayName = "Aries Scroll",
 		identifiedResourceName = "오래된파란상자",
 		identifiedDescriptionName = {
-			"The special scroll launching to celebrate the month of Aries. Have chance to obtain Aries Crown,",
-			"Aries Diadem, Freyja Boots, Scuba Mask, Acidus Card and other valuable item.",
+			"The special scroll launching to celebrate the month of Aries. Have chance to obtain Aries Crown,",
+			"Aries Diadem, Freyja Boots, Scuba Mask, Acidus Card and other valuable item.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11679,7 +11679,7 @@ tbl = {
 		identifiedDisplayName = "Aries Scroll Box",
 		identifiedResourceName = "캐시상자_빨강",
 		identifiedDescriptionName = {
-			"A box contais 10 pieces of Aries Scroll.",
+			"A box contais 10 pieces of Aries Scroll.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11776,8 +11776,8 @@ tbl = {
 		identifiedDisplayName = "Taurus Diadem Scroll",
 		identifiedResourceName = "오래된파란상자",
 		identifiedDescriptionName = {
-			"The special scroll launching to celebrate the month of Taurus.",
-			"Have chance to obtain Taurus Diadem, Owl Baron Card, Freyja Crown, Samurai Mask, Mischievous Fairy and other valuable item.",
+			"The special scroll launching to celebrate the month of Taurus.",
+			"Have chance to obtain Taurus Diadem, Owl Baron Card, Freyja Crown, Samurai Mask, Mischievous Fairy and other valuable item.",
 			"Weight: ^77777730^000000",
 		},
 		slotCount = 0,
@@ -11790,7 +11790,7 @@ tbl = {
 		identifiedDisplayName = "Taurus Diadem ScrollBox",
 		identifiedResourceName = "오래된파란상자",
 		identifiedDescriptionName = {
-			"A box contains 10 pieces of Taurus Diadem Scroll",
+			"A box contains 10 pieces of Taurus Diadem Scroll",
 			"Weight: ^77777730^000000",
 		},
 		slotCount = 0,
@@ -11803,7 +11803,7 @@ tbl = {
 		identifiedDisplayName = "Sagittarius Scroll",
 		identifiedResourceName = "사수자리스크롤",
 		identifiedDescriptionName = {
-			"The Sagittarius Scroll.",
+			"The Sagittarius Scroll.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11816,8 +11816,8 @@ tbl = {
 		identifiedDisplayName = "Taurus Crown Scroll",
 		identifiedResourceName = "오래된파란상자",
 		identifiedDescriptionName = {
-			"The special scroll launching to celebrate the month of Taurus.",
-			"Have chance to obtain Taurus Crown, Centipede Larve Card, Freyja Cape, Umbala Spirit, Round Eyes and other valuable item.",
+			"The special scroll launching to celebrate the month of Taurus.",
+			"Have chance to obtain Taurus Crown, Centipede Larve Card, Freyja Cape, Umbala Spirit, Round Eyes and other valuable item.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11830,7 +11830,7 @@ tbl = {
 		identifiedDisplayName = "Taurus Crown Scroll Box",
 		identifiedResourceName = "캐시상자_빨강",
 		identifiedDescriptionName = {
-			"A box contains 10 pieces of Taurus Crown Scroll.",
+			"A box contains 10 pieces of Taurus Crown Scroll.",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11878,7 +11878,7 @@ tbl = {
 		identifiedDisplayName = "RWC Super Scroll",
 		identifiedResourceName = "RWC슈퍼스크롤",
 		identifiedDescriptionName = {
-			"The special scroll to celebrate the Ragnarok World Championship, its limited and precious. Open it will obtain various valuable items!",
+			"The special scroll to celebrate the Ragnarok World Championship, its limited and precious. Open it will obtain various valuable items!",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11891,8 +11891,8 @@ tbl = {
 		identifiedDisplayName = "Ribbon of bride Box",
 		identifiedResourceName = "번호상자03",
 		identifiedDescriptionName = {
-			"A box with 1 Ribbon of bride in it.",
-			"^ff0000For this item, the cancellation of purchase or refund is not allowed.^000000",
+			"A box with 1 Ribbon of bride in it.",
+			"^ff0000For this item, the cancellation of purchase or refund is not allowed.^000000",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -11905,8 +11905,8 @@ tbl = {
 		identifiedDisplayName = "Bossnia Ticket Scroll",
 		identifiedResourceName = "RWC특수스크롤",
 		identifiedDescriptionName = {
-			"^ff0000Cannot trade to other^000000",
-			"The scroll with a Bossnia Entrance Ticket, can obtain either Battle Manual, Bubble Gum, Insurance, Token Of Siegfried, White Light Potion randomly.",
+			"^ff0000Cannot trade to other^000000",
+			"The scroll with a Bossnia Entrance Ticket, can obtain either Battle Manual, Bubble Gum, Insurance, Token Of Siegfried, White Light Potion randomly.",
 			"Weight:  ^7777771^000000",
 		},
 		slotCount = 0,
@@ -14909,18 +14909,18 @@ tbl = {
 		identifiedDisplayName = "Fallen Angel Wing",
 		identifiedResourceName = "타락천사의날개",
 		identifiedDescriptionName = {
-			"A black fallen angel wing",
-			"ATK+10",
-			"MATK+10",
-			"MDEF+10",
-			"when equipped with Costume Fallen Angel Lost, will get ATK+3 MATK+3",
-			"when equipped with Gangster Scarf, will get ATK+1 MATK+1",
-			"when equipped with 3 pieces, Fallen angel wing and gangster scarf",
-			"and costume fallen angel lost will get All stats +1",
-			"Class: ^777777Garment^000000",
-			"Defense : ^77777710^000000",
-			"Weight: ^77777720^000000",
-			"Jobs : ^777777All^000000",
+			"A black fallen angel wing",
+			"ATK+10",
+			"MATK+10",
+			"MDEF+10",
+			"when equipped with Costume Fallen Angel Lost, will get ATK+3 MATK+3",
+			"when equipped with Gangster Scarf, will get ATK+1 MATK+1",
+			"when equipped with 3 pieces, Fallen angel wing and gangster scarf",
+			"and costume fallen angel lost will get All stats +1",
+			"Class: ^777777Garment^000000",
+			"Defense : ^77777710^000000",
+			"Weight: ^77777720^000000",
+			"Jobs : ^777777All^000000",
 			"Required Level : ^7777771^000000",
 		},
 		slotCount = 1,
@@ -15582,17 +15582,17 @@ tbl = {
 		identifiedDisplayName = "Aquarius Manteau",
 		identifiedResourceName = "후드",
 		identifiedDescriptionName = {
-			"Mdef + 5.",
-			"Matk + 20.",
-			"MaxHP + 10%, MaxSP + 10%.",
-			"Reduces global cooldowns by 5%.",
-			"Reduces damage taken from neutral property by 20%.",
-			"When equipped by Warlock, Matk + 30, MaxHP + 10%, MaxSP + 10%, reduces damage taken from neutral property by 20%.",
-			"If refine rate is 8 or higher, attack speed + 20%.",
-			"",
-			"Class: ^777777Garment^000000 Defense: ^77777725^000000",
-			"Weight: ^77777730^000000",
-			"Required Level: ^7777771^000000",
+			"Mdef + 5.",
+			"Matk + 20.",
+			"MaxHP + 10%, MaxSP + 10%.",
+			"Reduces global cooldowns by 5%.",
+			"Reduces damage taken from neutral property by 20%.",
+			"When equipped by Warlock, Matk + 30, MaxHP + 10%, MaxSP + 10%, reduces damage taken from neutral property by 20%.",
+			"If refine rate is 8 or higher, attack speed + 20%.",
+			"",
+			"Class: ^777777Garment^000000 Defense: ^77777725^000000",
+			"Weight: ^77777730^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All^000000",
 		},
 		slotCount = 0,
@@ -15755,11 +15755,11 @@ tbl = {
 		identifiedDisplayName = "Costume: Fairy of Eden",
 		identifiedResourceName = "Fairy_Of_Eden",
 		identifiedDescriptionName = {
-			"Wings in the image of the fairies flying through the Garden of Eden",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Garment^000000 Weight:  ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"Wings in the image of the fairies flying through the Garden of Eden",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Garment^000000 Weight:  ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -16644,23 +16644,23 @@ tbl = {
 		identifiedDisplayName = "Boots of Judgment",
 		identifiedResourceName = "징벌의슈즈",
 		identifiedDescriptionName = {
-			"Elegant boots. It seems like it would be worn by high-level officials.",
-			"",
-			"MDEF +15.",
-			"When using skills, SP consumption +10%.",
-			"Physical and magic damage to Human, Demon, Undead eneimes +10%.",
-			"",
-			"Equip with ^008080Invective Robe^000000,",
-			"[Lightning Ride] cooldown -0.5 seconds.",
-			"For every 3 refine level of Boots of Judgment, [Lightning Ride] damage +20%.",
-			"",
-			"Equip with ^008080Agenda Robe^000000,",
-			"[Adoramus] cooldown -1 seconds.",
-			"For every 3 refine level of Boots of Judgment, Holy property magical damage +10%.",
-			"",
-			"Class: ^777777Shoes^000000 Defense: ^77777720^000000",
-			"Weight: ^77777730^000000",
-			"Required Level: ^777777100^000000",
+			"Elegant boots. It seems like it would be worn by high-level officials.",
+			"",
+			"MDEF +15.",
+			"When using skills, SP consumption +10%.",
+			"Physical and magic damage to Human, Demon, Undead eneimes +10%.",
+			"",
+			"Equip with ^008080Invective Robe^000000,",
+			"[Lightning Ride] cooldown -0.5 seconds.",
+			"For every 3 refine level of Boots of Judgment, [Lightning Ride] damage +20%.",
+			"",
+			"Equip with ^008080Agenda Robe^000000,",
+			"[Adoramus] cooldown -1 seconds.",
+			"For every 3 refine level of Boots of Judgment, Holy property magical damage +10%.",
+			"",
+			"Class: ^777777Shoes^000000 Defense: ^77777720^000000",
+			"Weight: ^77777730^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^7777773rd Acolyte Classes^000000",
 		},
 		slotCount = 1,
@@ -18515,16 +18515,16 @@ tbl = {
 		identifiedDisplayName = "Wizard's Memory",
 		identifiedResourceName = "롯드",
 		identifiedDescriptionName = {
-			"Matk + 180.",
-			"Can't be destroyed.",
-			"Increases Frost Misty and Jack Frost damage by 1% per 1 base level.",
-			"Attack speed + 2% per refine rate.",
-			"When equipped with King's Divine Power, attack speed + 15%, reduces damage taken from players by 10%, enables to use Battle Chant level 1.",
-			"",
-			"Class: ^777777Rod^000000 Attack: ^77777760^000000",
-			"Weight: ^77777730^000000",
-			"Weapon Level: ^7777774^000000",
-			"Required Level: ^777777100^000000",
+			"Matk + 180.",
+			"Can't be destroyed.",
+			"Increases Frost Misty and Jack Frost damage by 1% per 1 base level.",
+			"Attack speed + 2% per refine rate.",
+			"When equipped with King's Divine Power, attack speed + 15%, reduces damage taken from players by 10%, enables to use Battle Chant level 1.",
+			"",
+			"Class: ^777777Rod^000000 Attack: ^77777760^000000",
+			"Weight: ^77777730^000000",
+			"Weapon Level: ^7777774^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777Warlock^000000",
 		},
 		slotCount = 1,
@@ -19883,30 +19883,30 @@ tbl = {
 		identifiedDisplayName = "Imperial Ring",
 		identifiedResourceName = "임페리얼링",
 		identifiedDescriptionName = {
-			"A strengthened ring engraved with the patterns of the Rune Midgard Kingdom.",
-			"",
-			"STR +1, INT +1.",
-			"Max HP +3%, Max SP +3%.",
-			"",
-			"Equip with ^008080Imperial Spear^000000,",
-			"for every 2 refine level of ^008080Imperial Spear^000000, increase damage of [Cannon Spear], [Vanishing Point] by an additional 3%.",
-			"",
-			"Equip with ^008080Imperial Guard^000000,",
-			"for every refine level of ^008080Imperial Guard^000000 after +5, increase damage of [Shield Press] by an additional 8%.",
-			"",
-			"Equip with ^008080Imperial Feather^000000,",
-			"For every ^0080801 Base Level^000000 increase damage of [Grand Cross] by an additional 1%, decrease variable cast time by 2 seconds.",
-			"For every ^00808030 Base Level^000000 increase damage of [Genesis Ray] by an additional 1%, decrease SP consumption by 10.",
-			"",
-			"Equip with ^008080Imperial Spear, Imperial Guard and Imperial Feather^000000,",
-			"Decrease SP consumption of [Grand Cross] by 30,",
-			"Decrease SP consumption of [Vanishing Point] by 15,",
-			"Decrease SP consumption of [Cannon Spear] by 10,",
-			"Decrease SP consumption of [Shield Press] by 5.",
-			"",
-			"Class: ^777777Accessory^000000 Defense: ^7777773^000000",
-			"Weight: ^77777750^000000",
-			"Required Level: ^77777750^000000",
+			"A strengthened ring engraved with the patterns of the Rune Midgard Kingdom.",
+			"",
+			"STR +1, INT +1.",
+			"Max HP +3%, Max SP +3%.",
+			"",
+			"Equip with ^008080Imperial Spear^000000,",
+			"for every 2 refine level of ^008080Imperial Spear^000000, increase damage of [Cannon Spear], [Vanishing Point] by an additional 3%.",
+			"",
+			"Equip with ^008080Imperial Guard^000000,",
+			"for every refine level of ^008080Imperial Guard^000000 after +5, increase damage of [Shield Press] by an additional 8%.",
+			"",
+			"Equip with ^008080Imperial Feather^000000,",
+			"For every ^0080801 Base Level^000000 increase damage of [Grand Cross] by an additional 1%, decrease variable cast time by 2 seconds.",
+			"For every ^00808030 Base Level^000000 increase damage of [Genesis Ray] by an additional 1%, decrease SP consumption by 10.",
+			"",
+			"Equip with ^008080Imperial Spear, Imperial Guard and Imperial Feather^000000,",
+			"Decrease SP consumption of [Grand Cross] by 30,",
+			"Decrease SP consumption of [Vanishing Point] by 15,",
+			"Decrease SP consumption of [Cannon Spear] by 10,",
+			"Decrease SP consumption of [Shield Press] by 5.",
+			"",
+			"Class: ^777777Accessory^000000 Defense: ^7777773^000000",
+			"Weight: ^77777750^000000",
+			"Required Level: ^77777750^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -19993,13 +19993,13 @@ tbl = {
 		identifiedDisplayName = "Subjugation Team's Ring",
 		identifiedResourceName = "은반지",
 		identifiedDescriptionName = {
-			"Ring awarded as compensation for a pursuit mission.",
-			"",
-			"STR +2, INT +2.",
-			"",
-			"Class: ^777777Accessory^000000 Defense: ^7777770^000000",
-			"Weight: ^77777710^000000",
-			"Required Level: ^77777760^000000",
+			"Ring awarded as compensation for a pursuit mission.",
+			"",
+			"STR +2, INT +2.",
+			"",
+			"Class: ^777777Accessory^000000 Defense: ^7777770^000000",
+			"Weight: ^77777710^000000",
+			"Required Level: ^77777760^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -20276,14 +20276,14 @@ tbl = {
 		identifiedDisplayName = "Cherry Badge",
 		identifiedResourceName = "벚꽃뱃지",
 		identifiedDescriptionName = {
-			"A badge made in the shape of a cherry blossom.",
-			"",
-			"MDEF +5, AGI +2.",
-			"Has a chance to cast Auto Spell: Lv 3 [Kyrie Eleison] upon receiving physical damage.",
-			"",
-			"Class: ^777777Accessory^000000 Defense: ^7777770^000000",
-			"Weight: ^77777710^000000",
-			"Required Level: ^7777771^000000",
+			"A badge made in the shape of a cherry blossom.",
+			"",
+			"MDEF +5, AGI +2.",
+			"Has a chance to cast Auto Spell: Lv 3 [Kyrie Eleison] upon receiving physical damage.",
+			"",
+			"Class: ^777777Accessory^000000 Defense: ^7777770^000000",
+			"Weight: ^77777710^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -20984,24 +20984,24 @@ tbl = {
 		identifiedDisplayName = "Themis Libra",
 		identifiedResourceName = "Themis_Balance",
 		identifiedDescriptionName = {
-			"The Libra of Justice, held in the left hand of the goddess Themis.",
-			"",
-			"MDEF+10, variable cast time -5%.",
-			"For every 5 Base Level, [Genesis Ray] +1%.",
-			"",
-			"If refine level is +9 or above,",
-			"For every 2 level of [Heal], Holy property magic damage +3%",
-			"",
-			"If refine level is +11 or above,",
-			"[Genesis Ray] cooldown -1 second.",
-			"",
-			"Equip with ^008080Dark Blinder or Dark Blinder[1]^000000,",
-			"variable cast time -5%,",
-			"magic damage to all race enemies +5%.",
-			"",
-			"Class: ^777777Shield^000000 Defense: ^77777790^000000",
-			"Weight: ^77777730^000000",
-			"Required Level: ^777777100^000000",
+			"The Libra of Justice, held in the left hand of the goddess Themis.",
+			"",
+			"MDEF+10, variable cast time -5%.",
+			"For every 5 Base Level, [Genesis Ray] +1%.",
+			"",
+			"If refine level is +9 or above,",
+			"For every 2 level of [Heal], Holy property magic damage +3%",
+			"",
+			"If refine level is +11 or above,",
+			"[Genesis Ray] cooldown -1 second.",
+			"",
+			"Equip with ^008080Dark Blinder or Dark Blinder[1]^000000,",
+			"variable cast time -5%,",
+			"magic damage to all race enemies +5%.",
+			"",
+			"Class: ^777777Shield^000000 Defense: ^77777790^000000",
+			"Weight: ^77777730^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -21034,47 +21034,47 @@ tbl = {
 		identifiedDisplayName = "Fallen Warrior Shield",
 		identifiedResourceName = "데몬실드",
 		identifiedDescriptionName = {
-			"Indestructible.",
-			"MDEF -15",
-			"Damage taken from Human, Player, Demon enemies -10%.",
-			"",
-			"If refine level is +7 or above, ASPD +2.",
-			"",
-			"If refine level is +10 or above,",
-			"When equipped by Rune Knight, [Hundred Spear] of cooldown -1sec.",
-			"When equipped by Royal Guard, [Earth Drive] of variable cast time -100%.",
-			"",
-			"If refine level is +12 or above,",
-			"HIT +40,",
-			"Physical damage to all class enemies +5%.",
-			"",
-			"Equip with ^008080Record of Swordman^000000 and ^008080Old Rune Circlet^000000,",
-			"When learned Lv10 of [Hundred Spear], able to use Lv1 [Shield Spell].",
-			"When equipment is unequipped, the effect of [Shield Spell] will be removed as well.",
-			"",
-			"When learned Lv1 of [Ignition Break], ATK-120.",
-			"",
-			"If total refine level is +18 or above, delay after skill -5%.",
-			"Increase ASPD (delay after attack -10%)",
-			"",
-			"If total refine level is +21 or above,",
-			"[Hundred Spear] cooldown -0.5sec",
-			"",
-			"Equip with ^008080Record of Swordman^000000 and ^008080Old Crown of Protection^000000,",
-			"",
-			"When learned Lv5 [Shield Press], delay after skill -30%.",
-			"",
-			"When learned Lv1 [Overbrand], delay after skill +30%.",
-			"",
-			"If total refine level is +18 or above,",
-			"[Earth Drive] and [Shield Press] damage +25%.",
-			"",
-			"If total refine level is +21 or above,",
-			"[Earth Drive] cooldown -0.5sec.",
-			"",
-			"Class: ^777777Shield^000000 Defense: ^777777120^000000",
-			"Weight: ^777777350^000000",
-			"Required Level: ^777777100^000000",
+			"Indestructible.",
+			"MDEF -15",
+			"Damage taken from Human, Player, Demon enemies -10%.",
+			"",
+			"If refine level is +7 or above, ASPD +2.",
+			"",
+			"If refine level is +10 or above,",
+			"When equipped by Rune Knight, [Hundred Spear] of cooldown -1sec.",
+			"When equipped by Royal Guard, [Earth Drive] of variable cast time -100%.",
+			"",
+			"If refine level is +12 or above,",
+			"HIT +40,",
+			"Physical damage to all class enemies +5%.",
+			"",
+			"Equip with ^008080Record of Swordman^000000 and ^008080Old Rune Circlet^000000,",
+			"When learned Lv10 of [Hundred Spear], able to use Lv1 [Shield Spell].",
+			"When equipment is unequipped, the effect of [Shield Spell] will be removed as well.",
+			"",
+			"When learned Lv1 of [Ignition Break], ATK-120.",
+			"",
+			"If total refine level is +18 or above, delay after skill -5%.",
+			"Increase ASPD (delay after attack -10%)",
+			"",
+			"If total refine level is +21 or above,",
+			"[Hundred Spear] cooldown -0.5sec",
+			"",
+			"Equip with ^008080Record of Swordman^000000 and ^008080Old Crown of Protection^000000,",
+			"",
+			"When learned Lv5 [Shield Press], delay after skill -30%.",
+			"",
+			"When learned Lv1 [Overbrand], delay after skill +30%.",
+			"",
+			"If total refine level is +18 or above,",
+			"[Earth Drive] and [Shield Press] damage +25%.",
+			"",
+			"If total refine level is +21 or above,",
+			"[Earth Drive] cooldown -0.5sec.",
+			"",
+			"Class: ^777777Shield^000000 Defense: ^777777120^000000",
+			"Weight: ^777777350^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -21180,27 +21180,27 @@ tbl = {
 		identifiedDisplayName = "Feather Shield of Protection",
 		identifiedResourceName = "에너지룬가드",
 		identifiedDescriptionName = {
-			"MDEF +15",
-			"For every refine level, Max HP and  Max SP +1%.",
-			"",
-			"If refine level is +7 or above,",
-			"Damage taken from [Crimson Rock] -30%,",
-			"Damage taken from [Arm Cannon] -30%.",
-			"",
-			"If refine level is +9 or above,",
-			"Damage taken from [Arrow Storm] -30%,",
-			"Damage taken from [Gates of Hell] -30%.",
-			"",
-			"If refine level is +11 or above,",
-			"Damage taken from [Lunatic Carrot Beat] -30%,",
-			"Damage taken from [CN Meteor] -30%.",
-			"",
-			"Equip with ^008080Cloth of Protection^000000 and ^008080Protect Feathers^000000,",
-			"Damage taken from [Crimson Rock], [Arm Cannon], [Arrow Storm], [Gates of Hell], [Lunatic Carrot Beat], [CN Meteor] -30% additionally.",
-			"",
-			"Class: ^777777Shield^000000 Defense: ^777777140^000000",
-			"Weight: ^777777100^000000",
-			"Required Level: ^777777100^000000",
+			"MDEF +15",
+			"For every refine level, Max HP and  Max SP +1%.",
+			"",
+			"If refine level is +7 or above,",
+			"Damage taken from [Crimson Rock] -30%,",
+			"Damage taken from [Arm Cannon] -30%.",
+			"",
+			"If refine level is +9 or above,",
+			"Damage taken from [Arrow Storm] -30%,",
+			"Damage taken from [Gates of Hell] -30%.",
+			"",
+			"If refine level is +11 or above,",
+			"Damage taken from [Lunatic Carrot Beat] -30%,",
+			"Damage taken from [CN Meteor] -30%.",
+			"",
+			"Equip with ^008080Cloth of Protection^000000 and ^008080Protect Feathers^000000,",
+			"Damage taken from [Crimson Rock], [Arm Cannon], [Arrow Storm], [Gates of Hell], [Lunatic Carrot Beat], [CN Meteor] -30% additionally.",
+			"",
+			"Class: ^777777Shield^000000 Defense: ^777777140^000000",
+			"Weight: ^777777100^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -22526,12 +22526,12 @@ tbl = {
 		identifiedDisplayName = "Costume: Straight Pony (White)",
 		identifiedResourceName = "스트레이트포니_흰색",
 		identifiedDescriptionName = {
-			"A costume hair which can be attached to the hair for different hair style.",
-			"A typical ponytail that goes well with different styles.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A costume hair which can be attached to the hair for different hair style.",
+			"A typical ponytail that goes well with different styles.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -22544,12 +22544,12 @@ tbl = {
 		identifiedDisplayName = "Costume: Straight Pony (Blue)",
 		identifiedResourceName = "스트레이트포니_파랑",
 		identifiedDescriptionName = {
-			"A costume hair which can be attached to the hair for different hair style.",
-			"A typical ponytail that goes well with different styles.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A costume hair which can be attached to the hair for different hair style.",
+			"A typical ponytail that goes well with different styles.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -22562,12 +22562,12 @@ tbl = {
 		identifiedDisplayName = "Costume: Straight Pony (Brown)",
 		identifiedResourceName = "스트레이트포니_연갈색",
 		identifiedDescriptionName = {
-			"A costume hair which can be attached to the hair for different hair style.",
-			"A typical ponytail that goes well with different styles.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A costume hair which can be attached to the hair for different hair style.",
+			"A typical ponytail that goes well with different styles.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -22580,12 +22580,12 @@ tbl = {
 		identifiedDisplayName = "Costume: Straight Pony (Red)",
 		identifiedResourceName = "스트레이트포니_빨강",
 		identifiedDescriptionName = {
-			"A costume hair which can be attached to the hair for different hair style.",
-			"A typical ponytail that goes well with different styles.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A costume hair which can be attached to the hair for different hair style.",
+			"A typical ponytail that goes well with different styles.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -22598,12 +22598,12 @@ tbl = {
 		identifiedDisplayName = "Costume: Straight Pony (Purple)",
 		identifiedResourceName = "스트레이트포니_보라",
 		identifiedDescriptionName = {
-			"A costume hair which can be attached to the hair for different hair style.",
-			"A typical ponytail that goes well with different styles.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A costume hair which can be attached to the hair for different hair style.",
+			"A typical ponytail that goes well with different styles.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -22616,12 +22616,12 @@ tbl = {
 		identifiedDisplayName = "Costume: Straight Pony (Green)",
 		identifiedResourceName = "스트레이트포니_녹색",
 		identifiedDescriptionName = {
-			"A costume hair which can be attached to the hair for different hair style.",
-			"A typical ponytail that goes well with different styles.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A costume hair which can be attached to the hair for different hair style.",
+			"A typical ponytail that goes well with different styles.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -22634,12 +22634,12 @@ tbl = {
 		identifiedDisplayName = "Costume: Straight Pony (Yellow)",
 		identifiedResourceName = "스트레이트포니_노랑",
 		identifiedDescriptionName = {
-			"A costume hair which can be attached to the hair for different hair style.",
-			"A typical ponytail that goes well with different styles.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A costume hair which can be attached to the hair for different hair style.",
+			"A typical ponytail that goes well with different styles.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -22652,12 +22652,12 @@ tbl = {
 		identifiedDisplayName = "Costume: Straight Pony (Black)",
 		identifiedResourceName = "스트레이트포니_검정",
 		identifiedDescriptionName = {
-			"A costume hair which can be attached to the hair for different hair style.",
-			"A typical ponytail that goes well with different styles.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A costume hair which can be attached to the hair for different hair style.",
+			"A typical ponytail that goes well with different styles.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -22806,11 +22806,11 @@ tbl = {
 		identifiedDisplayName = "Costume: Roll Twin (Blue)",
 		identifiedResourceName = "롤트윈_청",
 		identifiedDescriptionName = {
-			"A costume hair which can be attached to the hair for different hair style.",
-			"",
-			"Class: ^777777Costume^000000 Defense : ^7777770^000000",
-			"Location : ^777777Middle^000000 Weight: ^7777770^000000",
-			"Required Level : ^7777771^000000",
+			"A costume hair which can be attached to the hair for different hair style.",
+			"",
+			"Class: ^777777Costume^000000 Defense : ^7777770^000000",
+			"Location : ^777777Middle^000000 Weight: ^7777770^000000",
+			"Required Level : ^7777771^000000",
 			"Jobs : ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -22823,11 +22823,11 @@ tbl = {
 		identifiedDisplayName = "Costume: Roll Twin (Red)",
 		identifiedResourceName = "롤트윈_적",
 		identifiedDescriptionName = {
-			"A costume hair which can be attached to the hair for different hair style.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A costume hair which can be attached to the hair for different hair style.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -23134,11 +23134,11 @@ tbl = {
 		identifiedDisplayName = "Costume: Cute Bear Bear Balloon (Brown)",
 		identifiedResourceName = "곰돌이풍선",
 		identifiedDescriptionName = {
-			"A balloon shaped like a bear. It's often mistaken for a Poring.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Lower^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A balloon shaped like a bear. It's often mistaken for a Poring.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Lower^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -23213,12 +23213,12 @@ tbl = {
 		identifiedDisplayName = "Costume: Easter Egg Shell",
 		identifiedResourceName = "성스러운달걀모자",
 		identifiedDescriptionName = {
-			"A colorful egg shell that seems fragile but has mysterious healing power within.",
-			"Class: ^777777Costume^000000",
-			"Defense: ^7777770^000000",
-			"Location: ^777777Upper ^000000",
-			"Weight: ^7777771^000000",
-			"Required Level: ^7777771^000000",
+			"A colorful egg shell that seems fragile but has mysterious healing power within.",
+			"Class: ^777777Costume^000000",
+			"Defense: ^7777770^000000",
+			"Location: ^777777Upper ^000000",
+			"Weight: ^7777771^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -23307,12 +23307,12 @@ tbl = {
 		identifiedDisplayName = "Costume: 2nd Anniversary Hat",
 		identifiedResourceName = "강한자의헤어",
 		identifiedDescriptionName = {
-			"^ff0000This item cannot be traded with other accounts.^000000",
-			"A hat made to celebrate 2nd anniversary.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Upper^000000 Weight:  ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"^ff0000This item cannot be traded with other accounts.^000000",
+			"A hat made to celebrate 2nd anniversary.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Upper^000000 Weight:  ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -23554,15 +23554,15 @@ tbl = {
 		identifiedDisplayName = "Costume: Fairy Long Hair (Blonde)",
 		identifiedResourceName = "C_Fairy_Long_BD",
 		identifiedDescriptionName = {
-			"A costume hair which can be attached to the hair for different hair style.",
-			"Long blonde hair that conjures up a cute, spunky, pixie-like image.",
-			"",
-			"^ffffff<NAVI>^4D4DFF[Designer Heidam]^000000<INFO>mal_in01,20,124,0,100,0,0</INFO></NAVI>^000000",
-			"^b4b4b4Exchangeable for Enchanted Stone Box Vol.14.^000000",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Upper^000000 Weight:  ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A costume hair which can be attached to the hair for different hair style.",
+			"Long blonde hair that conjures up a cute, spunky, pixie-like image.",
+			"",
+			"^ffffff<NAVI>^4D4DFF[Designer Heidam]^000000<INFO>mal_in01,20,124,0,100,0,0</INFO></NAVI>^000000",
+			"^b4b4b4Exchangeable for Enchanted Stone Box Vol.14.^000000",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Upper^000000 Weight:  ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -27273,15 +27273,15 @@ tbl = {
 		identifiedDisplayName = "Sealed Gopinich Card",
 		identifiedResourceName = "이름없는카드",
 		identifiedDescriptionName = {
-			"Restore 3 SP upon inflicting damage to the enemies.",
-			"SP consumption +50%.",
-			"If refine level of the headgear is +15 or above,",
-			"Restore 4 SP instead upon inflicting damage to the enemies.",
-			"",
-			"^ff0000Caution: ^000088Sillit Pong^ff0000 cannot be used for card desocketing!^000000",
-			"",
-			"Class: ^777777Card^000000",
-			"Location: ^777777Headgear^000000",
+			"Restore 3 SP upon inflicting damage to the enemies.",
+			"SP consumption +50%.",
+			"If refine level of the headgear is +15 or above,",
+			"Restore 4 SP instead upon inflicting damage to the enemies.",
+			"",
+			"^ff0000Caution: ^000088Sillit Pong^ff0000 cannot be used for card desocketing!^000000",
+			"",
+			"Class: ^777777Card^000000",
+			"Location: ^777777Headgear^000000",
 			"Weight: ^7777771^000000",
 		},
 		slotCount = 0,
@@ -37552,19 +37552,19 @@ tbl = {
 		identifiedDisplayName = "Ullr Blessing",
 		identifiedResourceName = "훈장_궁수",
 		identifiedDescriptionName = {
-			"Increase physical damage to all property monsters by 15%.",
-			"------------------------",
-			"^FF0000Class Bonus:^000000",
-			"",
-			"^4D4DFFAbyss Chaser^000000",
-			"^4D4DFFWind Hawk^000000",
-			"^4D4DFFTrouvere^000000",
-			"^4D4DFFTroubadour^000000",
-			"",
-			"When performing physical attack, there's a chance to cast No Limits Lv 5 for 20 seconds.",
-			"------------------------",
-			"Type: ^777777Card^000000",
-			"Equip: ^777777Available in all slots (Enchant)^000000",
+			"Increase physical damage to all property monsters by 15%.",
+			"------------------------",
+			"^FF0000Class Bonus:^000000",
+			"",
+			"^4D4DFFAbyss Chaser^000000",
+			"^4D4DFFWind Hawk^000000",
+			"^4D4DFFTrouvere^000000",
+			"^4D4DFFTroubadour^000000",
+			"",
+			"When performing physical attack, there's a chance to cast No Limits Lv 5 for 20 seconds.",
+			"------------------------",
+			"Type: ^777777Card^000000",
+			"Equip: ^777777Available in all slots (Enchant)^000000",
 			"Weight: ^7777770^000000",
 		},
 		slotCount = 0,
@@ -42586,29 +42586,29 @@ tbl = {
 		identifiedDisplayName = "Fallen Angel Hairband",
 		identifiedResourceName = "타천사의분실물",
 		identifiedDescriptionName = {
-			"A hairband made from the feathers of a Fallen Angel's wings.",
-			"",
-			"All Stats +1.",
-			"Damage taken from Holy property attack +10%, damage taken from Angel monsters +15%.",
-			"Resistance against Demon, Demi-human enemies +6%.",
-			"",
-			"Equip with ^008080Fallen Angel Armor^000000,",
-			"Max HP +10% VIT +2.",
-			"",
-			"If refine level is +10 or above and",
-			"equip with refine level +10 or above ^008080Fallen Angel Wing^000000,",
-			"has a chance to apply Stone Curse to all enemies in 5x5",
-			"cells around to wearer upon receiving physical damage.",
-			"Resistance to all races except Angel enemies +3%.",
-			"",
-			"Equip with refine level +10 or above ^008080[Kachua]Fallen Angel Wing^000000,",
-			"MATK +30, ATK +30.",
-			"has a chance to apply Curse to enemies upon inflicting physical or magic damage.",
-			"Variable cast time -5%.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777775^000000",
-			"Location: ^777777Upper^000000 Weight: ^77777710^000000",
-			"Required Level: ^77777730^000000",
+			"A hairband made from the feathers of a Fallen Angel's wings.",
+			"",
+			"All Stats +1.",
+			"Damage taken from Holy property attack +10%, damage taken from Angel monsters +15%.",
+			"Resistance against Demon, Demi-human enemies +6%.",
+			"",
+			"Equip with ^008080Fallen Angel Armor^000000,",
+			"Max HP +10% VIT +2.",
+			"",
+			"If refine level is +10 or above and",
+			"equip with refine level +10 or above ^008080Fallen Angel Wing^000000,",
+			"has a chance to apply Stone Curse to all enemies in 5x5",
+			"cells around to wearer upon receiving physical damage.",
+			"Resistance to all races except Angel enemies +3%.",
+			"",
+			"Equip with refine level +10 or above ^008080[Kachua]Fallen Angel Wing^000000,",
+			"MATK +30, ATK +30.",
+			"has a chance to apply Curse to enemies upon inflicting physical or magic damage.",
+			"Variable cast time -5%.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777775^000000",
+			"Location: ^777777Upper^000000 Weight: ^77777710^000000",
+			"Required Level: ^77777730^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -43864,19 +43864,19 @@ tbl = {
 		identifiedDisplayName = "Wing of Bless",
 		identifiedResourceName = "프로텍트페더",
 		identifiedDescriptionName = {
-			"Fixed cast time -0.1 seconds.",
-			"",
-			"If pure STR is 90 or above, Max HP +1%.",
-			"If pure AGI is 90 or above, Perfect Dodge +3.",
-			"If pure VIT is 90 or above, MDEF+1.",
-			"If pure INT is 90 or above, MSP+1%.",
-			"If pure DEX is 90 or above, fixed cast time -0.1 seconds additionally.",
-			"If pure LUK is 90 or above, FLEE +10.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^77777710^000000",
-			"Armor Level: ^7777771^000000",
-			"Required Level: ^7777771^000000",
+			"Fixed cast time -0.1 seconds.",
+			"",
+			"If pure STR is 90 or above, Max HP +1%.",
+			"If pure AGI is 90 or above, Perfect Dodge +3.",
+			"If pure VIT is 90 or above, MDEF+1.",
+			"If pure INT is 90 or above, MSP+1%.",
+			"If pure DEX is 90 or above, fixed cast time -0.1 seconds additionally.",
+			"If pure LUK is 90 or above, FLEE +10.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^77777710^000000",
+			"Armor Level: ^7777771^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -44374,12 +44374,12 @@ tbl = {
 		identifiedDisplayName = "GGH 1st Anniversary Hat",
 		identifiedResourceName = "강한자의헤어",
 		identifiedDescriptionName = {
-			"^8032CDHappy Anniversary!^000000",
-			"An exclusive costume obtainable during GGH 1st(Number 1) Birthday Celebration.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Upper^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"^8032CDHappy Anniversary!^000000",
+			"An exclusive costume obtainable during GGH 1st(Number 1) Birthday Celebration.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Upper^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -44913,11 +44913,11 @@ tbl = {
 		identifiedDisplayName = "Costume: Juan Hat",
 		identifiedResourceName = "강한자의헤어",
 		identifiedDescriptionName = {
-			"Traditional headgear from Philippines. Worn by Every-Juan.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Upper^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"Traditional headgear from Philippines. Worn by Every-Juan.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Upper^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -45845,12 +45845,12 @@ tbl = {
 		identifiedDisplayName = "[NFS]C. Golden Magestic Goat",
 		identifiedResourceName = "GOLD_MAJESTIC_GOUT",
 		identifiedDescriptionName = {
-			"The moment it is worn as a helmet resembling a goat's horn, the wearer enjoys the effect of enormous attention and at the same time gives a feeling of pride.",
-			"It is decorated with gold and looks particularly luxurious.",
-			"",
-			"Class: ^777777Costume^000000",
-			"Location: ^777777Upper ^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"The moment it is worn as a helmet resembling a goat's horn, the wearer enjoys the effect of enormous attention and at the same time gives a feeling of pride.",
+			"It is decorated with gold and looks particularly luxurious.",
+			"",
+			"Class: ^777777Costume^000000",
+			"Location: ^777777Upper ^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -46139,17 +46139,17 @@ tbl = {
 		identifiedDisplayName = "Passion Rabbit Ribbon",
 		identifiedResourceName = "Passion_Rabbit_Ribbon",
 		identifiedDescriptionName = {
-			"CON + 3.",
-			"Reduces damage taken from player by 13%.",
-			"Reduces damage taken from normal and boss monsters by 20%.",
-			"Increases physical damage by 40%.",
-			"Every 10 base levels, increases Rhythm Shooting and Rose Blossom damage by 1%.",
-			"Every refine rate, CON + 1.",
-			"―――――――――――――",
-			"Class: ^777777Headgear^000000 Defense: ^77777710^000000",
-			"Location: ^777777Upper^000000",
-			"Weight: ^77777750^000000",
-			"Required Level: ^777777200^000000",
+			"CON + 3.",
+			"Reduces damage taken from player by 13%.",
+			"Reduces damage taken from normal and boss monsters by 20%.",
+			"Increases physical damage by 40%.",
+			"Every 10 base levels, increases Rhythm Shooting and Rose Blossom damage by 1%.",
+			"Every refine rate, CON + 1.",
+			"―――――――――――――",
+			"Class: ^777777Headgear^000000 Defense: ^77777710^000000",
+			"Location: ^777777Upper^000000",
+			"Weight: ^77777750^000000",
+			"Required Level: ^777777200^000000",
 			"Jobs: ^777777Fourth classes, expanded fourth classes^000000",
 		},
 		slotCount = 1,
@@ -46306,13 +46306,13 @@ tbl = {
 		identifiedDisplayName = "Costume: Clock Wise",
 		identifiedResourceName = "Clockwise",
 		identifiedDescriptionName = {
-			"A crystal of blood, sweat, and tears forged by the Magician's Guild.",
-			"The clover is fire, the heart is water,",
-			"the spade is wind, and the diamond is earth.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Upper^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A crystal of blood, sweat, and tears forged by the Magician's Guild.",
+			"The clover is fire, the heart is water,",
+			"the spade is wind, and the diamond is earth.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Upper^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -46383,11 +46383,11 @@ tbl = {
 		identifiedDisplayName = "Costume: Numbawan GGH",
 		identifiedResourceName = "강한자의헤어",
 		identifiedDescriptionName = {
-			"World's Best Ragnarok GGH!",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Upper^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"World's Best Ragnarok GGH!",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Upper^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -47320,17 +47320,17 @@ tbl = {
 		identifiedDisplayName = "Many Flowers Love",
 		identifiedResourceName = "Many_Flowers_Love",
 		identifiedDescriptionName = {
-			"POW + 3.",
-			"Reduces damage taken from players by 13%.",
-			"Reduces damage taken from normal and boss monsters by 20%.",
-			"Increases physical damage by 40%.",
-			"Every 10 base levels, increases Impact Crater, Savage Impact and Fatal Shadow Claw damage by 1%.",
-			"Every refine rate, POW + 1.",
-			"If refine rate is 10, Cri + 25, reduces global cooldown by 20%.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^77777710^000000",
-			"Location: ^777777Upper^000000 Weight: ^77777750^000000",
-			"Required Level: ^777777200^000000",
+			"POW + 3.",
+			"Reduces damage taken from players by 13%.",
+			"Reduces damage taken from normal and boss monsters by 20%.",
+			"Increases physical damage by 40%.",
+			"Every 10 base levels, increases Impact Crater, Savage Impact and Fatal Shadow Claw damage by 1%.",
+			"Every refine rate, POW + 1.",
+			"If refine rate is 10, Cri + 25, reduces global cooldown by 20%.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^77777710^000000",
+			"Location: ^777777Upper^000000 Weight: ^77777750^000000",
+			"Required Level: ^777777200^000000",
 			"Jobs: ^777777Fourth Jobs, expanded fourth Jobs^000000",
 		},
 		slotCount = 1,
@@ -49157,34 +49157,34 @@ tbl = {
 		identifiedDisplayName = "Cor Core Headset",
 		identifiedResourceName = "Cor_Core_Headset",
 		identifiedDescriptionName = {
-			"Headphones with core shaped earplugs.",
-			"",
-			"MDEF+3.",
-			"Delay after skill -10%.",
-			"",
-			"Equip with ^008080EP17.1 Weapon^000000, ATK +200, MATK +200.",
-			"",
-			"^000088[EP17.1 Weapon List]^000000",
-			"AC-B44-OS",
-			"HR-S55-OS",
-			"MH-P89-OS",
-			"Ultio-OS",
-			"Electric Fox-OS",
-			"Cannon Rapier-OS",
-			"Kuroiro-OS",
-			"Circuit Board-OS",
-			"Saphir Mace-OS",
-			"Virtual Bow-OS",
-			"Burning Knuckle-OS",
-			"Beam Claymor-OS",
-			"Boost Lance-OS",
-			"Blasti-OS",
-			"Meuchler-OS",
-			"Rutilus Stick-OS",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777775^000000",
-			"Location: ^777777Middle ^000000 Weight: ^77777710^000000",
-			"Required Level: ^777777100^000000",
+			"Headphones with core shaped earplugs.",
+			"",
+			"MDEF+3.",
+			"Delay after skill -10%.",
+			"",
+			"Equip with ^008080EP17.1 Weapon^000000, ATK +200, MATK +200.",
+			"",
+			"^000088[EP17.1 Weapon List]^000000",
+			"AC-B44-OS",
+			"HR-S55-OS",
+			"MH-P89-OS",
+			"Ultio-OS",
+			"Electric Fox-OS",
+			"Cannon Rapier-OS",
+			"Kuroiro-OS",
+			"Circuit Board-OS",
+			"Saphir Mace-OS",
+			"Virtual Bow-OS",
+			"Burning Knuckle-OS",
+			"Beam Claymor-OS",
+			"Boost Lance-OS",
+			"Blasti-OS",
+			"Meuchler-OS",
+			"Rutilus Stick-OS",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777775^000000",
+			"Location: ^777777Middle ^000000 Weight: ^77777710^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -49917,40 +49917,40 @@ tbl = {
 		identifiedDisplayName = "Demon's Familiar",
 		identifiedResourceName = "Demons_Familiar",
 		identifiedDescriptionName = {
-			"All Stat + 10.",
-			"When equipped with one of following items,",
-			"[Hypocrisy Edge],",
-			"[Avaritia Metal],",
-			"[Luxuria Pierce],",
-			"[Pride Stone],",
-			"[Wrath Wheel],",
-			"[Superbia String],",
-			"[Gula Gun],",
-			"[Pigritia Rhythm],",
-			"[Lust Pointer],",
-			"[Lust Shatter],",
-			"[Lust Crusher],",
-			"[Lust Boom],",
-			"[Hypocrisy Machine],",
-			"[Invidia Bundle],",
-			"[Wrath Rack],",
-			"[Gula Teeth],",
-			"[Pride Steel],",
-			"[Gluttony Stick],",
-			"[Sloth Text],",
-			"[Sloth Bible],",
-			"[Greed Wand],",
-			"[Addiction Plant],",
-			"[Ira Fist],",
-			"[Pigritia Wave],",
-			"[Pigritia Spark],",
-			"[Envy Blunt],",
-			"Atk + 200, Matk + 200.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777772^000000",
-			"Location: ^777777Middle^000000",
-			"Weight: ^77777720^000000",
-			"Required Level: ^777777100^000000",
+			"All Stat + 10.",
+			"When equipped with one of following items,",
+			"[Hypocrisy Edge],",
+			"[Avaritia Metal],",
+			"[Luxuria Pierce],",
+			"[Pride Stone],",
+			"[Wrath Wheel],",
+			"[Superbia String],",
+			"[Gula Gun],",
+			"[Pigritia Rhythm],",
+			"[Lust Pointer],",
+			"[Lust Shatter],",
+			"[Lust Crusher],",
+			"[Lust Boom],",
+			"[Hypocrisy Machine],",
+			"[Invidia Bundle],",
+			"[Wrath Rack],",
+			"[Gula Teeth],",
+			"[Pride Steel],",
+			"[Gluttony Stick],",
+			"[Sloth Text],",
+			"[Sloth Bible],",
+			"[Greed Wand],",
+			"[Addiction Plant],",
+			"[Ira Fist],",
+			"[Pigritia Wave],",
+			"[Pigritia Spark],",
+			"[Envy Blunt],",
+			"Atk + 200, Matk + 200.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777772^000000",
+			"Location: ^777777Middle^000000",
+			"Weight: ^77777720^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All^000000",
 		},
 		slotCount = 0,
@@ -50222,20 +50222,20 @@ tbl = {
 		identifiedDisplayName = "2021 RTC Champion Gaming Headset",
 		identifiedResourceName = "선글래스",
 		identifiedDescriptionName = {
-			"Enables to detect hiding or cloaking entities.",
-			"Reduces fixed casting time by 0.5 seconds.",
-			"Increases melee physical damage by 10%.",
-			"Increases long ranged physical damage by 10%.",
-			"Increases all property magical damage by 10%.",
-			"Reduces damage taken from demihuman race monsters and players by 5%.",
-			"Reduces global cooldown by 5%.",
-			"",
-			"^ff0000Account-bound.^000000",
-			"^ff0000All effects are disabled in WoE TE.^000000",
-			"",
-			"Class: ^777777Headgear ^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^77777710^000000",
-			"Required Level: ^7777771^000000",
+			"Enables to detect hiding or cloaking entities.",
+			"Reduces fixed casting time by 0.5 seconds.",
+			"Increases melee physical damage by 10%.",
+			"Increases long ranged physical damage by 10%.",
+			"Increases all property magical damage by 10%.",
+			"Reduces damage taken from demihuman race monsters and players by 5%.",
+			"Reduces global cooldown by 5%.",
+			"",
+			"^ff0000Account-bound.^000000",
+			"^ff0000All effects are disabled in WoE TE.^000000",
+			"",
+			"Class: ^777777Headgear ^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^77777710^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -50556,17 +50556,17 @@ tbl = {
 		identifiedDisplayName = "Ears of Grisly Soul",
 		identifiedResourceName = "Grisly_Soul",
 		identifiedDescriptionName = {
-			"Increases physical damage against small, medium and large size monsters by 10%.",
-			"Reduces damage taken from players by 5%.",
-			"Skill casting can't be interrupted.",
-			"If user learned Earth Shaker level 5, reduces fixed casting time of Lion's Howl by 100%, reduces skill cooldown of Lion's Howl by 9.5 seconds,",
-			"when equipped with Devil's Hand, the skill cooldown reduction of Lion's Howl is disabled.",
-			"If user learned Lightning Ride level 5, attack speed + 15%.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777772^000000",
-			"Location: ^777777Middle^000000",
-			"Weight: ^77777730^000000",
-			"Required Level: ^777777100^000000",
+			"Increases physical damage against small, medium and large size monsters by 10%.",
+			"Reduces damage taken from players by 5%.",
+			"Skill casting can't be interrupted.",
+			"If user learned Earth Shaker level 5, reduces fixed casting time of Lion's Howl by 100%, reduces skill cooldown of Lion's Howl by 9.5 seconds,",
+			"when equipped with Devil's Hand, the skill cooldown reduction of Lion's Howl is disabled.",
+			"If user learned Lightning Ride level 5, attack speed + 15%.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777772^000000",
+			"Location: ^777777Middle^000000",
+			"Weight: ^77777730^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All^000000",
 		},
 		slotCount = 0,
@@ -50579,45 +50579,45 @@ tbl = {
 		identifiedDisplayName = "Raven of Tomb",
 		identifiedResourceName = "수다쟁이까마귀",
 		identifiedDescriptionName = {
-			"The immortal soul of the wicked raven awakens!",
-			"",
-			"If Pure STR is 100,",
-			"Physical damage to all enemies +4%, HIT+10.",
-			"",
-			"If Pure STR is 120,",
-			"Physical damage to all enemies +6%, HIT+10 additionally.",
-			"",
-			"If Pure INT is 100,",
-			"MATK +4%, magical damage to all property enemies +4%.",
-			"",
-			"If Pure INT is 120,",
-			"MATK +6%, magical damage to all property enemies +6% additionally.",
-			"",
-			"If Pure DEX is 100,",
-			"CRIT +4, delay after skill -3%.",
-			"",
-			"If Pure DEX is 120,",
-			"CRIT +6, delay after skill -3% additionally.",
-			"",
-			"If Pure VIT is 100,",
-			"Max HP +4%, Increase ASPD(delay after attack -4%)",
-			"",
-			"If Pure VIT is 120,",
-			"Max HP +4%, Increase ASPD(delay after attack -4%) additionally.",
-			"",
-			"If Pure LUK is 100, ATK +20, MATK +20.",
-			"",
-			"If Pure LUK is 120, ATK +40, MATK +40 additionally.",
-			"",
-			"If Pure AGI is 100,",
-			"Flee +10 ,Critical Damage +7%.",
-			"",
-			"If Pure AGI is 120,",
-			"Flee +10, Critical Damage +7% additionally.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^77777710^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777771^000000",
-			"Required Level: ^777777100^000000",
+			"The immortal soul of the wicked raven awakens!",
+			"",
+			"If Pure STR is 100,",
+			"Physical damage to all enemies +4%, HIT+10.",
+			"",
+			"If Pure STR is 120,",
+			"Physical damage to all enemies +6%, HIT+10 additionally.",
+			"",
+			"If Pure INT is 100,",
+			"MATK +4%, magical damage to all property enemies +4%.",
+			"",
+			"If Pure INT is 120,",
+			"MATK +6%, magical damage to all property enemies +6% additionally.",
+			"",
+			"If Pure DEX is 100,",
+			"CRIT +4, delay after skill -3%.",
+			"",
+			"If Pure DEX is 120,",
+			"CRIT +6, delay after skill -3% additionally.",
+			"",
+			"If Pure VIT is 100,",
+			"Max HP +4%, Increase ASPD(delay after attack -4%)",
+			"",
+			"If Pure VIT is 120,",
+			"Max HP +4%, Increase ASPD(delay after attack -4%) additionally.",
+			"",
+			"If Pure LUK is 100, ATK +20, MATK +20.",
+			"",
+			"If Pure LUK is 120, ATK +40, MATK +40 additionally.",
+			"",
+			"If Pure AGI is 100,",
+			"Flee +10 ,Critical Damage +7%.",
+			"",
+			"If Pure AGI is 120,",
+			"Flee +10, Critical Damage +7% additionally.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^77777710^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777771^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -50760,13 +50760,13 @@ tbl = {
 		identifiedDisplayName = "Magic Celestial Globe",
 		identifiedResourceName = "Magic_Celestial_Globe",
 		identifiedDescriptionName = {
-			"Atk + 1 and Matk + 1 per 1 base level.",
-			"When equipped with [Zodiac] enchant, all basic status + 10.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777772^000000",
-			"Location: ^777777Middle^000000",
-			"Weight: ^77777710^000000",
-			"Required Level: ^777777100^000000",
+			"Atk + 1 and Matk + 1 per 1 base level.",
+			"When equipped with [Zodiac] enchant, all basic status + 10.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777772^000000",
+			"Location: ^777777Middle^000000",
+			"Weight: ^77777710^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All^000000",
 		},
 		slotCount = 0,
@@ -50938,9 +50938,9 @@ tbl = {
 		identifiedDisplayName = "Costume: Fluffy Lovely Fox",
 		identifiedResourceName = "Fluffy_Lovely_Fox",
 		identifiedDescriptionName = {
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All^000000",
 		},
 		slotCount = 0,
@@ -51291,17 +51291,17 @@ tbl = {
 		identifiedDisplayName = "[NFS]Crow Tengu Mask",
 		identifiedResourceName = "까마귀천구의가면",
 		identifiedDescriptionName = {
-			"^ff0000This item cannot be traded with other accounts.^000000",
-			"A mask that carries the grudge of its previous owner.",
-			"",
-			"Damage to all sizes enemies +1%.",
-			"Ranged physical damage +2%.",
-			"If pure STR is 108 or above, damage to all sizes enemies +1% & ranged physical damage +2% additionally.",
-			"If pure STR is 120 or above, damage to all sizes enemies +2% & ranged physical damage +3% additionally.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777773^000000",
-			"Required Level: ^77777780^000000",
+			"^ff0000This item cannot be traded with other accounts.^000000",
+			"A mask that carries the grudge of its previous owner.",
+			"",
+			"Damage to all sizes enemies +1%.",
+			"Ranged physical damage +2%.",
+			"If pure STR is 108 or above, damage to all sizes enemies +1% & ranged physical damage +2% additionally.",
+			"If pure STR is 120 or above, damage to all sizes enemies +2% & ranged physical damage +3% additionally.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777773^000000",
+			"Required Level: ^77777780^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -51669,12 +51669,12 @@ tbl = {
 		identifiedDisplayName = "[NFS]Sunglasses",
 		identifiedResourceName = "선글래스",
 		identifiedDescriptionName = {
-			"^ff0000This item cannot be traded with other accounts.^000000",
-			"Glasses with special, darkened lenses that block ultraviolet light.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^77777710^000000",
-			"Required Level: ^7777771^000000",
+			"^ff0000This item cannot be traded with other accounts.^000000",
+			"Glasses with special, darkened lenses that block ultraviolet light.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^77777710^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -51702,12 +51702,12 @@ tbl = {
 		identifiedDisplayName = "[NFS] Little Abyss Dragon",
 		identifiedResourceName = "C_Little_Abyss_Dragon",
 		identifiedDescriptionName = {
-			"A small dragon born from the abyss.",
-			"It has the property of growing using its owner's emotions as food, and depending on its properties, it can bring about glory or destruction.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"A small dragon born from the abyss.",
+			"It has the property of growing using its owner's emotions as food, and depending on its properties, it can bring about glory or destruction.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Middle^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -52758,13 +52758,13 @@ tbl = {
 		identifiedDisplayName = "Aura of Passion",
 		identifiedResourceName = "Love_Feeling",
 		identifiedDescriptionName = {
-			"Hearts flying around that show the full depth of your feelings.",
-			"",
-			"When attacking using magical attacks, has 1% chance to restore 400 HP and 80 SP per second for 10 seconds.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
-			"Location: ^777777Lower ^000000 Weight: ^77777730^000000",
-			"Required Level: ^7777771^000000",
+			"Hearts flying around that show the full depth of your feelings.",
+			"",
+			"When attacking using magical attacks, has 1% chance to restore 400 HP and 80 SP per second for 10 seconds.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
+			"Location: ^777777Lower ^000000 Weight: ^77777730^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -53317,14 +53317,14 @@ tbl = {
 		identifiedDisplayName = "Yesterday Once More",
 		identifiedResourceName = "Yesterday_Once_More",
 		identifiedDescriptionName = {
-			"Mdef + 5.",
-			"Attack speed + 10%.",
-			"When equipped with [King of Origin] enchant, increases physical and magical damage against small, medium and large size monsters by 15%.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
-			"Location: ^777777Lower^000000",
-			"Weight: ^77777750^000000",
-			"Required Level: ^777777100^000000",
+			"Mdef + 5.",
+			"Attack speed + 10%.",
+			"When equipped with [King of Origin] enchant, increases physical and magical damage against small, medium and large size monsters by 15%.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
+			"Location: ^777777Lower^000000",
+			"Weight: ^77777750^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All^000000",
 		},
 		slotCount = 0,
@@ -53717,20 +53717,20 @@ tbl = {
 		identifiedDisplayName = "[NFS]Tengu Blank Scroll",
 		identifiedResourceName = "천구의두루마리",
 		identifiedDescriptionName = {
-			"^ff0000This item cannot be traded with other accounts.^000000",
-			"Has chance to absorb 5% of physical damage dealt to enemy as HP.",
-			"",
-			"Equip with ^008080Crow Tengu Mask^000000 or ^008080[NFS]Crow Tengu Mask^000000,",
-			"Physical damage +1%.",
-			"Ranged physical damage +2%.",
-			"",
-			"If pure STR is 108 or above, physical damage +2% additionally, ranged physical damage +1% additionally.",
-			"",
-			"If pure STR is 120 or above, physical damage +3% additionally, ranged physical damage +1% additionally.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
-			"Location: ^777777Lower ^000000 Weight: ^77777730^000000",
-			"Required Level: ^77777740^000000",
+			"^ff0000This item cannot be traded with other accounts.^000000",
+			"Has chance to absorb 5% of physical damage dealt to enemy as HP.",
+			"",
+			"Equip with ^008080Crow Tengu Mask^000000 or ^008080[NFS]Crow Tengu Mask^000000,",
+			"Physical damage +1%.",
+			"Ranged physical damage +2%.",
+			"",
+			"If pure STR is 108 or above, physical damage +2% additionally, ranged physical damage +1% additionally.",
+			"",
+			"If pure STR is 120 or above, physical damage +3% additionally, ranged physical damage +1% additionally.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
+			"Location: ^777777Lower ^000000 Weight: ^77777730^000000",
+			"Required Level: ^77777740^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -53781,15 +53781,15 @@ tbl = {
 		identifiedDisplayName = "[NFS]Panda Bear Balloon",
 		identifiedResourceName = "판다풍선",
 		identifiedDescriptionName = {
-			"^ff0000This item cannot be traded with other accounts.^000000",
-			"A cute panda balloon!",
-			"",
-			"All State +1, Atk Speed1.",
-			"Unable to refine and indestructible.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
-			"Location: ^777777Lower ^000000 Weight: ^77777720^000000",
-			"Required Level: ^7777771^000000",
+			"^ff0000This item cannot be traded with other accounts.^000000",
+			"A cute panda balloon!",
+			"",
+			"All State +1, Atk Speed1.",
+			"Unable to refine and indestructible.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
+			"Location: ^777777Lower ^000000 Weight: ^77777720^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -53910,11 +53910,11 @@ tbl = {
 		identifiedDisplayName = "Hero Cloth",
 		identifiedResourceName = "c_protect_cloth_b",
 		identifiedDescriptionName = {
-			"Every 10 base levels, increases physical and magical damage against small, medium and large size monsters by 1%.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
-			"Location: ^777777Lower^000000 Weight: ^77777710^000000",
-			"Required Level: ^777777100^000000",
+			"Every 10 base levels, increases physical and magical damage against small, medium and large size monsters by 1%.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
+			"Location: ^777777Lower^000000 Weight: ^77777710^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -54370,14 +54370,14 @@ tbl = {
 		identifiedDisplayName = "Rinrin Nyanka Bell",
 		identifiedResourceName = "Sound_of_Catbell",
 		identifiedDescriptionName = {
-			"Increases heal effectiveness of heal skills by 10%.",
-			"If user learned Spirit Of Sea level 1, reduces fixed casting time of Tuna Party by 1 second.",
-			"For each level of Purring user learned, MaxHP + 3%.",
-			"―――――――――――――",
-			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
-			"Location: ^777777Lower^000000",
-			"Weight: ^77777710^000000",
-			"Required Level: ^777777100^000000",
+			"Increases heal effectiveness of heal skills by 10%.",
+			"If user learned Spirit Of Sea level 1, reduces fixed casting time of Tuna Party by 1 second.",
+			"For each level of Purring user learned, MaxHP + 3%.",
+			"―――――――――――――",
+			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
+			"Location: ^777777Lower^000000",
+			"Weight: ^77777710^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777Summoner Class^000000",
 		},
 		slotCount = 0,
@@ -54412,28 +54412,28 @@ tbl = {
 		identifiedDisplayName = "[NFS]Mob Scarf",
 		identifiedResourceName = "폭주의스카프",
 		identifiedDescriptionName = {
-			"^ff0000This item cannot be traded with other accounts.^000000",
-			"A scarf worn during a revolt. It gives the user the courage they need to never yield to anyone!",
-			"",
-			"Able to cast Lv2 [Spell Breaker].",
-			"",
-			"Equip with ^008080Sunglasses^000000, ^008080[NFS]Sunglasses^000000 or ^008080Glasses^000000:",
-			"",
-			"For every pure 80 stats (STR+LUK),",
-			"Physical damage to all classes (Normal, Boss, Guardian) enemies +6%.",
-			"CRIT +5, Critical Damage +10%.",
-			"",
-			"For every pure 80 stats (INT+DEX),",
-			"MATK +120, variable cast time -3%.",
-			"HP recovery +10% when using Heal skills.",
-			"",
-			"For every pure 80 stats (AGI+VIT),",
-			"Increase ASPD(delay after attack -5%), Max HP +5%.",
-			"Damage taken from Players -2%.",
-			"",
-			"Class: ^777777Headgear^000000 Defense : ^7777770^000000",
-			"Location : ^777777Lower ^000000 Weight: ^77777710^000000",
-			"Required Level : ^777777100^000000",
+			"^ff0000This item cannot be traded with other accounts.^000000",
+			"A scarf worn during a revolt. It gives the user the courage they need to never yield to anyone!",
+			"",
+			"Able to cast Lv2 [Spell Breaker].",
+			"",
+			"Equip with ^008080Sunglasses^000000, ^008080[NFS]Sunglasses^000000 or ^008080Glasses^000000:",
+			"",
+			"For every pure 80 stats (STR+LUK),",
+			"Physical damage to all classes (Normal, Boss, Guardian) enemies +6%.",
+			"CRIT +5, Critical Damage +10%.",
+			"",
+			"For every pure 80 stats (INT+DEX),",
+			"MATK +120, variable cast time -3%.",
+			"HP recovery +10% when using Heal skills.",
+			"",
+			"For every pure 80 stats (AGI+VIT),",
+			"Increase ASPD(delay after attack -5%), Max HP +5%.",
+			"Damage taken from Players -2%.",
+			"",
+			"Class: ^777777Headgear^000000 Defense : ^7777770^000000",
+			"Location : ^777777Lower ^000000 Weight: ^77777710^000000",
+			"Required Level : ^777777100^000000",
 			"Jobs : ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -54627,12 +54627,12 @@ tbl = {
 		identifiedDisplayName = "Book of Destruction",
 		identifiedResourceName = "C_Spinning_Skulls",
 		identifiedDescriptionName = {
-			"Reduces damage taken from players by 3%.",
-			"Every 10 base levels, increases physical and magical damage against small, medium and large size monsters by 1%.",
-			"―――――――――――――",
-			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
-			"Location: ^777777Lower^000000 Weight: ^77777710^000000",
-			"Required Level: ^777777100^000000",
+			"Reduces damage taken from players by 3%.",
+			"Every 10 base levels, increases physical and magical damage against small, medium and large size monsters by 1%.",
+			"―――――――――――――",
+			"Class: ^777777Headgear^000000 Defense: ^7777770^000000",
+			"Location: ^777777Lower^000000 Weight: ^77777710^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All^000000",
 		},
 		slotCount = 0,
@@ -55597,19 +55597,19 @@ tbl = {
 		identifiedDisplayName = "[NFS]Helm of Death",
 		identifiedResourceName = "죽은자의투구",
 		identifiedDescriptionName = {
-			"^ff0000This item cannot be traded with other accounts.^000000",
-			"The helm of the Lord of the Dead Helm.",
-			"",
-			"All Stats +1, MDEF+5.",
-			"Physical damage to Boss class enemies +10%.",
-			"Damage taken from Normal class enemies +5%.",
-			"",
-			"For every refine level after +4, physical damage to Boss class enemies +1%.",
-			"",
-			"Class: ^777777Headgear^000000 Defense: ^77777710^000000",
-			"Location: ^777777Upper/Middle^000000",
-			"Weight: ^777777100^000000",
-			"Required Level: ^77777770^000000",
+			"^ff0000This item cannot be traded with other accounts.^000000",
+			"The helm of the Lord of the Dead Helm.",
+			"",
+			"All Stats +1, MDEF+5.",
+			"Physical damage to Boss class enemies +10%.",
+			"Damage taken from Normal class enemies +5%.",
+			"",
+			"For every refine level after +4, physical damage to Boss class enemies +1%.",
+			"",
+			"Class: ^777777Headgear^000000 Defense: ^77777710^000000",
+			"Location: ^777777Upper/Middle^000000",
+			"Weight: ^777777100^000000",
+			"Required Level: ^77777770^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -55866,21 +55866,21 @@ tbl = {
 		identifiedDisplayName = "Kukulkan Skin",
 		identifiedResourceName = "흙빛의로브",
 		identifiedDescriptionName = {
-			"An armor made from the skin that fell off Kukulkan. It is said that those who can control the armor can gain great power.",
-			"",
-			"MHP+3%, Max SP +3%.",
-			"",
-			"Resistance against Neutral property attack +5%.",
-			"",
-			"If refine level is +7 or above, All Stats +1.",
-			"If refine level is +9 or above, damage taken from ranged physical damage -5%.",
-			"If refine level is +11 or above, resistance against Neutral property attack +3% additionally.",
-			"If refine level is +12 or above, Atk Speed1.",
-			"If refine level is +13 or above, able to cast Lv3 [Guard].",
-			"",
-			"Class: ^777777Armor^000000 Defense: ^77777740^000000",
-			"Weight:  ^777777250^000000",
-			"Required Level: ^77777770^000000",
+			"An armor made from the skin that fell off Kukulkan. It is said that those who can control the armor can gain great power.",
+			"",
+			"MHP+3%, Max SP +3%.",
+			"",
+			"Resistance against Neutral property attack +5%.",
+			"",
+			"If refine level is +7 or above, All Stats +1.",
+			"If refine level is +9 or above, damage taken from ranged physical damage -5%.",
+			"If refine level is +11 or above, resistance against Neutral property attack +3% additionally.",
+			"If refine level is +12 or above, Atk Speed1.",
+			"If refine level is +13 or above, able to cast Lv3 [Guard].",
+			"",
+			"Class: ^777777Armor^000000 Defense: ^77777740^000000",
+			"Weight:  ^777777250^000000",
+			"Required Level: ^77777770^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -55982,28 +55982,28 @@ tbl = {
 		identifiedDisplayName = "Fallen Angel Armor",
 		identifiedResourceName = "화염의갑옷",
 		identifiedDescriptionName = {
-			"An armor worn by Fallen Angel.",
-			"",
-			"Indestructible.",
-			"",
-			"MDEF+5, All Stats +1.",
-			"",
-			"Damage taken from Holy property attack +10%, damage taken from Angel monsters +15%.",
-			"Resistance against Demon, Demi-human enemies +5%.",
-			"",
-			"If refine level is +7 or above, Max HP +5%.",
-			"If refine level is +9 or above, resistance against Demon, Demi-human enemies +5% additionally.",
-			"If refine level is +11 or above, variable cast time -8%.",
-			"",
-			"Equip with +9 or above ^008080Fallen Angel Wing^000000,",
-			"resistance to all races except Angel enemies +3%.",
-			"",
-			"Equip with +9 or above ^008080[Kachua]Fallen Angel Wing^000000,",
-			"Physical and magic damage to all class enemies +7%.",
-			"",
-			"Class: ^777777Armor^000000  Defense: ^77777750^000000",
-			"Weight: ^777777100^000000",
-			"Required Level: ^77777730^000000",
+			"An armor worn by Fallen Angel.",
+			"",
+			"Indestructible.",
+			"",
+			"MDEF+5, All Stats +1.",
+			"",
+			"Damage taken from Holy property attack +10%, damage taken from Angel monsters +15%.",
+			"Resistance against Demon, Demi-human enemies +5%.",
+			"",
+			"If refine level is +7 or above, Max HP +5%.",
+			"If refine level is +9 or above, resistance against Demon, Demi-human enemies +5% additionally.",
+			"If refine level is +11 or above, variable cast time -8%.",
+			"",
+			"Equip with +9 or above ^008080Fallen Angel Wing^000000,",
+			"resistance to all races except Angel enemies +3%.",
+			"",
+			"Equip with +9 or above ^008080[Kachua]Fallen Angel Wing^000000,",
+			"Physical and magic damage to all class enemies +7%.",
+			"",
+			"Class: ^777777Armor^000000  Defense: ^77777750^000000",
+			"Weight: ^777777100^000000",
+			"Required Level: ^77777730^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -56418,19 +56418,19 @@ tbl = {
 		identifiedDisplayName = "Requiescat in Pace",
 		identifiedResourceName = "Requiescat_in_Pace",
 		identifiedDescriptionName = {
-			"Can't be destroyed.",
-			"Mdef + 15.",
-			"Attack speed + 10%.",
-			"Increases physical and magical damage against fish, demihuman race monsters and doram players by 40%.",
-			"Increases physical and magical damage against holy and neutral property monsters by 40%.",
-			"Reduces damage taken from poison property by 2% per refine rate.",
-			"If refine rate is 5 or higher, reduces damage taken from players by 7%, Def + 300, Mdef + 30.",
-			"If refine rate is 7 or higher, increases movement speed.",
-			"When equipped with Murderous Grudge, Perfect Hit + 25.",
-			"",
-			"Class: ^777777Armor^000000 Defense: ^777777150^000000",
-			"Weight: ^777777100^000000",
-			"Required Level: ^77777790^000000",
+			"Can't be destroyed.",
+			"Mdef + 15.",
+			"Attack speed + 10%.",
+			"Increases physical and magical damage against fish, demihuman race monsters and doram players by 40%.",
+			"Increases physical and magical damage against holy and neutral property monsters by 40%.",
+			"Reduces damage taken from poison property by 2% per refine rate.",
+			"If refine rate is 5 or higher, reduces damage taken from players by 7%, Def + 300, Mdef + 30.",
+			"If refine rate is 7 or higher, increases movement speed.",
+			"When equipped with Murderous Grudge, Perfect Hit + 25.",
+			"",
+			"Class: ^777777Armor^000000 Defense: ^777777150^000000",
+			"Weight: ^777777100^000000",
+			"Required Level: ^77777790^000000",
 			"Jobs: ^777777All^000000",
 		},
 		slotCount = 1,
@@ -57338,15 +57338,15 @@ tbl = {
 		identifiedDisplayName = "Costume: Petal (Albino)",
 		identifiedResourceName = "코튼셔츠",
 		identifiedDescriptionName = {
-			"Reduces damage taken from players by 7%.",
-			"Every 10 base levels, increases Petitio and Effligo damage by 1%.",
-			"Every refine rate, increases physical damage against small, medium and large size monsters by 7%.",
-			"If refine rate is 7 or higher, attack speed + 10%, reduces damage taken from normal and boss monsters by 5%.",
-			"If refine rate is 9 or higher, the armor can't be destroyed, Every 1 base level, increases Duple Light damage by 2%.",
-			"",
-			"Class: ^777777Armor^000000 Defense: ^777777100^000000",
-			"Weight: ^777777100^000000",
-			"Required Level: ^777777200^000000",
+			"Reduces damage taken from players by 7%.",
+			"Every 10 base levels, increases Petitio and Effligo damage by 1%.",
+			"Every refine rate, increases physical damage against small, medium and large size monsters by 7%.",
+			"If refine rate is 7 or higher, attack speed + 10%, reduces damage taken from normal and boss monsters by 5%.",
+			"If refine rate is 9 or higher, the armor can't be destroyed, Every 1 base level, increases Duple Light damage by 2%.",
+			"",
+			"Class: ^777777Armor^000000 Defense: ^777777100^000000",
+			"Weight: ^777777100^000000",
+			"Required Level: ^777777200^000000",
 			"Jobs: ^777777Cardinal^000000",
 		},
 		slotCount = 1,
@@ -57609,12 +57609,12 @@ tbl = {
 		identifiedDisplayName = "Spenta Mainyu",
 		identifiedResourceName = "Spenta_Mainyu",
 		identifiedDescriptionName = {
-			"Mdef + 10.",
-			"Reduces damage taken from demihuman and angel race monsters by 5%.",
-			"",
-			"Class: ^777777Shield^000000 Defense: ^777777100^000000",
-			"Weight: ^77777760^000000",
-			"Required Level: ^77777790^000000",
+			"Mdef + 10.",
+			"Reduces damage taken from demihuman and angel race monsters by 5%.",
+			"",
+			"Class: ^777777Shield^000000 Defense: ^777777100^000000",
+			"Weight: ^77777760^000000",
+			"Required Level: ^77777790^000000",
 			"Jobs: ^777777All^000000",
 		},
 		slotCount = 1,
@@ -59107,25 +59107,25 @@ tbl = {
 		identifiedDisplayName = "Laphine Pray Shoes",
 		identifiedResourceName = "Peep_Toe_Sandals",
 		identifiedDescriptionName = {
-			"MATK +30",
-			"For every 3 level of [Freezing Spell], MATK + 2%, delay after skill -2%.",
-			"",
-			"Equip with ^008080Laphine Shield^000000, delay after skill -3%,",
-			"increase ASPD (delay after attack -10%),",
-			"For every 2 refine level of Laphine Pray Shoes, fixed cast time -0.1seconds.",
-			"",
-			"Equip with ^008080Kardui Ear^000000, MATK +30 and [Comet] Cooldown -20seconds.",
-			"",
-			"Equip with ^008080Tree Sprout^000000,",
-			"has a chance INT +150 for 10 seconds upon inflicting magical attack, consuming 100 SP per second.",
-			"",
-			"Equip with ^008080Nidhoggur Shadow Card^000000,",
-			"magical damage to Boss monster +40%,",
-			"Resistance against all property attack -20%.",
-			"",
-			"Class: ^777777Shoes^000000 Defense: ^77777720^000000",
-			"Weight: ^77777720^000000",
-			"Required Level: ^777777100^000000",
+			"MATK +30",
+			"For every 3 level of [Freezing Spell], MATK + 2%, delay after skill -2%.",
+			"",
+			"Equip with ^008080Laphine Shield^000000, delay after skill -3%,",
+			"increase ASPD (delay after attack -10%),",
+			"For every 2 refine level of Laphine Pray Shoes, fixed cast time -0.1seconds.",
+			"",
+			"Equip with ^008080Kardui Ear^000000, MATK +30 and [Comet] Cooldown -20seconds.",
+			"",
+			"Equip with ^008080Tree Sprout^000000,",
+			"has a chance INT +150 for 10 seconds upon inflicting magical attack, consuming 100 SP per second.",
+			"",
+			"Equip with ^008080Nidhoggur Shadow Card^000000,",
+			"magical damage to Boss monster +40%,",
+			"Resistance against all property attack -20%.",
+			"",
+			"Class: ^777777Shoes^000000 Defense: ^77777720^000000",
+			"Weight: ^77777720^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -60544,22 +60544,22 @@ tbl = {
 		identifiedDisplayName = "Dragon Slayer's Shoes",
 		identifiedResourceName = "FrontiaBoots",
 		identifiedDescriptionName = {
-			"The shoes worn by the dragon conqueror.",
-			"",
-			"Max HP +1,000, Max SP +200",
-			"If refine level is +7 or above,",
-			"EXP gain from monsters +8%.",
-			"",
-			"If refine level is +9 or above,",
-			"physical and magic damage to Dragon, Insect monsters +15%.",
-			"",
-			"If refine level is +11 or above,",
-			"physical and magic damage taken from Dragon, Insect monsters -20%.",
-			"",
-			"Class: ^777777Shoes^000000",
-			"Defense: ^77777730^000000",
-			"Weight: ^77777790^000000",
-			"Required Level: ^77777730^000000",
+			"The shoes worn by the dragon conqueror.",
+			"",
+			"Max HP +1,000, Max SP +200",
+			"If refine level is +7 or above,",
+			"EXP gain from monsters +8%.",
+			"",
+			"If refine level is +9 or above,",
+			"physical and magic damage to Dragon, Insect monsters +15%.",
+			"",
+			"If refine level is +11 or above,",
+			"physical and magic damage taken from Dragon, Insect monsters -20%.",
+			"",
+			"Class: ^777777Shoes^000000",
+			"Defense: ^77777730^000000",
+			"Weight: ^77777790^000000",
+			"Required Level: ^77777730^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -60964,22 +60964,22 @@ tbl = {
 		identifiedDisplayName = "Nameless Swordsman Boots",
 		identifiedResourceName = "Arrogance_P_Shoes",
 		identifiedDescriptionName = {
-			"The shoes of a terrifying, nameless Swordsman.",
-			"No one who left to discover his name returned alive.",
-			"",
-			"Physical damage to Boss monster +15%.",
-			"",
-			"For every 2 refine level,",
-			"ATK +10",
-			"Increase ASPD (delay after attack -2%),",
-			"Max HP / Max SP +2%",
-			"",
-			"Equip with ^008080Sealed Egnigem Card^000000 or ^008080Boss Egnigem Card^000000, restores 5000 HP and 50 SP every 10 seconds.",
-			"",
-			"For every 3 refine level, STR +10, FLEE +10",
-			"",
-			"Class: ^777777Shoes^000000 Defense: ^77777760^000000",
-			"Weight: ^777777120^000000 Required Level: ^777777100^000000",
+			"The shoes of a terrifying, nameless Swordsman.",
+			"No one who left to discover his name returned alive.",
+			"",
+			"Physical damage to Boss monster +15%.",
+			"",
+			"For every 2 refine level,",
+			"ATK +10",
+			"Increase ASPD (delay after attack -2%),",
+			"Max HP / Max SP +2%",
+			"",
+			"Equip with ^008080Sealed Egnigem Card^000000 or ^008080Boss Egnigem Card^000000, restores 5000 HP and 50 SP every 10 seconds.",
+			"",
+			"For every 3 refine level, STR +10, FLEE +10",
+			"",
+			"Class: ^777777Shoes^000000 Defense: ^77777760^000000",
+			"Weight: ^777777120^000000 Required Level: ^777777100^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -62130,19 +62130,19 @@ tbl = {
 		identifiedDisplayName = "Warm Dandelion Cape",
 		identifiedResourceName = "후드",
 		identifiedDescriptionName = {
-			"Attack speed + 5%.",
-			"MaxHP + 5%.",
-			"Reduces damage taken from players by 5%.",
-			"If user learned Spirit of Land level 1, int + 1 and increases Silvervine Stem Spear by 1% per each skill of plant type skills user learned.",
-			"Recovers 1 SP when dealing damage per each level of Chattering user learned.",
-			"Increases Catnip Meteor damage by 10% per each level of Nyang Grass user learned.",
-			"If user leanred Meow Meow level 5, recovers 150 HP and 15 SP when killing monsters with magical damage.",
-			"If refine rate is 5 or higher, attack speed + 5%, MaxHP + 5%.",
-			"If refine rate is 7 or higher, attack speed + 10%, MaxHP + 10%.",
-			"",
-			"Class: ^777777Garment^000000 Defense: ^77777712^000000",
-			"Weight: ^77777710^000000",
-			"Required Level: ^777777100^000000",
+			"Attack speed + 5%.",
+			"MaxHP + 5%.",
+			"Reduces damage taken from players by 5%.",
+			"If user learned Spirit of Land level 1, int + 1 and increases Silvervine Stem Spear by 1% per each skill of plant type skills user learned.",
+			"Recovers 1 SP when dealing damage per each level of Chattering user learned.",
+			"Increases Catnip Meteor damage by 10% per each level of Nyang Grass user learned.",
+			"If user leanred Meow Meow level 5, recovers 150 HP and 15 SP when killing monsters with magical damage.",
+			"If refine rate is 5 or higher, attack speed + 5%, MaxHP + 5%.",
+			"If refine rate is 7 or higher, attack speed + 10%, MaxHP + 10%.",
+			"",
+			"Class: ^777777Garment^000000 Defense: ^77777712^000000",
+			"Weight: ^77777710^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All^000000",
 		},
 		slotCount = 1,
@@ -62473,19 +62473,19 @@ tbl = {
 		identifiedDisplayName = "[NFS]Candy Bag Poring Pet Backpack (Physical)",
 		identifiedResourceName = "안토니오가방",
 		identifiedDescriptionName = {
-			"^ff0000This item can not be traded with other accounts.^000000",
-			"A bag stuffed with candies.",
-			"By carrying a magical bag, you can acquire a variety of effects.",
-			"",
-			"For every 2 refine level, ATK + 1%.",
-			"If refine level is +9 or above, increase ASPD(delay after attack -10%).",
-			"If refine level is +12 or above, delay after skill -7%.",
-			"If base level is under 100, EXP gain from monster +10%.",
-			"If base level is 100 or above, EXP gain from monster +4%.",
-			"",
-			"Class: ^777777Garment^000000 Defense: ^77777730^000000",
-			"Weight: ^77777720^000000",
-			"Required Level: ^7777771^000000",
+			"^ff0000This item can not be traded with other accounts.^000000",
+			"A bag stuffed with candies.",
+			"By carrying a magical bag, you can acquire a variety of effects.",
+			"",
+			"For every 2 refine level, ATK + 1%.",
+			"If refine level is +9 or above, increase ASPD(delay after attack -10%).",
+			"If refine level is +12 or above, delay after skill -7%.",
+			"If base level is under 100, EXP gain from monster +10%.",
+			"If base level is 100 or above, EXP gain from monster +4%.",
+			"",
+			"Class: ^777777Garment^000000 Defense: ^77777730^000000",
+			"Weight: ^77777720^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -62498,28 +62498,28 @@ tbl = {
 		identifiedDisplayName = "DID Cape",
 		identifiedResourceName = "마법의스톨",
 		identifiedDescriptionName = {
-			"A cape said to whisper into the wearer's ear, \"Succumb to this madness.\"",
-			"",
-			"ATK +30",
-			"For every 3 refine level, HIT +8.",
-			"For every 4 refine level, melee physical damage +3%.",
-			"",
-			"If refine level is +11 or above,",
-			"HIT +30,",
-			"All Stats +5,",
-			"Melee physical damage +5% additionally.",
-			"",
-			"When equipped by ^3e71f0Guillotine Cross^000000 class and refine level is +9 or above,",
-			"delay after skill -5%,",
-			"Increases ASPD(delay after attack -20%).",
-			"",
-			"When equipped by ^3e71f0Royal Guard^000000 class and refine level is +9 or above,",
-			"HIT +20 additionally,",
-			"After using [Earth Drive], [Shield Press] damage +30% for 60 seconds.",
-			"",
-			"Class: ^777777Garment^000000 Defense: ^7777778^000000",
-			"Weight:  ^77777720^000000",
-			"Required Level: ^777777100^000000",
+			"A cape said to whisper into the wearer's ear, \"Succumb to this madness.\"",
+			"",
+			"ATK +30",
+			"For every 3 refine level, HIT +8.",
+			"For every 4 refine level, melee physical damage +3%.",
+			"",
+			"If refine level is +11 or above,",
+			"HIT +30,",
+			"All Stats +5,",
+			"Melee physical damage +5% additionally.",
+			"",
+			"When equipped by ^3e71f0Guillotine Cross^000000 class and refine level is +9 or above,",
+			"delay after skill -5%,",
+			"Increases ASPD(delay after attack -20%).",
+			"",
+			"When equipped by ^3e71f0Royal Guard^000000 class and refine level is +9 or above,",
+			"HIT +20 additionally,",
+			"After using [Earth Drive], [Shield Press] damage +30% for 60 seconds.",
+			"",
+			"Class: ^777777Garment^000000 Defense: ^7777778^000000",
+			"Weight:  ^77777720^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -63178,25 +63178,25 @@ tbl = {
 		identifiedDisplayName = "Battle Surcoat",
 		identifiedResourceName = "BattleSurcoat",
 		identifiedDescriptionName = {
-			"A replica of the surcoat which is worn by the lord of Amatsu Castle. Once worn, you will be able to move rapidly.",
-			"",
-			"Increase ASPD(delay after attack -3%), FLEE +10.",
-			"Able to use Lv3 [Double Attack],",
-			"Lv3 [Raging Trifecta Blow].",
-			"",
-			"If refine level is +11 or above,",
-			"Increase ASPD(delay after attack -3%), FLEE +10 additionally.",
-			"Able to use Lv5 [Double Attack],",
-			"Lv5 [Raging Trifecta Blow] instead.",
-			"",
-			"If refine level is +13 or above,",
-			"Increase ASPD(delay after attack -3%), FLEE +10 additionally.",
-			"Able to use Lv10 [Double Attack],",
-			"Lv10 [Raging Trifecta Blow] instead.",
-			"",
-			"Class: ^777777Garment^000000 Defense: ^77777710^000000",
-			"Weight: ^77777730^000000",
-			"Required Level: ^77777770^000000",
+			"A replica of the surcoat which is worn by the lord of Amatsu Castle. Once worn, you will be able to move rapidly.",
+			"",
+			"Increase ASPD(delay after attack -3%), FLEE +10.",
+			"Able to use Lv3 [Double Attack],",
+			"Lv3 [Raging Trifecta Blow].",
+			"",
+			"If refine level is +11 or above,",
+			"Increase ASPD(delay after attack -3%), FLEE +10 additionally.",
+			"Able to use Lv5 [Double Attack],",
+			"Lv5 [Raging Trifecta Blow] instead.",
+			"",
+			"If refine level is +13 or above,",
+			"Increase ASPD(delay after attack -3%), FLEE +10 additionally.",
+			"Able to use Lv10 [Double Attack],",
+			"Lv10 [Raging Trifecta Blow] instead.",
+			"",
+			"Class: ^777777Garment^000000 Defense: ^77777710^000000",
+			"Weight: ^77777730^000000",
+			"Required Level: ^77777770^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -63657,13 +63657,13 @@ tbl = {
 		identifiedDisplayName = "[NFS]Costume Valkyrie Wings",
 		identifiedResourceName = "C_Valkyrie_Wing",
 		identifiedDescriptionName = {
-			"^ff0000This cannot be traded with other accounts.^000000",
-			"Costume wings that spread around a Valkyrie's aura.",
-			"The feathers continue to flutter as if they are being blessed, but the feathers on the wings never disappear.",
-			"",
-			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
-			"Location: ^777777Garment ^000000 Weight: ^7777770^000000",
-			"Required Level: ^7777771^000000",
+			"^ff0000This cannot be traded with other accounts.^000000",
+			"Costume wings that spread around a Valkyrie's aura.",
+			"The feathers continue to flutter as if they are being blessed, but the feathers on the wings never disappear.",
+			"",
+			"Class: ^777777Costume^000000 Defense: ^7777770^000000",
+			"Location: ^777777Garment ^000000 Weight: ^7777770^000000",
+			"Required Level: ^7777771^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 0,
@@ -65033,24 +65033,24 @@ tbl = {
 		identifiedDisplayName = "Fallen Angel's Tear",
 		identifiedResourceName = "여신의눈물",
 		identifiedDescriptionName = {
-			"A jewel coagulated into a Fallen Angel's Tear.",
-			"ATK + 6%, MATK + 6%, HIT +15.",
-			"",
-			"Equip with ^008080[Kachua] Fallen Angel Wings^000000,",
-			"Physical, magical damage to all class monsters +4%.",
-			"",
-			"Equip with ^008080Fallen Angel Wing^000000 or ^008080[NFS]Fallen Angel Wing^000000,",
-			"Resistance against ^880000Stone Curse^000000 and ^880000Curse^000000 +40%.",
-			"",
-			"Equip with ^008080Fallen Angel Hairband^000000 or ^008080[NFS]Fallen Angel Hairband^000000,",
-			"variable cast time -5%.",
-			"",
-			"Equip with +9 or above ^008080Fallen Angel Armor^000000 or ^008080[NFS]Fallen Angel Armor^000000,",
-			"Max HP +8%.",
-			"",
-			"Class: ^777777Accessory^000000 Defense: ^7777770^000000",
-			"Weight: ^77777710^000000",
-			"Required Level: ^77777730^000000",
+			"A jewel coagulated into a Fallen Angel's Tear.",
+			"ATK + 6%, MATK + 6%, HIT +15.",
+			"",
+			"Equip with ^008080[Kachua] Fallen Angel Wings^000000,",
+			"Physical, magical damage to all class monsters +4%.",
+			"",
+			"Equip with ^008080Fallen Angel Wing^000000 or ^008080[NFS]Fallen Angel Wing^000000,",
+			"Resistance against ^880000Stone Curse^000000 and ^880000Curse^000000 +40%.",
+			"",
+			"Equip with ^008080Fallen Angel Hairband^000000 or ^008080[NFS]Fallen Angel Hairband^000000,",
+			"variable cast time -5%.",
+			"",
+			"Equip with +9 or above ^008080Fallen Angel Armor^000000 or ^008080[NFS]Fallen Angel Armor^000000,",
+			"Max HP +8%.",
+			"",
+			"Class: ^777777Accessory^000000 Defense: ^7777770^000000",
+			"Weight: ^77777710^000000",
+			"Required Level: ^77777730^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -65462,13 +65462,13 @@ tbl = {
 		identifiedDisplayName = "Omega Core",
 		identifiedResourceName = "Omega_Core",
 		identifiedDescriptionName = {
-			"Attack speed + 10%.",
-			"Increases physical damage by 10%.",
-			"When equipped with Whole Creation, all stat + 10, reduces delay after skill by 30%.",
-			"",
-			"Class: ^777777Accessory (Right)^000000 Defense: ^7777771^000000",
-			"Weight: ^77777750^000000",
-			"Required Level: ^777777100^000000",
+			"Attack speed + 10%.",
+			"Increases physical damage by 10%.",
+			"When equipped with Whole Creation, all stat + 10, reduces delay after skill by 30%.",
+			"",
+			"Class: ^777777Accessory (Right)^000000 Defense: ^7777771^000000",
+			"Weight: ^77777750^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All^000000",
 		},
 		slotCount = 0,
@@ -66954,31 +66954,31 @@ tbl = {
 		identifiedDisplayName = "Book of Justice",
 		identifiedResourceName = "Fate_MagicBook",
 		identifiedDescriptionName = {
-			"One of the symbols people associate with the goddess of justice turning away is the law book.",
-			"",
-			"MATK +10%.",
-			"Variable cast time -10%.",
-			"Delay after skill -5%.",
-			"",
-			"For every 5 base level,",
-			"[Genesis Ray] damage +1%.",
-			"",
-			"Equip with ^008080Dark Blinder^000000 or ^008080Dark Blinder[1]^000000,",
-			"Has 100% chance to autocast Lv.3 [Highness Heal] on the user upon casting [Genesis Ray].",
-			"(This effect does not activate if Base Level is 200 or above)",
-			"",
-			"Equip with ^008080Themis Libra^000000,",
-			"For every 3 refine level of Shield,",
-			"Variable cast time -3%,",
-			"Delay after skill -3%.",
-			"",
-			"Equip with ^008080Themis Libra^000000 and ^008080Dark Blinder/Dark Blinder[1]^000000,",
-			"For every 3 refine level of Shield,",
-			"magical damage to all property enemies +5%.",
-			"",
-			"Class: ^777777Accessory(Right)^000000 Defense: ^7777770^000000",
-			"Weight:  ^77777720^000000",
-			"Required Level: ^777777100^000000",
+			"One of the symbols people associate with the goddess of justice turning away is the law book.",
+			"",
+			"MATK +10%.",
+			"Variable cast time -10%.",
+			"Delay after skill -5%.",
+			"",
+			"For every 5 base level,",
+			"[Genesis Ray] damage +1%.",
+			"",
+			"Equip with ^008080Dark Blinder^000000 or ^008080Dark Blinder[1]^000000,",
+			"Has 100% chance to autocast Lv.3 [Highness Heal] on the user upon casting [Genesis Ray].",
+			"(This effect does not activate if Base Level is 200 or above)",
+			"",
+			"Equip with ^008080Themis Libra^000000,",
+			"For every 3 refine level of Shield,",
+			"Variable cast time -3%,",
+			"Delay after skill -3%.",
+			"",
+			"Equip with ^008080Themis Libra^000000 and ^008080Dark Blinder/Dark Blinder[1]^000000,",
+			"For every 3 refine level of Shield,",
+			"magical damage to all property enemies +5%.",
+			"",
+			"Class: ^777777Accessory(Right)^000000 Defense: ^7777770^000000",
+			"Weight:  ^77777720^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777All Jobs^000000",
 		},
 		slotCount = 1,
@@ -68829,24 +68829,24 @@ tbl = {
 		identifiedDisplayName = "[NFS]Super Novice Figure",
 		identifiedResourceName = "피규어",
 		identifiedDescriptionName = {
-			"^ff0000This item cannot be traded with other accounts.^000000",
-			"A powerful accessory only usable by Super Novice.",
-			"",
-			"Variable cast time -10%.",
-			"Physical and magic damage to all class enemies +10%.",
-			"",
-			"Equip on right accessory slot,",
-			"increase ASPD(delay after attack -10%)",
-			"For every 3 Base Level, [Rapid Smiting] damage +1%.",
-			"",
-			"Equip on left accessory slot,",
-			"MDEF pierce to all race monsters +50%.",
-			"[Psychic Wave] damage +20%.",
-			"Earth and Neutral property magic damage +10%.",
-			"",
-			"Class: ^777777Accessory^000000 Defense: ^7777770^000000",
-			"Weight: ^77777710^000000",
-			"Required Level: ^777777100^000000",
+			"^ff0000This item cannot be traded with other accounts.^000000",
+			"A powerful accessory only usable by Super Novice.",
+			"",
+			"Variable cast time -10%.",
+			"Physical and magic damage to all class enemies +10%.",
+			"",
+			"Equip on right accessory slot,",
+			"increase ASPD(delay after attack -10%)",
+			"For every 3 Base Level, [Rapid Smiting] damage +1%.",
+			"",
+			"Equip on left accessory slot,",
+			"MDEF pierce to all race monsters +50%.",
+			"[Psychic Wave] damage +20%.",
+			"Earth and Neutral property magic damage +10%.",
+			"",
+			"Class: ^777777Accessory^000000 Defense: ^7777770^000000",
+			"Weight: ^77777710^000000",
+			"Required Level: ^777777100^000000",
 			"Jobs: ^777777Novice Classes^000000",
 		},
 		slotCount = 0,
@@ -68859,16 +68859,16 @@ tbl = {
 		identifiedDisplayName = "Dawson Badge",
 		identifiedResourceName = "전투휘장",
 		identifiedDescriptionName = {
-			"An accessory that every true Gunslinger wants!",
-			"",
-			"Physical damage to all Class enemies +3%,",
-			"MATK + 3%, CRIT +10,",
-			"Max HP+200, MaxSP+100,",
-			"has 1% chance to apply ^880000Blind^000000 to enemies upon inflicting damage.",
-			"",
-			"Class: ^777777Accessory^000000 Defense: ^7777771^000000",
-			"Weight: ^7777770^000000",
-			"Required Level: ^77777710^000000",
+			"An accessory that every true Gunslinger wants!",
+			"",
+			"Physical damage to all Class enemies +3%,",
+			"MATK + 3%, CRIT +10,",
+			"Max HP+200, MaxSP+100,",
+			"has 1% chance to apply ^880000Blind^000000 to enemies upon inflicting damage.",
+			"",
+			"Class: ^777777Accessory^000000 Defense: ^7777771^000000",
+			"Weight: ^7777770^000000",
+			"Required Level: ^77777710^000000",
 			"Jobs: ^777777Gunslinger Classes^000000",
 		},
 		slotCount = 0,
@@ -76028,7 +76028,7 @@ tbl = {
 		identifiedResourceName = "Guarantee_5w2a_Ticket",
 		identifiedDescriptionName = {
 			"Refines an equipped ^006400level 5 weapon^000000 to ^006400+13^000000 with no chance of failure. One use.",
-			"Bring it to the ^8B4513Refine Master^000000 in Prontera (184, 177).",
+			"Use it at the ^8B4513Grade Refiner^000000 in Prontera (164, 166): \"Refine with a ticket\" (standart-npc mod).",
 			"Weight : ^7777770^000000",
 		},
 		slotCount = 0,
@@ -76042,7 +76042,7 @@ tbl = {
 		identifiedResourceName = "Guarantee_5w2a_Ticket",
 		identifiedDescriptionName = {
 			"Refines an equipped ^006400level 2 armor^000000 to ^006400+13^000000 with no chance of failure. One use.",
-			"Bring it to the ^8B4513Refine Master^000000 in Prontera (184, 177).",
+			"Use it at the ^8B4513Grade Refiner^000000 in Prontera (164, 166): \"Refine with a ticket\" (standart-npc mod).",
 			"Weight : ^7777770^000000",
 		},
 		slotCount = 0,
@@ -76056,7 +76056,7 @@ tbl = {
 		identifiedResourceName = "Guarantee_5w2a_Ticket",
 		identifiedDescriptionName = {
 			"Refines an equipped ^006400level 5 weapon^000000 to ^006400+14^000000 with no chance of failure. One use.",
-			"Bring it to the ^8B4513Refine Master^000000 in Prontera (184, 177).",
+			"Use it at the ^8B4513Grade Refiner^000000 in Prontera (164, 166): \"Refine with a ticket\" (standart-npc mod).",
 			"Weight : ^7777770^000000",
 		},
 		slotCount = 0,
@@ -76070,7 +76070,7 @@ tbl = {
 		identifiedResourceName = "Guarantee_5w2a_Ticket",
 		identifiedDescriptionName = {
 			"Refines an equipped ^006400level 2 armor^000000 to ^006400+14^000000 with no chance of failure. One use.",
-			"Bring it to the ^8B4513Refine Master^000000 in Prontera (184, 177).",
+			"Use it at the ^8B4513Grade Refiner^000000 in Prontera (164, 166): \"Refine with a ticket\" (standart-npc mod).",
 			"Weight : ^7777770^000000",
 		},
 		slotCount = 0,
@@ -76084,7 +76084,7 @@ tbl = {
 		identifiedResourceName = "Guarantee_5w2a_Ticket",
 		identifiedDescriptionName = {
 			"Refines an equipped ^006400level 5 weapon^000000 to ^006400+15^000000 with no chance of failure. One use.",
-			"Bring it to the ^8B4513Refine Master^000000 in Prontera (184, 177).",
+			"Use it at the ^8B4513Grade Refiner^000000 in Prontera (164, 166): \"Refine with a ticket\" (standart-npc mod).",
 			"Weight : ^7777770^000000",
 		},
 		slotCount = 0,
@@ -76098,7 +76098,7 @@ tbl = {
 		identifiedResourceName = "Guarantee_5w2a_Ticket",
 		identifiedDescriptionName = {
 			"Refines an equipped ^006400level 2 armor^000000 to ^006400+15^000000 with no chance of failure. One use.",
-			"Bring it to the ^8B4513Refine Master^000000 in Prontera (184, 177).",
+			"Use it at the ^8B4513Grade Refiner^000000 in Prontera (164, 166): \"Refine with a ticket\" (standart-npc mod).",
 			"Weight : ^7777770^000000",
 		},
 		slotCount = 0,

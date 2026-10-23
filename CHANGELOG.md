@@ -5,12 +5,12 @@ Needs Ragnarok Offline 1.6.9 or later.
 
 ### 🏷️ New: Regional items (always on)
 The Regional Items mod is now part of World Sync Extras. The server knows about 3,800 items your client has no name for; they showed as "Unknown Item".
-- 3,582 items get names and descriptions: about 1,700 with official text (translated from Korean or Japanese where needed), 1,380 with their own icons, the rest described from the server's data.
+- 3,582 items get names and descriptions: about 1,700 with official text (translated from Korean or Japanese where needed), 1,380 with their own icons, the rest described from the server's data. (A stray line ending in 1,217 of these texts made the client drop the whole table; fixed, and CI now compiles every Lua table.)
 - The 237 kRO-only items, all translated into English, and iRO's text for the 8 items with iRO's own abilities.
 If you had Regional Items installed on its own, remove it.
 
-### 🔨 New: Refine Master (setting `refine_master`, on)
-rAthena ships its Refine Master switched off, so refine certificates and tickets did nothing. This block's Refine Master in Prontera (186, 178) refines equipped gear with the +5 to +19 certificates and the [ROS] tickets (+13 to +15) for level 5 weapons and level 2 armor, with no chance of failure. It stands one step from rAthena's spot, which the iRO services block's Refining Researcher uses.
+### 🔨 Refine tickets
+The refine certificates and [ROS] tickets get their text pointing to standart-npc's Grade Refiner ("Refine with a ticket"), which takes them in standart-npc's next release. The iRO services block's Refining Researcher is gone: it was a copy of the same switched-off rAthena NPC, stood on the same cell, and stopped at a TODO for level 5 weapons.
 
 ## 2.0.3
 Needs Ragnarok Offline 1.6.9 or later.
