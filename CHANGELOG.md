@@ -9,6 +9,9 @@ The Regional Items mod is now part of World Sync Extras. The server knows about 
 - The 237 kRO-only items, all translated into English, and iRO's text for the 8 items with iRO's own abilities.
 If you had Regional Items installed on its own, remove it.
 
+### 🐍 Episode Valkyrie
+standart-npc 5.0.3 brings the Episode Valkyrie's Episode 20 and 21 Clear Tickets, which skip this mod's Jormungandr stories.
+
 ### 🔨 Refine tickets
 The refine certificates and [ROS] tickets get their text pointing to standart-npc's Grade Refiner ("Refine with a ticket"), which takes them in standart-npc's next release. The iRO services block's Refining Researcher is gone: it was a copy of the same switched-off rAthena NPC, stood on the same cell, and stopped at a TODO for level 5 weapons.
 

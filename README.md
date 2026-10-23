@@ -38,8 +38,8 @@ default except `skip_ep19` and `entrances`.
 **How to start:** finish Issgard's Episode 19, reach base level 200 and talk to **Horuru** in the
 Ice Castle's adventurers' lodge (`icas_in`). Episode 21 starts with **Voglinde** in the Ice Castle's
 west wing at base level 230. No Episode 19 yet? Turn on **`skip_ep19`** and Horuru offers Episode 20
-to any character of level 200+. The Episode Valkyrie's Episode 20 and 21 Clear Tickets come with
-standart-npc's next release.
+to any character of level 200+. The Episode Valkyrie (standart-npc 5.0.3 and later) sells the
+Episode 20 and 21 Clear Tickets to skip either story.
 
 Everything is written from the kRO client's quest text and navigation tables, since no official
 script exists for these episodes.
