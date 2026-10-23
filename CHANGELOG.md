@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1
+Needs Ragnarok Offline 1.6.9 or later.
+- 🏙️ City Investment's setting and the README now say it replaces akreao's **City Unity** mod. Both are the same kRO system on the same quests, insignias and NPC spots. City Unity 0.1.2 and later turns itself off while City Investment is on. To play City Unity instead, untick City Investment and restart the server; that also turns off the street stall staffers. Each mod keeps its own city contribution.
+
 ## 2.1.0
 Needs Ragnarok Offline 1.6.9 or later.
 
