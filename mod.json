@@ -84,7 +84,7 @@
       "type": "boolean",
       "default": true,
       "label": "iRO quests: City Investment (Merchant Union)",
-      "description": "Join the City Merchant Union at the Eden Group, earn Union Insignias from monsters and Union requests (113 deliveries, weekly Wanted bosses), invest them in 9 cities and buy their account-bound Union gear. Masha in Alberta hires out street stall staffers that keep a stall open while you're away (a stand-in)."
+      "description": "Join the City Merchant Union at the Eden Group, earn Union Insignias from monsters and Union requests (113 deliveries, weekly Wanted bosses), invest them in 9 cities and buy their account-bound Union gear. Masha in Alberta hires out street stall staffers that keep a stall open while you're away (a stand-in). Replaces akreao's City Unity mod, which turns itself off while this is on: untick this and restart the server to play City Unity instead (that also turns off the street stall staffers)."
     },
     {
       "key": "town_quests_2021",

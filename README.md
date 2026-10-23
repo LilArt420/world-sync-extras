@@ -107,6 +107,11 @@ staffer that keeps a **selling or buying stall** open in Alberta or Prontera for
 mail, and whatever is left is mailed back when the stall closes. This is a scripted stand-in: the
 server has no real staffer units.
 
+**City Unity:** akreao's City Unity mod is the same kRO system, on the same quests, insignias and
+NPC spots. While `city_investment` is on, City Unity turns itself off (City Unity 0.1.2 and later).
+To play City Unity instead, untick `city_investment` and restart the server; that also turns off the
+street stall staffers. Each mod keeps its own city contribution, so switching doesn't carry it over.
+
 With akreao's **Eden Group 2021 rework** installed too, World Sync Extras takes priority (it is
 applied after it). Both use iRO's official ids for the 2021 town quests, which the app merges.
 
