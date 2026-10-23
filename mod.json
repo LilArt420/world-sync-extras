@@ -1,8 +1,8 @@
 {
   "name": "world-sync-extras",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "author": "Lil Art",
-  "description": "World Sync's playable content and iRO's quests, in blocks you can switch: the Jormungandr saga (Episodes 20 and 21), Chapters 1 and 2 of the Song of the World Tree, Varmundt, Star Forest and Herosria, iRO services, and iRO Quests (Bounty Boards, City Investment, the 2021 town quests, Gramps and more). The official NPCs still without logic stand where the clients put them, and @npcplace moves any NPC. Needs Ragnarok Offline 1.6.7 or later.",
+  "description": "World Sync's playable content and iRO's quests, in blocks you can switch: the Jormungandr saga (Episodes 20 and 21), Chapters 1 and 2 of the Song of the World Tree, Varmundt, Star Forest and Herosria, iRO services, iRO Quests (Bounty Boards, City Investment, the 2021 town quests, Gramps and more), and names and descriptions for 3,800 items your client doesn't know. The official NPCs still without logic stand where the clients put them, and @npcplace moves any NPC. Needs Ragnarok Offline 1.6.9 or later.",
   "requires": {
     "app": ">=1.6.9",
     "era": "renewal"
@@ -42,7 +42,7 @@
       "type": "boolean",
       "default": true,
       "label": "iRO services: the Devil in the Box, market catalogs, Eden's Dungeon Teleporter and town helpers",
-      "description": "The Clock Tower's Devil in the Box and her Unknown Basement dailies (level 200+), stall search in the markets, the Catalogue Magician, Eden's Dungeon Teleporter and iRO's own services (Keiki, Aperture, the Refining Researcher, the Shadow Blacksmith, Madogear rental), Izlude's Increase AGI acolytes and the Acolytes' training in the Izlude Sunken Ship. Turned off, they leave."
+      "description": "The Clock Tower's Devil in the Box and her Unknown Basement dailies (level 200+), stall search in the markets, the Catalogue Magician, Eden's Dungeon Teleporter and iRO's own services (Keiki, Aperture, the Shadow Blacksmith, Madogear rental), Izlude's Increase AGI acolytes and the Acolytes' training in the Izlude Sunken Ship. Turned off, they leave."
     },
     {
       "key": "bounty_boards",

@@ -60,6 +60,13 @@ jobs:
       - name: Parse every .yml with rapidyaml
         run: python3 .github/scripts/validate_mod.py yaml .
 
+      # The client loads each System/*.lua table with Lua: one syntax error (a raw
+      # line break inside a string, say) drops the whole table, silently.
+      - name: Compile every client .lua table with luac
+        run: |
+          sudo apt-get install -y -qq lua5.4 >/dev/null
+          find . -path ./.git -prune -o -name '*.lua' -print0 | xargs -0 -r -n1 luac5.4 -p
+
       - name: Check CHANGELOG.md has a section for this version
         env:
           VERSION: ${{ steps.manifest.outputs.version }}
