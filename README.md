@@ -63,7 +63,7 @@ iRO's permanent services that World Sync placed as greeting-only NPCs.
 - The **Catalog Dispensers** search the Prontera and Payon markets' stalls; the **Catalogue Magician**
   (Prontera) sells the Window Shopper Catalogue.
 - The Eden Group's **Dungeon Teleporter** books a dungeon for your party (25,000z).
-- iRO's own NPCs that rAthena keeps switched off: Keiki and Aperture's warps, the Refining Researcher, Phelix
+- iRO's own NPCs that rAthena keeps switched off: Keiki and Aperture's warps, Phelix
   and Izaac, Dark Luhir. Plus the Shadow Blacksmith (Prontera), Madogear rental (Eclage, Mora) and Izlude's
   Increase AGI acolytes.
 - The Acolytes' training ground in the Izlude Sunken Ship (Acolyte Leader Alice in the Prontera Cathedral).

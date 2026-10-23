@@ -42,14 +42,7 @@
       "type": "boolean",
       "default": true,
       "label": "iRO services: the Devil in the Box, market catalogs, Eden's Dungeon Teleporter and town helpers",
-      "description": "The Clock Tower's Devil in the Box and her Unknown Basement dailies (level 200+), stall search in the markets, the Catalogue Magician, Eden's Dungeon Teleporter and iRO's own services (Keiki, Aperture, the Refining Researcher, the Shadow Blacksmith, Madogear rental), Izlude's Increase AGI acolytes and the Acolytes' training in the Izlude Sunken Ship. Turned off, they leave."
-    },
-    {
-      "key": "refine_master",
-      "type": "boolean",
-      "default": true,
-      "label": "Refine Master: refine tickets",
-      "description": "A Refine Master in Prontera (184, 177) refines your equipped gear with the +5 to +19 refine certificates and the [ROS] tickets for level 5 weapons and level 2 armor, with no chance of failure. The server ships rAthena's Refine Master switched off, so without this the tickets do nothing."
+      "description": "The Clock Tower's Devil in the Box and her Unknown Basement dailies (level 200+), stall search in the markets, the Catalogue Magician, Eden's Dungeon Teleporter and iRO's own services (Keiki, Aperture, the Shadow Blacksmith, Madogear rental), Izlude's Increase AGI acolytes and the Acolytes' training in the Izlude Sunken Ship. Turned off, they leave."
     },
     {
       "key": "bounty_boards",
