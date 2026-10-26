@@ -1,0 +1,318 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 20 (The Undying One): the Canyon Exploration instance.
+//===== Description: =========================================
+//= Step 95 (quest 16701). Lehar takes you into the deep canyon
+//= (1@20cn1, 1@20cn2, instance "Canyon Exploration", one player).
+//= Route as the official one: follow the canyon road to two
+//= suspicious Iwins; a device throws you into another part of the
+//= canyon, where Bagot shows himself; the white cat leads you and
+//= Lehar out through a rift, back to the Ice Castle (step 100).
+//= Progress inside the instance: 'cn (0-11).
+//============================================================
+
+1@20cn1,1,1,0	script	#wsj_cn	HIDDEN_WARP_NPC,{
+	end;
+OnInstanceInit:
+	'cn = 0;
+	disablenpc instance_npcname("Bagot#wsj_cn2");
+	disablenpc instance_npcname("White Cat#wsj_cn2");
+	disablenpc instance_npcname("White Cat#wsj_cn3");
+	disablenpc instance_npcname("Lehar#wsj_cn3b");
+	disablenpc instance_npcname("White Cat#wsj_cn4a");
+	disablenpc instance_npcname("White Cat#wsj_cn4b");
+	disablenpc instance_npcname("White Cat#wsj_cn4c");
+	disablenpc instance_npcname("Lehar#wsj_cn4");
+	disablenpc instance_npcname("Rift#wsj_cn4");
+	end;
+}
+
+// Marks the next place to go on the minimap (one mark at a time).
+function	script	F_WSJ_CnMark	{
+	viewpoint 2, 1, 1, 1, 0xFFFFFF;
+	if (getarg(0) > 0)
+		viewpoint 1, getarg(0), getarg(1), 1, 0x88CCFF;
+	return;
+}
+
+// ------------------------------------------------------------
+// The canyon road (1@20cn1)
+1@20cn1,67,39,5	script	Lehar#wsj_cn1	4_EP19_LEHAR,{
+	cutin "ep19_lehar02.png",2;
+	mes "[Lehar]";
+	if ('cn == 0) {
+		mes "Fresh tracks. Iron-shod boots, and something dragged behind them.";
+		mes "Iwins don't drag anything. They carry it, singing, badly.";
+		next;
+		mes "[Lehar]";
+		mes "The tracks follow the road: east along the bottom of the canyon, then north.";
+		mes "Go ahead and keep low. I'll watch our backs.";
+		callfunc "F_WSJ_CnMark", 285, 185;
+	} else
+		mes "Keep going. Up the road, at the top of the canyon.";
+	close3;
+}
+
+1@20cn1,285,185,3	script	Suspicious Iwin#wsj_cn1a	21977,{
+	if ('cn != 0) end;
+	cutin "ep20_fake_iwin01.png",2;
+	mes "[Suspicious Iwin]";
+	mes "Oh! A human. Hello, human. We are Iwins.";
+	mes "Normal Iwins. Doing normal Iwin things. In the canyon.";
+	next;
+	select("What are you hammering into the ice?");
+	mes "[Suspicious Iwin]";
+	mes "Nothing! A tent peg. A very big tent peg.";
+	mes "With runes on it. Iwins love runes.";
+	next;
+	mes "^4d4dffBehind them, a device the size of a barrel hums against the rock. The snow around it is grey and dull.^000000";
+	mes "^4d4dffIt looks exactly like the one you brought back to Vellgunde.^000000";
+	next;
+	cutin "ep20_fake_iwin02.png",2;
+	mes "[Suspicious Iwin]";
+	mes "...It has seen the device. Hisssss!";
+	mes "Turn it up! Turn it all the way up!";
+	next;
+	cutin "",255;
+	specialeffect2 EF_HOLYHIT;
+	mes "^4d4dffThe device screams. Light pours out of it, the ground drops away,^000000";
+	mes "^4d4dffand the canyon folds over you like a closing book.^000000";
+	'cn = 1;
+	close2;
+	callfunc "F_WSJ_CnMark", 247, 123;
+	warp instance_mapname("1@20cn2"), 251, 99;
+	end;
+}
+
+1@20cn1,284,179,1	script	Suspicious Iwin#wsj_cn1b	21977,{
+	cutin "ep20_fake_iwin01.png",2;
+	mes "[Suspicious Iwin]";
+	mes "Talk to him, not me. I'm just holding the tent peg.";
+	close3;
+}
+
+// ------------------------------------------------------------
+// Thrown across the canyon: Lehar and Bagot (1@20cn2, east)
+1@20cn2,247,123,5	script	Lehar#wsj_cn2	4_EP19_LEHAR,{
+	if ('cn == 1) {
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "Ugh... you're in one piece? Good. I followed the light and fell right in after you.";
+		mes "That thing didn't just drain mana. It moved us. Who builds something like that?";
+		next;
+		mes "[Lehar]";
+		mes "Shh. Someone's coming up the slope.";
+		'cn = 2;
+		enablenpc instance_npcname("Bagot#wsj_cn2");
+		callfunc "F_WSJ_CnMark", 252, 147;
+		close3;
+	}
+	if ('cn == 3) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Bagot. Vellgunde said his fingerprints were all over the device, and there he was, signing his work.";
+		mes "A human, building toys for the Rgans. Aurelie needs to hear this.";
+		next;
+		mes "[Lehar]";
+		mes "If we can find a way out of this hole, that is. Every path down there is crawling with fake Iwins.";
+		next;
+		cutin "ep20_nyar01.png",1;
+		mes "^4d4dffSomething small and white sits on a rock nearby, where nothing sat a moment ago.^000000";
+		mes "^4d4dffA cat. It looks at you as if you're late.^000000";
+		'cn = 4;
+		enablenpc instance_npcname("White Cat#wsj_cn2");
+		callfunc "F_WSJ_CnMark", 256, 140;
+		close3;
+	}
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	if ('cn == 2)
+		mes "Up there. Careful.";
+	else
+		mes "A cat. In the middle of a canyon. Of course there is.";
+	close3;
+}
+
+1@20cn2,252,147,3	script	Bagot#wsj_cn2	4_EP18_BAGOT,{
+	if ('cn != 2) end;
+	cutin "ep18_bagot_01.png",2;
+	mes "[Bagot]";
+	mes "Well, well. My little harvester picked up two humans. I didn't know it could do that.";
+	mes "I'll have to write that down.";
+	next;
+	select("Who are you?");
+	cutin "ep18_bagot_02.png",2;
+	mes "[Bagot]";
+	mes "Bagot. Engineer, scholar, and the only person in this frozen waste who understands what he's looking at.";
+	mes "The Rgans pray to their Serpent God. I prefer to measure him.";
+	next;
+	select("What are the devices for?");
+	mes "[Bagot]";
+	mes "Mana. The canyon is full of it, old and cold and doing nothing.";
+	mes "My devices gather it up, and the bishops carry it down to the Roots. Everyone is happy. Except the canyon.";
+	next;
+	cutin "ep18_bagot_03.png",2;
+	mes "[Bagot]";
+	mes "Don't look so grim. You should be flattered: you're the first to see a field test.";
+	mes "Now, if you'll excuse me, my 'Iwins' need supervising. They keep singing.";
+	next;
+	cutin "",255;
+	mes "^4d4dffBagot turns his back on you as if you weren't there, and walks off into the snow.^000000";
+	'cn = 3;
+	disablenpc instance_npcname("Bagot#wsj_cn2");
+	callfunc "F_WSJ_CnMark", 247, 123;
+	close;
+}
+
+1@20cn2,256,140,3	script	White Cat#wsj_cn2	4_EP20_NYAR,{
+	if ('cn != 4) end;
+	cutin "ep20_nyar01.png",1;
+	mes "[White Cat]";
+	mes "Mrrrow.";
+	next;
+	cutin "ep20_nyar02.png",1;
+	mes "^4d4dffThe cat flicks its tail. The canyon tilts, slides sideways,^000000";
+	mes "^4d4dffand you're standing somewhere else, high on a ridge, with cold wind in your face.^000000";
+	'cn = 5;
+	close2;
+	cutin "",255;
+	callfunc "F_WSJ_CnMark", 68, 240;
+	warp instance_mapname("1@20cn2"), 43, 290;
+	end;
+}
+
+// ------------------------------------------------------------
+// The ridge (1@20cn2, north)
+1@20cn2,68,240,5	script	Lehar#wsj_cn3	4_EP19_LEHAR,{
+	if ('cn == 5) {
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Down! Get down!";
+		mes "...Sorry. The cat dropped me behind this rock a minute before you showed up.";
+		next;
+		mes "[Lehar]";
+		mes "Look below the ridge. A whole line of 'Iwins', hammering devices into the ice. They're draining the canyon bit by bit.";
+		next;
+		mes "[Lehar]";
+		mes "And there goes our guide. Down the slope, tail in the air.";
+		mes "I suppose we follow the cat now. My life has become very strange.";
+		'cn = 6;
+		enablenpc instance_npcname("White Cat#wsj_cn3");
+		callfunc "F_WSJ_CnMark", 66, 195;
+		close3;
+	}
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "Follow the cat. Quietly.";
+	close3;
+}
+
+1@20cn2,66,195,3	script	White Cat#wsj_cn3	4_EP20_NYAR,{
+	if ('cn != 6) end;
+	cutin "ep20_nyar03.png",1;
+	mes "^4d4dffAt the bottom of the slope, the cat sits and washes a paw, entirely unbothered by the soldiers below.^000000";
+	mes "^4d4dffLehar slides down the snow behind you, out of breath.^000000";
+	'cn = 7;
+	enablenpc instance_npcname("Lehar#wsj_cn3b");
+	callfunc "F_WSJ_CnMark", 70, 199;
+	close3;
+}
+
+1@20cn2,70,199,5	script	Lehar#wsj_cn3b	4_EP19_LEHAR,{
+	if ('cn != 7) end;
+	cutin "ep19_lehar04.png",2;
+	mes "[Lehar]";
+	mes "Made it. Nobody saw us. I think.";
+	mes "Now what, cat?";
+	next;
+	cutin "ep20_nyar02.png",1;
+	mes "^4d4dffThe cat yawns. The ridge blurs and runs like wet paint,^000000";
+	mes "^4d4dffand the two of you are somewhere else again: a narrow gully, deep in the canyon.^000000";
+	'cn = 8;
+	close2;
+	cutin "",255;
+	enablenpc instance_npcname("White Cat#wsj_cn4a");
+	callfunc "F_WSJ_CnMark", 71, 71;
+	warp instance_mapname("1@20cn2"), 100, 100;
+	end;
+}
+
+// ------------------------------------------------------------
+// The gully and the rift (1@20cn2, south-west)
+1@20cn2,71,71,3	script	White Cat#wsj_cn4a	4_EP20_NYAR,{
+	if ('cn != 8) end;
+	cutin "ep20_nyar01.png",1;
+	mes "[White Cat]";
+	mes "Mrrp.";
+	next;
+	mes "^4d4dffThe cat trots off down the gully, stopping once to make sure you're following.^000000";
+	'cn = 9;
+	disablenpc instance_npcname("White Cat#wsj_cn4a");
+	enablenpc instance_npcname("White Cat#wsj_cn4b");
+	callfunc "F_WSJ_CnMark", 46, 46;
+	close3;
+}
+
+1@20cn2,46,46,3	script	White Cat#wsj_cn4b	4_EP20_NYAR,{
+	if ('cn != 9) end;
+	cutin "ep20_nyar03.png",1;
+	mes "^4d4dffThe cat waits at a bend, tail curled, then pads on toward the end of the gully.^000000";
+	mes "^4d4dffLehar is already there, staring at something in the rock.^000000";
+	'cn = 10;
+	disablenpc instance_npcname("White Cat#wsj_cn4b");
+	enablenpc instance_npcname("White Cat#wsj_cn4c");
+	enablenpc instance_npcname("Lehar#wsj_cn4");
+	callfunc "F_WSJ_CnMark", 37, 26;
+	close3;
+}
+
+1@20cn2,33,27,1	script	White Cat#wsj_cn4c	4_EP20_NYAR,{
+	cutin "ep20_nyar01.png",1;
+	mes "[White Cat]";
+	mes "Mrrrow.";
+	close3;
+}
+
+1@20cn2,37,26,3	script	Lehar#wsj_cn4	4_EP19_LEHAR,{
+	if ('cn == 10) {
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Look at this. A crack in the air, glowing like the inside of a seashell.";
+		mes "And the cat's sitting right next to it like it opened a door for us.";
+		next;
+		mes "[Lehar]";
+		mes "I don't trust it. I don't trust anything that happened today.";
+		mes "...After you.";
+		'cn = 11;
+		enablenpc instance_npcname("Rift#wsj_cn4");
+		callfunc "F_WSJ_CnMark", 29, 21;
+		close3;
+	}
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "Through the rift. Go on.";
+	close3;
+}
+
+1@20cn2,29,21,0	script	Rift#wsj_cn4	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if ('cn != 11 || wsj_ep20 != 95) end;
+	callfunc "F_WSJ_CnMark", 0, 0;
+	mes "^4d4dffYou step through the light. For a moment there's nothing at all, then snow, wind,^000000";
+	mes "^4d4dffand the walls of the Ice Castle ahead of you. Lehar stumbles out a step behind.^000000";
+	next;
+	cutin "ep19_lehar04.png",2;
+	mes "[Lehar]";
+	mes "Home. Hah... we're home.";
+	mes "Thrown across a canyon, lectured by a madman, and rescued by a cat. Nobody at the lodge is going to believe this.";
+	next;
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "Bagot's working for the Rgans, and they're feeding the canyon's mana to something below. That's what matters.";
+	mes "Miriam will be worried sick. She's at the <NAVI>[lodge]<INFO>icas_in,259,200,0,101,0</INFO></NAVI>. Let's tell her we're alive.";
+	callfunc "F_WSJ_Step", 100, "16701", "16702";
+	close2;
+	cutin "",255;
+	warp "icas_in",257,206;
+	end;
+}

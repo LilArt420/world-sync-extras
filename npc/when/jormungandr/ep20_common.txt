@@ -27,7 +27,7 @@ function	script	F_WSJ_Scenes	{
 	if (.@m$ == "icas_in") {
 		setarray .@t$,
 			"Horuru#wsj_l","-1","129",
-			"Aurelie#wsj_l","40","129",
+			"Aurelie#wsj_l","40","139",
 			"Vellgunde#wsj_l","80","129",
 			"Miriam#wsj_l","100","129",
 			"Lazy#wsj_l","110","129",
@@ -40,7 +40,7 @@ function	script	F_WSJ_Scenes	{
 	} else if (.@m$ == "icecastle") {
 		setarray .@t$,
 			"Iwin Soldier#wsj_alley","60","69",
-			"Lehar#wsj_front","90","94";
+			"Lehar#wsj_front","90","99";
 	} else if (.@m$ == "jor_back5") {
 		setarray .@t$,
 			"Lehar#wsj_c1a","10","29",
@@ -52,10 +52,6 @@ function	script	F_WSJ_Scenes	{
 			"Miriam#wsj_c1b","30","39",
 			"Horuru#wsj_c1b","30","39",
 			"Magical Object#wsj_c1b","30","39";
-	} else if (.@m$ == "jor_back6") {
-		setarray .@t$,
-			"Lehar#wsj_b6","95","99",
-			"Fake Iwin Soldier#wsj_b6","95","99";
 	} else if (.@m$ == "jor_nest") {
 		setarray .@t$,
 			"Lazy#wsj_door","120","139",
@@ -68,7 +64,7 @@ function	script	F_WSJ_Scenes	{
 			"Mark#wsj_k3","550","559";
 	} else if (.@m$ == "jor_root2") {
 		setarray .@t$,
-			"Lehar#wsj_hide","160","179",
+			"Lehar#wsj_hide","160","189",
 			"Miriam#wsj_hide","160","179",
 			"Aurelie#wsj_hide","160","179",
 			"Leon#wsj_hide","160","179",

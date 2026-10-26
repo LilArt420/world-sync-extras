@@ -52,3 +52,13 @@ Body:
       Map: 1@slug
       X: 200
       Y: 40
+  - Id: 2026
+    Name: Canyon Exploration
+    TimeLimit: 3600
+    IdleTimeOut: 300
+    Enter:
+      Map: 1@20cn1
+      X: 64
+      Y: 36
+    AdditionalMaps:
+      1@20cn2: true
