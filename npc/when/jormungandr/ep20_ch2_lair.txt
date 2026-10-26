@@ -926,7 +926,7 @@ jor_maze,140,72,0	script	Rippling Wall#wsj	GATE_SKYBLUE,{
 		cutin "ep20_nyar01.png",1;
 		specialeffect EF_HOLYHIT;
 		mes "^4d4dffA blinding white light floods the maze.^000000";
-		mes "^4d4dffSitting on top of the device, where nothing sat a moment ago, is a small white cat.^000000";
+		mes "^4d4dffSitting on top of the device, where nothing sat a moment ago, is the small white cat from the canyon.^000000";
 		next;
 		mes "[White Cat]";
 		mes "Mrrrow.";

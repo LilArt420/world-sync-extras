@@ -1,6 +1,6 @@
 //===== World Sync: Jormungandr =============================
 //= Episode 20, chapter 1: the Ancient Ice Canyon.
-//= Quests 16691-16704, 17690. Steps 0-139.
+//= Quests 16691-16704, 17690. Steps 0-139 (step 95 is ep20_canyon.txt).
 //============================================================
 
 // ------------------------------------------------------------
@@ -606,9 +606,7 @@ icecastle,201,171,5	script(CLOAKED)	Lehar#wsj_front	4_EP19_LEHAR,{
 			close3;
 		}
 		callfunc "F_WSJ_Step", 95, "", "";
-		close2;
-		cutin "",255;
-		warp "jor_back6",372,258;
+		callfunc "F_WSJ_Canyon";
 		end;
 	}
 	if (wsj_ep20 == 95) {
@@ -618,9 +616,7 @@ icecastle,201,171,5	script(CLOAKED)	Lehar#wsj_front	4_EP19_LEHAR,{
 		next;
 		if (select("Go to the deep canyon.:Not yet.") == 2)
 			close3;
-		close2;
-		cutin "",255;
-		warp "jor_back6",372,258;
+		callfunc "F_WSJ_Canyon";
 		end;
 	}
 	end;
@@ -637,68 +633,16 @@ OnTouch:
 	end;
 }
 
-jor_back6,370,262,3	script(CLOAKED)	Lehar#wsj_b6	4_EP19_LEHAR,{
-	if (wsj_ep20 == 95) {
-		cutin "ep19_lehar02.png",2;
-		mes "[Lehar]";
-		mes "Shh. Down.";
-		mes "There. Do you see them?";
-		next;
-		mes "^4d4dffBelow the ridge, a dozen 'Iwin soldiers' are hammering devices into the ice in a long line.^000000";
-		mes "^4d4dffEvery few steps, the snow around them turns grey and dull.^000000";
-		next;
-		cutin "ep19_lehar03.png",2;
-		mes "[Lehar]";
-		mes "They're draining the whole canyon. Bit by bit.";
-		mes "And look at the one giving orders. That's not a hat, that's a crest. A Rgan bishop's crest.";
-		next;
-		mes "^4d4dffOne of the soldiers looks up, straight at your hiding spot.^000000";
-		next;
-		cutin "ep20_fake_iwin02.png",0;
-		mes "[Fake Iwin Soldier]";
-		mes "HUMANS! On the ridge! Hisssss!";
-		next;
-		cutin "ep19_lehar01.png",2;
-		mes "[Lehar]";
-		mes "So much for quiet. Run!";
-		next;
-		cutin "",255;
-		mes "^4d4dffYou flee along the ridge as the ice cracks behind you. A roar shakes the canyon:^000000";
-		mes "^4d4dffthe ancient Icewinds, furious at the noise, dive on the fake soldiers and scatter them across the snow.^000000";
-		next;
-		cutin "ep19_lehar04.png",2;
-		mes "[Lehar]";
-		mes "Hah... haha! The birds saved us! I take back everything I said about them.";
-		mes "Let's get home before they remember they don't like us either.";
-		mes "Miriam will be worried sick. She's at the <NAVI>[lodge]<INFO>icas_in,259,200,0,101,0</INFO></NAVI>.";
-		next;
-		callfunc "F_WSJ_Step", 100, "16701", "16702";
-		if (select("Head back to the Ice Castle.:I'll walk back myself.") == 1) {
-			close2;
-			cutin "",255;
-			warp "icas_in",257,206;
-			end;
+// Into the Canyon Exploration instance (ep20_canyon.txt), one player.
+function	script	F_WSJ_Canyon	{
+	if (instance_enter("Canyon Exploration") != IE_OK) {
+		if (instance_create("Canyon Exploration", IM_CHAR) < 0 || instance_enter("Canyon Exploration") != IE_OK) {
+			mes "[Lehar]";
+			mes "...The path's blocked by fresh snow. Give it a moment and ask me again.";
+			close3;
 		}
-		close3;
 	}
-	end;
-
-OnInit:
-	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 95" );
-	end;
-}
-
-jor_back6,366,264,5	script(CLOAKED)	Fake Iwin Soldier#wsj_b6	21977,{
-	cutin "ep20_fake_iwin01.png",2;
-	mes "[Fake Iwin Soldier]";
-	mes "Nothing to see here. Just a normal Iwin. Doing normal Iwin things. Hiss.";
-	close3;
-}
-
-jor_back6,372,260,0	script	#wsj_t_b6	HIDDEN_WARP_NPC,12,12,{
-	end;
-OnTouch:
-	callfunc "F_WSJ_Scenes";
+	cutin "",255;
 	end;
 }
 
