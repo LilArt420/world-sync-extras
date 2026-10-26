@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.2
+Needs Ragnarok Offline 1.6.9 or later.
+- 🐍 Episode 20: after the Snake God's Nest door, Lazy sends you to Aurelie in the Ice Castle, but she wasn't there, and the story stopped. She's back where the quest log points (the inner Ice Castle lodge). A check of every story NPC found five more that were hidden at the one step they're needed, all fixed: Lehar at the castle front (going back into the canyon), Lehar in the Roots (the way down to Lazy's cave) and three Episode 21 hints.
+- 🏔️ Episode 20's **Canyon Exploration** is now the official solo instance, instead of a short scene. Follow the canyon road to two suspicious Iwins, get thrown across the canyon, meet Bagot, and follow the white cat over the ridge and down a gully to a rift home. Your minimap marks the next spot.
+
 ## 2.1.1
 Needs Ragnarok Offline 1.6.9 or later.
 - 🏙️ City Investment's setting and the README now say it replaces akreao's **City Unity** mod. Both are the same kRO system on the same quests, insignias and NPC spots. City Unity 0.1.2 and later turns itself off while City Investment is on. To play City Unity instead, untick City Investment and restart the server; that also turns off the street stall staffers. Each mod keeps its own city contribution.
