@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.3
+Needs Ragnarok Offline 1.6.9 or later.
+- 🧍 The Verkhasel placeholder on ve_fild05 is gone: Ragnarok Offline 1.7.3 brings the Shadow Cross job change quest, whose real Verkhasel stands on the same cell. 72 placeholders remain, 44 of them working.
+
 ## 2.1.2
 Needs Ragnarok Offline 1.6.9 or later.
 - 🐍 Episode 20: after the Snake God's Nest door, Lazy sends you to Aurelie in the Ice Castle, but she wasn't there, and the story stopped. She's back where the quest log points (the inner Ice Castle lodge). A check of every story NPC found five more that were hidden at the one step they're needed, all fixed: Lehar at the castle front (going back into the canyon), Lehar in the Roots (the way down to Lazy's cave) and three Episode 21 hints.

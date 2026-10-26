@@ -17,7 +17,7 @@ default except `skip_ep19` and `entrances`.
 | 🛎️ | iRO services | `iro_systems` | Devil in the Box, catalogs, Dungeon Teleporter, town helpers, Acolyte training |
 | 🎯 | iRO Quests | seven settings | Bounty Boards, City Investment, Gramps, the 2021 town quests and more |
 | 🏷️ | Regional items | always on | Names, descriptions and icons for 3,800 items |
-| 🧍 | Official NPCs | `placeholders` | 73 official NPCs where the clients put them, 44 already working |
+| 🧍 | Official NPCs | `placeholders` | 72 official NPCs where the clients put them, 44 already working |
 | 🚪 | Entrances | `entrances` (off) | 34 portals into the World Sync maps |
 | 🛠️ | @npcplace | `npc_mover` | A GM command to move any NPC |
 
@@ -132,7 +132,7 @@ ticket"), which comes with standart-npc's next release.
 
 ## 🧍 Official NPCs (`placeholders`)
 
-73 official NPCs whose dialog and logic exist in no server data yet, standing where the client puts
+72 official NPCs whose dialog and logic exist in no server data yet, standing where the client puts
 them with their own sprite and name. **44 already work**: storage lockers, guild storage, inns,
 repair, channel switches, the Varmundt elevator, Jormungandr's contact points and the market guides.
 The rest greet you until their quests are written. Every block takes over the placeholders it
