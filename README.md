@@ -127,6 +127,9 @@ icon. This block gives them:
   server's own data.
 - **237 kRO-only items**, all translated into English.
 - iRO's text for the 8 items with iRO's own abilities.
+- Whole job lines for 16 iRO items whose text names classes (Agni Sword, Fenrir Staff, Thorn
+  Breaker, the Heretic Boots…): the server gave them only each line's first job, until the app
+  ships the fix (`db/item_db.yml`).
 
 Refine certificates and [ROS] tickets are used at standart-npc's **Grade Refiner** ("Refine with a
 ticket"), which comes with standart-npc's next release.
