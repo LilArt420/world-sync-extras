@@ -76,5 +76,5 @@ Body:
     IdleTimeOut: 300
     Enter:
       Map: 1@twig
-      X: 250
-      Y: 14
+      X: 120
+      Y: 63
