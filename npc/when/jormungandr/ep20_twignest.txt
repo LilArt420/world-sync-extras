@@ -37,11 +37,11 @@ OnWave:
 	if ('tn == 1) {
 		'tn = 2;
 		mapannounce .@m$, "Lehar: Over here! Quick, before more of them grow!", bc_map, "0x88CCFF";
-		.@x = 230; .@y = 72;
+		.@x = 160; .@y = 88;
 	} else if ('tn == 3) {
 		'tn = 4;
 		mapannounce .@m$, "Lehar: This way! I can hear someone up ahead!", bc_map, "0x88CCFF";
-		.@x = 200; .@y = 140;
+		.@x = 157; .@y = 140;
 	} else
 		end;
 	if (playerattached())
@@ -63,7 +63,7 @@ function	script	F_WSJ_TnWave	{
 
 // ------------------------------------------------------------
 // Following Lehar up through the nest
-1@twig,252,18,3	script	Lehar#wsj_tn1	4_EP19_LEHAR,{
+1@twig,123,66,3	script	Lehar#wsj_tn1	4_EP19_LEHAR,{
 	if ('tn == 0) {
 		cutin "ep19_lehar02.png",2;
 		mes "[Lehar]";
@@ -77,13 +77,13 @@ function	script	F_WSJ_TnWave	{
 		'tn = 1;
 		disablenpc instance_npcname("Lehar#wsj_tn1");
 		enablenpc instance_npcname("Lehar#wsj_tn2");
-		callfunc "F_WSJ_TnWave", 240, 40;
+		callfunc "F_WSJ_TnWave", 137, 70;
 		close3;
 	}
 	end;
 }
 
-1@twig,230,72,5	script	Lehar#wsj_tn2	4_EP19_LEHAR,{
+1@twig,160,88,5	script	Lehar#wsj_tn2	4_EP19_LEHAR,{
 	if ('tn == 2) {
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
@@ -96,7 +96,7 @@ function	script	F_WSJ_TnWave	{
 		disablenpc instance_npcname("Lehar#wsj_tn2");
 		enablenpc instance_npcname("Lehar#wsj_tn3");
 		callfunc "F_WSJ_CnMark", 0, 0;
-		callfunc "F_WSJ_TnWave", 220, 100;
+		callfunc "F_WSJ_TnWave", 171, 126;
 		close3;
 	}
 	cutin "ep19_lehar03.png",2;
@@ -105,7 +105,7 @@ function	script	F_WSJ_TnWave	{
 	close3;
 }
 
-1@twig,200,140,5	script	Lehar#wsj_tn3	4_EP19_LEHAR,{
+1@twig,157,140,5	script	Lehar#wsj_tn3	4_EP19_LEHAR,{
 	if ('tn == 4) {
 		cutin "ep19_lehar02.png",2;
 		mes "[Lehar]";
@@ -117,7 +117,7 @@ function	script	F_WSJ_TnWave	{
 		'tn = 5;
 		enablenpc instance_npcname("Leon#wsj_tn");
 		enablenpc instance_npcname("Aurelie#wsj_tn");
-		callfunc "F_WSJ_CnMark", 186, 157;
+		callfunc "F_WSJ_CnMark", 128, 157;
 		close3;
 	}
 	cutin "ep19_lehar01.png",2;
@@ -131,7 +131,7 @@ function	script	F_WSJ_TnWave	{
 
 // ------------------------------------------------------------
 // Leon and Aurelie, and Nyar's way back
-1@twig,186,157,3	script	Leon#wsj_tn	4_EP19_LEON,{
+1@twig,128,157,3	script	Leon#wsj_tn	4_EP19_LEON,{
 	if (wsj_ep20 == 450) {
 		cutin "ep19_leon03.png",0;
 		mes "[Leon]";
@@ -180,7 +180,7 @@ function	script	F_WSJ_TnWave	{
 	close3;
 }
 
-1@twig,189,154,3	script	Aurelie#wsj_tn	4_EP19_AURELIE,{
+1@twig,132,154,3	script	Aurelie#wsj_tn	4_EP19_AURELIE,{
 	cutin "ep19_aurelie01.png",1;
 	mes "[Aurelie]";
 	if (wsj_ep20 < 470)
@@ -190,7 +190,7 @@ function	script	F_WSJ_TnWave	{
 	close3;
 }
 
-1@twig,183,160,5	script	White Cat#wsj_tn	4_EP20_NYAR,{
+1@twig,125,160,5	script	White Cat#wsj_tn	4_EP20_NYAR,{
 	cutin "ep20_nyar01.png",1;
 	mes "[White Cat]";
 	mes "Mrr.";

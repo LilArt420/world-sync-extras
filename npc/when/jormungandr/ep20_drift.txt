@@ -179,6 +179,7 @@ OnTouch:
 	if ('sd < 6) end;
 	if ('sd == 6) {
 		'sd = 7;
+		enablenpc instance_npcname("Rgan Bishop#wsj_sd2");
 		callfunc "F_WSJ_CnMark", 163, 190;
 	}
 	warp instance_mapname("1@twsd"), 168, 186;
