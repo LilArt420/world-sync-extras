@@ -1,7 +1,7 @@
 {
   "name": "world-sync-extras",
   "version": "2.1.3",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "author": "Lil Art",
   "description": "World Sync's playable content and iRO's quests, in blocks you can switch: the Jormungandr saga (Episodes 20 and 21), Chapters 1 and 2 of the Song of the World Tree, Varmundt, Star Forest and Herosria, iRO services, iRO Quests (Bounty Boards, City Investment, the 2021 town quests, Gramps and more), and names and descriptions for 3,800 items your client doesn't know. The official NPCs still without logic stand where the clients put them, and @npcplace moves any NPC. Needs Ragnarok Offline 1.6.9 or later.",
   "requires": {
