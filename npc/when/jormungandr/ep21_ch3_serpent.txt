@@ -195,21 +195,27 @@ jor_raise1,128,326,0	script	Ornamental Door#wsj	4_POINT_BLUE,{
 	close;
 }
 
-// Enters (or creates, then enters) a memorial dungeon for this character.
+// Enters (or creates, then enters) a solo memorial dungeon for this character.
+// instance_enter without an instance id looks for the party's instance, so the
+// character's own (IM_CHAR) id is passed; a character holds one solo instance,
+// so one left over from another dungeon is closed first. On failure: the
+// speaker and line (or a default line) and close.
+//   callfunc "F_WSJ_EnterMd", "<instance name>"{, "<speaker>", "<line on failure>"};
 function	script	F_WSJ_EnterMd	{
 	.@md$ = getarg(0);
-	if (instance_enter(.@md$) == IE_OK)
-		return;
+	.@id = instance_id(IM_CHAR);
+	if (.@id > 0) {
+		if (instance_enter(.@md$, -1, -1, getcharid(0), .@id) == IE_OK)
+			return;
+		instance_destroy .@id;
+	}
 	.@id = instance_create(.@md$, IM_CHAR);
-	if (.@id < 0) {
-		mes "^4d4dffThe way won't open right now. Try again in a moment.^000000";
-		close;
-	}
-	if (instance_enter(.@md$) != IE_OK) {
-		mes "^4d4dffThe way won't open right now. Try again in a moment.^000000";
-		close;
-	}
-	return;
+	if (.@id > 0 && instance_enter(.@md$, -1, -1, getcharid(0), .@id) == IE_OK)
+		return;
+	if (getarg(1, "") != "")
+		mes getarg(1);
+	mes getarg(2, "^4d4dffThe way won't open right now. Try again in a moment.^000000");
+	close3;
 }
 
 jor_raise1,126,329,5	script(CLOAKED)	Reinhardt#wsj_door	4_EP21_REINHARDT,{
