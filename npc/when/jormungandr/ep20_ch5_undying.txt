@@ -1,7 +1,7 @@
 //===== World Sync: Jormungandr =============================
 //= Episode 20, chapter 5: The Undying One.
 //= Quests 18220-18233, memorial dungeon "Separated Sanctuary"
-//= (1@twig). Steps 530-700.
+//= (1@twas, the official Isolated Sanctuary). Steps 530-700.
 //============================================================
 
 // ------------------------------------------------------------
@@ -442,31 +442,31 @@ OnTouch:
 }
 
 // ------------------------------------------------------------
-// Memorial dungeon: the Separated Sanctuary (1@twig)
+// Memorial dungeon: the Separated Sanctuary (1@twas)
 // ------------------------------------------------------------
-1@twig	mapflag	nosave	SavePoint
-1@twig	mapflag	noteleport
-1@twig	mapflag	nomemo
-1@twig	mapflag	nowarpto
-1@twig	mapflag	nobranch
-1@twig	mapflag	monster_noteleport
-1@twig	mapflag	nopenalty
+1@twas	mapflag	nosave	SavePoint
+1@twas	mapflag	noteleport
+1@twas	mapflag	nomemo
+1@twas	mapflag	nowarpto
+1@twas	mapflag	nobranch
+1@twas	mapflag	monster_noteleport
+1@twas	mapflag	nopenalty
 
-1@twig,1,1,0	script	#wsj_md	-1,{
+1@twas,1,1,0	script	#wsj_md	-1,{
 	end;
 OnInstanceInit:
 	disablenpc instance_npcname("Nyar#wsj_md");
-	monster instance_mapname("1@twig"),142,155,"Rasgand",21981,1,instance_npcname("#wsj_md") + "::OnRasgandDown";
+	monster instance_mapname("1@twas"),96,80,"Rasgand",21981,1,instance_npcname("#wsj_md") + "::OnRasgandDown";
 	end;
 OnRasgandDown:
-	mapannounce instance_mapname("1@twig"), "Rasgand: Hhh... hhaaah... you can't... I can't... die...", bc_map, "0xFF4444";
+	mapannounce instance_mapname("1@twas"), "Rasgand: Hhh... hhaaah... you can't... I can't... die...", bc_map, "0xFF4444";
 	sleep 3000;
-	mapannounce instance_mapname("1@twig"), "The shard of Ymir's heart cracks free of Rasgand's chest and falls to the ground.", bc_map, "0x88CCFF";
+	mapannounce instance_mapname("1@twas"), "The shard of Ymir's heart cracks free of Rasgand's chest and falls to the ground.", bc_map, "0x88CCFF";
 	enablenpc instance_npcname("Nyar#wsj_md");
 	end;
 }
 
-1@twig,145,150,3	script	Nyar#wsj_md	4_EP20_NYAR,{
+1@twas,99,76,3	script	Nyar#wsj_md	4_EP20_NYAR,{
 	if (wsj_ep20 == 620) {
 		cutin "ep20_nyar03.png",1;
 		mes "[Nyar]";

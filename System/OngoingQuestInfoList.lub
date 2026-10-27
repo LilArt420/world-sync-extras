@@ -2502,13 +2502,13 @@ QuestInfoList = {
 	[23106] = {
 		Title = "A Nest of Small Branches",
 		IconName = "ico_ep.bmp",
-		Description = { "You found a spot where you can sense the magic of Jormungandr and met a cat. However, the cat led Leon and Aurelie away. Let's follow them with <NAVI>[Lehar]<INFO>jor_twice,235,111,0,101,0</INFO></NAVI> in the Frozen Zone. If you've left the Frozen Zone, <NAVI>[Diving Iwin]<INFO>icecastle,141,212,0,101,0</INFO></NAVI> in the Ice Castle will take you back." },
+		Description = { "You found a spot where you can sense the magic of Jormungandr and met a cat. However, the cat led Leon and Aurelie away. Let's follow them with <NAVI>[Lehar]<INFO>jor_twice,164,244,0,101,0</INFO></NAVI> in the Frozen Zone. If you've left the Frozen Zone, <NAVI>[Diving Iwin]<INFO>icecastle,141,212,0,101,0</INFO></NAVI> in the Ice Castle will take you back." },
 		Summary = "Find Leon and Aurelie"
 	},
 	[23107] = {
 		Title = "A Nest of Small Branches",
 		IconName = "ico_ep.bmp",
-		Description = { "Leo seems to have too much on his mind after arriving at the Nest of Small Branches. Let's give him some time to sort his thoughts and then try talking to him." },
+		Description = { "Leon seems to have too much on his mind after arriving at the Nest of Small Branches. Let's give him some time to sort his thoughts and then try talking to him." },
 		Summary = "Talk to Leon"
 	},
 	[23108] = {

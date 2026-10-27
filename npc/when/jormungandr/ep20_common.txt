@@ -81,8 +81,6 @@ function	script	F_WSJ_Scenes	{
 		setarray .@t$,
 			"Traces#wsj_m1","280","289",
 			"Traces#wsj_m2","290","299",
-			"Rasgand#wsj_m3","310","319",
-			"Sarekgand#wsj_m3","310","319",
 			"Lehar#wsj_mz","490","499",
 			"Leon#wsj_mz","490","499",
 			"Aurelie#wsj_mz","490","499",
@@ -124,8 +122,6 @@ function	script	F_WSJ_Scenes	{
 			"Leon#wsj_tw3","470","489";
 	} else if (.@m$ == "jor_twig") {
 		setarray .@t$,
-			"Leon#wsj_tg1","450","469",
-			"Aurelie#wsj_tg1","450","469",
 			"White Cat#wsj_tg2","580","589",
 			"White Cat#wsj_tg3","590","599",
 			"Lehar#wsj_tg3","590","599",
