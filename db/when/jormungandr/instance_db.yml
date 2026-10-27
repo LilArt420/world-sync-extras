@@ -42,16 +42,16 @@ Body:
     IdleTimeOut: 300
     Enter:
       Map: 1@wtgs
-      X: 30
-      Y: 252
+      X: 56
+      Y: 314
   - Id: 2025
     Name: Sticky Sea
     TimeLimit: 3600
     IdleTimeOut: 300
     Enter:
       Map: 1@slug
-      X: 200
-      Y: 40
+      X: 72
+      Y: 41
   - Id: 2026
     Name: Canyon Exploration
     TimeLimit: 3600
