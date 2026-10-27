@@ -2,7 +2,9 @@
 
 ## 2.1.5
 Needs Ragnarok Offline 1.6.9 or later.
+- 🗡️ **Class fix for 16 iRO items.** Agni Sword, Fenrir Staff, Thorn Breaker, the Heretic Mage and Acolyte Boots, Divine Mace, Chaos Sword, Dark Chaser Boots and 8 more name whole classes ("Swordman, Thief and Merchant Classes"), but the server only let each line's first job wear them. Knights, Crusaders, Blacksmiths, Alchemists, Wizards, Sages, Priests, Monks and the rest of each line, 3rd and 4th jobs included, can equip them now. The app's own fix is on its way (Flux159/rathena#84); this carries it until then.
 - 🧍 The Verkhasel placeholder on ve_fild05 is gone: Ragnarok Offline 1.7.3 brings the Shadow Cross job change quest, whose real Verkhasel stands on the same cell. 72 placeholders remain, 44 of them working.
+
 ## 2.1.4
 Needs Ragnarok Offline 1.6.9 or later.
 - 🌿 **Twig's Nest** dropped you into open sea at the edge of the map, where you couldn't take a step. Its entry and whole route were on cells the map blocks. It now follows the nest's real path, from its south end up to Leon and Aurelie.
