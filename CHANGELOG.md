@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.4
+Needs Ragnarok Offline 1.6.9 or later.
+- 🌿 **Twig's Nest** dropped you into open sea at the edge of the map, where you couldn't take a step. Its entry and whole route were on cells the map blocks. It now follows the nest's real path, from its south end up to Leon and Aurelie.
+- 🧊 **Drift Ice Zone**: the Rgan Bishop on the middle floe never showed up, so the run stopped after the second crossing. He's there now, and the run plays through to the white cat.
+- 🐌 **Sticky Sea**: you couldn't get in, because the entry was on a blocked cell. It now follows the official route from the south tip: slugs along the way, the five lost Copos where the official ones wait, and the snail in its hollow past the cave's west tunnel.
+- 👻 **Unidentified Ghost Ship**: you couldn't board, because the entry was on a blocked cell. You now go down the ship floor by floor (deck, hold, bow cabin, captain's room) through hatches that open once a floor's drowned sailors are down. Maristella waits beside the captain at the end.
+
 ## 2.1.3
 Needs Ragnarok Offline 1.6.9 or later.
 - 🚪 None of this mod's memorial dungeons let you in: the entrance made your solo instance, then looked for a party one. Fixed for all of them: Est's **Sky Fortress** and the **Recreated Dark Whisper** (Varmundt), Aurelie's **Separated Sanctuary**, the **Canyon Exploration** and the **Sticky Sea** (Episode 20), and the **Snake's Resting Place**, **Secret Altar**, **Serene Sanctuary** and **Unidentified Ghost Ship** (Episode 21).
