@@ -403,19 +403,7 @@ jor_twig,138,152,5	script(CLOAKED)	Aurelie#wsj_tg4	4_EP19_AURELIE,{
 			mes "Don't take too long. Nyar won't last forever.";
 			close3;
 		}
-		if (instance_enter("Separated Sanctuary") != IE_OK) {
-			.@id = instance_create("Separated Sanctuary", IM_CHAR);
-			if (.@id < 0) {
-				mes "[Aurelie]";
-				mes "...The barrier won't open. Something is in the way. Try again in a moment.";
-				close3;
-			}
-			if (instance_enter("Separated Sanctuary") != IE_OK) {
-				mes "[Aurelie]";
-				mes "...The barrier won't open. Try again in a moment.";
-				close3;
-			}
-		}
+		callfunc "F_WSJ_EnterMd", "Separated Sanctuary", "[Aurelie]", "...The barrier won't open. Try again in a moment.";
 		cutin "",255;
 		end;
 	}

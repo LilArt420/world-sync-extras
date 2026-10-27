@@ -635,13 +635,7 @@ OnTouch:
 
 // Into the Canyon Exploration instance (ep20_canyon.txt), one player.
 function	script	F_WSJ_Canyon	{
-	if (instance_enter("Canyon Exploration") != IE_OK) {
-		if (instance_create("Canyon Exploration", IM_CHAR) < 0 || instance_enter("Canyon Exploration") != IE_OK) {
-			mes "[Lehar]";
-			mes "...The path's blocked by fresh snow. Give it a moment and ask me again.";
-			close3;
-		}
-	}
+	callfunc "F_WSJ_EnterMd", "Canyon Exploration", "[Lehar]", "...The path's blocked by fresh snow. Give it a moment and ask me again.";
 	cutin "",255;
 	end;
 }
