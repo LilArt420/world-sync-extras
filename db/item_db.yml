@@ -1,0 +1,184 @@
+# World Sync Extras: whole job lines for 16 iRO items, until the app has them.
+#
+# The server's regional item table gives these items only the first job of each
+# class line their text names ("Swordman, Thief and Merchant Classes" became
+# Swordman, Thief, Merchant), so Knights, Wizards, Priests and the rest of each
+# line, 3rd and 4th jobs included, couldn't equip them. Flux159/rathena#84
+# fixes the table and its generator. These entries are its Jobs: rAthena
+# replaces an item's whole job list with the one an import gives and leaves
+# the rest of the item alone. Drop this file once the app ships #84.
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Body:
+  - Id: 18189
+    AegisName: iRO_18189  # Bloody Bow
+    Jobs:
+      Archer: true
+      Hunter: true
+      BardDancer: true
+      Rogue: true
+  - Id: 28769
+    AegisName: iRO_28769  # Valkyrie Dagger
+    Jobs:
+      Thief: true
+      Assassin: true
+      Rogue: true
+  - Id: 470349
+    AegisName: Dark_Chaser_US  # Dark Chaser Boots
+    Jobs:
+      Swordman: true
+      Knight: true
+      Crusader: true
+      Merchant: true
+      Blacksmith: true
+      Alchemist: true
+      Thief: true
+      Assassin: true
+      Rogue: true
+  - Id: 470443
+    AegisName: Stray_Acolyte_US  # Heretic Acolyte Boots
+    Jobs:
+      Acolyte: true
+      Priest: true
+      Monk: true
+  - Id: 470468
+    AegisName: Stray_Mage_US  # Heretic Mage Boots
+    Jobs:
+      Mage: true
+      Wizard: true
+      Sage: true
+  - Id: 490876
+    AegisName: False_Swordman1_US  # False Document Swordman I
+    Jobs:
+      Swordman: true
+      Knight: true
+      Crusader: true
+  - Id: 490877
+    AegisName: False_Mage1_US  # False Document Mage I
+    Jobs:
+      Mage: true
+      Wizard: true
+      Sage: true
+  - Id: 491057
+    AegisName: Purple_Haze_US  # Purple Haze
+    Jobs:
+      Thief: true
+      Assassin: true
+      Rogue: true
+      Ninja: true
+      KagerouOboro: true
+  - Id: 500118
+    AegisName: Agni_Sword_US  # Agni Sword
+    Jobs:
+      Swordman: true
+      Knight: true
+      Crusader: true
+      Merchant: true
+      Blacksmith: true
+      Alchemist: true
+      Thief: true
+      Assassin: true
+      Rogue: true
+  - Id: 510024
+    AegisName: iRO_510024  # Ancient Reinforced Knife
+    Jobs:
+      Swordman: true
+      Archer: true
+      Hunter: true
+      BardDancer: true
+      Thief: true
+      Assassin: true
+      Rogue: true
+      Mage: true
+      Wizard: true
+      Sage: true
+      Merchant: true
+      Blacksmith: true
+      Alchemist: true
+      Ninja: true
+      KagerouOboro: true
+      SoulLinker: true
+  - Id: 510025
+    AegisName: iRO_510025  # Released Reinforced Knife
+    Jobs:
+      Swordman: true
+      Archer: true
+      Hunter: true
+      BardDancer: true
+      Thief: true
+      Assassin: true
+      Rogue: true
+      Mage: true
+      Wizard: true
+      Sage: true
+      Merchant: true
+      Blacksmith: true
+      Alchemist: true
+      Ninja: true
+      KagerouOboro: true
+      SoulLinker: true
+  - Id: 510222
+    AegisName: Ruby_Dagger_US  # Blood Ruby Dagger
+    Jobs:
+      Swordman: true
+      Knight: true
+      Crusader: true
+      Archer: true
+      Hunter: true
+      BardDancer: true
+      Thief: true
+      Assassin: true
+      Rogue: true
+      Mage: true
+      Wizard: true
+      Sage: true
+      Merchant: true
+      Blacksmith: true
+      Alchemist: true
+      Ninja: true
+      KagerouOboro: true
+      SoulLinker: true
+  - Id: 520062
+    AegisName: Thorn_Breaker_US  # Thorn Breaker
+    Jobs:
+      Novice: true
+      SuperNovice: true
+      Swordman: true
+      Knight: true
+      Crusader: true
+      Thief: true
+      Assassin: true
+      Rogue: true
+      Merchant: true
+      Blacksmith: true
+      Alchemist: true
+  - Id: 550169
+    AegisName: Fenrir_Staff_US  # Fenrir Staff
+    Jobs:
+      Mage: true
+      Wizard: true
+      Sage: true
+      Acolyte: true
+      Priest: true
+      Monk: true
+      SoulLinker: true
+  - Id: 590109
+    AegisName: Divine_Mace_US  # Divine Mace
+    Jobs:
+      Swordman: true
+      Knight: true
+      Crusader: true
+      Merchant: true
+      Blacksmith: true
+      Alchemist: true
+      Acolyte: true
+      Priest: true
+      Monk: true
+  - Id: 600055
+    AegisName: Chaos_Sword_US  # Chaos Sword
+    Jobs:
+      Swordman: true
+      Knight: true
+      Crusader: true
