@@ -351,6 +351,10 @@ OnInit:
 // ------------------------------------------------------------
 // The Sticky Sea (1@slug)
 // ------------------------------------------------------------
+// The official route: you drop in at the south tip (72,41), climb the
+// west side past the Copos at 51,60, 83,127 and 47,186, cross to the
+// cave at 157,308 and take its west tunnel into the snail's hollow
+// (66,335), which no path reaches on foot.
 1@slug	mapflag	nosave	SavePoint
 1@slug	mapflag	noteleport
 1@slug	mapflag	nomemo
@@ -365,9 +369,14 @@ OnInstanceInit:
 	.@m$ = instance_mapname("1@slug");
 	disablenpc instance_npcname("Rorohyu#wsj_md");
 	disablenpc instance_npcname("Copo#wsj_friend");
-	monster .@m$,0,0,"--ja--",21969,12;	// Snow Rabbit Slug
-	monster .@m$,0,0,"--ja--",21970,12;	// Melibe Slug
-	monster .@m$,200,200,"Corrupted Angel Snail",21982,1,instance_npcname("#wsj_slug") + "::OnSnailDown";
+	// Slugs by the first Copo, north-west of the second, north of the
+	// third and all over the last cave.
+	setarray .@b, 44,56,64,76, 56,140,82,148, 46,186,68,200, 150,286,185,310;
+	for (.@i = 0; .@i < 16; .@i += 4) {
+		areamonster .@m$,.@b[.@i],.@b[.@i+1],.@b[.@i+2],.@b[.@i+3],"--ja--",21969,3;	// Snow Rabbit Slug
+		areamonster .@m$,.@b[.@i],.@b[.@i+1],.@b[.@i+2],.@b[.@i+3],"--ja--",21970,3;	// Melibe Slug
+	}
+	monster .@m$,60,328,"Corrupted Angel Snail",21982,1,instance_npcname("#wsj_slug") + "::OnSnailDown";
 	end;
 OnSnailDown:
 	.@m$ = instance_mapname("1@slug");
@@ -376,7 +385,7 @@ OnSnailDown:
 	enablenpc instance_npcname("Copo#wsj_friend");
 	end;
 }
-1@slug,196,198,5	script	Rorohyu#wsj_md	21965,{
+1@slug,66,335,5	script	Rorohyu#wsj_md	21965,{
 	mes "[Rorohyu]";
 	if (wsj_koko == 16) {
 		mes "Hmmm! Hmm hm HMMM! (He hums so loudly that bubbles of slime pop around him.)";
@@ -393,12 +402,12 @@ OnSnailDown:
 	warp "jor_back4", 101, 262;
 	end;
 }
-1@slug,203,198,3	script	Copo#wsj_friend	21965,{
+1@slug,69,334,3	script	Copo#wsj_friend	21965,{
 	mes "[Koko]";
 	mes "Ko... ko. (Still sticky, still shaking, but free.)";
 	close;
 }
-1@slug,200,36,5	script	Sticky Current#wsj	4_POINT_BLUE,{
+1@slug,74,37,5	script	Sticky Current#wsj	4_POINT_BLUE,{
 	mes "^4d4dffA current of thick, warm water pushes up toward the hole in the ice.^000000";
 	next;
 	if (select("Ride it back up.:Stay.") == 2)
@@ -407,15 +416,29 @@ OnSnailDown:
 	end;
 }
 
-// Lost Copos for "It's Dangerous!" (11951).
-1@slug,150,150,5	script	Lost Copo#wsj_l1	21965,{
+// The cave's west tunnel to the snail's hollow, and back.
+1@slug,145,302,0	script	Slime Tunnel#wsj_sl1	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp instance_mapname("1@slug"), 92, 334;
+	end;
+}
+1@slug,97,337,0	script	Slime Tunnel#wsj_sl2	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp instance_mapname("1@slug"), 150, 302;
+	end;
+}
+
+// Lost Copos for "It's Dangerous!" (11951), where the official Copos wait.
+1@slug,51,60,5	script	Lost Copo#wsj_l1	21965,{
 	.@h$ = strnpcinfo(2);
 	callfunc "F_WSJ_KokoScold", atoi(charat(.@h$, getstrlen(.@h$) - 1));
 }
-1@slug,250,150,3	duplicate(Lost Copo#wsj_l1)	Lost Copo#wsj_l2	21965
-1@slug,120,250,5	duplicate(Lost Copo#wsj_l1)	Lost Copo#wsj_l3	21965
-1@slug,200,160,5	duplicate(Lost Copo#wsj_l1)	Lost Copo#wsj_l4	21965
-1@slug,230,230,3	duplicate(Lost Copo#wsj_l1)	Lost Copo#wsj_l5	21965
+1@slug,83,127,3	duplicate(Lost Copo#wsj_l1)	Lost Copo#wsj_l2	21965
+1@slug,47,186,5	duplicate(Lost Copo#wsj_l1)	Lost Copo#wsj_l3	21965
+1@slug,100,265,5	duplicate(Lost Copo#wsj_l1)	Lost Copo#wsj_l4	21965
+1@slug,157,308,3	duplicate(Lost Copo#wsj_l1)	Lost Copo#wsj_l5	21965
 
 function	script	F_WSJ_KokoScold	{
 	.@b = 1 << (getarg(0) - 1);
