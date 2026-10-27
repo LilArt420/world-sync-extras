@@ -17,6 +17,13 @@
 # 21982 MD_EP20_FALLENANGEL, the corrupted angel snail of the Sticky Sea
 # (1@slug, Koko's Secret Base): known to the client, not to rAthena. Stats
 # follow the Angel Slug of the Frozen Scale Beach, made a solo boss.
+#
+# 21991-21994, the cult's guards inside Episode 20's memorial dungeons (the
+# Drift Ice Zone, 1@twsd, and Twig's Nest, 1@twig): the client draws them as
+# the Jormun Guards, the Jormun Warlock and the Heart Hunter; rAthena only has
+# commented-out placeholders. Like Episode 19's dungeon Heart Hunter (21536),
+# they're the field monsters with about 40% of the HP, no experience and no
+# drops: the instances give their rewards at the end.
 Header:
   Type: MOB_DB
   Version: 5
@@ -205,3 +212,119 @@ Body:
         Rate: 5000
       - Item: EP19_Unknown_Cell
         Rate: 2000
+  - Id: 21991
+    AegisName: MD_EP20_JOR_G_P
+    Name: Jormun Guard-P
+    Level: 222
+    Hp: 7595000
+    Attack: 11237
+    Attack2: 1874
+    Defense: 341
+    MagicDefense: 130
+    Resistance: 245
+    MagicResistance: 115
+    Str: 108
+    Agi: 91
+    Vit: 86
+    Int: 69
+    Dex: 93
+    Luk: 90
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Demon
+    Element: Poison
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 919
+    AttackMotion: 1351
+    DamageMotion: 480
+    Ai: 04
+  - Id: 21992
+    AegisName: MD_EP20_JOR_G_Y
+    Name: Jormun Guard-Y
+    Level: 222
+    Hp: 7139000
+    Attack: 6961
+    Attack2: 2828
+    Defense: 229
+    MagicDefense: 230
+    Resistance: 173
+    MagicResistance: 261
+    Str: 83
+    Agi: 90
+    Vit: 94
+    Int: 127
+    Dex: 112
+    Luk: 127
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 523
+    AttackMotion: 769
+    DamageMotion: 480
+    Ai: 04
+  - Id: 21993
+    AegisName: MD_EP20_JOR_WARLOCK
+    Name: Rgan Shaman
+    Level: 227
+    Hp: 8983000
+    Attack: 8977
+    Attack2: 2537
+    Defense: 347
+    MagicDefense: 191
+    Resistance: 290
+    MagicResistance: 224
+    Str: 134
+    Agi: 110
+    Vit: 128
+    Int: 134
+    Dex: 129
+    Luk: 128
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Wind
+    ElementLevel: 2
+    WalkSpeed: 160
+    AttackDelay: 586
+    AttackMotion: 862
+    DamageMotion: 480
+    Ai: 04
+  - Id: 21994
+    AegisName: EP20_MD_HEARTHUNTER1
+    Name: Heart Hunter
+    Level: 210
+    Hp: 4604000
+    Attack: 8432
+    Attack2: 1689
+    Defense: 171
+    MagicDefense: 86
+    Resistance: 106
+    MagicResistance: 80
+    Str: 86
+    Agi: 100
+    Vit: 56
+    Int: 72
+    Dex: 91
+    Luk: 88
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 324
+    AttackMotion: 1080
+    DamageMotion: 576
+    Ai: 04

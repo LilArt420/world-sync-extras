@@ -1,7 +1,8 @@
 //===== World Sync: Jormungandr =============================
 //= Episode 20, chapters 3-4: a guest in the castle, the Frozen
 //= Zone and the Serpent's Maze.
-//= Quests 17712-17716, 23100-23118. Steps 340-529.
+//= Quests 17712-17716, 23100-23118. Steps 340-529 (steps 450-469 are
+//= ep20_twignest.txt).
 //============================================================
 
 // ------------------------------------------------------------
@@ -370,7 +371,12 @@ jor_twice,162,246,3	script(CLOAKED)	White Cat#wsj_tw2	4_EP20_NYAR,{
 		cutin "ep19_lehar03.png",0;
 		mes "[Lehar]";
 		mes "Leon! Aurelie!";
-		mes "They can't have gone far. There are tracks, look, heading <NAVI>[north-west]<INFO>jor_twice,43,331,0,101,0</INFO></NAVI>!";
+		mes "...The tracks stop dead, right there. Three sets, and then nothing, as if they walked into the air.";
+		next;
+		cutin "ep19_lehar01.png",0;
+		mes "[Lehar]";
+		mes "I can feel it, though. The same prickling as at the gate in the maze, only stronger. There's a way through here, if I can find the edge of it.";
+		mes "Give me a moment, then <NAVI>[talk to me]<INFO>jor_twice,164,244,0,101,0</INFO></NAVI>. We go in together.";
 		callfunc "F_WSJ_Step", 450, "23105", "23106";
 		close3;
 	}
@@ -411,30 +417,37 @@ jor_twice,169,249,3	script(CLOAKED)	Lazy#wsj_tw2	4_EP19_LAZY,{
 	mes "I'm not chasing a cat across the ocean. Wake me when someone comes back.";
 	close3;
 }
+// Steps 450-469: Lehar takes you into the Twig's Nest instance
+// (ep20_twignest.txt), one player.
 jor_twice,164,244,3	script(CLOAKED)	Lehar#wsj_tw3	4_EP19_LEHAR,{
+	if (wsj_ep20 == 450 || wsj_ep20 == 460) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Found it. Right here, the air's thinner, like a curtain.";
+		mes "Whatever's on the other side, Leon and Aurelie are in it. Ready?";
+		next;
+		if (select("Go through with Lehar.:Not yet.") == 2) {
+			mes "[Lehar]";
+			mes "Don't take too long. I don't like them being in there alone.";
+			close3;
+		}
+		callfunc "F_WSJ_EnterMd", "Twig's Nest", "[Lehar]", "...The curtain's closed again. Give it a moment and ask me again.";
+		cutin "",255;
+		end;
+	}
 	cutin "ep19_lehar01.png",2;
 	mes "[Lehar]";
-	mes "The tracks go to the <NAVI>[far north-west corner]<INFO>jor_twice,43,331,0,101,0</INFO></NAVI> of the floes. Go, I'll keep everyone together here!";
+	mes "A nest made of a god. I'm going to need a bigger notebook.";
 	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 450 || wsj_ep20 == 460" );
+	end;
 }
 
 // The white cat that carries people to the Nest of Small Branches.
+// From step 470 on.
 jor_twice,45,333,3	script	White Cat#wsj_portal	4_EP20_NYAR,{
-	if (wsj_ep20 == 450 || wsj_ep20 == 460) {
-		cutin "ep20_nyar01.png",1;
-		mes "^4d4dffThe white cat is sitting on the last floe, staring at the empty air in front of it.^000000";
-		mes "^4d4dffThe air shimmers. Behind it, white branches climb into the fog.^000000";
-		next;
-		mes "[White Cat]";
-		mes "Mrrrow?";
-		next;
-		if (select("Follow the cat.:Not yet.") == 2)
-			close3;
-		close2;
-		cutin "",255;
-		warp "jor_twig",212,114;
-		end;
-	}
 	if (wsj_ep20 >= 470) {
 		cutin "ep20_nyar01.png",1;
 		mes "[White Cat]";
@@ -451,10 +464,6 @@ jor_twice,45,333,3	script	White Cat#wsj_portal	4_EP20_NYAR,{
 	}
 	mes "^4d4dffA small white cat dozing on the ice. It opens one eye, decides you're not interesting, and closes it again.^000000";
 	close;
-
-OnInit:
-	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 450" );
-	end;
 }
 
 // Step 470-489: back with the others on the floes.
@@ -530,66 +539,6 @@ OnTouch:
 	end;
 }
 jor_twice,162,245,0	script	#wsj_t_tw2	HIDDEN_WARP_NPC,12,12,{
-	end;
-OnTouch:
-	callfunc "F_WSJ_Scenes";
-	end;
-}
-
-// ------------------------------------------------------------
-// The Nest of Small Branches, first visit (steps 450-469)
-// ------------------------------------------------------------
-jor_twig,212,120,3	script(CLOAKED)	Leon#wsj_tg1	4_EP19_LEON,{
-	if (wsj_ep20 == 450) {
-		cutin "ep19_leon03.png",0;
-		mes "[Leon]";
-		mes "......";
-		next;
-		mes "^4d4dffLeon is staring up at the white branches. He doesn't seem to hear you.^000000";
-		mes "^4d4dffBetter give him a moment.^000000";
-		callfunc "F_WSJ_Step", 460, "23106", "23107";
-		close3;
-	}
-	if (wsj_ep20 == 460) {
-		cutin "ep19_leon01.png",0;
-		mes "[Leon]";
-		mes "Sorry. It's... a lot.";
-		mes "The cat led us here and then she spoke. In my head. Her name is Nyar.";
-		next;
-		mes "[Leon]";
-		mes "She says this is the Nest of Small Branches. Jormungandr's body is wrapped around the world, and these are the very tips of it. Where his sleep is lightest.";
-		next;
-		cutin "ep19_aurelie01.png",1;
-		mes "[Aurelie]";
-		mes "And somewhere in this nest is the heart Rasgand talked about. The 'heart that still beats'.";
-		mes "Nyar guards it. She can't leave, and she can't fight everyone who comes knocking.";
-		next;
-		cutin "ep19_leon02.png",0;
-		mes "[Leon]";
-		mes "So she needs us. Fine by me.";
-		next;
-		cutin "ep19_aurelie01.png",1;
-		mes "[Aurelie]";
-		mes "Let's go back to the floes and tell the others. I'll explain the rest there.";
-		mes "Meet me at the <NAVI>[floes]<INFO>jor_twice,161,243,0,101,0</INFO></NAVI>.";
-		callfunc "F_WSJ_Step", 470, "23107", "23108";
-		close3;
-	}
-	end;
-
-OnInit:
-	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 450 || wsj_ep20 == 460" );
-	end;
-}
-
-jor_twig,213,117,3	script(CLOAKED)	Aurelie#wsj_tg1	4_EP19_AURELIE,{
-	cutin "ep19_aurelie01.png",1;
-	mes "[Aurelie]";
-	mes "Give him a moment. This place is overwhelming.";
-	close3;
-}
-
-jor_twig,212,117,0	script	#wsj_t_tg1	HIDDEN_WARP_NPC,8,8,{
 	end;
 OnTouch:
 	callfunc "F_WSJ_Scenes";
