@@ -1,7 +1,7 @@
 //===== World Sync: Jormungandr =============================
 //= Episode 20, chapter 2: the Lair of the Rgans.
 //= Quests 17691-17709, 17719 and the trust errands 8839-8854.
-//= Steps 140-339.
+//= Steps 140-339 (step 310 is ep20_drift.txt).
 //============================================================
 
 // ------------------------------------------------------------
@@ -889,6 +889,7 @@ OnInit:
 	end;
 }
 
+// The way into the Drift Ice Zone instance (ep20_drift.txt), one player.
 jor_maze,140,72,0	script	Rippling Wall#wsj	GATE_SKYBLUE,{
 	if (wsj_ep20 == 300) {
 		mes "^4d4dffAt the heart of the maze, a wall of pale light ripples like water.^000000";
@@ -899,70 +900,25 @@ jor_maze,140,72,0	script	Rippling Wall#wsj	GATE_SKYBLUE,{
 		callfunc "F_WSJ_Step", 310, "17706", "17707";
 		next;
 		select("Examine the device.");
-		mes "^4d4dffThe device is pumping mana into the rippling wall. Behind the light, you can just make out another place:";
-		mes "^4d4dffbranches, white and enormous, like the inside of a frozen tree.^000000";
+		mes "^4d4dffThe device is pumping mana into the rippling wall. Behind the light, you can just make out another place:^000000";
+		mes "^4d4dffgrey sea, drifting ice, and figures in black robes kneeling in circles on the floes.^000000";
 		next;
-		cloakoffnpcself "Rasgand#wsj_m3";
-		cloakoffnpcself "Sarekgand#wsj_m3";
-		specialeffect EF_DARKBREATH, AREA, "Rasgand#wsj_m3";
-		cutin "ep20_lasgand01.png",2;
-		mes "[???]";
-		mes "Admiring Bagot's toy? He'll be flattered.";
-		next;
-		mes "[Rasgand]";
-		mes "So this is the 'useful attendant' Sarekgand told me about.";
-		mes "The scroll is good. But you hold yourself like a human. You always will.";
-		next;
-		cutin "ep20_lasgand02.png",2;
-		mes "[Rasgand]";
-		mes "No matter. You're just in time to see it open.";
-		mes "Beyond this gate is the nest of the Serpent God's smallest branches, where his heart still beats. When I reach it, I won't need bishops or roots or devices any more.";
-		next;
-		select("You'll have to get past me first.");
-		cutin "ep20_lasgand03.png",2;
-		mes "[Rasgand]";
-		mes "Gladly.";
-		next;
-		cutin "ep20_nyar01.png",1;
-		specialeffect EF_HOLYHIT;
-		mes "^4d4dffA blinding white light floods the maze.^000000";
-		mes "^4d4dffSitting on top of the device, where nothing sat a moment ago, is the small white cat from the canyon.^000000";
-		next;
-		mes "[White Cat]";
-		mes "Mrrrow.";
-		next;
-		cutin "ep20_lasgand04.png",2;
-		mes "[Rasgand]";
-		mes "You...! Not now, not when I'm this close!";
-		next;
-		cutin "ep20_nyar02.png",1;
-		mes "^4d4dffThe cat flicks its tail. The world folds in half.^000000";
-		mes "^4d4dffRasgand and Sarekgand are flung one way, you the other, and the maze spins away into white.^000000";
-		callfunc "F_WSJ_Step", 320, "17707", "17708";
-		close2;
-		cutin "",255;
-		warp "jor_back1",364,224;
-		end;
+		mes "^4d4dffSarekgand's trail runs straight into the light.^000000";
+	} else if (wsj_ep20 == 310) {
+		mes "^4d4dffThe wall of light ripples. Beyond it: the drifting ice, and the robed figures on the floes.^000000";
+	} else {
+		mes "^4d4dffA wall of pale light. Touch it and it ripples, cold and hard as ice.^000000";
+		close;
 	}
-	mes "^4d4dffA wall of pale light. Touch it and it ripples, cold and hard as ice.^000000";
-	close;
+	next;
+	if (select("Step through the wall.:Not yet.") == 2)
+		close;
+	callfunc "F_WSJ_EnterMd", "Drift Ice Zone", "", "^4d4dffThe light hardens under your hand like ice. Try again in a moment.^000000";
+	end;
 
 OnInit:
-	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 300" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 300 || wsj_ep20 == 310" );
 	end;
-}
-
-jor_maze,143,69,3	script(CLOAKED)	Rasgand#wsj_m3	4_EP20_LASGAND,{
-	cutin "ep20_lasgand01.png",2;
-	mes "[Rasgand]";
-	mes "......";
-	close3;
-}
-
-jor_maze,137,70,5	script(CLOAKED)	Sarekgand#wsj_m3	4_EP19_RGAN_SR1,{
-	mes "[Sarekgand]";
-	mes "Bow, attendant. You stand before the Bishop.";
-	close;
 }
 
 jor_maze,16,100,0	script	#wsj_t_maze1	HIDDEN_WARP_NPC,30,60,{
@@ -981,7 +937,7 @@ jor_back1,365,226,3	script(CLOAKED)	Aurelie#wsj_b1	4_EP19_AURELIE,{
 		mes "[Aurelie]";
 		mes "You're alive! We landed here a moment before you did. All of us, out of nowhere.";
 		next;
-		select("Rasgand. He was at the heart of the maze.");
+		select("Rasgand. He was out on the ice, behind the wall in the maze.");
 		mes "[Aurelie]";
 		mes "Rasgand himself...";
 		mes "And a white cat, you say? It threw him away too?";
@@ -1020,7 +976,7 @@ jor_back1,367,228,3	script(CLOAKED)	Leon#wsj_b1	4_EP19_LEON,{
 jor_back1,362,227,5	script(CLOAKED)	Lehar#wsj_b1	4_EP19_LEHAR,{
 	cutin "ep19_lehar02.png",2;
 	mes "[Lehar]";
-	mes "One moment I was in the maze, the next I was face-down in a snowdrift!";
+	mes "One moment I was following a cat across the ice, the next I was face-down in a snowdrift!";
 	close3;
 }
 jor_back1,363,229,5	script(CLOAKED)	Lazy#wsj_b1	4_EP19_LAZY,{

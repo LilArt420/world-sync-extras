@@ -24,8 +24,9 @@ default except `skip_ep19` and `entrances`.
 ## 🐍 Jormungandr saga (`jormungandr`)
 
 - **Episode 20, The Undying One:** the Ancient Ice Canyon, the Lair of the Rgans, the Sacred Roots,
-  the Serpent's Maze, a guest in the Ice Castle, the Frozen Zone and the Nest of Small Branches, and
-  the memorial dungeon Separated Sanctuary. 83 quests.
+  the Serpent's Maze, a guest in the Ice Castle, the Frozen Zone and the Nest of Small Branches, the
+  story's solo instances (Canyon Exploration, Drift Ice Zone, Twig's Nest) and the memorial dungeon
+  Separated Sanctuary. 83 quests.
 - **Episode 21, Age of Heroes:** back in time to Lunaforma and Alberta of old, the Georborg
   resistance, the ghost ship, two infiltrations of the cult's temple Gimle, and the last battle
   against the giant serpent. 101 quests, with an English quest log (the client only has Korean).

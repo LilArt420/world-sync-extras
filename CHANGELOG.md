@@ -1,8 +1,21 @@
 # Changelog
 
-## 2.1.3
+## 2.1.5
 Needs Ragnarok Offline 1.6.9 or later.
 - 🧍 The Verkhasel placeholder on ve_fild05 is gone: Ragnarok Offline 1.7.3 brings the Shadow Cross job change quest, whose real Verkhasel stands on the same cell. 72 placeholders remain, 44 of them working.
+## 2.1.4
+Needs Ragnarok Offline 1.6.9 or later.
+- 🌿 **Twig's Nest** dropped you into open sea at the edge of the map, where you couldn't take a step. Its entry and whole route were on cells the map blocks. It now follows the nest's real path, from its south end up to Leon and Aurelie.
+- 🧊 **Drift Ice Zone**: the Rgan Bishop on the middle floe never showed up, so the run stopped after the second crossing. He's there now, and the run plays through to the white cat.
+- 🐌 **Sticky Sea**: you couldn't get in, because the entry was on a blocked cell. It now follows the official route from the south tip: slugs along the way, the five lost Copos where the official ones wait, and the snail in its hollow past the cave's west tunnel.
+- 👻 **Unidentified Ghost Ship**: you couldn't board, because the entry was on a blocked cell. You now go down the ship floor by floor (deck, hold, bow cabin, captain's room) through hatches that open once a floor's drowned sailors are down. Maristella waits beside the captain at the end.
+
+## 2.1.3
+Needs Ragnarok Offline 1.6.9 or later.
+- 🚪 None of this mod's memorial dungeons let you in: the entrance made your solo instance, then looked for a party one. Fixed for all of them: Est's **Sky Fortress** and the **Recreated Dark Whisper** (Varmundt), Aurelie's **Separated Sanctuary**, the **Canyon Exploration** and the **Sticky Sea** (Episode 20), and the **Snake's Resting Place**, **Secret Altar**, **Serene Sanctuary** and **Unidentified Ghost Ship** (Episode 21).
+- 🧊 Episode 20's **Drift Ice Zone** and **Twig's Nest** are now the official solo instances, instead of short scenes. Step through the rippling wall in the Serpent's Maze onto the drifting ice, break the cult's rituals, meet Bagot again and face Rasgand, until the white cat throws everyone out. Later, follow Lehar through Twig's Nest to find Leon, Aurelie and Nyar. Both give Sacred Cat Whiskers.
+- The Separated Sanctuary moves to its own round arena (the official Isolated Sanctuary map), since Twig's Nest now uses the map it borrowed.
+- The quest log points Episode 20's Twig's Nest step at Lehar, and says "Leon" where it said "Leo".
 
 ## 2.1.2
 Needs Ragnarok Offline 1.6.9 or later.

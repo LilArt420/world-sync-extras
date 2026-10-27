@@ -35,14 +35,7 @@ hem_dun01,209,248,4	script	Est#wsv	10183,{
 			close3;
 		if (wsv_ch1 == 605)
 			callfunc "F_WSV_Step", "wsv_ch1", 610, "12666", "12664";
-		if (instance_enter("Destroy the Sky Fortress") != IE_OK) {
-			.@id = instance_create("Destroy the Sky Fortress", IM_CHAR);
-			if (.@id < 0 || instance_enter("Destroy the Sky Fortress") != IE_OK) {
-				mes "[Est]";
-				mes "...The shadow won't open. Try again in a moment.";
-				close3;
-			}
-		}
+		callfunc "F_WSV_EnterMd", "Destroy the Sky Fortress", "[Est]", "...The shadow won't open. Try again in a moment.";
 		cutin "",255;
 		end;
 	}
@@ -215,14 +208,7 @@ hem_dun01,205,248,4	script	Mage Professor#wsv	10589,{
 		next;
 		if (select("Go in.:Not now.") == 2)
 			close;
-		if (instance_enter("Recreated Dark Whisper") != IE_OK) {
-			.@id = instance_create("Recreated Dark Whisper", IM_CHAR);
-			if (.@id < 0 || instance_enter("Recreated Dark Whisper") != IE_OK) {
-				mes "[Mage Professor]";
-				mes "...The recreation collapsed. Try again in a moment.";
-				close;
-			}
-		}
+		callfunc "F_WSV_EnterMd", "Recreated Dark Whisper", "[Mage Professor]", "...The recreation collapsed. Try again in a moment.";
 		end;
 	}
 	if (callfunc("F_WSV_Waiting", 12661)) {
@@ -239,14 +225,7 @@ hem_dun01,205,248,4	script	Mage Professor#wsv	10589,{
 		erasequest 12662;
 	setquest 12662;
 	questinfo_refresh;
-	if (instance_enter("Recreated Dark Whisper") != IE_OK) {
-		.@id = instance_create("Recreated Dark Whisper", IM_CHAR);
-		if (.@id < 0 || instance_enter("Recreated Dark Whisper") != IE_OK) {
-			mes "[Mage Professor]";
-			mes "...The recreation collapsed. Try again in a moment.";
-			close;
-		}
-	}
+	callfunc "F_WSV_EnterMd", "Recreated Dark Whisper", "[Mage Professor]", "...The recreation collapsed. Try again in a moment.";
 	end;
 }
 

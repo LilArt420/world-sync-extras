@@ -382,6 +382,10 @@ OnInit:
 }
 
 // Memorial dungeon: the Unidentified Ghost Ship (1@wtgs).
+// The ship's floors don't connect on foot. As in the official run you
+// board on the deck (56,314), then go down through the hold (102,100)
+// and the bow cabin (44,22) to the captain's room (152,18). Each
+// floor's hatch opens once its drowned sailors are down.
 1@wtgs	mapflag	nosave	SavePoint
 1@wtgs	mapflag	noteleport
 1@wtgs	mapflag	nomemo
@@ -395,10 +399,15 @@ OnInit:
 OnInstanceInit:
 	disablenpc instance_npcname("Maristella#wsj_mdgs");
 	.@m$ = instance_mapname("1@wtgs");
-	setarray .@x, 80, 120, 160, 200, 240, 280, 320, 100, 220, 300;
-	for (.@i = 0; .@i < 10; .@i++)
-		monster .@m$, .@x[.@i], 240 + rand(25), "Drowned Sailor", 22369, 1;
-	monster .@m$, 370, 252, "Ghost Ship Captain", 22370, 1, instance_npcname("#wsj_mdgs") + "::OnCaptainDown";
+	.@e$ = instance_npcname("#wsj_mdgs") + "::OnSailor";
+	areamonster .@m$, 48, 304, 145, 331, "Drowned Sailor", 22369, 4, .@e$ + "1";	// the deck
+	areamonster .@m$, 100, 89, 225, 130, "Drowned Sailor", 22369, 3, .@e$ + "2";	// the hold
+	areamonster .@m$, 35, 9, 74, 50, "Drowned Sailor", 22369, 3, .@e$ + "3";	// the bow cabin
+	monster .@m$, 172, 25, "Ghost Ship Captain", 22370, 1, instance_npcname("#wsj_mdgs") + "::OnCaptainDown";
+	end;
+OnSailor1:
+OnSailor2:
+OnSailor3:
 	end;
 OnCaptainDown:
 	mapannounce instance_mapname("1@wtgs"), "The captain falls to the deck. The fog over the ship begins to thin.", bc_map, "0x88CCFF";
@@ -408,7 +417,35 @@ OnCaptainDown:
 	end;
 }
 
-1@wtgs,365,252,5	script	Maristella#wsj_mdgs	10577,{
+// Down from one floor to the next: callfunc "F_WSJ_GsDown", <floor>, <x>, <y>;
+function	script	F_WSJ_GsDown	{
+	if (mobcount(instance_mapname("1@wtgs"), instance_npcname("#wsj_mdgs") + "::OnSailor" + getarg(0))) {
+		dispbottom "Drowned sailors still hold this floor. The way down won't open while they stand.";
+		end;
+	}
+	warp instance_mapname("1@wtgs"), getarg(1), getarg(2);
+	end;
+}
+1@wtgs,143,315,0	script	Hatch#wsj_gs1	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_GsDown", 1, 102, 100;
+	end;
+}
+1@wtgs,222,110,0	script	Hatch#wsj_gs2	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_GsDown", 2, 44, 22;
+	end;
+}
+1@wtgs,70,28,0	script	Hatch#wsj_gs3	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_GsDown", 3, 152, 18;
+	end;
+}
+
+1@wtgs,168,28,5	script	Maristella#wsj_mdgs	10577,{
 	cutin "ep21_maristella03.png",2;
 	if (wsj_ep21 == 681) {
 		mes "[Maristella]";

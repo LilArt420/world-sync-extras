@@ -173,3 +173,26 @@ vr_bob	mapflag	loadevent
 vr_bob	mapflag	nomemo
 vr_bob	mapflag	nosave	SavePoint
 vr_bob	mapflag	nobranch
+
+// Enters (or creates, then enters) a solo memorial dungeon for this character.
+// instance_enter without an instance id looks for the party's instance, so the
+// character's own (IM_CHAR) id is passed; a character holds one solo instance,
+// so one left over from another dungeon is closed first. On failure: the
+// speaker and line (or a default line) and close.
+//   callfunc "F_WSV_EnterMd", "<instance name>"{, "<speaker>", "<line on failure>"};
+function	script	F_WSV_EnterMd	{
+	.@md$ = getarg(0);
+	.@id = instance_id(IM_CHAR);
+	if (.@id > 0) {
+		if (instance_enter(.@md$, -1, -1, getcharid(0), .@id) == IE_OK)
+			return;
+		instance_destroy .@id;
+	}
+	.@id = instance_create(.@md$, IM_CHAR);
+	if (.@id > 0 && instance_enter(.@md$, -1, -1, getcharid(0), .@id) == IE_OK)
+		return;
+	if (getarg(1, "") != "")
+		mes getarg(1);
+	mes getarg(2, "^4d4dffThe way won't open right now. Try again in a moment.^000000");
+	close3;
+}

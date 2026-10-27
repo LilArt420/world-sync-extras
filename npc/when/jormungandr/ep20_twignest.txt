@@ -1,0 +1,207 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 20 (The Undying One): the Twig's Nest instance.
+//===== Description: =========================================
+//= Steps 450-469 (quests 23106-23107). Lehar finds the way the
+//= white cat took Leon and Aurelie, on the drift ice (jor_twice),
+//= and takes you through to the Nest of Small Branches (1@twig,
+//= instance "Twig's Nest", one player). Route as the official
+//= one: follow Lehar up through the nest, past two packs of its
+//= guardians, to Leon, who has met Nyar (step 470). The cat
+//= sends you back to the floes.
+//= Progress inside the instance: 'tn (0-6).
+//============================================================
+
+1@twig	mapflag	nosave	SavePoint
+1@twig	mapflag	noteleport
+1@twig	mapflag	nomemo
+1@twig	mapflag	nowarpto
+1@twig	mapflag	nobranch
+1@twig	mapflag	monster_noteleport
+
+1@twig,1,1,0	script	#wsj_tn	HIDDEN_WARP_NPC,{
+	end;
+OnInstanceInit:
+	'tn = 0;
+	disablenpc instance_npcname("Lehar#wsj_tn2");
+	disablenpc instance_npcname("Lehar#wsj_tn3");
+	disablenpc instance_npcname("Leon#wsj_tn");
+	disablenpc instance_npcname("Aurelie#wsj_tn");
+	disablenpc instance_npcname("White Cat#wsj_tn");
+	end;
+
+// The last guardian of a pack moves the instance on.
+OnWave:
+	.@m$ = instance_mapname("1@twig");
+	if (mobcount(.@m$, instance_npcname("#wsj_tn") + "::OnWave") > 0)
+		end;
+	if ('tn == 1) {
+		'tn = 2;
+		mapannounce .@m$, "Lehar: Over here! Quick, before more of them grow!", bc_map, "0x88CCFF";
+		.@x = 160; .@y = 88;
+	} else if ('tn == 3) {
+		'tn = 4;
+		mapannounce .@m$, "Lehar: This way! I can hear someone up ahead!", bc_map, "0x88CCFF";
+		.@x = 157; .@y = 140;
+	} else
+		end;
+	if (playerattached())
+		callfunc "F_WSJ_CnMark", .@x, .@y;
+	end;
+}
+
+// A pack of the nest's guardians around a spot, counted by #wsj_tn::OnWave.
+// callfunc "F_WSJ_TnWave", <x>, <y>;
+function	script	F_WSJ_TnWave	{
+	.@x = getarg(0);
+	.@y = getarg(1);
+	.@m$ = instance_mapname("1@twig");
+	.@e$ = instance_npcname("#wsj_tn") + "::OnWave";
+	areamonster .@m$, .@x - 3, .@y - 3, .@x + 3, .@y + 3, "--ja--", 21991, 2, .@e$;
+	areamonster .@m$, .@x - 3, .@y - 3, .@x + 3, .@y + 3, "--ja--", 21992, 1, .@e$;
+	return;
+}
+
+// ------------------------------------------------------------
+// Following Lehar up through the nest
+1@twig,123,66,3	script	Lehar#wsj_tn1	4_EP19_LEHAR,{
+	if ('tn == 0) {
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Branches. White branches, everywhere, as tall as towers. And warm. Ice outside, and in here it's warm.";
+		next;
+		mes "[Lehar]";
+		mes "Leon! Aurelie!";
+		mes "...Nothing. They can't be far. Stay close, and keep your eyes open.";
+		next;
+		mes "^4d4dffLehar sets off up the slope. Behind you, something pale peels itself off a branch and starts to move.^000000";
+		'tn = 1;
+		disablenpc instance_npcname("Lehar#wsj_tn1");
+		enablenpc instance_npcname("Lehar#wsj_tn2");
+		callfunc "F_WSJ_TnWave", 137, 70;
+		close3;
+	}
+	end;
+}
+
+1@twig,160,88,5	script	Lehar#wsj_tn2	4_EP19_LEHAR,{
+	if ('tn == 2) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Those things weren't Rgans. They looked like they grew out of the branches.";
+		mes "The nest is defending itself. Either we aren't welcome, or something else isn't.";
+		next;
+		mes "[Lehar]";
+		mes "Keep going. Up and to the left, where the branches open out.";
+		'tn = 3;
+		disablenpc instance_npcname("Lehar#wsj_tn2");
+		enablenpc instance_npcname("Lehar#wsj_tn3");
+		callfunc "F_WSJ_CnMark", 0, 0;
+		callfunc "F_WSJ_TnWave", 171, 126;
+		close3;
+	}
+	cutin "ep19_lehar03.png",2;
+	mes "[Lehar]";
+	mes "Behind you!";
+	close3;
+}
+
+1@twig,157,140,5	script	Lehar#wsj_tn3	4_EP19_LEHAR,{
+	if ('tn == 4) {
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Look, up ahead. That red coat. That's Leon!";
+		mes "...And he's just standing there, staring up at the branches.";
+		next;
+		mes "[Lehar]";
+		mes "Go and talk to him. I'll keep an eye on the way we came.";
+		'tn = 5;
+		enablenpc instance_npcname("Leon#wsj_tn");
+		enablenpc instance_npcname("Aurelie#wsj_tn");
+		callfunc "F_WSJ_CnMark", 128, 157;
+		close3;
+	}
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	if ('tn == 3)
+		mes "Behind you!";
+	else
+		mes "I'll watch our backs. Go on.";
+	close3;
+}
+
+// ------------------------------------------------------------
+// Leon and Aurelie, and Nyar's way back
+1@twig,128,157,3	script	Leon#wsj_tn	4_EP19_LEON,{
+	if (wsj_ep20 == 450) {
+		cutin "ep19_leon03.png",0;
+		mes "[Leon]";
+		mes "......";
+		next;
+		mes "^4d4dffLeon is staring up at the white branches. He doesn't seem to hear you.^000000";
+		mes "^4d4dffBetter give him a moment.^000000";
+		callfunc "F_WSJ_CnMark", 0, 0;
+		callfunc "F_WSJ_Step", 460, "23106", "23107";
+		close3;
+	}
+	if (wsj_ep20 == 460) {
+		cutin "ep19_leon01.png",0;
+		mes "[Leon]";
+		mes "Sorry. It's... a lot.";
+		mes "The cat led us here and then she spoke. In my head. Her name is Nyar.";
+		next;
+		mes "[Leon]";
+		mes "She says this is the Nest of Small Branches. Jormungandr's body is wrapped around the world, and these are the very tips of it. Where his sleep is lightest.";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "And somewhere in this nest is the heart Rasgand talked about. The 'heart that still beats'.";
+		mes "Nyar guards it. She can't leave, and she can't fight everyone who comes knocking.";
+		next;
+		cutin "ep19_leon02.png",0;
+		mes "[Leon]";
+		mes "So she needs us. Fine by me.";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Let's go back to the floes and tell the others. I'll explain the rest there.";
+		mes "Nyar will show us the way out. Meet me at the <NAVI>[floes]<INFO>jor_twice,161,243,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step", 470, "23107", "23108";
+		getitem 1001217,10;	// Ep20_Cat_Whiskers
+		'tn = 6;
+		enablenpc instance_npcname("White Cat#wsj_tn");
+		next;
+		cutin "ep20_nyar01.png",1;
+		mes "^4d4dffA small white cat is sitting on a root beside you, washing a paw, as if it had been there all along.^000000";
+		close3;
+	}
+	cutin "ep19_leon01.png",0;
+	mes "[Leon]";
+	mes "Go on ahead. I want to look at this place a little longer.";
+	close3;
+}
+
+1@twig,132,154,3	script	Aurelie#wsj_tn	4_EP19_AURELIE,{
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	if (wsj_ep20 < 470)
+		mes "Give him a moment. This place is overwhelming.";
+	else
+		mes "Nyar will send us back. Go first, we'll follow.";
+	close3;
+}
+
+1@twig,125,160,5	script	White Cat#wsj_tn	4_EP20_NYAR,{
+	cutin "ep20_nyar01.png",1;
+	mes "[White Cat]";
+	mes "Mrr.";
+	next;
+	if (select("Go back to the floes.:Stay a little longer.") == 2)
+		close3;
+	cutin "ep20_nyar02.png",1;
+	mes "^4d4dffThe cat flicks its tail. The branches blur into fog, and the fog into falling snow.^000000";
+	callfunc "F_WSJ_CnMark", 0, 0;
+	close2;
+	cutin "",255;
+	warp "jor_twice",164,240;
+	end;
+}

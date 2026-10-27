@@ -1,4 +1,4 @@
-# World Sync: Jormungandr - the memorial dungeon of Episode 20.
+# World Sync: Jormungandr - the memorial dungeons of Episodes 20 and 21.
 Header:
   Type: INSTANCE_DB
   Version: 2
@@ -9,9 +9,9 @@ Body:
     TimeLimit: 3600
     IdleTimeOut: 300
     Enter:
-      Map: 1@twig
-      X: 150
-      Y: 100
+      Map: 1@twas
+      X: 96
+      Y: 62
   - Id: 2021
     Name: Snake's Resting Place
     TimeLimit: 3600
@@ -42,16 +42,16 @@ Body:
     IdleTimeOut: 300
     Enter:
       Map: 1@wtgs
-      X: 30
-      Y: 252
+      X: 56
+      Y: 314
   - Id: 2025
     Name: Sticky Sea
     TimeLimit: 3600
     IdleTimeOut: 300
     Enter:
       Map: 1@slug
-      X: 200
-      Y: 40
+      X: 72
+      Y: 41
   - Id: 2026
     Name: Canyon Exploration
     TimeLimit: 3600
@@ -62,3 +62,19 @@ Body:
       Y: 36
     AdditionalMaps:
       1@20cn2: true
+  - Id: 2027
+    Name: Drift Ice Zone
+    TimeLimit: 3600
+    IdleTimeOut: 300
+    Enter:
+      Map: 1@twsd
+      X: 320
+      Y: 86
+  - Id: 2028
+    Name: Twig's Nest
+    TimeLimit: 3600
+    IdleTimeOut: 300
+    Enter:
+      Map: 1@twig
+      X: 120
+      Y: 63

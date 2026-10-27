@@ -1,0 +1,419 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 20 (The Undying One): the Drift Ice Zone instance.
+//===== Description: =========================================
+//= Step 310 (quest 17707). The Rippling Wall at the heart of the
+//= Serpent's Maze opens onto the drifting ice (1@twsd, instance
+//= "Drift Ice Zone", one player), where the cult draws the nest's
+//= mana up through the ice. Route as the official one: a Rgan
+//= bishop and his guards, the shamans' first ritual, the bishop
+//= again, Lehar, then Sarekgand and Bagot at the far end of the
+//= floes. Rasgand comes for the attendant, and the white cat
+//= throws everyone onto the Frozen Scale Hill (step 320).
+//= Progress inside the instance: 'sd (0-20).
+//============================================================
+
+1@twsd	mapflag	nosave	SavePoint
+1@twsd	mapflag	noteleport
+1@twsd	mapflag	nomemo
+1@twsd	mapflag	nowarpto
+1@twsd	mapflag	nobranch
+1@twsd	mapflag	monster_noteleport
+
+1@twsd,1,1,0	script	#wsj_sd	HIDDEN_WARP_NPC,{
+	end;
+OnInstanceInit:
+	'sd = 0;
+	disablenpc instance_npcname("Floe Crossing#wsj_sd1");
+	disablenpc instance_npcname("Floe Crossing#wsj_sd2");
+	disablenpc instance_npcname("Floe Crossing#wsj_sd3");
+	disablenpc instance_npcname("Rgan Bishop#wsj_sd2");
+	disablenpc instance_npcname("Lehar#wsj_sd1");
+	disablenpc instance_npcname("Sarekgand#wsj_sd");
+	disablenpc instance_npcname("Bagot#wsj_sd");
+	disablenpc instance_npcname("Rasgand#wsj_sd");
+	disablenpc instance_npcname("White Cat#wsj_sd1");
+	disablenpc instance_npcname("Lehar#wsj_sd2");
+	disablenpc instance_npcname("White Cat#wsj_sd2");
+	end;
+
+// Every monster of a wave runs this when it dies; the last one moves the
+// instance on. The killer is attached when there is one (for the marks).
+OnWave:
+	.@m$ = instance_mapname("1@twsd");
+	if (mobcount(.@m$, instance_npcname("#wsj_sd") + "::OnWave") > 0)
+		end;
+	switch ('sd) {
+	case 1:
+		'sd = 2;
+		disablenpc instance_npcname("Rgan Bishop#wsj_sd1");
+		mapannounce .@m$, "Rgan Bishop: The shamans! Protect the ritual!", bc_map, "0xFF4444";
+		.@x = 319; .@y = 100;
+		break;
+	case 3:
+		'sd = 4;
+		enablenpc instance_npcname("Floe Crossing#wsj_sd1");
+		mapannounce .@m$, "The ritual hole freezes over. A path of shimmering ice opens across the water.", bc_map, "0x88CCFF";
+		.@x = 294; .@y = 115;
+		break;
+	case 5:
+		'sd = 6;
+		enablenpc instance_npcname("Floe Crossing#wsj_sd2");
+		mapannounce .@m$, "The last shaman on the floe falls. Another crossing shimmers to the west.", bc_map, "0x88CCFF";
+		.@x = 220; .@y = 154;
+		break;
+	case 8:
+		'sd = 9;
+		mapannounce .@m$, "Rgan Bishop: Guardians! To me!", bc_map, "0xFF4444";
+		callfunc "F_WSJ_SdWave", 21991, 1, 163, 194;
+		callfunc "F_WSJ_SdWave", 21992, 1, 163, 194;
+		end;
+	case 9:
+		'sd = 10;
+		mapannounce .@m$, "Rgan Bishop: Shamans, rise! All of you!", bc_map, "0xFF4444";
+		callfunc "F_WSJ_SdWave", 21993, 2, 163, 194;
+		end;
+	case 10:
+		'sd = 11;
+		disablenpc instance_npcname("Rgan Bishop#wsj_sd2");
+		enablenpc instance_npcname("Lehar#wsj_sd1");
+		mapannounce .@m$, "The bishop dives into a crack in the ice and is gone. Someone is calling your name from the north.", bc_map, "0x88CCFF";
+		.@x = 162; .@y = 245;
+		break;
+	case 13:
+		'sd = 14;
+		enablenpc instance_npcname("Sarekgand#wsj_sd");
+		enablenpc instance_npcname("Bagot#wsj_sd");
+		mapannounce .@m$, "Voices carry across the water, from the last floe.", bc_map, "0x88CCFF";
+		.@x = 48; .@y = 326;
+		break;
+	case 15:
+		'sd = 16;
+		mapannounce .@m$, "Sarekgand: ...Impressive. Annoying, but impressive.", bc_map, "0xFF4444";
+		.@x = 48; .@y = 326;
+		break;
+	case 17:
+		'sd = 18;
+		mapannounce .@m$, "The last ritual circle breaks. Somebody sighs, loudly.", bc_map, "0x88CCFF";
+		.@x = 46; .@y = 328;
+		break;
+	default:
+		end;
+	}
+	if (playerattached())
+		callfunc "F_WSJ_CnMark", .@x, .@y;
+	end;
+}
+
+// A wave of the cult's guards around a spot, counted by #wsj_sd::OnWave.
+// callfunc "F_WSJ_SdWave", <mob id>, <amount>, <x>, <y>;
+function	script	F_WSJ_SdWave	{
+	.@x = getarg(2);
+	.@y = getarg(3);
+	areamonster instance_mapname("1@twsd"), .@x - 3, .@y - 3, .@x + 3, .@y + 3, "--ja--", getarg(0), getarg(1), instance_npcname("#wsj_sd") + "::OnWave";
+	return;
+}
+
+// ------------------------------------------------------------
+// The first floe: a bishop and his guards (1@twsd, south-east)
+1@twsd,314,92,5	script	Rgan Bishop#wsj_sd1	4_EP19_RGAN_SR2,{
+	if ('sd == 0) {
+		mes "[Rgan Bishop]";
+		mes "Stop there. Nobody comes through the wall while the ritual is running.";
+		next;
+		mes "[Rgan Bishop]";
+		mes "...Sarekgand's new attendant? He talks about you. 'Useful.' 'Quiet.' 'Doesn't smell quite right.'";
+		next;
+		mes "[Rgan Bishop]";
+		mes "Bishop Rasgand told us to watch for a human in a borrowed skin.";
+		mes "Let's see what's under yours. Guards! Hunters! Peel this one!";
+		'sd = 1;
+		callfunc "F_WSJ_SdWave", 21994, 2, 316, 96;
+		callfunc "F_WSJ_SdWave", 21991, 2, 316, 96;
+		callfunc "F_WSJ_SdWave", 21992, 1, 316, 96;
+		close;
+	}
+	mes "[Rgan Bishop]";
+	mes "Don't let it near the shamans!";
+	close;
+}
+
+// Walking up to the ritual (or clicking it) starts the next fight.
+1@twsd,319,100,1	script	Rgan Shaman#wsj_sd1	21993,3,3,{
+OnTouch:
+	if ('sd != 2) end;
+	mes "^4d4dffA ring of Rgan shamans kneels around a hole cut in the ice.^000000";
+	mes "^4d4dffMana rises out of the black water in pale threads and winds itself around their staves.^000000";
+	next;
+	mes "[Rgan Shaman]";
+	mes "Deeper... pull it up from deeper... The nest is right below us, brothers, I can feel it pulse...";
+	next;
+	mes "[Rgan Shaman]";
+	mes "...Who let a human onto the ice?!";
+	next;
+	mes "^4d4dffThe shamans leap to their feet, staves blazing.^000000";
+	'sd = 3;
+	disablenpc instance_npcname("Rgan Shaman#wsj_sd1");
+	callfunc "F_WSJ_SdWave", 21993, 2, 319, 104;
+	close;
+}
+
+// ------------------------------------------------------------
+// Crossings of shimmering ice from floe to floe
+1@twsd,294,115,0	script	Floe Crossing#wsj_sd1	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if ('sd < 4) end;
+	if ('sd == 4) {
+		'sd = 5;
+		callfunc "F_WSJ_CnMark", 0, 0;
+		callfunc "F_WSJ_SdWave", 21993, 4, 236, 148;
+		dispbottom "Another ritual circle, on the next floe. Four shamans this time.";
+	}
+	warp instance_mapname("1@twsd"), 240, 145;
+	end;
+}
+
+1@twsd,220,154,0	script	Floe Crossing#wsj_sd2	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if ('sd < 6) end;
+	if ('sd == 6) {
+		'sd = 7;
+		enablenpc instance_npcname("Rgan Bishop#wsj_sd2");
+		callfunc "F_WSJ_CnMark", 163, 190;
+	}
+	warp instance_mapname("1@twsd"), 168, 186;
+	end;
+}
+
+1@twsd,164,260,0	script	Floe Crossing#wsj_sd3	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if ('sd < 12) end;
+	if ('sd == 12) {
+		'sd = 13;
+		disablenpc instance_npcname("Lehar#wsj_sd1");
+		callfunc "F_WSJ_CnMark", 0, 0;
+		callfunc "F_WSJ_SdWave", 21993, 3, 56, 318;
+		dispbottom "Shamans on the far floe. Lehar is right behind you.";
+	}
+	warp instance_mapname("1@twsd"), 62, 310;
+	end;
+}
+
+// ------------------------------------------------------------
+// The middle of the floes: the bishop again, and Lehar
+1@twsd,163,190,5	script	Rgan Bishop#wsj_sd2	4_EP19_RGAN_SR2,{
+	if ('sd == 7) {
+		mes "[Rgan Bishop]";
+		mes "You! You were supposed to be peeled!";
+		mes "Do you know how long it takes to train a shaman? Do you know how hard it is to find ice this thin?";
+		next;
+		mes "[Rgan Bishop]";
+		mes "No matter. Sarekgand is waiting at the far end of the floes, and He is coming to meet him.";
+		mes "You won't reach them. Shamans! Guards! All of you!";
+		'sd = 8;
+		callfunc "F_WSJ_CnMark", 0, 0;
+		callfunc "F_WSJ_SdWave", 21993, 2, 163, 194;
+		close;
+	}
+	mes "[Rgan Bishop]";
+	mes "Hisss! Stay back!";
+	close;
+}
+
+1@twsd,162,245,3	script	Lehar#wsj_sd1	4_EP19_LEHAR,{
+	if ('sd == 11) {
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "There you are! I lost you in the maze, then I saw Sarekgand walk straight into that wall of light, so I walked in after him.";
+		next;
+		mes "[Lehar]";
+		mes "My disguise came off on the way through. It turns out Rgans notice when your face falls off.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Listen. Sarekgand went west, to the last floe. And he isn't alone: there was a man in a long coat with him, carrying a toolbox.";
+		next;
+		select("Bagot.");
+		mes "[Lehar]";
+		mes "The engineer from the canyon? Then that device at the wall is his too.";
+		mes "There's a crossing just north of here. Go, I'm right behind you.";
+		'sd = 12;
+		enablenpc instance_npcname("Floe Crossing#wsj_sd3");
+		callfunc "F_WSJ_CnMark", 164, 260;
+		close3;
+	}
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "The crossing, just north. Go!";
+	close3;
+}
+
+// ------------------------------------------------------------
+// The last floe: Sarekgand, Bagot and Rasgand (1@twsd, north-west)
+1@twsd,48,326,5	script	Sarekgand#wsj_sd	4_EP19_RGAN_SR1,{
+	if ('sd == 14) {
+		mes "[Sarekgand]";
+		mes "My useful attendant. I did say: tell no one, follow no one.";
+		mes "And yet here you are, at the end of the ice, with a trail of my shamans behind you.";
+		next;
+		mes "[Sarekgand]";
+		mes "Bishop Rasgand warned me. 'Sarekgand,' he said, 'your attendant walks like a human.'";
+		mes "I told him you were only clumsy. I don't like being wrong. Hunters!";
+		'sd = 15;
+		callfunc "F_WSJ_CnMark", 0, 0;
+		callfunc "F_WSJ_SdWave", 21994, 5, 52, 320;
+		close;
+	}
+	if ('sd == 16) {
+		mes "[Sarekgand]";
+		mes "Five Heart Hunters. Do you know what those cost? Bagot charges by the bolt.";
+		next;
+		mes "[Sarekgand]";
+		mes "Enough. If the hunters can't stop you, the ritual will.";
+		mes "Shamans, finish it! Open the way to the nest!";
+		'sd = 17;
+		callfunc "F_WSJ_CnMark", 0, 0;
+		callfunc "F_WSJ_SdWave", 21993, 3, 52, 320;
+		close;
+	}
+	mes "[Sarekgand]";
+	mes "Order on the ice. That's all I ask.";
+	close;
+}
+
+1@twsd,46,328,5	script	Bagot#wsj_sd	4_EP18_BAGOT,{
+	if ('sd != 18) {
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "Don't mind me. I'm only taking notes.";
+		close3;
+	}
+	cutin "ep18_bagot_01.png",2;
+	mes "[Bagot]";
+	mes "Well, well. The canyon tourist! I wondered when you'd turn up again.";
+	mes "You have a real talent for walking into my experiments at the worst possible moment.";
+	next;
+	select("You built the device in the maze.");
+	cutin "ep18_bagot_02.png",2;
+	mes "[Bagot]";
+	mes "Built it, tuned it, and bolted it into the rock with my own two hands. The Rgans can't hold a spanner.";
+	mes "It pulls mana down from the Roots and pushes it through the wall, out here, where the ice is thin.";
+	next;
+	mes "[Bagot]";
+	mes "And under the ice... is the most remarkable instrument in the world, and I'm the first to listen to it.";
+	next;
+	cutin "",255;
+	enablenpc instance_npcname("Rasgand#wsj_sd");
+	specialeffect EF_DARKBREATH, AREA, instance_npcname("Rasgand#wsj_sd");
+	cutin "ep20_lasgand01.png",2;
+	mes "[???]";
+	mes "Bagot. You talk too much.";
+	next;
+	mes "[Rasgand]";
+	mes "So this is the 'useful attendant' Sarekgand told me about.";
+	mes "The scroll was good. But you hold yourself like a human. You always will.";
+	next;
+	cutin "ep20_lasgand02.png",2;
+	mes "[Rasgand]";
+	mes "No matter. You're just in time to see it open.";
+	mes "Beyond that gate, under this ice, is the nest of the Serpent God's smallest branches, where his heart still beats. When I reach it, I won't need bishops or roots or devices any more.";
+	next;
+	select("You'll have to get past me first.");
+	cutin "ep20_lasgand03.png",2;
+	mes "[Rasgand]";
+	mes "Gladly.";
+	next;
+	enablenpc instance_npcname("White Cat#wsj_sd1");
+	specialeffect EF_HOLYHIT, AREA, instance_npcname("White Cat#wsj_sd1");
+	cutin "ep20_nyar01.png",1;
+	mes "^4d4dffA blinding white light floods the ice.^000000";
+	mes "^4d4dffSitting on Bagot's toolbox, where nothing sat a moment ago, is the small white cat from the canyon.^000000";
+	next;
+	mes "[White Cat]";
+	mes "Mrrrow.";
+	next;
+	cutin "ep18_bagot_03.png",2;
+	mes "[Bagot]";
+	mes "You again! Shoo! That box is calibrated!";
+	next;
+	cutin "ep20_lasgand04.png",2;
+	mes "[Rasgand]";
+	mes "You...! Not now, not when I'm this close!";
+	next;
+	cutin "ep20_nyar02.png",1;
+	mes "^4d4dffThe cat flicks its tail. The floes heave like a blanket being shaken out.^000000";
+	mes "^4d4dffRasgand, Sarekgand and Bagot are flung far across the ice, and the fog swallows them.^000000";
+	'sd = 19;
+	disablenpc instance_npcname("Rasgand#wsj_sd");
+	disablenpc instance_npcname("Sarekgand#wsj_sd");
+	disablenpc instance_npcname("Bagot#wsj_sd");
+	enablenpc instance_npcname("Lehar#wsj_sd2");
+	callfunc "F_WSJ_CnMark", 50, 322;
+	close3;
+}
+
+1@twsd,51,330,3	script	Rasgand#wsj_sd	4_EP20_LASGAND,{
+	cutin "ep20_lasgand01.png",2;
+	mes "[Rasgand]";
+	mes "......";
+	close3;
+}
+
+1@twsd,47,331,3	script	White Cat#wsj_sd1	4_EP20_NYAR,{
+	cutin "ep20_nyar01.png",1;
+	mes "[White Cat]";
+	mes "Mrr.";
+	close3;
+}
+
+1@twsd,50,322,5	script	Lehar#wsj_sd2	4_EP19_LEHAR,{
+	if ('sd == 19) {
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Did you see that? Did a cat just throw a bishop into the sea?";
+		mes "...Don't answer. I don't want to know.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "It's looking at us. I think it wants us to follow.";
+		mes "We followed a cat out of the canyon, didn't we? Lead the way, I'm right behind you.";
+		next;
+		mes "^4d4dffThe white cat hops down from the toolbox and trots off toward the edge of the floe.^000000";
+		'sd = 20;
+		disablenpc instance_npcname("White Cat#wsj_sd1");
+		enablenpc instance_npcname("White Cat#wsj_sd2");
+		callfunc "F_WSJ_CnMark", 42, 318;
+		close3;
+	}
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "Follow the cat. Quietly.";
+	close3;
+}
+
+1@twsd,42,318,3	script	White Cat#wsj_sd2	4_EP20_NYAR,{
+	if ('sd != 20 || wsj_ep20 != 310) {
+		cutin "ep20_nyar01.png",1;
+		mes "[White Cat]";
+		mes "Mrr.";
+		close3;
+	}
+	cutin "ep20_nyar03.png",1;
+	mes "^4d4dffThe cat sits at the edge of the floe, tail curled, and looks back at the two of you.^000000";
+	next;
+	mes "[White Cat]";
+	mes "Mrrp.";
+	next;
+	cutin "ep20_nyar02.png",1;
+	mes "^4d4dffIt flicks its tail once more. The ice drops away, the sky turns over,^000000";
+	mes "^4d4dffand the world comes down, hard and white.^000000";
+	callfunc "F_WSJ_CnMark", 0, 0;
+	callfunc "F_WSJ_Step", 320, "17707", "17708";
+	getitem 1001217,20;	// Ep20_Cat_Whiskers
+	close2;
+	cutin "",255;
+	warp "jor_back1",364,224;
+	end;
+}
