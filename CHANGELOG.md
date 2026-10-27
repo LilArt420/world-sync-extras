@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.5
+Needs Ragnarok Offline 1.6.9 or later.
+- 🧍 The Verkhasel placeholder on ve_fild05 is gone: Ragnarok Offline 1.7.3 brings the Shadow Cross job change quest, whose real Verkhasel stands on the same cell. 72 placeholders remain, 44 of them working.
 ## 2.1.4
 Needs Ragnarok Offline 1.6.9 or later.
 - 🌿 **Twig's Nest** dropped you into open sea at the edge of the map, where you couldn't take a step. Its entry and whole route were on cells the map blocks. It now follows the nest's real path, from its south end up to Leon and Aurelie.

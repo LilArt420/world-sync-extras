@@ -43,3 +43,5 @@ b465-b470
 32149
 # City Investment block: Masha's street stall staffer requests (Murian in the Prontera Culvert, Elbury in the Sphinx)
 17448 17449
+# Shadow Cross job change quest (Flux159/rathena#79, shipped in Ragnarok Offline 1.7.3): the real Verkhasel stands at ve_fild05 317,235
+17263
