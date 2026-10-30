@@ -350,20 +350,110 @@ OnTouch:
 1@ep21b	mapflag	monster_noteleport
 1@ep21b	mapflag	nopenalty
 
+// The battle has already been fought when you arrive: the resistance stands
+// around the serpent's egg in the round hall by the entrance, and Tan is
+// gone. Heine's tablet shows what is inside the egg; the egg hatches the
+// serpent's last vessel, Tan himself. 'stage: 0 arrival, 1 tablet shown,
+// 2 egg hatched, 3 Tan down.
 1@ep21b,1,1,0	script	#wsj_md21b	-1,{
 	end;
 OnInstanceInit:
-	disablenpc instance_npcname("Tris#wsj_md21b");
-	monster instance_mapname("1@ep21b"),100,168,"Eroded Tan",22371,1,instance_npcname("#wsj_md21b") + "::OnTanDown";
+	'stage = 0;
+	end;
+OnHatch:
+	'stage = 2;
+	.@m$ = instance_mapname("1@ep21b");
+	mapannounce .@m$, "The shell splits from top to bottom. Out of the mana steps a man with the serpent's eyes: Tan.", bc_map, "0xFF4444";
+	monster .@m$,100,129,"Eroded Tan",22371,1,instance_npcname("#wsj_md21b") + "::OnTanDown";
 	end;
 OnTanDown:
-	mapannounce instance_mapname("1@ep21b"), "The giant serpent's coils go slack. In the middle of them, a man slumps to his knees: Tan.", bc_map, "0xFF4444";
-	sleep 3000;
-	enablenpc instance_npcname("Tris#wsj_md21b");
+	'stage = 3;
+	mapannounce instance_mapname("1@ep21b"), "The serpent's mana pours out of Tan like smoke. He slumps to his knees, himself again.", bc_map, "0xFF4444";
 	end;
 }
 
-1@ep21b,100,118,3	script	Tris#wsj_md21b	4_EP21_TRIS,{
+1@ep21b,100,124,0	script	Serpent's Egg#wsj_md21b	4_POINT_BLUE,{
+	if ('stage == 0) {
+		mes "^4d4dffA huge egg sits in the middle of the hall, its shell glowing with the serpent's mana. Talk to Tris first.^000000";
+		close;
+	}
+	if ('stage == 1) {
+		mes "^4d4dffYou hold Heine's tablet up to the egg. Behind its glass, the shell turns clear: something curled inside, with a man's shape.^000000";
+		next;
+		if (select("Hold the tablet closer.:Step back.") == 2)
+			close;
+		specialeffect EF_LORD;
+		mes "^4d4dffThe tablet whines. The egg answers it, louder and louder, until the shell cracks.^000000";
+		close2;
+		donpcevent instance_npcname("#wsj_md21b") + "::OnHatch";
+		end;
+	}
+	if ('stage == 2) {
+		mes "^4d4dffThe broken shell. Whatever came out of it is still here.^000000";
+		close;
+	}
+	mes "^4d4dffAn empty shell, already going grey.^000000";
+	close;
+}
+
+1@ep21b,106,124,3	script	Reinhardt#wsj_md21b	4_EP21_REINHARDT,{
+	cutin "ep21_reinhardt01.png",2;
+	mes "[Reinhardt]";
+	if ('stage < 2)
+		mes "We killed the serpent. Its body crumbled to ash, but its mana went into that egg. And Tan... Tan walked in after it.";
+	else if ('stage == 2)
+		mes "That isn't Tan anymore! Bring him down, it's the only way to get him out!";
+	else
+		mes "He's breathing. He's breathing!";
+	close3;
+}
+
+1@ep21b,100,118,3	script	Nyar#wsj_md21b	4_EP20_NYAR,{
+	cutin "ep20_nyar01.png",1;
+	mes "[Nyar]";
+	if ('stage < 2)
+		mes "^0000FFThe egg smells like the snake bishop. Hold the bird-woman's tablet to it. It sees inside things.^000000";
+	else
+		mes "^0000FFMrrow. Hit it. Then we talk.^000000";
+	close3;
+}
+
+1@ep21b,93,124,5	script	Tris#wsj_md21b	4_EP21_TRIS,{
+	if ('stage == 0) {
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		if (wsj_ep21 == 760) {
+			mes "You came anyway. Of course you did.";
+			mes "It's done. The serpent is dead; we cut it apart in the dark halls. But when it died, its mana didn't scatter. It flowed in here, into that thing.";
+			next;
+			mes "[Tris]";
+			mes "And Tan... he was ahead of all of us the whole fight. When the serpent fell he walked straight to the egg, touched it, and he was gone. Just gone.";
+			next;
+			mes "^4d4dffThe tablet in your pack hums. Heine's face appears, squinting.^000000";
+			next;
+			cutin "ep21_ilse_heine02.png",1;
+			mes "[Ilse el Heine]";
+			mes "Hold me up to the egg. No, closer. My tablet sees through time a little; it can see through an eggshell.";
+			mes "If your vice-captain is in there, we'll know.";
+		} else {
+			mes "The same night, again. The serpent dead, its mana in that egg, and Tan inside.";
+			mes "You know what to do. Hold up the tablet.";
+		}
+		'stage = 1;
+		close3;
+	}
+	if ('stage == 1) {
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "The <NAVI>[egg]<INFO>1@ep21b,100,124,0,101,0</INFO></NAVI>. Hold Heine's tablet up to it.";
+		close3;
+	}
+	if ('stage == 2) {
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "Don't hold back! If anything of Tan is left in there, that's how we get it out!";
+		close3;
+	}
 	if (wsj_ep21 == 760) {
 		cutin "ep21_tris02.png",2;
 		mes "[Tris]";
@@ -378,7 +468,7 @@ OnTanDown:
 		next;
 		cutin "ep21_tris02.png",2;
 		mes "[Tris]";
-		mes "It's dead. You held on long enough for us to kill it. You did it, Tan.";
+		mes "The serpent's dead, and you're out of its egg. You held on long enough. You did it, Tan.";
 		next;
 		cutin "ep21_tan01.png",0;
 		mes "[Tan]";
@@ -486,8 +576,11 @@ OnTouch:
 	end;
 }
 
-// Memorial dungeon: the Secret Altar (1@ep21a). Four shamans feed the
-// seed; when they fall, Nyar takes the mana.
+// Memorial dungeon: the Secret Altar (1@ep21a). Its three halls don't
+// touch: the entrance corridor, the winding way up, and the altar. Lehar
+// waits at the entrance; past the guards, the sealed gate lets the mana
+// stream carry you up, and a door of light opens onto the altar, where four
+// shamans feed the seed. When they fall, Nyar takes the mana.
 1@ep21a	mapflag	nosave	SavePoint
 1@ep21a	mapflag	noteleport
 1@ep21a	mapflag	nomemo
@@ -500,15 +593,54 @@ OnTouch:
 	end;
 OnInstanceInit:
 	disablenpc instance_npcname("Nyar#wsj_md21a");
+	disablenpc instance_npcname("Mana Stream#wsj_md21a");
+	disablenpc instance_npcname("Shining Door#wsj_md21a");
+	.@m$ = instance_mapname("1@ep21a");
+	// The hall at the end of the entrance corridor, before the sealed gate.
+	'guards = 6;
+	areamonster .@m$,180,24,198,44,"Yordos Interrogator",22355,3,instance_npcname("#wsj_md21a") + "::OnGuardDown";
+	callsub S_Story, 3;
+	areamonster .@m$,180,24,198,44,"Yordos Judge",22356,3,instance_npcname("#wsj_md21a") + "::OnGuardDown";
+	callsub S_Story, 3;
+	// The winding way up to the altar.
+	'path = 4;
+	setarray .@x, 174, 139, 104, 145;
+	setarray .@y, 112, 115, 136, 168;
+	for (.@i = 0; .@i < 4; .@i++) {
+		areamonster .@m$,.@x[.@i]-3,.@y[.@i]-3,.@x[.@i]+3,.@y[.@i]+3,"Yordos Judge",22356,1,instance_npcname("#wsj_md21a") + "::OnPathDown";
+		callsub S_Story, 1;
+	}
+	// The altar: four shamans feed the seed.
 	'shamans = 4;
 	setarray .@x, 58, 66, 58, 66;
 	setarray .@y, 242, 242, 234, 234;
 	for (.@i = 0; .@i < 4; .@i++) {
-		monster instance_mapname("1@ep21a"),.@x[.@i],.@y[.@i],"Seed Keeper",22359,1,instance_npcname("#wsj_md21a") + "::OnShamanDown";
+		monster .@m$,.@x[.@i],.@y[.@i],"Seed Keeper",22359,1,instance_npcname("#wsj_md21a") + "::OnShamanDown";
 		// Lighter than the temple's Yoscopus Shamans: a story fight.
 		setunitdata $@mobid[0], UMOB_MAXHP, 6000000;
 		setunitdata $@mobid[0], UMOB_HP, 6000000;
 	}
+	end;
+// The cult's guards here are lighter than the temple's: a story fight.
+// $@mobid keeps older entries, so the caller says how many were spawned.
+S_Story:
+	for (.@j = 0; .@j < getarg(0); .@j++) {
+		setunitdata $@mobid[.@j], UMOB_MAXHP, 4000000;
+		setunitdata $@mobid[.@j], UMOB_HP, 4000000;
+	}
+	return;
+OnGuardDown:
+	'guards--;
+	if ('guards > 0)
+		end;
+	mapannounce instance_mapname("1@ep21a"), "Lehar: That's the last of the guards. The gate at the end of the hall, the one with the serpent seal. Break it!", bc_map, "0x88CCFF";
+	end;
+OnPathDown:
+	'path--;
+	if ('path > 0)
+		end;
+	mapannounce instance_mapname("1@ep21a"), "The way is clear. At the top of the path, a door of white light hums with the snake's mana.", bc_map, "0x88CCFF";
+	enablenpc instance_npcname("Shining Door#wsj_md21a");
 	end;
 OnShamanDown:
 	'shamans--;
@@ -519,6 +651,50 @@ OnShamanDown:
 	mapannounce instance_mapname("1@ep21a"), "The last keeper falls. The mana churns over the altar, unguarded...", bc_map, "0x88CCFF";
 	sleep 2000;
 	enablenpc instance_npcname("Nyar#wsj_md21a");
+	end;
+}
+
+1@ep21a,104,33,3	script	Lehar#wsj_md21a	4_EP19_LEHAR,{
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	if ('guards > 0) {
+		mes "You took your time! Nyar ran ahead, as usual.";
+		mes "The cult's guards hold the hall at the end of this corridor, in front of a sealed gate. The mana flows through there, down to the altar.";
+		next;
+		mes "[Lehar]";
+		mes "Clear the hall, break the seal, follow the mana. Simple. I like simple.";
+	} else
+		mes "The gate at the end of the hall. Break the seal and follow the mana!";
+	close3;
+}
+
+1@ep21a,201,34,0	script	Sealed Gate#wsj_md21a	4_POINT_BLUE,{
+	if ('guards > 0) {
+		mes "^4d4dffA gate of black stone, sealed with a coiled serpent. While the cult's guards stand in the hall, the seal holds.^000000";
+		close;
+	}
+	mes "^4d4dffA gate of black stone, sealed with a coiled serpent. With its guards gone, the seal flickers.^000000";
+	next;
+	if (select("Break the seal.:Leave it.") == 2)
+		close;
+	specialeffect EF_BAKU;
+	mes "^4d4dffThe seal cracks like ice. Behind the gate, a stream of mana runs upward into the dark.^000000";
+	close2;
+	enablenpc instance_npcname("Mana Stream#wsj_md21a");
+	end;
+}
+
+1@ep21a,198,34,0	script	Mana Stream#wsj_md21a	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp instance_mapname("1@ep21a"),190,80;
+	end;
+}
+
+1@ep21a,148,206,0	script	Shining Door#wsj_md21a	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp instance_mapname("1@ep21a"),66,226;
 	end;
 }
 

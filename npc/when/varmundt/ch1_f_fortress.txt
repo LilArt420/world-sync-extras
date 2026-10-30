@@ -28,7 +28,7 @@ hem_dun01,209,248,4	script	Est#wsv	10183,{
 	}
 	if (wsv_ch1 == 605 || wsv_ch1 == 610) {
 		mes "[Est]";
-		mes "The way stays open for an hour. Inside, fight your way through the Legion; the officers guard the inner hall, and Himmelmez waits at the far end.";
+		mes "The way stays open for an hour. Inside, the fortress is a chain of floating platforms. Clear one, and a stairway of light takes you to the next: the Legion on the outer spiral, its officers at the heart of the inner one, and Himmelmez in the throne hall below.";
 		mes "Ready?";
 		next;
 		if (select("Open the way.:Not yet.") == 2)
@@ -69,27 +69,48 @@ OnInit:
 1@ch1b	mapflag	monster_noteleport
 1@ch1b	mapflag	nopenalty
 
+// The fortress is a chain of floating platforms with no walkway between
+// them: the outer spiral (where you come in, at its heart), the inner
+// spiral, and the throne hall, a round platform below. Stairways of light
+// appear when a platform is cleared.
 1@ch1a,1,1,0	script	#wsv_md	-1,{
 	end;
 OnInstanceInit:
-	'stage = 1;
-	'left = 15;
+	'left = 16;
 	disablenpc instance_npcname("Est#wsv_md");
+	disablenpc instance_npcname("Upper Stairway#wsv_md");
+	disablenpc instance_npcname("Throne Stairway#wsv_md");
 	.@m$ = instance_mapname("1@ch1a");
-	monster .@m$,262,285,"Meat Cleaver Soldier",22460,5,instance_npcname("#wsv_md") + "::OnLegion";
-	monster .@m$,258,280,"Hate Scythe Soldier",22461,5,instance_npcname("#wsv_md") + "::OnLegion";
-	monster .@m$,266,280,"Crushing Plow Soldier",22462,5,instance_npcname("#wsv_md") + "::OnLegion";
+	.@e$ = instance_npcname("#wsv_md") + "::OnLegion";
+	// Up the outer spiral, from its heart to the top.
+	setarray .@x, 282, 308, 256, 224;
+	setarray .@y, 330, 283, 259, 306;
+	for (.@i = 0; .@i < 4; .@i++) {
+		areamonster .@m$,.@x[.@i]-3,.@y[.@i]-3,.@x[.@i]+3,.@y[.@i]+3,"Meat Cleaver Soldier",22460,2,.@e$;
+		areamonster .@m$,.@x[.@i]-3,.@y[.@i]-3,.@x[.@i]+3,.@y[.@i]+3,"Hate Scythe Soldier",22461,1,.@e$;
+		areamonster .@m$,.@x[.@i]-3,.@y[.@i]-3,.@x[.@i]+3,.@y[.@i]+3,"Crushing Plow Soldier",22462,1,.@e$;
+	}
 	end;
 OnLegion:
 	'left--;
 	if ('left > 0)
 		end;
 	.@m$ = instance_mapname("1@ch1a");
-	mapannounce .@m$, "Est: That's the gate guard down. The inner hall is open: officers, two of them, and something they're carrying.", bc_map, "0x88CCFF";
-	'left = 3;
-	monster .@m$,270,70,"Immortal Legion Officer",22474,1,instance_npcname("#wsv_md") + "::OnOfficer";
-	monster .@m$,262,70,"Immortal Legion Officer",22475,1,instance_npcname("#wsv_md") + "::OnOfficer";
-	monster .@m$,266,64,"Vessel of the Immortal",22499,1,instance_npcname("#wsv_md") + "::OnOfficer";
+	mapannounce .@m$, "Est: That's the outer guard down. A stairway of light has opened at the top of the spiral. Up!", bc_map, "0x88CCFF";
+	enablenpc instance_npcname("Upper Stairway#wsv_md");
+	// Down the inner spiral, from its top to its heart, where the officers wait.
+	'left = 15;
+	.@e$ = instance_npcname("#wsv_md") + "::OnOfficer";
+	setarray .@x, 128, 155, 104, 71;
+	setarray .@y, 330, 284, 259, 306;
+	for (.@i = 0; .@i < 4; .@i++) {
+		areamonster .@m$,.@x[.@i]-3,.@y[.@i]-3,.@x[.@i]+3,.@y[.@i]+3,"Meat Cleaver Soldier",22460,1,.@e$;
+		areamonster .@m$,.@x[.@i]-3,.@y[.@i]-3,.@x[.@i]+3,.@y[.@i]+3,"Hate Scythe Soldier",22461,1,.@e$;
+		areamonster .@m$,.@x[.@i]-3,.@y[.@i]-3,.@x[.@i]+3,.@y[.@i]+3,"Crushing Plow Soldier",22462,1,.@e$;
+	}
+	monster .@m$,117,296,"Immortal Legion Officer",22474,1,.@e$;
+	monster .@m$,108,296,"Immortal Legion Officer",22475,1,.@e$;
+	monster .@m$,112,298,"Vessel of the Immortal",22499,1,.@e$;
 	end;
 OnOfficer:
 	'left--;
@@ -98,8 +119,9 @@ OnOfficer:
 	.@m$ = instance_mapname("1@ch1a");
 	mapannounce .@m$, "A cold voice rolls through the fortress: \"Who dares walk into my house?\"", bc_map, "0xFF4444";
 	sleep 2000;
-	mapannounce .@m$, "Est: Himmelmez. East wing, the deepest hall. Go!", bc_map, "0x88CCFF";
-	monster .@m$,330,70,"Himmelmez",22497,1,instance_npcname("#wsv_md") + "::OnBoss";
+	mapannounce .@m$, "Est: Himmelmez. The throne hall is below the inner spiral; the stairway at its heart goes down. Go!", bc_map, "0x88CCFF";
+	enablenpc instance_npcname("Throne Stairway#wsv_md");
+	monster .@m$,85,150,"Himmelmez",22497,1,instance_npcname("#wsv_md") + "::OnBoss";
 	end;
 OnBoss:
 	.@m$ = instance_mapname("1@ch1a");
@@ -112,7 +134,21 @@ OnBoss:
 	end;
 }
 
-1@ch1a,326,72,4	script	Est#wsv_md	10183,{
+1@ch1a,258,352,0	script	Upper Stairway#wsv_md	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp instance_mapname("1@ch1a"),105,349;
+	end;
+}
+
+1@ch1a,113,291,0	script	Throne Stairway#wsv_md	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp instance_mapname("1@ch1a"),85,129;
+	end;
+}
+
+1@ch1a,85,140,4	script	Est#wsv_md	10183,{
 	cutin "ep162_est03.png",2;
 	if (wsv_ch1 == 610) {
 		mes "[Est]";
@@ -229,23 +265,32 @@ hem_dun01,205,248,4	script	Mage Professor#wsv	10589,{
 	end;
 }
 
+// The same floating platforms as the Sky Fortress: the Legion on the outer
+// spiral, then a stairway of light down to the throne hall.
 1@ch1b,1,1,0	script	#wsv_md2	-1,{
 	end;
 OnInstanceInit:
-	'left = 10;
+	'left = 12;
 	disablenpc instance_npcname("Mage Professor#wsv_md2");
+	disablenpc instance_npcname("Throne Stairway#wsv_md2");
 	.@m$ = instance_mapname("1@ch1b");
-	monster .@m$,262,285,"Meat Cleaver Soldier",22460,4,instance_npcname("#wsv_md2") + "::OnLegion";
-	monster .@m$,258,280,"Hate Scythe Soldier",22461,3,instance_npcname("#wsv_md2") + "::OnLegion";
-	monster .@m$,266,280,"Crushing Plow Soldier",22462,3,instance_npcname("#wsv_md2") + "::OnLegion";
+	.@e$ = instance_npcname("#wsv_md2") + "::OnLegion";
+	setarray .@x, 282, 308, 256, 224;
+	setarray .@y, 330, 283, 259, 306;
+	for (.@i = 0; .@i < 4; .@i++) {
+		areamonster .@m$,.@x[.@i]-3,.@y[.@i]-3,.@x[.@i]+3,.@y[.@i]+3,"Meat Cleaver Soldier",22460,1,.@e$;
+		areamonster .@m$,.@x[.@i]-3,.@y[.@i]-3,.@x[.@i]+3,.@y[.@i]+3,"Hate Scythe Soldier",22461,1,.@e$;
+		areamonster .@m$,.@x[.@i]-3,.@y[.@i]-3,.@x[.@i]+3,.@y[.@i]+3,"Crushing Plow Soldier",22462,1,.@e$;
+	}
 	end;
 OnLegion:
 	'left--;
 	if ('left > 0)
 		end;
 	.@m$ = instance_mapname("1@ch1b");
-	mapannounce .@m$, "The recreation shudders. In the east wing, the Immortal Lord takes shape again.", bc_map, "0xCCCCCC";
-	monster .@m$,330,70,"Himmelmez",22497,1,instance_npcname("#wsv_md2") + "::OnBoss";
+	mapannounce .@m$, "The recreation shudders. A stairway of light opens at the top of the spiral; below, the Immortal Lord takes shape again.", bc_map, "0xCCCCCC";
+	enablenpc instance_npcname("Throne Stairway#wsv_md2");
+	monster .@m$,85,150,"Himmelmez",22497,1,instance_npcname("#wsv_md2") + "::OnBoss";
 	end;
 OnBoss:
 	.@m$ = instance_mapname("1@ch1b");
@@ -254,7 +299,14 @@ OnBoss:
 	end;
 }
 
-1@ch1b,326,72,4	script	Mage Professor#wsv_md2	10589,{
+1@ch1b,258,352,0	script	Throne Stairway#wsv_md2	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp instance_mapname("1@ch1b"),85,129;
+	end;
+}
+
+1@ch1b,85,140,4	script	Mage Professor#wsv_md2	10589,{
 	if (isbegin_quest(12662) == 1) {
 		mes "[Mage Professor]";
 		mes "Did you see it? The shadow, at the very end? It looked at you. It knows you now.";

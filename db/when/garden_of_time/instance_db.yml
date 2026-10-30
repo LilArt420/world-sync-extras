@@ -1,0 +1,24 @@
+# World Sync Extras: Garden of Time block - the two Dimensional Prisons north
+# of the Garden of Time (rAthena has their entrances, but no dungeons behind
+# them). Both are party memorial dungeons, as in kRO.
+Header:
+  Type: INSTANCE_DB
+  Version: 2
+
+Body:
+  - Id: 2032
+    Name: Lake of Fire
+    TimeLimit: 1800
+    IdleTimeOut: 300
+    Enter:
+      Map: 1@f_lake
+      X: 20
+      Y: 25
+  - Id: 2033
+    Name: Hall of Life
+    TimeLimit: 3600
+    IdleTimeOut: 300
+    Enter:
+      Map: 1@ba_go
+      X: 54
+      Y: 32

@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.6
+Needs Ragnarok Offline 1.6.9 or later.
+- 🏰 **Chapter 1, Destroy the Sky Fortress**: inside, there were no NPCs, nothing happened on the stairs, and a few soldiers stood off the platforms near the start. The fortress is a chain of floating platforms with no walkway between them, and the officers, Himmelmez and Est were all on platforms you couldn't reach. Now you clear the Legion up the outer spiral, and a stairway of light takes you onto the inner spiral. Its officers wait at its heart, and the next stairway goes down to the throne hall, where you fight Himmelmez and find Est. The **Recreated Dark Whisper** works the same way: the Legion on the outer spiral, then the stairway down to Himmelmez.
+- 🥚 **Episode 21's last battle** (Snake's Resting Place) was an empty room around the serpent's egg: Tan waited in a hall you couldn't reach. Now it plays like the official one. Tris, Reinhardt and Nyar are waiting by the egg. Hold Heine's tablet up to it, and the egg hatches the Eroded Tan, whom you fight right there. No item is needed: the tablet is part of the story.
+- 🕯️ **Episode 21's Secret Altar** had the same problem: its three halls don't touch, so the shamans and Nyar were out of reach. Lehar now meets you at the entrance. Clear the cult's guards and break the serpent seal on the gate at the end of the hall. A stream of mana carries you up the winding way, and a door of light at the top opens onto the altar.
+- ⏳ **New block: the Garden of Time's Dimensional Prisons** (`garden_of_time`, on by default). The two gates north of the Sealing Spirit Stone never showed up, and there was nothing behind them. They now open onto the **Lake of Fire** (one of the Four Divine Beasts, once a day, drops the Hall of Life Key) and the **Hall of Life** (the Dimensional Criminal, with barrier levels 1-20, traps, the other world's illusions, sanctuary and a weekly reward). For base level 250+, in a party.
+
 ## 2.1.5
 Needs Ragnarok Offline 1.6.9 or later.
 - 🗡️ **Class fix for 16 iRO items.** Agni Sword, Fenrir Staff, Thorn Breaker, the Heretic Mage and Acolyte Boots, Divine Mace, Chaos Sword, Dark Chaser Boots and 8 more name whole classes ("Swordman, Thief and Merchant Classes"), but the server only let each line's first job wear them. Knights, Crusaders, Blacksmiths, Alchemists, Wizards, Sages, Priests, Monks and the rest of each line, 3rd and 4th jobs included, can equip them now. The app's own fix is on its way (Flux159/rathena#84); this carries it until then.
