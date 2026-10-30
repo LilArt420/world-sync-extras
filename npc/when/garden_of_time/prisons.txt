@@ -420,7 +420,7 @@ S_Traps:
 	for (.@i = 0; .@i < .@n; .@i++) {
 		if (getmapxy(.@mm$, .@x, .@y, BL_PC, .@pc[.@i]) != 0 || .@x > 200)
 			continue;
-		.@far = max(abs(.@x - 54), abs(.@y - 49));
+		.@far = distance(.@x, .@y, 54, 49);
 		if (.@far < 8)
 			continue;
 		if (attachrid(.@pc[.@i])) {
