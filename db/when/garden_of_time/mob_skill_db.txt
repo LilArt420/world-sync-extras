@@ -1,0 +1,20 @@
+// World Sync Extras: Garden of Time block - skills for the prison monsters.
+// Divine Pride lists none; these follow each Divine Beast's season and
+// element, and the criminal's "dangerous omens" (wide area attacks).
+22177,Floral Pegasus@NPC_POWERUP,attack,349,5,10000,1000,60000,no,self,myhpltmaxrate,50,,,,,,,
+22177,Floral Pegasus@NPC_POISON,attack,176,5,1000,500,5000,yes,target,always,0,,,,,,,
+22177,Floral Pegasus@NPC_WIDEBLEEDING,attack,665,3,500,1000,20000,no,self,always,0,,,,,,,
+22178,Coral Marine@NPC_POWERUP,attack,349,5,10000,1000,60000,no,self,myhpltmaxrate,50,,,,,,,
+22178,Coral Marine@NPC_EARTHQUAKE,attack,653,3,500,1500,20000,no,self,always,0,,,,,,,
+22178,Coral Marine@NPC_WIDESTONE,attack,666,3,500,1000,20000,no,self,always,0,,,,,,,
+22179,Maple Tree@NPC_POWERUP,attack,349,5,10000,1000,60000,no,self,myhpltmaxrate,50,,,,,,,
+22179,Maple Tree@NPC_WIDESILENCE,attack,663,3,500,1000,20000,no,self,always,0,,,,,,,
+22179,Maple Tree@NPC_WINDATTACK,attack,187,5,1000,500,5000,yes,target,always,0,,,,,,,
+22180,Monarch Penguin@NPC_POWERUP,attack,349,5,10000,1000,60000,no,self,myhpltmaxrate,50,,,,,,,
+22180,Monarch Penguin@NPC_WIDEFREEZE,attack,664,3,500,1000,20000,no,self,always,0,,,,,,,
+22180,Monarch Penguin@NPC_WATERATTACK,attack,184,5,1000,500,5000,yes,target,always,0,,,,,,,
+22174,Dimensional Criminal@NPC_WIDEBLEEDING,attack,665,3,500,1000,20000,no,self,always,0,,,,,,,
+22174,Dimensional Criminal@NPC_WIDEFREEZE,attack,664,3,500,1000,25000,no,self,always,0,,,,,,,
+22174,Dimensional Criminal@NPC_EARTHQUAKE,attack,653,3,500,1500,30000,no,self,always,0,,,,,,,
+22174,Dimensional Criminal@NPC_POWERUP,attack,349,5,10000,1000,60000,no,self,myhpltmaxrate,30,,,,,,,
+22175,Criminal's Illusion@NPC_DARKBREATH,attack,202,3,1000,800,8000,yes,target,always,0,,,,,,,

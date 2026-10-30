@@ -2,7 +2,8 @@
 -- the iRO client's own table lacks (kRO-only ones). The sprites themselves come from
 -- the kRO fallback GRF. Generated from kRO data.grf datainfo/npcidentity + jobname,
 -- plus the Episode 21 characters of the Jormungandr block, and the monsters and NPC looks
--- the blocks' own scripts use (Herosria siege, Koko, the Rgan transformation...).
+-- the blocks' own scripts use (Herosria siege, Koko, the Rgan transformation, the
+-- Garden of Time prisons...).
 JobNameTable = {
 	[10490] = "4_ragfes_08",
 	[10529] = "4_m_nillem",
@@ -382,4 +383,10 @@ JobNameTable = {
 	[22857] = "caput",	-- Twin Caput1
 	[22858] = "WAKWAK",	-- Wakwak
 	[22859] = "WAKWAK",	-- Wakwak
+	[22174] = "MD_PRI_RIGEL",
+	[22175] = "MD_PRI_RIGEL_AC",
+	[22177] = "MD_PRI_DRAGON_1",
+	[22178] = "MD_PRI_DRAGON_2",
+	[22179] = "MD_PRI_DRAGON_3",
+	[22180] = "MD_PRI_DRAGON_4",
 }

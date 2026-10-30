@@ -14,6 +14,7 @@ default except `skip_ep19` and `entrances`.
 | 🐍 | Jormungandr saga | `jormungandr` | Episodes 20 and 21, start to finish |
 | 🌳 | Varmundt & the World Tree | `varmundt` | Chapters 1 and 2, Varmundt, Amatsu, the Juno Library |
 | ⭐ | Star Forest & Herosria | `star_forest` | Star Emperor job change, Sanctuary Herosria and its siege, Ash Village |
+| ⏳ | Garden of Time prisons | `garden_of_time` | The Lake of Fire and Hall of Life memorial dungeons (level 250) |
 | 🛎️ | iRO services | `iro_systems` | Devil in the Box, catalogs, Dungeon Teleporter, town helpers, Acolyte training |
 | 🎯 | iRO Quests | seven settings | Bounty Boards, City Investment, Gramps, the 2021 town quests and more |
 | 🏷️ | Regional items | always on | Names, descriptions and icons for 3,800 items |
@@ -71,6 +72,27 @@ script exists for these episodes.
   holding guild's master gets Herosria's Gifts daily. GMs can start a 60-minute test battle at the
   Sanctuary Manager.
 - 🌳 **Ash Village's** shops, enchants and signposts at the edge of the World Tree.
+
+## ⏳ Garden of Time: the Dimensional Prisons (`garden_of_time`)
+
+The Garden of Time's story is the server's own, up to Rigel's prison registration at the Sealing
+Spirit Stone. The two prison gates north of the stone used to stay hidden, with nothing behind them.
+This block adds the two party memorial dungeons (base level 250+):
+
+- 🔥 **Lake of Fire** (left gate, once a day; 5 Dimensional Crystal Fragments open it again): one
+  of the Four Divine Beasts (Floral Pegasus, Coral Marine, Maple Tree, Monarch Penguin) waits by the
+  lake. Talk to it and it leads you through a rift to the far shore. Beat it for the **Hall of Life
+  Key**, crystal fragments and its season's energy.
+- 🌀 **Hall of Life** (right gate; costs a key, then once an hour): wear the **Constellation's
+  Protection** (the Sealing Spirit Stone reissues it). The barrier engraved on it (levels 1-20) sets
+  the Dimensional Criminal's strength. Stay near the centre, because its traps strike harder further
+  out and every hit makes it stronger. Ten hits open a portal to the other world, where its three
+  illusions are; killing them stuns it. Pull it out of its sanctuary when it declares one. After the
+  fight, take the weekly reward, or skip it to raise your barrier by a level. A run you don't finish
+  lowers your barrier by a level.
+
+Stats and drops of the Divine Beasts and the criminal are Divine Pride's. The reward amounts and the
+trap, sanctuary and regeneration numbers are our estimates.
 
 ## 🛎️ iRO services (`iro_systems`)
 

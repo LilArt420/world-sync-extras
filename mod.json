@@ -1,6 +1,6 @@
 {
   "name": "world-sync-extras",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "author": "Lil Art",
   "description": "World Sync's playable content and iRO's quests, in blocks you can switch: the Jormungandr saga (Episodes 20 and 21), Chapters 1 and 2 of the Song of the World Tree, Varmundt, Star Forest and Herosria, iRO services, iRO Quests (Bounty Boards, City Investment, the 2021 town quests, Gramps and more), and names and descriptions for 3,800 items your client doesn't know. The official NPCs still without logic stand where the clients put them, and @npcplace moves any NPC. Needs Ragnarok Offline 1.6.9 or later.",
   "requires": {
@@ -36,6 +36,13 @@
       "default": true,
       "label": "Star Forest, Herosria and Ash Village",
       "description": "The Star Emperor job change in the Meteor Forest (TaeKwon Masters, base 99 / job 50: Nalson in Payon), Sanctuary Herosria's Garden of Dawn (portals in the four castle realms) and Ash Village's shops, enchants and signposts at the edge of the World Tree. Turned off, their NPCs leave the maps (their placeholders don't come back)."
+    },
+    {
+      "key": "garden_of_time",
+      "type": "boolean",
+      "default": true,
+      "label": "Garden of Time: the Dimensional Prisons (Lake of Fire, Hall of Life)",
+      "description": "The two memorial dungeons behind the prison gates north of the Garden of Time (level 250+, party), which open once you've registered at Rigel's Sealing Spirit Stone. The Lake of Fire's Divine Beasts (once a day) keep the Hall of Life key; the Hall of Life's criminal grows with the barrier on your Constellation's Protection."
     },
     {
       "key": "iro_systems",

@@ -1,0 +1,583 @@
+//===== World Sync Extras: Garden of Time block ==============
+//= The two Dimensional Prisons north of the Garden of Time (t_garden):
+//= the Lake of Fire (1@f_lake), where the Four Divine Beasts are held,
+//= and the Hall of Life (1@ba_go), the cell of the Dimensional Criminal.
+//=
+//= rAthena scripts the Garden of Time up to Rigel's registration
+//= (quest 12597), but its two prison gates are empty stubs, and the
+//= touch area that should show them looks for "Dimensional Prison#1/#2",
+//= names no NPC has. So the gates never appeared. These are the gates and
+//= the dungeons behind them, after the client's quest log (12611-12619),
+//= tip box and the Sealing Spirit Stone's prison guide.
+//=
+//= Quests: 12611 Lake of Fire done today; 12613-12616 one Divine Beast
+//= each; 12617 a Hall of Life run; 12619 an hour between Hall of Life
+//= keys; 12612 the Hall of Life's weekly reward.
+//= Char vars: wsg_lake (Lake instance entered), wsg_hol (Hall instance
+//= entered), wsg_hol_open (a Hall run not finished yet).
+//============================================================
+
+// ------------------------------------------------------------
+// The gates
+// ------------------------------------------------------------
+t_garden,166,235,0	script	#wsg_gates	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if (isbegin_quest(12597) != 2)
+		end;
+	cloakoffnpcself "Dimensional Prison#wsg1";
+	cloakoffnpcself "Dimensional Prison#wsg2";
+	end;
+}
+
+// Enters (or creates, then enters) the party's memorial dungeon.
+// Returns the instance id, or 0 after telling the player why not.
+function	script	F_WSG_Enter	{
+	.@md$ = getarg(0);
+	if (instance_enter(.@md$) == IE_OK)
+		return instance_id(IM_PARTY);
+	.@id = instance_create(.@md$, IM_PARTY);
+	if (.@id > 0 && instance_enter(.@md$) == IE_OK)
+		return .@id;
+	mes "[Dimensional Prison]";
+	if (.@id == -3)
+		mes "^ff0000Your party already has another memorial dungeon open. It must close before this gate will open.^000000";
+	else
+		mes "^ff0000The gate flickers and stays shut. Try again in a moment.^000000";
+	close2;
+	return 0;
+}
+
+// Common checks before either gate opens. Returns 1 if the player may go on.
+function	script	F_WSG_GateCheck	{
+	if (checkweight(1201,1) == 0) {
+		mes "^ff0000It seems that there are too many types and weights of items. Please organize your inventory.^000000";
+		close2;
+		return 0;
+	}
+	if (BaseLevel < 250) {
+		mes "[Dimensional Prison]";
+		mes "^ff0000Only adventurers of base level 250 or higher can hold their own inside the prison.^000000";
+		close2;
+		return 0;
+	}
+	if (getcharid(1) < 1) {
+		mes "^0000ffPlease organize a party of at least one person and proceed.^000000";
+		close2;
+		return 0;
+	}
+	return 1;
+}
+
+// The barrier level engraved on the Constellation's Protection the player
+// wears (Constellation's Barrier (1)-(20) in its fourth slot), or 0 if they
+// don't wear one.
+function	script	F_WSG_Barrier	{
+	if (getequipid(EQI_HEAD_LOW) != 420231)
+		return 0;
+	.@c = getequipcardid(EQI_HEAD_LOW, 3);
+	if (.@c < 312453 || .@c > 312472)
+		return 1;
+	return .@c - 312452;
+}
+
+// Engraves a new barrier level on the worn Constellation's Protection.
+function	script	F_WSG_SetBarrier	{
+	.@lv = cap_value(getarg(0), 1, 20);
+	if (getequipid(EQI_HEAD_LOW) != 420231)
+		return;
+	.@ref = getequiprefinerycnt(EQI_HEAD_LOW);
+	.@c = getequipcardid(EQI_HEAD_LOW, 3);
+	unequip EQI_HEAD_LOW;
+	delitem2 420231,1,1,.@ref,0,0,0,0,.@c;
+	getitem2 420231,1,1,.@ref,0,0,0,0,312452 + .@lv;	// MD_Hol_Protection
+	equip 420231;
+	return;
+}
+
+t_garden,158,235,2	script(CLOAKED)	Dimensional Prison#wsg1	GATE_SKYBLUE,{
+	if (isbegin_quest(12597) != 2)
+		end;
+	if (!callfunc("F_WSG_GateCheck"))
+		end;
+	mes "[Dimensional Prison]";
+	mes "^0000ffThe Lake of Fire.^000000";
+	mes "The Four Divine Beasts who served the Constellation of Life are held here. They still guard the criminal, and they keep the key to the Hall of Life.";
+	mes "Entry: once a day. Time limit: 30 minutes.";
+	next;
+	switch (select("Enter the Lake of Fire.:Open the gate again today (5 Dimensional Crystal Fragments).:Leave.")) {
+	case 3:
+		end;
+	case 2:
+		if (checkquest(12611,PLAYTIME) != 0 && checkquest(12611,PLAYTIME) != 1) {
+			mes "[Dimensional Prison]";
+			mes "The gate is already open for you today.";
+			close;
+		}
+		if (countitem(1001414) < 5) {
+			mes "[Dimensional Prison]";
+			mes "^ff0000You need 5 " + mesitemlink(1001414) + ".^000000";
+			close;
+		}
+		delitem 1001414,5;	// MD_Hol_Fragment
+		erasequest 12611;
+		mes "[Dimensional Prison]";
+		mes "The fragments dissolve into the gate. It will open for you once more today.";
+		close;
+	}
+	.@iid = instance_id(IM_PARTY);
+	if (.@iid > 0 && wsg_lake == .@iid) {
+		// Back into the run you already started.
+		callfunc "F_WSG_Enter", "Lake of Fire";
+		end;
+	}
+	switch (checkquest(12611,PLAYTIME)) {
+	case 0:
+	case 1:
+		mes "[Dimensional Prison]";
+		mes "^ff0000You have already been to the Lake of Fire today. The gate opens again at 4 AM, or for 5 Dimensional Crystal Fragments.^000000";
+		close;
+	case 2:
+		erasequest 12611;
+		break;
+	}
+	.@iid = callfunc("F_WSG_Enter", "Lake of Fire");
+	if (.@iid > 0) {
+		wsg_lake = .@iid;
+		setquest 12611;
+	}
+	end;
+}
+
+t_garden,173,235,2	script(CLOAKED)	Dimensional Prison#wsg2	GATE_SKYBLUE,{
+	if (isbegin_quest(12597) != 2)
+		end;
+	if (!callfunc("F_WSG_GateCheck"))
+		end;
+	mes "[Dimensional Prison]";
+	mes "^0000ffThe Hall of Life.^000000";
+	mes "The Dimensional Criminal is held here, under the barrier engraved on your Constellation's Protection.";
+	mes "Entry: a " + mesitemlink(1001415) + ", then once an hour. Reward: once a week. Time limit: 60 minutes.";
+	next;
+	if (select("Enter the Hall of Life.:Leave.") == 2)
+		end;
+	.@lv = callfunc("F_WSG_Barrier");
+	if (.@lv == 0) {
+		mes "[Dimensional Prison]";
+		mes "^ff0000Wear the " + mesitemlink(420231) + " first. The gate reads the barrier engraved on it.^000000";
+		mes "The <NAVI>[Sealing Spirit Stone]<INFO>t_garden,166,235,0,101,0</INFO></NAVI> reissues it if you lost yours.";
+		close;
+	}
+	.@iid = instance_id(IM_PARTY);
+	if (.@iid > 0 && wsg_hol == .@iid) {
+		callfunc "F_WSG_Enter", "Hall of Life";
+		end;
+	}
+	switch (checkquest(12619,PLAYTIME)) {
+	case 0:
+	case 1:
+		mes "[Dimensional Prison]";
+		mes "^ff0000You entered the Hall of Life less than an hour ago. Take a break and come back with your key.^000000";
+		close;
+	case 2:
+		erasequest 12619;
+		break;
+	}
+	if (countitem(1001415) < 1) {
+		mes "[Dimensional Prison]";
+		mes "^ff0000The gate needs a " + mesitemlink(1001415) + ". The Divine Beasts of the Lake of Fire keep them.^000000";
+		close;
+	}
+	// A run left unfinished lowers the barrier you can hold by one level.
+	if (wsg_hol_open && .@lv > 1) {
+		.@lv--;
+		callfunc "F_WSG_SetBarrier", .@lv;
+		mes "[Dimensional Prison]";
+		mes "^ff0000Your last correction failed. The barrier on your protection weakens to level " + .@lv + ".^000000";
+		next;
+	}
+	wsg_hol_open = 0;
+	if (instance_id(IM_PARTY) <= 0)
+		.@new = 1;
+	.@iid = callfunc("F_WSG_Enter", "Hall of Life");
+	if (.@iid <= 0)
+		end;
+	if (.@new)
+		$@wsg_hol_lv[.@iid] = .@lv;
+	delitem 1001415,1;	// MD_Hol_Key
+	wsg_hol = .@iid;
+	wsg_hol_open = 1;
+	setquest 12619;
+	if (isbegin_quest(12617))
+		erasequest 12617;
+	setquest 12617;
+	end;
+}
+
+// ------------------------------------------------------------
+// The Lake of Fire (1@f_lake)
+// ------------------------------------------------------------
+1@f_lake	mapflag	nosave	SavePoint
+1@f_lake	mapflag	noteleport
+1@f_lake	mapflag	nomemo
+1@f_lake	mapflag	nowarpto
+1@f_lake	mapflag	nobranch
+1@f_lake	mapflag	monster_noteleport
+1@f_lake	mapflag	nopenalty
+
+// 'beast: 1 Floral Pegasus (spring), 2 Coral Marine (summer), 3 Maple Tree
+// (autumn), 4 Monarch Penguin (winter). 'state: 0 waiting, 1 fighting,
+// 2 subdued.
+1@f_lake,1,1,0	script	#wsg_lake	-1,{
+	end;
+OnInstanceInit:
+	'beast = rand(1,4);
+	'state = 0;
+	setarray .@n$, "", "Floral Pegasus", "Coral Marine", "Maple Tree", "Monarch Penguin";
+	setnpcdisplay instance_npcname("Divine Beast#wsg_lake"), .@n$['beast], 22176 + 'beast;
+	disablenpc instance_npcname("Rift#wsg_lake");
+	disablenpc instance_npcname("Dimensional Portal#wsg_lake");
+	end;
+OnBeastDown:
+	'state = 2;
+	mapannounce instance_mapname("1@f_lake"), "The Divine Beast folds to the ground. As it falls, a dimensional portal opens beside it, and a key drops from its keeping.", bc_map, "0x88CCFF";
+	enablenpc instance_npcname("Dimensional Portal#wsg_lake");
+	end;
+}
+
+// Everyone who comes in gets the hunt for this run's beast.
+1@f_lake,20,25,0	script	#wsg_lake_in	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	.@q = 12612 + 'beast;
+	if (isbegin_quest(.@q) == 0)
+		setquest .@q;
+	end;
+}
+
+1@f_lake,115,75,4	script	Divine Beast#wsg_lake	22177,{
+	setarray .@n$, "", "Floral Pegasus", "Coral Marine", "Maple Tree", "Monarch Penguin";
+	setarray .@s$, "", "spring", "summer", "autumn", "winter";
+	if ('state != 0)
+		end;
+	mes "[" + .@n$['beast] + "]";
+	mes "...You smell of Rigel. Of the one who locked HER away.";
+	mes "We were the Constellation's beasts before your kind had names. We guard her still.";
+	next;
+	mes "^4d4dffThe divine beast of " + .@s$['beast] + " doesn't know the criminal from the Constellation it served. It won't hear reason.^000000";
+	next;
+	if (select("Subdue it.:Not yet.") == 2)
+		close;
+	if ('state != 0)
+		close;
+	'state = 1;
+	close2;
+	npctalk "Then come. Across the lake, where the fire is deep!";
+	specialeffect EF_LORD;
+	disablenpc instance_npcname("Divine Beast#wsg_lake");
+	enablenpc instance_npcname("Rift#wsg_lake");
+	.@m$ = instance_mapname("1@f_lake");
+	monster .@m$,178,174,.@n$['beast],22176 + 'beast,1,instance_npcname("#wsg_lake") + "::OnBeastDown";
+	mapannounce .@m$, "The " + .@n$['beast] + " tears a rift across the lake and waits on the far shore. Follow it through the rift!", bc_map, "0xFF4444";
+	end;
+}
+
+1@f_lake,111,73,0	script	Rift#wsg_lake	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp instance_mapname("1@f_lake"),178,160;
+	end;
+}
+
+1@f_lake,178,166,4	script	Dimensional Portal#wsg_lake	GATE_SKYBLUE,{
+	setarray .@e, 0, 1001440, 1001441, 1001442, 1001443;	// Energy_Of_Spring..Winter
+	.@q = 12612 + 'beast;
+	if ('state == 2 && isbegin_quest(.@q) == 1) {
+		mes "[Dimensional Portal]";
+		mes "The divine beast is subdued. What it guarded is yours.";
+		completequest .@q;
+		erasequest .@q;
+		getitem 1001415,1;	// MD_Hol_Key
+		getitem 1001414,2;	// MD_Hol_Fragment
+		getitem .@e['beast],3;
+		next;
+	}
+	mes "[Dimensional Portal]";
+	mes "Back to the Garden of Time?";
+	next;
+	if (select("Leave the Lake of Fire.:Stay.") == 2)
+		close;
+	warp "t_garden",165,228;
+	end;
+}
+
+// ------------------------------------------------------------
+// The Hall of Life (1@ba_go)
+// ------------------------------------------------------------
+1@ba_go	mapflag	nosave	SavePoint
+1@ba_go	mapflag	noteleport
+1@ba_go	mapflag	nomemo
+1@ba_go	mapflag	nowarpto
+1@ba_go	mapflag	nobranch
+1@ba_go	mapflag	monster_noteleport
+1@ba_go	mapflag	nopenalty
+
+// Two mirrored halls: the prison (35-73, 30-68, centre 54,49) and the
+// other world (333-371, 30-68).
+//  - Traps: every 8 seconds, everyone standing far from the prison's
+//    centre is struck (harder further out); each hit makes the criminal
+//    stronger.
+//  - Ten trap hits open a portal to the other world at the north wall.
+//    Each pass through it makes the criminal heal faster. Killing the
+//    three illusions there stuns the criminal for 20 seconds: no healing,
+//    defenses broken, traps and power reset.
+//  - Sanctuary: now and then the criminal makes itself immune where it
+//    stands; pull it more than 4 cells away to break it.
+//  - Barrier level ('level, from the protection of whoever opened the
+//    hall): 400,000,000 HP, +100,000,000 per level over 1 (up to
+//    2,000,000,000), and +5% attack per level over 1.
+// 'state: 0 waiting, 1 fighting, 2 corrected.
+1@ba_go,1,1,0	script	#wsg_hol	-1,{
+	end;
+OnInstanceInit:
+	'state = 0;
+	disablenpc instance_npcname("Other World#wsg_hol");
+	disablenpc instance_npcname("Way Back#wsg_hol");
+	disablenpc instance_npcname("Dimensional Portal#wsg_hol");
+	end;
+OnStart:
+	if ('state != 0)
+		end;
+	'state = 1;
+	.@m$ = instance_mapname("1@ba_go");
+	'level = cap_value($@wsg_hol_lv[instance_id()], 1, 20);
+	$@wsg_hol_lv[instance_id()] = 0;
+	monster .@m$,54,52,"Dimensional Criminal",22174,1,instance_npcname("#wsg_hol") + "::OnBoss";
+	'boss = $@mobid[0];
+	// Capped at 2,000,000,000 (level 17 and up).
+	.@hp = 400000000 + 100000000 * min('level - 1, 16);
+	setunitdata 'boss, UMOB_MAXHP, .@hp;
+	setunitdata 'boss, UMOB_HP, .@hp;
+	getunitdata 'boss, .@d;
+	'atkmin = .@d[UMOB_ATKMIN] * (100 + 5 * ('level - 1)) / 100;
+	'atkmax = .@d[UMOB_ATKMAX] * (100 + 5 * ('level - 1)) / 100;
+	'def = .@d[UMOB_DEF];
+	'mdef = .@d[UMOB_MDEF];
+	setunitdata 'boss, UMOB_ATKMIN, 'atkmin;
+	setunitdata 'boss, UMOB_ATKMAX, 'atkmax;
+	'traps = 0;
+	'passes = 0;
+	'groggy = 0;
+	'sanct = 0;
+	'illusions = 0;
+	mapannounce .@m$, "Sealing Spirit Stone: Barrier level " + 'level + ". The dimensional criminal wakes. Keep close to the centre of the prison: its traps grow worse the further out you stand.", bc_map, "0x88CCFF";
+	.@t = 0;
+	while ('state == 1) {
+		sleep 1000;
+		if ('state != 1 || !unitexists('boss))
+			end;
+		.@t++;
+		getunitdata 'boss, .@d;
+		// Groggy: counts down, then the criminal recovers its defenses.
+		if ('groggy > 0) {
+			'groggy--;
+			if ('groggy == 0) {
+				setunitdata 'boss, UMOB_DEF, 'def;
+				setunitdata 'boss, UMOB_MDEF, 'mdef;
+				mapannounce .@m$, "The dimensional criminal shakes off the blow.", bc_map, "0xFF4444";
+			}
+		} else if (.@t % 5 == 0) {
+			// Regeneration: 0.01% of max HP per barrier level every 5 seconds,
+			// and 0.02% more for each pass through the other world's portal.
+			.@heal = .@d[UMOB_MAXHP] / 10000 * ('level + 2 * 'passes);
+			setunitdata 'boss, UMOB_HP, min(.@d[UMOB_MAXHP], .@d[UMOB_HP] + .@heal);
+		}
+		// Sanctuary.
+		if ('sanct > 0) {
+			'sanct--;
+			if (distance(.@d[UMOB_X], .@d[UMOB_Y], 'sx, 'sy) > 4 || 'sanct == 0) {
+				'sanct = 0;
+				setunitdata 'boss, UMOB_DAMAGETAKEN, 100;
+				mapannounce .@m$, "The sanctuary around the dimensional criminal breaks.", bc_map, "0x88CCFF";
+			}
+		} else if (.@t % 45 == 0 && 'groggy == 0) {
+			'sanct = 15;
+			'sx = .@d[UMOB_X];
+			'sy = .@d[UMOB_Y];
+			setunitdata 'boss, UMOB_DAMAGETAKEN, 0;
+			mapannounce .@m$, "The dimensional criminal declares a sanctuary! Nothing can touch it there. Pull it out!", bc_map, "0xFF4444";
+		}
+		// Traps.
+		if (.@t % 8 == 0 && 'groggy == 0)
+			callsub S_Traps, .@m$;
+	}
+	end;
+
+S_Traps:
+	.@m$ = getarg(0);
+	.@hit = 0;
+	.@n = getmapunits(BL_PC, .@m$, .@pc);
+	for (.@i = 0; .@i < .@n; .@i++) {
+		if (getmapxy(.@mm$, .@x, .@y, BL_PC, .@pc[.@i]) != 0 || .@x > 200)
+			continue;
+		.@far = distance(.@x, .@y, 54, 49);
+		if (.@far < 8)
+			continue;
+		if (attachrid(.@pc[.@i])) {
+			specialeffect2 EF_THUNDERSTORM2;
+			if (Hp > 0)
+				percentheal -min(25, 5 + .@far / 2), 0;
+			detachrid;
+			.@hit++;
+		}
+	}
+	if (.@hit == 0)
+		return;
+	'traps += .@hit;
+	// Every trap hit: +3% attack, up to +150%.
+	.@pct = 100 + min(150, 3 * 'traps);
+	setunitdata 'boss, UMOB_ATKMIN, 'atkmin * .@pct / 100;
+	setunitdata 'boss, UMOB_ATKMAX, 'atkmax * .@pct / 100;
+	if ('traps >= 10 && 'illusions == 0) {
+		'illusions = 3;
+		.@e$ = instance_npcname("#wsg_hol") + "::OnIllusion";
+		.@ihp = 20000000 * 'level;
+		setarray .@ix, 343, 361, 352;
+		setarray .@iy, 49, 49, 60;
+		for (.@i = 0; .@i < 3; .@i++) {
+			monster .@m$,.@ix[.@i],.@iy[.@i],"Criminal's Illusion",22175,1,.@e$;
+			setunitdata $@mobid[0], UMOB_MAXHP, .@ihp;
+			setunitdata $@mobid[0], UMOB_HP, .@ihp;
+		}
+		enablenpc instance_npcname("Other World#wsg_hol");
+		enablenpc instance_npcname("Way Back#wsg_hol");
+		mapannounce .@m$, "The traps have torn the prison open: a portal to the other world glows at the north wall. Its illusions are bound to the criminal. Few and strong should go; every crossing makes it heal faster.", bc_map, "0x88CCFF";
+	}
+	return;
+
+OnIllusion:
+	'illusions--;
+	if ('illusions > 0)
+		end;
+	.@m$ = instance_mapname("1@ba_go");
+	disablenpc instance_npcname("Other World#wsg_hol");
+	disablenpc instance_npcname("Way Back#wsg_hol");
+	areawarp .@m$,333,30,371,68,.@m$,54,60;
+	if ('state != 1 || !unitexists('boss))
+		end;
+	'groggy = 20;
+	'traps = 0;
+	'sanct = 0;
+	setunitdata 'boss, UMOB_DAMAGETAKEN, 100;
+	setunitdata 'boss, UMOB_ATKMIN, 'atkmin;
+	setunitdata 'boss, UMOB_ATKMAX, 'atkmax;
+	setunitdata 'boss, UMOB_DEF, 'def / 10;
+	setunitdata 'boss, UMOB_MDEF, 'mdef / 10;
+	mapannounce .@m$, "The illusions shatter, and the dimensional criminal reels! Its traps fall silent and its defenses crack. Strike now!", bc_map, "0x88CCFF";
+	end;
+
+OnBoss:
+	'state = 2;
+	.@m$ = instance_mapname("1@ba_go");
+	killmonster .@m$, instance_npcname("#wsg_hol") + "::OnIllusion";
+	disablenpc instance_npcname("Other World#wsg_hol");
+	disablenpc instance_npcname("Way Back#wsg_hol");
+	areawarp .@m$,333,30,371,68,.@m$,54,44;
+	mapannounce .@m$, "The dimensional criminal is corrected. For a moment its face is not Rigel's at all. A dimensional portal opens: report there.", bc_map, "0x88CCFF";
+	enablenpc instance_npcname("Dimensional Portal#wsg_hol");
+	end;
+}
+
+1@ba_go,54,34,0	script	#wsg_hol_in	HIDDEN_WARP_NPC,4,3,{
+	end;
+OnTouch:
+	if ('state == 0)
+		donpcevent instance_npcname("#wsg_hol") + "::OnStart";
+	end;
+}
+
+1@ba_go,54,66,0	script	Other World#wsg_hol	WARPNPC,1,1,{
+	end;
+OnTouch:
+	'passes++;
+	warp instance_mapname("1@ba_go"),352,34;
+	end;
+}
+
+1@ba_go,352,31,0	script	Way Back#wsg_hol	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp instance_mapname("1@ba_go"),54,62;
+	end;
+}
+
+1@ba_go,54,40,4	script	Dimensional Portal#wsg_hol	GATE_SKYBLUE,{
+	if ('state != 2)
+		end;
+	if (wsg_hol == instance_id())
+		wsg_hol_open = 0;
+	if (isbegin_quest(12617) == 1)
+		completequest 12617;
+	mes "[Dimensional Portal]";
+	mes "The dimensional criminal is corrected at barrier level " + 'level + ".";
+	mes "Take your reward, or leave it and strengthen the barrier on your protection, so the next correction pays more.";
+	next;
+	switch (select("Take the reward.:Strengthen my barrier (no reward).:Leave.")) {
+	case 1:
+		if (wsg_hol != instance_id()) {
+			mes "[Dimensional Portal]";
+			mes "^ff0000You didn't open the gate with your own key for this correction.^000000";
+			close;
+		}
+		switch (checkquest(12612,PLAYTIME)) {
+		case 0:
+		case 1:
+			mes "[Dimensional Portal]";
+			mes "^ff0000You've already been rewarded this week. The record clears on Monday at 4 AM.^000000";
+			close;
+		case 2:
+			erasequest 12612;
+			break;
+		}
+		setquest 12612;
+		wsg_hol = 0;
+		// Reward amounts grow with the barrier level.
+		getitem 1001456, 1 + 'level / 4;	// Circul_Of_Life
+		getitem 1001457, 1 + 'level / 5;	// Fruit_Of_Birth
+		getitem 1001458, 1 + 'level / 5;	// Fruit_Of_Extinction
+		getitem 1001593, 'level;	// R_Outside_Rune
+		if ('level >= 5)
+			getitem 1001459, 1 + 'level / 10;	// Truth_Of_Life
+		if ('level >= 10)
+			getitem 1001460, 1;	// Light_Of_Life
+		if ('level >= 15)
+			getitem 1001601, 1;	// Genesis_Of_Life
+		mes "[Dimensional Portal]";
+		mes "The reward is yours.";
+		close2;
+		break;
+	case 2:
+		.@lv = callfunc("F_WSG_Barrier");
+		if (.@lv == 0) {
+			mes "[Dimensional Portal]";
+			mes "^ff0000Wear your " + mesitemlink(420231) + " first.^000000";
+			close;
+		}
+		if (.@lv >= 20) {
+			mes "[Dimensional Portal]";
+			mes "Your barrier can't grow any stronger.";
+			close;
+		}
+		callfunc "F_WSG_SetBarrier", .@lv + 1;
+		wsg_hol = 0;
+		mes "[Dimensional Portal]";
+		mes "The barrier on your protection is now level " + (.@lv + 1) + ".";
+		close2;
+		break;
+	case 3:
+		close2;
+		break;
+	}
+	warp "t_garden",165,228;
+	end;
+}

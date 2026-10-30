@@ -1,0 +1,301 @@
+# World Sync Extras: Garden of Time block - the monsters of the two
+# Dimensional Prison memorial dungeons (Lake of Fire, Hall of Life).
+#
+# 22177-22180 MD_PRI_DRAGON_1-4, the Four Divine Beasts of the Lake of Fire:
+# rAthena only has name stubs for them (no stats, no drops). 22174
+# MD_PRI_RIGEL (the Dimensional Criminal, Hall of Life) and 22175
+# MD_PRI_RIGEL_AC (its illusions in the other world) are commented out in
+# rAthena. Level, HP, attack, defense, resistances, stats, race, element,
+# size, range, speed and drops are Divine Pride's (kRO 2023). Attack and
+# Attack2 are converted the way World Sync converts Divine Pride's ranges
+# (middle of the range minus Str/Int and level). Divine Pride shows no
+# experience: ours follows the HP of the Episode 20/21 bosses.
+# The Hall of Life script scales the criminal's HP and attack to the
+# barrier level you bring in.
+Header:
+  Type: MOB_DB
+  Version: 5
+
+Body:
+  - Id: 22177
+    AegisName: MD_PRI_DRAGON_1
+    Name: Floral Pegasus
+    Level: 275
+    Hp: 700000000
+    BaseExp: 10500000
+    JobExp: 7350000
+    MvpExp: 5250000
+    Attack: 55810
+    Attack2: 10827
+    Defense: 347
+    MagicDefense: 134
+    Resistance: 1741
+    MagicResistance: 807
+    Str: 486
+    Agi: 390
+    Vit: 386
+    Int: 311
+    Dex: 552
+    Luk: 520
+    AttackRange: 2
+    SkillRange: 12
+    ChaseRange: 14
+    Size: Large
+    Race: Angel
+    Element: Poison
+    ElementLevel: 1
+    WalkSpeed: 130
+    AttackDelay: 731
+    AttackMotion: 1075
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    MvpDrops:
+      - Item: Energy_Of_Spring
+        Rate: 5000
+      - Item: Old_Card_Album
+        Rate: 2500
+      - Item: Magic_Card_Album
+        Rate: 2500
+    Drops:
+      - Item: Energy_Of_Spring
+        Rate: 2000
+      - Item: Energy_Of_Spring
+        Rate: 1000
+      - Item: MD_Hol_Fragment
+        Rate: 1000
+      - Item: Spring_Material_1
+        Rate: 500
+      - Item: Spring_Material_2
+        Rate: 500
+      - Item: Spring_Material_3
+        Rate: 500
+  - Id: 22178
+    AegisName: MD_PRI_DRAGON_2
+    Name: Coral Marine
+    Level: 275
+    Hp: 700000000
+    BaseExp: 10500000
+    JobExp: 7350000
+    MvpExp: 5250000
+    Attack: 54007
+    Attack2: 11132
+    Defense: 213
+    MagicDefense: 241
+    Resistance: 1020
+    MagicResistance: 1682
+    Str: 324
+    Agi: 303
+    Vit: 330
+    Int: 445
+    Dex: 521
+    Luk: 520
+    AttackRange: 3
+    SkillRange: 12
+    ChaseRange: 14
+    Size: Large
+    Race: Fish
+    Element: Earth
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 830
+    AttackMotion: 1220
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    MvpDrops:
+      - Item: Energy_Of_Summer
+        Rate: 5000
+      - Item: Old_Card_Album
+        Rate: 2500
+      - Item: Magic_Card_Album
+        Rate: 2500
+    Drops:
+      - Item: Energy_Of_Summer
+        Rate: 2000
+      - Item: Energy_Of_Summer
+        Rate: 1000
+      - Item: MD_Hol_Fragment
+        Rate: 1000
+      - Item: Summer_Material_1
+        Rate: 500
+      - Item: Summer_Material_2
+        Rate: 500
+      - Item: Summer_Material_3
+        Rate: 500
+  - Id: 22179
+    AegisName: MD_PRI_DRAGON_3
+    Name: Maple Tree
+    Level: 275
+    Hp: 700000000
+    BaseExp: 10500000
+    JobExp: 7350000
+    MvpExp: 5250000
+    Attack: 43450
+    Attack2: 12336
+    Defense: 213
+    MagicDefense: 241
+    Resistance: 1399
+    MagicResistance: 2324
+    Str: 415
+    Agi: 428
+    Vit: 467
+    Int: 485
+    Dex: 532
+    Luk: 525
+    AttackRange: 2
+    SkillRange: 12
+    ChaseRange: 14
+    Size: Large
+    Race: Plant
+    Element: Wind
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 985
+    AttackMotion: 1449
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    MvpDrops:
+      - Item: Energy_Of_Autumn
+        Rate: 5000
+      - Item: Old_Card_Album
+        Rate: 2500
+      - Item: Magic_Card_Album
+        Rate: 2500
+    Drops:
+      - Item: Energy_Of_Autumn
+        Rate: 2000
+      - Item: Energy_Of_Autumn
+        Rate: 1000
+      - Item: MD_Hol_Fragment
+        Rate: 1000
+      - Item: Autumn_Material_1
+        Rate: 500
+      - Item: Autumn_Material_2
+        Rate: 500
+      - Item: Autumn_Material_3
+        Rate: 500
+  - Id: 22180
+    AegisName: MD_PRI_DRAGON_4
+    Name: Monarch Penguin
+    Level: 275
+    Hp: 700000000
+    BaseExp: 10500000
+    JobExp: 7350000
+    MvpExp: 5250000
+    Attack: 56281
+    Attack2: 11146
+    Defense: 347
+    MagicDefense: 134
+    Resistance: 1741
+    MagicResistance: 807
+    Str: 486
+    Agi: 390
+    Vit: 386
+    Int: 311
+    Dex: 552
+    Luk: 515
+    AttackRange: 3
+    SkillRange: 12
+    ChaseRange: 14
+    Size: Large
+    Race: Dragon
+    Element: Water
+    ElementLevel: 1
+    WalkSpeed: 130
+    AttackDelay: 781
+    AttackMotion: 1149
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    MvpDrops:
+      - Item: Energy_Of_Winter
+        Rate: 5000
+      - Item: Old_Card_Album
+        Rate: 2500
+      - Item: Magic_Card_Album
+        Rate: 2500
+    Drops:
+      - Item: Energy_Of_Winter
+        Rate: 2000
+      - Item: Energy_Of_Winter
+        Rate: 1000
+      - Item: MD_Hol_Fragment
+        Rate: 1000
+      - Item: Winter_Material_1
+        Rate: 500
+      - Item: Winter_Material_2
+        Rate: 500
+      - Item: Winter_Material_3
+        Rate: 500
+  - Id: 22174
+    AegisName: MD_PRI_RIGEL
+    Name: Dimensional Criminal
+    Level: 275
+    Hp: 800000000
+    BaseExp: 12000000
+    JobExp: 8400000
+    MvpExp: 6000000
+    Attack: 30260
+    Attack2: 12602
+    Defense: 358
+    MagicDefense: 138
+    Resistance: 1833
+    MagicResistance: 850
+    Str: 515
+    Agi: 330
+    Vit: 413
+    Int: 408
+    Dex: 584
+    Luk: 580
+    AttackRange: 3
+    SkillRange: 12
+    ChaseRange: 14
+    Size: Large
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 120
+    AttackDelay: 781
+    AttackMotion: 1149
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    MvpDrops:
+      - Item: Old_Card_Album
+        Rate: 2500
+      - Item: Magic_Card_Album
+        Rate: 2500
+  - Id: 22175
+    AegisName: MD_PRI_RIGEL_AC
+    Name: Criminal's Illusion
+    Level: 275
+    Hp: 800000000
+    BaseExp: 0
+    JobExp: 0
+    Attack: 30260
+    Attack2: 12602
+    Defense: 358
+    MagicDefense: 138
+    Resistance: 1833
+    MagicResistance: 850
+    Str: 515
+    Agi: 330
+    Vit: 413
+    Int: 408
+    Dex: 584
+    Luk: 580
+    AttackRange: 10
+    SkillRange: 12
+    ChaseRange: 14
+    Size: Large
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 120
+    AttackDelay: 781
+    AttackMotion: 1149
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
