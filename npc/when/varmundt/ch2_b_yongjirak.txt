@@ -524,7 +524,7 @@ kindlbrk,256,120,4	script	Harvan Sailor#wsv	10613,{
 function	script	F_WSV_C2Villager	{
 	cutin getarg(1), 2;
 	mes "[" + getarg(0) + "]";
-	mes (wsv_ch2 >= 60 && wsv_ch2 < 1000) ? getarg(2) : getarg(3);
+	mes (wsv_ch2 >= 230 && wsv_ch2 < 1000) ? getarg(2) : getarg(3);
 	close3;
 }
 kindlbrk,108,124,4	script	Serum#wsv	10660,{ callfunc "F_WSV_C2Villager", "Serum", "ch2_harrban_f.png", "Did you see the cold creeping up from the east? Like frost on a window, except the window is the whole world.", "Serum's the name, smelting's the game. Business is good when the fire's good."; end; }
