@@ -9,6 +9,7 @@ Needs Ragnarok Offline 1.6.9 or later. Fixes from players' reports.
 - 🏰 The same colon bug made the **Herosria Jewel Room** warps and the **Devil in the Box** meal choices pick the wrong line. Fixed.
 - 📜 **Long menu options**: our client gives each option one line; a longer one wrapped over the next option and clicks on it picked the wrong one. The 32 menu options that didn't fit (Abyss research requests, Newt's seals, 2021 town dailies, story answers) were shortened.
 - 🧪 **Zero Cell** quests gave no experience. They now give a share of your level, like Chapter 2 (estimates): A Hazy Gate 3%, the Abandoned Lab Zero Cell story 5%, each Lux or Nox daily 2%, each Vita or Ark daily 3%.
+- 🧍 The **Doomk** placeholder on ve_fild05 is gone: the Abyss Chaser job change quest (in Ragnarok Offline 1.8.3) brings the real Doomk to the same spot. 71 placeholders remain, 44 of them working. By MondoTruth.
 
 ## 2.1.8
 Needs Ragnarok Offline 1.6.9 or later. Fixes from players' reports.
