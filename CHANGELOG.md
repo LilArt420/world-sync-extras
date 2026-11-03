@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.8
+Needs Ragnarok Offline 1.6.9 or later.
+- 🧍 The Doomk placeholder on ve_fild05 is gone: the Abyss Chaser job change quest (Flux159/rathena#85) provides the real Doomk on the same cell. 71 placeholders remain, 44 of them working.
+
 ## 2.1.7
 Needs Ragnarok Offline 1.6.9 or later.
 - 🔥 **Chapter 2 redone, following the official story.** The old version skipped most of it: no instances, many people missing, and a fight with Artea's invader that respawned every time you talked to her, with nothing happening after you killed it. The new one follows the official order in nine parts (the same steps players' guides list):
