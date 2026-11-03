@@ -1,105 +1,207 @@
 //===== World Sync Extras: Varmundt block ====================
 //= Chapter 2 "Song of the World Tree ~ Fragment of the End":
-//= shared functions, who is visible at which step, and the ways
-//= into Muspelheim's Harvan village and Ragsruth.
+//= shared functions, the story's steps and the ways into
+//= Muspelheim's Harvan village and Ragsruth.
 //===== Description: =========================================
-//= From kRO's update notes (ro.gnjoy.com update 301, 2026-03-18):
-//= the main quests, their givers and places, the sub quest, the
-//= nine daily quests, Nirhult's Illusion and the Flame Gold Coin
-//= traders. The client the app ships predates the update: it has
-//= the maps, monsters and NPC looks, but no Chapter 2 quest text
-//= or items. So the quests are this block's own (64201-64246),
-//= the dialogue is written from the notes' summaries, and Flame
-//= Gold Coins are kept as points (wsv_flame). Kill counts, rewards
-//= and trades aren't published: they're estimates.
+//= The main story follows the official order as players' guides
+//= describe it (wiki.muhro.eu/Chapter_2, the clearest one; the
+//= tester's reference), with kRO's update notes (update 301) for
+//= the rest. The client the app ships has the maps, monsters and
+//= NPC looks, but no Chapter 2 quest text: the quests are this
+//= block's own (64201-64246) and the dialogue is ours. Flame Gold
+//= Coins are kept as points (wsv_flame). Rewards, kill counts and
+//= trades the guides don't give are estimates.
 //=
-//= Main story steps, wsv_ch2 (level 225+, Chapter 1 done):
-//=     0  not started (Sasha in Ash Village, ygg_edge 156,179)
-//=    10  Crossroads of Tangled Magic: three knots in Beledor
-//=    20  El, the World Tree's guardian, wakes (veledor)
-//=    30  report to Sasha in the Tube Fruit house (ygg_fruit)
-//=    40  News from the Burning Land: Chez in Volund Valley
-//=    50  Between Cold Spot and Hot Spot: Yongjirak (kindlbrk)
-//=    60  Beryl's boat to the Root of Death
-//=    70  What Was Met at the Root of Death (deadroot, Gregor)
-//=    80  A Fragmented Other Root: Brimir (Gregor, Il)
-//=    90  Residents of the Ragged Root (ch2safe4, Devries)
-//=   100  Suspicious Movement: Distorted Ragsruth (rgs_dun1)
-//=   110  Nirhult (ragsruth, Artea)
-//=   120  Fragment of the End: back to Sasha
+//= Main story steps, wsv_ch2 (level 225+, Chapter 1 done). Quest
+//= per arc: 64201-64209. ch2_a_story.txt has 100-419, ch2_c has
+//= 420-1000.
+//=   Call of the Guardian (64201)
+//=     0  Sasha (ygg_edge 156,179) sends you to Beledor
+//=   100  Vedr (veledor 268,212)        110  Varg: Crossroads of
+//=        Tangled Mana (1@ch2b): 4 knots, Sollith, El
+//=   120  Sasha in Beledor (270,207)    130  Sasha (ygg_fruit 79,121)
+//=   Meeting El (64202)
+//=   140  El (veledor 134,323)          150  Newt (131,322)
+//=   160  Chez (mu_fild01 110,166) takes you to the crossroads
+//=   Between Cold and Heat (64203)
+//=   170  Jubilus (ch1_sf01 195,216)    180  Beryl (ch1_sf01 197,212)
+//=   190  Beryl in Yongjirak (kindlbrk 101,103)  200  Bromin (102,96)
+//=   210  the villagers and the White Powder (bits 1-16)
+//=   220  Beryl                         230  the boat: Chez and Dew
+//=        at the Root of Death (bits 32/64)
+//=   240  Tamarin and the strange Hal (kin_in01 34,251)
+//=   The Root of Death (64204)
+//=   250  Gregor (deadroot 101,167)     260  3 survey points (bits)
+//=   270  Maura (ch2safe3 30,114)       280  Gregor in Shelter
+//=        Geminis (ch2gms 20,34) and the "?" (18,41)
+//=   290  Maura (ch2gms 76,85)          300  Frozen Harvan (deadroot 348,347)
+//=   310  Prasium (kindlbrk 252,118)    320  Prasium (106,215):
+//=        the Cradle of Fire (ch2safe2)
+//=   330  Samsin Harvan (ch2safe2 133,51) and Maura
+//=   340  5 Fluffy Sparks for Samsin    350  Nedim (ch2safe2 137,44)
+//=   360  Charles in the shelter (ch2gms 21,35)
+//=   370  Orion, the cryo capsules, the passage, the damaged
+//=        devices, the crystal (bits)    400  Nedim (kindlbrk 110,218)
+//=   410  Sasha (ygg_fruit 79,121)
+//=   Sprout of a World's End (64205)
+//=   420  El                            430  Gregor (uknw_ruin 273,237)
+//=   440  Il (ch1_sf02 160,160): 20 Shadow Wardens (64210)
+//=   450  the feather at the roots (uknw_ruin2 266,243)
+//=   Residents of the Tattered Root (64206)
+//=   460-590  Devries, the pony, Violas, Gregor, Sirina, Orion,
+//=        Heria, Elder Heria, Painu (ch2safe4, ragsruth)
+//=   590  5 Apples: Sirina, Violas, Gregor, Artea (bits)
+//=   600  Artea: Nyrholt (1@ch2a): 4 gates, the Snapdragon
+//=   610  Roarin (rgs_dun1 223,154)     620  Jasminna (109,195)
+//=   630  the branch (rgs_dun1 273,80): Devries
+//=   A Dormant Matter (64207)
+//=   640  Il and Zero (uknw_ruin 157,161): 20 Shadow Wardens (64211)
+//=   650  Gregor (uknw_ruin 273,238)    660  Il    670  El
+//=   Seed of Heat (64208)
+//=   680  Bartum (kindlbrk 191,148)     690  Karillon (195,146)
+//=   700  Einhar (194,149)              710  Maura and the machine
+//=        button (kin_in01 88,46)        720  Gregor (kin_in01 82,43)
+//=   730  Orion (ch2gms 19,36): Alpurings, Icyblasts, 3 frozen
+//=        material piles, 5 Ice Jelly, 5 Frost Shards (64212)
+//=   740  the parts to Orion             750  Gregor (ch2gms 22,37)
+//=   755  Charles (kin_in01 84,49)      758  Maura (kin_in01 88,46)
+//=   760  Samsin and the baby Harvan (ch2safe2 138,41)
+//=   770  Einhar (kin_in01 84,43)       780  El
+//=   Distorted Ragsroot (64209)
+//=   800  Devries (ch2safe4 217,234)    810  Impati (rgs_dun1 131,147)
+//=   820  Violas (rgs_dun1 37,236), an Apple
+//=   830  Elder Heria (rgs_dun1 219,265) 840  Painu (ch2safe4 235,176)
+//=   850  the Phantom of Artea (ch2safe4 207,35): Phantom of Nyrholt
+//=   860  Devries (ch2safe4 23,175)     870  El
 //=  1000  Chapter 2 done
-//= Bits, wsv_ch2b: 1/2/4 knots untangled, 8/16/32/64 the four
-//=   Harvan crafters asked, 128 White Powder looked at, 256/512/
-//=   1024 frozen Harvans freed, 2048/4096/8192 traces found in the
-//=   grass, 16384 the Branch of Distorted Ragsruth touched.
+//= wsv_ch2b: the bits of the current step (cleared at every step).
+//= wsv_ch2v: 2 = this version of the story (older steps are moved
+//=   to the start of their arc at login).
 //= After the story, wsv_c2s: 1 Time to Do What Must Be Done
 //=   done, 2 Helping Hands at the Nursery, 4 Shelter Visit,
 //=   8 Research Assistant, 16 Distorted Ragsruth, 32 Strange
 //=   Magic Investigation, 64/128/256/512 the four Harvans asked,
 //=   1024 Orion's parts collected, 2048/4096/8192 the nursery
-//=   children met.
+//=   children met, 16384 the Snapdragon Phantom beaten today.
 //= wsv_c2p: grass piles searched today (bit per pile), wsv_c2pd:
 //= that day; wsv_c2gf: Ghost Flowers found for today's daily.
 //============================================================
 
-// Who sees which Chapter 2 scene NPC (CLOAKED), by wsv_ch2.
+// Kept for vr_common's map-load hook: Chapter 2's story NPCs are all
+// visible now, each with its own line between its steps.
 function	script	F_WSV_C2Scenes	{
-	.@m$ = strcharinfo(3);
-	.@s = wsv_ch2;
-	if (BaseLevel < 225)
-		.@s = -1;
-	if (.@m$ == "ygg_edge") {
-		setarray .@t$,
-			"Sasha#wsv_c2e", "0", "29";
-	} else if (.@m$ == "ygg_fruit") {
-		setarray .@t$,
-			"El#wsv_c2f", "40", "9999";
-	} else if (.@m$ == "veledor") {
-		setarray .@t$,
-			"Knot of Magic#wsv_c2a", "10", "19",
-			"Knot of Magic#wsv_c2b", "10", "19",
-			"Knot of Magic#wsv_c2c", "10", "19",
-			"El#wsv_c2v", "20", "29";
-	} else if (.@m$ == "mu_fild01") {
-		setarray .@t$,
-			"Chez#wsv_c2", "40", "59";
-	} else if (.@m$ == "deadroot") {
-		setarray .@t$,
-			"Gregor#wsv_c2d", "60", "79",
-			"Devries#wsv_c2d", "60", "79",
-			"Frozen Harvan#wsv_c2a", "70", "79",
-			"Frozen Harvan#wsv_c2b", "70", "79",
-			"Frozen Harvan#wsv_c2c", "70", "79";
-	} else if (.@m$ == "uknw_ruin") {
-		setarray .@t$,
-			"Gregor#wsv_c2b", "80", "89";
-	} else if (.@m$ == "ch2safe4") {
-		setarray .@t$,
-			"Devries#wsv_c2s", "90", "129",
-			"Gregor#wsv_c2s", "90", "129",
-			"Devries#wsv_c2r", "1000", "9999",
-			"Gregor#wsv_c2r", "1000", "9999";
-	} else
-		return;
-	for (.@i = 0; .@i < getarraysize(.@t$); .@i += 3) {
-		if (.@s >= atoi(.@t$[.@i+1]) && .@s <= atoi(.@t$[.@i+2]))
-			cloakoffnpcself .@t$[.@i];
-		else
-			cloakonnpcself .@t$[.@i];
+	return;
+}
+
+// The arc quest of a step.
+function	script	F_WSV_C2Arc	{
+	.@s = getarg(0);
+	if (.@s < 100 || .@s >= 1000)
+		return 0;
+	setarray .@from, 100, 140, 170, 250, 420, 460, 640, 680, 800;
+	for (.@i = 8; .@i > 0; .@i--)
+		if (.@s >= .@from[.@i])
+			break;
+	return 64201 + .@i;
+}
+
+// Moves the story to step getarg(0): the arc quest changes when the arc
+// does, the step's bits clear; getarg(1) percent of a level and
+// getarg(2) Flame Gold Coins.
+// callfunc "F_WSV_C2Go", <step>{, <percent>, <coins>};
+function	script	F_WSV_C2Go	{
+	.@o = callfunc("F_WSV_C2Arc", wsv_ch2);
+	.@n = callfunc("F_WSV_C2Arc", getarg(0));
+	if (.@o != .@n) {
+		if (.@o) {
+			if (isbegin_quest(.@o) == 0)
+				setquest .@o;
+			if (isbegin_quest(.@o) == 1)
+				completequest .@o;
+		}
+		if (.@n) {
+			if (isbegin_quest(.@n) == 2)
+				erasequest .@n;
+			if (isbegin_quest(.@n) == 0)
+				setquest .@n;
+		}
 	}
-	// Harvans already thawed stay gone; knots already loosened too.
-	if (.@m$ == "deadroot") {
-		setarray .@f$, "Frozen Harvan#wsv_c2a", "Frozen Harvan#wsv_c2b", "Frozen Harvan#wsv_c2c";
-		for (.@i = 0; .@i < 3; .@i++)
-			if (wsv_ch2b & (256 << .@i))
-				cloakonnpcself .@f$[.@i];
-	} else if (.@m$ == "veledor") {
-		setarray .@f$, "Knot of Magic#wsv_c2a", "Knot of Magic#wsv_c2b", "Knot of Magic#wsv_c2c";
-		for (.@i = 0; .@i < 3; .@i++)
-			if (wsv_ch2b & (1 << .@i))
-				cloakonnpcself .@f$[.@i];
+	wsv_ch2 = getarg(0);
+	wsv_ch2b = 0;
+	if (getarg(1, 0) || getarg(2, 0))
+		callfunc "F_WSV_C2Reward", getarg(1, 0), getarg(2, 0);
+	questinfo_refresh;
+	return;
+}
+
+// Pages of dialogue: "[Name]", then lines; "-" turns the page.
+// callfunc "F_WSV_C2Lines", "[Name]", "line", "line", "-", "line", ...;
+function	script	F_WSV_C2Lines	{
+	.@n = getargcount();
+	mes getarg(0);
+	for (.@i = 1; .@i < .@n; .@i++) {
+		if (getarg(.@i) == "-") {
+			next;
+			mes getarg(0);
+		} else
+			mes getarg(.@i);
 	}
 	return;
+}
+
+// A story beat: if the story is at step getarg(0), the lines, then the
+// next step getarg(1) with getarg(2) coins. Returns 1 if it played.
+// callfunc("F_WSV_C2Beat", <step>, <next>, <coins>, "[Name]", lines...)
+function	script	F_WSV_C2Beat	{
+	if (wsv_ch2 != getarg(0))
+		return 0;
+	.@n = getargcount();
+	mes getarg(3);
+	for (.@i = 4; .@i < .@n; .@i++) {
+		if (getarg(.@i) == "-") {
+			next;
+			mes getarg(3);
+		} else
+			mes getarg(.@i);
+	}
+	callfunc "F_WSV_C2Go", getarg(1), getarg(2) ? 3 : 0, getarg(2);
+	return 1;
+}
+
+// Steps from the first version of this story (2.0-2.1) start their arc
+// again in this one.
+-	script	WSV_C2Migrate	-1,{
+	end;
+OnPCLoginEvent:
+	if (wsv_ch2v >= 2)
+		end;
+	wsv_ch2v = 2;
+	if (wsv_ch2 <= 0 || wsv_ch2 >= 1000)
+		end;
+	.@s = wsv_ch2;
+	if (.@s < 30)
+		.@new = 100;
+	else if (.@s < 40)
+		.@new = 130;
+	else if (.@s < 50)
+		.@new = 140;
+	else if (.@s < 60)
+		.@new = 190;
+	else if (.@s < 70)
+		.@new = 230;
+	else if (.@s < 80)
+		.@new = 250;
+	else if (.@s < 90)
+		.@new = 430;
+	else
+		.@new = 460;
+	for (.@q = 64201; .@q <= 64212; .@q++)
+		if (isbegin_quest(.@q))
+			erasequest .@q;
+	wsv_ch2 = 0;
+	callfunc "F_WSV_C2Go", .@new;
+	dispbottom "Chapter 2's story has been redone to follow the official one. Yours carries on from the start of its part: check your quest log.";
+	end;
 }
 
 // Flame Gold Coins (points: the client has no Flame Gold Coin).

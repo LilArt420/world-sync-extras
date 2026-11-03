@@ -5962,76 +5962,76 @@ QuestInfoList = {
 		Summary = "Meet the four watchers"
 	},
 	[64201] = {
-		Title = "Crossroads of Tangled Magic",
+		Title = "Call of the Guardian",
 		IconName = "ico_ep.bmp",
-		Description = { "The ward a sage wove over the forest long ago has knotted itself up, and it's starting to hurt things. Loosen the three knots of magic in <NAVI>[Sanctuary Beledor]<INFO>veledor,149,312,0,101,0</INFO></NAVI>." },
-		Summary = "Loosen 3 knots in Beledor"
+		Description = { "The spring of the World Tree in Sanctuary Beledor is knotted with mana. Help the druid twins <NAVI>[Vedr]<INFO>veledor,268,212,0,101,0</INFO></NAVI> and Varg untangle it, then meet Sasha by the spring and in the Tube Fruit house of Ash Village." },
+		Summary = "Untangle the spring"
 	},
 	[64202] = {
-		Title = "Crossroads of Tangled Magic",
+		Title = "Meeting El",
 		IconName = "ico_ep.bmp",
-		Description = { "El, the World Tree's guardian, woke when the knots came loose. Meet him and <NAVI>[Sasha]<INFO>ygg_fruit,80,122,0,101,0</INFO></NAVI> in the Tube Fruit house of Ash Village." },
-		Summary = "Talk to Sasha"
+		Description = { "El, born from the freed mana, is the World Tree's emissary now. Hear him and <NAVI>[Newt]<INFO>veledor,131,322,0,101,0</INFO></NAVI> in Beledor, then find <NAVI>[Chez]<INFO>mu_fild01,110,166,0,101,0</INFO></NAVI> in Volund Valley." },
+		Summary = "Talk to El"
 	},
 	[64203] = {
-		Title = "News from the Burning Land",
+		Title = "Between Cold and Heat",
 		IconName = "ico_ep.bmp",
-		Description = { "News came from the Harvans' village in Muspelheim: something cold. Find <NAVI>[Chez]<INFO>mu_fild01,110,166,0,101,0</INFO></NAVI>, who keeps watch in Volund Valley." },
-		Summary = "Talk to Chez"
+		Description = { "A cold that doesn't belong is creeping over Muspelheim. Go with Beryl to <NAVI>[Yongjirak]<INFO>kindlbrk,101,103,0,101,0</INFO></NAVI>, hear the Harvans, and scout the Root of Death." },
+		Summary = "Help the Harvans"
 	},
 	[64204] = {
-		Title = "Between Cold Spot and Hot Spot",
+		Title = "The Root of Death",
 		IconName = "ico_ep.bmp",
-		Description = { "A cold spot in the land of fire, and Harvans missing. In Yongjirak, east of Volund Valley, talk to <NAVI>[Beryl]<INFO>kindlbrk,101,103,0,101,0</INFO></NAVI>, ask the four crafters what they saw and look at the white powder by the well." },
-		Summary = "Ask around Yongjirak"
+		Description = { "Survey the Root of Death with <NAVI>[Gregor]<INFO>deadroot,101,167,0,101,0</INFO></NAVI>, explore Shelter Geminis, wake a frozen Harvan in the Cradle of Fire, and find what is drinking Muspelheim's heat." },
+		Summary = "The Root of Death"
 	},
 	[64205] = {
-		Title = "Between Cold Spot and Hot Spot",
+		Title = "Sprout of a World's End",
 		IconName = "ico_ep.bmp",
-		Description = { "The missing Harvans went to the Root of Death. <NAVI>[Beryl]<INFO>kindlbrk,262,110,0,101,0</INFO></NAVI>'s boat at the east dock goes to its edge. Find out what's there." },
-		Summary = "To the Root of Death"
+		Description = { "The Root of Death comes from a World Tree that died at the end of another world. Follow <NAVI>[Gregor]<INFO>uknw_ruin,274,238,0,101,0</INFO></NAVI> into Brimir and its parallel snowfield." },
+		Summary = "Follow the dead root"
 	},
 	[64206] = {
-		Title = "What Was Met at the Root of Death",
+		Title = "Residents of the Tattered Root",
 		IconName = "ico_ep.bmp",
-		Description = { "Gregor and Devries found Harvans frozen solid. Thaw the 3 frozen Harvans with Devries's warming draught, defeat 30 ice creatures at the Root of Death, and report to <NAVI>[Gregor]<INFO>deadroot,106,170,0,101,0</INFO></NAVI>." },
-		Summary = "Thaw 3 Harvans, 30 monsters"
+		Description = { "In <NAVI>[Ragsruth]<INFO>ch2safe4,201,111,0,101,0</INFO></NAVI> live the Folnirs, on a root that fell from the dead world. Meet them, share apples, and help their protector Artea in Nyrholt." },
+		Summary = "Meet the Folnirs"
 	},
 	[64207] = {
-		Title = "Sprout of the Ended World",
+		Title = "A Dormant Matter",
 		IconName = "ico_ep.bmp",
-		Description = { "A sprout grows out of the frozen lava at the Root of Death. It comes from a world that already ended. Show it to the Valkyrie Il in Brimir." },
-		Summary = "Show the sprout to Il"
+		Description = { "Something sleeps in the Shadow Wardens of Brimir. Help <NAVI>[Zero]<INFO>uknw_ruin,158,162,0,101,0</INFO></NAVI> and Il study it." },
+		Summary = "Study the dormant matter"
 	},
 	[64208] = {
-		Title = "A Fragmented Other Root",
+		Title = "Seed of Heat",
 		IconName = "ico_ep.bmp",
-		Description = { "Meet <NAVI>[Gregor]<INFO>uknw_ruin,273,237,0,101,0</INFO></NAVI> in Distorted Brimir and ask <NAVI>[Il]<INFO>uknw_ruin,272,235,0,101,0</INFO></NAVI> about the sprout." },
-		Summary = "Talk to Il"
+		Description = { "The Harvans want to build a heat exchanger for the cracked crystal. Start with <NAVI>[Bartum]<INFO>kindlbrk,191,148,0,101,0</INFO></NAVI> in Yongjirak." },
+		Summary = "Build the heat exchanger"
 	},
 	[64209] = {
-		Title = "Residents of the Ragged Root",
+		Title = "Distorted Ragsruth",
 		IconName = "ico_ep.bmp",
-		Description = { "Il's branch led to Ragsruth, the Ragged Root of a world that ended. Devries says its people are the Folnirs; meet their leader, <NAVI>[Artea]<INFO>ragsruth,124,47,0,101,0</INFO></NAVI>." },
-		Summary = "Talk to Artea"
+		Description = { "Foreign mana gathers in Distorted Ragsruth. Ask <NAVI>[Devries]<INFO>ch2safe4,217,234,0,101,0</INFO></NAVI>, find the missing Folnirs and break the Snapdragon's phantom." },
+		Summary = "Gather the foreign mana"
 	},
 	[64210] = {
-		Title = "Residents of the Ragged Root - Suspicious Movement",
+		Title = "Sprout of a World's End - Shadow Wardens",
 		IconName = "ico_ep.bmp",
-		Description = { "Something is moving in Distorted Ragsruth. Touch the old branch at its far end, search the grass piles for 3 traces, and report to <NAVI>[Artea]<INFO>ragsruth,124,47,0,101,0</INFO></NAVI>." },
-		Summary = "Branch and 3 traces"
+		Description = { "Break 20 Shadow Wardens in Brimir, then report to <NAVI>[Il]<INFO>ch1_sf02,160,160,0,101,0</INFO></NAVI> in the parallel snowfield." },
+		Summary = "Hunt 20 Shadow Wardens"
 	},
 	[64211] = {
-		Title = "Nirhult",
+		Title = "A Dormant Matter - Shadow Wardens",
 		IconName = "ico_ep.bmp",
-		Description = { "An intruder has come into Ragsruth: Nirhult. Drive him out, alone or with your party, and report to <NAVI>[Artea]<INFO>ragsruth,124,47,0,101,0</INFO></NAVI>." },
-		Summary = "Defeat Nirhult"
+		Description = { "Break 20 Shadow Wardens in Brimir, then report to <NAVI>[Zero]<INFO>uknw_ruin,158,162,0,101,0</INFO></NAVI>." },
+		Summary = "Hunt 20 Shadow Wardens"
 	},
 	[64212] = {
-		Title = "Fragment of the End",
+		Title = "Seed of Heat - Frozen Materials",
 		IconName = "ico_ep.bmp",
-		Description = { "Nirhult left a black, glittering fragment behind: a piece of whatever ended Ragsruth's world. Take it to <NAVI>[Sasha]<INFO>ygg_fruit,80,122,0,101,0</INFO></NAVI> and El in Ash Village." },
-		Summary = "Talk to Sasha"
+		Description = { "Clear 10 Alpurings and 10 Icyblasts on the Root of Death, dig the three Frozen Materials piles in its north-east, and bring 5 Ice Jelly and 5 Frost Shards to <NAVI>[Orion]<INFO>ch2gms,24,25,0,101,0</INFO></NAVI>." },
+		Summary = "Gather the frozen parts"
 	},
 	[64220] = {
 		Title = "Time to Do What Must Be Done",
@@ -6090,13 +6090,13 @@ QuestInfoList = {
 	[64229] = {
 		Title = "Helping Hands at the Nursery",
 		IconName = "ico_ep.bmp",
-		Description = { "Say hello to the three young Harvans at the nursery, then report to <NAVI>[Bartom]<INFO>kin_in01,86,47,0,101,0</INFO></NAVI>." },
+		Description = { "Say hello to the three young Harvans at the nursery, then report to <NAVI>[Bartum]<INFO>kin_in01,86,47,0,101,0</INFO></NAVI>." },
 		Summary = "Meet 3 children"
 	},
 	[64231] = {
 		Title = "Work at the Nursery",
 		IconName = "ico_ep.bmp",
-		Description = { "Ruteun's snacks for the little ones keep getting stolen: defeat 20 each of Dudulson, Garakson and Tuktakson in the Muspelheim dungeon and report to <NAVI>[Bartom]<INFO>kin_in01,86,47,0,101,0</INFO></NAVI>." },
+		Description = { "Ruteun's snacks for the little ones keep getting stolen: defeat 20 each of Dudulson, Garakson and Tuktakson in the Muspelheim dungeon and report to <NAVI>[Bartum]<INFO>kin_in01,86,47,0,101,0</INFO></NAVI>." },
 		Summary = "20 each Dudulson, Garakson, Tuktakson"
 	},
 	[64232] = {
@@ -6108,13 +6108,13 @@ QuestInfoList = {
 	[64233] = {
 		Title = "Shelter Visit",
 		IconName = "ico_ep.bmp",
-		Description = { "Yongjirak's heat exchanger needs parts from Shelter Gemis. Introduce the village to <NAVI>[Orion]<INFO>ch2gms,24,25,0,101,0</INFO></NAVI>, then report to <NAVI>[Karimun]<INFO>kin_in01,87,36,0,101,0</INFO></NAVI>." },
+		Description = { "Yongjirak's heat exchanger needs parts from Shelter Geminis. Introduce the village to <NAVI>[Orion]<INFO>ch2gms,24,25,0,101,0</INFO></NAVI>, then report to <NAVI>[Karillon]<INFO>kin_in01,87,36,0,101,0</INFO></NAVI>." },
 		Summary = "Talk to Orion"
 	},
 	[64234] = {
 		Title = "Gemis Parts Supply",
 		IconName = "ico_ep.bmp",
-		Description = { "Defeat 30 Icy Blasts and 30 Ice Needles at the Root of Death, collect the parts from <NAVI>[Orion]<INFO>ch2gms,24,25,0,101,0</INFO></NAVI> and bring them to <NAVI>[Karimun]<INFO>kin_in01,87,36,0,101,0</INFO></NAVI>." },
+		Description = { "Defeat 30 Icy Blasts and 30 Ice Needles at the Root of Death, collect the parts from <NAVI>[Orion]<INFO>ch2gms,24,25,0,101,0</INFO></NAVI> and bring them to <NAVI>[Karillon]<INFO>kin_in01,87,36,0,101,0</INFO></NAVI>." },
 		Summary = "30 Icy Blast, 30 Ice Needle, Orion"
 	},
 	[64235] = {
@@ -6178,13 +6178,13 @@ QuestInfoList = {
 		Summary = "Talk to the illusion"
 	},
 	[64245] = {
-		Title = "Nirhult's Illusion",
+		Title = "Phantom of Nyrholt",
 		IconName = "ico_ep.bmp",
-		Description = { "Nirhult's shadow gathers again every day. Break the Illusion of Nirhult, alone or with your party, and tell the <NAVI>[Illusion of Artea]<INFO>ch2safe4,207,35,0,101,0</INFO></NAVI>." },
-		Summary = "Break the illusion"
+		Description = { "The foreign mana gathers into the Snapdragon's phantom every day. Go to Nyrholt through the <NAVI>[Phantom of Artea]<INFO>ch2safe4,207,35,0,101,0</INFO></NAVI>, clear the four gates, break the phantom in Artea's magic circles, and report back." },
+		Summary = "Break the Snapdragon Phantom"
 	},
 	[64246] = {
-		Title = "[Standby] Nirhult's Illusion",
+		Title = "[Standby] Phantom of Nyrholt",
 		IconName = "ico_ep.bmp",
 		Description = { "This is a daily quest: it can be done again after 4 AM." },
 		Summary = "Reset at 04:00"

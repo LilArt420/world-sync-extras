@@ -933,34 +933,40 @@ Body:
   - Id: 64131
     Title: "The Eroded Wing"
   - Id: 64201
-    Title: "Crossroads of Tangled Magic"
+    Title: "Call of the Guardian"
   - Id: 64202
-    Title: "Crossroads of Tangled Magic"
+    Title: "Meeting El"
   - Id: 64203
-    Title: "News from the Burning Land"
+    Title: "Between Cold and Heat"
   - Id: 64204
-    Title: "Between Cold Spot and Hot Spot"
+    Title: "The Root of Death"
   - Id: 64205
-    Title: "Between Cold Spot and Hot Spot"
+    Title: "Sprout of a World's End"
   - Id: 64206
-    Title: "What Was Met at the Root of Death"
-    Targets:
-      - Id: 1
-        Count: 30
-        MapName: Root of Death
-        Location: deadroot
+    Title: "Residents of the Tattered Root"
   - Id: 64207
-    Title: "Sprout of the Ended World"
+    Title: "A Dormant Matter"
   - Id: 64208
-    Title: "A Fragmented Other Root"
+    Title: "Seed of Heat"
   - Id: 64209
-    Title: "Residents of the Ragged Root"
+    Title: "Distorted Ragsruth"
   - Id: 64210
-    Title: "Residents of the Ragged Root - Suspicious Movement"
+    Title: "Sprout of a World's End - Shadow Wardens"
+    Targets:
+      - Mob: CH1_SHADOW_JAILER
+        Count: 20
   - Id: 64211
-    Title: "Nirhult"
+    Title: "A Dormant Matter - Shadow Wardens"
+    Targets:
+      - Mob: CH1_SHADOW_JAILER
+        Count: 20
   - Id: 64212
-    Title: "Fragment of the End"
+    Title: "Seed of Heat - Frozen Materials"
+    Targets:
+      - Mob: CH2_ALPURING
+        Count: 10
+      - Mob: CH2_ICYBLAST
+        Count: 10
   - Id: 64220
     Title: "Time to Do What Must Be Done"
   - Id: 64221
@@ -1064,7 +1070,7 @@ Body:
   - Id: 64244
     Title: "Distorted Ragsruth - Strange Magic Investigation"
   - Id: 64245
-    Title: "Nirhult's Illusion"
+    Title: "Phantom of Nyrholt"
   - Id: 64246
-    Title: "[Standby] Nirhult's Illusion"
+    Title: "[Standby] Phantom of Nyrholt"
     TimeLimit: 4h

@@ -1,60 +1,54 @@
 //===== World Sync Extras: Varmundt block ====================
-//= Chapter 2, the main story's first half: Ash Village, Beledor,
-//= Volund Valley, the Root of Death and Brimir. Steps and quests
-//= in ch2_common.txt.
+//= Chapter 2, the main story's first half (steps 100-419): Call
+//= of the Guardian, Meeting El, Between Cold and Heat and The Root
+//= of Death. Steps, quests and helpers in ch2_common.txt.
 //============================================================
 
 // ------------------------------------------------------------
-// Crossroads of Tangled Magic (64201, 64202)
+// Call of the Guardian (64201)
 // ------------------------------------------------------------
-ygg_edge,156,179,4	script(CLOAKED)	Sasha#wsv_c2e	435,{
+ygg_edge,156,179,4	script	Sasha#wsv_c2e	435,{
 	if (!callfunc("F_WSV_C1Done") || BaseLevel < 225) {
 		mes "[Sasha]";
 		mes "The forest has been restless lately. I'll tell you about it when you're ready. ^4d4dff(Chapter 1 done, base level 225)^000000";
 		close;
 	}
 	if (wsv_ch2 == 0) {
-		mes "[Sasha]";
-		mes "Ah, there you are. I was hoping you'd come by.";
-		mes "You know the sanctuary up the path, Beledor? Long ago a sage wove a ward over the forest there, to keep it safe.";
-		next;
-		mes "[Sasha]";
-		mes "That ward has gone wrong. The magic has knotted up on itself, like a net left out in a storm. Where it's knotted, the forest goes quiet. Even the birds won't land.";
-		mes "Left alone, I think it will start to hurt things.";
-		next;
-		mes "[Sasha]";
-		mes "I can't undo it. But I know someone who can, if he wakes up. First the knots have to be loosened.";
-		mes "Would you go up to Beledor and find them? There should be three.";
+		callfunc "F_WSV_C2Lines", "[Sasha]",
+			"Ah, there you are. I was hoping you'd come by.",
+			"The spring of the World Tree in ^0000FFSanctuary Beledor^000000 has gone strange. Its mana is knotting up on itself, and the druid twins who guard it, Vedr and Varg, sent for help.",
+			"-",
+			"I can't untangle mana. But you've done stranger things. Will you go?";
 		next;
 		if (select("I'll go.:Not right now.") == 2) {
 			mes "[Sasha]";
-			mes "All right. It's not going anywhere. That's the problem, really.";
+			mes "All right. It isn't going anywhere. That's the problem, really.";
 			close;
 		}
-		callfunc "F_WSV_Step", "wsv_ch2", 10, "", "64201";
+		callfunc "F_WSV_C2Go", 100;
 		mes "[Sasha]";
-		mes "Thank you. The way to Beledor is just over there. Or I can send you along the branches, if you'd rather.";
+		mes "Thank you. The small branch beside me goes to Beledor. Talk to ^0000FFVedr^000000 by the spring.";
 		next;
-		if (select("Send me along the branches.:I'll walk.") == 1) {
+		if (select("Send me along the branch.:I'll go myself.") == 1) {
 			close2;
-			warp "veledor",149,312;
+			warp "veledor",266,208;
 			end;
 		}
 		close;
 	}
-	if (wsv_ch2 == 10) {
+	if (wsv_ch2 >= 100 && wsv_ch2 < 120) {
 		mes "[Sasha]";
-		mes "Three knots of magic in Beledor. You'll feel them before you see them: the air goes thick, like before a storm.";
+		mes "Vedr and Varg are by the spring in Beledor.";
 		next;
 		if (select("Send me to Beledor.:Not now.") == 1) {
 			close2;
-			warp "veledor",149,312;
+			warp "veledor",266,208;
 			end;
 		}
 		close;
 	}
 	mes "[Sasha]";
-	mes "If the knots are loose, someone in Beledor should be waking up about now. Go and say hello.";
+	mes "When I'm not in the Tube Fruit house, I'm here, watching the path. Old habit.";
 	close;
 
 OnInit:
@@ -62,191 +56,382 @@ OnInit:
 	end;
 }
 
-// The three knots in Beledor.
-function	script	F_WSV_C2Knot	{
-	.@b = getarg(0);
-	if (wsv_ch2 != 10 || (wsv_ch2b & .@b)) {
-		mes "The air here is calm now.";
-		close;
-	}
-	mes "The air is thick and humming. Threads of green light twist around each other, pulling tighter whenever you look away.";
+// The small branch to Sanctuary Beledor.
+ygg_edge,152,177,4	script	Sanctuary Beledor#wsv_c2	10620,{
+	mes "[Sanctuary Beledor]";
+	mes "A small branch of the World Tree, its leaves turned towards Beledor.";
 	next;
-	if (select("Ease the threads apart.:Leave it.") == 2)
+	if (select("Go to Beledor.:Stay.") == 2)
 		close;
 	close2;
-	progressbar "00ff00", 5;
-	specialeffect2 EF_GREEN99_6;
-	wsv_ch2b = wsv_ch2b | .@b;
-	if ((wsv_ch2b & 7) == 7) {
-		dispbottom "The last knot comes loose. Somewhere nearby, someone takes a deep breath.";
-		callfunc "F_WSV_Step", "wsv_ch2", 20, "", "";
-	} else
-		dispbottom "The threads slide apart and fade. Another knot is somewhere in the sanctuary.";
+	warp "veledor",266,208;
 	end;
 }
 
-veledor,145,294,4	script(CLOAKED)	Knot of Magic#wsv_c2a	10620,{
-	callfunc "F_WSV_C2Knot", 1;
-	end;
-}
-veledor,145,252,4	script(CLOAKED)	Knot of Magic#wsv_c2b	10620,{
-	callfunc "F_WSV_C2Knot", 2;
-	end;
-}
-veledor,200,200,4	script(CLOAKED)	Knot of Magic#wsv_c2c	10620,{
-	callfunc "F_WSV_C2Knot", 4;
+veledor,268,212,4	script	Vedr#wsv_c2	10645,{
+	if (callfunc("F_WSV_C2Beat", 100, 110, 0, "[Vedr]",
+		"You're the one Sasha sent? Good. I'm Vedr; my brother Varg and I guard the spring of the World Tree.",
+		"-",
+		"Look at the water. See how it twists? The mana under the spring has knotted, four times over, and every knot draws more mana into it. Something is feeding on it, down there.",
+		"Varg can take you into the spring itself. I'll come too. Talk to him.")) close;
+	mes "[Vedr]";
+	if (wsv_ch2 == 110)
+		mes "Varg opens the way into the spring. We'll follow the mana to the knots.";
+	else
+		mes "The spring runs clear. My brother sleeps better, and so do I.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 100" );
 	end;
 }
 
-veledor,149,306,4	script(CLOAKED)	El#wsv_c2v	10646,{
-	mes "[El]";
-	mes "...Ah. The air moves again. Was that you?";
-	mes "I am El. I guard the World Tree, or I am supposed to. When the ward knotted, it bound me with it. I have been dreaming for a long time.";
-	next;
-	mes "[El]";
-	mes "Thank you. The sage who wove this ward would be ashamed of how it ended up. Magic left alone too long forgets what it was for.";
-	next;
-	mes "[El]";
-	mes "Sasha sent you? Then she knew I was here, and couldn't reach me. She worries. Let's go and ease her mind.";
-	callfunc "F_WSV_Step", "wsv_ch2", 30, "64201", "64202";
-	callfunc "F_WSV_C2Reward", 5, 3;
-	next;
-	mes "[El]";
-	mes "I'll go ahead to the Tube Fruit house. Meet us there.";
-	next;
-	if (select("Go to Ash Village.:I'll walk.") == 1) {
-		close2;
-		warp "ygg_fruit",82,119;
+veledor,270,210,4	script	Varg#wsv_c2	10644,{
+	if (wsv_ch2 == 110) {
+		mes "[Varg]";
+		mes "The Crossroads of Tangled Mana. Inside the spring, the mana runs like roads, and the roads are knotted.";
+		mes "Untie the four knots. Whatever's feeding on them will come out. Ready?";
+		next;
+		if (select("Take me in.:Not yet.") == 2)
+			close;
+		callfunc "F_WSV_EnterMd", "Crossroads of Tangled Mana", "[Varg]", "...The spring won't open. Try again in a moment.";
 		end;
 	}
+	mes "[Varg]";
+	if (wsv_ch2 < 110)
+		mes "Talk to my brother first. He does the talking. I do the opening.";
+	else
+		mes "The spring is quiet. If it ever knots up again, you know the way in.";
 	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 110" );
+	end;
 }
 
-// El stays in Ash Village from then on.
-ygg_fruit,77,121,4	script(CLOAKED)	El#wsv_c2f	10646,{
-	mes "[El]";
-	if (wsv_ch2 >= 1000) {
-		mes "Fragments of a world that ended, taking root in ours. I will keep watching them. Thank you for everything, friend.";
-		close;
-	}
-	if (wsv_ch2 >= 50) {
-		mes "Ice in Muspelheim. A root from nowhere. The World Tree is trying to tell us something, and it doesn't have words.";
-		close;
-	}
-	mes "Sasha has news, I think. She gets a crease between her eyes when she's holding something in.";
-	close;
-}
-
-// ------------------------------------------------------------
-// News from the Burning Land (64203): Chez in Volund Valley
-// ------------------------------------------------------------
-mu_fild01,110,166,4	script(CLOAKED)	Chez#wsv_c2	10606,{
-	cutin "ch1_chez01.png",2;
-	if (wsv_ch2 == 40) {
-		mes "[Chez]";
-		mes "There you are! Sasha said someone was coming. I'm Chez. I keep watch out here for Ash Village.";
+veledor,270,207,4	script	Sasha#wsv_c2v	435,{
+	if (callfunc("F_WSV_C2Beat", 120, 130, 3, "[Sasha]",
+		"You're back, and the spring runs clear. And you brought... someone?",
+		"-",
+		"El. A guardian, born from the knotted mana once it was set free. The World Tree made him on purpose, I think. It's trying to tell us something.",
+		"I'll go ahead to the Tube Fruit house in Ash Village. Meet me there and we'll talk properly.")) {
 		next;
-		cutin "ch1_chez02.png",2;
-		mes "[Chez]";
-		mes "Something's wrong east of the valley. In the land of fire, there's a ^0000FFcold spot^000000. Here, of all places.";
-		mes "The Harvans' village, ^0000FFYongjirak^000000, is right next to it. They're usually loud. Now they're quiet.";
-		next;
-		mes "[Chez]";
-		mes "And some of them are missing. They went to look at the cold and didn't come back.";
-		mes "Go east through the valley and on to Yongjirak. Ask for ^0000FFBeryl^000000.";
-		callfunc "F_WSV_Step", "wsv_ch2", 50, "64203", "64204";
-		callfunc "F_WSV_C2Reward", 5, 3;
-		next;
-		mes "[Chez]";
-		mes "It's a long walk. I can carry you there on the wind, if you like. My wings are cold, but they're quick.";
-		next;
-		if (select("Take me to Yongjirak.:I'll walk.") == 1) {
+		if (select("Go to Ash Village.:Later.") == 1) {
 			close2;
-			cutin "",255;
-			warp "kindlbrk",50,36;
+			warp "ygg_fruit",81,119;
 			end;
 		}
-		close3;
+		close;
 	}
-	mes "[Chez]";
-	mes "Yongjirak is east, past the end of the valley. Beryl will know more.";
-	next;
-	if (select("Take me to Yongjirak.:Not now.") == 1) {
-		close2;
-		cutin "",255;
-		warp "kindlbrk",50,36;
-		end;
-	}
-	close3;
+	mes "[Sasha]";
+	mes "The Tube Fruit house, in Ash Village.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 120" );
+	end;
+}
+
+// Sasha's Chapter 2 reports in the Tube Fruit house, called from her
+// Chapter 1 NPC (Sasha#wsv_c1, ch1_a_call.txt). Returns if neither applies.
+function	script	F_WSV_C2SashaFruit	{
+	if (callfunc("F_WSV_C2Beat", 130, 140, 0, "[Sasha]",
+		"There. Sit, have some tea. It's made from the leaves of the Tube Fruit; don't ask.",
+		"El has gone back to Beledor. He says the World Tree speaks through him now, a little, and it's worried about the south. About Muspelheim.",
+		"-",
+		"Go and hear it from him. He's on the hill above the spring.")) close;
+	if (callfunc("F_WSV_C2Beat", 410, 420, 5, "[Sasha]",
+		"Ice in Muspelheim, a shelter of sleeping strangers, a crystal that drinks heat... and Gregor running through all of it.",
+		"-",
+		"And the Root of Death. A root that doesn't belong to our World Tree at all. A root from a tree that has died somewhere else, at the end of some other world.",
+		"El will know more. Go to him.")) close;
+	return;
 }
 
 // ------------------------------------------------------------
-// Between Cold Spot and Hot Spot (64204, 64205): Yongjirak
+// Memorial dungeon: the Crossroads of Tangled Mana (1@ch2b).
+// The spring's hub and four pools, each with a knot; the fifth pool
+// (a hall of its own) is where Sollith waits, then El.
 // ------------------------------------------------------------
-kindlbrk,101,103,4	script	Beryl#wsv_c2a	10655,{
+1@ch2b	mapflag	nosave	SavePoint
+1@ch2b	mapflag	noteleport
+1@ch2b	mapflag	nomemo
+1@ch2b	mapflag	nowarpto
+1@ch2b	mapflag	nobranch
+1@ch2b	mapflag	monster_noteleport
+1@ch2b	mapflag	nopenalty
+
+1@ch2b,1,1,0	script	#wsv_c2md	-1,{
+	end;
+OnInstanceInit:
+	'knots = 0;
+	'tied = 0;
+	'state = 0;
+	disablenpc instance_npcname("Heart of the Spring#wsv_c2md");
+	disablenpc instance_npcname("El#wsv_c2md");
+	end;
+OnKnot:
+	'knots++;
+	.@m$ = instance_mapname("1@ch2b");
+	if ('knots < 4) {
+		mapannounce .@m$, "Vedr: One knot down. " + (4 - 'knots) + " to go. Watch the mana: it fights back.", bc_map, "0x88CCFF";
+		end;
+	}
+	mapannounce .@m$, "Varg: That's all four! The mana is running backwards, into the heart of the spring. Whatever was feeding on it is in there. The way opened in the east pool!", bc_map, "0x88CCFF";
+	enablenpc instance_npcname("Heart of the Spring#wsv_c2md");
+	end;
+OnSollith:
+	'state = 2;
+	.@m$ = instance_mapname("1@ch2b");
+	mapannounce .@m$, "Sollith dissolves. The mana it was drinking pours out all at once, gathers, and takes the shape of a young man.", bc_map, "0xCCCCCC";
+	enablenpc instance_npcname("El#wsv_c2md");
+	end;
+}
+
+1@ch2b,144,84,4	script	Vedr#wsv_c2md	10645,{
+	mes "[Vedr]";
+	if ('knots < 4) {
+		mes "Four knots of tangled mana, one in each of the spring's pools: south-west, north-west, north and east. Untie them. Each one throws out wild mana when it comes loose.";
+		mes "Untied so far: " + 'knots + " of 4.";
+	} else
+		mes "The heart of the spring, through the east pool. Go, we're right behind you.";
+	close;
+}
+1@ch2b,147,84,4	script	Varg#wsv_c2md	10644,{
+	mes "[Varg]";
+	mes "Don't mind me. I'm holding the way out open. Talk to me if you want to leave.";
+	next;
+	if (select("Leave the spring.:Stay.") == 1) {
+		close2;
+		warp "veledor",266,208;
+		end;
+	}
+	close;
+}
+
+function	script	F_WSV_C2MdKnot	{
+	if ('tied & getarg(0)) {
+		mes "^4d4dffThe mana here flows freely now.^000000";
+		close;
+	}
+	mes "^4d4dffMana twists around itself here, a knot of light pulling tighter whenever you look away.^000000";
+	next;
+	if (select("Untie it.:Leave it.") == 2)
+		close;
+	close2;
+	progressbar "00ff00", 4;
+	if ('tied & getarg(0))
+		end;
+	'tied = 'tied | getarg(0);
+	specialeffect EF_GREEN99_6;
+	getmapxy(.@m$, .@x, .@y, BL_NPC);
+	areamonster .@m$, .@x - 4, .@y - 4, .@x + 4, .@y + 4, "Unstable Mana", 22680, 3;
+	donpcevent instance_npcname("#wsv_c2md") + "::OnKnot";
+	end;
+}
+1@ch2b,37,52,4	script	Tangled Mana#wsv_c2md1	10620,{ callfunc "F_WSV_C2MdKnot", 1; end; }
+1@ch2b,65,181,4	script	Tangled Mana#wsv_c2md2	10620,{ callfunc "F_WSV_C2MdKnot", 2; end; }
+1@ch2b,122,155,4	script	Tangled Mana#wsv_c2md3	10620,{ callfunc "F_WSV_C2MdKnot", 4; end; }
+1@ch2b,187,123,4	script	Tangled Mana#wsv_c2md4	10620,{ callfunc "F_WSV_C2MdKnot", 8; end; }
+
+1@ch2b,190,128,0	script	Heart of the Spring#wsv_c2md	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if ('state == 0) {
+		'state = 1;
+		monster instance_mapname("1@ch2b"), 190, 190, "Sollith", 22682, 1, instance_npcname("#wsv_c2md") + "::OnSollith";
+		mapannounce instance_mapname("1@ch2b"), "Something heavy turns in the heart of the spring: Sollith, swollen with stolen mana.", bc_map, "0xFF4444";
+	}
+	warp instance_mapname("1@ch2b"), 190, 178;
+	end;
+}
+
+1@ch2b,190,186,4	script	El#wsv_c2md	10646,{
+	if (callfunc("F_WSV_C2Beat", 110, 120, 3, "[El]",
+		"...Where... Ah. I am. I am El.",
+		"The World Tree wove me from the mana you set free. I know its voice, a little. I know it is afraid.",
+		"-",
+		"Thank you, friend. Let us go back up. Sasha is waiting by the spring.")) {
+		close2;
+		warp "veledor",268,206;
+		end;
+	}
+	mes "[El]";
+	mes "Shall we go back up?";
+	close2;
+	warp "veledor",268,206;
+	end;
+}
+
+// ------------------------------------------------------------
+// Meeting El (64202)
+// ------------------------------------------------------------
+veledor,134,323,4	script	El#wsv_c2	10646,{
+	if (callfunc("F_WSV_C2Beat", 140, 150, 0, "[El]",
+		"Friend. The World Tree has given me a task: to be its emissary, and to listen where it cannot.",
+		"-",
+		"It is listening to the south now. Something is wrong in Muspelheim, a cold that doesn't belong there. Newt has been there. Ask him.")) close;
+	if (callfunc("F_WSV_C2Beat", 420, 430, 0, "[El]",
+		"A root from a dead world... yes. The World Tree feels it like a splinter.",
+		"Gregor has gone to Brimir, to the distorted ruins. He says a piece of that other world sank into ours there. Find him: by the broken stairs on the first floor.")) close;
+	if (callfunc("F_WSV_C2Beat", 670, 680, 3, "[El]",
+		"Il and Zero say the dormant matter in the Shadow Wardens is the same as the crystal under Muspelheim: the last of the dead world's heat, sleeping.",
+		"-",
+		"If it can sleep, it can wake. The Harvans of Yongjirak are trying to make something of it. Go and see Bartum, by the forge.")) close;
+	if (callfunc("F_WSV_C2Beat", 780, 800, 5, "[El]",
+		"Warmth for the Harvans, from the heart of a dead world. Good.",
+		"-",
+		"But I feel something else. Foreign mana in Ragsruth, cold and hungry, the same as the Snapdragon's. Devries is already there. Go to him, in the safe place by the gate.")) close;
+	if (wsv_ch2 == 870) {
+		callfunc "F_WSV_C2Lines", "[El]",
+			"You've brought them back. The fragments of the end.",
+			"-",
+			"Listen. The World Tree is humming. It knows these pieces; they come from a tree like it, at the end of another world. Their song is sad, and very old.",
+			"I'll keep them. One day, when the tree understands, it may tell us what ended there, and how to keep it from ending here.",
+			"-",
+			"Thank you, friend. The Song of the World Tree has one more verse now.";
+		callfunc "F_WSV_C2Go", 1000, 10, 10;
+		close;
+	}
+	mes "[El]";
+	if (wsv_ch2 >= 1000)
+		mes "The fragments sing quietly. I listen every night.";
+	else
+		mes "The World Tree is listening. So am I.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 140 || wsv_ch2 == 420 || wsv_ch2 == 670 || wsv_ch2 == 780 || wsv_ch2 == 870" );
+	end;
+}
+
+veledor,131,322,4	script	Newt#wsv_c2	10613,{
+	if (callfunc("F_WSV_C2Beat", 150, 160, 0, "[Newt]",
+		"Muspelheim? Oh, I have news. Bad news, mostly.",
+		"The Harvans, the fire folk who live past Volund Valley, are in trouble. Ice, in their land. Their fields freezing over.",
+		"-",
+		"Chez is at the edge of the valley. She knows the way to them. Go to her at Volund Valley's camp.")) close;
+	mes "[Newt]";
+	mes "I go where the news goes. Right now, it's going south.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 150" );
+	end;
+}
+
+mu_fild01,110,166,4	script	Chez#wsv_c2	10606,{
+	cutin "ch1_chez01.png",2;
+	if (callfunc("F_WSV_C2Beat", 160, 170, 0, "[Chez]",
+		"Newt sent you? Then you've heard. The Harvans are freezing.",
+		"-",
+		"Their scouts are waiting at the crossroads camp, past the valley. Jubilus leads them. I'll take you.")) {
+		close2;
+		cutin "",255;
+		warp "ch1_sf01",193,213;
+		end;
+	}
+	mes "[Chez]";
+	mes "Need a lift to the crossroads camp?";
+	next;
+	if (select("Take me there.:Not now.") == 1) {
+		close2;
+		cutin "",255;
+		warp "ch1_sf01",193,213;
+		end;
+	}
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 160" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Between Cold and Heat (64203)
+// ------------------------------------------------------------
+ch1_sf01,195,216,4	script	Jubilus#wsv_c2	10612,{
+	if (callfunc("F_WSV_C2Beat", 170, 180, 0, "[Jubilus]",
+		"The adventurer from Ash Village! Good.",
+		"The cold came out of the east, from the root they call the Root of Death, and it's crawling towards Yongjirak, the Harvans' village. Beryl knows more; she's one of them.")) close3;
+	mes "[Jubilus]";
+	mes "Keep warm. Ironic, I know.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 170" );
+	end;
+}
+
+ch1_sf01,197,212,4	script	Beryl#wsv_c2c	10655,{
 	cutin "ch2_harrban_a.png",2;
-	if (wsv_ch2 == 50) {
-		if ((wsv_ch2b & 248) == 248) {
-			mes "[Beryl]";
-			mes "So it's the deep veins. The lava under the Root went cold, and the cold is climbing.";
-			mes "And that white powder... It came back with the last one who returned. He wouldn't stop shivering.";
-			next;
-			mes "[Beryl]";
-			mes "The ones who went down are still at the ^0000FFRoot of Death^000000. If they're alive, they won't be for long.";
-			mes "My boat is at the east dock. I'll take you as close as anyone can go.";
-			callfunc "F_WSV_Step", "wsv_ch2", 60, "64204", "64205";
-			callfunc "F_WSV_C2Reward", 5, 3;
-			close3;
-		}
-		mes "[Beryl]";
-		mes "An outsider? Chez sent you. Good. We need people who aren't afraid of the cold, and Harvans... we are very afraid of the cold.";
-		next;
-		mes "[Beryl]";
-		mes "Our people went to the place we call the ^0000FFRoot of Death^000000. It was a lava field, once. One morning it was ice.";
-		mes "Talk to the crafters. The farmer, the miner, the fisherman and the weaponsmith each saw something. And look at the ^0000FFwhite powder^000000 by the well.";
-		close3;
-	}
-	if (wsv_ch2 == 60) {
-		mes "[Beryl]";
-		mes "My boat is at the east dock. Hurry.";
-		close3;
-	}
-	if (wsv_ch2 >= 1000) {
-		mes "[Beryl]";
-		mes "Everyone's home and warming up. Yongjirak owes you, outsider. That's not a small thing for a Harvan to say.";
-		close3;
+	if (callfunc("F_WSV_C2Beat", 180, 190, 0, "[Beryl]",
+		"You'll help us? Then come to Yongjirak. East from Volund Valley, through the Volund Plain and the Volund Forest.",
+		"-",
+		"I'll send you back to the valley. Follow the road east, and find me at the village gate.")) {
+		close2;
+		cutin "",255;
+		warp "mu_fild01",370,180;
+		end;
 	}
 	mes "[Beryl]";
-	mes "Welcome to Yongjirak. Mind the heat. Or, lately, the lack of it.";
+	mes "Yongjirak is east, past the plain and the forest. Shall I send you back to the valley?";
+	next;
+	if (select("Yes.:No.") == 1) {
+		close2;
+		cutin "",255;
+		warp "mu_fild01",370,180;
+		end;
+	}
 	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 180" );
+	end;
+}
+
+kindlbrk,101,103,4	script	Beryl#wsv_c2a	10655,{
+	cutin "ch2_harrban_a.png",2;
+	if (callfunc("F_WSV_C2Beat", 190, 200, 0, "[Beryl]",
+		"You made it! Welcome to Yongjirak.",
+		"Before anything else, meet Bromin, our elder. He's right here; he'll want to see your face.")) close3;
+	if (wsv_ch2 == 210) {
+		mes "[Beryl]";
+		mes "Talk to the villagers: the farmer, the miner, the fisherman and the weapon artisan. And look at that white powder by the well. Then come back.";
+		close3;
+	}
+	if (callfunc("F_WSV_C2Beat", 220, 230, 2, "[Beryl]",
+		"Frozen fields, cold veins, frightened fish, a forge that won't hold its heat. And white ash, cold as snow.",
+		"-",
+		"It all points at the Root of Death. My boat is at the east pier. Chez and Dew went ahead to scout; meet them there.")) close3;
+	mes "[Beryl]";
+	if (wsv_ch2 >= 1000)
+		mes "The village is warm again. Warmer than it's been in years, Bromin says. Thank you.";
+	else
+		mes "My boat's at the east pier, whenever you need it.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 190 || wsv_ch2 == 220" );
+	end;
 }
 
 kindlbrk,102,96,4	script	Bromin#wsv_c2	10658,{
 	cutin "ch2_harrban_d.png",2;
+	if (callfunc("F_WSV_C2Beat", 200, 210, 2, "[Bromin]",
+		"A human, in Yongjirak. In my lifetime! Welcome, welcome.",
+		"-",
+		"You've come about the cold. Everyone has their own story of it. Go and hear them: the farmer, the miner, the fisherman, the weapon artisan. And look at the white ash by the well. Then tell Beryl what you think.")) close3;
 	mes "[Bromin]";
-	if (wsv_ch2 >= 50 && wsv_ch2 < 1000) {
-		mes "In all my years, the fire under Yongjirak has never gone out. Not once.";
-		mes "Fire is what we are. A Harvan who goes cold... doesn't just get sick. He stops.";
-		next;
-		mes "[Bromin]";
-		mes "If you find them frozen, don't break the ice. Warm it. Slowly.";
-		close3;
-	}
-	mes "The forges are lit, the children are loud. A good day in Yongjirak.";
+	mes "Harvans are made of fire. When the fire goes out of the ground, it goes out of us too, a little.";
 	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 200" );
+	end;
 }
 
-// The crafters and the white powder (bits 8-128 of wsv_ch2b).
+// The villagers and the White Powder (bits 1-16 of wsv_ch2b).
 // callfunc "F_WSV_C2Ask", <bit>, "<name>", "<cut-in>", "<line 1>", "<line 2>", "<everyday line>";
 function	script	F_WSV_C2Ask	{
 	cutin getarg(2), 2;
 	mes "[" + getarg(1) + "]";
-	if (wsv_ch2 == 50) {
+	if (wsv_ch2 == 210 && !(wsv_ch2b & getarg(0))) {
 		mes getarg(3);
 		mes getarg(4);
 		wsv_ch2b = wsv_ch2b | getarg(0);
-		if ((wsv_ch2b & 248) == 248)
-			dispbottom "You've heard everyone. Go back to Beryl.";
+		if ((wsv_ch2b & 31) == 31)
+			callfunc "F_WSV_C2Go", 220;
 		close3;
 	}
 	mes getarg(5);
@@ -254,228 +439,486 @@ function	script	F_WSV_C2Ask	{
 }
 
 kindlbrk,128,171,4	script	Farmer Harvan#wsv_c2	10656,{
-	callfunc "F_WSV_C2Ask", 8, "Farmer Harvan", "ch2_harrban_b.png",
+	callfunc "F_WSV_C2Ask", 1, "Farmer Harvan", "ch2_harrban_b.png",
 		"My ember-wheat froze in one night. Frost, on a field you could fry an egg on.",
 		"The cold came from the east, from the Root. You could see the white creeping over the rocks.",
 		"The ember-wheat is growing again. It sulks for a while after a frost, like a child.";
 	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 210 && (wsv_ch2b & 1) == 0" );
+	end;
 }
 kindlbrk,123,204,4	script	Miner Harvan#wsv_c2	10659,{
-	callfunc "F_WSV_C2Ask", 16, "Miner Harvan", "ch2_harrban_e.png",
+	callfunc "F_WSV_C2Ask", 2, "Miner Harvan", "ch2_harrban_e.png",
 		"The deep veins under the Root went cold. Lava doesn't do that. Lava doesn't know how.",
 		"Something down there is drinking the heat out of the ground. My pick rang like it was hitting glass.",
 		"The veins are warm again. I can hear them hum when I put my ear to the rock.";
 	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 210 && (wsv_ch2b & 2) == 0" );
+	end;
 }
 kindlbrk,156,100,4	script	Fisherman Harvan#wsv_c2	10660,{
-	callfunc "F_WSV_C2Ask", 32, "Fisherman Harvan", "ch2_harrban_f.png",
+	callfunc "F_WSV_C2Ask", 4, "Fisherman Harvan", "ch2_harrban_f.png",
 		"The lava fish swam away from the Root, all at once, a whole school of them. Like they'd seen a ghost.",
 		"I followed them up the channel. The ones that didn't make it were frozen in the flow.",
 		"The fish are back. Fat and grumpy. Good eating.";
 	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 210 && (wsv_ch2b & 4) == 0" );
+	end;
 }
-kindlbrk,191,187,4	script	Weaponsmith Harvan#wsv_c2	10657,{
-	callfunc "F_WSV_C2Ask", 64, "Weaponsmith Harvan", "ch2_harrban_c.png",
+kindlbrk,191,187,4	script	Weapon Artisan Harvan#wsv_c2	10657,{
+	callfunc "F_WSV_C2Ask", 8, "Weapon Artisan Harvan", "ch2_harrban_c.png",
 		"My forge won't hold its heat. I stoke it and stoke it and it sinks back, like something's pulling at it.",
 		"Whatever it is, it's strongest at the Root. My best tongs went there with my brother. Neither came back.",
 		"My forge roars again. Come back when you need a blade that remembers being lava.";
 	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 210 && (wsv_ch2b & 8) == 0" );
+	end;
 }
-kindlbrk,171,120,4	script	White Powder#wsv_c2	557,{
-	if (wsv_ch2 == 50) {
-		mes "A small heap of white powder near the well. In Muspelheim's heat it should have melted, or burned. It does neither.";
-		mes "It's cold. Not cool: cold, like a winter morning.";
-		next;
-		mes "^4d4dffA Harvan back from the Root of Death shook it out of his clothes, the villagers say.^000000";
-		wsv_ch2b = wsv_ch2b | 128;
-		if ((wsv_ch2b & 248) == 248)
-			dispbottom "You've heard everyone. Go back to Beryl.";
+kindlbrk,173,120,4	script	White Powder#wsv_c2	557,{
+	mes "[White Powder]";
+	if (wsv_ch2 == 210 && !(wsv_ch2b & 16)) {
+		mes "A drift of white powder, like ash. You touch it: it's cold. Cold as snow, in Muspelheim.";
+		mes "^4d4dffIt melts on your fingers, and leaves them numb.^000000";
+		wsv_ch2b = wsv_ch2b | 16;
+		if ((wsv_ch2b & 31) == 31)
+			callfunc "F_WSV_C2Go", 220;
 		close;
 	}
-	mes "A faint white stain on the stones, the last of the powder. It's finally melting.";
+	mes "A smudge of grey ash by the well.";
 	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 210 && (wsv_ch2b & 16) == 0" );
+	end;
 }
 
-// Beryl's boat (and, after the story, the way to the Root).
+// Beryl's boat: the Harvan Sailor (ch2_b) takes you to the Root of Death
+// after the story; during it, Beryl does.
 kindlbrk,262,110,4	script	Beryl#wsv_c2b	10655,{
 	cutin "ch2_harrban_a.png",2;
-	if (wsv_ch2 == 60) {
+	if (wsv_ch2 >= 230 && wsv_ch2 < 1000) {
 		mes "[Beryl]";
-		mes "Ready? I can't take you all the way. The boat would freeze to the channel. I'll put you ashore at the edge of the Root.";
+		mes "To the Root of Death? Hold on to something. The current near the Root runs cold.";
 		next;
 		if (select("Let's go.:Not yet.") == 2)
 			close3;
 		close2;
 		cutin "",255;
-		warp "deadroot",110,168;
-		end;
-	}
-	if (wsv_ch2 > 60 && wsv_ch2 < 1000) {
-		mes "[Beryl]";
-		mes "Back to the Root? Hold on tight.";
-		next;
-		if (select("To the Root of Death.:Not now.") == 2)
-			close3;
-		close2;
-		cutin "",255;
-		warp "deadroot",110,168;
+		warp "deadroot",104,121;
 		end;
 	}
 	mes "[Beryl]";
-	if (wsv_ch2 >= 1000)
-		mes "The sailor at the end of the dock takes people to the Root now. I'm done with that place for a while.";
-	else
-		mes "This is my boat. Isn't she pretty? Don't touch the hull, it's hot.";
+	mes "My boat. Small, but she's never sunk. Well. Never sunk for long.";
 	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 230" );
+	end;
 }
 
-// ------------------------------------------------------------
-// What Was Met at the Root of Death (64205, 64206, 64207)
-// ------------------------------------------------------------
-deadroot,106,170,4	script(CLOAKED)	Gregor#wsv_c2d	627,{
-	cutin "4job_gregor_01.png",2;
-	if (wsv_ch2 == 60) {
-		mes "[Gregor]";
-		mes "Well! Of all the places to meet. Devries and I came to look at the ice. A biologist can't resist a frozen lava field.";
-		next;
-		mes "[Gregor]";
-		mes "The Harvans are here. Some of them, anyway. ^0000FFFrozen solid^000000, standing where they stopped. They're alive. Barely.";
-		mes "Devries brewed a warming draught. Pour it over the ice, slowly, and they'll come out of it.";
-		next;
-		mes "[Gregor]";
-		mes "And the cold is breeding things. Ice creatures that shouldn't exist in Muspelheim. Thin them out while you're at it: ^0000FF30 of them^000000.";
-		callfunc "F_WSV_Step", "wsv_ch2", 70, "64205", "64206";
-		callfunc "F_WSV_C2Reward", 5, 3;
+// Chez and Dew, scouting the Root of Death (bits 32/64).
+deadroot,103,124,4	script	Chez#wsv_c2d	10606,{
+	cutin "ch1_chez01.png",2;
+	mes "[Chez]";
+	if (wsv_ch2 == 230 && !(wsv_ch2b & 32)) {
+		mes "Look at it. Half of this root is lava, half of it is ice, and the line between them moves while you watch.";
+		mes "Dew went further in, to the east. Find her too.";
+		wsv_ch2b = wsv_ch2b | 32;
+		if ((wsv_ch2b & 96) == 96)
+			callfunc "F_WSV_C2Go", 240;
 		close3;
 	}
-	if (wsv_ch2 == 70) {
-		if ((wsv_ch2b & 1792) == 1792 && checkquest(64206, HUNTING) == 2) {
-			mes "[Gregor]";
-			mes "All three thawed and on their way home, and the ice creatures thinned. Well done.";
-			next;
-			mes "[Gregor]";
-			mes "Now, look at this. We found it where the cold is strongest. A ^0000FFsprout^000000, growing out of the frozen lava.";
-			mes "It isn't from Muspelheim. It isn't from Midgard. The cells are... wrong. Old. Like a plant from a world that already ended.";
-			next;
-			mes "[Gregor]";
-			mes "We've seen something like it once before: in Brimir, the dead dimension. If anyone knows what this is, it's the Valkyrie there, ^0000FFIl^000000.";
-			mes "I'll go ahead. Meet me in Brimir.";
-			callfunc "F_WSV_Step", "wsv_ch2", 80, "64206", "64207,64208";
-			callfunc "F_WSV_C2Reward", 10, 5;
-			next;
-			if (select("Go to Brimir.:I'll find my own way.") == 1) {
-				close2;
-				cutin "",255;
-				warp "uknw_ruin",270,240;
-				end;
-			}
-			close3;
-		}
-		mes "[Gregor]";
-		mes "Thaw the three frozen Harvans with Devries's draught, and thin out 30 of the ice creatures.";
-		close3;
-	}
+	mes "Lava on one side, ice on the other. My boots don't know what to think.";
 	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 230 && (wsv_ch2b & 32) == 0" );
+	end;
 }
-
-deadroot,108,168,4	script(CLOAKED)	Devries#wsv_c2d	865,{
-	mes "[Devries]";
-	mes "The draught? It's the same base as the fire resistance potion, only backwards: instead of keeping the heat out, it lets it in.";
-	mes "Pour it slowly. A Harvan that thaws too fast cracks.";
-	close;
-}
-
-// The frozen Harvans (bits 256, 512, 1024 of wsv_ch2b).
-function	script	F_WSV_C2Thaw	{
-	.@b = getarg(0);
-	if (wsv_ch2 != 70 || (wsv_ch2b & .@b)) {
-		mes "Only a puddle is left where the ice was.";
+deadroot,278,73,4	script	Dew#wsv_c2d	10610,{
+	mes "[Dew]";
+	if (wsv_ch2 == 230 && !(wsv_ch2b & 64)) {
+		mes "Shh. Hear that? The ice is singing. Something under it is breathing out cold, slowly, like a sleeper.";
+		mes "We've seen enough. Back to the village: Tamarin came down from Ash Village and set up in the inn. She found something strange, she says.";
+		wsv_ch2b = wsv_ch2b | 64;
+		if ((wsv_ch2b & 96) == 96)
+			callfunc "F_WSV_C2Go", 240;
 		close;
 	}
-	cutin "ch2_harr_ice.png",2;
-	mes "A Harvan, frozen mid-step. Under the ice the fire in its chest still flickers, very faintly.";
-	next;
-	if (select("Pour the warming draught.:Not yet.") == 2)
-		close3;
-	close2;
-	cutin "",255;
-	progressbar "ff8800", 5;
-	specialeffect EF_FIREPILLARBOMB;
-	wsv_ch2b = wsv_ch2b | .@b;
-	cloakonnpcself strnpcinfo(0);
-	dispbottom "The ice cracks and slides away. The Harvan gasps, coughs out steam, and staggers off towards Yongjirak.";
-	if ((wsv_ch2b & 1792) == 1792)
-		dispbottom "That's all three. Go back to Gregor once the ice creatures are thinned out.";
+	mes "The ice sings, if you listen. I wish it wouldn't.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 230 && (wsv_ch2b & 64) == 0" );
 	end;
 }
 
-deadroot,150,195,4	script(CLOAKED)	Frozen Harvan#wsv_c2a	10650,{
-	callfunc "F_WSV_C2Thaw", 256;
-	end;
-}
-deadroot,220,150,4	script(CLOAKED)	Frozen Harvan#wsv_c2b	10650,{
-	callfunc "F_WSV_C2Thaw", 512;
-	end;
-}
-deadroot,300,254,4	script(CLOAKED)	Frozen Harvan#wsv_c2c	10650,{
-	callfunc "F_WSV_C2Thaw", 1024;
+kin_in01,36,251,4	script	Strange Hal#wsv_c2	10652,{
+	if (callfunc("F_WSV_C2Beat", 240, 250, 2, "[Tamarin]",
+		"There you are! Meet my new friend. Well, I think it's a friend. It's a Hal, a little fire spirit, but look: it's pale, and shivering.",
+		"-",
+		"It crawled out of the snow near the Root. Something there is putting out the fire in things. Even in spirits.",
+		"There's a man camped at the Root asking the same questions. Gregor. You know him? He's at the Root's western edge.")) close;
+	mes "[Strange Hal]";
+	mes "^4d4dffThe little Hal flickers, a little warmer than before.^000000";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 240" );
 	end;
 }
 
 // ------------------------------------------------------------
-// A Fragmented Other Root (64207, 64208): Gregor in Brimir; Il gives
-// the branch (Il#wsv, ch1_g_side.txt, calls F_WSV_C2Il).
+// The Root of Death (64204)
 // ------------------------------------------------------------
-uknw_ruin,273,237,4	script(CLOAKED)	Gregor#wsv_c2b	627,{
+deadroot,101,167,4	script	Gregor#wsv_c2d	627,{
 	cutin "4job_gregor_01.png",2;
+	if (callfunc("F_WSV_C2Beat", 250, 260, 0, "[Gregor]",
+		"You. Of course it's you. Wherever the world cracks, you turn up with a lantern.",
+		"-",
+		"This root isn't ours. It's from a World Tree that died somewhere else, and it's still dying here. Help me survey it: three points along the frozen side, east and north. Look closely at each.")) close3;
+	if (wsv_ch2 == 260) {
+		mes "[Gregor]";
+		mes "The three survey points: east of here, then far north-east, then the north-east edge.";
+		close3;
+	}
 	mes "[Gregor]";
-	mes "Il is right there. She knows these dead roots better than anyone. Show her the sprout.";
+	mes "Dead roots still grow. That's the part that frightens me.";
 	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 250" );
+	end;
 }
 
-// Il's part, called from Il#wsv: 1 when she handled the talk.
-function	script	F_WSV_C2Il	{
-	if (wsv_ch2 != 80)
-		return 0;
-	mes "[Il]";
-	mes "A sprout. From the Root of Death, you say? Give it here.";
-	next;
-	mes "[Il]";
-	mes "......";
-	mes "This is a piece of a root that broke off. Not from your tree. From another. From a world that ended, the way Brimir ended.";
-	next;
-	mes "[Il]";
-	mes "When a world ends, its tree does not always die all at once. Pieces drift. Sometimes they take root somewhere else.";
-	mes "This one has a sister. I can feel it pulling. Somewhere ragged, somewhere torn.";
-	next;
-	mes "[Il]";
-	mes "Take this ^0000FFbranch^000000. It remembers where its sisters went. Hold it, and it will take you there.";
-	callfunc "F_WSV_Step", "wsv_ch2", 90, "64207,64208", "64209";
-	callfunc "F_WSV_C2Reward", 5, 3;
-	next;
-	if (select("Hold the branch.:Not yet.") == 1) {
-		close2;
-		specialeffect2 EF_TELEPORTATION2;
-		warp "ch2safe4",201,108;
-		end;
+function	script	F_WSV_C2Survey	{
+	mes "[Survey Point]";
+	if (wsv_ch2 != 260 || (wsv_ch2b & getarg(0))) {
+		mes "Frozen bark, scored with old cracks.";
+		close;
 	}
-	mes "[Il]";
-	mes "Come back when you are ready. The branch will wait. Branches are patient.";
-	close;
+	mes "Under the frost, the root's grain runs the wrong way: from the tip back towards the base, as if it were growing backwards.";
+	next;
+	if (select("Take notes.:Leave it.") == 2)
+		close;
+	close2;
+	progressbar "ffffff", 3;
+	wsv_ch2b = wsv_ch2b | getarg(0);
+	if ((wsv_ch2b & 7) == 7) {
+		dispbottom "That's all three. Maura, at the safe place north of the Root, is collecting reports.";
+		callfunc "F_WSV_C2Go", 270;
+	} else
+		dispbottom "Noted. There are more survey points along the frozen side.";
+	end;
+}
+deadroot,154,172,4	script	Survey Point#wsv_c2a	10429,{
+	callfunc "F_WSV_C2Survey", 1;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 260 && (wsv_ch2b & 1) == 0" );
+	end;
+}
+deadroot,282,251,4	script	Survey Point#wsv_c2b	10429,{
+	callfunc "F_WSV_C2Survey", 2;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 260 && (wsv_ch2b & 2) == 0" );
+	end;
+}
+deadroot,334,288,4	script	Survey Point#wsv_c2c	10429,{
+	callfunc "F_WSV_C2Survey", 4;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 260 && (wsv_ch2b & 4) == 0" );
+	end;
 }
 
-// After that, Il keeps the branch for you: the way to Ragsruth.
-function	script	F_WSV_C2Branch	{
-	if (wsv_ch2 < 90)
-		return;
-	mes "[Il]";
-	mes "The branch still pulls towards its sisters. Do you want to follow it?";
-	next;
-	if (select("Hold the branch.:Not now.") == 1) {
+ch2safe3,30,114,4	script	Maura#wsv_c2s	10416,{
+	if (callfunc("F_WSV_C2Beat", 270, 280, 0, "[Maura]",
+		"A root that grows backwards. Yes, that fits.",
+		"-",
+		"Across the Root, at its far north-eastern end, there's a shelter: Shelter Geminis. Old, sealed, full of machines nobody here understands. Gregor's gone inside. The portal at the Root's north-east corner leads there.")) close;
+	mes "[Maura]";
+	mes "The portal at the Root of Death's north-east corner goes to Shelter Geminis.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 270" );
+	end;
+}
+
+// Shelter Geminis: the server's own warp at the Root's north-east corner
+// (deadroot 349,351) leads in.
+
+ch2gms,20,34,4	script	Gregor#wsv_c2g	627,{
+	cutin "4job_gregor_01.png",2;
+	if (wsv_ch2 == 280 && !(wsv_ch2b & 1)) {
+		mes "[Gregor]";
+		mes "Look at this place. Capsules. Hundreds of them. And in each one, someone sleeping in the ice.";
+		mes "There's a terminal over there, the one with the question mark blinking. See if it'll tell you anything.";
+		wsv_ch2b = wsv_ch2b | 1;
+		close3;
+	}
+	if (wsv_ch2 == 280 && (wsv_ch2b & 2)) {
+		if (callfunc("F_WSV_C2Beat", 280, 290, 0, "[Gregor]",
+			"'Preservation of the last citizens. Heat source: the Crystal. Failing.' The last citizens of the dead world. They froze themselves, hoping to wake somewhere warm.",
+			"-",
+			"And now they've drifted into Muspelheim, and their cold is leaking out. Maura came in after me. She's in the inner hall.")) close3;
+	}
+	mes "[Gregor]";
+	if (wsv_ch2 == 280)
+		mes "The terminal with the question mark. What does it say?";
+	else
+		mes "Sleeping strangers from a world that ended. I keep wanting to whisper.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 280 && (wsv_ch2b & 1) == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 280 && (wsv_ch2b & 2) == 2" );
+	end;
+}
+ch2gms,18,41,4	script	?#wsv_c2g	10669,{
+	mes "[?]";
+	if (wsv_ch2 == 280 && (wsv_ch2b & 1) && !(wsv_ch2b & 2)) {
+		mes "^4d4dffThe screen flickers. Letters you don't know rearrange themselves into ones you do:^000000";
+		mes "'GEMINIS. PRESERVATION OF THE LAST CITIZENS. HEAT SOURCE: THE CRYSTAL. HEAT SOURCE STATUS: FAILING.'";
+		wsv_ch2b = wsv_ch2b | 2;
+		dispbottom "Tell Gregor what the terminal said.";
+		close;
+	}
+	if (wsv_ch2 >= 770)
+		mes "'HEAT SOURCE STATUS: STABLE.'";
+	else
+		mes "'HEAT SOURCE STATUS: FAILING.'";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 280 && (wsv_ch2b & 3) == 1" );
+	end;
+}
+
+ch2gms,76,85,4	script	Maura#wsv_c2g	10416,{
+	if (callfunc("F_WSV_C2Beat", 290, 300, 0, "[Maura]",
+		"Some of the capsules have broken open. The sleepers inside are gone, wandered out, and the cold took them on the Root.",
+		"-",
+		"One of them is still out there, at the Root's north-east end, by the shelter's door. Frozen solid, but alive, I think. Harvan, by the look of him. Go and see.")) close;
+	mes "[Maura]";
+	mes "Mind the capsules. Some of them hum when you walk past.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 290" );
+	end;
+}
+
+deadroot,348,347,4	script	Frozen Harvan#wsv_c2	10650,{
+	if (callfunc("F_WSV_C2Beat", 300, 310, 0, "[Frozen Harvan]",
+		"^4d4dffA Harvan, frozen in a crust of ice, flame flickering faintly in his chest.^000000",
+		"...c... cold... the crystal... drank... my flame...",
+		"-",
+		"^4d4dffYou can't thaw him here. In Yongjirak, Prasium the flame-keeper knows about fire trapped in ice.^000000")) close;
+	mes "[Frozen Harvan]";
+	if (wsv_ch2 >= 310)
+		mes "^4d4dffThe ice where he stood is melting into a puddle.^000000";
+	else
+		mes "^4d4dffA shape in the ice.^000000";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 300" );
+	end;
+}
+
+kindlbrk,252,118,4	script	Prasium#wsv_c2a	10664,{
+	if (callfunc("F_WSV_C2Beat", 310, 320, 4, "[Prasium]",
+		"Flame trapped in ice? That is the oldest sickness of our people. The cold can't kill a Harvan's flame. It can only hold it, and wait.",
+		"-",
+		"There is one place where a held flame can be set free: the Cradle of Fire, deep in the Primordial Flame. Meet me at the north of the village, by the steps.")) close;
+	mes "[Prasium]";
+	mes "I keep the village's flame. It's a quiet job, until it isn't.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 310" );
+	end;
+}
+kindlbrk,106,215,4	script	Prasium#wsv_c2b	10664,{
+	if (wsv_ch2 == 320) {
+		mes "[Prasium]";
+		mes "The Cradle of Fire. Our first fire, where every Harvan is born. Samsin Harvan keeps it; he's chained to it, by his own choice.";
+		next;
+		if (select("Take me to the Cradle.:Not yet.") == 2)
+			close;
+		callfunc "F_WSV_C2Go", 330;
 		close2;
-		specialeffect2 EF_TELEPORTATION2;
-		warp "ch2safe4",201,108;
+		warp "ch2safe2",134,50;
 		end;
 	}
+	if (wsv_ch2 > 320) {
+		mes "[Prasium]";
+		mes "To the Cradle of Fire?";
+		next;
+		if (select("Yes.:No.") == 1) {
+			close2;
+			warp "ch2safe2",134,50;
+			end;
+		}
+		close;
+	}
+	mes "[Prasium]";
+	mes "The steps lead down to the Primordial Flame. Not a place for visitors.";
 	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 320" );
+	end;
+}
+
+ch2safe2,133,51,4	script	Samsin Harvan#wsv_c2	10649,{
+	if (wsv_ch2 == 330 && !(wsv_ch2b & 1)) {
+		callfunc "F_WSV_C2Lines", "[Samsin Harvan]",
+			"A human in the Cradle. The world must be ending again.",
+			"-",
+			"Frozen flames? I can wake them. But the Cradle is tired; it needs feeding. Talk to the woman beside me first, she's been asking about the shelter all morning.";
+		wsv_ch2b = wsv_ch2b | 1;
+		close;
+	}
+	if (wsv_ch2 == 340) {
+		if (countitem(1002683) >= 5) {
+			delitem 1002683,5;	// Fluffy Sparks
+			callfunc "F_WSV_C2Lines", "[Samsin Harvan]",
+				"Fluffy Sparks! Look how they crackle. The Cradle will eat well tonight.",
+				"-",
+				"Now, the frozen ones: bring them here and the Cradle will wake their flames. Nedim, beside me, keeps the list of who's missing.";
+			callfunc "F_WSV_C2Go", 350, 3, 4;
+			close;
+		}
+		mes "[Samsin Harvan]";
+		mes "Five " + mesitemlink(1002683) + ". The Fire Cottons of the Volund Forest carry them.";
+		close;
+	}
+	if (callfunc("F_WSV_C2Beat", 760, 770, 4, "[Samsin Harvan]",
+		"The heat exchanger works? Warm air in the shelter, and the crystal's heat flowing back to the village?",
+		"-",
+		"Then the frozen ones can come home. Look, even the little one is dancing.")) close;
+	mes "[Samsin Harvan]";
+	mes "The Cradle burns. As long as it burns, so do we.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "(wsv_ch2 == 330 && (wsv_ch2b & 1) == 0) || wsv_ch2 == 340 || wsv_ch2 == 760" );
+	end;
+}
+ch2safe2,138,41,4	script	Baby Harvan#wsv_c2	10652,{
+	mes "[Baby Harvan]";
+	mes "^4d4dffA tiny Harvan, no bigger than a candle flame, hops from foot to foot.^000000";
+	close;
+}
+ch2safe2,135,49,4	script	Maura#wsv_c2c	10416,{
+	if (wsv_ch2 == 330 && (wsv_ch2b & 1)) {
+		callfunc "F_WSV_C2Lines", "[Maura]",
+			"So the sleepers' cold comes from their heat source failing. The Crystal. If the Cradle can wake frozen flames, maybe we can wake the shelter's heat too.",
+			"-",
+			"But the Cradle has to be fed first. Samsin needs ^0000FF5 Fluffy Sparks^000000, from the Fire Cottons in the Volund Forest. Bring them to him.";
+		callfunc "F_WSV_C2Go", 340;
+		close;
+	}
+	mes "[Maura]";
+	mes "Fire on one side of the world, ice on the other. And us in the middle, taking notes.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 330 && (wsv_ch2b & 1) == 1" );
+	end;
+}
+ch2safe2,137,44,4	script	Nedim#wsv_c2s	10658,{
+	if (callfunc("F_WSV_C2Beat", 350, 360, 0, "[Nedim]",
+		"Six Harvans missing since the cold came. Three found frozen. Three still out there, or in that shelter.",
+		"-",
+		"Charles, the human who runs the shelter's machines, is asking for help. He's at the shelter's entrance hall. Go; I'll keep counting.")) close;
+	mes "[Nedim]";
+	mes "Counting is what I do. I'd like to count up for a change.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 350" );
+	end;
+}
+
+// Shelter Geminis: Charles, Orion, the capsules, the passage and the
+// damaged devices (bits 1-16), step 360 -> 400.
+ch2gms,21,35,4	script	Charles#wsv_c2g	10247,{
+	if (wsv_ch2 == 360) {
+		if ((wsv_ch2b & 31) == 31) {
+			callfunc "F_WSV_C2Lines", "[Charles]",
+				"The crystal is cracked, and it's drinking the Root's heat to stay alive. That's where Muspelheim's cold comes from.",
+				"-",
+				"We can't fix it here. But Yongjirak's engineers might be able to build something: a way to give the crystal heat without stealing it. Go back to the village. Nedim will know who to ask.";
+			callfunc "F_WSV_C2Go", 400, 3, 5;
+			close;
+		}
+		if (!(wsv_ch2b & 1)) {
+			callfunc "F_WSV_C2Lines", "[Charles]",
+				"You're the one the Harvans sent? Good. I keep the machines of this place running. Barely.",
+				"-",
+				"Orion, the shelter's keeper, knows more than I do. He's inside. Then look around: the capsules, the passage, the damaged preservation devices. Tell me what you see.";
+			wsv_ch2b = wsv_ch2b | 1;
+			close;
+		}
+		mes "[Charles]";
+		mes "Orion, the capsules, the passage, the damaged devices. Look at all of it.";
+		close;
+	}
+	mes "[Charles]";
+	mes "Machines from the end of a world. They still hum. I still oil them.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 360 && ((wsv_ch2b & 1) == 0 || (wsv_ch2b & 31) == 31)" );
+	end;
+}
+
+// callfunc "F_WSV_C2Look", <bit>, "[Name]", "<line>", "<line>";
+function	script	F_WSV_C2Look	{
+	mes getarg(1);
+	if (wsv_ch2 == 360 && (wsv_ch2b & 1) && !(wsv_ch2b & getarg(0))) {
+		mes getarg(2);
+		mes getarg(3);
+		wsv_ch2b = wsv_ch2b | getarg(0);
+		if ((wsv_ch2b & 31) == 31)
+			dispbottom "You've seen enough. Report to Charles at the entrance hall.";
+		close;
+	}
+	mes getarg(3);
+	close;
+}
+// Orion's part at step 360, called from Orion#wsv (ch2_b_yongjirak.txt).
+function	script	F_WSV_C2OrionLook	{
+	callfunc "F_WSV_C2Look", 2, "[Orion]",
+		"I am Orion. I keep the sleepers. I have kept them for longer than your kingdoms have had names.",
+		"Our world ended in ice. We built Geminis to carry the last of us somewhere warm. The Crystal was our hearth. It is cracking.";
+	end;
+}
+ch2gms,78,75,4	script	Cryo Capsule#wsv_c2g	10669,{
+	callfunc "F_WSV_C2Look", 4, "[Cryo Capsule]",
+		"^4d4dffBehind frosted glass, a face. A child's. Its breath hangs in the air inside, frozen mid-sigh.^000000",
+		"^4d4dffThe capsule hums.^000000";
+	end;
+}
+ch2gms,76,68,4	script	Shelter Passage#wsv_c2g	10429,{
+	callfunc "F_WSV_C2Look", 8, "[Shelter Passage]",
+		"^4d4dffThe passage deeper in is blocked by ice, thicker every hour by the look of the walls.^000000",
+		"^4d4dffBeyond it, a dim blue glow.^000000";
+	end;
+}
+ch2gms,82,86,4	script	Damaged Device#wsv_c2g	10669,{
+	callfunc "F_WSV_C2Look", 16, "[Damaged Preservation Device]",
+		"^4d4dffA cracked panel spits cold sparks. Through the crack you see the Crystal: a great blue stone, split down the middle, drinking warmth from the air.^000000",
+		"^4d4dffThe crystal pulses, slow, like a heartbeat.^000000";
+	end;
+}
+
+// Nedim's part at step 400, called from Nedim#wsv (ch2_b_yongjirak.txt).
+function	script	F_WSV_C2Nedim	{
+	.@t = wsv_ch2b + 1;
+	wsv_ch2b = .@t;
+	mes "[Nedim]";
+	if (.@t == 1) {
+		mes "A cracked crystal that drinks heat. Hm. Hmmm.";
+		mes "Give me a moment. I'm thinking.";
+	} else if (.@t == 2) {
+		mes "Still thinking. Engineers think slowly and build fast. Or the other way around. One of the two.";
+	} else {
+		mes "Got it! We can't stop it drinking, so we give it something to drink: a heat exchanger. But I'll need materials and hands we don't have yet.";
+		mes "Tell Sasha in Ash Village what you've found. When the World Tree knows, maybe it'll know where to look.";
+		callfunc "F_WSV_C2Go", 410, 3, 5;
+	}
+	close3;
 }

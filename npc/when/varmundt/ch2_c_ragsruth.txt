@@ -1,26 +1,139 @@
 //===== World Sync Extras: Varmundt block ====================
-//= Chapter 2, the main story's second half: Ragsruth, the Ragged
-//= Root (ch2safe4, ragsruth, rgs_dun1), Nirhult, and the dailies
-//= there after the story (Devries, Gregor, Nirhult's Illusion).
-//= Nirhult has no monster or memorial map in the client: he is a
-//= Feeos under his own name with lowered HP, called out for you
-//= and your party where you stand (estimate).
+//= Chapter 2, the main story's second half (steps 420-870): Sprout
+//= of a World's End (Brimir), Residents of the Tattered Root
+//= (Ragsruth, the Nyrholt memorial dungeon), A Dormant Matter,
+//= Seed of Heat (Yongjirak, Shelter Geminis) and Distorted
+//= Ragsruth (the Phantom of Nyrholt). Then the dailies of the safe
+//= place after the story. Char var wsv_nyrk: which Nyrholt run the
+//= character last opened. Steps and helpers in ch2_common.txt.
 //============================================================
 
 // ------------------------------------------------------------
-// The safe place of Ragsruth (ch2safe4)
+// Sprout of a World's End (64205)
 // ------------------------------------------------------------
-ch2safe4,201,111,4	script(CLOAKED)	Devries#wsv_c2s	865,{
-	mes "[Devries]";
-	if (wsv_ch2 == 90) {
-		mes "You came by the branch too? Gregor and I followed the sprout's scent, so to speak. This is where it leads.";
-		mes "They call this place ^0000FFRagsruth^000000. The Ragged Root. A piece of another world's tree that drifted here and took hold.";
+// Il#wsv (ch1_g_side.txt) calls these two: her Chapter 2 part is now
+// at the square and in the parallel snowfield.
+function	script	F_WSV_C2Il	{
+	return 0;
+}
+function	script	F_WSV_C2Branch	{
+	if (wsv_ch2 < 460)
+		return;
+	mes "[Il]";
+	mes "The feather still pulls towards Ragsruth. Do you want to follow it?";
+	next;
+	if (select("Follow it.:Not now.") == 1) {
+		close2;
+		specialeffect2 EF_TELEPORTATION2;
+		warp "ch2safe4",201,108;
+		end;
+	}
+	close;
+}
+
+uknw_ruin,274,238,4	script	Gregor#wsv_c2b	627,{
+	cutin "4job_gregor_01.png",2;
+	if (wsv_ch2 == 430) {
+		callfunc "F_WSV_C2Lines", "[Gregor]",
+			"There you are. Feel that? The air here is thin, like a page that's been rubbed too hard.",
+			"A piece of the dead world sank into Brimir. There's a parallel snowfield under this one, the same place, the other world. Il is already there. Come.";
+		callfunc "F_WSV_C2Go", 440;
+		close2;
+		cutin "",255;
+		warp "ch1_sf02",158,157;
+		end;
+	}
+	if (callfunc("F_WSV_C2Beat", 650, 660, 0, "[Gregor]",
+		"Dormant matter? In the Shadow Wardens? ...Then they're not guarding Brimir. They're sleeping on top of something.",
+		"-",
+		"Tell Il I agree with her. And that I hate agreeing with her.")) close3;
+	mes "[Gregor]";
+	if (wsv_ch2 >= 440 && wsv_ch2 < 460) {
+		mes "To the parallel snowfield?";
 		next;
-		mes "[Devries]";
-		mes "And it has people. Little ones, called ^0000FFFolnirs^000000. Their leader is ^0000FFArtea^000000. The passage to the northeast leads to their village.";
-		mes "Go and introduce yourself. Politely. We're the strangers here.";
+		if (select("Yes.:No.") == 1) {
+			close2;
+			cutin "",255;
+			warp "ch1_sf02",158,157;
+			end;
+		}
+		close3;
+	}
+	mes "Brimir always feels like the moment after someone stops talking.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 430 || wsv_ch2 == 650" );
+	end;
+}
+
+ch1_sf02,160,160,4	script	Il#wsv_c2sf	10605,{
+	if (wsv_ch2 == 440) {
+		if (isbegin_quest(64210) == 0) {
+			callfunc "F_WSV_C2Lines", "[Il]",
+				"A living one, in the other Brimir. Gregor said you would come.",
+				"-",
+				"This snowfield is where the dead world's tree touches ours. The Shadow Wardens crowd around it like moths. Break ^0000FF20 of them^000000 in Brimir, so the tree's root can breathe.";
+			setquest 64210;
+			questinfo_refresh;
+			close;
+		}
+		if (checkquest(64210, HUNTING) != 2) {
+			mes "[Il]";
+			mes "Twenty Shadow Wardens, in Brimir.";
+			close;
+		}
+		completequest 64210;
+		callfunc "F_WSV_C2Lines", "[Il]",
+			"Good. It breathes.",
+			"-",
+			"Take this ^0000FFfeather^000000. It's from one of us, from when we still flew. Plant it where the World Tree's roots remain, on Brimir's second floor, at the far east. It will carry you to where the dead tree's root went.";
+		callfunc "F_WSV_C2Go", 450, 3, 3;
 		close;
 	}
+	mes "[Il]";
+	mes "The snow here never melts. It never falls, either. It just is.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 440 && (isbegin_quest(64210) == 0 || checkquest(64210, HUNTING) == 2)" );
+	end;
+}
+
+uknw_ruin2,266,243,4	script	Roots of the World Tree#wsv_c2	10620,{
+	if (wsv_ch2 == 450) {
+		mes "^4d4dffOld roots break through the stone here: the last of the World Tree in Brimir. You push Il's feather into the soil between them.^000000";
+		next;
+		mes "^4d4dffThe feather stands upright. Then it pulls, gently, like a hand, and the world folds.^000000";
+		callfunc "F_WSV_C2Go", 460;
+		close2;
+		specialeffect2 EF_TELEPORTATION2;
+		warp "ch2safe4",201,108;
+		end;
+	}
+	mes "^4d4dffOld roots break through the stone.^000000";
+	if (wsv_ch2 > 450) {
+		next;
+		if (select("Follow the feather to Ragsruth.:Leave.") == 1) {
+			close2;
+			warp "ch2safe4",201,108;
+			end;
+		}
+	}
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 450" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Residents of the Tattered Root (64206)
+// ------------------------------------------------------------
+ch2safe4,201,111,4	script	Devries#wsv_c2s	865,{
+	if (callfunc("F_WSV_C2Beat", 460, 470, 0, "[Devries]",
+		"You came by the feather too? Gregor and I followed the root's scent, so to speak. This is where it leads.",
+		"They call this place ^0000FFRagsruth^000000. The Ragged Root. A piece of the dead world's tree that drifted here and took hold.",
+		"-",
+		"And it has people. Little ones, called ^0000FFFolnirs^000000. Go and meet them, politely. There's a pony at the village gate who seems to be in charge of greetings.")) close;
+	mes "[Devries]";
 	mes "Fascinating place. Terrible place. Fascinating.";
 	next;
 	if (select("Take me back to Brimir.:Never mind.") == 1) {
@@ -29,116 +142,438 @@ ch2safe4,201,111,4	script(CLOAKED)	Devries#wsv_c2s	865,{
 		end;
 	}
 	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 460" );
+	end;
 }
 
-ch2safe4,198,110,4	script(CLOAKED)	Gregor#wsv_c2s	627,{
+ragsruth,104,107,4	script	Pony#wsv_c2	10663,{
+	if (callfunc("F_WSV_C2Beat", 470, 480, 0, "[Pony]",
+		"Neigh! I mean: hello. I'm the pony. Everybody's pony. Strangers have to meet Violas first, those are the rules. He's just over there.")) close;
+	mes "[Pony]";
+	mes "Neigh. That's all, really.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 470" );
+	end;
+}
+
+ragsruth,110,113,4	script	Violas#wsv_c2a	10662,{
+	if (callfunc("F_WSV_C2Beat", 480, 490, 0, "[Violas]",
+		"A Big One! With the other two Big Ones! The one with the long coat is already up by the north well, asking questions.",
+		"-",
+		"Go and tell him the Folnirs don't bite. Mostly.")) close;
+	mes "[Violas]";
+	mes "I'm Violas. I'm in charge of the gate. Well, I'm in charge of standing next to it.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 480" );
+	end;
+}
+
+ragsruth,130,68,4	script	Gregor#wsv_c2rg	627,{
 	cutin "4job_gregor_01.png",2;
-	mes "[Gregor]";
-	mes "The grass here grows in ragged piles. The Folnirs say it hides things. I believe them.";
-	close3;
-}
-
-// ------------------------------------------------------------
-// Ragsruth: Artea and the Folnirs (64209-64212)
-// ------------------------------------------------------------
-ragsruth,124,47,4	script	Artea#wsv	10661,{
-	cutin "ch2_folnir_a.png",2;
-	if (wsv_ch2 == 90) {
-		mes "[Artea]";
-		mes "An outsider... from the trunk side? You smell of a living tree. We haven't smelled that in a long time.";
-		mes "I am Artea. The Folnirs of Ragsruth listen to me, mostly.";
-		next;
-		mes "[Artea]";
-		mes "Our root is all that's left of a world that ended. We live on it. We tend it. And lately, something has been moving in the twisted part of it, ^0000FFDistorted Ragsruth^000000.";
-		next;
-		mes "[Artea]";
-		mes "Will you look? The old ^0000FFbranch^000000 at the far end hums when something passes. And the grass piles: whoever it is, they hide in the grass.";
-		callfunc "F_WSV_Step", "wsv_ch2", 100, "64209", "64210";
-		callfunc "F_WSV_C2Reward", 5, 3;
-		close3;
-	}
-	if (wsv_ch2 == 100) {
-		if ((wsv_ch2b & 30720) == 30720) {
-			mes "[Artea]";
-			mes "Torn threads of magic in the grass, and the branch humming with a stranger's passing. So it's true.";
-			mes "Someone has come into Ragsruth. Someone who means to take what's left of our root.";
-			next;
-			mes "[Artea]";
-			mes "......!";
-			mes "Do you feel that? He's here. ^0000FFNirhult^000000.";
-			callfunc "F_WSV_Step", "wsv_ch2", 110, "64210", "64211";
-			close3;
-		}
-		mes "[Artea]";
-		mes "Touch the old branch in Distorted Ragsruth, and search the grass piles. Three of them should hold traces.";
-		close3;
-	}
-	if (wsv_ch2 == 110) {
-		if (wsv_ch2b & 32768) {
-			mes "[Artea]";
-			mes "He's gone. For now. And look, he left something behind: a ^0000FFfragment^000000, black and glittering. It's cold, and it isn't from our tree. It isn't from yours, either.";
-			next;
-			mes "[Artea]";
-			mes "A fragment of the end. Of whatever ended our world, I think. Take it to your guardian in Ash Village. He should know it exists.";
-			callfunc "F_WSV_Step", "wsv_ch2", 120, "64211", "64212";
-			callfunc "F_WSV_C2Reward", 10, 5;
-			close3;
-		}
-		mes "[Artea]";
-		mes "Nirhult is here. Drive him out of Ragsruth, please. Bring your friends if you have them.";
-		next;
-		if (select("Face Nirhult.:Not yet.") == 2)
-			close3;
-		close2;
-		cutin "",255;
-		callfunc "F_WSV_C2Nirhult", 0, "ragsruth", 124, 55;
+	if (callfunc("F_WSV_C2Beat", 490, 500, 0, "[Gregor]",
+		"They're tiny, they're cheerful, and they live on a dying root that fell out of a dead world. And they don't seem to mind.",
+		"-",
+		"The little gatekeeper, Violas, was looking for you again. He's moved to the west houses.")) close3;
+	if (wsv_ch2 == 590 && !(wsv_ch2b & 4)) {
+		callfunc "F_WSV_C2Apple", 4, "[Gregor]", "An apple? From Painu? ...They're feeding me. I've been adopted.";
 		end;
 	}
-	if (wsv_ch2 == 120) {
-		mes "[Artea]";
-		mes "Take the fragment to Ash Village. We'll be here. We always are.";
+	mes "[Gregor]";
+	mes "I keep measuring the root. It keeps getting shorter.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 490 || (wsv_ch2 == 590 && (wsv_ch2b & 4) == 0)" );
+	end;
+}
+
+ragsruth,86,112,4	script	Violas#wsv_c2b	10662,{
+	if (callfunc("F_WSV_C2Beat", 500, 510, 0, "[Violas]",
+		"You found me! Now you have to meet Sirina. She knows everyone's name. Even yours, probably. She's down south, by the water.")) close;
+	if (wsv_ch2 == 590 && !(wsv_ch2b & 2)) {
+		callfunc "F_WSV_C2Apple", 2, "[Violas]", "For me?! A whole apple! I'm going to look at it for a week before I eat it.";
+		end;
+	}
+	mes "[Violas]";
+	mes "Gate duty, house duty. Same thing, different spot.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 500 || (wsv_ch2 == 590 && (wsv_ch2b & 2) == 0)" );
+	end;
+}
+
+ragsruth,92,83,4	script	Sirina#wsv_c2	10663,{
+	if (callfunc("F_WSV_C2Beat", 510, 520, 0, "[Sirina]",
+		"Hello! You're the one with the feather. And there's a man in the glass-and-metal coat who came through the root after you. Orion, he says. He's lost; go and find him by the old stump.")) close;
+	if (wsv_ch2 == 590 && !(wsv_ch2b & 1)) {
+		callfunc "F_WSV_C2Apple", 1, "[Sirina]", "An apple! It smells like... like the old songs. We used to have trees like this, Elder Heria says.";
+		end;
+	}
+	mes "[Sirina]";
+	mes "Sirina. I remember names. It's what I'm for.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 510 || (wsv_ch2 == 590 && (wsv_ch2b & 1) == 0)" );
+	end;
+}
+
+ragsruth,100,92,4	script	Orion#wsv_c2r	10651,{
+	if (callfunc("F_WSV_C2Beat", 520, 530, 0, "[Orion]",
+		"You. From the shelter. I followed the cold here; it's the same cold. This root and our crystal are from the same world.",
+		"-",
+		"The Folnirs are what's left of its forest folk. They've forgotten. Devries is asking their elders about it; he went to the houses by the west gate.")) close;
+	mes "[Orion]";
+	mes "Our world, in pieces. I keep finding them.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 520" );
+	end;
+}
+
+ragsruth,87,115,4	script	Devries#wsv_c2v	865,{
+	if (callfunc("F_WSV_C2Beat", 530, 540, 0, "[Devries]",
+		"The Folnirs have an elder. Heria. If anyone remembers where they came from, it's her. She lives at the top of the village, by the big root.")) close;
+	if (callfunc("F_WSV_C2Beat", 570, 580, 0, "[Devries]",
+		"A strange presence in the root, Elder Heria says. Something that came from outside and is eating the root's mana.",
+		"-",
+		"The Folnirs won't fight it. But their protector, Artea, might. Painu, the little cook, says the way to Artea's heart is apples. Go and see him.")) close;
+	mes "[Devries]";
+	mes "Small people, old memories. I could spend years here.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 530 || wsv_ch2 == 570" );
+	end;
+}
+
+ragsruth,118,47,4	script	Elder Heria#wsv_c2	10663,{
+	if (callfunc("F_WSV_C2Beat", 540, 550, 0, "[Heria]",
+		"Mm? A Big One. Come closer, my eyes are older than this root.",
+		"-",
+		"You want the old stories? Then you have to ask properly. Ask the elder, not the old woman. ...I'm both. Ask again.")) close;
+	if (callfunc("F_WSV_C2Beat", 550, 560, 4, "[Elder Heria]",
+		"Better. The old stories, then.",
+		"We lived on a great tree, at the end of the world. The world got cold. The tree got cold. We held on to one root, and the root broke off and fell, and fell, and here we are.",
+		"-",
+		"Go and look at the root, and come back. I want to know if you see what I see.")) close;
+	if (callfunc("F_WSV_C2Beat", 560, 570, 0, "[Elder Heria]",
+		"You saw it? The dark patches in the bark? Something is feeding on our root. Something that came from outside.",
+		"-",
+		"Tell the man in the coat, the one who listens. Devries.")) close;
+	mes "[Elder Heria]";
+	mes "Old stories keep a root alive. I tell them every night.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 540 || wsv_ch2 == 550 || wsv_ch2 == 560" );
+	end;
+}
+
+ragsruth,115,117,4	script	Painu#wsv_c2	10662,{
+	if (wsv_ch2 == 580) {
+		callfunc "F_WSV_C2Lines", "[Painu]",
+			"Artea? Our protector? She'll help you if you're a friend of the village. And the village likes apples. Everybody likes apples.",
+			"-",
+			"Bring ^0000FF5 Apples^000000, and give one each to Sirina, Violas, Gregor and Artea. The fifth one's for me, obviously.";
+		callfunc "F_WSV_C2Go", 590;
+		close;
+	}
+	if (wsv_ch2 == 590 && !(wsv_ch2b & 16)) {
+		if (countitem(512) < 5) {
+			mes "[Painu]";
+			mes "Five " + mesitemlink(512) + ", please. One for me, four for the others.";
+			close;
+		}
+		delitem 512,1;	// Apple
+		wsv_ch2b = wsv_ch2b | 16;
+		mes "[Painu]";
+		mes "Crunch. Mm. Now the others: Sirina, Violas, Gregor and Artea.";
+		close;
+	}
+	mes "[Painu]";
+	mes "I'm the cook. Mostly I cook apples. When there are apples.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 580 || (wsv_ch2 == 590 && (wsv_ch2b & 16) == 0)" );
+	end;
+}
+
+// An apple for a resident (bits 1 Sirina, 2 Violas, 4 Gregor, 8 Artea;
+// 16 Painu first). Ends the dialogue.
+// callfunc "F_WSV_C2Apple", <bit>, "[Name]", "<thanks>";
+function	script	F_WSV_C2Apple	{
+	if (!(wsv_ch2b & 16)) {
+		mes getarg(1);
+		mes "Painu is handing out the apples, isn't he? Go to him first.";
 		close3;
 	}
-	if (wsv_ch2 >= 1000) {
-		mes "[Artea]";
-		mes "Ragsruth is quiet again, thanks to you. Quiet for a ragged root, anyway. Come and visit. Bring your living-tree smell.";
+	if (countitem(512) < 1) {
+		mes getarg(1);
+		mes "^4d4dffYou're out of " + mesitemlink(512) + "s.^000000";
 		close3;
 	}
-	mes "[Artea]";
-	mes "......";
-	mes "An outsider. Ragsruth has nothing for you. Go back the way you came.";
+	delitem 512,1;	// Apple
+	wsv_ch2b = wsv_ch2b | getarg(0);
+	mes getarg(1);
+	mes getarg(2);
+	if ((wsv_ch2b & 31) == 31) {
+		next;
+		mes getarg(1);
+		mes "^4d4dffEveryone has had an apple. Artea is ready to listen.^000000";
+		callfunc "F_WSV_C2Go", 600;
+	}
 	close3;
 }
 
-ragsruth,120,50,4	script	Folnir#wsv_c2a	10662,{
-	cutin "ch2_folnir_b.png",2;
-	mes "[Folnir]";
-	if (wsv_ch2 >= 1000)
-		mes "You chased off the stranger! Artea says we shouldn't make a fuss. I'm making a fuss! Thank you!";
-	else
-		mes "Artea says outsiders are dangerous. You don't look dangerous. You look tired.";
-	close3;
+// Enters Nyrholt: getarg(0) 1 = the story, 2 = the Phantom of Nyrholt.
+// A run of the other kind, or yesterday's phantom, is closed first.
+// callfunc "F_WSV_C2Nyr", <mode>, "<speaker>";
+function	script	F_WSV_C2Nyr	{
+	.@key = getarg(0) * 1000 + ((getarg(0) == 2) ? gettime(DT_YEARDAY) : 0);
+	.@id = instance_id(IM_CHAR);
+	if (.@id > 0 && wsv_nyrk != .@key)
+		instance_destroy .@id;
+	wsv_nyrk = .@key;
+	callfunc "F_WSV_EnterMd", "Nyrholt", getarg(1), "...The way won't open. Try again in a moment.";
+	$@wsv_nyr[instance_id(IM_CHAR)] = getarg(0);
+	end;
 }
-ragsruth,128,50,4	script	Folnir#wsv_c2b	10663,{
-	cutin "ch2_folnir_c.png",2;
-	mes "[Folnir]";
-	mes "Our root used to be part of a great tree. Then the world ended and the tree broke. We kept the piece we were standing on.";
+
+ragsruth,124,47,4	script	Artea#wsv	10661,{
+	cutin "ch2_folnir_a.png",2;
+	if (wsv_ch2 == 590 && !(wsv_ch2b & 8)) {
+		callfunc "F_WSV_C2Apple", 8, "[Artea]", "An apple, from a Big One. ...The village trusts you, then. So will I.";
+		end;
+	}
+	if (wsv_ch2 == 600) {
+		callfunc "F_WSV_C2Lines", "[Artea]",
+			"I am Artea. I keep the barrier around the heart of the root: Nyrholt. Something got in. Intruders, wearing the shapes of things they've eaten, and behind them a Snapdragon, fat on our mana.",
+			"-",
+			"I'll release the barrier for you. Four gates, each held by intruders. Then the Snapdragon. If it shrugs off your blows, draw it into my magic circles.";
+		next;
+		if (select("Open the barrier.:Not yet.") == 2)
+			close3;
+		cutin "",255;
+		callfunc "F_WSV_C2Nyr", 1, "[Artea]";
+	}
+	mes "[Artea]";
+	if (wsv_ch2 >= 610)
+		mes "Nyrholt is quiet again. The root's mana flows to the village, the way it should.";
+	else
+		mes "The heart of the root is behind my barrier. I keep it. I keep them.";
 	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "(wsv_ch2 == 590 && (wsv_ch2b & 8) == 0) || wsv_ch2 == 600" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Memorial dungeon: Nyrholt (1@ch2a), the heart of the root.
+// The story (Artea) and the daily Phantom of Nyrholt (Artea's
+// phantom) share the map: $@wsv_nyr[<instance>] is 1 or 2.
+// Four gates of Mysterious Intruders along the branching path, a
+// portal at its north end, then the round arena: the Snapdragon (or
+// its phantom) takes a tenth of the damage until it stands in one of
+// Artea's three magic circles, which stun it for 10 seconds.
+// ------------------------------------------------------------
+1@ch2a	mapflag	nosave	SavePoint
+1@ch2a	mapflag	noteleport
+1@ch2a	mapflag	nomemo
+1@ch2a	mapflag	nowarpto
+1@ch2a	mapflag	nobranch
+1@ch2a	mapflag	monster_noteleport
+1@ch2a	mapflag	nopenalty
+
+1@ch2a,1,1,0	script	#wsv_nyr	-1,{
+	end;
+OnInstanceInit:
+	'state = 0;
+	disablenpc instance_npcname("Heart of Nyrholt#wsv_nyr");
+	disablenpc instance_npcname("Artea#wsv_nyr");
+	end;
+OnStart:
+	if ('state != 0)
+		end;
+	'state = 1;
+	'mode = cap_value($@wsv_nyr[instance_id()], 1, 2);
+	$@wsv_nyr[instance_id()] = 0;
+	.@m$ = instance_mapname("1@ch2a");
+	// The intruders wear the shapes of the Flamebull, Paruson, Ice Needle
+	// and Folnir Hre.
+	setarray .@x, 209, 182, 235, 200;
+	setarray .@y, 54, 69, 96, 110;
+	setarray .@mob, 22685, 22694, 22701, 22704;
+	'left = 16;
+	for (.@g = 0; .@g < 4; .@g++) {
+		areamonster .@m$, .@x[.@g] - 3, .@y[.@g] - 3, .@x[.@g] + 3, .@y[.@g] + 3, "Mysterious Intruder", .@mob[.@g], 4, instance_npcname("#wsv_nyr") + "::OnIntruder";
+		for (.@i = 0; .@i < 4; .@i++) {
+			setunitdata $@mobid[.@i], UMOB_MAXHP, ('mode == 1) ? 3000000 : 6000000;
+			setunitdata $@mobid[.@i], UMOB_HP, ('mode == 1) ? 3000000 : 6000000;
+		}
+	}
+	mapannounce .@m$, "Artea: Four gates, four bands of intruders. Clear them all, and the way to the heart opens at the north end.", bc_map, "0x88CCFF";
+	end;
+OnIntruder:
+	'left--;
+	if ('left % 4 == 0 && 'left > 0)
+		mapannounce instance_mapname("1@ch2a"), "A gate is clear. " + ('left / 4) + " to go.", bc_map, "0x88CCFF";
+	if ('left > 0)
+		end;
+	mapannounce instance_mapname("1@ch2a"), "Artea: The last gate is open! The heart of Nyrholt, at the north end. The Snapdragon is waiting.", bc_map, "0x88CCFF";
+	enablenpc instance_npcname("Heart of Nyrholt#wsv_nyr");
+	end;
+OnBoss:
+	'state = 3;
+	mapannounce instance_mapname("1@ch2a"), "The Snapdragon wilts, and the foreign mana it hoarded drifts loose like pollen.", bc_map, "0x88CCFF";
+	enablenpc instance_npcname("Artea#wsv_nyr");
+	end;
+OnFight:
+	if ('state != 1)
+		end;
+	'state = 2;
+	.@m$ = instance_mapname("1@ch2a");
+	if ('mode == 1)
+		monster .@m$, 84, 140, "Snapdragon", 22706, 1, instance_npcname("#wsv_nyr") + "::OnBoss";
+	else
+		monster .@m$, 84, 140, "Snapdragon Phantom", 22711, 1, instance_npcname("#wsv_nyr") + "::OnBoss";
+	'boss = $@mobid[0];
+	setunitdata 'boss, UMOB_DAMAGETAKEN, 10;
+	mapannounce .@m$, "Artea: It's soaking up the blows! Lure it into one of my magic circles!", bc_map, "0xFF4444";
+	setarray .@cx, 74, 94, 84;
+	setarray .@cy, 132, 132, 148;
+	.@stun = 0;
+	.@rest = 0;
+	while ('state == 2 && unitexists('boss)) {
+		sleep 1000;
+		if ('state != 2 || !unitexists('boss))
+			end;
+		getunitdata 'boss, .@d;
+		if (.@stun > 0) {
+			.@stun--;
+			if (.@stun == 0) {
+				setunitdata 'boss, UMOB_DAMAGETAKEN, 10;
+				mapannounce .@m$, "The Snapdragon shakes itself awake.", bc_map, "0xFF4444";
+				.@rest = 5;
+			}
+			continue;
+		}
+		if (.@rest > 0) {
+			.@rest--;
+			continue;
+		}
+		for (.@i = 0; .@i < 3; .@i++) {
+			if (distance(.@d[UMOB_X], .@d[UMOB_Y], .@cx[.@i], .@cy[.@i]) <= 2) {
+				.@stun = 10;
+				setunitdata 'boss, UMOB_DAMAGETAKEN, 100;
+				mapannounce .@m$, "Artea's magic circle flares! The Snapdragon is stunned: hit it now!", bc_map, "0x88CCFF";
+				break;
+			}
+		}
+	}
+	end;
+}
+
+1@ch2a,233,28,0	script	#wsv_nyr_in	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if ('state == 0)
+		donpcevent instance_npcname("#wsv_nyr") + "::OnStart";
+	end;
+}
+
+1@ch2a,207,136,0	script	Heart of Nyrholt#wsv_nyr	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp instance_mapname("1@ch2a"), 84, 128;
+	if ('state == 1)
+		donpcevent instance_npcname("#wsv_nyr") + "::OnFight";
+	end;
+}
+
+1@ch2a,74,132,0	script	Magic Circle#wsv_nyr1	4_ENERGY_BLUE,{
+	mes "^4d4dffOne of Artea's magic circles. Lure the Snapdragon onto it.^000000";
+	close;
+}
+1@ch2a,94,132,0	duplicate(Magic Circle#wsv_nyr1)	Magic Circle#wsv_nyr2	4_ENERGY_BLUE
+1@ch2a,84,148,0	duplicate(Magic Circle#wsv_nyr1)	Magic Circle#wsv_nyr3	4_ENERGY_BLUE
+
+1@ch2a,84,136,4	script	Artea#wsv_nyr	10661,{
+	cutin "ch2_folnir_a.png",2;
+	if ('mode == 1) {
+		if (wsv_ch2 == 600) {
+			callfunc "F_WSV_C2Lines", "[Artea]",
+				"It's gone. The heart of the root is ours again.",
+				"-",
+				"Thank you, Big One. Two of my Folnirs went into the distorted part of the root to hide and haven't come back: Roarin and Jasminna. Would you look for them? Distorted Ragsruth is beyond the village.";
+			callfunc "F_WSV_C2Go", 610, 5, 0;
+			next;
+		}
+		mes "[Artea]";
+		mes "I'll send you back to the village.";
+		close2;
+		cutin "",255;
+		warp "ragsruth",122,50;
+		end;
+	}
+	// The Phantom of Nyrholt.
+	mes "[Phantom of Artea]";
+	if (wsv_ch2 == 850) {
+		mes "The foreign mana is gathered. Take it to Devries; he'll know what it is.";
+		callfunc "F_WSV_C2Go", 860, 3, 3;
+	} else if (isbegin_quest(64245) == 1 && !(wsv_c2s & 16384)) {
+		mes "The phantom is broken. For today.";
+		wsv_c2s = wsv_c2s | 16384;
+		dispbottom "Report to the Phantom of Artea at the safe place.";
+	} else
+		mes "The mana is quiet.";
+	close2;
+	cutin "",255;
+	warp "ch2safe4",207,38;
+	end;
+}
+
+// Roarin and Jasminna, hiding in Distorted Ragsruth; then the branch.
+rgs_dun1,223,154,4	script	Roarin#wsv_c2	10662,{
+	if (callfunc("F_WSV_C2Beat", 610, 620, 0, "[Roarin]",
+		"Is it gone? The big flower? ...Artea sent you? Oh, thank the root.",
+		"Jasminna went further in, to the west. She's braver than me. Or sillier.")) close;
+	mes "[Roarin]";
+	mes "I'll go home in a minute. When my legs stop shaking.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 610" );
+	end;
+}
+rgs_dun1,109,195,4	script	Jasminna#wsv_c2	10663,{
+	if (callfunc("F_WSV_C2Beat", 620, 630, 0, "[Jasminna]",
+		"I wasn't hiding! I was... researching. The grass here is full of strange mana.",
+		"-",
+		"Your friend Devries is waiting at the old branch, at the east end. He looked worried. He always looks worried.")) close;
+	mes "[Jasminna]";
+	mes "Research. Very important research.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 620" );
+	end;
 }
 
 // ------------------------------------------------------------
 // Distorted Ragsruth (rgs_dun1): the old branch and the grass
 // ------------------------------------------------------------
 rgs_dun1,273,80,4	script	Branch#wsv	10620,{
+	if (wsv_ch2 == 630) {
+		callfunc "F_WSV_C2Lines", "[Devries]",
+			"There you are. Everyone's safe? Good.",
+			"The Snapdragon's mana wasn't from this root, or from ours. It came from outside, from somewhere it had been sleeping.",
+			"-",
+			"Il and Zero are studying the same thing in Brimir: something dormant in the Shadow Wardens. This branch goes back there. Let's go.";
+		callfunc "F_WSV_C2Go", 640, 3, 0;
+		close2;
+		warp "uknw_ruin",157,158;
+		end;
+	}
 	mes "[Branch]";
 	mes "An old branch, thicker than a man, growing out of the ragged root.";
-	if (wsv_ch2 == 100 && !(wsv_ch2b & 16384)) {
-		mes "It hums under your hand. Something passed by here not long ago, something that didn't belong.";
-		wsv_ch2b = wsv_ch2b | 16384;
-		if ((wsv_ch2b & 30720) == 30720)
-			dispbottom "That's everything. Go back to Artea.";
-		close;
-	}
 	if (isbegin_quest(64239) == 1) {
 		mes "It hums faintly. The stranger's trace is fading, but the magic of this place is restless: strange, foreign threads in it.";
 		wsv_c2s = wsv_c2s | 16;
@@ -146,38 +581,28 @@ rgs_dun1,273,80,4	script	Branch#wsv	10620,{
 		close;
 	}
 	next;
-	if (select("Go back to the safe place.:Stay.") == 1) {
+	switch (select("Go back to the safe place.:Go to Brimir.:Stay.")) {
+	case 1:
 		close2;
 		warp "ch2safe4",215,231;
 		end;
+	case 2:
+		close2;
+		warp "uknw_ruin",157,158;
+		end;
 	}
 	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 630" );
+	end;
 }
 
-// Story: piles 3, 8 and 12 hold traces (bits 2048, 4096, 8192).
-// Daily "Even a Handful of Magic": each pile once a day, a Ghost
-// Flower half of the time (wsv_c2p, wsv_c2pd, wsv_c2gf).
+// Daily "Even a Handful of Magic": each pile once a day, a Ghost Flower
+// half of the time (wsv_c2p, wsv_c2pd, wsv_c2gf).
 function	script	F_WSV_C2Pile	{
 	.@n = getarg(0);
 	mes "[Pile of Grass]";
 	mes "A ragged pile of pale grass.";
-	if (wsv_ch2 == 100) {
-		setarray .@trace, 0, 0, 0, 2048, 0, 0, 0, 0, 4096, 0, 0, 0, 8192;
-		.@b = (.@n < getarraysize(.@trace)) ? .@trace[.@n] : 0;
-		next;
-		if (select("Search the grass.:Leave it.") == 2)
-			close;
-		close2;
-		progressbar "ffffff", 2;
-		if (.@b && !(wsv_ch2b & .@b)) {
-			wsv_ch2b = wsv_ch2b | .@b;
-			dispbottom "Under the grass: torn threads of magic, still warm, like someone lay here waiting.";
-			if ((wsv_ch2b & 30720) == 30720)
-				dispbottom "That's everything. Go back to Artea.";
-		} else
-			dispbottom "Just grass, and a beetle that's annoyed with you.";
-		end;
-	}
 	if (isbegin_quest(64240) == 1) {
 		.@today = gettime(DT_YEAR) * 1000 + gettime(DT_YEARDAY);
 		if (wsv_c2pd != .@today) {
@@ -222,86 +647,335 @@ rgs_dun1,259,137,4	script	Pile of Grass#wsv14	10430,{ callfunc "F_WSV_C2Pile", 1
 rgs_dun1,203,156,4	script	Pile of Grass#wsv15	10430,{ callfunc "F_WSV_C2Pile", 15; end; }
 
 // ------------------------------------------------------------
-// Nirhult: callfunc "F_WSV_C2Nirhult", <0 story | 1 illusion>, "<map>", <x>, <y>;
-// He fights you and your party; whoever of the party is on the map
-// when he falls gets the credit.
+// A Dormant Matter (64207): Il and Zero at Brimir's square. Il#wsv_sq
+// (ch1_g_side.txt) keeps her Chapter 1 lines; Zero speaks for both.
 // ------------------------------------------------------------
-function	script	F_WSV_C2Nirhult	{
-	.@cid = getcharid(0);
-	.@old = getd("$@wsv_nir_" + .@cid);
-	if (.@old && unitexists(.@old)) {
-		dispbottom "Nirhult is already here!";
+uknw_ruin,158,162,4	script	Zero#wsv_c2	10605,{
+	if (wsv_ch2 == 640) {
+		if (isbegin_quest(64211) == 0) {
+			callfunc "F_WSV_C2Lines", "[Zero]",
+				"I am Zero. Il and I have been listening to the Shadow Wardens. There's something inside them. Dormant. Warm, a little, like a coal under ash.",
+				"-",
+				"We need more of it to understand. Break ^0000FF20 Shadow Wardens^000000 here in Brimir, and we'll read what's left of them.";
+			setquest 64211;
+			questinfo_refresh;
+			close;
+		}
+		if (checkquest(64211, HUNTING) != 2) {
+			mes "[Zero]";
+			mes "Twenty Shadow Wardens.";
+			close;
+		}
+		completequest 64211;
+		callfunc "F_WSV_C2Lines", "[Zero]",
+			"Yes. Dormant matter, the same warmth as the crystal under Muspelheim, sleeping.",
+			"-",
+			"Gregor has been reading Brimir's stones by the broken stairs. Ask him what he thinks.";
+		callfunc "F_WSV_C2Go", 650, 3, 3;
+		close;
+	}
+	if (callfunc("F_WSV_C2Beat", 660, 670, 0, "[Il]",
+		"Gregor agrees? Then it's true. The dead world's heat didn't die. It fell asleep, scattered, in the Wardens, in the crystal, in the root.",
+		"-",
+		"Tell the emissary of your tree. El. He will want to know that some things refuse to end.")) close;
+	mes "[Zero]";
+	mes "Il counts. I listen. Between us, we know almost everything about nothing.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "(wsv_ch2 == 640 && (isbegin_quest(64211) == 0 || checkquest(64211, HUNTING) == 2)) || wsv_ch2 == 660" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Seed of Heat (64208)
+// ------------------------------------------------------------
+kindlbrk,191,148,4	script	Bartum#wsv_c2	10649,{
+	if (callfunc("F_WSV_C2Beat", 680, 690, 0, "[Bartum]",
+		"The sleeping heat in the crystal? Nedim's heat exchanger could wake it, and give it back to the village instead of stealing ours.",
+		"-",
+		"But I'm a smith, not an engineer. Karillon handles the shelter's trade. Ask her what we'd need.")) close;
+	mes "[Bartum]";
+	mes "Hammer, anvil, ember. The rest is details.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 680" );
+	end;
+}
+kindlbrk,195,146,4	script	Karillon#wsv_c2	10657,{
+	if (callfunc("F_WSV_C2Beat", 690, 700, 0, "[Karillon]",
+		"Parts from Geminis, heat from the Cradle, hands from the village. I can get two of the three.",
+		"-",
+		"Einhar is the one who decides what the village builds. Talk to him; he's right next to me, pretending not to listen.")) close;
+	mes "[Karillon]";
+	mes "Trade with the shelter is good. They make screws, we make warmth.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 690" );
+	end;
+}
+kindlbrk,194,149,4	script	Einhar#wsv_c2	10658,{
+	if (callfunc("F_WSV_C2Beat", 700, 710, 0, "[Einhar]",
+		"I was listening. We'll build it. Maura is already inside, at the old machine room. There's a button on the machine nobody dares press. Go and press it, with her.")) close;
+	mes "[Einhar]";
+	mes "I decide what we build. Mostly I decide to say yes.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 700" );
+	end;
+}
+kin_in01,88,46,4	script	Maura#wsv_c2k	10416,{
+	if (wsv_ch2 == 710 && !(wsv_ch2b & 1)) {
+		mes "[Maura]";
+		mes "This machine is from Geminis. The Harvans traded for it years ago and never got it working. It's a heat exchanger's heart, missing its parts.";
+		mes "Press the button beside it. Let's see what it does.";
+		wsv_ch2b = wsv_ch2b | 1;
+		close;
+	}
+	if (callfunc("F_WSV_C2Beat", 758, 760, 0, "[Maura]",
+		"Charles fitted the parts, Bartum hammered the casing, and listen... it hums.",
+		"-",
+		"The crystal's heat is flowing here instead of being stolen. Go and tell Samsin at the Cradle. He'll want to light a candle for it.")) close;
+	mes "[Maura]";
+	mes "Machines and fire. I'm starting to like this village.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "(wsv_ch2 == 710 && (wsv_ch2b & 1) == 0) || wsv_ch2 == 758" );
+	end;
+}
+kin_in01,88,48,4	script	Machine Button#wsv_c2	10669,{
+	if (wsv_ch2 == 710 && (wsv_ch2b & 1)) {
+		mes "^4d4dffYou press the button. The machine coughs, rattles, and lights up a panel: a list of missing parts, in the shelter's script.^000000";
+		callfunc "F_WSV_C2Go", 720;
+		close;
+	}
+	mes "^4d4dffA big round button. It looks important.^000000";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 710 && (wsv_ch2b & 1) == 1" );
+	end;
+}
+kin_in01,82,43,4	script	Gregor#wsv_c2k	627,{
+	cutin "4job_gregor_01.png",2;
+	if (callfunc("F_WSV_C2Beat", 720, 730, 0, "[Gregor]",
+		"A list of parts in the dead world's script? Let me see. ...Orion can make these. Take the sailor's boat to the Root and walk to Geminis. Orion will be in the entrance hall.")) close3;
+	mes "[Gregor]";
+	mes "I came here for a dead tree and ended up in a machine shop. That's research for you.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 720" );
+	end;
+}
+
+// Orion's part at steps 730/740, called from Orion#wsv (ch2_b): the
+// parts need 10 Alpurings and 10 Icyblasts (64212), 5 Ice Jelly, 5 Frost
+// Shards and the three frozen material piles (bits 1-4).
+function	script	F_WSV_C2OrionParts	{
+	if (wsv_ch2 == 730) {
+		callfunc "F_WSV_C2Lines", "[Orion]",
+			"These parts? I can make them. But the materials are out on the Root, frozen.",
+			"-",
+			"Clear the ^0000FF10 Alpurings and 10 Icyblasts^000000 around the frozen materials, dig the three piles on the north-east of the Root, and bring me ^0000FF5 Ice Jelly and 5 Frost Shards^000000.";
+		setquest 64212;
+		callfunc "F_WSV_C2Go", 740;
+		close3;
+	}
+	if (checkquest(64212, HUNTING) != 2 || (wsv_ch2b & 7) != 7 || countitem(1002695) < 5 || countitem(1002693) < 5) {
+		mes "[Orion]";
+		mes "10 Alpurings and 10 Icyblasts, the three frozen material piles, 5 " + mesitemlink(1002695) + " and 5 " + mesitemlink(1002693) + ".";
+		close3;
+	}
+	delitem 1002695,5;	// Ice Jelly
+	delitem 1002693,5;	// Frost Shards
+	completequest 64212;
+	callfunc "F_WSV_C2Lines", "[Orion]",
+		"Good. Give me an hour. ...There. Valves, coils, a crystal seat. Gregor wants to see them before they go; he's in the hall.";
+	callfunc "F_WSV_C2Go", 750;
+	close3;
+}
+function	script	F_WSV_C2Frozen	{
+	mes "[Frozen Materials]";
+	if (wsv_ch2 != 740 || (wsv_ch2b & getarg(0))) {
+		mes "A heap of frozen scrap.";
+		close;
+	}
+	mes "Scrap metal and ice, fused together. Somewhere in it, the parts Orion needs.";
+	next;
+	if (select("Dig.:Leave it.") == 2)
+		close;
+	close2;
+	progressbar "ffffff", 4;
+	wsv_ch2b = wsv_ch2b | getarg(0);
+	dispbottom ((wsv_ch2b & 7) == 7) ? "That's all three piles." : "Dug out. There are more piles on the north-east of the Root.";
+	end;
+}
+deadroot,345,291,4	script	Frozen Materials#wsv_c2a	10429,{
+	callfunc "F_WSV_C2Frozen", 1;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 740 && (wsv_ch2b & 1) == 0" );
+	end;
+}
+deadroot,289,360,4	script	Frozen Materials#wsv_c2b	10429,{
+	callfunc "F_WSV_C2Frozen", 2;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 740 && (wsv_ch2b & 2) == 0" );
+	end;
+}
+deadroot,167,308,4	script	Frozen Materials#wsv_c2c	10429,{
+	callfunc "F_WSV_C2Frozen", 4;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 740 && (wsv_ch2b & 4) == 0" );
+	end;
+}
+
+ch2gms,22,37,4	script	Gregor#wsv_c2h	627,{
+	cutin "4job_gregor_01.png",2;
+	if (callfunc("F_WSV_C2Beat", 750, 755, 1, "[Gregor]",
+		"Look at these. Made by people whose world was freezing, to keep the cold out. And now they'll keep a fire in.",
+		"-",
+		"Take them to Charles, in Yongjirak; he's waiting at the machine room.")) close3;
+	mes "[Gregor]";
+	mes "History, in pieces. I keep picking them up.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 750" );
+	end;
+}
+kin_in01,84,49,4	script	Charles#wsv_c2k	10247,{
+	if (callfunc("F_WSV_C2Beat", 755, 758, 0, "[Charles]",
+		"Orion's parts! Let me... yes, these fit. Hold that. No, the other end.",
+		"-",
+		"There. Talk to Maura; she'll want to switch it on herself.")) close;
+	mes "[Charles]";
+	mes "I oil machines in two worlds now. Twice the oil.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 755" );
+	end;
+}
+kin_in01,84,43,4	script	Einhar#wsv_c2k	10658,{
+	if (wsv_ch2 == 770) {
+		callfunc "F_WSV_C2Lines", "[Einhar]",
+			"The Cradle says the frozen ones are waking. The village is warm. Yongjirak owes you a debt, Big One.",
+			"-",
+			"Go back to your El. Tell him the fire people send their thanks, and a little heat.";
+		callfunc "F_WSV_C2Go", 780, 3, 2;
+		next;
+		if (select("Go to Beledor.:Stay.") == 1) {
+			close2;
+			warp "veledor",136,320;
+			end;
+		}
+		close;
+	}
+	mes "[Einhar]";
+	mes "Warm feet, warm hearts. That's the whole of Harvan philosophy.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 770" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Distorted Ragsruth (64209)
+// ------------------------------------------------------------
+rgs_dun1,131,147,4	script	Impati#wsv_c2	10662,{
+	if (callfunc("F_WSV_C2Beat", 810, 820, 0, "[Impati]",
+		"Help! The grass is whispering in a language I don't know! It wants something!",
+		"-",
+		"Violas is further west, and Elder Heria went east. Find them, please!")) close;
+	mes "[Impati]";
+	mes "I'm not scared. I'm cautious. Very cautious.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 810" );
+	end;
+}
+rgs_dun1,37,236,4	script	Violas#wsv_c2d	10662,{
+	if (wsv_ch2 == 820) {
+		if (countitem(512) < 1) {
+			mes "[Violas]";
+			mes "I'm so hungry I could eat the grass. Do you have an " + mesitemlink(512) + "?";
+			close;
+		}
+		delitem 512,1;	// Apple
+		callfunc "F_WSV_C2Lines", "[Violas]",
+			"An apple! You remembered! ...I'm all right now. The foreign mana is everywhere, here. It feels like someone is collecting it.",
+			"-",
+			"Elder Heria is to the north-east. She'll know.";
+		callfunc "F_WSV_C2Go", 830;
+		close;
+	}
+	mes "[Violas]";
+	mes "Gate duty, even out here. Old habits.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 820" );
+	end;
+}
+rgs_dun1,219,265,4	script	Elder Heria#wsv_c2d	10663,{
+	if (wsv_ch2 == 830) {
+		callfunc "F_WSV_C2Lines", "[Elder Heria]",
+			"You came for an old woman. Kind.",
+			"-",
+			"The foreign mana is gathering into a shape: the Snapdragon's phantom, and Artea's with it. Our protector's shadow, made of stolen mana. The leaf of our village is in danger. Go back to the safe place; Painu will show you.";
+		callfunc "F_WSV_C2Go", 840;
+		close2;
+		warp "ch2safe4",233,173;
 		end;
 	}
-	.@name$ = getarg(0) ? "Illusion of Nirhult" : "Nirhult";
-	.@gid = monster(getarg(1), getarg(2), getarg(3), .@name$, 22705, 1, "WSV_Nirhult::OnKill");
-	setunitdata .@gid, UMOB_LEVEL, 240;
-	setunitdata .@gid, UMOB_MAXHP, getarg(0) ? 30000000 : 15000000;
-	setunitdata .@gid, UMOB_HP, getarg(0) ? 30000000 : 15000000;
-	setd "$@wsv_nir_" + .@cid, .@gid;
-	setd "$@wsv_niro_" + .@gid, .@cid;
-	setd "$@wsv_nira_" + .@gid, getcharid(3);
-	setd "$@wsv_nirp_" + .@gid, getcharid(1);
-	setd "$@wsv_nirm_" + .@gid, getarg(0);
-	specialeffect2 EF_LIGHTSPHERE;
-	dispbottom "A cold presence gathers into a shape: " + .@name$ + "!";
+	mes "[Elder Heria]";
+	mes "Old roots, new trouble. Same as ever.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 830" );
 	end;
 }
-
--	script	WSV_Nirhult	-1,{
+ch2safe4,235,176,4	script	Painu#wsv_c2s	10662,{
+	if (callfunc("F_WSV_C2Beat", 840, 850, 0, "[Painu]",
+		"The Leaf is in danger! The village's leaf, the one that keeps the root alive!",
+		"-",
+		"Artea's phantom is at the south edge of the safe place. She'll open the way to where the foreign mana is gathering.")) close;
+	mes "[Painu]";
+	mes "If you find any apples, you know where I am.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 840" );
 	end;
-OnKill:
-	.@g = killedgid;
-	.@cid = getd("$@wsv_niro_" + .@g);
-	.@aid = getd("$@wsv_nira_" + .@g);
-	.@pid = getd("$@wsv_nirp_" + .@g);
-	.@mode = getd("$@wsv_nirm_" + .@g);
-	.@map$ = strcharinfo(3);
-	setd "$@wsv_niro_" + .@g, 0;
-	setd "$@wsv_nira_" + .@g, 0;
-	setd "$@wsv_nirp_" + .@g, 0;
-	setd "$@wsv_nirm_" + .@g, 0;
-	if (.@cid)
-		setd "$@wsv_nir_" + .@cid, 0;
-	if (.@pid) {
-		getpartymember .@pid, 1;
-		getpartymember .@pid, 2;
-		copyarray .@c[0], $@partymembercid[0], $@partymembercount;
-		copyarray .@a[0], $@partymemberaid[0], $@partymembercount;
-		.@n = $@partymembercount;
-	} else {
-		.@c[0] = .@cid;
-		.@a[0] = .@aid;
-		.@n = 1;
-	}
-	for (.@i = 0; .@i < .@n; .@i++) {
-		if (!isloggedin(.@a[.@i], .@c[.@i]) || !attachrid(.@a[.@i]))
-			continue;
-		if (getcharid(0) != .@c[.@i] || strcharinfo(3) != .@map$)
-			continue;
-		if (.@mode == 0 && wsv_ch2 == 110 && !(wsv_ch2b & 32768)) {
-			wsv_ch2b = wsv_ch2b | 32768;
-			questinfo_refresh;
-			dispbottom "Nirhult staggers back and is gone, leaving something glittering behind. Go back to Artea.";
-		}
-		if (.@mode == 1 && isbegin_quest(64245) == 1 && !(wsv_c2s & 16384)) {
-			wsv_c2s = wsv_c2s | 16384;
-			dispbottom "The illusion of Nirhult breaks apart. Tell Artea's illusion.";
-		}
-	}
-	detachrid;
+}
+ch2safe4,23,175,4	script	Devries#wsv_c2e	865,{
+	if (callfunc("F_WSV_C2Beat", 860, 870, 3, "[Devries]",
+		"Let me see. ...These aren't mana. They're fragments. Pieces of a song, or a memory, from the dead world's tree. The end of a world, in a handful of light.",
+		"-",
+		"Take them to El. If anyone can hear what they're singing, it's him.")) close;
+	mes "[Devries]";
+	mes "I write everything down. One day someone will read it and think I made it up.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 860" );
 	end;
 }
 
 // ------------------------------------------------------------
-// After the story: the safe place's dailies.
+// The safe place's dailies, after the story.
 // Devries: Distorted Ragsruth (64239), Even a Handful of Magic
 // (64240, cooldown 64241). Gregor: OK, Calm Down (64242, 64243),
-// Strange Magic Investigation (64244). Artea's illusion:
-// Nirhult's Illusion (64245, 64246).
+// Strange Magic Investigation (64244). Artea's phantom: the Phantom
+// of Nyrholt (64245, cooldown 64246).
 // ------------------------------------------------------------
-ch2safe4,217,234,4	script(CLOAKED)	Devries#wsv_c2r	865,{
+ch2safe4,217,234,4	script	Devries#wsv_c2r	865,{
 	.@n$ = "[Devries]";
+	if (callfunc("F_WSV_C2Beat", 800, 810, 0, .@n$,
+		"El sent you? Then he feels it too. Foreign mana, all through Distorted Ragsruth.",
+		"-",
+		"Some of the Folnirs went in there to gather grass and haven't come back. Impati, Violas, Elder Heria. Find them. Bring an Apple; Violas will be starving.")) close;
+	if (wsv_ch2 < 1000) {
+		mes .@n$;
+		mes "Fascinating place. Terrible place. Fascinating.";
+		close;
+	}
 	if (isbegin_quest(64239) == 1) {
 		if (wsv_c2s & 16) {
 			mes .@n$;
@@ -347,11 +1021,20 @@ ch2safe4,217,234,4	script(CLOAKED)	Devries#wsv_c2r	865,{
 		end;
 	}
 	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 800" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch2 >= 1000 && isbegin_quest(64239) == 0" );
+	end;
 }
 
-ch2safe4,215,234,4	script(CLOAKED)	Gregor#wsv_c2r	627,{
+ch2safe4,215,234,4	script	Gregor#wsv_c2r	627,{
 	cutin "4job_gregor_01.png",2;
 	.@n$ = "[Gregor]";
+	if (wsv_ch2 < 1000) {
+		mes .@n$;
+		mes "I'm measuring the root. Don't mind me.";
+		close3;
+	}
 	if (isbegin_quest(64242) == 1 && checkquest(64242, HUNTING) == 2) {
 		mes .@n$;
 		mes "Fewer Folnirs splitting off, and the magic's steadier already. Thank you. They're not evil, you know. Just... too much magic in too small a body.";
@@ -360,7 +1043,7 @@ ch2safe4,215,234,4	script(CLOAKED)	Gregor#wsv_c2r	627,{
 	}
 	if (isbegin_quest(64244) == 1) {
 		mes .@n$;
-		mes "Artea's... reflection, down by the south edge of the safe place. It's made of the same foreign magic Nirhult left behind. Talk to it.";
+		mes "Artea's phantom, down by the south edge of the safe place. It's made of the same foreign magic the Snapdragon left behind. Talk to it.";
 		close3;
 	}
 	.@menu$ = "OK, Calm Down (daily).:";
@@ -388,17 +1071,27 @@ ch2safe4,215,234,4	script(CLOAKED)	Gregor#wsv_c2r	627,{
 	close3;
 }
 
-ch2safe4,207,35,4	script	Illusion of Artea#wsv	10661,{
+ch2safe4,207,35,4	script	Phantom of Artea#wsv	10661,{
 	cutin "ch2_folnir_a.png",2;
-	.@n$ = "[Illusion of Artea]";
+	.@n$ = "[Phantom of Artea]";
+	if (wsv_ch2 == 850) {
+		callfunc "F_WSV_C2Lines", .@n$,
+			"......You can see me. Then you can see him, too: the Snapdragon's phantom, made of the foreign mana.",
+			"-",
+			"I'll open the way. Gather the mana, break the phantom. The same four gates, the same circles.";
+		next;
+		if (select("Open the way.:Not yet.") == 2)
+			close3;
+		cutin "",255;
+		callfunc "F_WSV_C2Nyr", 2, .@n$;
+	}
 	if (wsv_ch2 < 1000) {
 		mes "A shimmer in the air, in a shape that might be a Folnir. It doesn't notice you.";
 		close3;
 	}
 	if (isbegin_quest(64244) == 1) {
 		mes .@n$;
-		mes "......You can see me. Then you can see him, too.";
-		mes "I am what's left of Artea's fear. Nirhult left it behind, in the magic. As long as it remains, he can come back here, as an illusion.";
+		mes "I am what's left of the foreign mana, wearing Artea's shape. As long as I remain, the Snapdragon's phantom can gather again.";
 		next;
 		mes .@n$;
 		mes "Every day his shadow gathers again. Every day, someone has to break it.";
@@ -413,40 +1106,32 @@ ch2safe4,207,35,4	script	Illusion of Artea#wsv	10661,{
 	}
 	if (isbegin_quest(64245) == 1 && (wsv_c2s & 16384)) {
 		mes .@n$;
-		mes "His shadow is broken. For today.";
+		mes "His phantom is broken. For today.";
 		wsv_c2s = wsv_c2s &~ 16384;
-		callfunc "F_WSV_C2DailyDone", 64245, 64246, 8, 10;
+		callfunc "F_WSV_C2DailyDone", 64245, 64246, 8, 3;
 		close3;
 	}
 	if (isbegin_quest(64245) == 1) {
 		mes .@n$;
-		mes "He's gathering. Break his illusion. Bring your friends.";
+		mes "He's gathering. Break his phantom in Nyrholt.";
 		next;
-		if (select("Face the Illusion of Nirhult.:Not yet.") == 2)
+		if (select("Go to Nyrholt.:Not yet.") == 2)
 			close3;
-		close2;
 		cutin "",255;
-		callfunc "F_WSV_C2Nirhult", 1, "ch2safe4", 207, 40;
-		end;
+		callfunc "F_WSV_C2Nyr", 2, .@n$;
 	}
 	mes .@n$;
-	mes "Nirhult's Illusion: once a day, alone or with a party.";
+	mes "The Phantom of Nyrholt: once a day.";
 	next;
-	if (select("Break his illusion.:Not now.") == 2)
+	if (select("Break his phantom.:Not now.") == 2)
 		close3;
 	wsv_c2s = wsv_c2s &~ 16384;
-	if (callfunc("F_WSV_C2Daily", .@n$, 64245, 64246, "Then let's call him. Talk to me again when you're ready.")) {
+	if (callfunc("F_WSV_C2Daily", .@n$, 64245, 64246, "Then let's open the way. Talk to me again when you're ready."))
 		next;
-		if (select("Face him now.:In a moment.") == 1) {
-			close2;
-			cutin "",255;
-			callfunc "F_WSV_C2Nirhult", 1, "ch2safe4", 207, 40;
-			end;
-		}
-	}
 	close3;
 
 OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 850" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(64244) == 2 && isbegin_quest(64245) == 0 && (isbegin_quest(64246) == 0 || checkquest(64246, PLAYTIME) == 2)" );
 	end;
 }

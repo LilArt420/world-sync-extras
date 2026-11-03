@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.1.7
+Needs Ragnarok Offline 1.6.9 or later.
+- 🔥 **Chapter 2 redone, following the official story.** The old version skipped most of it: no instances, many people missing, and a fight with Artea's invader that respawned every time you talked to her, with nothing happening after you killed it. The new one follows the official order in nine parts (the same steps players' guides list):
+  - **Call of the Guardian**: the druid twins Vedr and Varg take you into the **Crossroads of Tangled Mana**. Untie four knots of tangled mana and beat Sollith to meet El.
+  - **Meeting El** and **Between Cold and Heat**: Newt, Chez, Jubilus and Beryl, Yongjirak's villagers, Chez and Dew at the Root of Death, and Tamarin's shivering Hal.
+  - **The Root of Death**: Gregor's survey, Maura, Shelter Geminis and its sleepers, a frozen Harvan, Prasium and the Cradle of Fire (5 Fluffy Sparks for Samsin Harvan), Charles and Orion, and Nedim's idea.
+  - **Sprout of a World's End**: Gregor and Il in Brimir's parallel snowfield (20 Shadow Wardens), and Il's feather to Ragsruth.
+  - **Residents of the Tattered Root**: the pony, Violas, Sirina, Orion, Elder Heria and Painu, five Apples for the village, and Artea's **Nyrholt**: four gates of Mysterious Intruders, then the Snapdragon, which shrugs off blows until you lure it into Artea's magic circles. Then Roarin, Jasminna and the branch.
+  - **A Dormant Matter**: Zero and Il (20 more Shadow Wardens) and Gregor.
+  - **Seed of Heat**: Bartum, Karillon and Einhar build a heat exchanger. Maura's machine button, Orion's parts (Alpurings, Icyblasts, three frozen material piles, Ice Jelly and Frost Shards), Charles, Samsin and the baby Harvan.
+  - **Distorted Ragsruth**: Devries, the lost Folnirs (bring an Apple for Violas), Painu, and the **Phantom of Nyrholt** through the Phantom of Artea. Then Devries and El, and the chapter ends.
+  - If you were partway through, your story carries on from the start of the part you were in. Daily Phantom of Nyrholt replaces Nirhult's Illusion. Bartom and Karimun are now Bartum and Karillon, as in kRO.
+- 🌌 **New block: the Constellation Tower** (`constellation_tower`, on by default). Betelgeuse's endless tower on Misty Island, through Oscar (base level 240+, party, every 3 days): floors of the old tower's monsters made stronger, a master every 5th floor, Naght Sieger after floor 25 and Betelgeuse at floor 50 or 70 with his fountain, and OSC0007's Nebula gear and Signets of Star. All 54 of its monsters, which the server only had commented out, with Divine Pride's stats.
+
 ## 2.1.6
 Needs Ragnarok Offline 1.6.9 or later.
 - 🏰 **Chapter 1, Destroy the Sky Fortress**: inside, there were no NPCs, nothing happened on the stairs, and a few soldiers stood off the platforms near the start. The fortress is a chain of floating platforms with no walkway between them, and the officers, Himmelmez and Est were all on platforms you couldn't reach. Now you clear the Legion up the outer spiral, and a stairway of light takes you onto the inner spiral. Its officers wait at its heart, and the next stairway goes down to the throne hall, where you fight Himmelmez and find Est. The **Recreated Dark Whisper** works the same way: the Legion on the outer spiral, then the stairway down to Himmelmez.

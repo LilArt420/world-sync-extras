@@ -125,6 +125,8 @@ kindlbrk,181,137,4	script	Harvan#wsv_c2d	10659,{
 // ------------------------------------------------------------
 kindlbrk,110,218,4	script	Nedim#wsv	10658,{
 	cutin "ch2_harrban_d.png",2;
+	if (wsv_ch2 == 400)
+		callfunc "F_WSV_C2Nedim";
 	.@n$ = "[Nedim]";
 	if (wsv_ch2 < 1000) {
 		mes .@n$;
@@ -146,17 +148,18 @@ kindlbrk,110,218,4	script	Nedim#wsv	10658,{
 	close3;
 
 OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 400" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsv_ch2 >= 1000 && isbegin_quest(64227) == 0 && (isbegin_quest(64228) == 0 || checkquest(64228, PLAYTIME) == 2)" );
 	end;
 }
 
 // ------------------------------------------------------------
-// The nursery: Bartom (Helping Hands at the Nursery 64229; Work at
+// The nursery: Bartum (Helping Hands at the Nursery 64229; Work at
 // the Nursery 64231, 64232) and the children (bits 2048-8192).
 // ------------------------------------------------------------
-kin_in01,86,47,4	script	Bartom#wsv	10649,{
+kin_in01,86,47,4	script	Bartum#wsv	10649,{
 	cutin "ch2_samsin01.png",2;
-	.@n$ = "[Bartom]";
+	.@n$ = "[Bartum]";
 	if (wsv_ch2 < 1000) {
 		mes .@n$;
 		mes "Shh. The little ones are finally asleep. They had a fright. We all did.";
@@ -215,7 +218,7 @@ function	script	F_WSV_C2Child	{
 	if (isbegin_quest(64229) == 1 && !(wsv_c2s & getarg(0))) {
 		wsv_c2s = wsv_c2s | getarg(0);
 		if ((wsv_c2s & 14336) == 14336)
-			dispbottom "All three have met you. Go back to Bartom.";
+			dispbottom "All three have met you. Go back to Bartum.";
 	}
 	close3;
 }
@@ -224,7 +227,7 @@ kin_in01,86,50,4	script	Young Harvan#wsv_c2a	10653,{
 	end;
 }
 kin_in01,88,50,4	script	Young Harvan#wsv_c2b	10654,{
-	callfunc "F_WSV_C2Child", 4096, "ch2_harr_kid_b01.png", "Bartom says outsiders are soft. You don't look soft. You look... medium.";
+	callfunc "F_WSV_C2Child", 4096, "ch2_harr_kid_b01.png", "Bartum says outsiders are soft. You don't look soft. You look... medium.";
 	end;
 }
 kin_in01,83,45,4	script	Young Harvan#wsv_c2c	10665,{
@@ -233,12 +236,12 @@ kin_in01,83,45,4	script	Young Harvan#wsv_c2c	10665,{
 }
 
 // ------------------------------------------------------------
-// Karimun: Shelter Visit (64233) and Gemis Parts Supply (64234,
-// 64235), with Orion at Shelter Gemis (ch2gms).
+// Karillon: Shelter Visit (64233) and Gemis Parts Supply (64234,
+// 64235), with Orion at Shelter Geminis (ch2gms).
 // ------------------------------------------------------------
-kin_in01,87,36,4	script	Karimun#wsv	10657,{
+kin_in01,87,36,4	script	Karillon#wsv	10657,{
 	cutin "ch2_harrban_c.png",2;
-	.@n$ = "[Karimun]";
+	.@n$ = "[Karillon]";
 	if (wsv_ch2 < 1000) {
 		mes .@n$;
 		mes "The heat exchanger keeps the inner rooms warm. It's held together with spare parts and stubbornness.";
@@ -248,7 +251,7 @@ kin_in01,87,36,4	script	Karimun#wsv	10657,{
 		if (isbegin_quest(64233) == 1) {
 			if (wsv_c2s & 1024) {
 				mes .@n$;
-				mes "Orion says yes? Wonderful. Shelter Gemis has the parts; we have the need. Now we just need someone to carry them.";
+				mes "Orion says yes? Wonderful. Shelter Geminis has the parts; we have the need. Now we just need someone to carry them.";
 				completequest 64233;
 				wsv_c2s = (wsv_c2s | 4) &~ 1024;
 				callfunc "F_WSV_C2Reward", 3, 3;
@@ -256,11 +259,11 @@ kin_in01,87,36,4	script	Karimun#wsv	10657,{
 				close3;
 			}
 			mes .@n$;
-			mes "Shelter Gemis is past the Root of Death, at its far corner. Ask for Orion.";
+			mes "Shelter Geminis is past the Root of Death, at its far corner. Ask for Orion.";
 			close3;
 		}
 		mes .@n$;
-		mes "To keep the heat exchanger running we need parts, steadily. The only place that makes them is ^0000FFShelter Gemis^000000, past the Root of Death.";
+		mes "To keep the heat exchanger running we need parts, steadily. The only place that makes them is ^0000FFShelter Geminis^000000, past the Root of Death.";
 		mes "Would you go and introduce us to their engineer, ^0000FFOrion^000000?";
 		next;
 		if (select("I'll go.:Not now.") == 2)
@@ -284,7 +287,7 @@ kin_in01,87,36,4	script	Karimun#wsv	10657,{
 		close3;
 	if (isbegin_quest(64234) != 1)
 		wsv_c2s = wsv_c2s &~ 1024;
-	callfunc "F_WSV_C2Daily", .@n$, 64234, 64235, "Defeat ^0000FF30 Icy Blasts and 30 Ice Needles^000000 at the Root of Death, then collect the parts from Orion at Shelter Gemis.";
+	callfunc "F_WSV_C2Daily", .@n$, 64234, 64235, "Defeat ^0000FF30 Icy Blasts and 30 Ice Needles^000000 at the Root of Death, then collect the parts from Orion at Shelter Geminis.";
 	close3;
 
 OnInit:
@@ -295,24 +298,28 @@ OnInit:
 
 ch2gms,24,25,4	script	Orion#wsv	10651,{
 	cutin "ch2_orion01.png",2;
+	if (wsv_ch2 == 360)
+		callfunc "F_WSV_C2OrionLook";
+	if (wsv_ch2 == 730 || wsv_ch2 == 740)
+		callfunc "F_WSV_C2OrionParts";
 	.@n$ = "[Orion]";
 	if (isbegin_quest(64233) == 1 && !(wsv_c2s & 1024)) {
 		mes .@n$;
 		mes "Yongjirak? The Harvans want parts? Of course. They kept us in coal for years. We'll keep them in screws.";
-		mes "Tell Karimun: work for parts. Their heat, our hands. Fair trade.";
+		mes "Tell Karillon: work for parts. Their heat, our hands. Fair trade.";
 		wsv_c2s = wsv_c2s | 1024;
 		close3;
 	}
 	if (isbegin_quest(64234) == 1) {
 		if (checkquest(64234, HUNTING) == 2 && !(wsv_c2s & 1024)) {
 			mes .@n$;
-			mes "The pipes are clear. Here: ice screws and a hydraulic tube, modified for Harvan heat. Take them to Karimun.";
+			mes "The pipes are clear. Here: ice screws and a hydraulic tube, modified for Harvan heat. Take them to Karillon.";
 			wsv_c2s = wsv_c2s | 1024;
 			close3;
 		}
 		if (wsv_c2s & 1024) {
 			mes .@n$;
-			mes "Karimun is waiting for those parts.";
+			mes "Karillon is waiting for those parts.";
 			close3;
 		}
 		mes .@n$;
@@ -320,8 +327,12 @@ ch2gms,24,25,4	script	Orion#wsv	10651,{
 		close3;
 	}
 	mes .@n$;
-	mes "Welcome to Shelter Gemis. We fix things here. Mostly things that the cold broke.";
+	mes "Welcome to Shelter Geminis. We fix things here. Mostly things that the cold broke.";
 	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 360 && (wsv_ch2b & 3) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 730 || (wsv_ch2 == 740 && countitem(1002695) >= 5 && countitem(1002693) >= 5 && (wsv_ch2b & 7) == 7)" );
+	end;
 }
 
 // ------------------------------------------------------------
@@ -488,15 +499,15 @@ kin_in01,171,122,4	script	Tros#wsv	10660,{
 	close3;
 }
 
-// The sailor takes people to the Root of Death and Shelter Gemis.
+// The sailor takes people to the Root of Death and Shelter Geminis.
 kindlbrk,256,120,4	script	Harvan Sailor#wsv	10613,{
 	cutin "ch2_harrban_a.png",2;
 	mes "[Harvan Sailor]";
-	if (wsv_ch2 < 70) {
+	if (wsv_ch2 < 230) {
 		mes "The Root of Death? Nobody sails there now. Ask Beryl, if you're mad enough.";
 		close3;
 	}
-	mes "The channel runs down to the edge of the Root of Death. From there you can walk to Shelter Gemis.";
+	mes "The channel runs down to the edge of the Root of Death. From there you can walk to Shelter Geminis.";
 	next;
 	if (select("To the Root of Death.:Never mind.") == 2)
 		close3;
@@ -513,7 +524,7 @@ kindlbrk,256,120,4	script	Harvan Sailor#wsv	10613,{
 function	script	F_WSV_C2Villager	{
 	cutin getarg(1), 2;
 	mes "[" + getarg(0) + "]";
-	mes (wsv_ch2 >= 60 && wsv_ch2 < 1000) ? getarg(2) : getarg(3);
+	mes (wsv_ch2 >= 230 && wsv_ch2 < 1000) ? getarg(2) : getarg(3);
 	close3;
 }
 kindlbrk,108,124,4	script	Serum#wsv	10660,{ callfunc "F_WSV_C2Villager", "Serum", "ch2_harrban_f.png", "Did you see the cold creeping up from the east? Like frost on a window, except the window is the whole world.", "Serum's the name, smelting's the game. Business is good when the fire's good."; end; }
@@ -534,7 +545,7 @@ kindlbrk,178,115,4	script	Yongjirak Request Board#wsv	10669,{
 	}
 	next;
 	setarray .@t$, "Yongjirak's Specialty! Hot Kalguksu", "Tamarin", "Hot! Hotter! (blankets)", "Tamarin", "Hot! Hotter! (snacks)", "Tamarin",
-		"Dream of Perpetual Motion", "Nedim", "Work at the Nursery", "Bartom", "Gemis Parts Supply", "Karimun", "Equipment Holding Heat", "Samra";
+		"Dream of Perpetual Motion", "Nedim", "Work at the Nursery", "Bartum", "Gemis Parts Supply", "Karillon", "Equipment Holding Heat", "Samra";
 	setarray .@q, 64221, 64223, 64225, 64227, 64231, 64234, 64237;
 	setarray .@ok, (wsv_c2s & 1) != 0, (wsv_c2s & 1) != 0, (wsv_c2s & 1) != 0, 1, (wsv_c2s & 2) != 0, (wsv_c2s & 4) != 0, (wsv_c2s & 8) != 0;
 	for (.@i = 0; .@i < 7; .@i++) {

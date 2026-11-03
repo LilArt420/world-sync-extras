@@ -1,0 +1,23 @@
+# World Sync Extras: Constellation Tower block - the tower's quests. The
+# client's quest log already has their text (12513-12519); the server has
+# no entries for them.
+Header:
+  Type: QUEST_DB
+  Version: 3
+
+Body:
+  - Id: 12513
+    Title: Why The Tower Was Destroyed
+  - Id: 12514
+    Title: Aftereffects of Entering The Tower
+    TimeLimit: +3d
+  - Id: 12515
+    Title: Face to Face with The New Tower Owner
+  - Id: 12516
+    Title: Secret of the Fountain 1
+  - Id: 12517
+    Title: Secret of the Fountain 2
+  - Id: 12518
+    Title: An Outcast
+  - Id: 12519
+    Title: Whereabouts of the original owner
