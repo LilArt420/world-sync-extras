@@ -1,6 +1,6 @@
 {
   "name": "world-sync-extras",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "author": "Lil Art",
   "description": "World Sync's playable content and iRO's quests, in blocks you can switch: the Jormungandr saga (Episodes 20 and 21), Chapters 1 and 2 of the Song of the World Tree, Varmundt, Star Forest and Herosria, iRO services, iRO Quests (Bounty Boards, City Investment, the 2021 town quests, Gramps and more), and names and descriptions for 3,800 items your client doesn't know. The official NPCs still without logic stand where the clients put them, and @npcplace moves any NPC. Needs Ragnarok Offline 1.6.9 or later.",
   "requires": {
@@ -43,6 +43,13 @@
       "default": true,
       "label": "Garden of Time: the Dimensional Prisons (Lake of Fire, Hall of Life)",
       "description": "The two memorial dungeons behind the prison gates north of the Garden of Time (level 250+, party), which open once you've registered at Rigel's Sealing Spirit Stone. The Lake of Fire's Divine Beasts (once a day) keep the Hall of Life key; the Hall of Life's criminal grows with the barrier on your Constellation's Protection."
+    },
+    {
+      "key": "constellation_tower",
+      "type": "boolean",
+      "default": true,
+      "label": "Constellation Tower: Betelgeuse's endless tower (level 240+)",
+      "description": "The old Endless Tower, taken over by the constellation Betelgeuse. Oscar on Misty Island (from Alberta's Captain Janssen) opens it for a party every 3 days. Climb floor by floor, end the climb against Naght Sieger after floor 25, or face Betelgeuse at floor 50 or 70. OSC0007 trades the Meteorite Powder for Nebula gear."
     },
     {
       "key": "iro_systems",

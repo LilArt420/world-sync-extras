@@ -15,6 +15,7 @@ default except `skip_ep19` and `entrances`.
 | 🌳 | Varmundt & the World Tree | `varmundt` | Chapters 1 and 2, Varmundt, Amatsu, the Juno Library |
 | ⭐ | Star Forest & Herosria | `star_forest` | Star Emperor job change, Sanctuary Herosria and its siege, Ash Village |
 | ⏳ | Garden of Time prisons | `garden_of_time` | The Lake of Fire and Hall of Life memorial dungeons (level 250) |
+| 🌌 | Constellation Tower | `constellation_tower` | Betelgeuse's endless tower on Misty Island (level 240) |
 | 🛎️ | iRO services | `iro_systems` | Devil in the Box, catalogs, Dungeon Teleporter, town helpers, Acolyte training |
 | 🎯 | iRO Quests | seven settings | Bounty Boards, City Investment, Gramps, the 2021 town quests and more |
 | 🏷️ | Regional items | always on | Names, descriptions and icons for 3,800 items |
@@ -54,9 +55,11 @@ script exists for these episodes.
 - 🗡️ **Seoyeon's Trial** under Amatsu (base 70+).
 - 🌳 **Chapter 1, "Song of the World Tree"**: from the small ash trees near Prontera and Payon to
   Destroyed Geffen, Verus and the Dark Whisper, with memorial dungeons and dailies (base 200+).
-- 🔥 **Chapter 2, "Fragment of the End"** (base 225+, after Chapter 1): from Sasha in Ash Village to
-  Muspelheim's Harvan village Yongjirak, the frozen Root of Death and Ragsruth, with Yongjirak's
-  dailies, Flame Gold Coins and Nirhult's Illusion.
+- 🔥 **Chapter 2, "Fragment of the End"** (base 225+, after Chapter 1): the official story in its
+  nine parts, from Sasha and the druid twins in Beledor (the Crossroads of Tangled Mana) to
+  Muspelheim's Harvan village Yongjirak, the frozen Root of Death and Shelter Geminis, Brimir, the
+  Folnirs of Ragsruth (Nyrholt and its Snapdragon), and back to El. Then Yongjirak's dailies, Flame
+  Gold Coins and the daily Phantom of Nyrholt.
 - 📚 The **Juno Library's VR books** through the library annex (base 200+).
 - 🏚️ The **eroded wing** of Varmundt's mansion and the Dimensional Biosphere watchers (base 265+).
 
@@ -93,6 +96,28 @@ This block adds the two party memorial dungeons (base level 250+):
 
 Stats and drops of the Divine Beasts and the criminal are Divine Pride's. The reward amounts and the
 trap, sanctuary and regeneration numbers are our estimates.
+
+## 🌌 Constellation Tower (`constellation_tower`)
+
+The Endless Tower has a new owner: the constellation **Betelgeuse**, who turned it upside down. The
+server had the instance and its maps, but no script and none of its monsters. Base level 240+, in a
+party, once every 3 days, 60 minutes:
+
+- 🗼 **Oscar** on Misty Island (`e_tower`, reached through Captain Janssen in Alberta) opens it at
+  floor 1, or higher for Meteorite Powder (40 per 5 floors, up to floor 25).
+- Each floor holds three of the old tower's monsters, stronger than they ever were. Every 5th floor
+  has one of its masters. Clear the floor and its stairway opens. Every cleared floor drops Meteorite
+  Powder for everyone in the tower. After floor 25 the rooms start again, 50% stronger each time
+  round.
+- After **floor 25**, end the climb against **Naght Sieger**, the tower's cast-out owner. At **floor
+  50 or 70**, face **Betelgeuse** himself, harder from 70. His fountain makes him stronger still, for
+  more reward, and two quest-log feats wait at 350% and 400%.
+- **OSC0007** trades Meteorite Powder, the typed powders and the souls of both bosses for the Nebula
+  armor and Signets of Star, and Meteorite Powder for Unknown Meteorite Fragments.
+
+Monster stats and drops are Divine Pride's. kRO's own tower script isn't published, so the floor
+rules follow RockMMO's guide. Rewards, prices and the bosses' HP (lowered from Divine Pride's 2
+billion: Naght Sieger 600 million, Betelgeuse 800 million to 2 billion) are our estimates.
 
 ## 🛎️ iRO services (`iro_systems`)
 
