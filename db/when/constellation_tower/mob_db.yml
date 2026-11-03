@@ -130,8 +130,10 @@ Body:
         Rate: 500
       - Item: Naght_Sieger_Soul
         Rate: 100
+    Drops:
       - Item: Nahtzigger_Card
         Rate: 10
+        StealProtected: true
   - Id: 20997
     AegisName: MD_G_ENTWEIHEN_M
     Name: Thorn of Mana

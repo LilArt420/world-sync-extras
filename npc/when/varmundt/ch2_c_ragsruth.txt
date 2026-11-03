@@ -171,7 +171,7 @@ OnInit:
 	end;
 }
 
-ragsruth,130,68,4	script	Gregor#wsv_c2r	627,{
+ragsruth,130,68,4	script	Gregor#wsv_c2rg	627,{
 	cutin "4job_gregor_01.png",2;
 	if (callfunc("F_WSV_C2Beat", 490, 500, 0, "[Gregor]",
 		"They're tiny, they're cheerful, and they live on a dying root that fell out of a dead world. And they don't seem to mind.",
