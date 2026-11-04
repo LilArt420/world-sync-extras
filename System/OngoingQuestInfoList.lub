@@ -6189,4 +6189,56 @@ QuestInfoList = {
 		Description = { "This is a daily quest: it can be done again after 4 AM." },
 		Summary = "Reset at 04:00"
 	},
+	-- Moscovia's Banish Winter chain moved to local Renewal ids 100000-100009
+	-- because the current kRO client reuses 18070-18079 for other quests.
+	[100000] = {
+		Title = "Banishing Winter",
+		Description = { "You decide to help Baba Yaga make her spell to banish winter." },
+		Summary = "Baba Yaga, the Horrible"
+	},
+	[100001] = {
+		Title = "Making the magic dust",
+		Description = { "Baba Yaga asked you to bring back the following: ^ff000020 Grasshopper's Legs, 5 Spawn, 20 Wings of Red Bat, 10 Sticky Mucus, 10 Witch Starsand, 10 Fine Grit, 1 Detonator, 5 Red Blood, 10 Burning Hearts, and 1 Diamond.^000000" },
+		Summary = ""
+	},
+	[100002] = {
+		Title = "Making the magic dust",
+		Description = { "Baba Yaga asked you to bring back the following: ^ff000020 Grasshopper's Legs, 5 Spawn, 20 Wings of Red Bat, 10 Sticky Mucus, 10 Witch Starsand, 10 Fine Grit, 1 Detonator, 5 Red Blood, 10 Burning Hearts, and 1 Diamond.^000000" },
+		Summary = ""
+	},
+	[100003] = {
+		Title = "The Dragon's Lair",
+		Description = { "Now that you have the ingredients for the magic dust, Baba Yaga has asked you to find a magic gourd bottle from the lair of a sleeping dragon." },
+		Summary = "Magic Gourd Bottle"
+	},
+	[100004] = {
+		Title = "The Magic Gourd Bottle",
+		Description = { "You found the Magic Gourd Bottle! Bring it back to Baba Yaga the Horrible." },
+		Summary = "Baba Yaga, the Horrible"
+	},
+	[100005] = {
+		Title = "Containing People's Speech",
+		Description = { "You must find and contain the voices of 3 people. From a child, a young person and a middle-aged person. You need to contain the wish phrase, I don't want winter to come, from the 3 different people." },
+		Summary = ""
+	},
+	[100006] = {
+		Title = "Containing People's Speech",
+		Description = { "You have contained the speech of a child, a young person and a middle-aged person. Bring the Magic Gourd Bottle back to Baba Yaga, the Horrible." },
+		Summary = "Baba Yaga, the Horrible"
+	},
+	[100007] = {
+		Title = "Csar's Request",
+		Description = { "The Csar has requested you to help Baba Yaga complete her spell to make sure that winter does not return." },
+		Summary = "Baba Yaga's Hut"
+	},
+	[100008] = {
+		Title = "Baba Yaga's Secret Medicine",
+		Description = { "You have successfully made Baba Yaga's Secret Medicine. Drop the bottle in the middle of the village to make sure that winter does not come back." },
+		Summary = "Village Center"
+	},
+	[100009] = {
+		Title = "Winter is Banished",
+		Description = { "You broke the bottle of Baba Yaga's Secret Medicine in the center of town. Report to Csar Aleksay III and tell him that you have banished winter from returning." },
+		Summary = "Csar Aleksay III"
+	},
 }
