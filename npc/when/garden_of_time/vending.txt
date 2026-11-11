@@ -1,0 +1,102 @@
+//===== World Sync Extras: Garden of Time block ==============
+//= The Subspace vending machines south of Rigel's Sealing Spirit Stone,
+//= rebuilt in dialogue. rAthena's #2 opens kRO's Item Reform window for
+//= the Divine Beast's Cloak upgrade, which our client can't show (the
+//= player is left stuck: "finish the task in progress"); #3 and #4 open
+//= enchant tables rAthena ships commented out, so nothing happens; and
+//= #4 is never uncloaked at all. These copies stand on the same spots,
+//= sell the same barters and do the upgrade and the enchants with the
+//= official tables (npc/wse_dialog.txt). #1 (the exchanges) works and
+//= stays rAthena's.
+//============================================================
+
+t_garden,1,1,0	script	#wsg_vending	-1,{
+	end;
+OnInit:
+	setarray .@n$, "Subspace vending machine#2", "Subspace vending machine#3", "Subspace vending machine#4";
+	for (.@i = 0; .@i < getarraysize(.@n$); .@i++) {
+		if (getnpcid(0, .@n$[.@i]))
+			disablenpc .@n$[.@i];
+	}
+	end;
+}
+
+// Shown to those who finished Rigel's registration, like rAthena's.
+t_garden,126,123,0	script	#wsg_v1	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if (isbegin_quest(12620) != 2)
+		end;
+	cloakoffnpcself "Subspace Vending Machine#wsg2";
+	cloakoffnpcself "Subspace Vending Machine#wsg3";
+	cloakoffnpcself "Subspace Vending Machine#wsg4";
+	end;
+}
+t_garden,130,119,0	duplicate(#wsg_v1)	#wsg_v2	HIDDEN_WARP_NPC,3,3
+t_garden,134,115,0	duplicate(#wsg_v1)	#wsg_v3	HIDDEN_WARP_NPC,4,4
+
+// Equipment: the accessories, the cloaks, and the cloak upgrade.
+t_garden,132,120,2	script(CLOAKED)	Subspace Vending Machine#wsg2	HEROS_IN_ORB_2,{
+	if (isbegin_quest(12620) != 2)
+		end;
+	if (checkweight(1201,1) == 0) {
+		mes "I cannot communicate with the barrier because I have too many types or weights of objects.";
+		close;
+	}
+	mes "[Subspace Vending Machine]";
+	mes "This unit specializes in equipment. What kind of deal do you want?";
+	next;
+	switch (select("Purchase Circulation of Life accessories.:Purchase a Divine Beast's Cloak.:Upgrade a Divine Beast's Cloak.:Cancel.")) {
+	case 1:
+		close2;
+		callshop "barter_t_garden_4";
+		end;
+	case 2:
+		close2;
+		callshop "barter_t_garden_5";
+		end;
+	case 3:
+		callfunc "F_WSE_Reform", 102514, "[Subspace Vending Machine]";	// Season_H_Upgrade
+		end;
+	}
+	close;
+OnInit:
+	setunittitle getnpcid(0), "<Clothing Upgrade Specialist>";
+	end;
+}
+
+// The Divine Beast's Cloaks (rAthena's enchant tables 117, 119, 121, 123).
+t_garden,135,117,2	script(CLOAKED)	Subspace Vending Machine#wsg3	HEROS_IN_ORB_3,{
+	if (isbegin_quest(12620) != 2)
+		end;
+	mes "[Subspace Vending Machine]";
+	mes "This unit carefully enchants the equipment brought back from the Lake of Fire. Which cloak?";
+	next;
+	.@s = select("Divine Beast's Cloak - Spring.:Divine Beast's Cloak - Summer.:Divine Beast's Cloak - Fall.:Divine Beast's Cloak - Winter.:Cancel.");
+	if (.@s == 5)
+		close;
+	setarray .@g, 117, 119, 121, 123;
+	callfunc "F_WSE_Enchant", .@g[.@s - 1], "[Subspace Vending Machine]";
+	end;
+OnInit:
+	setunittitle getnpcid(0), "<Divine Cloak Enchantment>";
+	end;
+}
+
+// The Circulation of Life gear (tables 142, 118, 120, 122, 124).
+t_garden,138,114,2	script(CLOAKED)	Subspace Vending Machine#wsg4	HEROS_IN_ORB_4,{
+	if (isbegin_quest(12620) != 2)
+		end;
+	mes "[Subspace Vending Machine]";
+	mes "This unit puts great effort into enchanting circulating equipment. Which one?";
+	next;
+	.@s = select("Circulation of Life accessories.:Circle of Life - Spring.:Circle of Life - Summer.:Circle of Life - Autumn.:Circle of Life - Winter.:Cancel.");
+	if (.@s == 6)
+		close;
+	setarray .@g, 142, 118, 120, 122, 124;
+	callfunc "F_WSE_Enchant", .@g[.@s - 1], "[Subspace Vending Machine]";
+	end;
+OnInit:
+	setunittitle getnpcid(0), "<Circle of Life Enchantment>";
+	end;
+}

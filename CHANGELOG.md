@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.1.8
+Needs Ragnarok Offline 1.6.9 or later. Fixes from players' reports.
+- 🌌 **Constellation Tower, rebuilt after the official tower** (iROWiki, with the guides of servers that run it):
+  - Floors now hold **2 to 14** of the old tower's monsters, a little stronger every floor, instead of always 3.
+  - Every 5th floor brings one of the **old tower's real bosses**: 35 of them, from Mastering and Vocal to Baphomet, Ifrit and Beelzebub, with Divine Pride's stats. They guard the floor but you don't have to beat them to go on. Chimera, Gryphon and Retribution are back to being ordinary floor monsters.
+  - No more Meteorite Powder for every floor: the monsters drop it, as officially. The **blue brazier** at the start of floors 1, 6, 11... carries the room 4 floors up for 50 powder (25 more each time). Oscar no longer opens the tower higher up.
+  - After floor 50 you can fight Betelgeuse or climb on: he waits again **after floor 75**, stronger (it was 70).
+  - **Betelgeuse's fountain** works as officially: his Health, Attack, Recovery, Defense and Traps each get 1-3 stars after floor 50 (3-5 after floor 75). Reroll them all (20 powder), raise one to the top (150) or seal one at 0 (300). Their sum is his strength, from 200% up to 1000%, and the more, the more his chest gives. Recovery heals him, Traps glow under your feet two seconds before they snap. The fountain and the throne gate now stand on the fountain and the door you see (they were off to the left and a few cells south).
+  - The minions were swapped: **Naght Sieger** fights with four **Thorny Skeletons** (back every 15 seconds), **Betelgeuse** raises **Dead Souls**.
+  - **OSC0007** trades as officially: Meteorite Fragments (50 powder, or break one into 40), the Faint Star Robe, Suit and Armor and the Signet of Star (for Naght Sieger's souls), then the Nebula gear and Stellar Signets made from them (for Betelgeuse's souls and typed powders).
+  - New: **OSC0008** next to it, once you've beaten Naght Sieger or Betelgeuse, enchants the Nebula gear and the Stellar Signets with the official enchant tables.
+- ⏳ **Garden of Time**: the Subspace Vending Machines' **Divine Beast's Cloak upgrade** left you stuck ("finish the task in progress", relog needed), and the **enchant** machine did nothing. Both now work in dialogue with the official tables, and the fourth machine (Circulation of Life enchants), which never showed up, is there too.
+- 🗡️ **Zero Cell tunings** (Boundary and Dimensional Tunings that turn a +10 Encroached weapon into a Frontier or Another Dimension weapon) did nothing and froze you until a relog. They now open a dialogue that does the conversion, keeping refine, cards, grade and options.
+- 🍎 **Chapter 2**: in Distorted Ragsruth's northern safe spot, Painu stood on top of the sailor who takes you to the last instance. She moved a few steps.
+
 ## 2.1.7
 Needs Ragnarok Offline 1.6.9 or later.
 - 🔥 **Chapter 2 redone, following the official story.** The old version skipped most of it: no instances, many people missing, and a fight with Artea's invader that respawned every time you talked to her, with nothing happening after you killed it. The new one follows the official order in nine parts (the same steps players' guides list):

@@ -70,7 +70,7 @@
 //=   Distorted Ragsroot (64209)
 //=   800  Devries (ch2safe4 217,234)    810  Impati (rgs_dun1 131,147)
 //=   820  Violas (rgs_dun1 37,236), an Apple
-//=   830  Elder Heria (rgs_dun1 219,265) 840  Painu (ch2safe4 235,176)
+//=   830  Elder Heria (rgs_dun1 219,265) 840  Painu (ch2safe4 239,178)
 //=   850  the Phantom of Artea (ch2safe4 207,35): Phantom of Nyrholt
 //=   860  Devries (ch2safe4 23,175)     870  El
 //=  1000  Chapter 2 done

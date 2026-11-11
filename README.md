@@ -94,6 +94,10 @@ This block adds the two party memorial dungeons (base level 250+):
   fight, take the weekly reward, or skip it to raise your barrier by a level. A run you don't finish
   lowers your barrier by a level.
 
+- 🏪 The **Subspace Vending Machines** by the stone upgrade the Divine Beast's Cloaks and enchant
+  the cloaks and the Circulation of Life gear in dialogue, with the official tables (the server's
+  versions opened windows our client can't show, or nothing at all).
+
 Stats and drops of the Divine Beasts and the criminal are Divine Pride's. The reward amounts and the
 trap, sanctuary and regeneration numbers are our estimates.
 
@@ -103,21 +107,28 @@ The Endless Tower has a new owner: the constellation **Betelgeuse**, who turned 
 server had the instance and its maps, but no script and none of its monsters. Base level 240+, in a
 party, once every 3 days, 60 minutes:
 
-- 🗼 **Oscar** on Misty Island (`e_tower`, reached through Captain Janssen in Alberta) opens it at
-  floor 1, or higher for Meteorite Powder (40 per 5 floors, up to floor 25).
-- Each floor holds three of the old tower's monsters, stronger than they ever were. Every 5th floor
-  has one of its masters. Clear the floor and its stairway opens. Every cleared floor drops Meteorite
-  Powder for everyone in the tower. After floor 25 the rooms start again, 50% stronger each time
-  round.
-- After **floor 25**, end the climb against **Naght Sieger**, the tower's cast-out owner. At **floor
-  50 or 70**, face **Betelgeuse** himself, harder from 70. His fountain makes him stronger still, for
-  more reward, and two quest-log feats wait at 350% and 400%.
-- **OSC0007** trades Meteorite Powder, the typed powders and the souls of both bosses for the Nebula
-  armor and Signets of Star, and Meteorite Powder for Unknown Meteorite Fragments.
+- 🗼 **Oscar** on Misty Island (`e_tower`, reached through Captain Janssen in Alberta) opens it.
+- Each floor holds 2 to 14 of the old tower's monsters, a little stronger every floor. Clear them
+  and the floor's stairway opens. Every 5th floor also holds one of the old tower's 35 bosses
+  (Mastering to Beelzebub), who doesn't have to be beaten. The monsters drop Meteorite Powder. The
+  **blue brazier** at the start of floors 1, 6, 11... carries the room 4 floors up (50 powder, 25
+  more each time). After floor 25 the rooms start again.
+- After **floor 25**, end the climb against **Naght Sieger**, the tower's cast-out owner, and his
+  Thorny Skeletons. After **floor 50**, face **Betelgeuse** and his Dead Souls, or climb on and face
+  him after **floor 75**, stronger.
+- ⛲ **Betelgeuse's fountain**: his Health, Attack, Recovery, Defense and Traps each have 1-3 stars
+  after floor 50, 3-5 after floor 75. Reroll all (20 powder), raise one to the top (150) or seal one
+  at 0 (300). Their sum is his strength (200% to 1000%); his chest gives one more share for every
+  100% above 200%. From 400%, it may hold one of his costumes.
+- **OSC0007** makes Meteorite Fragments (and breaks them back), the Faint Star gear and Signet of
+  Star (Naght Sieger's souls), the Nebula gear and Stellar Signets (Betelgeuse's souls and typed
+  powders), and Unknown Meteorite Fragments. **OSC0008**, once you've beaten either owner, enchants
+  the Nebula gear and the Stellar Signets with the official tables.
 
-Monster stats and drops are Divine Pride's. kRO's own tower script isn't published, so the floor
-rules follow RockMMO's guide. Rewards, prices and the bosses' HP (lowered from Divine Pride's 2
-billion: Naght Sieger 600 million, Betelgeuse 800 million to 2 billion) are our estimates.
+Monster stats and drops are Divine Pride's. Floors, bosses, skips, the fountain and the exchange
+follow iROWiki's tower page; monster counts and the bosses' habits, the kRO-based servers' guides.
+The bosses' HP (Naght Sieger 600 million, Betelgeuse 1 to 1.75 billion; Divine Pride lists 2
+billion), the chests beyond the souls and the trap and recovery numbers are our estimates.
 
 ## 🛎️ iRO services (`iro_systems`)
 

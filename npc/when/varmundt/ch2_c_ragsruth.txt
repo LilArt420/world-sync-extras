@@ -933,7 +933,7 @@ OnInit:
 	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsv_ch2 == 830" );
 	end;
 }
-ch2safe4,235,176,4	script	Painu#wsv_c2s	10662,{
+ch2safe4,239,178,4	script	Painu#wsv_c2s	10662,{
 	if (callfunc("F_WSV_C2Beat", 840, 850, 0, "[Painu]",
 		"The Leaf is in danger! The village's leaf, the one that keeps the root alive!",
 		"-",
