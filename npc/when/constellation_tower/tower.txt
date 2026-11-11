@@ -2,26 +2,31 @@
 //= The Constellation Tower (kRO 2023): the Endless Tower, taken over
 //= and turned upside down by the constellation Betelgeuse. rAthena has
 //= the instance ("Constellation Tower", 1@ch_t, 2@ch_t, 3@ch_t) but no
-//= script and no monsters. kRO's own walkthrough isn't published; this
-//= follows the client's quest log (12513-12519), its tip box (level 240,
-//= every 3 days, 60 minutes, Oscar and OSC0007 on Misty Island) and
-//= RockMMO's guide to its version of the tower.
+//= script. This follows iROWiki's Constellation Tower page (floors,
+//= bosses, skips, the fountain's stars, the exchange), with the monster
+//= counts of Midgard Tales' guide and the boss fights' habits of the
+//= kRO-based guides (Midgard Tales, Shining Moon, RockMMO):
 //=
-//= - Floors: 1@ch_t is 25 identical rooms. Floor N is room (N-1) % 25,
-//=   so the climb goes round the rooms again after floor 25, with the
-//=   monsters 50% stronger each time round. Each floor: three of the old
-//=   tower's monsters (every 5th floor: one of its bosses and two more).
-//=   Clear the floor and its stairway opens; everyone still in the room
-//=   is carried up with the first who takes it. Each cleared floor gives
-//=   everyone in the tower Meteorite Powder.
-//= - Floor 25: end the climb against Naght Sieger, the tower's cast-out
-//=   owner (2@ch_t), or keep climbing. Floor 50 and 70: Betelgeuse
-//=   (3@ch_t), harder from floor 70; his fountain makes him harder still
-//=   for Meteorite Powder, and his chest pays more.
-//= - Oscar starts a new climb on floor 1, or higher for Meteorite Powder
-//=   (40 per 5 floors, up to floor 25).
-//= Rewards, floor-skip prices, the fountain and the exchange are our
-//= estimates; monster stats and drops are Divine Pride's.
+//= - Floors: 1@ch_t is 25 identical rooms; floor N is room (N-1) % 25.
+//=   Each floor holds 2 to 14 of the old tower's monsters, a little
+//=   stronger every floor; clear them and the stairway opens. Every 5th
+//=   floor also holds one of the old tower's bosses (21325-21359), who
+//=   doesn't have to be beaten to go on. The blue brazier at the start of
+//=   floors 1, 6, 11... skips 4 floors for Meteorite Powder (50, then 25
+//=   more each time).
+//= - Floor 25: fight Naght Sieger, the tower's cast-out owner (2@ch_t),
+//=   or climb on. Floor 50: fight Betelgeuse (3@ch_t), stars 1-3, or climb
+//=   on to floor 75 and fight him at 3-5 stars.
+//= - Betelgeuse's fountain: five stats (Health, Attack, Recovery,
+//=   Defense, Traps), each 0 (sealed) to 5 stars. Reroll all for 20
+//=   Meteorite Powder, max one for 150, seal one for 300. Their sum is his
+//=   strength (all 1 star = 200%, all 3 = 600%, all 5 = 1000%); his chest
+//=   pays one share at 200%, and one more for every 100% above that.
+//= - The monsters drop the Meteorite Powder (0.5%, Divine Pride); the
+//=   final bosses' chests pay the rest. OSC0007 trades it for the Faint
+//=   Star and Nebula gear, OSC0008 enchants that gear once you've beaten
+//=   one of the two owners.
+//= Chest amounts beyond the souls are estimates.
 //=
 //= Char vars: wsct_iid (the tower instance the character entered).
 //============================================================
@@ -46,11 +51,12 @@ e_tower,71,115,4	script	Oscar#wsct	4_ED_OSCAR,{
 	switch (select("Enter the tower.:About the tower.:Leave.")) {
 	case 2:
 		mes "[Oscar]";
-		mes "Each floor is full of the old tower's monsters, stronger than they ever were. Clear a floor and the stairway opens.";
-		mes "After the 25th floor you can face the tower's old owner and leave, or climb on. Betelgeuse waits at the 50th floor, and harder at the 70th.";
+		mes "Each floor is full of the old tower's monsters, stronger with every floor. Clear a floor and the stairway opens. Every fifth floor, one of the old tower's masters waits too; you don't have to beat it to go on.";
+		mes "The blue brazier at the start of floors 1, 6, 11 and so on can carry you four floors up, for Meteorite Powder.";
 		next;
 		mes "[Oscar]";
-		mes "The monsters drop ^0000FFMeteorite Powder^000000, and every floor you clear leaves a little more. I can open the tower higher up for it, and OSC0007 here trades it for the tower's gear.";
+		mes "After the 25th floor you can face the tower's old owner and leave, or climb on. Betelgeuse waits after the 50th floor, and stronger after the 75th.";
+		mes "His fountain makes him stronger still, and his chest richer. The monsters drop ^0000FFMeteorite Powder^000000; OSC0007 here trades it for the tower's gear.";
 		close3;
 	case 3:
 		close3;
@@ -85,20 +91,7 @@ e_tower,71,115,4	script	Oscar#wsct	4_ED_OSCAR,{
 		erasequest 12514;
 		break;
 	}
-	.@start = 1;
 	if (.@iid <= 0) {
-		mes "[Oscar]";
-		mes "Shall I open the tower at the bottom, or higher up? Higher costs Meteorite Powder: 40 for every five floors.";
-		next;
-		.@s = select("Floor 1.:Floor 5 (40 Meteorite Powder).:Floor 10 (80).:Floor 15 (120).:Floor 20 (160).:Floor 25 (200).") - 1;
-		if (.@s > 0) {
-			if (countitem(1000372) < .@s * 40) {
-				mes "[Oscar]";
-				mes "You need " + (.@s * 40) + " " + mesitemlink(1000372) + " for that.";
-				close3;
-			}
-			.@start = .@s * 5;
-		}
 		.@iid = instance_create("Constellation Tower", IM_PARTY);
 		if (.@iid <= 0) {
 			mes "[Oscar]";
@@ -108,9 +101,6 @@ e_tower,71,115,4	script	Oscar#wsct	4_ED_OSCAR,{
 				mes "The tower won't open right now. Try again in a moment.";
 			close3;
 		}
-		if (.@start > 1)
-			delitem 1000372, .@s * 40;	// Meteorite_Dust
-		$@wsct_start[.@iid] = .@start;
 	}
 	cutin "",255;
 	if (instance_enter("Constellation Tower") != IE_OK) {
@@ -125,15 +115,139 @@ e_tower,71,115,4	script	Oscar#wsct	4_ED_OSCAR,{
 	end;
 }
 
-// The tower's exchange. kRO's OSC0007 list isn't published: the Nebula
-// gear and Signets of Star are the items Divine Pride lists Meteorite
-// Powder as a material for; the prices are ours.
+// The tower's exchange (iROWiki's Misty Island vending machines).
 e_tower,77,111,4	script	OSC0007#wsct	4_VENDING_MACHINE2,{
 	mes "[OSC0007]";
-	mes "OSC0007, Oscar's exchange unit. Bring what the tower gives and I will make what the tower's owner wears.";
+	mes "OSC0007, Oscar's exchange unit. Bring what the tower gives and I will make what the tower's owners wore.";
 	next;
-	switch (select("Unknown Meteorite Fragment.:Nebula armor.:Signet of Star.:Leave.")) {
+	switch (select("Meteorite Fragments.:Faint Star gear (Naght Sieger's souls).:Nebula gear (Betelgeuse's souls).:Unknown Meteorite Fragment.:Leave.")) {
 	case 1:
+		mes "[OSC0007]";
+		mes "50 " + mesitemlink(1000372) + " make one " + mesitemlink(1000373) + ". One fragment breaks back into 40 powder.";
+		next;
+		.@s = select("Powder into fragments.:A fragment into powder.:Cancel.");
+		if (.@s == 3)
+			close;
+		mes "[OSC0007]";
+		mes "How many " + (.@s == 1 ? "fragments" : "fragments to break") + "? (1-100)";
+		next;
+		input .@n, 0, 100;
+		if (.@n <= 0)
+			close;
+		if (.@s == 1) {
+			if (countitem(1000372) < .@n * 50) {
+				mes "[OSC0007]";
+				mes "That needs " + (.@n * 50) + " Meteorite Powder.";
+				close;
+			}
+			if (checkweight(1000373, .@n) == 0) {
+				mes "[OSC0007]";
+				mes "You can't carry that. Make some room first.";
+				close;
+			}
+			delitem 1000372, .@n * 50;	// Meteorite_Dust
+			getitem 1000373, .@n;	// Meteorite_Fragment
+		} else {
+			if (countitem(1000373) < .@n) {
+				mes "[OSC0007]";
+				mes "You don't have that many fragments.";
+				close;
+			}
+			if (checkweight(1000372, .@n * 40) == 0) {
+				mes "[OSC0007]";
+				mes "You can't carry that. Make some room first.";
+				close;
+			}
+			delitem 1000373, .@n;	// Meteorite_Fragment
+			getitem 1000372, .@n * 40;	// Meteorite_Dust
+		}
+		mes "[OSC0007]";
+		mes "Exchanged.";
+		close;
+	case 2:
+		// Faint Star's Robe/Suit/Armor [1] and the Signet of Star.
+		setarray .@item, 450168, 450167, 450166, 490131;
+		setarray .@frag, 50, 50, 50, 100;
+		setarray .@soul, 5, 5, 5, 10;
+		for (.@i = 0; .@i < 4; .@i++)
+			.@menu$ += getitemname(.@item[.@i]) + ":";
+		.@i = select(.@menu$ + "Cancel.") - 1;
+		if (.@i == 4)
+			close;
+		mes "[OSC0007]";
+		mes mesitemlink(.@item[.@i]) + " costs:";
+		mes "- " + .@frag[.@i] + " " + mesitemlink(1000373);
+		mes "- " + .@soul[.@i] + " " + mesitemlink(1000396);
+		next;
+		if (select("Exchange.:Cancel.") == 2)
+			close;
+		if (countitem(1000373) < .@frag[.@i] || countitem(1000396) < .@soul[.@i]) {
+			mes "[OSC0007]";
+			mes "You're missing some of it.";
+			close;
+		}
+		if (checkweight(.@item[.@i], 1) == 0) {
+			mes "[OSC0007]";
+			mes "You can't carry it. Make some room first.";
+			close;
+		}
+		delitem 1000373, .@frag[.@i];	// Meteorite_Fragment
+		delitem 1000396, .@soul[.@i];	// Naght_Sieger_Soul
+		getitem .@item[.@i], 1;
+		mes "[OSC0007]";
+		mes "Exchanged. Wear it well.";
+		close;
+	case 3:
+		// Nebula gear: the matching Faint Star piece, or the Signet of Star,
+		// plus the matching powder.
+		setarray .@item, 450169, 450170, 450171, 450172, 450173, 450174, 490132, 490133, 490134, 490135, 490136, 490137;
+		setarray .@base, 450168, 450168, 450167, 450167, 450166, 450166, 490131, 490131, 490131, 490131, 490131, 490131;
+		// Power, Stamina, Concentration, Creative, Spell, Wisdom powder.
+		setarray .@pow, 1000398, 1000399, 1000400, 1000401, 1000402, 1000403, 1000398, 1000399, 1000400, 1000401, 1000402, 1000403;
+		for (.@i = 0; .@i < 12; .@i++)
+			.@menu$ += getitemname(.@item[.@i]) + ":";
+		.@i = select(.@menu$ + "Cancel.") - 1;
+		if (.@i == 12)
+			close;
+		.@sig = (.@i >= 6);
+		.@nfrag = (.@sig ? 250 : 50);
+		.@npow = (.@sig ? 50 : 30);
+		.@nsoul = (.@sig ? 20 : 10);
+		mes "[OSC0007]";
+		mes mesitemlink(.@item[.@i]) + " costs:";
+		mes "- 1 " + mesitemlink(.@base[.@i]) + " (unrefined, no cards)";
+		mes "- " + .@nfrag + " " + mesitemlink(1000373);
+		mes "- " + .@npow + " " + mesitemlink(.@pow[.@i]);
+		mes "- " + .@nsoul + " " + mesitemlink(1000397);
+		next;
+		if (select("Exchange.:Cancel.") == 2)
+			close;
+		// The base piece: an unworn +0 one without cards.
+		callfunc "F_WSE_Save";
+		.@b = -1;
+		for (.@k = 0; .@k < @wsx_count; .@k++) {
+			if (@wsx_id[.@k] == .@base[.@i] && !@wsx_equip[.@k] && @wsx_ref[.@k] == 0 && !@wsx_c1[.@k] && !@wsx_c2[.@k] && !@wsx_c3[.@k] && !@wsx_c4[.@k])
+				.@b = .@k;
+		}
+		if (.@b < 0 || countitem(1000373) < .@nfrag || countitem(.@pow[.@i]) < .@npow || countitem(1000397) < .@nsoul) {
+			mes "[OSC0007]";
+			mes "You're missing some of it.";
+			close;
+		}
+		if (checkweight(.@item[.@i], 1) == 0) {
+			mes "[OSC0007]";
+			mes "You can't carry it. Make some room first.";
+			close;
+		}
+		delitemidx @wsx_idx[.@b], 1;
+		delitem 1000373, .@nfrag;	// Meteorite_Fragment
+		delitem .@pow[.@i], .@npow;
+		delitem 1000397, .@nsoul;	// Betelgeuse_Soul
+		getitem .@item[.@i], 1;
+		mes "[OSC0007]";
+		mes "Exchanged. Wear it well.";
+		close;
+	case 4:
 		mes "[OSC0007]";
 		mes "One " + mesitemlink(1001599) + " for 100 " + mesitemlink(1000372) + ".";
 		next;
@@ -149,54 +263,38 @@ e_tower,77,111,4	script	OSC0007#wsct	4_VENDING_MACHINE2,{
 		mes "[OSC0007]";
 		mes "Exchanged.";
 		close;
-	case 2:
-		setarray .@item, 450169, 450170, 450171, 450172, 450173, 450174;
-		.@soul = 1000397;	// Betelgeuse_Soul
-		break;
-	case 3:
-		setarray .@item, 490132, 490133, 490134, 490135, 490136, 490137;
-		.@soul = 1000396;	// Naght_Sieger_Soul
-		break;
-	case 4:
-		close;
 	}
-	// The matching powder: Power, Stamina, Concentration, Creative, Spell, Wisdom.
-	setarray .@pow, 1000398, 1000399, 1000400, 1000401, 1000402, 1000403;
-	for (.@i = 0; .@i < 6; .@i++)
-		.@menu$ += getitemname(.@item[.@i]) + ":";
-	.@i = select(.@menu$) - 1;
-	mes "[OSC0007]";
-	mes mesitemlink(.@item[.@i]) + " costs:";
-	mes "- 10 " + mesitemlink(.@soul);
-	mes "- 100 " + mesitemlink(.@pow[.@i]);
-	mes "- 20 " + mesitemlink(1000373);
-	next;
-	if (select("Exchange.:Cancel.") == 2)
-		close;
-	if (countitem(.@soul) < 10 || countitem(.@pow[.@i]) < 100 || countitem(1000373) < 20) {
-		mes "[OSC0007]";
-		mes "You're missing some of it.";
-		close;
-	}
-	if (checkweight(.@item[.@i],1) == 0) {
-		mes "[OSC0007]";
-		mes "You can't carry it. Make some room first.";
-		close;
-	}
-	delitem .@soul,10;
-	delitem .@pow[.@i],100;
-	delitem 1000373,20;	// Meteorite_Fragment
-	getitem .@item[.@i],1;
-	mes "[OSC0007]";
-	mes "Exchanged. Wear it well.";
 	close;
 }
+
+// The Nebula gear's enchants (the official tables 7-13, in dialogue: see
+// npc/wse_dialog.txt). Shown once a character has beaten one of the
+// tower's two owners.
+e_tower,81,110,4	script(CLOAKED)	OSC0008#wsct	4_VENDING_MACHINE2,{
+	mes "[OSC0008]";
+	mes "OSC0008, Oscar's tuning unit. I wake the stars sleeping in the Nebula gear. Which piece?";
+	next;
+	.@s = select("Nebula Armor of Power.:Nebula Armor of Stamina.:Nebula Suit of Concentration.:Nebula Suit of Creative.:Nebula Robe of Spell.:Nebula Robe of Wisdom.:A Signet of Star (Power to Wisdom).:Leave.");
+	if (.@s == 8)
+		close;
+	callfunc "F_WSE_Enchant", 6 + .@s, "[OSC0008]";
+	end;
+OnPCLoadMapEvent:
+	if (strcharinfo(3) == "e_tower" && (isbegin_quest(12515) == 2 || isbegin_quest(12518) == 2))
+		cloakoffnpcself strnpcinfo(0);
+	end;
+OnInit:
+	setunittitle getnpcid(0), "<Nebula Enchantment>";
+	end;
+}
+e_tower	mapflag	loadevent
 
 // ------------------------------------------------------------
 // The floors (1@ch_t)
 // ------------------------------------------------------------
 // Rooms in climbing order: their lower-left corners. The entry is at
-// (+44,+9) in each room, its stairway at (+20,+42).
+// (+44,+9) in each room, its stairway at (+20,+42), the blue brazier at
+// (+46,+14).
 function	script	F_WSCT_Room	{
 	setarray .@x, 4,88,176,262,346,4,88,176,262,346,4,88,176,262,346,4,88,176,262,346,4,88,176,262,346;
 	setarray .@y, 174,174,174,174,174,90,90,90,90,90,4,4,4,4,4,346,346,346,346,346,262,262,262,262,262;
@@ -207,15 +305,21 @@ function	script	F_WSCT_Room	{
 }
 
 // 'floor: the floor being fought (0 before anyone arrives); 'cleared: the
-// highest floor cleared; 'route: 0 climbing, 1 Naght Sieger, 2 Betelgeuse.
+// highest floor cleared; 'route: 0 climbing, 1 Naght Sieger, 2 Betelgeuse;
+// 'left: monsters still to beat; 'skips: braziers used; 'boss: the GID of
+// the floor's boss.
 1@ch_t,1,1,0	script	#wsct	-1,{
 	end;
 OnInstanceInit:
 	'floor = 0;
 	'cleared = 0;
 	'route = 0;
+	'skips = 0;
+	'boss = 0;
 	for (.@i = 1; .@i <= 25; .@i++)
 		disablenpc instance_npcname("Stairway#wsct" + .@i);
+	for (.@i = 1; .@i <= 5; .@i++)
+		disablenpc instance_npcname("Blue Brazier#wsct" + .@i);
 	end;
 
 // Starts floor getarg(0): its monsters, and moves everyone from the
@@ -224,44 +328,54 @@ S_Floor:
 	.@n = getarg(0);
 	.@m$ = instance_mapname("1@ch_t");
 	if ('floor > 0) {
-		disablenpc instance_npcname("Stairway#wsct" + (callfunc("F_WSCT_Room", 'floor, .@px, .@py) + 1));
+		.@r = callfunc("F_WSCT_Room", 'floor, .@px, .@py);
+		disablenpc instance_npcname("Stairway#wsct" + (.@r + 1));
+		if (.@r % 5 == 0)
+			disablenpc instance_npcname("Blue Brazier#wsct" + (.@r / 5 + 1));
+		killmonster .@m$, instance_npcname("#wsct") + "::OnMob";
 	}
+	if ('boss && unitexists('boss))
+		unitkill 'boss;
+	'boss = 0;
 	'floor = .@n;
-	callfunc "F_WSCT_Room", .@n, .@x, .@y;
+	.@r = callfunc("F_WSCT_Room", .@n, .@x, .@y);
 	if (.@px || .@py)
 		areawarp .@m$, .@px, .@py, .@px + 49, .@py + 49, .@m$, .@x + 44, .@y + 9;
-	// Normal monsters 20998-21047 (the four boss kinds aside).
-	setarray .@boss, 21002, 21019, 21031, 21044;
-	.@lap = (.@n - 1) / 25;
-	.@count = 3;
-	'left = 3;
+	// 2 to 14 of the old tower's monsters (20998-21047), at 42% of Divine
+	// Pride's strength on floor 1, 100% on floor 25, 220% on floor 75.
+	.@count = rand(2, 14);
+	.@hp_pct = 40 + 12 * .@n / 5;
+	.@atk_pct = 60 + 8 * .@n / 5;
+	'left = .@count;
 	.@e$ = instance_npcname("#wsct") + "::OnMob";
 	for (.@i = 0; .@i < .@count; .@i++) {
-		if (.@i == 0 && .@n % 5 == 0)
-			.@mob = .@boss[rand(4)];
-		else {
-			do {
-				.@mob = rand(20998, 21047);
-			} while (inarray(.@boss, .@mob) != -1);
-		}
-		areamonster .@m$, .@x + 4, .@y + 4, .@x + 45, .@y + 45, "--ja--", .@mob, 1, .@e$;
-		if (.@lap > 0) {
-			getunitdata $@mobid[0], .@d;
-			.@hp = .@d[UMOB_MAXHP] / 2 * (2 + .@lap);
-			setunitdata $@mobid[0], UMOB_MAXHP, .@hp;
-			setunitdata $@mobid[0], UMOB_HP, .@hp;
-			setunitdata $@mobid[0], UMOB_ATKMIN, .@d[UMOB_ATKMIN] / 2 * (2 + .@lap);
-			setunitdata $@mobid[0], UMOB_ATKMAX, .@d[UMOB_ATKMAX] / 2 * (2 + .@lap);
-		}
+		areamonster .@m$, .@x + 4, .@y + 4, .@x + 45, .@y + 45, "--ja--", rand(20998, 21047), 1, .@e$;
+		.@gid = $@mobid[0];
+		getunitdata .@gid, .@d;
+		.@hp = .@d[UMOB_MAXHP] / 100 * .@hp_pct;
+		setunitdata .@gid, UMOB_MAXHP, .@hp;
+		setunitdata .@gid, UMOB_HP, .@hp;
+		setunitdata .@gid, UMOB_ATKMIN, .@d[UMOB_ATKMIN] * .@atk_pct / 100;
+		setunitdata .@gid, UMOB_ATKMAX, .@d[UMOB_ATKMAX] * .@atk_pct / 100;
 	}
-	mapannounce .@m$, "Constellation Tower: floor " + .@n + (.@n % 5 == 0 ? ". One of the old tower's masters guards it." : "."), bc_map, "0x88CCFF";
+	// Every 5th floor: one of the old tower's bosses, not needed to go on.
+	if (.@n % 5 == 0) {
+		areamonster .@m$, .@x + 15, .@y + 15, .@x + 35, .@y + 35, "--ja--", rand(21325, 21359), 1;
+		'boss = $@mobid[0];
+		getunitdata 'boss, .@d;
+		.@b$ = getmonsterinfo(.@d[UMOB_CLASS], MOB_NAME);
+		mapannounce .@m$, "Constellation Tower: floor " + .@n + ". " + .@count + " monsters, and " + .@b$ + ", one of the old tower's masters, guards it.", bc_map, "0x88CCFF";
+	} else
+		mapannounce .@m$, "Constellation Tower: floor " + .@n + ". " + .@count + " monsters.", bc_map, "0x88CCFF";
+	// The brazier at the start of floors 1, 6, 11, ...
+	if (.@n % 5 == 1 && .@n + 4 <= 75)
+		enablenpc instance_npcname("Blue Brazier#wsct" + (.@r / 5 + 1));
 	return;
 
 OnStart:
 	if ('floor > 0)
 		end;
-	callsub S_Floor, max(1, $@wsct_start[instance_id()]);
-	$@wsct_start[instance_id()] = 0;
+	callsub S_Floor, 1;
 	end;
 
 OnClimb:
@@ -270,25 +384,26 @@ OnClimb:
 	callsub S_Floor, 'floor + 1;
 	end;
 
+OnSkip:
+	if ('cleared >= 'floor || 'route || 'floor % 5 != 1)
+		end;
+	'skips++;
+	callsub S_Floor, 'floor + 4;
+	end;
+
 OnMob:
 	'left--;
 	if ('left > 0)
 		end;
 	'cleared = 'floor;
 	.@m$ = instance_mapname("1@ch_t");
-	// Everyone in the tower gets Meteorite Powder: 2 a floor, 5 on every 5th.
-	.@p = ('floor % 5 == 0) ? 5 : 2;
-	.@n = getmapunits(BL_PC, .@m$, .@pc);
-	for (.@i = 0; .@i < .@n; .@i++) {
-		if (attachrid(.@pc[.@i])) {
-			getitem 1000372, .@p;	// Meteorite_Dust
-			detachrid;
-		}
-	}
-	enablenpc instance_npcname("Stairway#wsct" + (callfunc("F_WSCT_Room", 'floor, .@x, .@y) + 1));
+	.@r = callfunc("F_WSCT_Room", 'floor, .@x, .@y);
+	enablenpc instance_npcname("Stairway#wsct" + (.@r + 1));
+	if (.@r % 5 == 0)
+		disablenpc instance_npcname("Blue Brazier#wsct" + (.@r / 5 + 1));
 	if ('floor == 25)
 		mapannounce .@m$, "Floor 25 is clear. The stairway leads on, or down to the hall where the tower's old owner was thrown.", bc_map, "0x88CCFF";
-	else if ('floor == 50 || 'floor == 70)
+	else if ('floor == 50 || 'floor == 75)
 		mapannounce .@m$, "Floor " + 'floor + " is clear. Above the stairway, something vast is waiting: the tower's new owner.", bc_map, "0xFF4444";
 	else
 		mapannounce .@m$, "Floor " + 'floor + " is clear. The stairway is open.", bc_map, "0x88CCFF";
@@ -317,6 +432,33 @@ OnTouch:
 	end;
 }
 
+// The blue braziers of rooms 1, 6, 11, 16 and 21: floors 1, 6, 11, ...
+1@ch_t,50,188,4	script	Blue Brazier#wsct1	4_ENERGY_BLUE,{
+	if ('floor % 5 != 1 || 'cleared >= 'floor || 'route)
+		end;
+	.@cost = 50 + 25 * 'skips;
+	mes "^4d4dffA cold blue flame. It remembers the old tower's shortcuts: it can carry everyone in this room up to floor " + ('floor + 4) + ".^000000";
+	mes "^4d4dffIt asks for " + .@cost + " " + mesitemlink(1000372) + ".^000000";
+	next;
+	if (select("Feed the flame.:Leave it.") == 2)
+		close;
+	if ('floor % 5 != 1 || 'cleared >= 'floor || 'route)
+		close;
+	if (countitem(1000372) < .@cost) {
+		mes "^4d4dffThe flame flickers. You need " + .@cost + " Meteorite Powder.^000000";
+		close;
+	}
+	delitem 1000372, .@cost;	// Meteorite_Dust
+	close2;
+	specialeffect EF_TELEPORTATION2;
+	donpcevent instance_npcname("#wsct") + "::OnSkip";
+	end;
+}
+1@ch_t,50,104,4	duplicate(Blue Brazier#wsct1)	Blue Brazier#wsct2	4_ENERGY_BLUE
+1@ch_t,50,18,4	duplicate(Blue Brazier#wsct1)	Blue Brazier#wsct3	4_ENERGY_BLUE
+1@ch_t,50,360,4	duplicate(Blue Brazier#wsct1)	Blue Brazier#wsct4	4_ENERGY_BLUE
+1@ch_t,50,276,4	duplicate(Blue Brazier#wsct1)	Blue Brazier#wsct5	4_ENERGY_BLUE
+
 1@ch_t,24,216,0	script	Stairway#wsct1	WARPNPC,1,1,{
 	end;
 OnTouch:
@@ -330,30 +472,33 @@ OnTouch:
 	}
 	if ('cleared != 'floor)
 		end;
-	if ('floor == 25 || 'floor == 50 || 'floor == 70) {
+	if ('floor == 25 || 'floor == 50 || 'floor == 75) {
 		mes "^4d4dffThe stairway splits. One way climbs on;";
 		if ('floor == 25)
 			mes "the other goes down to the hall where the tower's old owner was thrown. Going there ends the climb.^000000";
 		else
 			mes "the other goes up to the throne of the tower's new owner, Betelgeuse. Going there ends the climb.^000000";
 		next;
-		if ('floor == 70)
-			.@c = select("Go to Betelgeuse's throne.");
+		if ('floor == 75)
+			.@c = select(":Go to Betelgeuse's throne.");
 		else if ('floor == 25)
 			.@c = select("Keep climbing.:Go down to the outcast's hall.");
 		else
-			.@c = select("Keep climbing.:Go to Betelgeuse's throne.");
+			.@c = select("Keep climbing (Betelgeuse grows stronger by floor 75).:Go to Betelgeuse's throne.");
 		close2;
 		if ('cleared != 'floor || 'route)
 			end;
-		if ('floor == 70 || .@c == 2) {
-			'route = ('floor == 25) ? 1 : 2;
-			if ('route == 1) {
+		if (.@c == 2) {
+			.@m$ = instance_mapname("1@ch_t");
+			if ('floor == 25) {
+				'route = 1;
 				donpcevent instance_npcname("#wsct_hall") + "::OnStart";
-				areawarp instance_mapname("1@ch_t"), 0, 0, 399, 399, instance_mapname("2@ch_t"), 90, 85;
+				areawarp .@m$, 0, 0, 399, 399, instance_mapname("2@ch_t"), 90, 85;
 			} else {
-				'hard = ('floor == 70) ? 2 : 0;
-				areawarp instance_mapname("1@ch_t"), 0, 0, 399, 399, instance_mapname("3@ch_t"), 31, 12;
+				'route = 2;
+				'last = 'floor;
+				donpcevent instance_npcname("#wsct_throne") + "::OnRoll";
+				areawarp .@m$, 0, 0, 399, 399, instance_mapname("3@ch_t"), 31, 12;
 			}
 			end;
 		}
@@ -390,7 +535,8 @@ OnTouch:
 // The outcast's hall (2@ch_t): Naght Sieger
 // ------------------------------------------------------------
 // Divine Pride lists him at 2,000,000,000 HP. The easy way out of the
-// tower after 25 floors: here he has 600,000,000.
+// tower after 25 floors: here he has 600,000,000. Four Thorny Skeletons
+// guard him, and the fallen ones come back every 15 seconds.
 2@ch_t,1,1,0	script	#wsct_hall	-1,{
 	end;
 OnInstanceInit:
@@ -402,11 +548,23 @@ OnStart:
 		end;
 	'hall = 1;
 	.@m$ = instance_mapname("2@ch_t");
+	.@e$ = instance_npcname("#wsct_hall") + "::OnMinion";
 	monster .@m$, 89, 100, "Naght Sieger", 20996, 1, instance_npcname("#wsct_hall") + "::OnBoss";
-	setunitdata $@mobid[0], UMOB_MAXHP, 600000000;
-	setunitdata $@mobid[0], UMOB_HP, 600000000;
-	areamonster .@m$, 70, 72, 108, 112, "Dead Soul", 20995, 6;
+	'naght = $@mobid[0];
+	setunitdata 'naght, UMOB_MAXHP, 600000000;
+	setunitdata 'naght, UMOB_HP, 600000000;
+	areamonster .@m$, 82, 93, 96, 107, "Thorny Skeleton", 20997, 4, .@e$;
 	mapannounce .@m$, "Naght Sieger: \"Another climber... He threw me down here like a broken sword. I'll throw YOU further.\"", bc_map, "0xFF4444";
+	while ('hall == 1) {
+		sleep 15000;
+		if ('hall != 1)
+			break;
+		.@alive = mobcount(.@m$, .@e$);
+		if (.@alive < 4)
+			areamonster .@m$, 82, 93, 96, 107, "Thorny Skeleton", 20997, 4 - .@alive, .@e$;
+	}
+	end;
+OnMinion:
 	end;
 OnBoss:
 	'hall = 2;
@@ -423,8 +581,8 @@ OnBoss:
 	if (wsct_iid == instance_id()) {
 		wsct_iid = 0;
 		getitem 1000396,1;	// Naght_Sieger_Soul
-		getitem 1000373,1;	// Meteorite_Fragment
-		getitem 1000372,20;	// Meteorite_Dust
+		getitem 1000373,5;	// Meteorite_Fragment
+		getitem 1000372,2;	// Meteorite_Dust
 		if (isbegin_quest(12518) == 0)
 			setquest 12518;
 		if (isbegin_quest(12518) == 1)
@@ -433,7 +591,7 @@ OnBoss:
 			setquest 12519;
 		if (isbegin_quest(12519) == 1)
 			completequest 12519;
-		mes "^4d4dffAmong the broken armor: a shard of Naght Sieger's soul, and dust from the stars.^000000";
+		mes "^4d4dffAmong the broken armor: a shard of Naght Sieger's soul, and fragments of the stars.^000000";
 		mes "^4d4dffSo the old owner lived, thrown out of his own throne. The new one must be far stronger.^000000";
 		next;
 	}
@@ -448,35 +606,117 @@ OnBoss:
 // ------------------------------------------------------------
 // Betelgeuse's throne (3@ch_t)
 // ------------------------------------------------------------
-// The ante-room (4-59, 8-101) holds the fountain and the throne gate; the
-// throne room (126-185, 64-150). 'hard: 0 from floor 50, 2 from floor 70,
-// plus one per fountain blessing, up to 6. Betelgeuse: 800,000,000 HP and
-// 200,000,000 more per level (Divine Pride: 2,000,000,000), +10% attack
-// per level.
+// The ante-room (4-64, 82-101) holds the fountain (46,90) and the throne
+// door (32,100); the throne room (126-185, 64-150).
+// 'star[0..4]: Health, Attack, Recovery, Defense, Traps (0-5 stars);
+// 'sealed: bit k set = stat k sealed at 0; 'cap: the most stars (3 after
+// floor 50, 5 after floor 75); 'rollmin: the fewest a roll gives.
+
+// What stat getarg(0) adds to Betelgeuse's strength at getarg(1) stars (%).
+function	script	F_WSCT_Pct	{
+	switch (getarg(0)) {
+	case 0: setarray .@t, 0, 15, 30, 45, 60, 75; break;	// Health
+	case 1: setarray .@t, 0, 20, 40, 60, 80, 100; break;	// Attack
+	case 2: setarray .@t, 0, 30, 60, 90, 120, 150; break;	// Recovery
+	case 3: setarray .@t, 0, 50, 100, 150, 200, 250; break;	// Defense
+	case 4: setarray .@t, 0, 85, 170, 255, 340, 425; break;	// Traps
+	}
+	return .@t[getarg(1)];
+}
+
 3@ch_t,1,1,0	script	#wsct_throne	-1,{
 	end;
 OnInstanceInit:
 	'throne = 0;
-	'hard = 0;
+	'sealed = 0;
 	disablenpc instance_npcname("Star Chest#wsct");
+	end;
+// Betelgeuse's strength (%) from the stars.
+S_Diff:
+	.@d = 0;
+	for (.@k = 0; .@k < 5; .@k++)
+		.@d += callfunc("F_WSCT_Pct", .@k, 'star[.@k]);
+	return .@d;
+OnRoll:
+	'cap = ('last >= 75) ? 5 : 3;
+	'rollmin = ('last >= 75) ? 3 : 1;
+	for (.@k = 0; .@k < 5; .@k++)
+		'star[.@k] = rand('rollmin, 'cap);
 	end;
 OnFight:
 	if ('throne != 0)
 		end;
 	'throne = 1;
 	.@m$ = instance_mapname("3@ch_t");
-	monster .@m$, 155, 120, "Betelgeuse", 20994, 1, instance_npcname("#wsct_throne") + "::OnBoss";
-	.@hp = 800000000 + 200000000 * min('hard, 6);
-	setunitdata $@mobid[0], UMOB_MAXHP, .@hp;
-	setunitdata $@mobid[0], UMOB_HP, .@hp;
-	getunitdata $@mobid[0], .@d;
-	setunitdata $@mobid[0], UMOB_ATKMIN, .@d[UMOB_ATKMIN] * (10 + 'hard) / 10;
-	setunitdata $@mobid[0], UMOB_ATKMAX, .@d[UMOB_ATKMAX] * (10 + 'hard) / 10;
-	setarray .@tx, 140, 170, 140, 170;
-	setarray .@ty, 105, 105, 135, 135;
-	for (.@i = 0; .@i < 4; .@i++)
-		monster .@m$, .@tx[.@i], .@ty[.@i], "Thorn of Mana", 20997, 1;
-	mapannounce .@m$, "Betelgeuse: \"You climbed my tower to kneel at my throne? Then kneel.\" (strength " + (100 + 50 * 'hard) + "%)", bc_map, "0xFF4444";
+	.@diff = callsub(S_Diff);
+	'diff = .@diff;
+	.@h = callfunc("F_WSCT_Pct", 0, 'star[0]);
+	.@a = callfunc("F_WSCT_Pct", 1, 'star[1]);
+	.@r = callfunc("F_WSCT_Pct", 2, 'star[2]);
+	.@f = callfunc("F_WSCT_Pct", 3, 'star[3]);
+	.@t = callfunc("F_WSCT_Pct", 4, 'star[4]);
+	monster .@m$, 156, 120, "Betelgeuse", 20994, 1, instance_npcname("#wsct_throne") + "::OnBoss";
+	.@gid = $@mobid[0];
+	'betel = .@gid;
+	// 1,000,000,000 HP, +Health%; attack +Attack%; defense +Defense%.
+	.@hp = 10000000 * (100 + .@h);
+	setunitdata .@gid, UMOB_MAXHP, .@hp;
+	setunitdata .@gid, UMOB_HP, .@hp;
+	getunitdata .@gid, .@d;
+	setunitdata .@gid, UMOB_ATKMIN, .@d[UMOB_ATKMIN] * (100 + .@a) / 100;
+	setunitdata .@gid, UMOB_ATKMAX, .@d[UMOB_ATKMAX] * (100 + .@a) / 100;
+	setunitdata .@gid, UMOB_DEF, .@d[UMOB_DEF] * (100 + .@f) / 100;
+	setunitdata .@gid, UMOB_MDEF, .@d[UMOB_MDEF] * (100 + .@f) / 100;
+	mapannounce .@m$, "Betelgeuse: \"You climbed my tower to kneel at my throne? Then kneel.\" (strength " + .@diff + "%)", bc_map, "0xFF4444";
+	// Every 5 seconds: his Dead Souls rise every 20 (two, six at most),
+	// his traps every 15, and he recovers every 30.
+	.@e$ = instance_npcname("#wsct_throne") + "::OnSoul";
+	.@tick = 0;
+	while ('throne == 1) {
+		sleep 5000;
+		if ('throne != 1 || !unitexists(.@gid))
+			break;
+		.@tick += 5;
+		if (.@tick % 20 == 0) {
+			.@alive = mobcount(.@m$, .@e$);
+			if (.@alive < 6)
+				areamonster .@m$, 140, 105, 172, 135, "Dead Soul", 20995, min(2, 6 - .@alive), .@e$;
+		}
+		if (.@r > 0 && .@tick % 30 == 0) {
+			getunitdata .@gid, .@d;
+			setunitdata .@gid, UMOB_HP, min(.@d[UMOB_MAXHP], .@d[UMOB_HP] + .@d[UMOB_MAXHP] / 1500 * .@r);
+			unittalk .@gid, "Betelgeuse: The stars mend me.";
+		}
+		if (.@t > 0 && .@tick % 15 == 0) {
+			// A trap snaps shut under each player two seconds after its
+			// glow: step away. Damage: Traps% / 25 of max HP.
+			deletearray .@pc;
+			.@n = getmapunits(BL_PC, .@m$, .@pc);
+			for (.@i = 0; .@i < .@n; .@i++) {
+				if (attachrid(.@pc[.@i])) {
+					getmapxy(.@mm$, .@px[.@i], .@py[.@i]);
+					if (.@mm$ == .@m$ && .@px[.@i] >= 126)
+						specialeffect2 EF_BEGINSPELL_N5;
+					else
+						.@px[.@i] = -10;
+					detachrid;
+				}
+			}
+			sleep 2000;
+			for (.@i = 0; .@i < .@n; .@i++) {
+				if (.@px[.@i] < 0 || !attachrid(.@pc[.@i]))
+					continue;
+				getmapxy(.@mm$, .@x, .@y);
+				if (.@mm$ == .@m$ && Hp > 0 && distance(.@x, .@y, .@px[.@i], .@py[.@i]) <= 1) {
+					specialeffect2 EF_FIREPILLARBOMB;
+					percentheal -(.@t / 25), 0;
+				}
+				detachrid;
+			}
+		}
+	}
+	end;
+OnSoul:
 	end;
 OnBoss:
 	'throne = 2;
@@ -487,36 +727,63 @@ OnBoss:
 	end;
 }
 
-3@ch_t,20,88,4	script	Fountain#wsct	4_ENERGY_BLUE,{
+// Betelgeuse's fountain, on its model at the right of the ante-room.
+3@ch_t,46,90,4	script	Fountain#wsct	HIDDEN_NPC,{
+	setarray .@stat$, "Health", "Attack", "Recovery", "Defense", "Traps";
 	if ('throne != 0) {
 		mes "^4d4dffThe fountain is still.^000000";
 		close;
 	}
-	mes "^4d4dffBetelgeuse's fountain. It amplifies its master's power, and the reward of those who beat him.^000000";
-	mes "^4d4dffHis strength now: " + (100 + 50 * 'hard) + "%.^000000";
-	next;
-	if ('hard >= 6) {
-		mes "^4d4dffIt can't make him any stronger.^000000";
-		close;
+	while (1) {
+		.@diff = 0;
+		mes "^4d4dffBetelgeuse's fountain. It feeds its master's power, and the reward of those who beat him. Up to " + 'cap + " stars each:^000000";
+		for (.@k = 0; .@k < 5; .@k++) {
+			.@p = callfunc("F_WSCT_Pct", .@k, 'star[.@k]);
+			.@diff += .@p;
+			mes "- " + .@stat$[.@k] + ": " + (('sealed & (1 << .@k)) ? "sealed" : 'star[.@k] + " star" + ('star[.@k] == 1 ? "" : "s")) + " (+" + .@p + "%)";
+		}
+		mes "^4d4dffHis strength: " + .@diff + "%. His chest: " + max(1, .@diff / 100 - 1) + " share" + (.@diff >= 300 ? "s" : "") + ".^000000";
+		next;
+		.@s = select("Stir it: reroll every stat (20 Meteorite Powder).:Feed one stat to the full (150 Meteorite Powder).:Seal one stat (300 Meteorite Powder).:Leave it.");
+		if (.@s == 4)
+			close;
+		setarray .@cost, 20, 150, 300;
+		.@c = .@cost[.@s - 1];
+		if (.@s > 1) {
+			.@menu$ = "";
+			for (.@k = 0; .@k < 5; .@k++)
+				.@menu$ += ((('sealed & (1 << .@k)) || (.@s == 2 && 'star[.@k] >= 'cap)) ? "" : .@stat$[.@k]) + ":";
+			.@k = select(.@menu$ + "Cancel.") - 1;
+			if (.@k == 5)
+				close;
+		}
+		if (countitem(1000372) < .@c) {
+			mes "^4d4dffYou need " + .@c + " " + mesitemlink(1000372) + ".^000000";
+			close;
+		}
+		if ('throne != 0)
+			close;
+		delitem 1000372, .@c;	// Meteorite_Dust
+		if (.@s == 1) {
+			for (.@k = 0; .@k < 5; .@k++) {
+				if (!('sealed & (1 << .@k)))
+					'star[.@k] = rand('rollmin, 'cap);
+			}
+		} else if (.@s == 2)
+			'star[.@k] = 'cap;
+		else {
+			'star[.@k] = 0;
+			'sealed = 'sealed | (1 << .@k);
+		}
+		specialeffect EF_BEGINSPELL_N5;
 	}
-	if (select("Pour in 100 Meteorite Powder (+50%).:Leave it.") == 2)
-		close;
-	if (countitem(1000372) < 100) {
-		mes "^4d4dffYou need 100 " + mesitemlink(1000372) + ".^000000";
-		close;
-	}
-	if ('throne != 0 || 'hard >= 6)
-		close;
-	delitem 1000372,100;	// Meteorite_Dust
-	'hard++;
-	specialeffect EF_BEGINSPELL_N5;
-	mes "^4d4dffThe fountain flares. Betelgeuse's strength: " + (100 + 50 * 'hard) + "%.^000000";
-	close;
+	end;
 }
 
-3@ch_t,30,90,4	script	Throne Gate#wsct	GATE_SKYBLUE,{
+// The throne door at the top of the ante-room.
+3@ch_t,32,100,4	script	Throne Gate#wsct	GATE_SKYBLUE,{
 	if ('throne == 0) {
-		mes "^4d4dffBehind the gate, the throne of the Constellation Tower. Betelgeuse's strength: " + (100 + 50 * 'hard) + "%.^000000";
+		mes "^4d4dffBehind the gate, the throne of the Constellation Tower. Once you're through, the fountain can't change him any more.^000000";
 		next;
 		if (select("Go to the throne.:Not yet.") == 2)
 			close;
@@ -533,21 +800,35 @@ OnBoss:
 		end;
 	if (wsct_iid == instance_id()) {
 		wsct_iid = 0;
+		// One share at 200% or less, one more for every 100% above it
+		// (Shining Moon: 300% pays double, 600% five times).
+		.@sh = max(1, 'diff / 100 - 1);
 		getitem 1000397,1;	// Betelgeuse_Soul
-		getitem 1000373, 2 + 'hard;	// Meteorite_Fragment
-		getitem rand(1000398,1000403), 5 + 5 * 'hard;	// one of the six typed Meteorite Powders
-		if (rand(100) < 5 + 5 * 'hard)
+		getitem 1000373, 2 * .@sh;	// Meteorite_Fragment
+		// Two of the six typed powders, and one typed fragment.
+		.@p1 = rand(1000398, 1000403);
+		.@p2 = rand(1000398, 1000403);
+		getitem .@p1, 3 * .@sh;
+		getitem .@p2, 3 * .@sh;
+		getitem rand(1000442, 1000447), .@sh;
+		// RockMMO: 5% at the easiest, 30% at the hardest.
+		if (rand(100) < min(30, 5 * .@sh))
 			getitem 1001599,1;	// Unknown_Meteorite_F
+		// iROWiki: from 400%, a chance of one of his costumes.
+		if ('diff >= 400 && rand(1000) < 10 + 5 * ('diff - 400) / 100) {
+			setarray .@cos, 400147, 400148, 400149;
+			getitem .@cos[rand(3)], 1;
+		}
 		if (isbegin_quest(12515) == 0)
 			setquest 12515;
 		if (isbegin_quest(12515) == 1)
 			completequest 12515;
-		// Over 300% and over 600% strength: the fountain's two feats.
-		if ('hard >= 5 && isbegin_quest(12516) == 0) {
+		// The fountain's two feats: 400% and 800%.
+		if ('diff >= 400 && isbegin_quest(12516) == 0) {
 			setquest 12516;
 			completequest 12516;
 		}
-		if ('hard >= 6 && isbegin_quest(12517) == 0) {
+		if ('diff >= 800 && isbegin_quest(12517) == 0) {
 			setquest 12517;
 			completequest 12517;
 		}

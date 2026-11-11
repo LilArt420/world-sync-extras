@@ -6189,4 +6189,118 @@ QuestInfoList = {
 		Description = { "This is a daily quest: it can be done again after 4 AM." },
 		Summary = "Reset at 04:00"
 	},
+	[64250] = {
+		Title = "A Hazy Gate",
+		IconName = "ico_ep.bmp",
+		Description = { "Rubiel's gate on the Geffen field of the second world has gone hazy, and she wants to show you her safe area behind it. Enter the Twisted Land of Darkness through the <NAVI>[portal]<INFO>ygg_edge,31,117,0,101,0</INFO></NAVI>, take the <NAVI>[red portal]<INFO>ygg_roots,157,242,0,101,0</INFO></NAVI> at the great intersection, and use the <NAVI>[Recon Point]<INFO>hem_fild,180,263,0,101,0</INFO></NAVI> to enter Rubiel's safe area. Talk to Rubiel inside." },
+		Summary = "Meet Rubiel in her safe area"
+	},
+	[64251] = {
+		Title = "A Hazy Gate",
+		IconName = "ico_ep.bmp",
+		Description = { "The erosion is thickening around Rubiel's gate. Leave her safe area by the Recon Point and tell <NAVI>[Minuel]<INFO>hem_fild,329,191,0,101,0</INFO></NAVI>, at the shaking crossroads on the east side of the Geffen field, that Rubiel sent you." },
+		Summary = "Talk to Minuel"
+	},
+	[64252] = {
+		Title = "Abandoned Lab Zero Cell",
+		IconName = "ico_ep.bmp",
+		Description = { "While scouting, Robin found a new erosion zone, and Rubiel asked you to go with her. Go into the Land of Darkness through the <NAVI>[portal]<INFO>ygg_edge,31,117,0,101,0</INFO></NAVI>, take the way into Erosion Zone 1 at the <NAVI>[north end of the roots]<INFO>ygg_roots,151,345,0,101,0</INFO></NAVI>, and find Newt at the <NAVI>[erosion site]<INFO>ch1fild1,168,38,0,101,0</INFO></NAVI>." },
+		Summary = "To the erosion zone"
+	},
+	[64253] = {
+		Title = "Abandoned Lab Zero Cell",
+		IconName = "ico_ep.bmp",
+		Description = { "Newt confirmed it is an erosion zone. For a closer look, go to the place <NAVI>[Robin]<INFO>ch1fild1,101,84,0,101,0</INFO></NAVI> marked." },
+		Summary = "Erosion zone investigation 1"
+	},
+	[64254] = {
+		Title = "Abandoned Lab Zero Cell",
+		IconName = "ico_ep.bmp",
+		Description = { "Robin wants to split up and search. Look for a <NAVI>[trace]<INFO>ch1fild1,25,132,0,101,0</INFO></NAVI> in the west of the zone that tells what this place was." },
+		Summary = "Erosion zone investigation 2"
+	},
+	[64255] = {
+		Title = "Abandoned Lab Zero Cell",
+		IconName = "ico_ep.bmp",
+		Description = { "You found papers from an abandoned facility called Zero Cell. Show them to <NAVI>[Robin]<INFO>ch1fild1,101,84,0,101,0</INFO></NAVI>." },
+		Summary = "Report to Robin"
+	},
+	[64256] = {
+		Title = "Abandoned Lab Zero Cell",
+		IconName = "ico_ep.bmp",
+		Description = { "Robin and you take the papers to the camp where you agreed to meet <NAVI>[Newt]<INFO>ch1fild1,106,84,0,101,0</INFO></NAVI>." },
+		Summary = "Join Newt"
+	},
+	[64257] = {
+		Title = "Resistance: Encroached Geffenia",
+		IconName = "ico_ep.bmp",
+		Description = { "Rubiel's gate magic keeps the erosion of West and East Encroached Geffenia off you for one hour." },
+		Summary = "Encroached Geffenia, 1 hour"
+	},
+	[64258] = {
+		Title = "Resistance: Ruined Valkyrie Realm",
+		IconName = "ico_ep.bmp",
+		Description = { "Minuel's heraldic magic keeps the erosion of the Ruined Valkyrie Realm off you for one hour." },
+		Summary = "Ruined Valkyrie Realm, 1 hour"
+	},
+	[64259] = {
+		Title = "Mana Resistance Seal: Lux and Nox",
+		IconName = "ico_ep.bmp",
+		Description = { "Newt's seal lets you into Zero Cell Lux and Zero Cell Nox for one hour. Talk to <NAVI>[Newt]<INFO>ch1fild1,106,84,0,101,0</INFO></NAVI> to go in. When it runs out, the sector pushes you out." },
+		Summary = "Lux and Nox, 1 hour"
+	},
+	[64260] = {
+		Title = "Mana Resistance Seal: Vita and Ark",
+		IconName = "ico_ep.bmp",
+		Description = { "Newt's stronger seal lets you into Zero Cell Vita and Zero Cell Ark for one hour. Talk to <NAVI>[Newt]<INFO>ch1fild1,106,84,0,101,0</INFO></NAVI> to go in. When it runs out, the sector pushes you out." },
+		Summary = "Vita and Ark, 1 hour"
+	},
+	[64261] = {
+		Title = "Clean Up Zero Cell Lux",
+		IconName = "ico_ep.bmp",
+		Description = { "Get a mana resistance seal from <NAVI>[Newt]<INFO>ch1fild1,106,84,0,101,0</INFO></NAVI>, defeat 300 monsters in Zero Cell Lux, then report to <NAVI>[Robin]<INFO>ch1fild1,101,84,0,101,0</INFO></NAVI>." },
+		Summary = "Zero Cell Lux 300 monsters"
+	},
+	[64262] = {
+		Title = "[Standby] Clean Up Zero Cell Lux",
+		IconName = "ico_ep.bmp",
+		Description = { "You thinned out the monsters in Zero Cell. Visit <NAVI>[Robin]<INFO>ch1fild1,101,84,0,101,0</INFO></NAVI> again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
+	[64263] = {
+		Title = "Clean Up Zero Cell Nox",
+		IconName = "ico_ep.bmp",
+		Description = { "Get a mana resistance seal from <NAVI>[Newt]<INFO>ch1fild1,106,84,0,101,0</INFO></NAVI>, defeat 300 monsters in Zero Cell Nox, then report to <NAVI>[Robin]<INFO>ch1fild1,101,84,0,101,0</INFO></NAVI>." },
+		Summary = "Zero Cell Nox 300 monsters"
+	},
+	[64264] = {
+		Title = "[Standby] Clean Up Zero Cell Nox",
+		IconName = "ico_ep.bmp",
+		Description = { "You thinned out the monsters in Zero Cell. Visit <NAVI>[Robin]<INFO>ch1fild1,101,84,0,101,0</INFO></NAVI> again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
+	[64265] = {
+		Title = "Clean Up Zero Cell Vita",
+		IconName = "ico_ep.bmp",
+		Description = { "Get a mana resistance seal from <NAVI>[Newt]<INFO>ch1fild1,106,84,0,101,0</INFO></NAVI>, defeat 100 monsters in Zero Cell Vita, then report to <NAVI>[Robin]<INFO>ch1fild1,101,84,0,101,0</INFO></NAVI>." },
+		Summary = "Zero Cell Vita 100 monsters"
+	},
+	[64266] = {
+		Title = "[Standby] Clean Up Zero Cell Vita",
+		IconName = "ico_ep.bmp",
+		Description = { "You thinned out the monsters in Zero Cell. Visit <NAVI>[Robin]<INFO>ch1fild1,101,84,0,101,0</INFO></NAVI> again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
+	[64267] = {
+		Title = "Clean Up Zero Cell Ark",
+		IconName = "ico_ep.bmp",
+		Description = { "Get a mana resistance seal from <NAVI>[Newt]<INFO>ch1fild1,106,84,0,101,0</INFO></NAVI>, defeat 100 monsters in Zero Cell Ark, then report to <NAVI>[Robin]<INFO>ch1fild1,101,84,0,101,0</INFO></NAVI>." },
+		Summary = "Zero Cell Ark 100 monsters"
+	},
+	[64268] = {
+		Title = "[Standby] Clean Up Zero Cell Ark",
+		IconName = "ico_ep.bmp",
+		Description = { "You thinned out the monsters in Zero Cell. Visit <NAVI>[Robin]<INFO>ch1fild1,101,84,0,101,0</INFO></NAVI> again after 4 AM." },
+		Summary = "Reset at 04:00"
+	},
 }

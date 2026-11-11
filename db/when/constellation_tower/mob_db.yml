@@ -3,13 +3,15 @@
 # kRO 2023 rebuilt the Endless Tower as the Constellation Tower (1@ch_t,
 # 2@ch_t, 3@ch_t). rAthena has the instance and its maps but only
 # commented-out entries for its monsters: 20994 MD_BETELGEUSE (the new
-# owner), 20995 MD_G_DEADSOUL, 20996 MD_NAGHT_SIEGER (the old owner,
-# cast out), 20997 MD_G_ENTWEIHEN_M (its thorns of mana) and the floor
-# monsters 20998-21047 (MD_T_*, the old tower's monsters made stronger).
+# owner), 20995 MD_G_DEADSOUL (his Dead Souls), 20996 MD_NAGHT_SIEGER
+# (the old owner, cast out), 20997 MD_G_ENTWEIHEN_M (Naght Sieger's Thorny
+# Skeletons), the floor monsters 20998-21047 and the bosses of every fifth
+# floor 21325-21359 (MD_T_*, the old tower's monsters made stronger).
 # Level, HP, attack, defense, resistances, stats, race, element, size,
 # range, speed and drops are Divine Pride's; Attack/Attack2 are converted
 # the way World Sync converts Divine Pride's ranges. Divine Pride shows no
-# experience: ours is an estimate. Divine Pride shows no English names:
+# experience: ours is an estimate (the fifth-floor bosses: 1.5% of their
+# HP, the floor monsters' ratio). Divine Pride shows no English names:
 # the floor monsters keep their classic names. The tower script lowers
 # the two finale bosses' HP to the difficulty you reach (see
 # npc/when/constellation_tower/tower.txt).
@@ -136,7 +138,7 @@ Body:
         StealProtected: true
   - Id: 20997
     AegisName: MD_G_ENTWEIHEN_M
-    Name: Thorn of Mana
+    Name: Thorny Skeleton
     Level: 250
     Hp: 5000000
     BaseExp: 1500000
@@ -1870,3 +1872,1884 @@ Body:
     Drops:
       - Item: Meteorite_Dust
         Rate: 50
+  - Id: 21325
+    AegisName: MD_T_MASTERING
+    Name: Mastering
+    Level: 250
+    Hp: 126000
+    BaseExp: 1890
+    JobExp: 1323
+    Attack: 160
+    Attack2: 80
+    Defense: 96
+    MagicDefense: 62
+    Resistance: 300
+    MagicResistance: 300
+    Str: 70
+    Agi: 42
+    Vit: 42
+    Int: 24
+    Dex: 58
+    Luk: 120
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Plant
+    Element: Water
+    ElementLevel: 1
+    WalkSpeed: 300
+    AttackDelay: 456
+    AttackMotion: 671
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    Drops:
+    - Item: Snowy_Horn
+      Rate: 100
+    - Item: Unripe_Apple
+      Rate: 25
+    - Item: Scarlet_Jewel
+      Rate: 500
+    - Item: Angel's_Safeguard
+      Rate: 500
+    - Item: Light_Granule
+      Rate: 250
+    - Item: Apple
+      Rate: 4000
+    - Item: Apple_Juice
+      Rate: 2000
+    - Item: Mastering_Card
+      Rate: 1
+  - Id: 21326
+    AegisName: MD_T_VAGABOND_WOLF
+    Name: Vagabond Wolf
+    Level: 250
+    Hp: 820300
+    BaseExp: 12304
+    JobExp: 8612
+    Attack: 1037
+    Attack2: 91
+    Defense: 204
+    MagicDefense: 102
+    Resistance: 300
+    MagicResistance: 300
+    Str: 144
+    Agi: 126
+    Vit: 110
+    Int: 58
+    Dex: 216
+    Luk: 30
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Earth
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 466
+    AttackMotion: 685
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    Drops:
+    - Item: Western_Grace
+      Rate: 100
+    - Item: Claw_Of_Wolves
+      Rate: 4000
+    - Item: Golden_Jewel
+      Rate: 750
+    - Item: Star_Dust_Blade
+      Rate: 50
+    - Item: Angel's_Warmth
+      Rate: 500
+    - Item: Light_Granule
+      Rate: 250
+    - Item: Monster_Juice
+      Rate: 25
+    - Item: Vagabond_Wolf_Card
+      Rate: 1
+  - Id: 21327
+    AegisName: MD_T_VOCAL
+    Name: Vocal
+    Level: 250
+    Hp: 331700
+    BaseExp: 4975
+    JobExp: 3482
+    Attack: 141
+    Attack2: 21
+    Defense: 144
+    MagicDefense: 52
+    Resistance: 300
+    MagicResistance: 300
+    Str: 144
+    Agi: 52
+    Vit: 52
+    Int: 60
+    Dex: 106
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Insect
+    Element: Earth
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 441
+    AttackMotion: 649
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    Drops:
+    - Item: Oldman's_Romance
+      Rate: 25
+    - Item: Grasshopper's_Leg
+      Rate: 940
+    - Item: Azure_Jewel
+      Rate: 500
+    - Item: Grasshopper_Doll
+      Rate: 750
+    - Item: Angel's_Arrival
+      Rate: 500
+    - Item: Light_Granule
+      Rate: 250
+    - Item: Guitar_Of_Gentle_Breeze
+      Rate: 5
+    - Item: Vocal_Card
+      Rate: 1
+  - Id: 21328
+    AegisName: MD_T_GOLDEN_BUG
+    Name: Golden Thief Bug
+    Level: 250
+    Hp: 22275000
+    BaseExp: 334125
+    JobExp: 233887
+    MvpExp: 167062
+    Attack: 1903
+    Attack2: 1685
+    Defense: 318
+    MagicDefense: 162
+    Resistance: 300
+    MagicResistance: 300
+    Str: 142
+    Agi: 144
+    Vit: 160
+    Int: 124
+    Dex: 280
+    Luk: 142
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Insect
+    Element: Fire
+    ElementLevel: 2
+    WalkSpeed: 100
+    AttackDelay: 523
+    AttackMotion: 769
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Gold_Ring
+      Rate: 2000
+    - Item: Ora_Ora
+      Rate: 1000
+    - Item: Bs_Making_S
+      Rate: 5000
+    Drops:
+    - Item: Gold
+      Rate: 500
+    - Item: Golden_Mace
+      Rate: 75
+    - Item: Golden_Gear
+      Rate: 125
+    - Item: Golden_Bell
+      Rate: 250
+    - Item: Emperium
+      Rate: 150
+    - Item: Elunium
+      Rate: 1000
+    - Item: Shadowdecon
+      Rate: 50
+    - Item: Golden_Bug_Card
+      Rate: 1
+  - Id: 21329
+    AegisName: MD_T_MISTRESS
+    Name: Mistress
+    Level: 250
+    Hp: 37800000
+    BaseExp: 567000
+    JobExp: 396900
+    MvpExp: 283500
+    Attack: 1970
+    Attack2: 3933
+    Defense: 574
+    MagicDefense: 384
+    Resistance: 300
+    MagicResistance: 300
+    Str: 142
+    Agi: 372
+    Vit: 176
+    Int: 226
+    Dex: 344
+    Luk: 158
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Insect
+    Element: Wind
+    ElementLevel: 4
+    WalkSpeed: 100
+    AttackDelay: 441
+    AttackMotion: 649
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Royal_Jelly
+      Rate: 4000
+    - Item: Scarlet_Jewel
+      Rate: 3000
+    Drops:
+    - Item: Gungnir
+      Rate: 75
+    - Item: Honey
+      Rate: 5000
+    - Item: Coronet
+      Rate: 125
+    - Item: Old_Card_Album
+      Rate: 500
+    - Item: Young_Twig
+      Rate: 5
+    - Item: Zelunium
+      Rate: 50
+    - Item: Red_Square_Bag
+      Rate: 50
+    - Item: Mistress_Card
+      Rate: 1
+  - Id: 21330
+    AegisName: MD_T_MAYA
+    Name: Maya
+    Level: 250
+    Hp: 38000000
+    BaseExp: 570000
+    JobExp: 399000
+    MvpExp: 285000
+    Attack: 1110
+    Attack2: 530
+    Defense: 366
+    MagicDefense: 100
+    Resistance: 300
+    MagicResistance: 300
+    Str: 176
+    Agi: 144
+    Vit: 152
+    Int: 204
+    Dex: 184
+    Luk: 152
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Insect
+    Element: Earth
+    ElementLevel: 4
+    WalkSpeed: 100
+    AttackDelay: 680
+    AttackMotion: 1000
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Crystal_Jewel
+      Rate: 2000
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Old_Violet_Box
+      Rate: 2000
+    Drops:
+    - Item: Queen's_Hair_Ornament
+      Rate: 250
+    - Item: Safety_Ring
+      Rate: 100
+    - Item: Tiara
+      Rate: 100
+    - Item: Armlet_Of_Obedience
+      Rate: 250
+    - Item: Mother's_Nightmare
+      Rate: 5
+    - Item: Zelunium
+      Rate: 50
+    - Item: Dea_Staff
+      Rate: 50
+    - Item: Maya_Card
+      Rate: 1
+  - Id: 21331
+    AegisName: MD_T_PHREEONI
+    Name: Phreeoni
+    Level: 250
+    Hp: 30000000
+    BaseExp: 450000
+    JobExp: 315000
+    MvpExp: 225000
+    Attack: 1385
+    Attack2: 1933
+    Defense: 538
+    MagicDefense: 196
+    Resistance: 300
+    MagicResistance: 300
+    Str: 176
+    Agi: 140
+    Vit: 224
+    Int: 174
+    Dex: 244
+    Luk: 142
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 3
+    WalkSpeed: 200
+    AttackDelay: 694
+    AttackMotion: 1020
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Frozen_Heart
+      Rate: 500
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Star_Crumb
+      Rate: 4000
+    Drops:
+    - Item: Thin_N'_Long_Tongue
+      Rate: 4850
+    - Item: Forturn_Sword
+      Rate: 250
+    - Item: Sucsamad
+      Rate: 75
+    - Item: Jaws_Of_Ant
+      Rate: 2500
+    - Item: Mr_Scream
+      Rate: 150
+    - Item: Shadowdecon
+      Rate: 50
+    - Item: Weihna
+      Rate: 50
+    - Item: Phreeoni_Card
+      Rate: 1
+  - Id: 21332
+    AegisName: MD_T_DRAKE
+    Name: Drake
+    Level: 250
+    Hp: 80450000
+    BaseExp: 1206750
+    JobExp: 844725
+    MvpExp: 603375
+    Attack: 5037
+    Attack2: 2805
+    Defense: 558
+    MagicDefense: 270
+    Resistance: 300
+    MagicResistance: 300
+    Str: 242
+    Agi: 206
+    Vit: 228
+    Int: 214
+    Dex: 324
+    Luk: 142
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 1
+    WalkSpeed: 400
+    AttackDelay: 286
+    AttackMotion: 420
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: White_Potion
+      Rate: 5000
+    - Item: Violet_Jewel
+      Rate: 500
+    - Item: Bs_Making_S
+      Rate: 5000
+    Drops:
+    - Item: Saber_
+      Rate: 300
+    - Item: Ring_Pommel_Saber_
+      Rate: 475
+    - Item: Cutlas
+      Rate: 75
+    - Item: Hae_Dong_Gum_
+      Rate: 200
+    - Item: Corsair
+      Rate: 175
+    - Item: Zelunium
+      Rate: 50
+    - Item: Krasnaya
+      Rate: 50
+    - Item: Drake_Card
+      Rate: 1
+  - Id: 21333
+    AegisName: MD_T_MOONLIGHT
+    Name: Moonlight Flower
+    Level: 250
+    Hp: 32400000
+    BaseExp: 486000
+    JobExp: 340200
+    MvpExp: 243000
+    Attack: 4463
+    Attack2: 2501
+    Defense: 508
+    MagicDefense: 162
+    Resistance: 300
+    MagicResistance: 300
+    Str: 172
+    Agi: 204
+    Vit: 186
+    Int: 174
+    Dex: 314
+    Luk: 240
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Fire
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 391
+    AttackMotion: 575
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Fox_Tail
+      Rate: 5000
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Golden_Jewel
+      Rate: 500
+    Drops:
+    - Item: Spectral_Spear
+      Rate: 250
+    - Item: Moonlight_Sword
+      Rate: 50
+    - Item: Long_Mace
+      Rate: 75
+    - Item: Punisher
+      Rate: 250
+    - Item: Silver_Knife_Of_Chaste
+      Rate: 325
+    - Item: Shadowdecon
+      Rate: 50
+    - Item: Staff_Of_Bordeaux
+      Rate: 50
+    - Item: Moonlight_Flower_Card
+      Rate: 1
+  - Id: 21334
+    AegisName: MD_T_BACSOJIN
+    Name: Bacsojin
+    Level: 250
+    Hp: 72050000
+    BaseExp: 1080750
+    JobExp: 756525
+    MvpExp: 540375
+    Attack: 2827
+    Attack2: 4071
+    Defense: 420
+    MagicDefense: 356
+    Resistance: 300
+    MagicResistance: 300
+    Str: 236
+    Agi: 588
+    Vit: 196
+    Int: 252
+    Dex: 582
+    Luk: 204
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Demihuman
+    Element: Wind
+    ElementLevel: 3
+    WalkSpeed: 130
+    AttackDelay: 654
+    AttackMotion: 962
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Celestial_Robe
+      Rate: 2000
+    - Item: Old_Violet_Box
+      Rate: 5000
+    Drops:
+    - Item: Long_Hair
+      Rate: 2750
+    - Item: Zelunium
+      Rate: 50
+    - Item: White_Snake_Tear
+      Rate: 1500
+    - Item: Limpid_Celestial_Robe
+      Rate: 1500
+    - Item: Tantanmen
+      Rate: 25
+    - Item: Red_Silk_Seal
+      Rate: 50
+    - Item: Tiara
+      Rate: 5
+    - Item: Bacsojin_Card
+      Rate: 1
+  - Id: 21335
+    AegisName: MD_T_GOBLIN_LEADER
+    Name: Goblin Leader
+    Level: 250
+    Hp: 2169200
+    BaseExp: 32538
+    JobExp: 22776
+    Attack: 345
+    Attack2: 97
+    Defense: 144
+    MagicDefense: 60
+    Resistance: 300
+    MagicResistance: 300
+    Str: 120
+    Agi: 134
+    Vit: 90
+    Int: 36
+    Dex: 146
+    Luk: 46
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Wind
+    ElementLevel: 1
+    WalkSpeed: 120
+    AttackDelay: 422
+    AttackMotion: 621
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    Drops:
+    - Item: Brigan
+      Rate: 750
+    - Item: Steel
+      Rate: 400
+    - Item: Oridecon_Stone
+      Rate: 60
+    - Item: Goblin_Mask_04
+      Rate: 25
+    - Item: Shield_
+      Rate: 1
+    - Item: Yellow_Herb
+      Rate: 325
+    - Item: Angry_Mouth
+      Rate: 5
+    - Item: Goblin_Leader_Card
+      Rate: 1
+  - Id: 21336
+    AegisName: MD_T_KOBOLD_LEADER
+    Name: Kobold Leader
+    Level: 250
+    Hp: 1352000
+    BaseExp: 20280
+    JobExp: 14196
+    Attack: 1990
+    Attack2: 191
+    Defense: 180
+    MagicDefense: 124
+    Resistance: 300
+    MagicResistance: 300
+    Str: 270
+    Agi: 68
+    Vit: 136
+    Int: 112
+    Dex: 232
+    Luk: 94
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Wind
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 360
+    AttackMotion: 529
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    Drops:
+    - Item: Steel
+      Rate: 225
+    - Item: Cobold_Hair
+      Rate: 3153
+    - Item: Zargon
+      Rate: 600
+    - Item: Scarlet_Mace
+      Rate: 50
+    - Item: Mighty_Staff
+      Rate: 1
+    - Item: Panacea
+      Rate: 75
+    - Item: Royal_Jelly
+      Rate: 50
+    - Item: Kobold_Leader_Card
+      Rate: 1
+  - Id: 21337
+    AegisName: MD_T_TURTLE_GENERAL
+    Name: Turtle General
+    Level: 250
+    Hp: 144200000
+    BaseExp: 2163000
+    JobExp: 1514100
+    MvpExp: 1081500
+    Attack: 6337
+    Attack2: 4131
+    Defense: 792
+    MagicDefense: 246
+    Resistance: 300
+    MagicResistance: 300
+    Str: 232
+    Agi: 246
+    Vit: 308
+    Int: 198
+    Dex: 434
+    Luk: 196
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Brute
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 680
+    AttackMotion: 1000
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Yggdrasilberry
+      Rate: 1500
+    - Item: Old_Violet_Box
+      Rate: 2000
+    Drops:
+    - Item: Iron_Driver
+      Rate: 4
+    - Item: War_Axe
+      Rate: 3
+    - Item: Zelunium
+      Rate: 50
+    - Item: Pole_Axe
+      Rate: 5
+    - Item: Broken_Shell
+      Rate: 2668
+    - Item: Immaterial_Sword
+      Rate: 40
+    - Item: Union_Of_Tribe
+      Rate: 1
+    - Item: Turtle_General_Card
+      Rate: 1
+  - Id: 21338
+    AegisName: MD_T_SAMURAI
+    Name: Samurai Specter
+    Level: 250
+    Hp: 90100000
+    BaseExp: 1351500
+    JobExp: 946049
+    MvpExp: 675750
+    Attack: 5710
+    Attack2: 1871
+    Defense: 588
+    MagicDefense: 240
+    Resistance: 300
+    MagicResistance: 300
+    Str: 290
+    Agi: 312
+    Vit: 176
+    Int: 132
+    Dex: 372
+    Luk: 120
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 135
+    AttackDelay: 919
+    AttackMotion: 1351
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Seed_Of_Yggdrasil
+      Rate: 3500
+    - Item: Elunium
+      Rate: 5500
+    Drops:
+    - Item: Masamune
+      Rate: 1
+    - Item: Elunium
+      Rate: 1750
+    - Item: Popcorn_Hair
+      Rate: 250
+    - Item: Zelunium
+      Rate: 50
+    - Item: Steel
+      Rate: 3153
+    - Item: Konts_Letter
+      Rate: 1500
+    - Item: Incant_Samurai_Card
+      Rate: 1
+  - Id: 21339
+    AegisName: MD_T_TOAD
+    Name: Toad
+    Level: 250
+    Hp: 66000
+    BaseExp: 990
+    JobExp: 693
+    Attack: 140
+    Attack2: 37
+    Defense: 48
+    MagicDefense: 12
+    Resistance: 300
+    MagicResistance: 300
+    Str: 64
+    Agi: 38
+    Vit: 54
+    Int: 20
+    Dex: 48
+    Luk: 10
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    Element: Water
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 228
+    AttackMotion: 336
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    Drops:
+    - Item: Big_Sis'_Ribbon
+      Rate: 25
+    - Item: Honey
+      Rate: 1000
+    - Item: Bluish_Green_Jewel
+      Rate: 500
+    - Item: Light_Granule
+      Rate: 250
+    - Item: Alchol
+      Rate: 50
+    - Item: Detrimindexta
+      Rate: 50
+    - Item: Kiss_Of_Angel
+      Rate: 500
+    - Item: Toad_Card
+      Rate: 1
+  - Id: 21340
+    AegisName: MD_T_OSIRIS
+    Name: Osiris
+    Level: 250
+    Hp: 117584000
+    BaseExp: 1763760
+    JobExp: 1234632
+    MvpExp: 881880
+    Attack: 3960
+    Attack2: 3005
+    Defense: 344
+    MagicDefense: 338
+    Resistance: 300
+    MagicResistance: 300
+    Str: 194
+    Agi: 198
+    Vit: 172
+    Int: 262
+    Dex: 230
+    Luk: 134
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 4
+    WalkSpeed: 100
+    AttackDelay: 456
+    AttackMotion: 671
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Seed_Of_Yggdrasil
+      Rate: 3000
+    - Item: Osiris_Doll
+      Rate: 500
+    Drops:
+    - Item: Shadowdecon
+      Rate: 50
+    - Item: Assasin_Dagger
+      Rate: 75
+    - Item: Crown
+      Rate: 100
+    - Item: Jamadhar_
+      Rate: 300
+    - Item: Spinx_Helm
+      Rate: 75
+    - Item: Cakram
+      Rate: 50
+    - Item: Osiris_Card
+      Rate: 1
+  - Id: 21341
+    AegisName: MD_T_PHARAOH
+    Name: Pharaoh
+    Level: 250
+    Hp: 90000000
+    BaseExp: 1350000
+    JobExp: 944999
+    MvpExp: 675000
+    Attack: 3247
+    Attack2: 3563
+    Defense: 248
+    MagicDefense: 538
+    Resistance: 300
+    MagicResistance: 300
+    Str: 196
+    Agi: 204
+    Vit: 194
+    Int: 284
+    Dex: 346
+    Luk: 204
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 125
+    AttackDelay: 523
+    AttackMotion: 769
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Royal_Jelly
+      Rate: 5000
+    - Item: Crystal_Jewel__
+      Rate: 5000
+    Drops:
+    - Item: Broken_Pharaoh_Symbol
+      Rate: 2910
+    - Item: Tutankhamen's_Mask
+      Rate: 1250
+    - Item: Solar_Sword
+      Rate: 50
+    - Item: Holy_Robe
+      Rate: 75
+    - Item: Gemmed_Crown
+      Rate: 250
+    - Item: Zelunium
+      Rate: 50
+    - Item: Bazerald
+      Rate: 40
+    - Item: Pharaoh_Card
+      Rate: 1
+  - Id: 21342
+    AegisName: MD_T_AMON_RA
+    Name: Amon Ra
+    Level: 250
+    Hp: 100900000
+    BaseExp: 1513500
+    JobExp: 1059450
+    MvpExp: 756750
+    Attack: 4180
+    Attack2: 4103
+    Defense: 413
+    MagicDefense: 246
+    Resistance: 300
+    MagicResistance: 300
+    Str: 172
+    Agi: 178
+    Vit: 240
+    Int: 262
+    Dex: 202
+    Luk: 184
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    Element: Earth
+    ElementLevel: 3
+    WalkSpeed: 170
+    AttackDelay: 1360
+    AttackMotion: 2000
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Bs_Making_S
+      Rate: 1000
+    - Item: Seed_Of_Yggdrasil
+      Rate: 3500
+    - Item: Crystal_Jewel__
+      Rate: 5500
+    Drops:
+    - Item: Spinx_Helm
+      Rate: 75
+    - Item: Safety_Ring
+      Rate: 25
+    - Item: Rojerta_Piece
+      Rate: 3880
+    - Item: Shadowdecon
+      Rate: 50
+    - Item: Old_Card_Album
+      Rate: 200
+    - Item: Tablet
+      Rate: 5
+    - Item: Yggdrasilberry
+      Rate: 1500
+    - Item: Amon_Ra_Card
+      Rate: 1
+  - Id: 21343
+    AegisName: MD_T_DARK_SNAKE_LORD
+    Name: Evil Snake Lord
+    Level: 250
+    Hp: 110100000
+    BaseExp: 1651500
+    JobExp: 1156050
+    MvpExp: 825750
+    Attack: 5763
+    Attack2: 3971
+    Defense: 628
+    MagicDefense: 370
+    Resistance: 300
+    MagicResistance: 300
+    Str: 244
+    Agi: 344
+    Vit: 214
+    Int: 270
+    Dex: 470
+    Luk: 176
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Brute
+    Element: Ghost
+    ElementLevel: 3
+    WalkSpeed: 200
+    AttackDelay: 553
+    AttackMotion: 813
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Old_Violet_Box
+      Rate: 5000
+    - Item: Elunium
+      Rate: 5500
+    Drops:
+    - Item: Taegeuk_Plate
+      Rate: 2910
+    - Item: Sword_Of_Grave_Keeper
+      Rate: 2550
+    - Item: Hell_Fire
+      Rate: 40
+    - Item: Zelunium
+      Rate: 50
+    - Item: Gae_Bolg
+      Rate: 250
+    - Item: Pill
+      Rate: 450
+    - Item: Sway_Apron
+      Rate: 1000
+    - Item: Dark_Snake_Lord_Card
+      Rate: 1
+  - Id: 21344
+    AegisName: MD_T_ARCHANGELING
+    Name: Arc Angeling
+    Level: 250
+    Hp: 2510000
+    BaseExp: 37650
+    JobExp: 26355
+    Attack: 1185
+    Attack2: 200
+    Defense: 184
+    MagicDefense: 162
+    Resistance: 300
+    MagicResistance: 300
+    Str: 64
+    Agi: 96
+    Vit: 124
+    Int: 198
+    Dex: 238
+    Luk: 210
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Angel
+    Element: Holy
+    ElementLevel: 3
+    WalkSpeed: 180
+    AttackDelay: 456
+    AttackMotion: 671
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    Drops:
+    - Item: Satanic_Chain
+      Rate: 3
+    - Item: Seed_Of_Yggdrasil
+      Rate: 75
+    - Item: Agate
+      Rate: 750
+    - Item: Angelic_Chain
+      Rate: 3
+    - Item: Plate_Armor_
+      Rate: 2
+    - Item: Turquoise
+      Rate: 750
+    - Item: Archangeling_Card
+      Rate: 1
+  - Id: 21345
+    AegisName: MD_T_DEVILING
+    Name: Deviling
+    Level: 250
+    Hp: 1689000
+    BaseExp: 25335
+    JobExp: 17734
+    Attack: 615
+    Attack2: 365
+    Defense: 134
+    MagicDefense: 140
+    Resistance: 300
+    MagicResistance: 300
+    Str: 96
+    Agi: 100
+    Vit: 66
+    Int: 150
+    Dex: 170
+    Luk: 400
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Dark
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 716
+    AttackMotion: 1053
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    Drops:
+    - Item: Petite_DiablOfs_Wing
+      Rate: 1500
+    - Item: Zargon
+      Rate: 2425
+    - Item: Satanic_Chain
+      Rate: 50
+    - Item: Apple
+      Rate: 2500
+    - Item: Blade_Lost_In_Darkness
+      Rate: 1
+    - Item: Black_Dyestuffs
+      Rate: 50
+    - Item: Ghost_Scroll_1_3
+      Rate: 50
+    - Item: Deviling_Card
+      Rate: 1
+  - Id: 21346
+    AegisName: MD_T_ANGELING
+    Name: Angeling
+    Level: 250
+    Hp: 1980000
+    BaseExp: 29700
+    JobExp: 20790
+    Attack: 781
+    Attack2: 290
+    Defense: 144
+    MagicDefense: 476
+    Resistance: 300
+    MagicResistance: 300
+    Str: 116
+    Agi: 100
+    Vit: 66
+    Int: 210
+    Dex: 160
+    Luk: 400
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Angel
+    Element: Holy
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 456
+    AttackMotion: 671
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    Drops:
+    - Item: Angelic_Chain
+      Rate: 50
+    - Item: Apple
+      Rate: 30
+    - Item: Spirit_Chain
+      Rate: 1
+    - Item: White_Herb
+      Rate: 1000
+    - Item: Emperium
+      Rate: 20
+    - Item: Angeling_Card
+      Rate: 1
+  - Id: 21347
+    AegisName: MD_T_GHOSTRING
+    Name: Ghostring
+    Level: 250
+    Hp: 2670000
+    BaseExp: 40050
+    JobExp: 28035
+    Attack: 770
+    Attack2: 323
+    Defense: 176
+    MagicDefense: 144
+    Resistance: 300
+    MagicResistance: 300
+    Str: 132
+    Agi: 170
+    Vit: 132
+    Int: 132
+    Dex: 238
+    Luk: 132
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 300
+    AttackDelay: 731
+    AttackMotion: 1075
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    Drops:
+    - Item: Transparent_Cloth
+      Rate: 2668
+    - Item: Ghost_Bandana
+      Rate: 50
+    - Item: Thief_Clothes_
+      Rate: 25
+    - Item: Branch_Of_Dead_Tree
+      Rate: 250
+    - Item: Old_Blue_Box
+      Rate: 5
+    - Item: Emperium
+      Rate: 15
+    - Item: Ghost_Scroll_1_5
+      Rate: 50
+    - Item: Ghostring_Card
+      Rate: 1
+  - Id: 21348
+    AegisName: MD_T_B_YGNIZEM
+    Name: Egnigem Cenia
+    Level: 250
+    Hp: 291008800
+    BaseExp: 4365132
+    JobExp: 3055592
+    MvpExp: 2182566
+    Attack: 11971
+    Attack2: 4701
+    Defense: 746
+    MagicDefense: 350
+    Resistance: 300
+    MagicResistance: 300
+    Str: 376
+    Agi: 354
+    Vit: 330
+    Int: 284
+    Dex: 556
+    Luk: 210
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Fire
+    ElementLevel: 2
+    WalkSpeed: 100
+    AttackDelay: 586
+    AttackMotion: 862
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Old_Violet_Box
+      Rate: 5500
+    - Item: Goast_Chill
+      Rate: 5000
+    - Item: Crystal_Jewel__
+      Rate: 2000
+    Drops:
+    - Item: Scarlet_Twohand_Sword
+      Rate: 500
+    - Item: Gift_Box
+      Rate: 2500
+    - Item: Old_Blue_Box
+      Rate: 2500
+    - Item: Schweizersabel
+      Rate: 500
+    - Item: Formal_Suit
+      Rate: 500
+    - Item: Goast_Chill
+      Rate: 500
+    - Item: Nagan
+      Rate: 500
+    - Item: B_Ygnizem_Card
+      Rate: 1
+  - Id: 21349
+    AegisName: MD_T_DOPPELGANGER
+    Name: Doppelganger
+    Level: 250
+    Hp: 38000000
+    BaseExp: 570000
+    JobExp: 399000
+    MvpExp: 285000
+    Attack: 4205
+    Attack2: 2351
+    Defense: 492
+    MagicDefense: 172
+    Resistance: 300
+    MagicResistance: 300
+    Str: 244
+    Agi: 244
+    Vit: 210
+    Int: 134
+    Dex: 406
+    Luk: 144
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 100
+    AttackDelay: 327
+    AttackMotion: 481
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Cardinal_Jewel_
+      Rate: 1500
+    - Item: Blue_Potion
+      Rate: 6000
+    - Item: Bs_Making_S
+      Rate: 500
+    Drops:
+    - Item: Plate_Armor_
+      Rate: 125
+    - Item: Broad_Sword_
+      Rate: 110
+    - Item: Zweihander
+      Rate: 75
+    - Item: Sharp_Gear
+      Rate: 175
+    - Item: Lance
+      Rate: 275
+    - Item: Elunium
+      Rate: 1843
+    - Item: Shadowdecon
+      Rate: 50
+    - Item: Doppelganger_Card
+      Rate: 1
+  - Id: 21350
+    AegisName: MD_T_ATROCE
+    Name: Atroce
+    Level: 250
+    Hp: 150200000
+    BaseExp: 2253000
+    JobExp: 1577100
+    MvpExp: 1126500
+    Attack: 5685
+    Attack2: 3005
+    Defense: 632
+    MagicDefense: 352
+    Resistance: 300
+    MagicResistance: 300
+    Str: 242
+    Agi: 330
+    Vit: 270
+    Int: 198
+    Dex: 426
+    Luk: 226
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Brute
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 407
+    AttackMotion: 599
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Bs_Making_S
+      Rate: 5500
+    - Item: Old_Violet_Box
+      Rate: 5000
+    - Item: Old_Violet_Box
+      Rate: 5000
+    Drops:
+    - Item: Bloody_Rune
+      Rate: 3500
+    - Item: Seed_Of_Yggdrasil
+      Rate: 500
+    - Item: Ring_
+      Rate: 500
+    - Item: Old_Violet_Box
+      Rate: 2500
+    - Item: Shadowdecon
+      Rate: 50
+    - Item: Ulle_Cap
+      Rate: 50
+    - Item: Altas_Weapon
+      Rate: 50
+    - Item: Atroce_Card
+      Rate: 1
+  - Id: 21351
+    AegisName: MD_T_ORK_HERO
+    Name: Orc Hero
+    Level: 250
+    Hp: 36200000
+    BaseExp: 543000
+    JobExp: 380100
+    MvpExp: 271500
+    Attack: 1323
+    Attack2: 881
+    Defense: 394
+    MagicDefense: 140
+    Resistance: 300
+    MagicResistance: 300
+    Str: 194
+    Agi: 164
+    Vit: 214
+    Int: 142
+    Dex: 288
+    Luk: 86
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 531
+    AttackMotion: 781
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Red_Jewel
+      Rate: 2000
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Steel
+      Rate: 5000
+    Drops:
+    - Item: Token_of_OrcGeneral
+      Rate: 4850
+    - Item: Monkey_Circlet
+      Rate: 250
+    - Item: Right_Epsilon
+      Rate: 75
+    - Item: Shield_
+      Rate: 125
+    - Item: Orcish_Sword
+      Rate: 500
+    - Item: Shadowdecon
+      Rate: 50
+    - Item: Giant_Axe
+      Rate: 50
+    - Item: Orc_Hero_Card
+      Rate: 1
+  - Id: 21352
+    AegisName: MD_T_ORC_LORD
+    Name: Orc Lord
+    Level: 250
+    Hp: 55200000
+    BaseExp: 828000
+    JobExp: 579600
+    MvpExp: 414000
+    Attack: 1560
+    Attack2: 1295
+    Defense: 512
+    MagicDefense: 184
+    Resistance: 300
+    MagicResistance: 300
+    Str: 190
+    Agi: 190
+    Vit: 206
+    Int: 192
+    Dex: 310
+    Luk: 170
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    Element: Earth
+    ElementLevel: 4
+    WalkSpeed: 100
+    AttackDelay: 340
+    AttackMotion: 500
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Voucher_Of_Orcish_Hero
+      Rate: 5500
+    - Item: Old_Violet_Box
+      Rate: 2000
+    - Item: Bs_Making_S
+      Rate: 5000
+    Drops:
+    - Item: Brood_Axe
+      Rate: 200
+    - Item: Ring_
+      Rate: 200
+    - Item: Loard_Circlet
+      Rate: 200
+    - Item: Doom_Slayer_
+      Rate: 200
+    - Item: Old_Violet_Box
+      Rate: 500
+    - Item: Shadowdecon
+      Rate: 50
+    - Item: Erde
+      Rate: 1550
+    - Item: Orc_Load_Card
+      Rate: 1
+  - Id: 21353
+    AegisName: MD_T_BAPHOMET
+    Name: Baphomet
+    Level: 250
+    Hp: 66800000
+    BaseExp: 1002000
+    JobExp: 701400
+    MvpExp: 501000
+    Attack: 6300
+    Attack2: 3967
+    Defense: 758
+    MagicDefense: 45
+    Resistance: 300
+    MagicResistance: 300
+    Str: 240
+    Agi: 250
+    Vit: 60
+    Int: 170
+    Dex: 372
+    Luk: 170
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 100
+    AttackDelay: 523
+    AttackMotion: 769
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Baphomet_Doll
+      Rate: 2500
+    - Item: Evil_Horn
+      Rate: 5000
+    Drops:
+    - Item: Crescent_Scythe
+      Rate: 200
+    - Item: Magestic_Goat
+      Rate: 150
+    - Item: Crescent_Scythe_
+      Rate: 25
+    - Item: Emperium
+      Rate: 250
+    - Item: Magestic_Goat_
+      Rate: 5
+    - Item: Zelunium
+      Rate: 50
+    - Item: Oridecon
+      Rate: 2086
+    - Item: Baphomet_Card
+      Rate: 1
+  - Id: 21354
+    AegisName: MD_T_DARK_LORD
+    Name: Dark Lord
+    Level: 250
+    Hp: 119090000
+    BaseExp: 1786350
+    JobExp: 1250445
+    MvpExp: 893175
+    Attack: 7870
+    Attack2: 5169
+    Defense: 660
+    MagicDefense: 324
+    Resistance: 300
+    MagicResistance: 300
+    Str: 236
+    Agi: 272
+    Vit: 308
+    Int: 284
+    Dex: 386
+    Luk: 132
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    Element: Undead
+    ElementLevel: 4
+    WalkSpeed: 100
+    AttackDelay: 523
+    AttackMotion: 769
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Skull
+      Rate: 6000
+    - Item: Blue_Coif_
+      Rate: 500
+    - Item: Bs_Making_S
+      Rate: 5000
+    Drops:
+    - Item: Bone_Wand
+      Rate: 400
+    - Item: Kronos
+      Rate: 50
+    - Item: Grimtooth_
+      Rate: 150
+    - Item: Mage_Coat
+      Rate: 150
+    - Item: Cape_Of_Ancient_Lord
+      Rate: 50
+    - Item: Shadowdecon
+      Rate: 50
+    - Item: Bone_Helm_
+      Rate: 5
+    - Item: Dark_Lord_Card
+      Rate: 1
+  - Id: 21355
+    AegisName: MD_T_FALLINGBISHOP
+    Name: Fallen Bishop
+    Level: 250
+    Hp: 565500000
+    BaseExp: 8482500
+    JobExp: 5937750
+    MvpExp: 4241250
+    Attack: 8580
+    Attack2: 9271
+    Defense: 548
+    MagicDefense: 764
+    Resistance: 300
+    MagicResistance: 300
+    Str: 372
+    Agi: 230
+    Vit: 190
+    Int: 452
+    Dex: 546
+    Luk: 172
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 294
+    AttackMotion: 433
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Seed_Of_Yggdrasil
+      Rate: 3500
+    - Item: Crystal_Jewel__
+      Rate: 2000
+    Drops:
+    - Item: Holy_Water
+      Rate: 5000
+    - Item: Long_Horn
+      Rate: 500
+    - Item: Spiritual_Ring
+      Rate: 250
+    - Item: Hunting_Spear
+      Rate: 500
+    - Item: Elunium
+      Rate: 2716
+    - Item: Blessed_Wand
+      Rate: 1000
+    - Item: Zelunium
+      Rate: 50
+    - Item: Fallen_Bishop_Card
+      Rate: 1
+  - Id: 21356
+    AegisName: MD_T_IFRIT
+    Name: Ifrit
+    Level: 250
+    Hp: 693500000
+    BaseExp: 10402500
+    JobExp: 7281750
+    MvpExp: 5201250
+    Attack: 16125
+    Attack2: 6777
+    Defense: 872
+    MagicDefense: 436
+    Resistance: 300
+    MagicResistance: 300
+    Str: 360
+    Agi: 402
+    Vit: 312
+    Int: 380
+    Dex: 598
+    Luk: 154
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Fire
+    ElementLevel: 4
+    WalkSpeed: 130
+    AttackDelay: 262
+    AttackMotion: 385
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Carnium
+      Rate: 5000
+    - Item: Old_Card_Album
+      Rate: 2000
+    Drops:
+    - Item: Flame_Heart
+      Rate: 6000
+    - Item: Spiritual_Ring
+      Rate: 1500
+    - Item: Ring_Of_Flame_Lord
+      Rate: 50
+    - Item: Ring_Of_Resonance
+      Rate: 50
+    - Item: Shadowdecon
+      Rate: 50
+    - Item: Fire_Brand
+      Rate: 1000
+    - Item: Flame_Sprits_Armor_
+      Rate: 100
+    - Item: Ifrit_Card
+      Rate: 1
+  - Id: 21357
+    AegisName: MD_T_RANDGRIS
+    Name: Valkyrie Randgris
+    Level: 250
+    Hp: 320500000
+    BaseExp: 4807500
+    JobExp: 3365250
+    MvpExp: 2403750
+    Attack: 14685
+    Attack2: 8823
+    Defense: 1176
+    MagicDefense: 1012
+    Resistance: 300
+    MagicResistance: 300
+    Str: 392
+    Agi: 262
+    Vit: 250
+    Int: 552
+    Dex: 802
+    Luk: 312
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Angel
+    Element: Holy
+    ElementLevel: 4
+    WalkSpeed: 100
+    AttackDelay: 391
+    AttackMotion: 575
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Old_Violet_Box
+      Rate: 5500
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Old_Card_Album
+      Rate: 2000
+    Drops:
+    - Item: Valhalla_Flower
+      Rate: 3000
+    - Item: Valkyrie_Armor
+      Rate: 300
+    - Item: Valkyrie_Manteau
+      Rate: 1000
+    - Item: Valkyrie_Shoes
+      Rate: 1000
+    - Item: Helm_
+      Rate: 3000
+    - Item: Bloody_Edge
+      Rate: 1500
+    - Item: Shadowdecon
+      Rate: 50
+    - Item: Randgris_Card
+      Rate: 1
+  - Id: 21358
+    AegisName: MD_T_BEELZEBUB
+    Name: Beelzebub
+    Level: 250
+    Hp: 680500000
+    BaseExp: 10207500
+    JobExp: 7145250
+    MvpExp: 5103750
+    Attack: 10500
+    Attack2: 4200
+    Defense: 576
+    MagicDefense: 530
+    Resistance: 300
+    MagicResistance: 300
+    Str: 310
+    Agi: 470
+    Vit: 400
+    Int: 250
+    Dex: 612
+    Luk: 132
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 100
+    AttackDelay: 391
+    AttackMotion: 575
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+  - Id: 21359
+    AegisName: MD_T_BEELZEBUB_
+    Name: Beelzebub
+    Level: 250
+    Hp: 480500000
+    BaseExp: 7207500
+    JobExp: 5045250
+    MvpExp: 3603750
+    Attack: 13331
+    Attack2: 8887
+    Defense: 836
+    MagicDefense: 330
+    Resistance: 300
+    MagicResistance: 300
+    Str: 356
+    Agi: 472
+    Vit: 400
+    Int: 500
+    Dex: 654
+    Luk: 132
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 100
+    AttackDelay: 343
+    AttackMotion: 505
+    DamageMotion: 480
+    Ai: '21'
+    Class: Boss
+    MvpDrops:
+    - Item: Old_Violet_Box
+      Rate: 5500
+    - Item: Bs_Making_S
+      Rate: 5000
+    - Item: Box_Of_Grudge
+      Rate: 5500
+    Drops:
+    - Item: Broken_Crown
+      Rate: 4500
+    - Item: Variant_Shoes
+      Rate: 1000
+    - Item: Death_Note
+      Rate: 1000
+    - Item: Destruction_Rod
+      Rate: 1000
+    - Item: Bison_Horn
+      Rate: 1000
+    - Item: Carnium
+      Rate: 500
+    - Item: Zelunium
+      Rate: 50
+    - Item: Berzebub_Card
+      Rate: 1

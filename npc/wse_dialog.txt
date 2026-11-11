@@ -1,0 +1,404 @@
+//===== World Sync Extras: reform and enchant in dialogue =====
+//= kRO's Item Reform and Enchant windows don't work for everything on our
+//= client: an NPC that opens the Reform window (the Garden of Time's
+//= cloak upgrade) leaves the player stuck with "finish the task in
+//= progress", the Zero Cell tunings aren't in the iRO client's reform
+//= table at all, and rAthena ships some enchant tables commented out.
+//= These two functions do the same work in an ordinary dialogue, with
+//= the official tables (npc/wse_dialog_data.txt, generated from
+//= rAthena's item_reform.yml and item_enchant.yml).
+//=
+//= callfunc "F_WSE_Reform", <reform item id>, "<[Speaker]>"{, <1: consume the reform item>};
+//= callfunc "F_WSE_Enchant", <enchant group id>, "<[Speaker]>";
+//= Both keep the item's refine, grade, cards and random options unless
+//= the table says otherwise, and only touch items that aren't worn.
+//============================================================
+
+// Rebuilds inventory slot getarg(0) (an index into the last
+// getinventorylist, saved by F_WSE_Save) as item getarg(1) with refine
+// getarg(2), cards from .@card[] of the caller (passed as getarg 3-6) and
+// grade getarg(7). Random options and binding stay.
+function	script	F_WSE_Rebuild	{
+	.@i = getarg(0);
+	.@id = getarg(1);
+	.@ref = getarg(2);
+	.@grade = getarg(7);
+	.@bound = @wsx_bound[.@i];
+	for (.@k = 0; .@k < 5; .@k++) {
+		.@oid[.@k] = getd("@wsx_oid" + .@k + "[" + .@i + "]");
+		.@oval[.@k] = getd("@wsx_oval" + .@k + "[" + .@i + "]");
+		.@opar[.@k] = getd("@wsx_opar" + .@k + "[" + .@i + "]");
+	}
+	delitemidx @wsx_idx[.@i], 1;
+	if (.@bound)
+		getitembound4 .@id, 1, 1, .@ref, @wsx_attr[.@i], getarg(3), getarg(4), getarg(5), getarg(6), .@bound, .@grade, .@oid, .@oval, .@opar;
+	else
+		getitem4 .@id, 1, 1, .@ref, @wsx_attr[.@i], getarg(3), getarg(4), getarg(5), getarg(6), .@grade, .@oid, .@oval, .@opar;
+	return;
+}
+
+// Copies the current getinventorylist into @wsx_* (later calls overwrite
+// @inventorylist_*).
+function	script	F_WSE_Save	{
+	getinventorylist;
+	freeloop(1);
+	for (.@i = 0; .@i < @inventorylist_count; .@i++) {
+		@wsx_id[.@i] = @inventorylist_id[.@i];
+		@wsx_idx[.@i] = @inventorylist_idx[.@i];
+		@wsx_equip[.@i] = @inventorylist_equip[.@i];
+		@wsx_ref[.@i] = @inventorylist_refine[.@i];
+		@wsx_attr[.@i] = @inventorylist_attribute[.@i];
+		@wsx_bound[.@i] = @inventorylist_bound[.@i];
+		@wsx_grade[.@i] = @inventorylist_enchantgrade[.@i];
+		@wsx_c1[.@i] = @inventorylist_card1[.@i];
+		@wsx_c2[.@i] = @inventorylist_card2[.@i];
+		@wsx_c3[.@i] = @inventorylist_card3[.@i];
+		@wsx_c4[.@i] = @inventorylist_card4[.@i];
+		@wsx_nopt[.@i] = 0;
+		for (.@k = 0; .@k < 5; .@k++) {
+			.@o = getd("@inventorylist_option_id" + (.@k + 1) + "[" + .@i + "]");
+			setd "@wsx_oid" + .@k + "[" + .@i + "]", .@o;
+			setd "@wsx_oval" + .@k + "[" + .@i + "]", getd("@inventorylist_option_value" + (.@k + 1) + "[" + .@i + "]");
+			setd "@wsx_opar" + .@k + "[" + .@i + "]", getd("@inventorylist_option_parameter" + (.@k + 1) + "[" + .@i + "]");
+			if (.@o)
+				@wsx_nopt[.@i]++;
+		}
+	}
+	freeloop(0);
+	@wsx_count = @inventorylist_count;
+	return;
+}
+
+// "+9 Nebula Armor of Power [2 enchants]" for saved slot getarg(0).
+function	script	F_WSE_ItemLabel	{
+	.@i = getarg(0);
+	.@n = (@wsx_c1[.@i] > 0) + (@wsx_c2[.@i] > 0) + (@wsx_c3[.@i] > 0) + (@wsx_c4[.@i] > 0);
+	.@s$ = getitemname(@wsx_id[.@i]);
+	if (@wsx_ref[.@i] > 0)
+		.@s$ = "+" + @wsx_ref[.@i] + " " + .@s$;
+	if (.@n > 0)
+		.@s$ += " (" + .@n + " filled slot" + (.@n > 1 ? "s" : "") + ")";
+	return .@s$;
+}
+
+// Lists materials getarg(0)[] x getarg(1)[] from offset getarg(2) to
+// getarg(3), plus zeny getarg(4), as mes lines. Returns 1 if the player has
+// them all.
+function	script	F_WSE_Costs	{
+	.@ok = 1;
+	for (.@k = getarg(2); .@k < getarg(3); .@k++) {
+		.@m = getelementofarray(getarg(0), .@k);
+		.@a = getelementofarray(getarg(1), .@k);
+		.@have = countitem(.@m);
+		mes "- " + .@a + " " + mesitemlink(.@m) + (.@have < .@a ? " ^ff0000(you have " + .@have + ")^000000" : "");
+		if (.@have < .@a)
+			.@ok = 0;
+	}
+	if (getarg(4) > 0) {
+		mes "- " + callfunc("F_InsertComma", getarg(4)) + " zeny" + (Zeny < getarg(4) ? " ^ff0000(not enough)^000000" : "");
+		if (Zeny < getarg(4))
+			.@ok = 0;
+	}
+	return .@ok;
+}
+
+// Takes what F_WSE_Costs listed.
+function	script	F_WSE_Pay	{
+	for (.@k = getarg(2); .@k < getarg(3); .@k++)
+		delitem getelementofarray(getarg(0), .@k), getelementofarray(getarg(1), .@k);
+	if (getarg(4) > 0)
+		Zeny -= getarg(4);
+	return;
+}
+
+// ------------------------------------------------------------
+// Reform: turns one item into another, as the reform table says.
+// ------------------------------------------------------------
+function	script	F_WSE_Reform	{
+	.@r = getarg(0);
+	.@who$ = getarg(1);
+	.@used = getarg(2, 0);
+	callfunc "F_WSE_ReformData", .@r;
+	callfunc "F_WSE_Save";
+	freeloop(1);
+	for (.@i = 0; .@i < @wsx_count; .@i++) {
+		if (@wsx_equip[.@i])
+			continue;
+		for (.@j = 0; .@j < getarraysize(@wsr_base); .@j++) {
+			if (@wsr_base[.@j] != @wsx_id[.@i])
+				continue;
+			if (@wsx_ref[.@i] < @wsr_minr[.@j] || @wsx_ref[.@i] > @wsr_maxr[.@j])
+				continue;
+			if (@wsx_nopt[.@i] < @wsr_opt[.@j])
+				continue;
+			if (!@wsr_card[.@j] && (@wsx_c1[.@i] || @wsx_c2[.@i] || @wsx_c3[.@i] || @wsx_c4[.@i]))
+				continue;
+			.@ci[.@n] = .@i;
+			.@cj[.@n] = .@j;
+			.@menu$ += callfunc("F_WSE_ItemLabel", .@i) + " > " + getitemname(@wsr_res[.@j]) + ":";
+			.@n++;
+		}
+	}
+	freeloop(0);
+	mes .@who$;
+	if (.@n == 0) {
+		mes "Nothing you're carrying can be changed this way. These can:";
+		.@shown = 0;
+		for (.@j = 0; .@j < getarraysize(@wsr_base) && .@shown < 6; .@j++) {
+			mes "- " + mesitemlink(@wsr_base[.@j]) + (@wsr_minr[.@j] > 0 ? " (+" + @wsr_minr[.@j] + " or more)" : "") + " > " + mesitemlink(@wsr_res[.@j]);
+			.@shown++;
+		}
+		mes "Take it off first if you're wearing it.";
+		close;
+	}
+	mes "Which one?";
+	next;
+	.@c = select(.@menu$ + "Cancel.") - 1;
+	if (.@c == .@n)
+		close;
+	.@i = .@ci[.@c];
+	.@j = .@cj[.@c];
+	mes .@who$;
+	mes callfunc("F_WSE_ItemLabel", .@i) + " becomes " + mesitemlink(@wsr_res[.@j]) + ".";
+	mes "It takes:";
+	.@ok = callfunc("F_WSE_Costs", @wsr_mi, @wsr_ma, @wsr_mo[.@j], @wsr_mo[.@j + 1], 0);
+	if (.@used)
+		mes "- this " + mesitemlink(.@r);
+	if (@wsr_clr[.@j])
+		mes "^ff0000Its cards and slot enchants are removed.^000000";
+	else
+		mes "Its refine, cards, grade and random options stay.";
+	if (!.@ok)
+		close;
+	next;
+	if (select("Do it.:Cancel.") == 2)
+		close;
+	// Check again: the inventory may have changed while the window was open.
+	.@id = @wsx_id[.@i];
+	.@slot = @wsx_idx[.@i];
+	callfunc "F_WSE_Save";
+	.@i = -1;
+	for (.@k = 0; .@k < @wsx_count; .@k++) {
+		if (@wsx_idx[.@k] == .@slot && @wsx_id[.@k] == .@id && !@wsx_equip[.@k])
+			.@i = .@k;
+	}
+	if (.@i < 0 || (.@used && countitem(.@r) < 1) || !callfunc("F_WSE_Has", @wsr_mi, @wsr_ma, @wsr_mo[.@j], @wsr_mo[.@j + 1], 0)) {
+		mes .@who$;
+		mes "Something's missing now. Nothing was changed.";
+		close;
+	}
+	if (!checkweight(@wsr_res[.@j], 1)) {
+		mes .@who$;
+		mes "You're carrying too much. Make some room first.";
+		close;
+	}
+	.@ref = cap_value(@wsx_ref[.@i] + @wsr_chg[.@j], 0, 20);
+	if (@wsr_clr[.@j]) {
+		.@c1 = 0; .@c2 = 0; .@c3 = 0; .@c4 = 0;
+	} else {
+		.@c1 = @wsx_c1[.@i]; .@c2 = @wsx_c2[.@i]; .@c3 = @wsx_c3[.@i]; .@c4 = @wsx_c4[.@i];
+	}
+	.@grade = (@wsr_grd[.@j] ? 0 : @wsx_grade[.@i]);
+	callfunc "F_WSE_Pay", @wsr_mi, @wsr_ma, @wsr_mo[.@j], @wsr_mo[.@j + 1], 0;
+	if (.@used)
+		delitem .@r, 1;
+	callfunc "F_WSE_Rebuild", .@i, @wsr_res[.@j], .@ref, .@c1, .@c2, .@c3, .@c4, .@grade;
+	specialeffect2 EF_REFINEOK;
+	mes .@who$;
+	mes "Done: " + mesitemlink(@wsr_res[.@j]) + ".";
+	close;
+}
+
+// F_WSE_Costs without the mes lines.
+function	script	F_WSE_Has	{
+	for (.@k = getarg(2); .@k < getarg(3); .@k++) {
+		if (countitem(getelementofarray(getarg(0), .@k)) < getelementofarray(getarg(1), .@k))
+			return 0;
+	}
+	return (Zeny >= getarg(4));
+}
+
+// ------------------------------------------------------------
+// Enchant: fills the item's enchant slots in the table's order.
+// ------------------------------------------------------------
+// The card slot (1-4) of enchant slot getarg(1) of saved item getarg(0).
+function	script	F_WSE_SlotCard	{
+	return getd("@wsx_c" + (getarg(1) + 1) + "[" + getarg(0) + "]");
+}
+
+function	script	F_WSE_Enchant	{
+	.@g = getarg(0);
+	.@who$ = getarg(1);
+	callfunc "F_WSE_EnchData", .@g;
+	callfunc "F_WSE_Save";
+	freeloop(1);
+	for (.@i = 0; .@i < @wsx_count; .@i++) {
+		if (@wsx_equip[.@i] || inarray(@wse_tgt, @wsx_id[.@i]) < 0)
+			continue;
+		if (@wsx_ref[.@i] < @wse_minref || @wsx_grade[.@i] < @wse_mingrade)
+			continue;
+		if (!@wse_allowopt && @wsx_nopt[.@i])
+			continue;
+		.@ci[.@n] = .@i;
+		.@menu$ += callfunc("F_WSE_ItemLabel", .@i) + ":";
+		.@n++;
+	}
+	freeloop(0);
+	mes .@who$;
+	if (.@n == 0) {
+		mes "Bring me one of these, unworn" + (@wse_minref ? ", refined to +" + @wse_minref + " or more" : "") + ":";
+		for (.@k = 0; .@k < getarraysize(@wse_tgt) && .@k < 6; .@k++)
+			mes "- " + mesitemlink(@wse_tgt[.@k]);
+		close;
+	}
+	mes "Which item?";
+	next;
+	.@c = select(.@menu$ + "Cancel.") - 1;
+	if (.@c == .@n)
+		close;
+	.@i = .@ci[.@c];
+	.@id = @wsx_id[.@i];
+	.@slotidx = @wsx_idx[.@i];
+	// The next empty enchant slot, in the table's order.
+	.@next = -1;
+	.@filled = 0;
+	for (.@k = 0; .@k < getarraysize(@wse_ord); .@k++) {
+		if (callfunc("F_WSE_SlotCard", .@i, @wse_ord[.@k]))
+			.@filled++;
+		else if (.@next < 0)
+			.@next = @wse_ord[.@k];
+	}
+	.@s$ = "@wse_s" + max(0, .@next);
+	.@hasrand = 0;
+	.@hasperf = 0;
+	if (.@next >= 0) {
+		.@hasrand = (getarraysize(getd(.@s$ + "eg")) > 0);
+		.@hasperf = (getarraysize(getd(.@s$ + "pi")) > 0);
+	}
+	.@hasreset = (@wse_rsc >= 0 && .@filled > 0);
+	mes .@who$;
+	mes callfunc("F_WSE_ItemLabel", .@i) + ".";
+	if (.@next < 0)
+		mes "All its enchant slots are filled.";
+	else
+		mes "Next: enchant slot " + (getarraysize(@wse_ord) - .@filled) + " of " + getarraysize(@wse_ord) + ".";
+	next;
+	.@m = select((.@hasrand ? "Random enchant." : "") + ":" + (.@hasperf ? "Choose the enchant." : "") + ":" + (.@hasreset ? "Reset the enchants." : "") + ":Cancel.");
+	if (.@m == 4)
+		close;
+	if (.@m == 1) {
+		.@z = getd(.@s$ + "z");
+		.@chance = getd(.@s$ + "c");
+		mes .@who$;
+		mes "A random enchant for this slot" + (.@chance < 100000 ? ", " + (.@chance / 1000) + "% chance; on a failure the materials are lost but the item is safe" : "") + ". It takes:";
+		.@ok = callfunc("F_WSE_Costs", getd(.@s$ + "m"), getd(.@s$ + "a"), 0, getarraysize(getd(.@s$ + "m")), .@z);
+		if (!.@ok)
+			close;
+		next;
+		if (select("Enchant.:Cancel.") == 2)
+			close;
+	} else if (.@m == 2) {
+		.@np = getarraysize(getd(.@s$ + "pi"));
+		for (.@k = 0; .@k < .@np; .@k++)
+			.@pm$ += getitemname(getelementofarray(getd(.@s$ + "pi"), .@k)) + ":";
+		mes .@who$;
+		mes "Which enchant?";
+		next;
+		.@p = select(.@pm$ + "Cancel.") - 1;
+		if (.@p == .@np)
+			close;
+		.@z = getelementofarray(getd(.@s$ + "pz"), .@p);
+		.@o0 = getelementofarray(getd(.@s$ + "po"), .@p);
+		.@o1 = getelementofarray(getd(.@s$ + "po"), .@p + 1);
+		mes .@who$;
+		mes mesitemlink(getelementofarray(getd(.@s$ + "pi"), .@p)) + " in this slot, for certain. It takes:";
+		.@ok = callfunc("F_WSE_Costs", getd(.@s$ + "pm"), getd(.@s$ + "pa"), .@o0, .@o1, .@z);
+		if (!.@ok)
+			close;
+		next;
+		if (select("Enchant.:Cancel.") == 2)
+			close;
+	} else {
+		mes .@who$;
+		mes "This removes every enchant on the item" + (@wse_rsc < 100000 ? ", " + (@wse_rsc / 1000) + "% chance; on a failure the enchants stay and the materials are lost" : "") + ". It takes:";
+		.@ok = callfunc("F_WSE_Costs", @wse_rsm, @wse_rsa, 0, getarraysize(@wse_rsm), @wse_rsz);
+		if (!.@ok)
+			close;
+		next;
+		if (select("Reset.:Cancel.") == 2)
+			close;
+	}
+	// Check again that the same item is still there, unworn and unchanged.
+	callfunc "F_WSE_Save";
+	.@j = -1;
+	for (.@k = 0; .@k < @wsx_count; .@k++) {
+		if (@wsx_idx[.@k] == .@slotidx && @wsx_id[.@k] == .@id && !@wsx_equip[.@k])
+			.@j = .@k;
+	}
+	if (.@j < 0 || (.@next >= 0 && callfunc("F_WSE_SlotCard", .@j, .@next))) {
+		mes .@who$;
+		mes "The item has changed or been put on. Nothing was done.";
+		close;
+	}
+	.@i = .@j;
+	for (.@k = 0; .@k < 4; .@k++)
+		.@card[.@k] = getd("@wsx_c" + (.@k + 1) + "[" + .@i + "]");
+	if (.@m == 1) {
+		if (!callfunc("F_WSE_Has", getd(.@s$ + "m"), getd(.@s$ + "a"), 0, getarraysize(getd(.@s$ + "m")), .@z))
+			end;
+		callfunc "F_WSE_Pay", getd(.@s$ + "m"), getd(.@s$ + "a"), 0, getarraysize(getd(.@s$ + "m")), .@z;
+		if (rand(100000) >= .@chance) {
+			specialeffect2 EF_REFINEFAIL;
+			mes .@who$;
+			mes "The enchant didn't take. The item is unharmed.";
+			close;
+		}
+		// The table for the item's grade: the last one at or below it.
+		.@t = 0;
+		for (.@k = 0; .@k < getarraysize(getd(.@s$ + "eg")); .@k++) {
+			if (getelementofarray(getd(.@s$ + "eg"), .@k) <= @wsx_grade[.@i])
+				.@t = .@k;
+		}
+		.@o0 = getelementofarray(getd(.@s$ + "eo"), .@t);
+		.@o1 = getelementofarray(getd(.@s$ + "eo"), .@t + 1);
+		.@sum = 0;
+		for (.@k = .@o0; .@k < .@o1; .@k++)
+			.@sum += getelementofarray(getd(.@s$ + "ec"), .@k);
+		.@roll = rand(max(1, .@sum));
+		.@got = getelementofarray(getd(.@s$ + "ei"), .@o1 - 1);
+		for (.@k = .@o0; .@k < .@o1; .@k++) {
+			.@roll -= getelementofarray(getd(.@s$ + "ec"), .@k);
+			if (.@roll < 0) {
+				.@got = getelementofarray(getd(.@s$ + "ei"), .@k);
+				break;
+			}
+		}
+		.@card[.@next] = .@got;
+	} else if (.@m == 2) {
+		if (!callfunc("F_WSE_Has", getd(.@s$ + "pm"), getd(.@s$ + "pa"), .@o0, .@o1, .@z))
+			end;
+		callfunc "F_WSE_Pay", getd(.@s$ + "pm"), getd(.@s$ + "pa"), .@o0, .@o1, .@z;
+		.@got = getelementofarray(getd(.@s$ + "pi"), .@p);
+		.@card[.@next] = .@got;
+	} else {
+		if (!callfunc("F_WSE_Has", @wse_rsm, @wse_rsa, 0, getarraysize(@wse_rsm), @wse_rsz))
+			end;
+		callfunc "F_WSE_Pay", @wse_rsm, @wse_rsa, 0, getarraysize(@wse_rsm), @wse_rsz;
+		if (rand(100000) >= @wse_rsc) {
+			specialeffect2 EF_REFINEFAIL;
+			mes .@who$;
+			mes "The reset failed. The enchants are still there.";
+			close;
+		}
+		for (.@k = 0; .@k < getarraysize(@wse_ord); .@k++)
+			.@card[@wse_ord[.@k]] = 0;
+	}
+	callfunc "F_WSE_Rebuild", .@i, @wsx_id[.@i], @wsx_ref[.@i], .@card[0], .@card[1], .@card[2], .@card[3], @wsx_grade[.@i];
+	specialeffect2 EF_REFINEOK;
+	mes .@who$;
+	if (.@m == 3)
+		mes "The enchants are gone. The slots are empty again.";
+	else
+		mes "Enchanted: " + mesitemlink(.@got) + ".";
+	close;
+}

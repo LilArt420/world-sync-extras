@@ -1,0 +1,543 @@
+//===== World Sync Extras: Varmundt block ====================
+//= Chapter 1, part H: A Hazy Gate and the Zero Cell Sector.
+//= - A Hazy Gate (64250, 64251): Rubiel in Ash Village, once the
+//=   Geffen field of the second world is open (wsv_ch1 >= 160).
+//=   Her safe area (ch1_sf03) is entered from the Recon Point (the
+//=   ring of stones, hem_fild 180,263); it ends with Minuel. Then
+//=   Rubiel sells a one-hour resistance for Encroached Geffenia
+//=   (64257, base 260, 45 Mana Rings) and Minuel one for the
+//=   Ruined Valkyrie Realm (64258, base 230, 20 Mana Rings). The
+//=   maps stay open without them, as they were.
+//= - Abandoned Lab Zero Cell (64252-64256): Robin in Ash Village
+//=   (base 260, Chapter 1 done, A Hazy Gate done), Erosion Zone 1
+//=   (ch1fild1), Newt, Robin, the trace, Robin, Newt.
+//= - Newt's authorizations (one hour): Lux and Nox (64259, base
+//=   260, 50 Mana Rings), Vita and Ark (64260, base 270, 70 Mana
+//=   Rings). The Zero Cell maps send anyone without a valid one
+//=   back to Newt, and send them out when it runs out.
+//= - Robin's dailies: Clean Up Zero Cell Lux/Nox/Vita/Ark (64261,
+//=   64263, 64265, 64267; cooldowns one id up).
+//= Written from the kRO client's quest text (27088-27104), the
+//= navigation table and the muhro wiki's Chapter 1 pages.
+//= Variables: wsv_c1hg (A Hazy Gate: 1 see Rubiel inside, 2 see
+//= Minuel, 3 done), wsv_c1zc (Zero Cell: 1 find Newt, 2 Robin,
+//= 3 trace, 4 Robin, 5 Newt, 6 done), wsv_c1rg / wsv_c1rv (the
+//= resistances' end, unix time), wsv_zcln / wsv_zcva (the
+//= authorizations' end, unix time).
+//============================================================
+
+// ------------------------------------------------------------
+// A Hazy Gate
+// ------------------------------------------------------------
+
+// Rubiel in Ash Village (ch1_g_side.txt) calls this first: it offers
+// the quest (and ends the dialogue), or gives a hint and returns to
+// her offer of the gate.
+function	script	F_WSV_C1HazyRubiel	{
+	if (wsv_ch1 < 160 || wsv_c1hg >= 3)
+		return;
+	if (wsv_c1hg == 0) {
+		mes "[Rubiel]";
+		mes "You've been through my gate on the Geffen field so many times. Did you ever look at it? Really look?";
+		mes "It's gone hazy. Blurry at the edges, like breath on glass.";
+		next;
+		mes "[Rubiel]";
+		mes "I set up a little safe place right behind it, where the erosion can't reach. I'd like to show you, and I'd like a second pair of eyes on that haze.";
+		next;
+		if (select("Show me.:Maybe later.") == 2) {
+			mes "[Rubiel]";
+			mes "All right. It's not going anywhere. I hope.";
+			close;
+		}
+		mes "[Rubiel]";
+		mes "Take the long way, so you see what I see: into the ^0000FFTwisted Land of Darkness^000000 from the village's west edge, then the ^0000FFred portal^000000 at the big intersection up north.";
+		mes "On the Geffen field, find the ^0000FFRecon Point^000000, my ring of stones. It will let you into my safe area. I'll be waiting inside.";
+		callfunc "F_WSV_Step", "wsv_c1hg", 1, "", "64250";
+		close;
+	}
+	mes "[Rubiel]";
+	if (wsv_c1hg == 1)
+		mes "The ring of stones on the Geffen field, the ^0000FFRecon Point^000000. Step in and you'll find my safe area. I'll be there before you.";
+	else
+		mes "Did you find Minuel? He's by the shaking crossroads on the east side of the Geffen field.";
+	next;
+	return;	// Rubiel#wsv goes on with her gate
+}
+
+// Rubiel inside her safe area, behind the Recon Point.
+ch1_sf03,117,253,4	script	Rubiel#wsv_sf	10610,{
+	if (wsv_c1hg == 1) {
+		mes "[Rubiel]";
+		mes "You made it! Welcome to my hideaway. Small, but nothing from outside gets in.";
+		next;
+		mes "[Rubiel]";
+		mes "So. The haze. My gate isn't failing, I checked every stone. It's the world around it.";
+		mes "The erosion is thickening out there, all over Encroached Geffenia. Mana that thick eats at anything that walks through it, gates included.";
+		next;
+		mes "[Rubiel]";
+		mes "I can weave a little of my gate's magic around a person, so the erosion slides off them for a while. An hour, give or take. It's not free, though: the weave burns Mana Rings.";
+		next;
+		mes "[Rubiel]";
+		mes "Minuel can do the same for the Ruined Valkyrie Realm, past the crossroads he guards. Go and tell him I sent you; he won't believe it otherwise.";
+		mes "Leave by the Recon Point. He's on the east side of the Geffen field.";
+		callfunc "F_WSV_Step", "wsv_c1hg", 2, "64250", "64251";
+		close;
+	}
+	if (wsv_c1hg == 2) {
+		mes "[Rubiel]";
+		mes "Minuel is at the shaking crossroads on the east side of the Geffen field. Tell him I sent you.";
+		close;
+	}
+	if (wsv_c1hg < 3) {
+		mes "[Rubiel]";
+		mes "How did you even get in here? ...Never mind. Mind the stones on your way out.";
+		close;
+	}
+	mes "[Rubiel]";
+	mes "Heading into Encroached Geffenia? The erosion's thick there. Nobody stops you at the crossings, but a little of my gate's magic around you will keep it off for an hour.";
+	next;
+	if (select("Weave the resistance around me.:Not now.") == 2) {
+		mes "[Rubiel]";
+		mes "Come back if you change your mind. I'm always here.";
+		close;
+	}
+	if (callfunc("F_WSV_C1Timed", "[Rubiel]", 64257, "wsv_c1rg", 260, 45, "Encroached Geffenia resistance")) {
+		mes "[Rubiel]";
+		mes "There. Feel that? Like stepping out of the rain. It lasts about an hour.";
+	}
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_c1hg == 1" );
+	end;
+}
+
+// Minuel (ch1_g_side.txt) calls this first.
+function	script	F_WSV_C1HazyMinuel	{
+	if (wsv_c1hg == 2) {
+		mes "[Minuel]";
+		mes "Halt! ...Rubiel sent you? Prove it.";
+		next;
+		select("She says her gate has gone hazy.");
+		mes "[Minuel]";
+		mes "...That's her, all right. She's been worrying about that haze for a week.";
+		next;
+		mes "[Minuel]";
+		mes "She's right, though. The erosion's thicker every day. The crossroads behind me lead into the Ruined Valkyrie Realm, and it's worse in there than here.";
+		mes "I can't stop anyone going through. But I can wrap you in a little heraldic magic so the erosion can't bite as deep. Twenty Mana Rings, one hour.";
+		next;
+		mes "[Minuel]";
+		mes "And Rubiel can do the same for Encroached Geffenia, if you're strong enough for it. Come back whenever you need it.";
+		callfunc "F_WSV_Step", "wsv_c1hg", 3, "64251", "";
+		close;
+	}
+	if (wsv_c1hg < 3)
+		return;
+	mes "[Minuel]";
+	mes "Going into the Ruined Valkyrie Realm? Want the resistance? Twenty Mana Rings, one hour.";
+	next;
+	if (select("Yes, please.:Just passing by.") == 2) {
+		mes "[Minuel]";
+		mes "Then pass by. Carefully.";
+		close;
+	}
+	if (callfunc("F_WSV_C1Timed", "[Minuel]", 64258, "wsv_c1rv", 230, 20, "Ruined Valkyrie Realm resistance")) {
+		mes "[Minuel]";
+		mes "Done. One hour. Don't waste it standing around talking to me.";
+	}
+	close;
+}
+
+// Sells a one-hour service: a timed quest the player can see, and its
+// end in a character variable. Returns 1 when bought.
+// callfunc("F_WSV_C1Timed", "<speaker>", <quest>, "<end variable>",
+//          <base level>, <Mana Rings>, "<what>")
+function	script	F_WSV_C1Timed	{
+	.@n$ = getarg(0);
+	.@q = getarg(1);
+	.@v$ = getarg(2);
+	.@cost = getarg(4);
+	if (BaseLevel < getarg(3)) {
+		mes .@n$;
+		mes "Not yet. The " + getarg(5) + " would tear apart before it settled on you. Come back at base level " + getarg(3) + ".";
+		return 0;
+	}
+	.@left = getd(.@v$) - gettimetick(2);
+	if (.@left > 0 && isbegin_quest(.@q) == 1) {
+		mes .@n$;
+		mes "Your " + getarg(5) + " is still holding: about " + ((.@left + 59) / 60) + " minute(s) left.";
+		mes "I can start a new hour now for another " + .@cost + " " + getitemname(1001996) + ".";
+		next;
+		if (select("Start a new hour.:I'll keep this one.") == 2)
+			return 0;
+	}
+	if (countitem(1001996) < .@cost) {
+		mes .@n$;
+		mes "That takes " + .@cost + " " + getitemname(1001996) + ". You have " + countitem(1001996) + ".";
+		return 0;
+	}
+	delitem 1001996, .@cost;
+	if (isbegin_quest(.@q))
+		erasequest .@q;
+	setquest .@q;
+	setd .@v$, gettimetick(2) + 3600;
+	specialeffect2 EF_BLESSING;
+	return 1;
+}
+
+// ------------------------------------------------------------
+// Abandoned Lab Zero Cell: the investigation
+// ------------------------------------------------------------
+
+// A step of the investigation (F_WSV_Step, then who is visible on
+// Erosion Zone 1).
+// callfunc "F_WSV_ZCStep", <new step>, "<done>", "<next>";
+function	script	F_WSV_ZCStep	{
+	callfunc "F_WSV_Step", "wsv_c1zc", getarg(0), getarg(1), getarg(2);
+	callfunc "F_WSV_ZCScenes";
+	return;
+}
+
+// Newt at the erosion site shows only while you're looking for him.
+function	script	F_WSV_ZCScenes	{
+	if (strcharinfo(3) != "ch1fild1")
+		return;
+	if (wsv_c1zc >= 1 && wsv_c1zc <= 2)
+		cloakoffnpcself "Newt#wsv_zc1";
+	else
+		cloakonnpcself "Newt#wsv_zc1";
+	return;
+}
+
+// 1 when this character may investigate Zero Cell.
+function	script	F_WSV_ZCReady	{
+	return (BaseLevel >= 260 && wsv_ch1 >= 1000 && wsv_c1hg >= 3);
+}
+
+ygg_edge,173,185,4	script	Robin#wsv	10609,{
+	if (wsv_c1zc == 0) {
+		if (!callfunc("F_WSV_ZCReady")) {
+			mes "[Robin]";
+			mes "Robin, herald scout. I go where the maps end and come back with new ones.";
+			if (wsv_ch1 >= 1000 && wsv_c1hg < 3)
+				mes "...Rubiel's been looking for you, by the way. Something about her gate.";
+			else if (wsv_ch1 >= 1000)
+				mes "Where I've been lately is no place for you yet. Come back stronger. Base level 260, at least.";
+			close;
+		}
+		mes "[Robin]";
+		mes "There you are! Rubiel said you'd be the one to ask.";
+		mes "I was scouting past the Land of Darkness and found a place that wasn't on any map. The ground's been eaten the same way Geffenia was. A new ^0000FFerosion zone^000000.";
+		next;
+		mes "[Robin]";
+		mes "Rubiel doesn't want me poking at it alone, and honestly, neither do I. Newt went ahead to take measurements.";
+		next;
+		if (select("I'll come with you.:Not right now.") == 2) {
+			mes "[Robin]";
+			mes "Fair enough. It's not going anywhere. That's the problem.";
+			close;
+		}
+		mes "[Robin]";
+		mes "Great! Go into the Land of Darkness from the village's west edge, then head north. The way into ^0000FFErosion Zone 1^000000 opens at the top of the roots.";
+		mes "Newt should be on the south side of the zone. I'll catch up.";
+		callfunc "F_WSV_ZCStep", 1, "", "64252";
+		close;
+	}
+	mes "[Robin]";
+	if (wsv_c1zc == 1)
+		mes "Erosion Zone 1 is through the north end of the Land of Darkness. Find Newt on the south side.";
+	else if (wsv_c1zc < 6)
+		mes "What are you doing back here? I'm at the camp in Erosion Zone 1. ...Wait, then who am I talking to? Never mind. Go!";
+	else
+		mes "The camp in Erosion Zone 1 is where the work is now. Newt and I take turns there.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_c1zc == 0 && BaseLevel >= 260 && wsv_ch1 >= 1000 && wsv_c1hg >= 3" );
+	end;
+}
+
+ch1fild1,168,38,4	script(CLOAKED)	Newt#wsv_zc1	10613,{
+	if (wsv_c1zc == 1) {
+		mes "[Newt]";
+		mes "Oh, it's you. Robin said she'd send someone. Careful where you step.";
+		next;
+		mes "[Newt]";
+		mes "It's an erosion zone, all right. Same signature as Geffenia: mana soaked into everything until the land forgets what it was.";
+		mes "But it's not natural. The readings get stronger toward the middle, as if something there is still pumping it out.";
+		next;
+		mes "[Newt]";
+		mes "Robin marked a spot to the north where she wants a closer look. Go and find her; I'll finish my measurements.";
+		callfunc "F_WSV_ZCStep", 2, "64252", "64253";
+		close;
+	}
+	mes "[Newt]";
+	mes "Robin's at the spot she marked, north of here. I'll join you two when I'm done.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_c1zc == 1" );
+	end;
+}
+
+ch1fild1,25,132,4	script	Trace#wsv_zc	10519,{
+	if (wsv_c1zc == 3) {
+		mes "[Trace]";
+		mes "Half buried in the eroded soil: a satchel, its leather gone stiff. Inside are papers, curled but readable.";
+		next;
+		mes "^0000FF\"...Sector containment holding. Lux and Nox stable; Vita and Ark show accelerated growth. Recommend no entry without a mana resistance seal.\"^000000";
+		next;
+		mes "^0000FF\"Final note. We are abandoning the facility. If anyone finds this: do not open ZERO CELL.\"^000000";
+		next;
+		mes "You gather up the papers. Robin should see these.";
+		callfunc "F_WSV_ZCStep", 4, "64254", "64255";
+		close;
+	}
+	mes "[Trace]";
+	mes "Footprints and drag marks in the eroded soil, long dried.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_c1zc == 3" );
+	end;
+}
+
+ch1fild1,101,84,4	script	Robin#wsv_zc	10609,{
+	if (wsv_c1zc == 2) {
+		mes "[Robin]";
+		mes "Newt says it's erosion? Thought so. But look around: walls, fences, a road. Somebody built something here before the land was eaten.";
+		next;
+		mes "[Robin]";
+		mes "Let's split up. I'll take the east side. You check the west; if anyone left anything behind, it'll be there. Look for a ^0000FFtrace^000000.";
+		callfunc "F_WSV_ZCStep", 3, "64253", "64254";
+		close;
+	}
+	if (wsv_c1zc == 3) {
+		mes "[Robin]";
+		mes "Nothing on my side but rubble. Try the far west of the zone.";
+		close;
+	}
+	if (wsv_c1zc == 4) {
+		mes "[Robin]";
+		mes "Papers? Let me see.";
+		next;
+		mes "[Robin]";
+		mes "\"Zero Cell.\" A research facility, with four sectors. And they just... left. With whatever's in there still growing.";
+		mes "That explains the readings. The erosion is leaking out of that lab.";
+		next;
+		mes "[Robin]";
+		mes "Newt needs to see this. We agreed to meet at the camp, right next to me here. Go on, show him.";
+		callfunc "F_WSV_ZCStep", 5, "64255", "64256";
+		close;
+	}
+	if (wsv_c1zc == 5) {
+		mes "[Robin]";
+		mes "Newt's right next to me. Show him the papers.";
+		close;
+	}
+	if (wsv_c1zc < 6) {
+		mes "[Robin]";
+		mes "Hey! This is no place for sightseeing.";
+		close;
+	}
+	callfunc "F_WSV_ZCDailies";
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_c1zc == 2 || wsv_c1zc == 4" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsv_c1zc >= 6 && ((isbegin_quest(64261) != 1 && (isbegin_quest(64262) == 0 || checkquest(64262, PLAYTIME) == 2)) || (isbegin_quest(64263) != 1 && (isbegin_quest(64264) == 0 || checkquest(64264, PLAYTIME) == 2)) || (isbegin_quest(64265) != 1 && (isbegin_quest(64266) == 0 || checkquest(64266, PLAYTIME) == 2)) || (isbegin_quest(64267) != 1 && (isbegin_quest(64268) == 0 || checkquest(64268, PLAYTIME) == 2)))" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Newt at the camp: the end of the investigation, then the
+// authorizations and the way into the four sectors.
+// ------------------------------------------------------------
+ch1fild1,106,84,4	script	Newt#wsv_zc	10613,{
+	if (wsv_c1zc == 5) {
+		mes "[Newt]";
+		mes "Robin told me you found something. ...Let me see.";
+		next;
+		mes "[Newt]";
+		mes "Zero Cell. So that's what's at the middle of this zone. And four sectors: ^0000FFLux, Nox, Vita and Ark^000000.";
+		mes "The mana in there will be far worse than out here. Walk in unprotected and it'll strip you to the bone.";
+		next;
+		mes "[Newt]";
+		mes "But their own notes say how they managed: a ^0000FFmana resistance seal^000000. I can make one. It holds about an hour, and it eats Mana Rings for fuel.";
+		mes "One seal covers Lux and Nox. Vita and Ark are worse, so they need a stronger one.";
+		next;
+		mes "[Newt]";
+		mes "Whenever you want in, come to me. I'll seal you and open the way. And talk to Robin: someone has to keep those monsters from spilling out.";
+		callfunc "F_WSV_ZCStep", 6, "64256", "";
+		close;
+	}
+	if (wsv_c1zc < 6) {
+		mes "[Newt]";
+		if (wsv_c1zc >= 1)
+			mes "I'm still working out these readings. Robin's investigating with you, isn't she? Bring me whatever you find.";
+		else
+			mes "Erosion readings, erosion readings... Sorry, I'm busy. And you shouldn't be here.";
+		close;
+	}
+	.@now = gettimetick(2);
+	.@ln = wsv_zcln - .@now;
+	.@va = wsv_zcva - .@now;
+	mes "[Newt]";
+	mes "Zero Cell. Where to?";
+	if (.@ln > 0)
+		mes "^0000FFLux and Nox seal: about " + ((.@ln + 59) / 60) + " minute(s) left.^000000";
+	if (.@va > 0)
+		mes "^0000FFVita and Ark seal: about " + ((.@va + 59) / 60) + " minute(s) left.^000000";
+	next;
+	.@s = select("Enter Zero Cell Lux.:Enter Zero Cell Nox.:Enter Zero Cell Vita.:Enter Zero Cell Ark.:Get a seal for Lux and Nox (base 260, 50 Mana Rings).:Get a seal for Vita and Ark (base 270, 70 Mana Rings).:Never mind.");
+	if (.@s <= 4) {
+		if ((.@s <= 2 && .@ln <= 0) || (.@s >= 3 && .@va <= 0)) {
+			mes "[Newt]";
+			mes "Without a seal? Absolutely not. Get one first.";
+			close;
+		}
+		setarray .@x, 255, 152, 214, 245;
+		setarray .@y, 141, 19, 261, 70;
+		close2;
+		warp "ch1zero" + .@s, .@x[.@s - 1], .@y[.@s - 1];
+		end;
+	}
+	if (.@s == 5) {
+		if (callfunc("F_WSV_C1Timed", "[Newt]", 64259, "wsv_zcln", 260, 50, "Lux and Nox seal")) {
+			mes "[Newt]";
+			mes "Hold still... There. Lux and Nox, one hour. Talk to me again when you're ready to go in.";
+		}
+		close;
+	}
+	if (.@s == 6) {
+		if (callfunc("F_WSV_C1Timed", "[Newt]", 64260, "wsv_zcva", 270, 70, "Vita and Ark seal")) {
+			mes "[Newt]";
+			mes "This one stings a little. There. Vita and Ark, one hour. Talk to me again when you're ready to go in.";
+		}
+		close;
+	}
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_c1zc == 5" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Robin's dailies: Clean Up Zero Cell
+// ------------------------------------------------------------
+function	script	F_WSV_ZCDailies	{
+	setarray .@q, 64261, 64263, 64265, 64267;
+	setarray .@sec$, "Lux", "Nox", "Vita", "Ark";
+	setarray .@cnt, 300, 300, 100, 100;
+	// Turn-ins first.
+	for (.@i = 0; .@i < 4; .@i++) {
+		if (isbegin_quest(.@q[.@i]) != 1 || checkquest(.@q[.@i], HUNTING) != 2)
+			continue;
+		mes "[Robin]";
+		mes "Zero Cell " + .@sec$[.@i] + " is quieter already. That buys us a day, at least.";
+		completequest .@q[.@i];
+		erasequest .@q[.@i];
+		if (isbegin_quest(.@q[.@i] + 1))
+			erasequest .@q[.@i] + 1;
+		setquest .@q[.@i] + 1;
+		questinfo_refresh;
+		if (.@i < 2) {
+			getitem 105161, 1;	// Tangled Singularity
+			getitem 1001996, 15;	// Ch1_Mana_Ring
+		} else {
+			getitem 105162, 1;	// Boundary (Frontier) Singularity
+			getitem 1001996, 20;	// Ch1_Mana_Ring
+		}
+		close;
+	}
+	mes "[Robin]";
+	mes "The monsters in Zero Cell keep multiplying. If we don't thin them out every day, they'll spill into the zone. Get a seal from Newt first.";
+	next;
+	for (.@i = 0; .@i < 4; .@i++) {
+		.@what$ = "Clean Up Zero Cell " + .@sec$[.@i] + " (" + .@cnt[.@i] + " monsters)";
+		if (isbegin_quest(.@q[.@i]) == 1)
+			.@menu$ += "^aaaaaa" + .@what$ + " (in progress)^000000:";
+		else if (callfunc("F_WSV_Waiting", .@q[.@i] + 1))
+			.@menu$ += "^aaaaaa" + .@what$ + " (done today)^000000:";
+		else
+			.@menu$ += .@what$ + ":";
+	}
+	.@i = select(.@menu$ + "Nothing today.") - 1;
+	if (.@i >= 4)
+		close;
+	if (isbegin_quest(.@q[.@i]) == 1) {
+		mes "[Robin]";
+		mes "Still on that one: " + .@cnt[.@i] + " monsters in Zero Cell " + .@sec$[.@i] + ".";
+		close;
+	}
+	if (callfunc("F_WSV_Waiting", .@q[.@i] + 1)) {
+		mes "[Robin]";
+		mes "That one's done for today. Come back after 4 AM.";
+		close;
+	}
+	if (isbegin_quest(.@q[.@i]) == 2)
+		erasequest .@q[.@i];
+	setquest .@q[.@i];
+	questinfo_refresh;
+	mes "[Robin]";
+	mes "Thanks. Defeat " + .@cnt[.@i] + " monsters in Zero Cell " + .@sec$[.@i] + " and come back to me.";
+	close;
+}
+
+// ------------------------------------------------------------
+// The four sectors let in only those with a valid seal, and send
+// them out to Newt's camp when it runs out (relogging inside loads
+// the map again, which starts the clock again).
+// ------------------------------------------------------------
+-	script	WSV_ZeroGate	-1,{
+	end;
+OnPCLoadMapEvent:
+	.@m$ = strcharinfo(3);
+	if (.@m$ == "ch1fild1") {
+		callfunc "F_WSV_ZCScenes";
+		end;
+	}
+	if (.@m$ != "ch1zero1" && .@m$ != "ch1zero2" && .@m$ != "ch1zero3" && .@m$ != "ch1zero4")
+		end;
+	deltimer strnpcinfo(3) + "::OnExpire";
+	.@left = callfunc("F_WSV_ZCLeft", .@m$);
+	if (.@left <= 0) {
+		dispbottom "Without a mana resistance seal, the mana of Zero Cell throws you back out. Newt can make one.";
+		warp "ch1fild1", 104, 79;
+		end;
+	}
+	addtimer .@left * 1000 + 500, strnpcinfo(3) + "::OnExpire";
+	end;
+OnExpire:
+	.@m$ = strcharinfo(3);
+	if (.@m$ != "ch1zero1" && .@m$ != "ch1zero2" && .@m$ != "ch1zero3" && .@m$ != "ch1zero4")
+		end;
+	.@left = callfunc("F_WSV_ZCLeft", .@m$);
+	if (.@left > 0) {
+		addtimer .@left * 1000 + 500, strnpcinfo(3) + "::OnExpire";
+		end;
+	}
+	dispbottom "Your mana resistance seal has worn off. The mana of Zero Cell pushes you out.";
+	warp "ch1fild1", 104, 79;
+	end;
+}
+
+// Seconds left on the seal that covers a Zero Cell map (0 if none).
+// callfunc("F_WSV_ZCLeft", "<map>")
+function	script	F_WSV_ZCLeft	{
+	if (getarg(0) == "ch1zero1" || getarg(0) == "ch1zero2")
+		.@t = wsv_zcln;
+	else
+		.@t = wsv_zcva;
+	.@left = .@t - gettimetick(2);
+	if (.@left < 0)
+		.@left = 0;
+	return .@left;
+}
+
+ch1fild1	mapflag	loadevent
+ch1zero1	mapflag	loadevent
+ch1zero2	mapflag	loadevent
+ch1zero3	mapflag	loadevent
+ch1zero4	mapflag	loadevent

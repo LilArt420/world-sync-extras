@@ -5,7 +5,8 @@
 //= - "Give Me Something to Do" (24107-24109) and the Volund
 //=   Valley dailies (24110-24117): Jubilus.
 //= - To Brimir (8955-8969) and the Brimir dailies (8970-8978).
-//= - The Shaking Crossroads, Minuel, Naviel and Rubiel.
+//= - The Shaking Crossroads, Minuel, Naviel and Rubiel (A Hazy Gate
+//=   and the resistances are in ch1_h_zero.txt).
 //= - The Fantasy Book "A Doctor's Record.." (19225, 19226).
 //= Variables: wsv_c1s (bits: 1 Schrodinger done, 2 something to
 //= do, 4 doctor's record read), wsv_c1br (Brimir step 0-11),
@@ -509,6 +510,7 @@ function	script	F_WSV_C1Cross	{
 }
 
 hem_fild,329,191,4	script	Minuel#wsv	447,{
+	callfunc "F_WSV_C1HazyMinuel";	// A Hazy Gate and the resistance (ch1_h_zero.txt)
 	mes "[Minuel]";
 	mes "Halt! ...Oh, an adventurer from Ash Village. Sorry. I guard the crossroads for the heralds.";
 	next;
@@ -516,6 +518,10 @@ hem_fild,329,191,4	script	Minuel#wsv	447,{
 	mes "These crossings shake. They lead deeper into this broken world: the ruins under the city, and the Geffenia the darkness has eaten.";
 	mes "Strong adventurers only. I've had to drag three people back by their collars this week.";
 	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_c1hg == 2" );
+	end;
 }
 
 // ------------------------------------------------------------
@@ -549,6 +555,7 @@ ygg_edge,167,182,4	script	Naviel#wsv	447,{
 }
 
 ygg_edge,175,186,4	script	Rubiel#wsv	10610,{
+	callfunc "F_WSV_C1HazyRubiel";	// A Hazy Gate (ch1_h_zero.txt)
 	mes "[Rubiel]";
 	if (wsv_ch1 < 150) {
 		mes "I'm Rubiel. I keep the gates for the heralds. Someday soon I'll be holding one open for you, I think.";
@@ -560,6 +567,10 @@ ygg_edge,175,186,4	script	Rubiel#wsv	10610,{
 		close;
 	close2;
 	warp "hem_fild",180,260;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsv_ch1 >= 160 && wsv_c1hg == 0" );
 	end;
 }
 
