@@ -1074,3 +1074,71 @@ Body:
   - Id: 64246
     Title: "[Standby] Phantom of Nyrholt"
     TimeLimit: 4h
+  # Chapter 1: A Hazy Gate, the resistances, Abandoned Lab Zero Cell,
+  # Newt's seals and Robin's dailies (npc/when/varmundt/ch1_h_zero.txt).
+  - Id: 64250
+    Title: "A Hazy Gate"
+  - Id: 64251
+    Title: "A Hazy Gate"
+  - Id: 64252
+    Title: "Abandoned Lab Zero Cell"
+  - Id: 64253
+    Title: "Abandoned Lab Zero Cell"
+  - Id: 64254
+    Title: "Abandoned Lab Zero Cell"
+  - Id: 64255
+    Title: "Abandoned Lab Zero Cell"
+  - Id: 64256
+    Title: "Abandoned Lab Zero Cell"
+  - Id: 64257
+    Title: "Resistance: Encroached Geffenia"
+    TimeLimit: +1h
+  - Id: 64258
+    Title: "Resistance: Ruined Valkyrie Realm"
+    TimeLimit: +1h
+  - Id: 64259
+    Title: "Mana Resistance Seal: Lux and Nox"
+    TimeLimit: +1h
+  - Id: 64260
+    Title: "Mana Resistance Seal: Vita and Ark"
+    TimeLimit: +1h
+  - Id: 64261
+    Title: "Clean Up Zero Cell Lux"
+    Targets:
+      - Id: 1
+        Count: 300
+        MapName: Zero Cell Lux
+        Location: ch1zero1
+  - Id: 64262
+    Title: "[Standby] Clean Up Zero Cell Lux"
+    TimeLimit: 4h
+  - Id: 64263
+    Title: "Clean Up Zero Cell Nox"
+    Targets:
+      - Id: 1
+        Count: 300
+        MapName: Zero Cell Nox
+        Location: ch1zero2
+  - Id: 64264
+    Title: "[Standby] Clean Up Zero Cell Nox"
+    TimeLimit: 4h
+  - Id: 64265
+    Title: "Clean Up Zero Cell Vita"
+    Targets:
+      - Id: 1
+        Count: 100
+        MapName: Zero Cell Vita
+        Location: ch1zero3
+  - Id: 64266
+    Title: "[Standby] Clean Up Zero Cell Vita"
+    TimeLimit: 4h
+  - Id: 64267
+    Title: "Clean Up Zero Cell Ark"
+    Targets:
+      - Id: 1
+        Count: 100
+        MapName: Zero Cell Ark
+        Location: ch1zero4
+  - Id: 64268
+    Title: "[Standby] Clean Up Zero Cell Ark"
+    TimeLimit: 4h
