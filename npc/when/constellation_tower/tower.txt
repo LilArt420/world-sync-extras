@@ -363,7 +363,7 @@ S_Floor:
 		areamonster .@m$, .@x + 15, .@y + 15, .@x + 35, .@y + 35, "--ja--", rand(21325, 21359), 1;
 		'boss = $@mobid[0];
 		getunitdata 'boss, .@d;
-		.@b$ = strmobinfo(1, .@d[UMOB_CLASS]);
+		.@b$ = getmonsterinfo(.@d[UMOB_CLASS], MOB_NAME);
 		mapannounce .@m$, "Constellation Tower: floor " + .@n + ". " + .@count + " monsters, and " + .@b$ + ", one of the old tower's masters, guards it.", bc_map, "0x88CCFF";
 	} else
 		mapannounce .@m$, "Constellation Tower: floor " + .@n + ". " + .@count + " monsters.", bc_map, "0x88CCFF";
