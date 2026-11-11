@@ -96,7 +96,8 @@ This block adds the two party memorial dungeons (base level 250+):
 
 - 🏪 The **Subspace Vending Machines** by the stone upgrade the Divine Beast's Cloaks and enchant
   the cloaks and the Circulation of Life gear in dialogue, with the official tables (the server's
-  versions opened windows our client can't show, or nothing at all).
+  versions opened windows our client can't show, or nothing at all). The Functional Vending
+  Machines' Tool Dealer sells the usual tools (the server's opened a sell window instead).
 
 Stats and drops of the Divine Beasts and the criminal are Divine Pride's. The reward amounts and the
 trap, sanctuary and regeneration numbers are our estimates.

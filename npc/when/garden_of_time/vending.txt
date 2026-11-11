@@ -8,12 +8,19 @@
 //= sell the same barters and do the upgrade and the enchants with the
 //= official tables (npc/wse_dialog.txt). #1 (the exchanges) works and
 //= stays rAthena's.
+//=
+//= The four Functional Vending Machines (tools, storage, save point) are
+//= copied too: rAthena's "Tool Dealer" opens the SELL window (callshop
+//= type 2) of a shop holding only Red Potions, so players saw their own
+//= inventory and took it for the machine's stock. Ours sells the usual
+//= tools.
 //============================================================
 
 t_garden,1,1,0	script	#wsg_vending	-1,{
 	end;
 OnInit:
-	setarray .@n$, "Subspace vending machine#2", "Subspace vending machine#3", "Subspace vending machine#4";
+	setarray .@n$, "Subspace vending machine#2", "Subspace vending machine#3", "Subspace vending machine#4",
+		"Functional Vending Machine#1", "Functional Vending Machine#2", "Functional Vending Machine#3", "Functional Vending Machine#4";
 	for (.@i = 0; .@i < getarraysize(.@n$); .@i++) {
 		if (getnpcid(0, .@n$[.@i]))
 			disablenpc .@n$[.@i];
@@ -100,3 +107,42 @@ OnInit:
 	setunittitle getnpcid(0), "<Circle of Life Enchantment>";
 	end;
 }
+
+// ------------------------------------------------------------
+// The Functional Vending Machines: tools, storage, save point.
+// ------------------------------------------------------------
+-	shop	wsg_tools	-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,657:-1,601:-1,602:-1,611:-1,610:-1
+
+t_garden,156,222,2	script	Functional Vending Machine#wsgf1	4_VENDING_MACHINE2,{
+	switch (select("Tool Dealer.:Storage (100z).:Use the save point service.:Cancel.")) {
+	case 1:
+		close2;
+		callshop "wsg_tools", 1;
+		end;
+	case 2:
+		if (Zeny < 100) {
+			npctalk "To use the Storage, please insert 100 zeny.", "", bc_self;
+			end;
+		}
+		Zeny -= 100;
+		npctalk "I will open your storage. Thank you for using it.", "", bc_self;
+		close2;
+		openstorage;
+		end;
+	case 3:
+		// Each machine saves next to itself, as rAthena's do.
+		.@n = atoi(charat(strnpcinfo(2), getstrlen(strnpcinfo(2)) - 1));
+		setarray .@x, 0, 156, 97, 90, 137;
+		setarray .@y, 0, 220, 135, 115, 106;
+		savepoint "t_garden", .@x[.@n], .@y[.@n];
+		npctalk strcharinfo(0) + ", your location has been safely saved.", "", bc_self;
+		end;
+	}
+	close;
+OnInit:
+	questinfo QTYPE_CLICKME, QMARK_YELLOW, "isbegin_quest(12592) == 2";
+	end;
+}
+t_garden,97,138,6	duplicate(Functional Vending Machine#wsgf1)	Functional Vending Machine#wsgf2	4_VENDING_MACHINE2
+t_garden,91,116,2	duplicate(Functional Vending Machine#wsgf1)	Functional Vending Machine#wsgf3	4_VENDING_MACHINE2
+t_garden,144,116,2	duplicate(Functional Vending Machine#wsgf1)	Functional Vending Machine#wsgf4	4_VENDING_MACHINE2
