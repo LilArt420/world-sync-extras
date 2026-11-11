@@ -158,7 +158,9 @@ OnInit:
 		"Travel to kin_in01#ws20470", "Travel to uknw_ruin2#ws20289",
 		"Travel to uknw_ruin2#ws20372", "Travel to ch2safe4#ws20368",
 		// the Deep Abyss's own exit
-		"Travel to ba_chess#ws14263";
+		"Travel to ba_chess#ws14263",
+		// Chapter 1: Newt takes people into Zero Cell (with a seal)
+		"Travel to ch1zero1#ws20091";
 	for (.@i = 0; .@i < getarraysize(.@n$); .@i++) {
 		if (getnpcid(0, .@n$[.@i]))
 			disablenpc .@n$[.@i];

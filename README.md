@@ -55,6 +55,9 @@ script exists for these episodes.
 - 🗡️ **Seoyeon's Trial** under Amatsu (base 70+).
 - 🌳 **Chapter 1, "Song of the World Tree"**: from the small ash trees near Prontera and Payon to
   Destroyed Geffen, Verus and the Dark Whisper, with memorial dungeons and dailies (base 200+).
+- 🧪 **After Chapter 1**: Rubiel's **A Hazy Gate** (Ash Village) and Robin's **Zero Cell** investigation
+  (base 260+). Newt's one-hour seals open the four Zero Cell sectors, Robin gives their dailies, and
+  the Encroached weapons dropped there carry random options.
 - 🔥 **Chapter 2, "Fragment of the End"** (base 225+, after Chapter 1): the official story in its
   nine parts, from Sasha and the druid twins in Beledor (the Crossroads of Tangled Mana) to
   Muspelheim's Harvan village Yongjirak, the frozen Root of Death and Shelter Geminis, Brimir, the

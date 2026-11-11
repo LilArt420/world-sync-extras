@@ -1,4 +1,5 @@
-# World Sync Extras: Varmundt block - monsters the server doesn't have yet.
+# World Sync Extras: Varmundt block - monsters the server doesn't have yet,
+# and random options on the Zero Cell monsters' Encroached weapons (at the end).
 #
 # 22497 CH1_MD_HEMEL (Himmelmez, the Immortal Lord) and 22499 CH1_MD_VESSEL are
 # the official ids the client draws for Chapter 1's memorial dungeon (sprite and
@@ -209,3 +210,78 @@ Body:
     DamageMotion: 480
     Ai: 21
     Class: Boss
+
+  # The Zero Cell monsters' Encroached weapons come with random options
+  # (item_randomopt_group.yml). Each Index is that drop's place in the
+  # monster's list in the server's db/re/mob_db_world.yml: the same slot
+  # is overwritten, not a second drop added.
+  - Id: 22508
+    # CH1_MC_M (M.MC.M-5407)
+    Drops:
+      - Index: 1
+        Item: Encroached_Mace
+        Rate: 3
+        RandomOptionGroup: WSV_ZC_MELEE_1H
+  - Id: 22509
+    # CH1_SC (M.SC-3941)
+    Drops:
+      - Index: 2
+        Item: Encroached_Dagger
+        Rate: 3
+        RandomOptionGroup: WSV_ZC_MELEE_1H_CRIT
+  - Id: 22510
+    # CH1_RA (M.RA-4152)
+    Drops:
+      - Index: 1
+        Item: Encroached_Bow
+        Rate: 3
+        RandomOptionGroup: WSV_ZC_RANGED_2H_CRIT
+  - Id: 22511
+    # CH1_SO (M.SO-4206)
+    Drops:
+      - Index: 1
+        Item: Encroached_Foxtail
+        Rate: 3
+        RandomOptionGroup: WSV_ZC_MAGIC_1H
+  - Id: 22512
+    # CH1_AB (M.AB-4084)
+    Drops:
+      - Index: 0
+        Item: Encroached_Staff
+        Rate: 3
+        RandomOptionGroup: WSV_ZC_MAGIC_1H
+  - Id: 22514
+    # CH1_GC_D (M.GC.D-4402)
+    Drops:
+      - Index: 1
+        Item: Encroached_Humma
+        Rate: 3
+        RandomOptionGroup: WSV_ZC_RANGED_2H
+  - Id: 22516
+    # CH1_RG (M.RG-5520)
+    Drops:
+      - Index: 2
+        Item: Encroached_Spear
+        Rate: 3
+        RandomOptionGroup: WSV_ZC_MELEE_1H
+  - Id: 22518
+    # CH1_GN (M.GN-6059)
+    Drops:
+      - Index: 2
+        Item: Encroached_Book
+        Rate: 3
+        RandomOptionGroup: WSV_ZC_MAGIC_1H
+  - Id: 22519
+    # CH1_GC (M.GC-5848)
+    Drops:
+      - Index: 3
+        Item: Encroached_Katar
+        Rate: 3
+        RandomOptionGroup: WSV_ZC_MELEE_2H_CRIT
+  - Id: 22520
+    # CH1_MI (M.MI-4419)
+    Drops:
+      - Index: 3
+        Item: Encroached_Rifle
+        Rate: 3
+        RandomOptionGroup: WSV_ZC_RANGED_2H

@@ -24,7 +24,21 @@ hem_fild,180,263,4	script	Designated Spot#wsv_c1	10429,{
 	}
 	mes "[Designated Spot]";
 	mes "A ring of white stones. Laphine magic keeps the way to Ash Village open here.";
-	if (wsv_ch1 >= 150) {
+	if (wsv_ch1 >= 160) {
+		// The Recon Point: also Rubiel's safe area (A Hazy Gate, ch1_h_zero.txt).
+		mes "Behind the stones, Rubiel's safe area waits, out of the erosion's reach.";
+		next;
+		switch (select("Go back to Ash Village.:Enter Rubiel's safe area.:Stay.")) {
+		case 1:
+			close2;
+			warp "ygg_edge",36,117;
+			end;
+		case 2:
+			close2;
+			warp "ch1_sf03",123,249;
+			end;
+		}
+	} else if (wsv_ch1 >= 150) {
 		next;
 		if (select("Go back to Ash Village.:Stay.") == 1) {
 			close2;
