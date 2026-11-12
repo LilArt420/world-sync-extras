@@ -185,7 +185,7 @@ ygg_edge,167,136,4	script(CLOAKED)	Jeon Cheosa#wsv_c1e	754,{
 		mes "Ho... you're back. And the wind from the intersection no longer smells of fever.";
 		mes "Sit. Tell an old man everything.";
 		next;
-		select("Himmelmez is dead. But something tore the air and took her body.");
+		select("Himmelmez is dead. Her body was taken.");
 		mes "[Jeon Cheosa]";
 		mes "......";
 		mes "Something that can tear the air between worlds as easily as paper. Hm.";

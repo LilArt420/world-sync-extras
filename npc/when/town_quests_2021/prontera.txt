@@ -334,7 +334,7 @@ glast_01,205,131,4	script	Claude#iqprt	690,{
 	mes "Will you help cleanse the";
 	mes "monastery today?";
 	next;
-	switch (select("Cleansing the Monastery (daily):Stabilizing the Underground Cemetery (daily):Never mind")) {
+	switch (select("Cleansing the Monastery (daily):Stabilize the Cemetery (daily):Never mind")) {
 	case 1: callfunc "F_IQ_TownDaily", 21272, 21273, 37640, 37050, 0, 0, "Claude", 70; end;
 	case 2: callfunc "F_IQ_TownDaily", 21274, 21275, 96220, 91630, 0, 0, "Claude", 90; end;
 	case 3: close;

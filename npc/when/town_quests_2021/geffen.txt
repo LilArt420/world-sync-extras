@@ -25,7 +25,7 @@ geffen,126,113,4	script	Apprentice Mage#iqgef	755,{
 	mes "The monsters multiply every day!";
 	mes "Which floor will you take?";
 	next;
-	switch (select("Hunterflies, 1F (Base Level 55):Ghouls and Jakks, 2F (Base Level 55):Marionettes and Deviruchis, 3F (Base Level 80):Never mind")) {
+	switch (select("Hunterflies, 1F (Lv 55):Ghouls and Jakks, 2F (Lv 55):Marionettes, Deviruchis, 3F (Lv 80):Never mind")) {
 	case 1: callfunc "F_IQ_FirstHunt", 21101, 21103, 21102, "iq_gef21", 1, 8000, 6800, "Apprentice Mage", 55; end;
 	case 2: callfunc "F_IQ_FirstHunt", 21104, 21106, 21105, "iq_gef21", 2, 14800, 13660, "Apprentice Mage", 55; end;
 	case 3: callfunc "F_IQ_FirstHunt", 21107, 21109, 21108, "iq_gef21", 4, 37520, 41740, "Apprentice Mage", 80; end;

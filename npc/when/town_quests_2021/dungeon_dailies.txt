@@ -343,7 +343,7 @@ ice_dun01,149,168,4	script	Magician's Friend#iqra8	704,{
 	mes "My friend the wizard sent me to study";
 	mes "the ice. The Snowiers won't let me.";
 	next;
-	switch (select("The Yeti Who Cannot Be Reasoned W. (daily):How Hard Is an Ice Crystal? (daily):Never mind")) {
+	switch (select("The Unreasonable Yeti (daily):How Hard Is an Ice Crystal? (daily):Never mind")) {
 	case 1: callfunc "F_IQ_TownDaily", 21389, 21390, 150000, 150000, 0, 0, "Magician's Friend", 100, 25223, 1; end;
 	case 2: callfunc "F_IQ_TownDaily", 21391, 21392, 300000, 300000, 0, 0, "Magician's Friend", 100, 25223, 1; end;
 	case 3: close;

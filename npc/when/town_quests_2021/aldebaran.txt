@@ -198,7 +198,7 @@ aldebaran,143,132,4	script	Clock Tower Manager#iqald	712,{
 	mes "that forget what clocks are for,";
 	mes "and a witch laughing underground.";
 	next;
-	switch (select("Cleaning the Clock Tower's First Floor (daily):The Living, Moving Clock 1 (daily):The Living, Moving Clock 2 (daily):Laughter Echoing from Underground (daily):Never mind")) {
+	switch (select("Clock Tower 1F Cleanup (daily):The Living, Moving Clock 1 (daily):The Living, Moving Clock 2 (daily):Laughter Echoing from Underground (daily):Never mind")) {
 	case 1: callfunc "F_IQ_TownDaily", 21286, 21287, 33820, 40650, 0, 0, "Cerdin", 70; end;
 	case 2: callfunc "F_IQ_ClockDaily", 21288, 21289, 20310, 17370; end;
 	case 3: callfunc "F_IQ_ClockDaily", 21290, 21291, 28320, 27960; end;

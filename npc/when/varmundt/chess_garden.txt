@@ -131,7 +131,7 @@ ba_chess,25,13,4	script	Research Quest Manager#wsv	10354,{
 	mes "What research request would you accept?";
 	mes "Research reputation: ^0000FF" + wsv_abyss_rep + "^000000";
 	next;
-	switch (select("Deep Abyss sample research (individual request):Accept all Deep Abyss specimen research requests:Complete all Deep Abyss specimen research requests:Deep Abyss multi-specimen research individual request:About the rewards:Never mind.")) {
+	switch (select("Sample research (single):Accept all research requests:Complete all research requests:Multi-specimen research (single):About the rewards:Never mind.")) {
 	case 1:
 		callfunc "F_WSV_AbyssQuest", 16779, 16780;
 		close;

@@ -533,7 +533,7 @@ vr_bob,144,289,5	script(CLOAKED)	Seyren Windsor#wsv_df2	10318,{
 		mes "[Seyren Windsor]";
 		mes "I couldn't wait in the kitchen. Well? What did they say?";
 		next;
-		select("Margaretha wants something warm to share. Kathryne wants it fresh.");
+		select("One wants it warm, one fresh.");
 		mes "[Seyren Windsor]";
 		mes "Warm, shareable and fresh...";
 		next;

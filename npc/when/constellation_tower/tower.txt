@@ -334,9 +334,11 @@ S_Floor:
 			disablenpc instance_npcname("Blue Brazier#wsct" + (.@r / 5 + 1));
 		killmonster .@m$, instance_npcname("#wsct") + "::OnMob";
 	}
-	if ('boss && unitexists('boss))
-		unitkill 'boss;
+	// Cleared first: a boss removed here isn't a kill (OnBossKill).
+	.@b = 'boss;
 	'boss = 0;
+	if (.@b && unitexists(.@b))
+		unitkill .@b;
 	'floor = .@n;
 	.@r = callfunc("F_WSCT_Room", .@n, .@x, .@y);
 	if (.@px || .@py)
@@ -360,7 +362,7 @@ S_Floor:
 	}
 	// Every 5th floor: one of the old tower's bosses, not needed to go on.
 	if (.@n % 5 == 0) {
-		areamonster .@m$, .@x + 15, .@y + 15, .@x + 35, .@y + 35, "--ja--", rand(21325, 21359), 1;
+		areamonster .@m$, .@x + 15, .@y + 15, .@x + 35, .@y + 35, "--ja--", rand(21325, 21359), 1, instance_npcname("#wsct") + "::OnBossKill";
 		'boss = $@mobid[0];
 		getunitdata 'boss, .@d;
 		.@b$ = getmonsterinfo(.@d[UMOB_CLASS], MOB_NAME);
@@ -389,6 +391,31 @@ OnSkip:
 		end;
 	'skips++;
 	callsub S_Floor, 'floor + 4;
+	end;
+
+// A 5th-floor boss beaten: Meteorite Fragments for everyone in its room,
+// 2 up to floor 20, 3 from 25, 4 from 50, 5 on 75 (an estimate: the
+// official amount isn't published). No player is attached here.
+OnBossKill:
+	if ('boss == 0 || killedgid != 'boss)
+		end;
+	'boss = 0;
+	.@m$ = instance_mapname("1@ch_t");
+	callfunc "F_WSCT_Room", 'floor, .@x, .@y;
+	.@amt = 2 + 'floor / 25;
+	.@n = getmapunits(BL_PC, .@m$, .@pc);
+	for (.@i = 0; .@i < .@n; .@i++) {
+		if (getmapxy(.@mm$, .@px, .@py, BL_PC, .@pc[.@i]) != 0)
+			continue;
+		if (.@px < .@x || .@px > .@x + 49 || .@py < .@y || .@py > .@y + 49)
+			continue;
+		if (attachrid(.@pc[.@i])) {
+			getitem 1000373, .@amt;	// Meteorite_Fragment
+			dispbottom "The old tower's master leaves " + .@amt + " Meteorite Fragments behind.";
+			detachrid;
+		}
+	}
+	mapannounce .@m$, "The floor's boss falls. Fragments of the stars scatter across the room.", bc_map, "0x88CCFF";
 	end;
 
 OnMob:
@@ -484,7 +511,7 @@ OnTouch:
 		else if ('floor == 25)
 			.@c = select("Keep climbing.:Go down to the outcast's hall.");
 		else
-			.@c = select("Keep climbing (Betelgeuse grows stronger by floor 75).:Go to Betelgeuse's throne.");
+			.@c = select("Keep climbing to floor 75.:Go to Betelgeuse's throne.");
 		close2;
 		if ('cleared != 'floor || 'route)
 			end;
@@ -744,7 +771,7 @@ OnBoss:
 		}
 		mes "^4d4dffHis strength: " + .@diff + "%. His chest: " + max(1, .@diff / 100 - 1) + " share" + (.@diff >= 300 ? "s" : "") + ".^000000";
 		next;
-		.@s = select("Stir it: reroll every stat (20 Meteorite Powder).:Feed one stat to the full (150 Meteorite Powder).:Seal one stat (300 Meteorite Powder).:Leave it.");
+		.@s = select("Reroll all stats (20 Powder).:Max one stat (150 Powder).:Seal one stat (300 Powder).:Leave it.");
 		if (.@s == 4)
 			close;
 		setarray .@cost, 20, 150, 300;

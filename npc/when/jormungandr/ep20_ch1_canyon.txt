@@ -96,7 +96,7 @@ icas_in,259,219,3	script(CLOAKED)	Horuru#wsj_l	4_EP19_IWIN,{
 		mes "[Horuru]";
 		mes "Well? What did you find?";
 		next;
-		select("A soldier no one knows, a guest who asked about the barrier, and a fake Iwin in the alley.");
+		select("A stranger, a nosy guest, a fake Iwin.");
 		cutin "ep19_iwin03.png",2;
 		mes "[Horuru]";
 		mes "......";
@@ -195,7 +195,7 @@ icas_in,260,205,5	script(CLOAKED)	Vellgunde#wsj_l	4_EP19_VELLGUNDE,{
 		mes "That thing you brought back is a ^0000FFmana absorption device^000000.";
 		mes "Planted in the ground, it drinks the magic out of the land around it and stores it in a core.";
 		next;
-		select("What would the Rgans want with that much mana?");
+		select("Why would the Rgans want that mana?");
 		mes "[Vellgunde]";
 		mes "That's the question, isn't it?";
 		mes "After you shut them out, they lost the mana of the nest. They'll need a great deal of it for whatever they're planning.";
@@ -258,7 +258,7 @@ icas_in,263,200,3	script(CLOAKED)	Lazy#wsj_l	4_EP19_LAZY,{
 		mes "Ah, the survivor~";
 		mes "Lehar's version has the canyon collapsing three times and him saving you twice. What's yours?";
 		next;
-		select("Fake Iwins, planting devices, guarding the canyon.");
+		select("Fake Iwins planting devices.");
 		mes "[Lazy]";
 		mes "Mm. And they ran away the moment they saw you, didn't they?";
 		mes "Because underneath the uniform, they're cowards. Rgans are rather predictable creatures.";

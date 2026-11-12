@@ -141,7 +141,7 @@ c_tower1,243,202,4	script	Mysterious Box#wsi	4_NONMYSTCASE,{
 		mes "today? The more souls, the";
 		mes "better the meal... and the pay.";
 		next;
-		.@s = select("Breakfast: 100 monsters:Lunch: 300 monsters:Dinner: 1000 monsters:Not today") - 1;
+		.@s = select("Breakfast - 100 monsters:Lunch - 300 monsters:Dinner - 1000 monsters:Not today") - 1;
 		if (.@s == 3) {
 			mes "[Devil in the Box]";
 			mes "Hmph. Cruel, cruel adventurer.";

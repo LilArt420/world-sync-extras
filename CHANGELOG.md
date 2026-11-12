@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.1.9
+Needs Ragnarok Offline 1.6.9 or later. Fixes from players' reports.
+- ⏳ **Garden of Time**: the **Functional Vending Machines** opened their menu with no dialogue box, so the Tool Dealer never opened, the storage stayed invisible and you had to relog to move again. They now talk first, and the Tool Dealer, the storage (100z) and the save point all work.
+- 🌌 **Constellation Tower**:
+  - The **bosses of every 5th floor** now leave **Meteorite Fragments** to everyone in the room: 2 up to floor 20, 3 from floor 25, 4 from floor 50, 5 on floor 75 (our estimate: the official amount isn't published). They used to give nothing extra.
+  - **Betelgeuse's fountain** picked the wrong option: "Stir it: reroll..." had a colon, which the game reads as a separator, so it showed as two lines and everything below it moved down by one. The options are now *Reroll all stats (20 Powder)*, *Max one stat (150 Powder)*, *Seal one stat (300 Powder)*.
+- 🏰 The same colon bug made the **Herosria Jewel Room** warps and the **Devil in the Box** meal choices pick the wrong line. Fixed.
+- 📜 **Long menu options**: our client gives each option one line; a longer one wrapped over the next option and clicks on it picked the wrong one. The 32 menu options that didn't fit (Abyss research requests, Newt's seals, 2021 town dailies, story answers) were shortened.
+- 🧪 **Zero Cell** quests gave no experience. They now give a share of your level, like Chapter 2 (estimates): A Hazy Gate 3%, the Abandoned Lab Zero Cell story 5%, each Lux or Nox daily 2%, each Vita or Ark daily 3%.
+
 ## 2.1.8
 Needs Ragnarok Offline 1.6.9 or later. Fixes from players' reports.
 - 🌌 **Constellation Tower, rebuilt after the official tower** (iROWiki, with the guides of servers that run it):

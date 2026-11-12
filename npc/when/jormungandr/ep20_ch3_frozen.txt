@@ -608,7 +608,7 @@ jor_maze,150,33,3	script(CLOAKED)	Miriam#wsj_mz	4_EP19_RGAN_R2,{
 		mes "[Miriam]";
 		mes "What did you hear? Everyone's back but you.";
 		next;
-		select("Rasgand's furious, Bagot's lab is on the 1st floor, and they've found another way into the nest.");
+		select("Rasgand's furious. Bagot's lab is 1F.");
 		mes "[Miriam]";
 		mes "Lehar heard about the lab too. He's gone to the Roots to look for it already. He left marks for us.";
 		next;

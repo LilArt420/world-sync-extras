@@ -410,7 +410,7 @@ ygg_roots,161,237,4	script(CLOAKED)	Magi#wsv_c1b	10365,{
 		mes "[Magi]";
 		mes "You're back! What did you see?";
 		next;
-		select("A field. And an investigator who says it's the Geffen field, but ruined.");
+		select("A Geffen field, but ruined.");
 		mes "[Magi]";
 		mes "Geffen? But we're nowhere near Geffen...";
 		mes "...So that's what an intersection does. It doesn't connect places. It connects worlds.";
@@ -525,7 +525,7 @@ ygg_roots,40,129,4	script	Tamarin#wsv_c1b	10381,{
 		mes "[Tamarin]";
 		mes "You're back! Is Alf all right?";
 		next;
-		select("He's fine. But the place on the other side... it's a ruin. Chained people, gray flowers.");
+		select("He's fine. The other side's a ruin.");
 		mes "[Tamarin]";
 		mes "......";
 		mes "That doesn't sound like somewhere we should poke around on our own.";
