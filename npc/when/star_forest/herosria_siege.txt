@@ -455,7 +455,7 @@ function	script	F_WSF_HsFlag	{
 	next;
 	setarray .@x, 166, 60, 250, 60, 250;
 	setarray .@y, 190, 240, 240, 80, 80;
-	.@c = select("Jewel Room: center:Jewel Room: northwest:Jewel Room: northeast:Jewel Room: southwest:Jewel Room: southeast:Stay") - 1;
+	.@c = select("Jewel Room - center:Jewel Room - northwest:Jewel Room - northeast:Jewel Room - southwest:Jewel Room - southeast:Stay") - 1;
 	if (.@c == 5)
 		close;
 	close2;

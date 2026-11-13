@@ -537,7 +537,7 @@ ygg_edge,167,182,4	script	Naviel#wsv	447,{
 		close;
 	}
 	next;
-	switch (select("The village entrance of the Land of Darkness.:The great intersection in the north.:The western intersection.:Never mind.")) {
+	switch (select("Land of Darkness village entrance.:The great intersection in the north.:The western intersection.:Never mind.")) {
 	case 1:
 		close2;
 		warp "ygg_roots",325,148;

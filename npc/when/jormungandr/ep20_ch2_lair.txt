@@ -481,7 +481,7 @@ jor_sanct,218,86,3	script	Gamirabagand#wsj	4_EP19_RGAN_R2,{
 		mes "[Gamirabagand]";
 		mes "Hi! Hi! Are you the boss's friend? Do you like beetles?";
 		next;
-		select("If you count every beetle in the Roots, the boss will be very proud.");
+		select("Count beetles! The boss will be proud.");
 		mes "[Gamirabagand]";
 		mes "EVERY beetle?! On it!";
 		mes "One... two... ooh, a big one... three...";
@@ -580,7 +580,7 @@ jor_sanct,258,117,3	script	Doririrogand#wsj	4_EP19_RGAN_R1,{
 		mes "Did he give you a job? He gives everyone jobs. He never gives ME jobs.";
 		mes "I'm supposed to be his assistant. I assist by standing here.";
 		next;
-		select("He wanted the feathers for you. To make you a proper nest.");
+		select("The feathers were for your nest.");
 		mes "[Doririrogand]";
 		mes "......For me?";
 		mes "He never says anything. I thought he didn't like me.";
@@ -937,7 +937,7 @@ jor_back1,365,226,3	script(CLOAKED)	Aurelie#wsj_b1	4_EP19_AURELIE,{
 		mes "[Aurelie]";
 		mes "You're alive! We landed here a moment before you did. All of us, out of nowhere.";
 		next;
-		select("Rasgand. He was out on the ice, behind the wall in the maze.");
+		select("Rasgand, behind the ice maze wall.");
 		mes "[Aurelie]";
 		mes "Rasgand himself...";
 		mes "And a white cat, you say? It threw him away too?";

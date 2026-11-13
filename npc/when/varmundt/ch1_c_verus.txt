@@ -248,7 +248,7 @@ ch1_dw,269,67,4	script(CLOAKED)	Clover#wsv_c1d1	123,{
 		mes "[Clover]";
 		mes "You're back! What did you find?";
 		next;
-		select("Machines pumping dark mist into the vents, and soldiers branded with the same sigil.");
+		select("Mist machines and branded soldiers.");
 		mes "[Jeon Cheosa]";
 		mes "The sickness is brewed here and breathed out over the ruins. And those it kills come here to be... collected.";
 		next;

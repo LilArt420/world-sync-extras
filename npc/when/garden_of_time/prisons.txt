@@ -105,7 +105,7 @@ t_garden,158,235,2	script(CLOAKED)	Dimensional Prison#wsg1	GATE_SKYBLUE,{
 	mes "The Four Divine Beasts who served the Constellation of Life are held here. They still guard the criminal, and they keep the key to the Hall of Life.";
 	mes "Entry: once a day. Time limit: 30 minutes.";
 	next;
-	switch (select("Enter the Lake of Fire.:Open the gate again today (5 Dimensional Crystal Fragments).:Leave.")) {
+	switch (select("Enter the Lake of Fire.:Reopen today (5 Crystal Fragments).:Leave.")) {
 	case 3:
 		end;
 	case 2:

@@ -372,11 +372,6 @@ pay_dun00,15,31,4	script	Book of Illusion Vol. 1#ws17266	10372,{
 	mes "Hello there, adventurer.";
 	close;
 }
-ve_fild05,313,110,4	script	Doomk#ws17332	481,{
-	mes "[Doomk]";
-	mes "Hello there, adventurer.";
-	close;
-}
 ab_ground1,119,228,4	script	Verkasel#ws28622	467,{
 	mes "[Verkasel]";
 	mes "Hello there, adventurer.";

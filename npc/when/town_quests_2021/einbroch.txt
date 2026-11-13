@@ -105,7 +105,7 @@ einbech,156,200,4	script	Guard Artin#iqein	852,{
 	mes "a scrap furnace that attacks";
 	mes "miners, minerals that jump. Help?";
 	next;
-	switch (select("The Shadow Miner (daily):Why Is Something Like That Moving?! (daily):Jumping Minerals (daily):Never mind")) {
+	switch (select("The Shadow Miner (daily):Why Is That Thing Moving?! (daily):Jumping Minerals (daily):Never mind")) {
 	case 1: callfunc "F_IQ_TownDaily", 21305, 21306, 77500, 69780, 0, 0, "Guard Artin", 85; end;
 	case 2: callfunc "F_IQ_TownDaily", 21307, 21308, 72040, 71084, 0, 0, "Guard Artin", 85; end;
 	case 3: callfunc "F_IQ_TownDaily", 21309, 21310, 72530, 89290, 0, 0, "Guard Artin", 85; end;
@@ -182,7 +182,7 @@ lighthalzen,200,314,4	script	Theodore#iqein	868,{
 	mes "says Stem Worms slap her ankles.";
 	mes "And they all come to ^0000FFme^000000.";
 	next;
-	switch (select("Why Can't We Use Such a Large Swimming Pool?! (daily):A Slap on the Ankle! (daily):Never mind")) {
+	switch (select("Such a Large Pool?! (daily):A Slap on the Ankle! (daily):Never mind")) {
 	case 1: callfunc "F_IQ_TownDaily", 21319, 21320, 51440, 52640, 0, 0, "Theodore", 80; end;
 	case 2: callfunc "F_IQ_TownDaily", 21321, 21322, 49890, 53416, 0, 0, "Theodore", 80; end;
 	case 3: close;

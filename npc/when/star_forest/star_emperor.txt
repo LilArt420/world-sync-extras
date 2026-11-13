@@ -378,7 +378,7 @@ star_frst,157,39,4	script	Eunha#wsf	10298,{
 		mes "[Eunha]";
 		mes "Zzz... hm? You again. What now?";
 		next;
-		select("Chosung wants to see you in Ilgwang's room.");
+		select("Chosung wants you in Ilgwang's room.");
 		emotion ET_SCRATCH;
 		mes "[Eunha]";
 		mes "Ugh. He found out, didn't he. About the Minerals.";
@@ -672,7 +672,7 @@ star_in,146,48,4	script	Chosung#wsf_room	10297,{
 		mes "[Chosung]";
 		mes "What's this? You smell like a fox den.";
 		next;
-		select("I hunted 50 Nine Tails. Ilgwang said you'd like that.");
+		select("I hunted 50 Nine Tails for you.");
 		mes "[Chosung]";
 		mes "Ilgwang said what?";
 		next;

@@ -114,6 +114,12 @@ OnInit:
 -	shop	wsg_tools	-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,657:-1,601:-1,602:-1,611:-1,610:-1
 
 t_garden,156,222,2	script	Functional Vending Machine#wsgf1	4_VENDING_MACHINE2,{
+	// A dialog box first: close2 needs its Close button. With a bare menu
+	// our client has no box to put it in, and the player is stuck until
+	// they relog ("finish the task in progress").
+	mes "[Functional Vending Machine]";
+	mes "Welcome. Please choose a service.";
+	next;
 	switch (select("Tool Dealer.:Storage (100z).:Use the save point service.:Cancel.")) {
 	case 1:
 		close2;
@@ -121,11 +127,13 @@ t_garden,156,222,2	script	Functional Vending Machine#wsgf1	4_VENDING_MACHINE2,{
 		end;
 	case 2:
 		if (Zeny < 100) {
-			npctalk "To use the Storage, please insert 100 zeny.", "", bc_self;
-			end;
+			mes "[Functional Vending Machine]";
+			mes "To use the Storage, please insert 100 zeny.";
+			close;
 		}
 		Zeny -= 100;
-		npctalk "I will open your storage. Thank you for using it.", "", bc_self;
+		mes "[Functional Vending Machine]";
+		mes "I will open your storage. Thank you for using it.";
 		close2;
 		openstorage;
 		end;
@@ -135,8 +143,9 @@ t_garden,156,222,2	script	Functional Vending Machine#wsgf1	4_VENDING_MACHINE2,{
 		setarray .@x, 0, 156, 97, 90, 137;
 		setarray .@y, 0, 220, 135, 115, 106;
 		savepoint "t_garden", .@x[.@n], .@y[.@n];
-		npctalk strcharinfo(0) + ", your location has been safely saved.", "", bc_self;
-		end;
+		mes "[Functional Vending Machine]";
+		mes strcharinfo(0) + ", your location has been safely saved.";
+		close;
 	}
 	close;
 OnInit:

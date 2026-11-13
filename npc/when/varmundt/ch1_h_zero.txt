@@ -17,6 +17,9 @@
 //=   back to Newt, and send them out when it runs out.
 //= - Robin's dailies: Clean Up Zero Cell Lux/Nox/Vita/Ark (64261,
 //=   64263, 64265, 64267; cooldowns one id up).
+//= EXP (estimates, the official amounts aren't published): a share of
+//= the next level like Chapter 2 (F_WSV_C2Reward): A Hazy Gate 3%, the
+//= Zero Cell story 5%, each Lux/Nox daily 2%, each Vita/Ark daily 3%.
 //= Written from the kRO client's quest text (27088-27104), the
 //= navigation table and the muhro wiki's Chapter 1 pages.
 //= Variables: wsv_c1hg (A Hazy Gate: 1 see Rubiel inside, 2 see
@@ -129,6 +132,7 @@ function	script	F_WSV_C1HazyMinuel	{
 		mes "[Minuel]";
 		mes "And Rubiel can do the same for Encroached Geffenia, if you're strong enough for it. Come back whenever you need it.";
 		callfunc "F_WSV_Step", "wsv_c1hg", 3, "64251", "";
+		callfunc "F_WSV_C2Reward", 3, 0;	// 3% of the level
 		close;
 	}
 	if (wsv_c1hg < 3)
@@ -369,6 +373,7 @@ ch1fild1,106,84,4	script	Newt#wsv_zc	10613,{
 		mes "[Newt]";
 		mes "Whenever you want in, come to me. I'll seal you and open the way. And talk to Robin: someone has to keep those monsters from spilling out.";
 		callfunc "F_WSV_ZCStep", 6, "64256", "";
+		callfunc "F_WSV_C2Reward", 5, 0;	// 5% of the level
 		close;
 	}
 	if (wsv_c1zc < 6) {
@@ -389,7 +394,7 @@ ch1fild1,106,84,4	script	Newt#wsv_zc	10613,{
 	if (.@va > 0)
 		mes "^0000FFVita and Ark seal: about " + ((.@va + 59) / 60) + " minute(s) left.^000000";
 	next;
-	.@s = select("Enter Zero Cell Lux.:Enter Zero Cell Nox.:Enter Zero Cell Vita.:Enter Zero Cell Ark.:Get a seal for Lux and Nox (base 260, 50 Mana Rings).:Get a seal for Vita and Ark (base 270, 70 Mana Rings).:Never mind.");
+	.@s = select("Enter Zero Cell Lux.:Enter Zero Cell Nox.:Enter Zero Cell Vita.:Enter Zero Cell Ark.:Lux/Nox seal (Lv 260, 50 Rings).:Vita/Ark seal (Lv 270, 70 Rings).:Never mind.");
 	if (.@s <= 4) {
 		if ((.@s <= 2 && .@ln <= 0) || (.@s >= 3 && .@va <= 0)) {
 			mes "[Newt]";
@@ -445,9 +450,11 @@ function	script	F_WSV_ZCDailies	{
 		if (.@i < 2) {
 			getitem 105161, 1;	// Tangled Singularity
 			getitem 1001996, 15;	// Ch1_Mana_Ring
+			callfunc "F_WSV_C2Reward", 2, 0;	// 2% of the level
 		} else {
 			getitem 105162, 1;	// Boundary (Frontier) Singularity
 			getitem 1001996, 20;	// Ch1_Mana_Ring
+			callfunc "F_WSV_C2Reward", 3, 0;	// 3% of the level
 		}
 		close;
 	}

@@ -559,7 +559,7 @@ ch1_gef_in,75,58,4	script(CLOAKED)	Einhar#wsv_c1a	10370,{
 		mes "[Einhar]";
 		mes "Tell us what you saw.";
 		next;
-		select("A cough, flaking skin, endless hunger with weight loss...");
+		select("Cough, flaking skin, hunger...");
 		mes "[Einhar]";
 		mes "Hm. The body burning through itself. Something is feeding on them from the inside.";
 		next;
@@ -752,7 +752,7 @@ ch1_geffen,180,147,4	script	Aire#wsv	893,{
 		mes "[Aire]";
 		mes "If you're selling something, I'm not buying. If you're preaching, I'm not listening.";
 		next;
-		select("I'm collecting blood from healthy people. For a cure.");
+		select("I'm collecting blood for a cure.");
 		mes "[Aire]";
 		mes "...Blood. For a cure.";
 		mes "Huh. That's a new one.";
