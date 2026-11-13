@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.10
+Needs Ragnarok Offline 1.6.9 or later.
+- 📜 **Moscovia's Banish Winter quest log**: since Ragnarok Offline 1.7.8 gave its quest IDs to the Abyss Chaser job change quest, Baba Yaga's ten steps had no title or text in the quest log. They have their English text back: Banishing Winter, the magic dust, the Dragon's Lair, the people's speech, the Csar's request and the secret medicine. By MondoTruth.
+
 ## 2.1.9
 Needs Ragnarok Offline 1.6.9 or later. Fixes from players' reports.
 - ⏳ **Garden of Time**: the **Functional Vending Machines** opened their menu with no dialogue box, so the Tool Dealer never opened, the storage stayed invisible and you had to relog to move again. They now talk first, and the Tool Dealer, the storage (100z) and the save point all work.
