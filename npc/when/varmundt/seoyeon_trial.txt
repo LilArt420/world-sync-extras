@@ -233,9 +233,7 @@ function	script	F_WSV_SYEnd	{
 	mes "[Seoyeon]";
 	mes "Something of him stays with whoever sets him free. His strength, his patience.";
 	mes "Take it, and don't waste it.";
-	.@e = min(NextBaseExp / 2, 2000000);
-	.@j = min(NextJobExp / 2, 1000000);
-	getexp2 .@e, .@j;
+	callfunc "F_WSV_Exp", NextBaseExp / 2, NextJobExp / 2, 2000000, 1000000;
 	callfunc "F_WSV_Step", "wsv_sy", 5, "", "";
 	close;
 }

@@ -797,6 +797,9 @@ mbase_in,298,121,3	script	Lee#wsj	10591,{
 		completequest 24041;
 		next;
 	}
+	// A message first: a menu with no box leaves the client stuck at close.
+	mes "[Lee]";
+	mes "Yorskalf's monsters need keeping busy. Which job will it be?";
 	switch (select("Yorskalf 1st floor (daily, 300).:Yorskalf 1st floor (weekly, 1500).:Yorskalf 2nd floor (daily, 300).:Yorskalf 2nd floor (weekly, 1500).:Nothing.")) {
 	case 1:
 		callfunc "F_WSJ_Hunt21", "Lee", 24042, 24043, "300 monsters on Yorskalf's 1st floor", "Make some noise on the 1st floor. Three hundred should get their attention.", 40000000, 3;

@@ -1009,6 +1009,9 @@ ch2safe4,217,234,4	script	Devries#wsv_c2r	865,{
 		callfunc "F_WSV_C2DailyDone", 64240, 64241, 3, 4;
 		close;
 	}
+	// A message first: a menu with no box leaves the client stuck at close.
+	mes .@n$;
+	mes "There's still so much to learn about this place. What can I do for you?";
 	switch (select("Even a Handful of Magic (daily).:Take me back to Brimir.:Never mind.")) {
 	case 1:
 		if (isbegin_quest(64240) != 1)
@@ -1046,6 +1049,9 @@ ch2safe4,215,234,4	script	Gregor#wsv_c2r	627,{
 		mes "Artea's phantom, down by the south edge of the safe place. It's made of the same foreign magic the Snapdragon left behind. Talk to it.";
 		close3;
 	}
+	// A message first: a menu with no box leaves the client stuck at close.
+	mes .@n$;
+	mes "The root's steadier, but the wild Folnirs aren't. Need something?";
 	.@menu$ = "OK, Calm Down (daily).:";
 	if (isbegin_quest(64239) == 2 && isbegin_quest(64244) == 0)
 		.@menu$ += "Strange magic?:";

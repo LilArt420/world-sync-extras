@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.1.11
+Needs Ragnarok Offline 1.6.9 or later. Fixes from players' reports.
+- 🧪 **Zero Cell quests took experience away** instead of giving it (from base 260 the reward is billions of EXP, and the game read it as a negative number). Fixed: A Hazy Gate gives 3% of your level, the Zero Cell story 5%, each Lux or Nox daily 2% and each Vita or Ark daily 3%, as intended. The same fix covers Chapter 2's rewards, the Void rift watchers, Seoyeon's Trial and the Fantasy Growth Potions, which could do the same at high levels.
+- 🌌 **Constellation Tower**:
+  - The **Throne Gate** froze the second player through it (nothing happened, and logging back in didn't help) once someone else had started the fight. It now lets everyone through to Betelgeuse and his Star Chest.
+  - The **Meteorite Fragments** of the 5th-floor bosses and what **Betelgeuse's Star Chest** and **Naght Sieger's remains** pay now follow your server's **drop rate** (Settings), like the monsters' own drops. The souls stay at one per chest.
+- 🐍 **Episode 21**: Tris (in the serpent's egg) and Nyar (at the mana altar) froze party members who weren't on that step of the story. They now say a line and send you on.
+- 💬 **Lee** (Yorskalf hunts), **Devries** and **Gregor** (Distorted Ragsruth) and the **Yongjirak** dailies opened their menu with no dialogue box; picking "Take me back to Brimir" or "Never mind" could leave you stuck. They now talk first.
+
 ## 2.1.10
 Needs Ragnarok Offline 1.6.9 or later.
 - 📜 **Moscovia's Banish Winter quest log**: since Ragnarok Offline 1.7.8 gave its quest IDs to the Abyss Chaser job change quest, Baba Yaga's ten steps had no title or text in the quest log. They have their English text back: Banishing Winter, the magic dust, the Dragon's Lair, the people's speech, the Csar's request and the secret medicine. By MondoTruth.

@@ -303,12 +303,12 @@ function	script	F_WSV_GrowthPotion	{
 		.@e = NextJobExp / 10;
 		if (BaseLevel >= 200)
 			.@e = NextJobExp / 50;
-		getexp2 0, max(.@e, 1);
+		callfunc "F_WSV_Exp", 0, (.@e < 1 ? 1 : .@e);
 	} else {
 		.@e = NextBaseExp / 10;
 		if (BaseLevel >= 200)
 			.@e = NextBaseExp / 50;
-		getexp2 max(.@e, 1), 0;
+		callfunc "F_WSV_Exp", (.@e < 1 ? 1 : .@e), 0;
 	}
 	return;
 }
