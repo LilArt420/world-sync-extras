@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.2
+Needs Ragnarok Offline 1.6.9 or later. Fixes from players' reports.
+- 🗡️ **Zero Cell tunings** (Boundary and Second-Dimensional Tunings) and the **Circulation of Life upgrade** froze you on "Which one?" with nothing to click, and you had to relog. The game drops an item's dialogue as soon as it waits for an answer, so the scroll now hands the choice to a regular dialogue that waits for you. Pick the weapon, check the materials, and it converts, keeping refine, cards, grade and options. The scroll is used up only when the conversion goes through.
+
 ## 2.2.1
 Needs Ragnarok Offline 1.6.9 or later. Fixes from players' reports.
 - 🧪 **Zero Cell quests took experience away** instead of giving it (from base 260 the reward is billions of EXP, and the game read it as a negative number). Fixed: A Hazy Gate gives 3% of your level, the Zero Cell story 5%, each Lux or Nox daily 2% and each Vita or Ark daily 3%, as intended. The same fix covers Chapter 2's rewards, the Void rift watchers, Seoyeon's Trial and the Fantasy Growth Potions, which could do the same at high levels.
