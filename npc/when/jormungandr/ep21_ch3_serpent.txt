@@ -502,8 +502,12 @@ OnTanDown:
 		getexp2 30000000,0;
 		getitem 1001618,1;	// Ep21_Wigner_Ticket
 		close2;
-	} else
+	} else {
+		// close2 needs a message box, or the client stays stuck.
+		mes "[Tris]";
+		mes "Come on. Let's get out of this shell.";
 		close2;
+	}
 	cutin "",255;
 	warp "jor_raise1",126,322;
 	end;
@@ -714,7 +718,12 @@ OnTouch:
 		warp "jor_crk_p",104,103;
 		end;
 	}
+	// close2 needs a message box, or the client stays stuck.
+	cutin "ep20_nyar03.png",1;
+	mes "[Nyar]";
+	mes "^0000FFBack to the temple. Nothing more to see here.^000000";
 	close2;
+	cutin "",255;
 	warp "jor_tmple1",170,301;
 	end;
 }

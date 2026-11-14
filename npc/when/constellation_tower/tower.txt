@@ -402,7 +402,7 @@ OnBossKill:
 	'boss = 0;
 	.@m$ = instance_mapname("1@ch_t");
 	callfunc "F_WSCT_Room", 'floor, .@x, .@y;
-	.@amt = 2 + 'floor / 25;
+	.@amt = callfunc("F_WSCT_Rate", 2 + 'floor / 25, "item_rate_common_boss");
 	.@n = getmapunits(BL_PC, .@m$, .@pc);
 	for (.@i = 0; .@i < .@n; .@i++) {
 		if (getmapxy(.@mm$, .@px, .@py, BL_PC, .@pc[.@i]) != 0)
@@ -608,8 +608,8 @@ OnBoss:
 	if (wsct_iid == instance_id()) {
 		wsct_iid = 0;
 		getitem 1000396,1;	// Naght_Sieger_Soul
-		getitem 1000373,5;	// Meteorite_Fragment
-		getitem 1000372,2;	// Meteorite_Dust
+		getitem 1000373, callfunc("F_WSCT_Rate", 5, "item_rate_treasure");	// Meteorite_Fragment
+		getitem 1000372, callfunc("F_WSCT_Rate", 2, "item_rate_treasure");	// Meteorite_Dust
 		if (isbegin_quest(12518) == 0)
 			setquest 12518;
 		if (isbegin_quest(12518) == 1)
@@ -638,6 +638,17 @@ OnBoss:
 // 'star[0..4]: Health, Attack, Recovery, Defense, Traps (0-5 stars);
 // 'sealed: bit k set = stat k sealed at 0; 'cap: the most stars (3 after
 // floor 50, 5 after floor 75); 'rollmin: the fewest a roll gives.
+
+// Items the scripts hand out in place of a drop (the floor bosses'
+// fragments, the two chests) follow the server's drop rate like real
+// drops do: the app's Settings write item_rate_* into the battle config.
+// callfunc("F_WSCT_Rate", <amount or chance>, "<battle flag>")
+function	script	F_WSCT_Rate	{
+	.@r = getbattleflag(getarg(1));
+	if (.@r <= 100)
+		return getarg(0);
+	return getarg(0) * .@r / 100;
+}
 
 // What stat getarg(0) adds to Betelgeuse's strength at getarg(1) stars (%).
 function	script	F_WSCT_Pct	{
@@ -816,8 +827,12 @@ OnBoss:
 			close;
 		close2;
 		donpcevent instance_npcname("#wsct_throne") + "::OnFight";
-	} else
+	} else {
+		// The fight has started (or ended): straight through. close2
+		// needs a message box, or the client stays stuck (2.2.1).
+		mes "^4d4dffThe gate stands open. Beyond it, the throne of the Constellation Tower.^000000";
 		close2;
+	}
 	warp instance_mapname("3@ch_t"), 155, 70;
 	end;
 }
@@ -831,18 +846,21 @@ OnBoss:
 		// (Shining Moon: 300% pays double, 600% five times).
 		.@sh = max(1, 'diff / 100 - 1);
 		getitem 1000397,1;	// Betelgeuse_Soul
-		getitem 1000373, 2 * .@sh;	// Meteorite_Fragment
+		getitem 1000373, callfunc("F_WSCT_Rate", 2 * .@sh, "item_rate_treasure");	// Meteorite_Fragment
 		// Two of the six typed powders, and one typed fragment.
 		.@p1 = rand(1000398, 1000403);
 		.@p2 = rand(1000398, 1000403);
-		getitem .@p1, 3 * .@sh;
-		getitem .@p2, 3 * .@sh;
-		getitem rand(1000442, 1000447), .@sh;
+		getitem .@p1, callfunc("F_WSCT_Rate", 3 * .@sh, "item_rate_treasure");
+		getitem .@p2, callfunc("F_WSCT_Rate", 3 * .@sh, "item_rate_treasure");
+		getitem rand(1000442, 1000447), callfunc("F_WSCT_Rate", .@sh, "item_rate_treasure");
 		// RockMMO: 5% at the easiest, 30% at the hardest.
-		if (rand(100) < min(30, 5 * .@sh))
+		.@ch = 5 * .@sh;
+		if (.@ch > 30)
+			.@ch = 30;
+		if (rand(100) < callfunc("F_WSCT_Rate", .@ch, "item_rate_treasure"))
 			getitem 1001599,1;	// Unknown_Meteorite_F
 		// iROWiki: from 400%, a chance of one of his costumes.
-		if ('diff >= 400 && rand(1000) < 10 + 5 * ('diff - 400) / 100) {
+		if ('diff >= 400 && rand(1000) < callfunc("F_WSCT_Rate", 10 + 5 * ('diff - 400) / 100, "item_rate_treasure")) {
 			setarray .@cos, 400147, 400148, 400149;
 			getitem .@cos[rand(3)], 1;
 		}

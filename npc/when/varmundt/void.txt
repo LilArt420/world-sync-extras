@@ -60,7 +60,7 @@ ba_void,140,101,4	script	Hongsi#wsv	10345,{
 			completequest 64131;
 			wsv_riftb = wsv_riftb | 16;
 			callfunc "F_WSV_RiftPoints", 10;
-			getexp2 min(NextBaseExp / 20, 500000000), min(NextJobExp / 20, 250000000);
+			callfunc "F_WSV_Exp", NextBaseExp / 20, NextJobExp / 20, 500000000, 250000000;
 			close;
 		}
 		mes "Have you met all four watchers? ^0000FFGeonsi^000000 to the north, ^0000FFBanshi^000000 to the west, ^0000FFYeonsi^000000 to the east and ^0000FFCheongsi^000000 right here by me.";
@@ -127,7 +127,7 @@ function	script	F_WSV_Rift	{
 				erasequest 64121 + .@w;
 			setquest 64121 + .@w;
 			callfunc "F_WSV_RiftPoints", 10;
-			getexp2 min(NextBaseExp / 20, 500000000), min(NextJobExp / 20, 250000000);
+			callfunc "F_WSV_Exp", NextBaseExp / 20, NextJobExp / 20, 500000000, 250000000;
 			close;
 		}
 		if (isbegin_quest(64111 + .@i) == 1 && checkquest(64111 + .@i, HUNTING) == 2) {
@@ -138,7 +138,7 @@ function	script	F_WSV_Rift	{
 				erasequest 64125 + .@w;
 			setquest 64125 + .@w;
 			callfunc "F_WSV_RiftPoints", 40;
-			getexp2 min(NextBaseExp / 7, 1500000000), min(NextJobExp / 7, 750000000);
+			callfunc "F_WSV_Exp", NextBaseExp / 7, NextJobExp / 7, 1500000000, 750000000;
 			close;
 		}
 	}

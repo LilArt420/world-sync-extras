@@ -212,12 +212,33 @@ function	script	F_WSV_Flame	{
 	return;
 }
 
-// Experience for level 225+: a share of the next level, capped.
+// Experience for level 225+: a share of the next level.
 // callfunc "F_WSV_C2Reward", <percent of the next level>, <coins>;
 function	script	F_WSV_C2Reward	{
-	getexp2 min(NextBaseExp / 100 * getarg(0), 1500000000), min(NextJobExp / 100 * getarg(0), 750000000);
+	callfunc "F_WSV_Exp", NextBaseExp / 100 * getarg(0), NextJobExp / 100 * getarg(0);
 	if (getarg(1))
 		callfunc "F_WSV_Flame", getarg(1);
+	return;
+}
+
+// Gives base/job experience, each capped by the optional 3rd/4th
+// argument. Never min()/max() on experience: they read 32-bit numbers,
+// and from base 230 a share of a level is billions, which wrapped
+// negative and made getexp2 TAKE experience (2.2.1).
+// callfunc "F_WSV_Exp", <base>, <job>{, <base cap>, <job cap>};
+function	script	F_WSV_Exp	{
+	.@b = getarg(0);
+	.@j = getarg(1);
+	if (getarg(2, 0) > 0 && .@b > getarg(2, 0))
+		.@b = getarg(2, 0);
+	if (getarg(3, 0) > 0 && .@j > getarg(3, 0))
+		.@j = getarg(3, 0);
+	if (.@b < 0)
+		.@b = 0;
+	if (.@j < 0)
+		.@j = 0;
+	if (.@b > 0 || .@j > 0)
+		getexp2 .@b, .@j;
 	return;
 }
 

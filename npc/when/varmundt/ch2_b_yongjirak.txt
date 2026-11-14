@@ -61,6 +61,9 @@ kin_in01,34,251,4	script	Tamarin#wsv_c2	10381,{
 		callfunc "F_WSV_C2DailyDone", 64225, 64226, 3, 4;
 		close3;
 	}
+	// A message first: a menu with no box leaves the client stuck at close.
+	mes .@n$;
+	mes "Yongjirak still needs a lot of things. Can you help?";
 	switch (select("Yongjirak's Specialty! Hot Kalguksu.:Hot! Hotter! (blankets):Hot! Hotter! (snacks):Never mind.")) {
 	case 1:
 		callfunc "F_WSV_C2Daily", .@n$, 64221, 64222, "Kalguksu needs a good broth. Bring meat from the fields: defeat ^0000FF20 Flamebulls and 20 Urochs^000000 in Muspelheim.";
