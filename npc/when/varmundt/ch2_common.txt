@@ -224,7 +224,7 @@ function	script	F_WSV_C2Reward	{
 // Gives base/job experience, each capped by the optional 3rd/4th
 // argument. Never min()/max() on experience: they read 32-bit numbers,
 // and from base 230 a share of a level is billions, which wrapped
-// negative and made getexp2 TAKE experience (2.1.11).
+// negative and made getexp2 TAKE experience (2.2.1).
 // callfunc "F_WSV_Exp", <base>, <job>{, <base cap>, <job cap>};
 function	script	F_WSV_Exp	{
 	.@b = getarg(0);

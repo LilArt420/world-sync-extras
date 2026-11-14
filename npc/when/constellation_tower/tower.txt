@@ -829,7 +829,7 @@ OnBoss:
 		donpcevent instance_npcname("#wsct_throne") + "::OnFight";
 	} else {
 		// The fight has started (or ended): straight through. close2
-		// needs a message box, or the client stays stuck (2.1.11).
+		// needs a message box, or the client stays stuck (2.2.1).
 		mes "^4d4dffThe gate stands open. Beyond it, the throne of the Constellation Tower.^000000";
 		close2;
 	}
