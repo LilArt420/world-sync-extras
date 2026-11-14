@@ -9,6 +9,7 @@
 //= rAthena's item_reform.yml and item_enchant.yml).
 //=
 //= callfunc "F_WSE_Reform", <reform item id>, "<[Speaker]>"{, <1: consume the reform item>};
+//= callfunc "F_WSE_ReformItem", <reform item id>;	(from an item's Script)
 //= callfunc "F_WSE_Enchant", <enchant group id>, "<[Speaker]>";
 //= Both keep the item's refine, grade, cards and random options unless
 //= the table says otherwise, and only touch items that aren't worn.
@@ -207,6 +208,33 @@ function	script	F_WSE_Reform	{
 	mes .@who$;
 	mes "Done: " + mesitemlink(@wsr_res[.@j]) + ".";
 	close;
+}
+
+// ------------------------------------------------------------
+// Reform from a usable item (the Zero Cell tunings, the Circulation of
+// Life upgrade). An item's script can't hold a dialogue: rAthena frees it as
+// soon as it stops for next or select (pc_useitem), which left "Which one?"
+// on screen with nothing to click and the player stuck until a relog. So the
+// item only queues its id here and ends; rAthena then runs WSE_Reform's
+// event as an ordinary NPC dialogue, which can wait for the player.
+// ------------------------------------------------------------
+function	script	F_WSE_ReformItem	{
+	@wse_rq[getarraysize(@wse_rq)] = getarg(0);
+	doevent "WSE_Reform::OnUse";
+	return;
+}
+
+-	script	WSE_Reform	-1,{
+	end;
+OnUse:
+	if (getarraysize(@wse_rq) < 1)
+		end;
+	.@r = @wse_rq[0];
+	deletearray @wse_rq[0], 1;
+	if (countitem(.@r) < 1)
+		end;
+	callfunc "F_WSE_Reform", .@r, "[" + getitemname(.@r) + "]", 1;
+	end;
 }
 
 // F_WSE_Costs without the mes lines.

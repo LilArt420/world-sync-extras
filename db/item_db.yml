@@ -192,136 +192,136 @@ Body:
   - Id: 102514
     AegisName: Season_H_Upgrade  # Granting the truth of the Circulation of life
     Script: |
-      callfunc "F_WSE_Reform", 102514, "[" + getitemname(102514) + "]", 1;
+      callfunc "F_WSE_ReformItem", 102514;
   - Id: 105163
     AegisName: Fron_Fix_DK_T_Sword  # Boundary Tuning (Frontier Dragon Sword)
     Script: |
-      callfunc "F_WSE_Reform", 105163, "[" + getitemname(105163) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105163;
   - Id: 105164
     AegisName: Fron_Fix_IG_Spear  # Boundary Tuning (Frontier Imperial Spear)
     Script: |
-      callfunc "F_WSE_Reform", 105164, "[" + getitemname(105164) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105164;
   - Id: 105165
     AegisName: Fron_Fix_MT_T_Axe  # Boundary Tuning (Frontier Mechanical Axe)
     Script: |
-      callfunc "F_WSE_Reform", 105165, "[" + getitemname(105165) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105165;
   - Id: 105166
     AegisName: Fron_Fix_BO_Hall  # Boundary Tuning (Frontier Biological Hall)
     Script: |
-      callfunc "F_WSE_Reform", 105166, "[" + getitemname(105166) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105166;
   - Id: 105167
     AegisName: Fron_Fix_SHC_Katar  # Boundary Tuning (Frontier Shadow Katar)
     Script: |
-      callfunc "F_WSE_Reform", 105167, "[" + getitemname(105167) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105167;
   - Id: 105168
     AegisName: Fron_Fix_ABC_Dagger  # Boundary Tuning (Frontier Abyss Dagger)
     Script: |
-      callfunc "F_WSE_Reform", 105168, "[" + getitemname(105168) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105168;
   - Id: 105169
     AegisName: Fron_Fix_AG_Staff  # Boundary Tuning (Frontier Arc Staff)
     Script: |
-      callfunc "F_WSE_Reform", 105169, "[" + getitemname(105169) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105169;
   - Id: 105170
     AegisName: Fron_Fix_EM_Book  # Boundary Tuning (Frontier Elemental Book)
     Script: |
-      callfunc "F_WSE_Reform", 105170, "[" + getitemname(105170) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105170;
   - Id: 105171
     AegisName: Fron_Fix_CD_Rod  # Boundary Tuning (Frontier Saint Lord)
     Script: |
-      callfunc "F_WSE_Reform", 105171, "[" + getitemname(105171) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105171;
   - Id: 105172
     AegisName: Fron_Fix_IQ_Claw  # Boundary Tuning (Frontier Judgment Claw)
     Script: |
-      callfunc "F_WSE_Reform", 105172, "[" + getitemname(105172) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105172;
   - Id: 105173
     AegisName: Fron_Fix_WH_Bow  # Boundary Tuning (Frontier Wind Bow)
     Script: |
-      callfunc "F_WSE_Reform", 105173, "[" + getitemname(105173) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105173;
   - Id: 105174
     AegisName: Fron_Fix_TR_Vilolin  # Boundary Tuning (Frontier Musical Violin)
     Script: |
-      callfunc "F_WSE_Reform", 105174, "[" + getitemname(105174) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105174;
   - Id: 105175
     AegisName: Fron_Fix_TR_Rope  # Tuning of the Boundary (Frontier Musical Rope)
     Script: |
-      callfunc "F_WSE_Reform", 105175, "[" + getitemname(105175) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105175;
   - Id: 105176
     AegisName: Fron_Fix_SS_Humma  # Tuning of the Boundary (Frontier Moonlight Fuma S
     Script: |
-      callfunc "F_WSE_Reform", 105176, "[" + getitemname(105176) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105176;
   - Id: 105177
     AegisName: Fron_Fix_NW_Rifle  # Tuning of the Boundary (Frontier Knight Rifle)
     Script: |
-      callfunc "F_WSE_Reform", 105177, "[" + getitemname(105177) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105177;
   - Id: 105178
     AegisName: Fron_Fix_SKE_Book  # Tuning of the Boundary (Frontier Emperor Battle B
     Script: |
-      callfunc "F_WSE_Reform", 105178, "[" + getitemname(105178) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105178;
   - Id: 105179
     AegisName: Fron_Fix_SOA_Staff  # Tuning of the Boundary (Frontier Soul Staff)
     Script: |
-      callfunc "F_WSE_Reform", 105179, "[" + getitemname(105179) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105179;
   - Id: 105180
     AegisName: Fron_Fix_HN_Rod  # Tuning of the Boundary (Frontier Hyper Rod)
     Script: |
-      callfunc "F_WSE_Reform", 105180, "[" + getitemname(105180) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105180;
   - Id: 105181
     AegisName: Fron_Fix_SH_Foxtail  # Tuning of the Boundary (Frontier Spirit Foxtail)
     Script: |
-      callfunc "F_WSE_Reform", 105181, "[" + getitemname(105181) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105181;
   - Id: 105415
     AegisName: A_DM_Fix_DK_T_Spear  # Tuning of the Dimension (Faceworm Queen's Horn)
     Script: |
-      callfunc "F_WSE_Reform", 105415, "[" + getitemname(105415) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105415;
   - Id: 105416
     AegisName: A_DM_Fix_IG_Spear  # Dimensional Tuning (Ispetar)
     Script: |
-      callfunc "F_WSE_Reform", 105416, "[" + getitemname(105416) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105416;
   - Id: 105417
     AegisName: A_DM_Fix_ABC_Bow  # Dimensional Tuning (Baregun Crossbow)
     Script: |
-      callfunc "F_WSE_Reform", 105417, "[" + getitemname(105417) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105417;
   - Id: 105418
     AegisName: A_DM_Fix_BO_Sword  # Second-Dimensional Tuning (Falx)
     Script: |
-      callfunc "F_WSE_Reform", 105418, "[" + getitemname(105418) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105418;
   - Id: 105419
     AegisName: A_DM_Fix_AG_T_Staff  # Second-Dimensional Tuning (Wepawet)
     Script: |
-      callfunc "F_WSE_Reform", 105419, "[" + getitemname(105419) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105419;
   - Id: 105420
     AegisName: A_DM_Fix_EM_Book  # Second-Dimensional Tuning (Elemental Spirits)
     Script: |
-      callfunc "F_WSE_Reform", 105420, "[" + getitemname(105420) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105420;
   - Id: 105421
     AegisName: A_DM_Fix_NW_Launcher  # Second-Dimensional Tuning (Agent Launcher)
     Script: |
-      callfunc "F_WSE_Reform", 105421, "[" + getitemname(105421) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105421;
   - Id: 105422
     AegisName: A_DM_Fix_SKE_Book  # Second-Dimensional Tuning (Book of the Red Moon)
     Script: |
-      callfunc "F_WSE_Reform", 105422, "[" + getitemname(105422) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105422;
   - Id: 105685
     AegisName: A_DM_Fix_MT_Mace  # Second Dimensional Tuning (Submarine Anchor)
     Script: |
-      callfunc "F_WSE_Reform", 105685, "[" + getitemname(105685) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105685;
   - Id: 105686
     AegisName: A_DM_Fix_SHC_Katar  # Second Dimensional Tuning (Vida Noctorno)
     Script: |
-      callfunc "F_WSE_Reform", 105686, "[" + getitemname(105686) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105686;
   - Id: 105687
     AegisName: A_DM_Fix_CD_Book  # Second Dimensional Tuning (Judgment Day)
     Script: |
-      callfunc "F_WSE_Reform", 105687, "[" + getitemname(105687) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105687;
   - Id: 105688
     AegisName: A_DM_Fix_TR_Violin  # Second Dimensional Tuning (Geigg)
     Script: |
-      callfunc "F_WSE_Reform", 105688, "[" + getitemname(105688) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105688;
   - Id: 105689
     AegisName: A_DM_Fix_TR_Whip  # Second Dimensional Tuning (Needle Whip)
     Script: |
-      callfunc "F_WSE_Reform", 105689, "[" + getitemname(105689) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105689;
   - Id: 105690
     AegisName: A_DM_Fix_HN_Mace  # Second Dimensional Tuning (Jack O'Rush)
     Script: |
-      callfunc "F_WSE_Reform", 105690, "[" + getitemname(105690) + "]", 1;
+      callfunc "F_WSE_ReformItem", 105690;
